@@ -183,6 +183,11 @@ font-size:14px;
 <div class="logo">
 <img src="logo.PNG" alt="ENGENIX Logo" class="logo-img">
 
+<div class="subtitle">
+ENGENIX AI
+</div>
+</div>
+
 <div class="security-banner">
 🔒 Secure NDA Execution Portal
 </div>
@@ -195,11 +200,12 @@ Step 1 of 3 • Complete Information
 
 <h2>Signer Information</h2>
 
-<input type="text" placeholder="Full Legal Name">
-<input type="text" placeholder="Company Name">
-<input type="email" placeholder="Email Address">
-<input type="text" placeholder="Phone Number">
-<input type="text" placeholder="Title / Position">
+<input id="full_name" type="text" placeholder="Full Legal Name">
+<input id="company" type="text" placeholder="Company Name">
+<input id="email" type="email" placeholder="Email Address">
+<input id="phone" type="text" placeholder="Phone Number">
+<input id="title" type="text" placeholder="Title / Position">
+
 
 </div>
 
@@ -282,9 +288,16 @@ I acknowledge that my electronic signature has the same legal effect as a handwr
 Finger Signature Capture Coming In Next Update
 </div>
 
-<button>
+<button id="executeNDA">
 EXECUTE NDA
 </button>
+
+<div id="status" style="
+margin-top:20px;
+text-align:center;
+font-weight:700;
+color:#8fc9ff;
+"></div>
 
 </div>
 
@@ -293,6 +306,111 @@ EXECUTE NDA
 </div>
 
 </div>
+
+<script>
+
+const SUPABASE_URL =
+"https://wwaoqqkpufowezodufyd.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_jEl2wRiIBVxlyQBTiov8xQ_HPAS7cBl";
+
+document
+.getElementById('executeNDA')
+.addEventListener('click', async () => {
+
+const full_name =
+document.getElementById('full_name').value;
+
+const company =
+document.getElementById('company').value;
+
+const email =
+document.getElementById('email').value;
+
+const phone =
+document.getElementById('phone').value;
+
+const title =
+document.getElementById('title').value;
+
+if(
+!full_name ||
+!company ||
+!email
+){
+alert('Please complete all required fields.');
+return;
+}
+
+document.getElementById('status').innerHTML =
+'Submitting NDA...';
+
+try {
+
+const response = await fetch(
+`${SUPABASE_URL}/rest/v1/nda_signatures`,
+{
+method:'POST',
+headers:{
+'apikey':SUPABASE_KEY,
+'Authorization':`Bearer ${SUPABASE_KEY}`,
+'Content-Type':'application/json',
+'Prefer':'return=minimal'
+},
+body:JSON.stringify({
+full_name,
+company,
+email,
+phone,
+title,
+signed_at:new Date().toISOString()
+})
+}
+);
+
+if(response.ok){
+
+document.getElementById('status').innerHTML =
+'✅ NDA Successfully Executed';
+
+alert(
+'NDA successfully recorded.'
+);
+
+}else{
+
+const error =
+await response.text();
+
+console.error(error);
+
+document.getElementById('status').innerHTML =
+'❌ Database Error';
+
+alert(
+'Database rejected submission.'
+);
+
+}
+
+}
+catch(err){
+
+console.error(err);
+
+document.getElementById('status').innerHTML =
+'❌ Connection Error';
+
+alert(
+'Unable to connect to Supabase.'
+);
+
+}
+
+});
+
+</script>
 
 </body>
 </html>
