@@ -213,7 +213,7 @@ Step 1 of 3 • Complete Information
 
 <h2>Mutual Non-Disclosure Agreement</h2>
 
-<div class="nda-box">
+<div class="nda-box" id="ndaBox">
 
 <p>
 This Mutual Non-Disclosure Agreement ("Agreement") is entered into by and between ENGEN LLC dba ENGENIX and the undersigned Receiving Party.
@@ -270,7 +270,7 @@ This Agreement shall be governed by and construed in accordance with the laws of
 <h2>Electronic Signature</h2>
 
 <label class="checkbox">
-<input type="checkbox">
+<input type="checkbox" id="ndaAgree" disabled>
 I have read and understand this Agreement.
 </label>
 
@@ -284,9 +284,25 @@ I agree to conduct this transaction electronically.
 I acknowledge that my electronic signature has the same legal effect as a handwritten signature.
 </label>
 
-<div class="signature-box">
-Finger Signature Capture Coming In Next Update
-</div>
+<canvas
+id="signature-pad"
+width="800"
+height="250"
+style="
+width:100%;
+background:#0d141d;
+border:2px dashed #344256;
+border-radius:16px;
+touch-action:none;
+">
+</canvas>
+
+<button
+type="button"
+id="clearSignature"
+style="margin-top:15px;">
+Clear Signature
+</button>
 
 <button id="executeNDA">
 EXECUTE NDA
@@ -307,6 +323,8 @@ color:#8fc9ff;
 
 </div>
 
+
+
 <script>
 
 const SUPABASE_URL =
@@ -314,6 +332,24 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
 "sb_publishable_jEl2wRiIBVxlyQBTiov8xQ_HPAS7cBl";
+
+const ndaBox =
+document.getElementById('ndaBox');
+
+const ndaAgree =
+document.getElementById('ndaAgree');
+
+ndaBox.addEventListener('scroll',()=>{
+
+if(
+ndaBox.scrollTop +
+ndaBox.clientHeight >=
+ndaBox.scrollHeight - 20
+){
+ndaAgree.disabled = false;
+}
+
+});
 
 document
 .getElementById('executeNDA')
@@ -343,10 +379,30 @@ alert('Please complete all required fields.');
 return;
 }
 
+if(!ndaAgree.checked){
+alert(
+'Please review and accept the NDA.'
+);
+return;
+}
+
+if(signaturePad.isEmpty()){
+alert(
+'Please provide your signature.'
+);
+return;
+}
+
 document.getElementById('status').innerHTML =
 'Submitting NDA...';
 
 try {
+
+const nda_id =
+'NDA-' + Date.now();
+
+const signature =
+signaturePad.toDataURL('image/png');
 
 const response = await fetch(
 `${SUPABASE_URL}/rest/v1/nda_signatures`,
@@ -359,11 +415,14 @@ headers:{
 'Prefer':'return=minimal'
 },
 body:JSON.stringify({
+nda_id,
 full_name,
 company,
 email,
 phone,
 title,
+signature,
+user_agent:navigator.userAgent,
 signed_at:new Date().toISOString()
 })
 }
@@ -410,7 +469,49 @@ alert(
 
 });
 
+const canvas =
+document.getElementById('signature-pad');
+
+function resizeCanvas(){
+
+const ratio =
+Math.max(window.devicePixelRatio || 1,1);
+
+canvas.width =
+canvas.offsetWidth * ratio;
+
+canvas.height =
+250 * ratio;
+
+canvas.getContext('2d')
+.scale(ratio,ratio);
+
+}
+
+resizeCanvas();
+
+window.addEventListener(
+'resize',
+resizeCanvas
+);
+
+const signaturePad =
+new SignaturePad(canvas,{
+minWidth:1,
+maxWidth:3
+});
+
+document
+.getElementById('clearSignature')
+.addEventListener('click',()=>{
+signaturePad.clear();
+});
+
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+ 
 
 </body>
 </html>
