@@ -472,10 +472,12 @@ alert(
 const canvas =
 document.getElementById('signature-pad');
 
-function resizeCanvas(){
+canvas.style.touchAction = 'none';
+
+function resizeCanvas() {
 
 const ratio =
-Math.max(window.devicePixelRatio || 1,1);
+Math.max(window.devicePixelRatio || 1, 1);
 
 canvas.width =
 canvas.offsetWidth * ratio;
@@ -483,8 +485,10 @@ canvas.offsetWidth * ratio;
 canvas.height =
 250 * ratio;
 
-canvas.getContext('2d')
-.scale(ratio,ratio);
+const ctx =
+canvas.getContext('2d');
+
+ctx.scale(ratio, ratio);
 
 }
 
@@ -497,8 +501,8 @@ resizeCanvas
 
 const signaturePad =
 new SignaturePad(canvas,{
-minWidth:1,
-maxWidth:3
+backgroundColor:'rgb(13,20,29)',
+penColor:'white'
 });
 
 document
