@@ -3,290 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ENGENIX helps automotive dealerships identify compliance risks, prioritize corrective action, and preserve a defensible record before problems become complaints, audits, or investigations.">
-<meta name="theme-color" content="#070a10">
+<meta name="description" content="ENGENIX helps automotive dealerships identify compliance risk, prioritize corrective action, and preserve a defensible operating record.">
+<meta name="theme-color" content="#070b12">
 <meta property="og:title" content="ENGENIX | Dealership Compliance Intelligence">
 <meta property="og:description" content="Find the problem before someone else does.">
 <meta property="og:type" content="website">
 <title>ENGENIX | Dealership Compliance Intelligence</title>
-<link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
 :root{
-  --bg:#070a10;
-  --bg-soft:#0b111b;
-  --panel:#0e1622;
-  --panel-2:#111c2a;
-  --line:rgba(255,255,255,.09);
-  --line-blue:rgba(55,145,255,.28);
+  --bg:#070b12;
+  --bg2:#0b111b;
+  --panel:#0f1723;
+  --panel2:#121d2b;
+  --line:rgba(255,255,255,.10);
   --text:#f7f9fc;
   --muted:#aab5c5;
-  --muted-2:#7f8b9d;
   --blue:#2f90ff;
-  --blue-bright:#70bbff;
+  --blue2:#7bc4ff;
   --orange:#ff7a18;
-  --orange-soft:#ffb15f;
+  --orange2:#ffb05d;
   --green:#47d19b;
-  --red:#ff6b6b;
   --max:1180px;
-  --radius:24px;
-  --shadow:0 28px 80px rgba(0,0,0,.42);
+  --shadow:0 30px 90px rgba(0,0,0,.45);
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:96px}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
 body{
   font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 10% -10%,rgba(47,144,255,.15),transparent 35%),
-    radial-gradient(circle at 95% 15%,rgba(255,122,24,.10),transparent 28%),
+    radial-gradient(circle at 12% -8%,rgba(47,144,255,.16),transparent 34%),
+    radial-gradient(circle at 92% 7%,rgba(255,122,24,.11),transparent 27%),
     var(--bg);
   line-height:1.6;
   overflow-x:hidden;
 }
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.22;
-  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:52px 52px;
-  mask-image:linear-gradient(to bottom,black,transparent 78%);
-  z-index:-1;
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:54px 54px;mask-image:linear-gradient(to bottom,black,transparent 78%);
 }
 a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
 button,input,textarea,select{font:inherit}
-button{border:0}
-img{max-width:100%;display:block}
-
 .container{width:min(calc(100% - 40px),var(--max));margin-inline:auto}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  color:#b9d9ff;
-  font-size:.78rem;
-  font-weight:800;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
+.section{padding:110px 0}
+.section-tight{padding:76px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:#b8d9ff;font-size:.76rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
 .eyebrow::before{content:"";width:28px;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.section{padding:112px 0}
-.section-tight{padding:78px 0}
-.section-head{max-width:760px;margin-bottom:54px}
+.section-head{max-width:760px;margin-bottom:50px}
 .section-head.center{text-align:center;margin-inline:auto}
 .section-head.center .eyebrow{justify-content:center}
-.section-title{
-  margin-top:16px;
-  font-size:clamp(2.2rem,5vw,4.45rem);
-  line-height:.98;
-  letter-spacing:-.055em;
-  text-wrap:balance;
-}
-.section-copy{margin-top:22px;color:var(--muted);font-size:clamp(1rem,1.6vw,1.18rem);max-width:680px}
+.section-title{font-size:clamp(2.3rem,5vw,4.8rem);line-height:.96;letter-spacing:-.058em;text-wrap:balance;margin-top:14px}
+.section-copy{color:var(--muted);font-size:clamp(1rem,1.6vw,1.18rem);margin-top:20px;max-width:700px}
 .section-head.center .section-copy{margin-inline:auto}
-
-.skip-link{position:absolute;left:-9999px;top:10px;background:#fff;color:#000;padding:12px 16px;z-index:1000;border-radius:10px}
+.skip-link{position:absolute;left:-9999px;top:10px;background:white;color:black;padding:10px 14px;border-radius:10px;z-index:999}
 .skip-link:focus{left:10px}
 
-.site-header{
-  position:fixed;
-  inset:0 0 auto;
-  z-index:100;
-  padding:18px 0;
-  transition:background .25s,border-color .25s,backdrop-filter .25s;
-}
-.site-header.scrolled{background:rgba(7,10,16,.84);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:8px;font-weight:900;letter-spacing:.08em}
-.brand-logo{display:block;height:52px;width:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.28))}
-.brand-name{font-size:.96rem}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.site-header .brand-logo{height:58px}
-.footer-brand .brand-logo{height:66px}
-.nav-links{display:flex;align-items:center;gap:28px;color:#c2cad5;font-size:.92rem;font-weight:700}
-.nav-links a:not(.nav-cta){position:relative}
-.nav-links a:not(.nav-cta)::after{content:"";position:absolute;left:0;right:100%;bottom:-7px;height:2px;background:var(--blue);transition:right .25s}
+.site-header{position:fixed;inset:0 0 auto;z-index:100;padding:10px 0;transition:.25s}
+.site-header.scrolled{background:rgba(7,11,18,.90);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+.nav{min-height:86px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;flex:0 0 auto}
+.brand-logo{width:286px;height:auto;filter:drop-shadow(0 10px 26px rgba(0,0,0,.30))}
+.nav-links{display:flex;align-items:center;gap:26px;color:#c2cad5;font-size:.9rem;font-weight:800}
+.nav-links a:not(.nav-cta){position:relative;padding:9px 0}
+.nav-links a:not(.nav-cta)::after{content:"";position:absolute;left:0;right:100%;bottom:3px;height:2px;background:var(--blue);transition:right .22s}
 .nav-links a:not(.nav-cta):hover::after{right:0}
-.nav-cta,.button{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  min-height:50px;padding:0 21px;border-radius:14px;
-  color:white;font-weight:850;letter-spacing:-.01em;
-  background:linear-gradient(100deg,var(--orange),#ff9b35);
-  box-shadow:0 12px 34px rgba(255,122,24,.25);
-  transition:transform .2s,box-shadow .2s,filter .2s;
-  cursor:pointer;
-}
-.nav-cta:hover,.button:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(255,122,24,.32);filter:saturate(1.1)}
-.button.secondary{background:rgba(255,255,255,.055);border:1px solid var(--line);box-shadow:none;color:#eef4fb}
-.button.secondary:hover{border-color:var(--line-blue);box-shadow:0 15px 36px rgba(0,0,0,.22)}
-.button.small{min-height:44px;padding:0 17px;border-radius:12px;font-size:.9rem}
-.mobile-toggle{display:none;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.055);border:1px solid var(--line);color:#fff;cursor:pointer}
-.mobile-toggle span{display:block;width:20px;height:2px;background:currentColor;margin:4px auto;transition:.2s}
+.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 21px;border-radius:14px;color:#fff;font-weight:900;background:linear-gradient(100deg,var(--orange),#ff9c36);box-shadow:0 14px 34px rgba(255,122,24,.25);transition:.2s;cursor:pointer;border:0}
+.nav-cta:hover,.button:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(255,122,24,.34)}
+.button.secondary{background:rgba(255,255,255,.055);border:1px solid var(--line);box-shadow:none}
+.button.secondary:hover{border-color:rgba(47,144,255,.40)}
+.mobile-toggle{display:none;width:48px;height:48px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:white}
+.mobile-toggle span{display:block;width:21px;height:2px;background:currentColor;margin:4px auto}
 
-.hero{min-height:100svh;display:grid;align-items:center;padding:148px 0 82px;position:relative}
-.hero::after{
-  content:"";position:absolute;right:-18vw;top:12%;width:48vw;height:48vw;max-width:780px;max-height:780px;border-radius:50%;
-  background:radial-gradient(circle,rgba(47,144,255,.10),transparent 66%);filter:blur(10px);pointer-events:none;
-}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:68px}
-.hero h1{
-  margin-top:22px;
-  font-size:clamp(3.35rem,7.1vw,6.7rem);
-  line-height:.88;
-  letter-spacing:-.072em;
-  text-wrap:balance;
-}
-.hero h1 span{display:block;color:transparent;background:linear-gradient(100deg,#fff 8%,#93caff 52%,#fff 96%);background-clip:text;-webkit-background-clip:text}
-.hero-copy{margin-top:28px;font-size:clamp(1.08rem,1.7vw,1.28rem);color:var(--muted);max-width:660px}
+.hero{padding:154px 0 82px;min-height:100svh;display:grid;align-items:center;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:56px}
+.hero h1{font-size:clamp(3.5rem,7.2vw,7rem);line-height:.88;letter-spacing:-.075em;text-wrap:balance;margin-top:20px}
+.hero h1 span{display:block;color:transparent;background:linear-gradient(100deg,#fff 8%,#8cc8ff 52%,#fff 96%);background-clip:text;-webkit-background-clip:text}
+.hero-copy{margin-top:27px;color:var(--muted);font-size:clamp(1.08rem,1.7vw,1.28rem);max-width:650px}
 .hero-copy strong{color:#fff}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-.hero-proof{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:28px;color:#8794a6;font-size:.86rem}
-.hero-proof span{display:inline-flex;align-items:center;gap:7px}
-.hero-proof i{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 5px rgba(71,209,155,.08)}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:33px}
+.hero-proof{display:flex;gap:15px 24px;flex-wrap:wrap;margin-top:27px;color:#8794a6;font-size:.83rem}
+.hero-proof span{display:flex;align-items:center;gap:8px}
+.hero-proof i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(71,209,155,.08)}
 
-.hero-visual{position:relative;z-index:2}
-.dashboard{
-  background:linear-gradient(155deg,rgba(17,28,42,.96),rgba(8,13,21,.98));
-  border:1px solid rgba(255,255,255,.11);border-radius:28px;padding:18px;box-shadow:var(--shadow);transform:perspective(1200px) rotateY(-5deg) rotateX(2deg);
-  position:relative;overflow:hidden;
-}
-.dashboard::before{content:"";position:absolute;inset:-1px;background:linear-gradient(125deg,rgba(112,187,255,.14),transparent 28%,transparent 70%,rgba(255,122,24,.09));pointer-events:none}
-.window-bar{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 5px 12px;color:#738094;font-size:.72rem}
-.dots{display:flex;gap:6px}.dots i{width:7px;height:7px;border-radius:50%;background:#354255}.dots i:nth-child(1){background:#ff786f}.dots i:nth-child(2){background:#ffc05c}.dots i:nth-child(3){background:#51d392}
-.dashboard-inner{border:1px solid rgba(255,255,255,.07);background:rgba(5,9,15,.64);border-radius:18px;padding:20px}
-.dash-top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px}
-.dash-title{font-weight:850}.dash-sub{color:#748196;font-size:.72rem;margin-top:2px}
-.live-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(71,209,155,.25);background:rgba(71,209,155,.08);color:#79e4b8;border-radius:999px;padding:7px 10px;font-size:.68rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
-.live-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green);animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.35}}
-.score-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}
-.score-card,.mini-card{border:1px solid rgba(255,255,255,.075);background:rgba(255,255,255,.035);border-radius:16px;padding:16px}
-.score-row{display:flex;align-items:end;justify-content:space-between;gap:12px}
-.score-number{font-size:3rem;line-height:1;font-weight:900;letter-spacing:-.06em}
-.score-label{font-size:.7rem;color:#8490a0;text-transform:uppercase;letter-spacing:.1em;font-weight:800}
-.ring{width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--orange) 0 28%,var(--blue) 28% 75%,#202c3b 75%);display:grid;place-items:center}
-.ring::after{content:"";width:48px;height:48px;border-radius:50%;background:#0c1420}
-.mini-stack{display:grid;gap:12px}
-.mini-value{font-size:1.35rem;font-weight:900}.mini-label{color:#8290a2;font-size:.68rem;margin-top:2px}
-.findings{margin-top:12px;display:grid;gap:9px}
-.finding{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);font-size:.73rem}
-.finding-icon{width:25px;height:25px;border-radius:8px;display:grid;place-items:center;background:rgba(255,107,107,.10);color:#ff9090}
-.finding:nth-child(2) .finding-icon{background:rgba(255,177,95,.10);color:#ffbe7d}.finding:nth-child(3) .finding-icon{background:rgba(71,209,155,.10);color:#79e4b8}
-.finding strong{font-size:.72rem}.finding small{display:block;color:#768396;font-size:.62rem;margin-top:1px}
-.severity{font-size:.58rem;text-transform:uppercase;letter-spacing:.07em;font-weight:900;color:#ff8f8f}
-.finding:nth-child(2) .severity{color:#ffbb72}.finding:nth-child(3) .severity{color:#6edfaf}
-.float-card{position:absolute;border:1px solid rgba(255,255,255,.10);background:rgba(11,17,27,.88);backdrop-filter:blur(16px);border-radius:16px;padding:13px 16px;box-shadow:0 16px 44px rgba(0,0,0,.38);font-size:.72rem}
-.float-card strong{display:block;font-size:.88rem}.float-card small{color:#7f8c9e}
-.float-a{left:-36px;bottom:34px}.float-b{right:-24px;top:72px}
+.hero-photo{position:relative;border-radius:30px;overflow:hidden;min-height:650px;border:1px solid rgba(255,255,255,.12);box-shadow:var(--shadow);background:#111a27}
+.hero-photo picture,.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-photo::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,11,18,.04),rgba(7,11,18,.12) 40%,rgba(7,11,18,.80));pointer-events:none}
+.hero-photo::after{content:"";position:absolute;inset:0;z-index:2;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);border-radius:30px;pointer-events:none}
+.photo-caption{position:absolute;z-index:3;left:24px;right:24px;bottom:24px;border-radius:20px;padding:20px;background:rgba(7,11,18,.78);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(14px)}
+.photo-caption-top{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.photo-caption h3{font-size:1.08rem}.photo-caption p{font-size:.79rem;color:#8f9bac;margin-top:5px}
+.live-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(71,209,155,.25);background:rgba(71,209,155,.08);color:#79e4b8;border-radius:999px;padding:7px 10px;font-size:.64rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.live-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.metric{padding:12px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.metric b{display:block;font-size:1.35rem;line-height:1}.metric small{color:#8190a2;font-size:.63rem;text-transform:uppercase;letter-spacing:.07em}
 
-.signal-bar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
-.signal-grid{display:grid;grid-template-columns:1.4fr repeat(5,1fr);align-items:center;min-height:102px}
-.signal-lead{font-weight:850;color:#f2f6fb;padding-right:22px}.signal-item{text-align:center;color:#7f8b9b;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;border-left:1px solid var(--line);padding:10px}
+.signal-bar{border-block:1px solid var(--line);background:rgba(255,255,255,.018)}
+.signal-grid{display:grid;grid-template-columns:1.5fr repeat(5,1fr);align-items:center;min-height:104px}
+.signal-lead{font-weight:900;padding-right:25px}.signal-item{text-align:center;color:#7f8b9b;font-size:.75rem;text-transform:uppercase;letter-spacing:.11em;font-weight:900;border-left:1px solid var(--line);padding:12px}
 
-.statement{padding:128px 0 112px;position:relative}
-.statement-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:100px;align-items:start}
-.statement-kicker{color:var(--orange-soft);font-weight:850;font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;position:sticky;top:120px}
-.statement h2{font-size:clamp(2.8rem,6.2vw,6.2rem);line-height:.94;letter-spacing:-.065em;text-wrap:balance}
-.statement h2 em{font-style:normal;color:var(--muted-2)}
-.statement p{font-size:1.1rem;color:var(--muted);margin-top:28px;max-width:720px}
+.statement{padding:126px 0 90px}
+.statement-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:88px;align-items:start}
+.statement-kicker{color:var(--orange2);font-weight:900;font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;position:sticky;top:125px}
+.statement h2{font-size:clamp(2.8rem,6.2vw,6.2rem);line-height:.94;letter-spacing:-.068em;text-wrap:balance}
+.statement h2 em{font-style:normal;color:#7f8b9d}
+.statement p{font-size:1.08rem;color:var(--muted);margin-top:28px;max-width:720px}
+
+.image-story{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.image-stack{display:grid;gap:18px}
+.story-card{position:relative;overflow:hidden;border-radius:25px;border:1px solid var(--line);min-height:390px;background:#111923;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.story-card.small{min-height:305px}
+.story-card picture,.story-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.story-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(5,8,13,.88));}
+.story-label{position:absolute;z-index:2;left:24px;right:24px;bottom:22px}
+.story-label b{font-size:1.25rem}.story-label p{color:#b2bdca;font-size:.86rem;margin-top:4px;max-width:520px}
+.story-number{position:absolute;top:18px;left:18px;z-index:2;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(7,11,18,.78);border:1px solid rgba(255,255,255,.13);font-weight:900;color:#d9ebff;backdrop-filter:blur(12px)}
 
 .risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.risk-card{padding:28px;border-radius:20px;background:linear-gradient(160deg,rgba(17,28,42,.86),rgba(10,15,23,.88));border:1px solid var(--line);min-height:240px;transition:transform .25s,border-color .25s}
-.risk-card:hover{transform:translateY(-6px);border-color:rgba(47,144,255,.32)}
-.card-number{font-size:.72rem;letter-spacing:.14em;color:#637286;font-weight:900}
-.risk-card h3{font-size:1.35rem;margin-top:34px;line-height:1.15}.risk-card p{color:var(--muted);font-size:.93rem;margin-top:14px}
-.risk-card .line{height:2px;width:38px;background:linear-gradient(90deg,var(--blue),transparent);margin-top:26px}
+.risk-card{padding:28px;border-radius:21px;background:linear-gradient(160deg,rgba(17,28,42,.88),rgba(9,14,22,.9));border:1px solid var(--line);min-height:236px;transition:.24s}
+.risk-card:hover{transform:translateY(-5px);border-color:rgba(47,144,255,.34)}
+.card-number{font-size:.7rem;letter-spacing:.13em;color:#657386;font-weight:900}.risk-card h3{font-size:1.34rem;line-height:1.15;margin-top:32px}.risk-card p{color:var(--muted);font-size:.92rem;margin-top:14px}.line{height:2px;width:38px;background:linear-gradient(90deg,var(--blue),transparent);margin-top:25px}
 
-.process-shell{border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,rgba(14,22,34,.88),rgba(8,13,20,.92));padding:22px;box-shadow:var(--shadow)}
-.process-grid{display:grid;grid-template-columns:repeat(3,1fr)}
-.process-step{padding:34px;position:relative;min-height:285px}.process-step+.process-step{border-left:1px solid var(--line)}
-.process-icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:rgba(47,144,255,.10);border:1px solid rgba(47,144,255,.22);color:#9dcfff;font-size:1.2rem}
-.process-step:nth-child(2) .process-icon{background:rgba(255,122,24,.10);border-color:rgba(255,122,24,.22);color:#ffc184}
-.process-step:nth-child(3) .process-icon{background:rgba(71,209,155,.09);border-color:rgba(71,209,155,.20);color:#7be0ba}
-.process-step h3{font-size:1.5rem;margin-top:26px}.process-step p{color:var(--muted);margin-top:12px;font-size:.95rem}.process-step b{display:block;margin-top:26px;color:#dce7f4;font-size:.8rem;letter-spacing:.07em;text-transform:uppercase}
+.workflow-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
+.workflow-photo{position:relative;min-height:580px;border-radius:28px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+.workflow-photo picture,.workflow-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.workflow-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,18,.05),rgba(7,11,18,.58))}
+.workflow-badge{position:absolute;z-index:2;left:20px;bottom:20px;right:20px;padding:18px;border-radius:18px;background:rgba(7,11,18,.78);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(14px)}
+.workflow-badge b{display:block}.workflow-badge span{display:block;color:#93a1b3;font-size:.78rem;margin-top:4px}
+.steps{display:grid;gap:13px;margin-top:30px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:17px;padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.024)}
+.step-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(47,144,255,.10);border:1px solid rgba(47,144,255,.22);font-weight:900;color:#9bd0ff}
+.step:nth-child(2) .step-icon{background:rgba(255,122,24,.10);border-color:rgba(255,122,24,.22);color:#ffc184}
+.step:nth-child(3) .step-icon{background:rgba(71,209,155,.09);border-color:rgba(71,209,155,.20);color:#79e4b8}
+.step h3{font-size:1.12rem}.step p{color:var(--muted);font-size:.88rem;margin-top:4px}
 
-.trail{overflow:hidden}
-.trail-panel{border-radius:34px;border:1px solid var(--line);background:linear-gradient(120deg,rgba(12,19,29,.96),rgba(17,27,41,.88));padding:clamp(34px,7vw,82px);position:relative;overflow:hidden}
+.trail-panel{border-radius:34px;border:1px solid var(--line);background:linear-gradient(120deg,rgba(12,19,29,.97),rgba(17,27,41,.90));padding:clamp(36px,7vw,82px);position:relative;overflow:hidden}
 .trail-panel::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-140px;top:-170px;background:radial-gradient(circle,rgba(47,144,255,.20),transparent 68%)}
-.trail-panel h2{font-size:clamp(3rem,7vw,6.8rem);line-height:.9;letter-spacing:-.07em;max-width:920px;position:relative;z-index:1}
-.trail-panel h2 span{color:#8190a3}.trail-panel p{position:relative;z-index:1;color:var(--muted);font-size:1.1rem;max-width:650px;margin-top:28px}
+.trail-panel h2{font-size:clamp(3rem,7vw,6.8rem);line-height:.9;letter-spacing:-.072em;max-width:940px;position:relative;z-index:1}.trail-panel h2 span{color:#8190a3}.trail-panel p{position:relative;z-index:1;color:var(--muted);font-size:1.08rem;max-width:650px;margin-top:28px}
 
 .two-lanes{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .lane{border:1px solid var(--line);border-radius:24px;padding:34px;background:rgba(255,255,255,.025);position:relative;overflow:hidden}
 .lane::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--blue)}
 .lane.alert::before{background:var(--orange)}
-.lane-label{color:#8dc7ff;text-transform:uppercase;font-size:.73rem;letter-spacing:.12em;font-weight:900}.lane.alert .lane-label{color:#ffbb78}
-.lane h3{font-size:1.8rem;line-height:1.1;margin-top:16px}.lane p{color:var(--muted);margin-top:14px}
-.lane ul{list-style:none;margin-top:24px;display:grid;gap:12px}.lane li{display:flex;gap:10px;color:#d8e0ea;font-size:.9rem}.lane li::before{content:"✓";color:var(--green);font-weight:900}
+.lane-label{color:#8dc7ff;text-transform:uppercase;font-size:.72rem;letter-spacing:.12em;font-weight:900}.lane.alert .lane-label{color:#ffbb78}
+.lane h3{font-size:1.8rem;line-height:1.1;margin-top:16px}.lane p{color:var(--muted);margin-top:14px}.lane ul{list-style:none;margin-top:23px;display:grid;gap:11px}.lane li{display:flex;gap:10px;color:#d8e0ea;font-size:.9rem}.lane li::before{content:"✓";color:var(--green);font-weight:900}
 
 .coverage-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.coverage-item{display:flex;gap:18px;align-items:flex-start;padding:22px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.022)}
-.coverage-mark{width:38px;height:38px;flex:0 0 38px;border-radius:12px;display:grid;place-items:center;color:#9bcfff;background:rgba(47,144,255,.08);border:1px solid rgba(47,144,255,.15);font-weight:900}
-.coverage-item h3{font-size:1rem}.coverage-item p{color:var(--muted);font-size:.86rem;margin-top:5px}
+.coverage-item{display:flex;gap:17px;padding:22px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.022)}
+.coverage-mark{width:39px;height:39px;flex:0 0 39px;border-radius:12px;display:grid;place-items:center;color:#9bcfff;background:rgba(47,144,255,.08);border:1px solid rgba(47,144,255,.15);font-weight:900}.coverage-item h3{font-size:1rem}.coverage-item p{color:var(--muted);font-size:.86rem;margin-top:5px}
 
-.faq{max-width:860px;margin-inline:auto}
-.faq-item{border-bottom:1px solid var(--line)}
-.faq-button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:none;color:#fff;text-align:left;padding:25px 0;font-weight:850;cursor:pointer;font-size:1.04rem}
-.faq-plus{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line);transition:transform .2s;flex:0 0 32px}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}.faq-answer p{padding:0 52px 24px 0;color:var(--muted)}
-.faq-item.open .faq-plus{transform:rotate(45deg)}
+.faq{max-width:860px;margin-inline:auto}.faq-item{border-bottom:1px solid var(--line)}
+.faq-button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:none;color:white;text-align:left;padding:25px 0;font-weight:900;cursor:pointer;border:0;font-size:1.03rem}.faq-plus{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line);transition:.2s;flex:0 0 32px}.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}.faq-answer p{padding:0 52px 24px 0;color:var(--muted)}.faq-item.open .faq-plus{transform:rotate(45deg)}
 
-.cta-section{padding:70px 0 100px}
-.cta-panel{display:grid;grid-template-columns:1fr .75fr;gap:60px;align-items:center;padding:clamp(34px,6vw,72px);border-radius:34px;background:linear-gradient(135deg,#10233a 0%,#0c1522 58%,#2a170b 120%);border:1px solid rgba(112,187,255,.22);box-shadow:var(--shadow);position:relative;overflow:hidden}
-.cta-panel::before{content:"";position:absolute;inset:auto -80px -130px auto;width:390px;height:390px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,24,.16),transparent 68%)}
-.cta-panel h2{font-size:clamp(2.7rem,5.5vw,5.3rem);line-height:.92;letter-spacing:-.064em;position:relative;z-index:1}.cta-panel p{color:#b5c0ce;margin-top:22px;font-size:1.05rem;max-width:640px;position:relative;z-index:1}
-.demo-form{position:relative;z-index:1;background:rgba(7,11,18,.52);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:22px;backdrop-filter:blur(12px)}
-.field{display:grid;gap:8px;margin-bottom:13px}.field label{font-size:.72rem;color:#94a1b2;font-weight:800;text-transform:uppercase;letter-spacing:.09em}.field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.09);background:#0b131f;color:#fff;border-radius:12px;padding:14px;outline:none;transition:border-color .2s,box-shadow .2s}.field textarea{min-height:90px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(47,144,255,.6);box-shadow:0 0 0 4px rgba(47,144,255,.08)}
-.demo-form .button{width:100%;margin-top:5px}.form-note{color:#6f7d91;font-size:.72rem;text-align:center;margin-top:10px}.form-status{margin-top:10px;text-align:center;font-size:.8rem;color:#8fe0bd;min-height:1.2em}
+.cta-section{padding:70px 0 100px}.cta-panel{display:grid;grid-template-columns:1fr .78fr;gap:55px;align-items:center;padding:clamp(34px,6vw,72px);border-radius:34px;background:linear-gradient(135deg,#10233a 0%,#0c1522 58%,#2a170b 120%);border:1px solid rgba(112,187,255,.22);box-shadow:var(--shadow);position:relative;overflow:hidden}.cta-panel::before{content:"";position:absolute;inset:auto -80px -130px auto;width:390px;height:390px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,24,.16),transparent 68%)}
+.cta-panel h2{font-size:clamp(2.7rem,5.5vw,5.3rem);line-height:.92;letter-spacing:-.064em;position:relative;z-index:1}.cta-panel p{color:#b5c0ce;margin-top:22px;font-size:1.04rem;max-width:640px;position:relative;z-index:1}
+.demo-form{position:relative;z-index:1;background:rgba(7,11,18,.55);border:1px solid rgba(255,255,255,.10);border-radius:22px;padding:22px;backdrop-filter:blur(12px)}
+.field{display:grid;gap:8px;margin-bottom:13px}.field label{font-size:.71rem;color:#94a1b2;font-weight:900;text-transform:uppercase;letter-spacing:.09em}.field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.09);background:#0b131f;color:white;border-radius:12px;padding:14px;outline:none}.field textarea{min-height:88px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(47,144,255,.6);box-shadow:0 0 0 4px rgba(47,144,255,.08)}.demo-form .button{width:100%;margin-top:5px}.form-note{color:#6f7d91;font-size:.71rem;text-align:center;margin-top:10px}.form-status{margin-top:10px;text-align:center;font-size:.8rem;color:#8fe0bd;min-height:1.2em}
 
-.site-footer{border-top:1px solid var(--line);padding:34px 0 44px;color:#798698}
-.footer-grid{display:flex;justify-content:space-between;gap:30px;align-items:flex-start}.footer-brand{color:#fff}.footer-copy{font-size:.78rem;max-width:650px;margin-top:10px}.footer-links{display:flex;gap:18px;flex-wrap:wrap;font-size:.8rem;font-weight:700}.footer-links a:hover{color:#fff}
-.legal-note{font-size:.72rem;color:#606d7e;margin-top:20px;max-width:850px}
+.site-footer{border-top:1px solid var(--line);padding:48px 0 38px;color:#798698;background:linear-gradient(180deg,rgba(255,255,255,.012),transparent)}
+.footer-grid{display:flex;justify-content:space-between;gap:40px;align-items:center}.footer-logo{width:310px}.footer-copy{font-size:.8rem;margin-top:4px;color:#8b98aa}.footer-links{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap;font-size:.8rem;font-weight:800}.footer-links a:hover{color:white}.legal-note{font-size:.69rem;line-height:1.7;color:#5f6b7b;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.065)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .68s ease,transform .68s ease}.reveal.visible{opacity:1;transform:none}
 
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}
-
-@media(max-width:980px){
-  .nav-links{position:fixed;inset:78px 20px auto;display:none;flex-direction:column;align-items:stretch;background:rgba(10,15,23,.98);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
-  .nav-links.open{display:flex}.nav-links a{padding:10px}.nav-cta{width:100%}.mobile-toggle{display:block}
-  .hero-grid,.statement-grid,.cta-panel{grid-template-columns:1fr}.hero{padding-top:132px}.hero-visual{max-width:700px;margin:10px auto 0}.statement-grid{gap:30px}.statement-kicker{position:static}.score-grid{grid-template-columns:1fr .85fr}
-  .signal-grid{grid-template-columns:repeat(3,1fr);padding:18px 0}.signal-lead{grid-column:1/-1;text-align:center;padding:0 0 14px}.signal-item:nth-last-child(-n+2){border-top:1px solid var(--line)}
-  .risk-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:1fr}.process-step+.process-step{border-left:0;border-top:1px solid var(--line)}
-  .cta-panel{gap:36px}.demo-form{max-width:620px}
+@media(max-width:1020px){
+  .brand-logo{width:255px}.nav-links{position:fixed;inset:103px 20px auto;display:none;flex-direction:column;align-items:stretch;background:rgba(9,14,22,.98);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.nav-links.open{display:flex}.nav-links a{padding:10px}.nav-cta{width:100%}.mobile-toggle{display:block}
+  .hero-grid,.statement-grid,.workflow-wrap,.cta-panel{grid-template-columns:1fr}.hero{padding-top:145px}.hero-photo{max-width:760px;width:100%;margin-inline:auto;min-height:610px}.statement-grid{gap:28px}.statement-kicker{position:static}.image-story{grid-template-columns:1fr}.image-stack{grid-template-columns:1fr 1fr}.story-card.small{min-height:330px}.risk-grid{grid-template-columns:repeat(2,1fr)}.workflow-wrap{gap:36px}.workflow-photo{min-height:540px}.cta-panel{gap:36px}.signal-grid{grid-template-columns:repeat(3,1fr);padding:18px 0}.signal-lead{grid-column:1/-1;text-align:center;padding:0 0 14px}.signal-item:nth-last-child(-n+2){border-top:1px solid var(--line)}
 }
-@media(max-width:680px){
-  .container{width:min(calc(100% - 28px),var(--max))}.section{padding:82px 0}.section-tight{padding:60px 0}
-  .site-header{padding:13px 0}.site-header .brand-logo{height:46px}.footer-brand .brand-logo{height:54px}.brand-name{font-size:.84rem}.hero{min-height:auto;padding:120px 0 68px}.hero h1{font-size:clamp(3rem,17vw,4.5rem)}.hero-actions{display:grid}.button{width:100%}
-  .dashboard{transform:none;padding:10px;border-radius:22px}.dashboard-inner{padding:14px}.score-grid{grid-template-columns:1fr}.mini-stack{grid-template-columns:1fr 1fr}.float-card{display:none}
-  .signal-grid{grid-template-columns:1fr 1fr}.signal-item{padding:15px 8px}.signal-item:nth-child(even){border-left:0}.signal-item:nth-child(n+4){border-top:1px solid var(--line)}
-  .statement{padding:86px 0}.risk-grid,.two-lanes,.coverage-grid{grid-template-columns:1fr}.risk-card{min-height:220px}.process-shell{padding:10px}.process-step{padding:27px;min-height:auto}
-  .trail-panel{border-radius:24px}.trail-panel h2{font-size:clamp(2.8rem,15vw,4.3rem)}
-  .cta-panel{padding:28px 20px;border-radius:25px}.demo-form{padding:17px}.footer-grid{flex-direction:column}.footer-links{gap:12px 18px}
+@media(max-width:700px){
+  .container{width:min(calc(100% - 26px),var(--max))}.section{padding:82px 0}.section-tight{padding:58px 0}
+  .site-header{padding:4px 0}.nav{min-height:100px}.brand-logo{width:260px;max-width:74vw}.mobile-toggle{width:46px;height:46px;flex:0 0 46px}.nav-links{inset:100px 13px auto}
+  .hero{min-height:auto;padding:134px 0 62px}.hero::before{content:"";position:absolute;inset:0 0 auto;height:860px;background:linear-gradient(180deg,rgba(7,11,18,.70),rgba(7,11,18,.90) 66%,var(--bg)),url("assets/hero-dealership.webp") center 24%/cover no-repeat;opacity:.42}.hero-grid{position:relative;z-index:1}.hero h1{font-size:clamp(3rem,16vw,4.7rem)}.hero-actions{display:grid}.button{width:100%}.hero-photo{min-height:520px;border-radius:24px}.photo-caption{left:14px;right:14px;bottom:14px;padding:15px}.metric-row{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:1/-1}
+  .signal-grid{grid-template-columns:1fr 1fr}.signal-item{padding:14px 8px}.signal-item:nth-child(even){border-left:0}.signal-item:nth-child(n+4){border-top:1px solid var(--line)}
+  .statement{padding:86px 0 58px}.image-stack{grid-template-columns:1fr}.story-card,.story-card.small{min-height:360px}.risk-grid,.two-lanes,.coverage-grid{grid-template-columns:1fr}.risk-card{min-height:218px}.workflow-photo{min-height:430px}.trail-panel{border-radius:25px}.trail-panel h2{font-size:clamp(2.8rem,14.5vw,4.4rem)}
+  .cta-panel{padding:28px 20px;border-radius:25px}.demo-form{padding:17px}.footer-grid{flex-direction:column;align-items:flex-start;gap:20px}.footer-logo{width:270px;max-width:88vw}.footer-links{gap:8px 18px}.legal-note{margin-top:23px;padding-top:19px}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+@media(max-width:420px){.brand-logo{width:246px;max-width:72vw}.hero-photo{min-height:480px}.metric b{font-size:1.18rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
 <header class="site-header" id="header">
   <div class="container nav">
-    <a href="#top" class="brand" aria-label="ENGENIX home">
-      <img src="engenix-logo.png" alt="ENGENIX" class="brand-logo">
-      <span class="sr-only">ENGENIX</span>
-    </a>
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="#top" class="brand" aria-label="ENGENIX home"><img src="engenix-logo.png" alt="ENGENIX" class="brand-logo"></a>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
-      <a href="#platform">Platform</a>
-      <a href="#workflow">How it works</a>
-      <a href="#dealerships">For dealerships</a>
-      <a href="#questions">Questions</a>
-      <a href="#demo" class="nav-cta">Book a demo</a>
+      <a href="#platform">Platform</a><a href="#operations">Operations</a><a href="#workflow">How it works</a><a href="#questions">Questions</a><a href="#demo" class="nav-cta">Book a demo</a>
     </nav>
   </div>
 </header>
@@ -294,268 +200,94 @@ img{max-width:100%;display:block}
 <main id="main">
 <section class="hero" id="top">
   <div class="container hero-grid">
-    <div class="hero-content reveal">
+    <div class="reveal">
       <div class="eyebrow">Dealership compliance intelligence</div>
       <h1>Your dealership is being judged <span>every day.</span></h1>
-      <p class="hero-copy">Customers. Banks. Manufacturers. Regulators. Attorneys. <strong>ENGENIX helps your leadership see the same risks they will, while there is still time to act.</strong></p>
-      <div class="hero-actions">
-        <a class="button" href="#demo">Book a private demo <span aria-hidden="true">→</span></a>
-        <a class="button secondary" href="#workflow">See how it works</a>
-      </div>
-      <div class="hero-proof" aria-label="Platform principles">
-        <span><i></i> Built for dealership operations</span>
-        <span><i></i> Human-reviewed actions</span>
-        <span><i></i> Defensible documentation</span>
-      </div>
+      <p class="hero-copy">Customers. Banks. Manufacturers. Regulators. Attorneys. <strong>ENGENIX helps leadership see the same risks they will, while there is still time to act.</strong></p>
+      <div class="hero-actions"><a class="button" href="#demo">Book a private demo <span aria-hidden="true">→</span></a><a class="button secondary" href="#workflow">See how it works</a></div>
+      <div class="hero-proof"><span><i></i> Built for dealership operations</span><span><i></i> Human-reviewed actions</span><span><i></i> Defensible documentation</span></div>
     </div>
-
-    <div class="hero-visual reveal" aria-label="Example ENGENIX monitoring dashboard">
-      <div class="dashboard">
-        <div class="window-bar"><div class="dots"><i></i><i></i><i></i></div><span>ENGENIX / Operational Review</span></div>
-        <div class="dashboard-inner">
-          <div class="dash-top">
-            <div><div class="dash-title">Daily Risk Review</div><div class="dash-sub">Prioritized for leadership</div></div>
-            <div class="live-pill">Monitoring</div>
-          </div>
-          <div class="score-grid">
-            <div class="score-card">
-              <div class="score-label">Items reviewed</div>
-              <div class="score-row"><div class="score-number">248</div><div class="ring" aria-hidden="true"></div></div>
-            </div>
-            <div class="mini-stack">
-              <div class="mini-card"><div class="mini-value">7</div><div class="mini-label">Needs attention</div></div>
-              <div class="mini-card"><div class="mini-value">3</div><div class="mini-label">Actions verified</div></div>
-            </div>
-          </div>
-          <div class="findings">
-            <div class="finding"><div class="finding-icon">!</div><div><strong>Disclosure inconsistency</strong><small>Deal documentation review</small></div><div class="severity">Review</div></div>
-            <div class="finding"><div class="finding-icon">↗</div><div><strong>Process drift detected</strong><small>Recurring workflow variance</small></div><div class="severity">Coach</div></div>
-            <div class="finding"><div class="finding-icon">✓</div><div><strong>Corrective action preserved</strong><small>Evidence added to audit record</small></div><div class="severity">Closed</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="float-card float-a"><strong>Less searching.</strong><small>More decisive action.</small></div>
-      <div class="float-card float-b"><strong>Every finding has a trail.</strong><small>Issue → action → evidence</small></div>
-    </div>
-  </div>
-</section>
-
-<section class="signal-bar" aria-label="Dealership departments supported">
-  <div class="container signal-grid">
-    <div class="signal-lead">One operating picture across the dealership.</div>
-    <div class="signal-item">Sales</div><div class="signal-item">F&amp;I</div><div class="signal-item">BDC</div><div class="signal-item">Service</div><div class="signal-item">Leadership</div>
-  </div>
-</section>
-
-<section class="statement" id="platform">
-  <div class="container statement-grid">
-    <div class="statement-kicker">The uncomfortable truth</div>
-    <div class="reveal">
-      <h2>You do not need more reports. <em>You need fewer surprises.</em></h2>
-      <p>The most expensive compliance problems rarely announce themselves. They hide in ordinary conversations, inconsistent documentation, missed disclosures, repeated workarounds, and decisions nobody preserved. ENGENIX turns that operational noise into a prioritized record leadership can act on.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section-tight" id="dealerships">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Where exposure begins</div>
-      <h2 class="section-title">Every deal creates a trail.</h2>
-      <p class="section-copy">ENGENIX helps make sure the trail tells the right story: what happened, what was identified, what leadership did, and what evidence was preserved.</p>
-    </div>
-    <div class="risk-grid">
-      <article class="risk-card reveal"><div class="card-number">01 / CUSTOMER</div><h3>Promises become expectations.</h3><p>What a customer hears, signs, receives, and later remembers can become the center of a complaint.</p><div class="line"></div></article>
-      <article class="risk-card reveal"><div class="card-number">02 / PROCESS</div><h3>Small deviations become patterns.</h3><p>A shortcut repeated across a team can quietly become the dealership's real operating procedure.</p><div class="line"></div></article>
-      <article class="risk-card reveal"><div class="card-number">03 / DOCUMENTATION</div><h3>Missing context becomes exposure.</h3><p>When the record is incomplete, leadership is forced to reconstruct events after the pressure arrives.</p><div class="line"></div></article>
-      <article class="risk-card reveal"><div class="card-number">04 / PEOPLE</div><h3>Coaching arrives too late.</h3><p>Recurring mistakes often stay invisible until a customer, auditor, lender, or regulator connects the dots.</p><div class="line"></div></article>
-      <article class="risk-card reveal"><div class="card-number">05 / DATA</div><h3>Access without control creates risk.</h3><p>Customer information moves through systems, vendors, devices, and people. Accountability has to move with it.</p><div class="line"></div></article>
-      <article class="risk-card reveal"><div class="card-number">06 / LEADERSHIP</div><h3>What you cannot see, you cannot correct.</h3><p>Dealer principals and managers need a clear, current view without digging through fragmented reports.</p><div class="line"></div></article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="workflow">
-  <div class="container">
-    <div class="section-head center reveal">
-      <div class="eyebrow">From signal to defensible action</div>
-      <h2 class="section-title">Find it. Fix it. Prove it.</h2>
-      <p class="section-copy">Compliance should not depend on whether somebody remembered to look. ENGENIX creates a repeatable operating rhythm around detection, correction, and evidence.</p>
-    </div>
-    <div class="process-shell reveal">
-      <div class="process-grid">
-        <article class="process-step"><div class="process-icon">⌁</div><h3>Detect</h3><p>Review dealership activity and documentation for inconsistencies, omissions, process drift, and emerging patterns.</p><b>Surface the right signal</b></article>
-        <article class="process-step"><div class="process-icon">→</div><h3>Prioritize</h3><p>Convert raw findings into clear next actions, organized by urgency, ownership, and operational impact.</p><b>Focus leadership attention</b></article>
-        <article class="process-step"><div class="process-icon">✓</div><h3>Document</h3><p>Preserve the finding, corrective action, responsible party, supporting evidence, and verified resolution.</p><b>Build the record as you go</b></article>
+    <div class="hero-photo reveal">
+      <picture><source srcset="assets/hero-dealership.webp" type="image/webp"><img src="assets/hero-dealership.jpg" alt="Dealership professional reviewing a vehicle with a customer"></picture>
+      <div class="photo-caption">
+        <div class="photo-caption-top"><div><h3>Daily operational review</h3><p>From ordinary dealership activity to prioritized leadership action.</p></div><div class="live-pill">Monitoring</div></div>
+        <div class="metric-row"><div class="metric"><b>248</b><small>Items reviewed</small></div><div class="metric"><b>7</b><small>Need attention</small></div><div class="metric"><b>3</b><small>Actions verified</small></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section trail">
-  <div class="container">
-    <div class="trail-panel reveal">
-      <h2>The question is not whether someone will ask. <span>It is whether your answer is already documented.</span></h2>
-      <p>ENGENIX gives leadership a living record of what the dealership saw, how it responded, and whether the correction held.</p>
-    </div>
-  </div>
-</section>
+<section class="signal-bar"><div class="container signal-grid"><div class="signal-lead">One operating picture across the dealership.</div><div class="signal-item">Sales</div><div class="signal-item">F&amp;I</div><div class="signal-item">BDC</div><div class="signal-item">Service</div><div class="signal-item">Leadership</div></div></section>
 
-<section class="section-tight">
+<section class="statement" id="platform"><div class="container statement-grid"><div class="statement-kicker">The uncomfortable truth</div><div class="reveal"><h2>You do not need more reports. <em>You need fewer surprises.</em></h2><p>The most expensive compliance problems rarely announce themselves. They hide in ordinary conversations, inconsistent documentation, missed disclosures, repeated workarounds, and decisions nobody preserved. ENGENIX turns that operational noise into a prioritized record leadership can act on.</p></div></div></section>
+
+<section class="section-tight" id="operations">
   <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Two moments. One platform.</div>
-      <h2 class="section-title">Before scrutiny. Under scrutiny.</h2>
-      <p class="section-copy">The best time to build a defensible operating record is before anyone asks for it. The second-best time is the moment attention arrives.</p>
-    </div>
-    <div class="two-lanes">
-      <article class="lane reveal"><div class="lane-label">Proactive dealerships</div><h3>Build the muscle before the pressure.</h3><p>Create a continuous review and correction process that helps leadership reduce unmanaged risk.</p><ul><li>Identify recurring operational patterns</li><li>Coach before mistakes become complaints</li><li>Preserve corrective action as it happens</li><li>Give leadership a current risk picture</li></ul></article>
-      <article class="lane alert reveal"><div class="lane-label">Dealerships under attention</div><h3>Respond with control, not chaos.</h3><p>Centralize findings, actions, evidence, and accountability while the dealership is under a brighter light.</p><ul><li>Organize the response around verified facts</li><li>Track ownership and deadlines clearly</li><li>Reduce fragmented email and spreadsheet trails</li><li>Show sustained correction over time</li></ul></article>
+    <div class="section-head reveal"><div class="eyebrow">The dealership in motion</div><h2 class="section-title">Real risk lives inside ordinary moments.</h2><p class="section-copy">The customer conversation, the document handoff, the manager review. ENGENIX is built around the places where dealership decisions become promises, patterns, and evidence.</p></div>
+    <div class="image-story">
+      <article class="story-card reveal"><picture><source srcset="assets/hero-dealership.webp" type="image/webp"><img src="assets/hero-dealership.jpg" alt="Sales professional and customer reviewing vehicles in a modern dealership"></picture><div class="story-number">01</div><div class="story-label"><b>Customer interaction</b><p>What is said, shown, promised, and understood can become the center of a complaint.</p></div></article>
+      <div class="image-stack">
+        <article class="story-card small reveal"><picture><source srcset="assets/documents-review.webp" type="image/webp"><img loading="lazy" src="assets/documents-review.jpg" alt="Dealership employees reviewing purchase documents beside a vehicle"></picture><div class="story-number">02</div><div class="story-label"><b>Documentation review</b><p>Missing context turns an easy answer into a reconstruction project.</p></div></article>
+        <article class="story-card small reveal"><picture><source srcset="assets/leadership-floor.webp" type="image/webp"><img loading="lazy" src="assets/leadership-floor.jpg" alt="Dealership team discussing a vehicle with a customer on the showroom floor"></picture><div class="story-number">03</div><div class="story-label"><b>Leadership visibility</b><p>Patterns become manageable only when the right person can see them.</p></div></article>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="section-head center reveal">
-      <div class="eyebrow">Operational visibility</div>
-      <h2 class="section-title">Built around the dealership you actually run.</h2>
-      <p class="section-copy">Not a generic compliance library wearing an automotive badge. ENGENIX is designed around the pace, people, decisions, and documentation inside dealership operations.</p>
-    </div>
-    <div class="coverage-grid">
-      <article class="coverage-item reveal"><div class="coverage-mark">S</div><div><h3>Sales process review</h3><p>Track consistency from first contact through customer commitment and handoff.</p></div></article>
-      <article class="coverage-item reveal"><div class="coverage-mark">F</div><div><h3>F&amp;I documentation</h3><p>Surface missing, inconsistent, or unexplained elements that need management review.</p></div></article>
-      <article class="coverage-item reveal"><div class="coverage-mark">B</div><div><h3>BDC accountability</h3><p>Identify process drift and coaching opportunities across high-volume customer interactions.</p></div></article>
-      <article class="coverage-item reveal"><div class="coverage-mark">V</div><div><h3>Service operations</h3><p>Bring visibility to customer communication, approvals, documentation, and recurring breakdowns.</p></div></article>
-      <article class="coverage-item reveal"><div class="coverage-mark">D</div><div><h3>Customer data handling</h3><p>Support clearer ownership, access awareness, and evidence around sensitive information.</p></div></article>
-      <article class="coverage-item reveal"><div class="coverage-mark">E</div><div><h3>Executive visibility</h3><p>Give leadership a prioritized view of what matters without another mountain of reports.</p></div></article>
+    <div class="section-head reveal"><div class="eyebrow">Where exposure begins</div><h2 class="section-title">Every deal leaves a trail.</h2><p class="section-copy">ENGENIX helps make sure that trail explains what happened, what was identified, what leadership did, and what evidence was preserved.</p></div>
+    <div class="risk-grid">
+      <article class="risk-card reveal"><div class="card-number">01 / CUSTOMER</div><h3>Promises become expectations.</h3><p>What a customer hears, signs, receives, and later remembers can become the center of a complaint.</p><div class="line"></div></article>
+      <article class="risk-card reveal"><div class="card-number">02 / PROCESS</div><h3>Small deviations become patterns.</h3><p>A shortcut repeated across a team can quietly become the dealership's real operating procedure.</p><div class="line"></div></article>
+      <article class="risk-card reveal"><div class="card-number">03 / DOCUMENTATION</div><h3>Missing context becomes exposure.</h3><p>When the record is incomplete, leadership is forced to reconstruct events after pressure arrives.</p><div class="line"></div></article>
+      <article class="risk-card reveal"><div class="card-number">04 / PEOPLE</div><h3>Coaching arrives too late.</h3><p>Recurring mistakes stay invisible until a customer, auditor, lender, or regulator connects the dots.</p><div class="line"></div></article>
+      <article class="risk-card reveal"><div class="card-number">05 / DATA</div><h3>Access without control creates risk.</h3><p>Customer information moves through systems, vendors, devices, and people. Accountability must move with it.</p><div class="line"></div></article>
+      <article class="risk-card reveal"><div class="card-number">06 / LEADERSHIP</div><h3>What you cannot see, you cannot correct.</h3><p>Dealer principals and managers need a current picture without digging through fragmented reports.</p><div class="line"></div></article>
     </div>
   </div>
 </section>
 
-<section class="section-tight" id="questions">
-  <div class="container">
-    <div class="section-head center reveal">
-      <div class="eyebrow">Straight answers</div>
-      <h2 class="section-title">Questions dealership leaders ask first.</h2>
-    </div>
-    <div class="faq reveal">
-      <div class="faq-item"><button class="faq-button" aria-expanded="false">Is ENGENIX replacing our compliance officer or attorney?<span class="faq-plus">+</span></button><div class="faq-answer"><p>No. ENGENIX is an operational intelligence and documentation platform. It helps teams identify, route, correct, and preserve issues. Legal conclusions and advice remain with qualified counsel and the dealership's responsible professionals.</p></div></div>
-      <div class="faq-item"><button class="faq-button" aria-expanded="false">Does this create another dashboard managers have to babysit?<span class="faq-plus">+</span></button><div class="faq-answer"><p>The goal is the opposite. ENGENIX is designed to prioritize what requires human attention, assign ownership, and preserve the resolution so managers spend less time reconstructing what happened.</p></div></div>
-      <div class="faq-item"><button class="faq-button" aria-expanded="false">Can it work across multiple rooftops?<span class="faq-plus">+</span></button><div class="faq-answer"><p>The platform is being designed for dealership and dealer-group visibility, with clear separation between locations, roles, users, and records.</p></div></div>
-      <div class="faq-item"><button class="faq-button" aria-expanded="false">What does a private demonstration cover?<span class="faq-plus">+</span></button><div class="faq-answer"><p>We walk through the operational workflow, the types of risks ENGENIX can surface, how actions are assigned and verified, and how the dealership's evidence trail is preserved.</p></div></div>
-      <div class="faq-item"><button class="faq-button" aria-expanded="false">Are you claiming the platform guarantees compliance?<span class="faq-plus">+</span></button><div class="faq-answer"><p>No responsible platform can guarantee that. ENGENIX is built to improve visibility, consistency, accountability, and documentation so dealership leadership can make better-informed decisions sooner.</p></div></div>
-    </div>
+<section class="section" id="workflow">
+  <div class="container workflow-wrap">
+    <div class="workflow-photo reveal"><picture><source srcset="assets/documents-review.webp" type="image/webp"><img loading="lazy" src="assets/documents-review.jpg" alt="Dealership professionals reviewing documentation beside a vehicle"></picture><div class="workflow-badge"><b>The record should build while the work is happening.</b><span>Issue → owner → action → evidence → verified resolution</span></div></div>
+    <div class="reveal"><div class="eyebrow">From signal to defensible action</div><h2 class="section-title">Find it. Fix it. Prove it.</h2><p class="section-copy">Compliance should not depend on whether somebody remembered to look. ENGENIX creates a repeatable operating rhythm around detection, correction, and evidence.</p><div class="steps"><article class="step"><div class="step-icon">01</div><div><h3>Detect</h3><p>Review activity and documentation for inconsistencies, omissions, process drift, and recurring patterns.</p></div></article><article class="step"><div class="step-icon">02</div><div><h3>Prioritize</h3><p>Convert findings into clear next actions organized by urgency, ownership, and operational impact.</p></div></article><article class="step"><div class="step-icon">03</div><div><h3>Document</h3><p>Preserve the finding, corrective action, responsible party, evidence, and verified resolution.</p></div></article></div></div>
   </div>
 </section>
 
-<section class="cta-section" id="demo">
+<section class="section-tight"><div class="container"><div class="trail-panel reveal"><h2>The question is not whether someone will ask. <span>It is whether your answer is already documented.</span></h2><p>ENGENIX gives leadership a living record of what the dealership saw, how it responded, and whether the correction held.</p></div></div></section>
+
+<section class="section-tight">
   <div class="container">
-    <div class="cta-panel reveal">
-      <div>
-        <div class="eyebrow">Private product demonstration</div>
-        <h2>Find the problem before someone else does.</h2>
-        <p>Tell us a little about your dealership. We will open a prepared email with your details so you can request a private walkthrough without sending sensitive information through this page.</p>
-      </div>
-      <form class="demo-form" id="demoForm">
-        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required placeholder="Your full name"></div>
-        <div class="field"><label for="company">Dealership or group</label><input id="company" name="company" autocomplete="organization" required placeholder="Company name"></div>
-        <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@dealership.com"></div>
-        <div class="field"><label for="role">Your role</label><select id="role" name="role"><option>Dealer principal / owner</option><option>General manager</option><option>Compliance / legal</option><option>Operations leader</option><option>Technology / vendor partner</option><option>Other</option></select></div>
-        <div class="field"><label for="message">What should we know?</label><textarea id="message" name="message" placeholder="Number of rooftops, current priorities, or the problem you are trying to solve."></textarea></div>
-        <button class="button" type="submit">Request private demo <span aria-hidden="true">→</span></button>
-        <div class="form-note">No sensitive customer or dealership data, please.</div>
-        <div class="form-status" id="formStatus" role="status"></div>
-      </form>
-    </div>
+    <div class="section-head reveal"><div class="eyebrow">Two moments. One platform.</div><h2 class="section-title">Before scrutiny. Under scrutiny.</h2><p class="section-copy">The best time to build a defensible operating record is before anyone asks for it. The second-best time is the moment attention arrives.</p></div>
+    <div class="two-lanes"><article class="lane reveal"><div class="lane-label">Proactive dealerships</div><h3>Build the muscle before the pressure.</h3><p>Create a continuous review and correction process that helps leadership reduce unmanaged risk.</p><ul><li>Identify recurring operational patterns</li><li>Coach before mistakes become complaints</li><li>Preserve corrective action as it happens</li><li>Give leadership a current risk picture</li></ul></article><article class="lane alert reveal"><div class="lane-label">Dealerships under attention</div><h3>Respond with control, not chaos.</h3><p>Centralize findings, actions, evidence, and accountability while the dealership is under a brighter light.</p><ul><li>Organize the response around verified facts</li><li>Track ownership and deadlines clearly</li><li>Reduce fragmented email and spreadsheet trails</li><li>Show sustained correction over time</li></ul></article></div>
   </div>
 </section>
+
+<section class="section">
+  <div class="container"><div class="section-head center reveal"><div class="eyebrow">Operational visibility</div><h2 class="section-title">Built around the dealership you actually run.</h2><p class="section-copy">Not a generic compliance library wearing an automotive badge. ENGENIX is designed around the pace, people, decisions, and documentation inside dealership operations.</p></div><div class="coverage-grid"><article class="coverage-item reveal"><div class="coverage-mark">S</div><div><h3>Sales process review</h3><p>Track consistency from first contact through customer commitment and handoff.</p></div></article><article class="coverage-item reveal"><div class="coverage-mark">F</div><div><h3>F&amp;I documentation</h3><p>Surface missing, inconsistent, or unexplained elements that need management review.</p></div></article><article class="coverage-item reveal"><div class="coverage-mark">B</div><div><h3>BDC accountability</h3><p>Identify process drift and coaching opportunities across high-volume customer interactions.</p></div></article><article class="coverage-item reveal"><div class="coverage-mark">V</div><div><h3>Service operations</h3><p>Bring visibility to customer communication, approvals, documentation, and recurring breakdowns.</p></div></article><article class="coverage-item reveal"><div class="coverage-mark">D</div><div><h3>Customer data handling</h3><p>Support clearer ownership, access awareness, and evidence around sensitive information.</p></div></article><article class="coverage-item reveal"><div class="coverage-mark">E</div><div><h3>Executive visibility</h3><p>Give leadership a prioritized view of what matters without another mountain of reports.</p></div></article></div></div>
+</section>
+
+<section class="section-tight" id="questions"><div class="container"><div class="section-head center reveal"><div class="eyebrow">Straight answers</div><h2 class="section-title">Questions dealership leaders ask first.</h2></div><div class="faq reveal"><div class="faq-item"><button class="faq-button" aria-expanded="false">Is ENGENIX replacing our compliance officer or attorney?<span class="faq-plus">+</span></button><div class="faq-answer"><p>No. ENGENIX is an operational intelligence and documentation platform. It helps teams identify, route, correct, and preserve issues. Legal conclusions and advice remain with qualified counsel and the dealership's responsible professionals.</p></div></div><div class="faq-item"><button class="faq-button" aria-expanded="false">Does this create another dashboard managers have to babysit?<span class="faq-plus">+</span></button><div class="faq-answer"><p>The goal is the opposite. ENGENIX prioritizes what requires human attention, assigns ownership, and preserves the resolution so managers spend less time reconstructing what happened.</p></div></div><div class="faq-item"><button class="faq-button" aria-expanded="false">Can it work across multiple rooftops?<span class="faq-plus">+</span></button><div class="faq-answer"><p>The platform is being designed for dealership and dealer-group visibility, with clear separation between locations, roles, users, and records.</p></div></div><div class="faq-item"><button class="faq-button" aria-expanded="false">Are you claiming the platform guarantees compliance?<span class="faq-plus">+</span></button><div class="faq-answer"><p>No responsible platform can guarantee that. ENGENIX is built to improve visibility, consistency, accountability, and documentation so dealership leadership can make better-informed decisions sooner.</p></div></div></div></div></section>
+
+<section class="cta-section" id="demo"><div class="container"><div class="cta-panel reveal"><div><div class="eyebrow">Private product demonstration</div><h2>Find the problem before someone else does.</h2><p>Tell us a little about your dealership. We will open a prepared email with your details so you can request a private walkthrough without sending sensitive information through this page.</p></div><form class="demo-form" id="demoForm"><div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required placeholder="Your full name"></div><div class="field"><label for="company">Dealership or group</label><input id="company" name="company" autocomplete="organization" required placeholder="Company name"></div><div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@dealership.com"></div><div class="field"><label for="role">Your role</label><select id="role" name="role"><option>Dealer principal / owner</option><option>General manager</option><option>Compliance / legal</option><option>Operations leader</option><option>Technology / vendor partner</option><option>Other</option></select></div><div class="field"><label for="message">What should we know?</label><textarea id="message" name="message" placeholder="Number of rooftops, current priorities, or the problem you are trying to solve."></textarea></div><button class="button" type="submit">Request private demo <span aria-hidden="true">→</span></button><div class="form-note">No sensitive customer or dealership data, please.</div><div class="form-status" id="formStatus" role="status"></div></form></div></div></section>
 </main>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div><div class="brand footer-brand"><img src="engenix-logo.png" alt="ENGENIX" class="brand-logo"></div><div class="footer-copy">Operational intelligence for modern automotive dealerships.</div></div>
-      <div class="footer-links"><a href="#platform">Platform</a><a href="#workflow">How it works</a><a href="#demo">Book a demo</a><a href="nda.html">Confidential portal</a></div>
-    </div>
-    <p class="legal-note">© 2026 ENGEN LLC d/b/a ENGENIX. All rights reserved. ENGENIX provides operational intelligence, workflow, and documentation technology. It does not provide legal advice and does not guarantee compliance with any law, rule, or regulatory requirement.</p>
-  </div>
-</footer>
+<footer class="site-footer"><div class="container"><div class="footer-grid"><div><img src="engenix-logo.png" alt="ENGENIX" class="footer-logo"><div class="footer-copy">Operational intelligence for modern automotive dealerships.</div></div><div class="footer-links"><a href="#platform">Platform</a><a href="#workflow">How it works</a><a href="#demo">Book a demo</a><a href="nda.html">Confidential portal</a></div></div><p class="legal-note">© 2026 ENGEN LLC d/b/a ENGENIX. All rights reserved. ENGENIX provides operational intelligence, workflow, and documentation technology. It does not provide legal advice and does not guarantee compliance with any law, rule, or regulatory requirement.</p></div></footer>
 
 <script>
-const CONFIG = {
-  salesEmail: 'sales@engenix.co'
-};
-
-const header = document.getElementById('header');
-const mobileToggle = document.getElementById('mobileToggle');
-const navLinks = document.getElementById('navLinks');
-
-function updateHeader(){
-  header.classList.toggle('scrolled', window.scrollY > 18);
-}
-updateHeader();
-window.addEventListener('scroll', updateHeader, {passive:true});
-
-mobileToggle.addEventListener('click', () => {
-  const open = navLinks.classList.toggle('open');
-  mobileToggle.setAttribute('aria-expanded', String(open));
-  mobileToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => {
-  navLinks.classList.remove('open');
-  mobileToggle.setAttribute('aria-expanded','false');
-}));
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-for(const item of document.querySelectorAll('.faq-item')){
-  const button = item.querySelector('.faq-button');
-  const answer = item.querySelector('.faq-answer');
-  button.addEventListener('click', () => {
-    const willOpen = !item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(openItem => {
-      openItem.classList.remove('open');
-      openItem.querySelector('.faq-button').setAttribute('aria-expanded','false');
-      openItem.querySelector('.faq-answer').style.maxHeight = null;
-    });
-    if(willOpen){
-      item.classList.add('open');
-      button.setAttribute('aria-expanded','true');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-    }
-  });
-}
-
-document.getElementById('demoForm').addEventListener('submit', (event) => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  if(!form.reportValidity()) return;
-  const data = new FormData(form);
-  const subject = encodeURIComponent(`ENGENIX private demo request — ${data.get('company')}`);
-  const body = encodeURIComponent(
-`Name: ${data.get('name')}
-Dealership / Group: ${data.get('company')}
-Work Email: ${data.get('email')}
-Role: ${data.get('role')}
-
-Context:
-${data.get('message') || 'No additional context provided.'}
-
-Sent from ENGENIX.co`
-  );
-  document.getElementById('formStatus').textContent = `Opening your email app to contact ${CONFIG.salesEmail}…`;
-  window.location.href = `mailto:${CONFIG.salesEmail}?subject=${subject}&body=${body}`;
-});
+const CONFIG={salesEmail:'sales@engenix.co'};
+const header=document.getElementById('header');
+const mobileToggle=document.getElementById('mobileToggle');
+const navLinks=document.getElementById('navLinks');
+function updateHeader(){header.classList.toggle('scrolled',window.scrollY>18)}
+updateHeader();window.addEventListener('scroll',updateHeader,{passive:true});
+mobileToggle.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');mobileToggle.setAttribute('aria-expanded',String(open));mobileToggle.setAttribute('aria-label',open?'Close navigation':'Open navigation')});
+document.querySelectorAll('.nav-links a').forEach(link=>link.addEventListener('click',()=>{navLinks.classList.remove('open');mobileToggle.setAttribute('aria-expanded','false')}));
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.10});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('.faq-item').forEach(item=>{const button=item.querySelector('.faq-button');const answer=item.querySelector('.faq-answer');button.addEventListener('click',()=>{const opening=!item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(openItem=>{openItem.classList.remove('open');openItem.querySelector('.faq-button').setAttribute('aria-expanded','false');openItem.querySelector('.faq-answer').style.maxHeight=null});if(opening){item.classList.add('open');button.setAttribute('aria-expanded','true');answer.style.maxHeight=answer.scrollHeight+'px'}})});
+document.getElementById('demoForm').addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;const data=new FormData(form);const subject=encodeURIComponent(`ENGENIX private demo request — ${data.get('company')}`);const body=encodeURIComponent(`Name: ${data.get('name')}\nDealership / Group: ${data.get('company')}\nWork Email: ${data.get('email')}\nRole: ${data.get('role')}\n\nContext:\n${data.get('message')||'No additional context provided.'}\n\nSent from ENGENIX.co`);document.getElementById('formStatus').textContent=`Opening your email app to contact ${CONFIG.salesEmail}…`;window.location.href=`mailto:${CONFIG.salesEmail}?subject=${subject}&body=${body}`});
 </script>
 </body>
 </html>
