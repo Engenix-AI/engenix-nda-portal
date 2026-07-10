@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /nda.html
+
+Sitemap: https://engenix.co/sitemap.xml
