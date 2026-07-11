@@ -670,14 +670,14 @@
                     </div>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="glass rounded-3xl border border-zinc-800 p-6">
+                        <div class="glass rounded-3xl border border-zinc-800 p-6 min-h-[260px]">
                             <div class="font-medium mb-4">Compliance Score Trend</div>
-                            <canvas id="trendChart" height="120"></canvas>
+                            <canvas id="trendChart" class="w-full h-full"></canvas>
                         </div>
                         
-                        <div class="glass rounded-3xl border border-zinc-800 p-6">
+                        <div class="glass rounded-3xl border border-zinc-800 p-6 min-h-[260px]">
                             <div class="font-medium mb-4">Compliance Distribution by Category</div>
-                            <canvas id="categoryChart" height="120"></canvas>
+                            <canvas id="categoryChart" class="w-full h-full"></canvas>
                         </div>
                     </div>
                 </div>
@@ -1036,6 +1036,12 @@
                     }
                 });
             }
+
+            // Force resize after DOM settles (fixes mobile / late-render issues)
+            setTimeout(() => {
+                if (trendChartInstance) trendChartInstance.resize();
+                if (categoryChartInstance) categoryChartInstance.resize();
+            }, 60);
         }
 
         function runComplianceScan() {
