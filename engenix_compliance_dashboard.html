@@ -1,801 +1,838 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Engenix • Compliance Command Center</title>
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Engenix • Compliance Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #6366f1;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+        }
 
-		:root {
-			--primary: #6366f1;
-		}
+        .dashboard-bg {
+            background: linear-gradient(145deg, #0f0f12 0%, #18181b 100%);
+        }
 
-		body {
-			font-family: 'Inter', system_ui, sans-serif;
-		}
+        .glass {
+            background: rgba(255,255,255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255, 0.08);
+        }
 
-		.font-display {
-			font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
-			font-weight: 600;
-		}
+        .metric-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                       box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
 
-		.dashboard-bg {
-			background: linear-gradient(145deg, #0f0f12 0%, #18181b 100%);
-		}
+        .nav-item {
+            transition: all 0.1s ease;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255,255,255, 0.06);
+        }
+        
+        .nav-item.active {
+            background-color: rgba(99, 102, 241, 0.15);
+            color: #6366f1;
+            border-radius: 8px;
+        }
 
-		.glass {
-			background: rgba(255, 255, 255, 0.03);
-			backdrop-filter: blur(20px);
-			border: 1px solid rgba(255, 255, 255, 0.08);
-		}
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
 
-		.metric-card {
-			transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-				box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
-		}
+        .compliance-score {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-		.metric-card:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-		}
+        .status-pill {
+            font-size: 0.75rem;
+            padding: 0.125rem 0.625rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            letter-spacing: -.025em;
+        }
 
-		.nav-item {
-			transition: all 0.1s ease;
-		}
+        .data-table {
+            border-collapse: separate;
+            border-spacing: 0 4px;
+        }
 
-		.nav-item:hover {
-			background-color: rgba(255, 255, 255, 0.06);
-		}
+        .data-table tr {
+            transition: background-color 0.1s ease;
+        }
+        
+        .data-table tr:hover {
+            background-color: rgba(255,255,255, 0.025);
+        }
 
-		.nav-item.active {
-			background-color: rgba(99, 102, 241, 0.15);
-			color: #6366f1;
-			border-radius: 8px;
-		}
+        .modern-shadow {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15),
+                       0 4px 6px -4px rgb(0 0 0 / 0.15);
+        }
 
-		.section {
-			display: none;
-		}
+        .metric-value {
+            font-variant-numeric: tabular-nums;
+        }
 
-		.section.active {
-			display: block;
-		}
+        .dashboard-header {
+            background: rgba(24, 24, 27, 0.95);
+            backdrop-filter: blur(12px);
+        }
 
-		.compliance-score {
-			transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-		}
+        .subtle-grid {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
 
-		.status-pill {
-			font-size: 0.75rem;
-			padding: 0.125rem 0.625rem;
-			border-radius: 9999px;
-			font-weight: 600;
-			letter-spacing: -.025em;
-		}
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "ss02";
+        }
 
-		.data-table {
-			border-collapse: separate;
-			border-spacing: 0 4px;
-		}
+        .alert-row {
+            transition: all 0.1s ease;
+        }
 
-		.data-table tr {
-			transition: background-color 0.1s ease;
-		}
+        .alert-row:hover {
+            transform: translateX(2px);
+        }
 
-		.data-table tr:hover {
-			background-color: rgba(255, 255, 255, 0.025);
-		}
+        .engenix-logo {
+            letter-spacing: -0.04em;
+        }
 
-		.modern-shadow {
-			box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15),
-				0 4px 6px -4px rgb(0 0 0 / 0.15);
-		}
-
-		.metric-value {
-			font-variant-numeric: tabular-nums;
-		}
-
-		.dashboard-header {
-			background: rgba(24, 24, 27, 0.95);
-			backdrop-filter: blur(12px);
-		}
-
-		.subtle-grid {
-			background-image:
-				linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-				linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-			background-size: 24px 24px;
-		}
-
-		.stat-number {
-			font-variant-numeric: tabular-nums;
-			font-feature-settings: "ss02";
-		}
-
-		.alert-row {
-			transition: all 0.1s ease;
-		}
-
-		.alert-row:hover {
-			transform: translateX(2px);
-		}
-
-		.engenix-logo {
-			letter-spacing: -0.04em;
-		}
-
-		.mini-chart {
-			height: 38px;
-		}
-	</style>
+        .mini-chart {
+            height: 38px;
+        }
+    </style>
 </head>
-
 <body class="bg-zinc-950 text-zinc-200 dashboard-bg">
-	<div class="flex h-screen overflow-hidden">
-		<!-- SIDEBAR -->
-		<div class="w-72 bg-zinc-900 border-r border-zinc-800 flex flex-col">
-			<!-- Logo -->
-			<div class="px-6 pt-6 pb-5 border-b border-zinc-800">
-				<div class="flex items-center gap-x-3">
-					<div class="w-9 h-9 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-inner">
-						<i class="fa-solid fa-shield-halved text-white text-2xl"></i>
-					</div>
-					<div>
-						<span class="font-display text-3xl font-semibold tracking-tighter engenix-logo">ENGENIX</span>
-						<div class="text-[10px] text-zinc-500 -mt-1 tracking-[2px]">COMPLIANCE OS</div>
-					</div>
-				</div>
-			</div>
+    <!-- MOBILE TOP BAR -->
+    <div class="lg:hidden sticky top-0 z-50 flex items-center justify-between px-4 h-14 border-b border-zinc-800 bg-zinc-900">
+        <div class="flex items-center gap-x-2.5">
+            <!-- Mobile Logo -->
+            <div class="flex items-center">
+                <svg width="28" height="24" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 28 Q 35 12 75 22" stroke="#3b82f6" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M70 22 Q 95 18 108 10" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+                    <g transform="translate(105, 8)">
+                        <polygon points="0,-5 1.5,-1.5 5,0 1.5,1.5 0,5 -1.5,1.5 -5,0 -1.5,-1.5" fill="#fbbf24"/>
+                    </g>
+                </svg>
+                <span class="font-display text-[21px] font-bold tracking-[-0.8px] ml-1 bg-gradient-to-r from-blue-400 via-blue-500 to-orange-400 bg-clip-text text-transparent">ENGENIX</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-x-1">
+            <button onclick="showNotifications()" class="w-9 h-9 flex items-center justify-center text-zinc-400 active:bg-zinc-800 rounded-2xl">
+                <i class="fa-solid fa-bell text-lg"></i>
+            </button>
+            <button onclick="toggleMobileMenu()" class="w-9 h-9 flex items-center justify-center text-zinc-400 active:bg-zinc-800 rounded-2xl">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
 
-			<!-- Dealership Selector -->
-			<div class="px-4 py-3 border-b border-zinc-800">
-				<div class="flex items-center gap-x-2.5 px-3 py-2 bg-zinc-950 rounded-2xl border border-zinc-800">
-					<div class="w-8 h-8 bg-zinc-800 rounded-xl flex-shrink-0 overflow-hidden ring-1 ring-zinc-700">
-						<img src="https://picsum.photos/id/1015/32/32" alt="Dealership" class="w-full h-full object-cover">
-					</div>
-					<div class="flex-1 min-w-0">
-						<div class="text-sm font-semibold tracking-tight">Premier Auto Group</div>
-						<div class="text-xs text-emerald-400 flex items-center gap-x-1">
-							<i class="fa-solid fa-check-circle text-[10px]"></i>
-							<span class="font-medium">Multi-location • 4 stores</span>
-						</div>
-					</div>
-					<i class="fa-solid fa-chevron-down text-zinc-500 text-xs"></i>
-				</div>
-			</div>
+    <div class="flex h-[calc(100vh-56px)] lg:h-screen overflow-hidden">
+        <!-- SIDEBAR (desktop always visible, mobile hidden by default) -->
+        <div id="sidebar" class="hidden lg:block w-72 bg-zinc-900 border-r border-zinc-800 flex flex-col flex-shrink-0">
+            <!-- Logo -->
+            <div class="px-6 pt-6 pb-5 border-b border-zinc-800">
+                <div class="flex items-center gap-x-3">
+                    <!-- New ENGENIX Logo -->
+                    <div class="flex items-center">
+                        <svg width="42" height="34" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Swoosh -->
+                            <path d="M8 28 Q 35 12 75 22" stroke="#3b82f6" stroke-width="6" stroke-linecap="round"/>
+                            <path d="M70 22 Q 95 18 108 10" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+                            <!-- Star / Comet -->
+                            <g transform="translate(105, 8)">
+                                <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="#fbbf24"/>
+                                <path d="M-2 0 Q -11 5 -20 3" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+                            </g>
+                        </svg>
+                        <span class="font-display text-[28px] font-bold tracking-[-1.2px] ml-1.5 bg-gradient-to-r from-blue-400 via-blue-500 to-orange-400 bg-clip-text text-transparent">ENGENIX</span>
+                    </div>
+                </div>
+                <div class="text-[10px] text-zinc-500 tracking-[1.5px] mt-0.5 ml-1">COMPLIANCE OS</div>
+            </div>
 
-			<!-- Navigation -->
-			<div class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-				<div onclick="showSection('overview')" class="nav-item active flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-overview">
-					<i class="fa-solid fa-chart-line w-4 text-center"></i>
-					<span>Overview</span>
-				</div>
+            <!-- Dealership Selector -->
+            <div class="px-4 py-3 border-b border-zinc-800">
+                <div class="flex items-center gap-x-2.5 px-3 py-2 bg-zinc-950 rounded-2xl border border-zinc-800">
+                    <div class="w-8 h-8 bg-zinc-800 rounded-xl flex-shrink-0 overflow-hidden ring-1 ring-zinc-700">
+                        <img src="https://picsum.photos/id/1015/32/32" alt="Dealership" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-semibold tracking-tight">Premier Auto Group</div>
+                        <div class="text-xs text-emerald-400 flex items-center gap-x-1">
+                            <i class="fa-solid fa-check-circle text-[10px]"></i>
+                            <span class="font-medium">Multi-location • 4 stores</span>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-zinc-500 text-xs"></i>
+                </div>
+            </div>
 
-				<div onclick="showSection('alerts')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-alerts">
-					<i class="fa-solid fa-exclamation-triangle w-4 text-center"></i>
-					<span>Alerts &amp; Risks</span>
-					<div class="ml-auto bg-red-500 text-white text-[10px] font-mono px-1.5 py-px rounded-full font-bold">7</div>
-				</div>
+            <!-- Navigation -->
+            <div class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+                <div onclick="showSection('overview')" class="nav-item active flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-overview">
+                    <i class="fa-solid fa-chart-line w-4 text-center"></i>
+                    <span>Overview</span>
+                </div>
+                
+                <div onclick="showSection('alerts')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-alerts">
+                    <i class="fa-solid fa-exclamation-triangle w-4 text-center"></i>
+                    <span>Alerts &amp; Risks</span>
+                    <div class="ml-auto bg-red-500 text-white text-[10px] font-mono px-1.5 py-px rounded-full font-bold">7</div>
+                </div>
+                
+                <div onclick="showSection('audits')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-audits">
+                    <i class="fa-solid fa-clipboard-check w-4 text-center"></i>
+                    <span>Audits &amp; Tasks</span>
+                </div>
+                
+                <div onclick="showSection('documents')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-documents">
+                    <i class="fa-solid fa-folder-open w-4 text-center"></i>
+                    <span>Document Hub</span>
+                </div>
+                
+                <div onclick="showSection('analytics')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-analytics">
+                    <i class="fa-solid fa-chart-bar w-4 text-center"></i>
+                    <span>Analytics</span>
+                </div>
 
-				<div onclick="showSection('audits')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-audits">
-					<i class="fa-solid fa-clipboard-check w-4 text-center"></i>
-					<span>Audits &amp; Tasks</span>
-				</div>
+                <div class="pt-4 mt-4 border-t border-zinc-800 px-3">
+                    <div class="text-[10px] font-mono tracking-widest text-zinc-500 px-4 mb-2">INTEGRATIONS</div>
+                    
+                    <div class="space-y-1 text-sm">
+                        <div class="flex items-center gap-x-3 px-4 py-2 text-zinc-400 hover:text-zinc-200 cursor-pointer rounded-xl">
+                            <i class="fa-solid fa-link w-4"></i>
+                            <span class="text-xs">ENGEN AI (F&amp;I)</span>
+                        </div>
+                        <div class="flex items-center gap-x-3 px-4 py-2 text-zinc-400 hover:text-zinc-200 cursor-pointer rounded-xl">
+                            <i class="fa-solid fa-link w-4"></i>
+                            <span class="text-xs">CDK Global DMS</span>
+                        </div>
+                        <div class="flex items-center gap-x-3 px-4 py-2 text-zinc-400 hover:text-zinc-200 cursor-pointer rounded-xl">
+                            <i class="fa-solid fa-link w-4"></i>
+                            <span class="text-xs">Reynolds &amp; Reynolds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-				<div onclick="showSection('documents')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-documents">
-					<i class="fa-solid fa-folder-open w-4 text-center"></i>
-					<span>Document Hub</span>
-				</div>
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-zinc-800 mt-auto">
+                <div class="flex items-center gap-x-3 px-3 py-2 rounded-2xl hover:bg-zinc-800 cursor-pointer">
+                    <div class="w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center text-xs font-bold">NE</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-medium">Nicholas Engen</div>
+                        <div class="text-[10px] text-emerald-400">Compliance Lead • Premier Auto</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-				<div onclick="showSection('analytics')" class="nav-item flex items-center gap-x-3 px-4 py-3 text-sm font-medium cursor-pointer rounded-2xl" id="nav-analytics">
-					<i class="fa-solid fa-chart-bar w-4 text-center"></i>
-					<span>Analytics</span>
-				</div>
+        <!-- MAIN CONTENT -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            
+            <!-- TOP HEADER -->
+            <div class="dashboard-header border-b border-zinc-800 px-8 py-4 flex items-center justify-between z-50">
+                <div class="flex items-center gap-x-4">
+                    <div>
+                        <span class="text-xl font-semibold tracking-tight">Compliance Command Center</span>
+                        <span class="ml-3 text-xs px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full font-mono tracking-wider text-[10px]">LIVE</span>
+                    </div>
+                </div>
 
-				<div class="pt-4 mt-4 border-t border-zinc-800 px-3">
-					<div class="text-[10px] font-mono tracking-widest text-zinc-500 px-4 mb-2">INTEGRATIONS</div>
+                <div class="flex items-center gap-x-4">
+                    <!-- Search -->
+                    <div class="relative w-80">
+                        <input type="text" 
+                               id="global-search"
+                               placeholder="Search deals, alerts, documents..." 
+                               class="w-full bg-zinc-900 border border-zinc-700 focus:border-zinc-600 transition-colors text-sm rounded-2xl pl-10 py-2.5 placeholder:text-zinc-500 outline-none">
+                        <i class="fa-solid fa-search absolute left-4 top-3.5 text-zinc-500"></i>
+                    </div>
 
-					<div class="space-y-1 text-sm">
-						<div class="flex items-center gap-x-3 px-4 py-2 text-zinc-400 hover:text-zinc-200 cursor-pointer rounded-xl">
-							<i class="fa-solid fa-link w-4"></i>
-							<span class="text-xs">ENGEN AI (F&amp;I)</span>
-						</div>
-						<div class="flex items-center gap-x-3 px-4 py-2 text-zinc-400 hover:text-zinc-200 cursor-pointer rounded-xl">
-							<i class="fa-solid fa-link w-4"></i>
-							<span class="text-xs">CDK Global DMS</span>
-						</div>
-						<div class="flex items-center gap-x-3 px-4 py-2 text-zinc-400 hover:text-zinc-200 cursor-pointer rounded-xl">
-							<i class="fa-solid fa-link w-4"></i>
-							<span class="text-xs">Reynolds &amp; Reynolds</span>
-						</div>
-					</div>
-				</div>
-			</div>
+                    <!-- Notifications -->
+                    <div class="relative" onclick="showNotifications()">
+                        <button class="w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-2xl transition-colors border border-zinc-800">
+                            <i class="fa-solid fa-bell text-lg"></i>
+                        </button>
+                        <div class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] font-mono w-5 h-5 flex items-center justify-center rounded-full ring-2 ring-zinc-950">12</div>
+                    </div>
 
-			<!-- Sidebar Footer -->
-			<div class="p-4 border-t border-zinc-800 mt-auto">
-				<div class="flex items-center gap-x-3 px-3 py-2 rounded-2xl hover:bg-zinc-800 cursor-pointer">
-					<div class="w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center text-xs font-bold">NE</div>
-					<div class="flex-1 min-w-0">
-						<div class="text-sm font-medium">Nicholas Engen</div>
-						<div class="text-[10px] text-emerald-400">Compliance Lead • Premier Auto</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                    <!-- Quick Scan Button -->
+                    <button onclick="runComplianceScan()" 
+                            class="flex items-center gap-x-2.5 bg-white text-zinc-900 hover:bg-zinc-100 active:bg-white transition-all px-5 h-10 rounded-2xl text-sm font-semibold shadow-inner">
+                        <i class="fa-solid fa-sync-alt"></i>
+                        <span>Run Full Scan</span>
+                    </button>
+                </div>
+            </div>
 
-		<!-- MAIN CONTENT -->
-		<div class="flex-1 flex flex-col overflow-hidden">
+            <!-- CONTENT AREA -->
+            <div class="flex-1 overflow-auto p-8 subtle-grid" id="main-content">
+                
+                <!-- OVERVIEW SECTION -->
+                <div id="overview" class="section active">
+                    <div class="flex items-end justify-between mb-8">
+                        <div>
+                            <div class="text-sm text-emerald-400 font-medium tracking-wider">FEBRUARY 10 — JULY 10, 2026</div>
+                            <h1 class="text-4xl font-semibold tracking-tighter">Good morning, Nicholas.</h1>
+                            <p class="text-zinc-400 mt-1">Your dealership group is currently <span class="text-emerald-400 font-medium">92% compliant</span>. 3 critical items need attention.</p>
+                        </div>
+                        
+                        <div class="text-right">
+                            <div class="inline-flex items-center gap-x-2 bg-zinc-900 border border-zinc-700 rounded-3xl px-4 py-1.5 text-sm">
+                                <div class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                                <span class="font-medium">All systems nominal</span>
+                            </div>
+                        </div>
+                    </div>
 
-			<!-- TOP HEADER -->
-			<div class="dashboard-header border-b border-zinc-800 px-8 py-4 flex items-center justify-between z-50">
-				<div class="flex items-center gap-x-4">
-					<div>
-						<span class="text-xl font-semibold tracking-tight">Compliance Command Center</span>
-						<span class="ml-3 text-xs px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full font-mono tracking-wider text-[10px]">LIVE</span>
-					</div>
-				</div>
+                    <!-- KPI Metrics -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <!-- Compliance Score -->
+                        <div class="metric-card glass rounded-3xl p-6 border border-zinc-800">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">OVERALL COMPLIANCE</div>
+                                    <div class="mt-3 flex items-baseline gap-x-1">
+                                        <span id="compliance-score" class="text-6xl font-semibold tracking-tighter stat-number">92</span>
+                                        <span class="text-3xl text-zinc-400">/100</span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="inline-flex items-center text-emerald-400 text-xs font-medium bg-emerald-500/10 px-3 py-1 rounded-full">
+                                        <i class="fa-solid fa-arrow-trend-up mr-1"></i>
+                                        <span>+4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                                    <div class="h-2 bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all" style="width: 92%"></div>
+                                </div>
+                                <div class="flex justify-between text-[10px] text-zinc-500 mt-1.5 font-mono">
+                                    <div>Target: 95</div>
+                                    <div class="text-emerald-400">+3 this month</div>
+                                </div>
+                            </div>
+                        </div>
 
-				<div class="flex items-center gap-x-4">
-					<!-- Search -->
-					<div class="relative w-80">
-						<input type="text" id="global-search" placeholder="Search deals, alerts, documents..." class="w-full bg-zinc-900 border border-zinc-700 focus:border-zinc-600 transition-colors text-sm rounded-2xl pl-10 py-2.5 placeholder:text-zinc-500 outline-none">
-						<i class="fa-solid fa-search absolute left-4 top-3.5 text-zinc-500"></i>
-					</div>
+                        <!-- Critical Alerts -->
+                        <div class="metric-card glass rounded-3xl p-6 border border-zinc-800 cursor-pointer" onclick="showSection('alerts')">
+                            <div class="flex justify-between">
+                                <div>
+                                    <div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">CRITICAL ALERTS</div>
+                                    <div class="mt-3">
+                                        <span class="text-6xl font-semibold tracking-tighter stat-number">7</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-exclamation-triangle text-red-400 text-4xl opacity-80"></i>
+                                </div>
+                            </div>
+                            <div class="mt-6 flex items-center gap-x-2 text-xs">
+                                <div class="px-3 py-1 bg-red-500/10 text-red-400 rounded-full font-medium">3 new today</div>
+                                <div class="text-zinc-500">2 require legal review</div>
+                            </div>
+                        </div>
 
-					<!-- Notifications -->
-					<div class="relative" onclick="showNotifications()">
-						<button class="w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-2xl transition-colors border border-zinc-800">
-							<i class="fa-solid fa-bell text-lg"></i>
-						</button>
-						<div class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[9px] font-mono w-5 h-5 flex items-center justify-center rounded-full ring-2 ring-zinc-950">12</div>
-					</div>
+                        <!-- Open Tasks -->
+                        <div class="metric-card glass rounded-3xl p-6 border border-zinc-800">
+                            <div class="flex justify-between">
+                                <div>
+                                    <div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">OPEN TASKS</div>
+                                    <div class="mt-3">
+                                        <span class="text-6xl font-semibold tracking-tighter stat-number">18</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-tasks text-amber-400 text-4xl opacity-80"></i>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <div class="flex items-center gap-x-2 text-xs">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between mb-1 text-zinc-400">
+                                            <span>12 due this week</span>
+                                        </div>
+                                        <div class="h-1.5 bg-zinc-800 rounded-full">
+                                            <div class="h-1.5 bg-amber-400 rounded-full" style="width: 67%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-					<!-- Quick Scan Button -->
-					<button onclick="runComplianceScan()" class="flex items-center gap-x-2.5 bg-white text-zinc-900 hover:bg-zinc-100 active:bg-white transition-all px-5 h-10 rounded-2xl text-sm font-semibold shadow-inner">
-						<i class="fa-solid fa-sync-alt"></i>
-						<span>Run Full Scan</span>
-					</button>
-				</div>
-			</div>
+                        <!-- Audit Readiness -->
+                        <div class="metric-card glass rounded-3xl p-6 border border-zinc-800">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">AUDIT READINESS</div>
+                                    <div class="mt-3">
+                                        <span class="text-6xl font-semibold tracking-tighter stat-number">94</span>
+                                        <span class="text-xl text-zinc-400">%</span>
+                                    </div>
+                                </div>
+                                <div class="text-emerald-400">
+                                    <i class="fa-solid fa-shield-halved text-4xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-xs text-emerald-400 flex items-center gap-x-1.5">
+                                <i class="fa-solid fa-check-double"></i>
+                                <span class="font-medium">Ready for Q3 external audit</span>
+                            </div>
+                        </div>
+                    </div>
 
-			<!-- CONTENT AREA -->
-			<div class="flex-1 overflow-auto p-8 subtle-grid" id="main-content">
+                    <!-- Two Column Content -->
+                    <div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
+                        
+                        <!-- Compliance by Category -->
+                        <div class="xl:col-span-3 glass rounded-3xl border border-zinc-800 p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <div class="font-semibold tracking-tight">Compliance by Category</div>
+                                    <div class="text-xs text-zinc-500">Last updated 47 minutes ago</div>
+                                </div>
+                                <button onclick="showSection('analytics')" class="text-xs flex items-center gap-x-1 text-indigo-400 hover:text-indigo-300 font-medium">
+                                    VIEW FULL <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-5">
+                                <!-- Category rows -->
+                                <div class="flex items-center gap-x-4">
+                                    <div class="w-40 text-sm">F&amp;I / Finance</div>
+                                    <div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+                                        <div class="h-2.5 bg-emerald-400 rounded-full" style="width: 96%"></div>
+                                    </div>
+                                    <div class="w-12 text-right font-mono text-emerald-400 font-medium">96%</div>
+                                </div>
+                                <div class="flex items-center gap-x-4">
+                                    <div class="w-40 text-sm">Data Privacy (CCPA)</div>
+                                    <div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+                                        <div class="h-2.5 bg-emerald-400 rounded-full" style="width: 89%"></div>
+                                    </div>
+                                    <div class="w-12 text-right font-mono text-emerald-400 font-medium">89%</div>
+                                </div>
+                                <div class="flex items-center gap-x-4">
+                                    <div class="w-40 text-sm">Title &amp; Registration</div>
+                                    <div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+                                        <div class="h-2.5 bg-amber-400 rounded-full" style="width: 82%"></div>
+                                    </div>
+                                    <div class="w-12 text-right font-mono text-amber-400 font-medium">82%</div>
+                                </div>
+                                <div class="flex items-center gap-x-4">
+                                    <div class="w-40 text-sm">Employment &amp; HR</div>
+                                    <div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+                                        <div class="h-2.5 bg-emerald-400 rounded-full" style="width: 98%"></div>
+                                    </div>
+                                    <div class="w-12 text-right font-mono text-emerald-400 font-medium">98%</div>
+                                </div>
+                                <div class="flex items-center gap-x-4">
+                                    <div class="w-40 text-sm">Sales &amp; Advertising</div>
+                                    <div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
+                                        <div class="h-2.5 bg-red-400 rounded-full" style="width: 71%"></div>
+                                    </div>
+                                    <div class="w-12 text-right font-mono text-red-400 font-medium">71%</div>
+                                </div>
+                            </div>
+                        </div>
 
-				<!-- OVERVIEW SECTION -->
-				<div id="overview" class="section active">
-					<div class="flex items-end justify-between mb-8">
-						<div>
-							<div class="text-sm text-emerald-400 font-medium tracking-wider">FEBRUARY 10 — JULY 10, 2026</div>
-							<h1 class="text-4xl font-semibold tracking-tighter">Good morning, Nicholas.</h1>
-							<p class="text-zinc-400 mt-1">Your dealership group is currently <span class="text-emerald-400 font-medium">92% compliant</span>. 3 critical items need attention.</p>
-						</div>
+                        <!-- Upcoming Deadlines -->
+                        <div class="xl:col-span-2 glass rounded-3xl border border-zinc-800 p-6 flex flex-col">
+                            <div class="font-semibold tracking-tight mb-4">Upcoming Deadlines</div>
+                            
+                            <div class="space-y-3 flex-1 text-sm">
+                                <div class="flex items-start gap-x-3 p-3 bg-zinc-900/60 rounded-2xl">
+                                    <div class="text-red-400 mt-0.5"><i class="fa-solid fa-clock"></i></div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">DMV Dealer License Renewal</div>
+                                        <div class="text-xs text-zinc-400">Due in <span class="font-mono text-red-400">11 days</span> • All 4 locations</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-x-3 p-3 bg-zinc-900/60 rounded-2xl">
+                                    <div class="text-amber-400 mt-0.5"><i class="fa-solid fa-clock"></i></div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Annual Privacy Policy Review</div>
+                                        <div class="text-xs text-zinc-400">Due Feb 28 • Legal team assigned</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start gap-x-3 p-3 bg-zinc-900/60 rounded-2xl">
+                                    <div class="text-emerald-400 mt-0.5"><i class="fa-solid fa-check-circle"></i></div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Q2 Internal Audit Complete</div>
+                                        <div class="text-xs text-emerald-400">Passed • 47 findings resolved</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button onclick="showSection('audits')" 
+                                    class="mt-4 w-full py-3 text-xs tracking-wider font-semibold border border-zinc-700 hover:bg-zinc-800 transition-colors rounded-2xl">
+                                VIEW ALL DEADLINES &amp; TASKS
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-						<div class="text-right">
-							<div class="inline-flex items-center gap-x-2 bg-zinc-900 border border-zinc-700 rounded-3xl px-4 py-1.5 text-sm">
-								<div class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></div>
-								<span class="font-medium">All systems nominal</span>
-							</div>
-						</div>
-					</div>
+                <!-- ALERTS SECTION -->
+                <div id="alerts" class="section">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-3xl font-semibold tracking-tight">Alerts &amp; Risks</h2>
+                            <p class="text-zinc-400">7 active items • 3 critical</p>
+                        </div>
+                        
+                        <div class="flex items-center gap-x-3">
+                            <div class="flex bg-zinc-900 border border-zinc-700 rounded-2xl p-1 text-xs">
+                                <div class="px-4 py-1.5 rounded-xl bg-zinc-800 font-medium">All</div>
+                                <div class="px-4 py-1.5 text-zinc-400 cursor-pointer">Critical</div>
+                                <div class="px-4 py-1.5 text-zinc-400 cursor-pointer">Medium</div>
+                            </div>
+                            
+                            <button onclick="acknowledgeAllAlerts()" 
+                                    class="px-5 py-2 text-xs font-semibold border border-zinc-700 hover:bg-zinc-800 rounded-2xl flex items-center gap-x-2">
+                                <i class="fa-solid fa-check-double"></i>
+                                <span>ACKNOWLEDGE ALL</span>
+                            </button>
+                        </div>
+                    </div>
 
-					<!-- KPI Metrics -->
-					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-						<!-- Compliance Score -->
-						<div class="metric-card glass rounded-3xl p-6 border border-zinc-800">
-							<div class="flex justify-between items-start">
-								<div>
-									<div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">OVERALL COMPLIANCE</div>
-									<div class="mt-3 flex items-baseline gap-x-1">
-										<span id="compliance-score" class="text-6xl font-semibold tracking-tighter stat-number">92</span>
-										<span class="text-3xl text-zinc-400">/100</span>
-									</div>
-								</div>
-								<div class="text-right">
-									<div class="inline-flex items-center text-emerald-400 text-xs font-medium bg-emerald-500/10 px-3 py-1 rounded-full">
-										<i class="fa-solid fa-arrow-trend-up mr-1"></i>
-										<span>+4</span>
-									</div>
-								</div>
-							</div>
+                    <!-- Alerts Table -->
+                    <div class="glass rounded-3xl border border-zinc-800 overflow-hidden">
+                        <table class="w-full data-table">
+                            <thead>
+                                <tr class="text-xs text-zinc-400 border-b border-zinc-800">
+                                    <th class="text-left px-6 py-4 font-medium">SEVERITY</th>
+                                    <th class="text-left px-6 py-4 font-medium">ALERT</th>
+                                    <th class="text-left px-6 py-4 font-medium">CATEGORY</th>
+                                    <th class="text-left px-6 py-4 font-medium">DEAL / VEHICLE</th>
+                                    <th class="text-left px-6 py-4 font-medium">DETECTED</th>
+                                    <th class="text-right px-6 py-4 font-medium">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-zinc-800" id="alerts-tbody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-							<div class="mt-6">
-								<div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
-									<div class="h-2 bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all" style="width: 92%"></div>
-								</div>
-								<div class="flex justify-between text-[10px] text-zinc-500 mt-1.5 font-mono">
-									<div>Target: 95</div>
-									<div class="text-emerald-400">+3 this month</div>
-								</div>
-							</div>
-						</div>
+                <!-- AUDITS SECTION -->
+                <div id="audits" class="section">
+                    <div class="flex justify-between items-end mb-6">
+                        <div>
+                            <h2 class="text-3xl font-semibold tracking-tight">Audits &amp; Open Tasks</h2>
+                            <p class="text-zinc-400">18 tasks • 4 audits in progress</p>
+                        </div>
+                        <button onclick="createNewAudit()" 
+                                class="px-6 py-2.5 bg-white text-zinc-950 font-semibold rounded-2xl text-sm flex items-center gap-x-2 hover:bg-zinc-100 transition-all">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>NEW AUDIT</span>
+                        </button>
+                    </div>
 
-						<!-- Critical Alerts -->
-						<div class="metric-card glass rounded-3xl p-6 border border-zinc-800 cursor-pointer" onclick="showSection('alerts')">
-							<div class="flex justify-between">
-								<div>
-									<div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">CRITICAL ALERTS</div>
-									<div class="mt-3">
-										<span class="text-6xl font-semibold tracking-tighter stat-number">7</span>
-									</div>
-								</div>
-								<div>
-									<i class="fa-solid fa-exclamation-triangle text-red-400 text-4xl opacity-80"></i>
-								</div>
-							</div>
-							<div class="mt-6 flex items-center gap-x-2 text-xs">
-								<div class="px-3 py-1 bg-red-500/10 text-red-400 rounded-full font-medium">3 new today</div>
-								<div class="text-zinc-500">2 require legal review</div>
-							</div>
-						</div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Active Audits -->
+                        <div class="glass rounded-3xl border border-zinc-800 p-6">
+                            <div class="font-semibold mb-4 flex items-center gap-x-2">
+                                <span>Active Audits</span>
+                                <span class="text-xs px-3 py-px bg-indigo-500/10 text-indigo-400 rounded-full">4</span>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="p-4 bg-zinc-900 rounded-2xl border border-zinc-700">
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <div class="font-medium">Q3 2026 External Compliance Audit</div>
+                                            <div class="text-xs text-zinc-400 mt-0.5">External • Started Jan 28</div>
+                                        </div>
+                                        <div class="text-emerald-400 text-xs font-mono">78% COMPLETE</div>
+                                    </div>
+                                    <div class="mt-3 h-1.5 bg-zinc-700 rounded"><div class="h-1.5 w-[78%] bg-emerald-400 rounded"></div></div>
+                                </div>
+                                
+                                <div class="p-4 bg-zinc-900 rounded-2xl border border-zinc-700">
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <div class="font-medium">F&amp;I Process Review — All Stores</div>
+                                            <div class="text-xs text-zinc-400 mt-0.5">Internal • Started Feb 3</div>
+                                        </div>
+                                        <div class="text-amber-400 text-xs font-mono">41% COMPLETE</div>
+                                    </div>
+                                    <div class="mt-3 h-1.5 bg-zinc-700 rounded"><div class="h-1.5 w-[41%] bg-amber-400 rounded"></div></div>
+                                </div>
+                            </div>
+                        </div>
 
-						<!-- Open Tasks -->
-						<div class="metric-card glass rounded-3xl p-6 border border-zinc-800">
-							<div class="flex justify-between">
-								<div>
-									<div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">OPEN TASKS</div>
-									<div class="mt-3">
-										<span class="text-6xl font-semibold tracking-tighter stat-number">18</span>
-									</div>
-								</div>
-								<div>
-									<i class="fa-solid fa-tasks text-amber-400 text-4xl opacity-80"></i>
-								</div>
-							</div>
-							<div class="mt-6">
-								<div class="flex items-center gap-x-2 text-xs">
-									<div class="flex-1">
-										<div class="flex justify-between mb-1 text-zinc-400">
-											<span>12 due this week</span>
-										</div>
-										<div class="h-1.5 bg-zinc-800 rounded-full">
-											<div class="h-1.5 bg-amber-400 rounded-full" style="width: 67%"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+                        <!-- Open Tasks -->
+                        <div class="glass rounded-3xl border border-zinc-800 p-6">
+                            <div class="font-semibold mb-4">High Priority Open Tasks</div>
+                            
+                            <div class="space-y-3 text-sm">
+                                <div class="flex gap-x-3 items-start p-3 rounded-2xl hover:bg-zinc-900">
+                                    <input type="checkbox" class="mt-1 accent-indigo-500">
+                                    <div class="flex-1">
+                                        <div>Resolve missing odometer disclosure on 4 used vehicles</div>
+                                        <div class="text-xs text-red-400">Overdue • Service Dept</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-x-3 items-start p-3 rounded-2xl hover:bg-zinc-900">
+                                    <input type="checkbox" class="mt-1 accent-indigo-500" checked>
+                                    <div class="flex-1">
+                                        <div>Update privacy notice for all customer portals</div>
+                                        <div class="text-xs text-emerald-400">Completed today</div>
+                                    </div>
+                                </div>
+                                <div class="flex gap-x-3 items-start p-3 rounded-2xl hover:bg-zinc-900">
+                                    <input type="checkbox" class="mt-1 accent-indigo-500">
+                                    <div class="flex-1">
+                                        <div>Retrain 14 sales staff on new FTC advertising guidelines</div>
+                                        <div class="text-xs text-amber-400">Due Feb 18</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-						<!-- Audit Readiness -->
-						<div class="metric-card glass rounded-3xl p-6 border border-zinc-800">
-							<div class="flex justify-between items-start">
-								<div>
-									<div class="text-xs uppercase tracking-widest text-zinc-500 font-medium">AUDIT READINESS</div>
-									<div class="mt-3">
-										<span class="text-6xl font-semibold tracking-tighter stat-number">94</span>
-										<span class="text-xl text-zinc-400">%</span>
-									</div>
-								</div>
-								<div class="text-emerald-400">
-									<i class="fa-solid fa-shield-halved text-4xl"></i>
-								</div>
-							</div>
-							<div class="mt-4 text-xs text-emerald-400 flex items-center gap-x-1.5">
-								<i class="fa-solid fa-check-double"></i>
-								<span class="font-medium">Ready for Q3 external audit</span>
-							</div>
-						</div>
-					</div>
+                <!-- DOCUMENTS SECTION -->
+                <div id="documents" class="section">
+                    <div class="flex justify-between mb-6">
+                        <div>
+                            <h2 class="text-3xl font-semibold tracking-tight">Document Hub</h2>
+                            <p class="text-zinc-400">1,284 active compliance documents • 94% digitized</p>
+                        </div>
+                        <button class="px-5 h-10 bg-white text-sm text-zinc-900 rounded-2xl font-semibold flex items-center gap-x-2">
+                            <i class="fa-solid fa-upload"></i>
+                            <span>UPLOAD DOCUMENTS</span>
+                        </button>
+                    </div>
 
-					<!-- Two Column Content -->
-					<div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
+                    <div class="glass rounded-3xl border border-zinc-800 p-1">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 p-5">
+                            <div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
+                                <i class="fa-solid fa-file-contract text-3xl text-indigo-400 mt-1"></i>
+                                <div>
+                                    <div class="font-semibold">F&amp;I Forms Library</div>
+                                    <div class="text-xs text-zinc-400">342 files • Last updated 2d ago</div>
+                                    <div class="text-[10px] mt-3 text-emerald-400">98% signed &amp; stored</div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
+                                <i class="fa-solid fa-file-shield text-3xl text-emerald-400 mt-1"></i>
+                                <div>
+                                    <div class="font-semibold">Privacy &amp; Data Policies</div>
+                                    <div class="text-xs text-zinc-400">87 files • Version controlled</div>
+                                    <div class="text-[10px] mt-3 text-emerald-400">Current as of Jan 2026</div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
+                                <i class="fa-solid fa-file-alt text-3xl text-amber-400 mt-1"></i>
+                                <div>
+                                    <div class="font-semibold">Audit Reports Archive</div>
+                                    <div class="text-xs text-zinc-400">156 files • 12 external audits</div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
+                                <i class="fa-solid fa-file-medical text-3xl text-red-400 mt-1"></i>
+                                <div>
+                                    <div class="font-semibold">Incident &amp; Remediation Logs</div>
+                                    <div class="text-xs text-zinc-400">41 active incidents</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-						<!-- Compliance by Category -->
-						<div class="xl:col-span-3 glass rounded-3xl border border-zinc-800 p-6">
-							<div class="flex items-center justify-between mb-6">
-								<div>
-									<div class="font-semibold tracking-tight">Compliance by Category</div>
-									<div class="text-xs text-zinc-500">Last updated 47 minutes ago</div>
-								</div>
-								<button onclick="showSection('analytics')" class="text-xs flex items-center gap-x-1 text-indigo-400 hover:text-indigo-300 font-medium">
-									VIEW FULL <i class="fa-solid fa-arrow-right ml-1 text-xs"></i>
-								</button>
-							</div>
+                <!-- ANALYTICS SECTION -->
+                <div id="analytics" class="section">
+                    <div class="mb-6">
+                        <h2 class="text-3xl font-semibold tracking-tight">Compliance Analytics</h2>
+                        <p class="text-zinc-400">Trends across your dealership group — Jan to July 2026</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass rounded-3xl border border-zinc-800 p-6">
+                            <div class="font-medium mb-4">Compliance Score Trend</div>
+                            <canvas id="trendChart" height="120"></canvas>
+                        </div>
+                        
+                        <div class="glass rounded-3xl border border-zinc-800 p-6">
+                            <div class="font-medium mb-4">Compliance Distribution by Category</div>
+                            <canvas id="categoryChart" height="120"></canvas>
+                        </div>
+                    </div>
+                </div>
 
-							<div class="space-y-5">
-								<!-- Category rows -->
-								<div class="flex items-center gap-x-4">
-									<div class="w-40 text-sm">F&amp;I / Finance</div>
-									<div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-										<div class="h-2.5 bg-emerald-400 rounded-full" style="width: 96%"></div>
-									</div>
-									<div class="w-12 text-right font-mono text-emerald-400 font-medium">96%</div>
-								</div>
-								<div class="flex items-center gap-x-4">
-									<div class="w-40 text-sm">Data Privacy (CCPA)</div>
-									<div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-										<div class="h-2.5 bg-emerald-400 rounded-full" style="width: 89%"></div>
-									</div>
-									<div class="w-12 text-right font-mono text-emerald-400 font-medium">89%</div>
-								</div>
-								<div class="flex items-center gap-x-4">
-									<div class="w-40 text-sm">Title &amp; Registration</div>
-									<div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-										<div class="h-2.5 bg-amber-400 rounded-full" style="width: 82%"></div>
-									</div>
-									<div class="w-12 text-right font-mono text-amber-400 font-medium">82%</div>
-								</div>
-								<div class="flex items-center gap-x-4">
-									<div class="w-40 text-sm">Employment &amp; HR</div>
-									<div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-										<div class="h-2.5 bg-emerald-400 rounded-full" style="width: 98%"></div>
-									</div>
-									<div class="w-12 text-right font-mono text-emerald-400 font-medium">98%</div>
-								</div>
-								<div class="flex items-center gap-x-4">
-									<div class="w-40 text-sm">Sales &amp; Advertising</div>
-									<div class="flex-1 h-2.5 bg-zinc-800 rounded-full overflow-hidden">
-										<div class="h-2.5 bg-red-400 rounded-full" style="width: 71%"></div>
-									</div>
-									<div class="w-12 text-right font-mono text-red-400 font-medium">71%</div>
-								</div>
-							</div>
-						</div>
+            </div>
+        </div>
+    </div>
 
-						<!-- Upcoming Deadlines -->
-						<div class="xl:col-span-2 glass rounded-3xl border border-zinc-800 p-6 flex flex-col">
-							<div class="font-semibold tracking-tight mb-4">Upcoming Deadlines</div>
+    <!-- ALERT DETAIL MODAL -->
+    <div id="alert-modal" onclick="if (event.target.id === 'alert-modal') hideAlertModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-lg mx-4 rounded-3xl border border-zinc-700 overflow-hidden">
+            <div class="px-6 pt-5 pb-4 border-b border-zinc-700 flex justify-between items-center">
+                <div class="font-semibold" id="modal-alert-title">Alert Details</div>
+                <button onclick="hideAlertModal()" class="text-zinc-400 hover:text-white"><i class="fa-solid fa-times text-xl"></i></button>
+            </div>
+            
+            <div class="p-6 space-y-5 text-sm">
+                <div id="modal-alert-body"></div>
+                
+                <div class="pt-4 border-t border-zinc-700 flex gap-x-3">
+                    <button onclick="resolveCurrentAlert()" 
+                            class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 transition-colors text-white font-semibold rounded-2xl text-sm">
+                        MARK AS RESOLVED
+                    </button>
+                    <button onclick="hideAlertModal()" 
+                            class="flex-1 py-3 border border-zinc-600 hover:bg-zinc-800 transition-colors font-medium rounded-2xl text-sm">
+                        CLOSE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-							<div class="space-y-3 flex-1 text-sm">
-								<div class="flex items-start gap-x-3 p-3 bg-zinc-900/60 rounded-2xl">
-									<div class="text-red-400 mt-0.5"><i class="fa-solid fa-clock"></i></div>
-									<div class="flex-1">
-										<div class="font-medium">DMV Dealer License Renewal</div>
-										<div class="text-xs text-zinc-400">Due in <span class="font-mono text-red-400">11 days</span> • All 4 locations</div>
-									</div>
-								</div>
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#6366f1');
+            
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                        }
+                    }
+                }
+            };
+        }
 
-								<div class="flex items-start gap-x-3 p-3 bg-zinc-900/60 rounded-2xl">
-									<div class="text-amber-400 mt-0.5"><i class="fa-solid fa-clock"></i></div>
-									<div class="flex-1">
-										<div class="font-medium">Annual Privacy Policy Review</div>
-										<div class="text-xs text-zinc-400">Due Feb 28 • Legal team assigned</div>
-									</div>
-								</div>
+        // Sample alerts data
+        let alerts = [
+            {
+                id: 1,
+                severity: "critical",
+                title: "Missing customer signatures on F&I disclosure forms",
+                category: "F&I / Finance",
+                deal: "Deal #48291 • 2024 Toyota Camry",
+                detected: "2 hours ago",
+                status: "open"
+            },
+            {
+                id: 2,
+                severity: "critical",
+                title: "Expired dealer license detected at North location",
+                category: "Regulatory",
+                deal: "All stores • License #D-44921",
+                detected: "Yesterday",
+                status: "open"
+            },
+            {
+                id: 3,
+                severity: "critical",
+                title: "Potential CCPA data request not responded within 45 days",
+                category: "Data Privacy",
+                deal: "Customer #C-98421",
+                detected: "Jan 29",
+                status: "open"
+            },
+            {
+                id: 4,
+                severity: "medium",
+                title: "Odometer disclosure form incomplete on 3 used vehicles",
+                category: "Title & Registration",
+                deal: "Deals #48102, #48115, #48133",
+                detected: "Jan 28",
+                status: "open"
+            },
+            {
+                id: 5,
+                severity: "medium",
+                title: "Sales team advertising claims flagged by state regulator",
+                category: "Sales & Advertising",
+                deal: "Multiple — Social + Google Ads",
+                detected: "Jan 25",
+                status: "open"
+            },
+            {
+                id: 6,
+                severity: "low",
+                title: "Annual sexual harassment training overdue for 9 employees",
+                category: "Employment & HR",
+                deal: "HR Records",
+                detected: "Jan 20",
+                status: "open"
+            },
+            {
+                id: 7,
+                severity: "medium",
+                title: "Lender compliance packet missing on 2 subprime deals",
+                category: "F&I / Finance",
+                deal: "Deal #47988 & #48003",
+                detected: "Jan 18",
+                status: "open"
+            }
+        ];
 
-								<div class="flex items-start gap-x-3 p-3 bg-zinc-900/60 rounded-2xl">
-									<div class="text-emerald-400 mt-0.5"><i class="fa-solid fa-check-circle"></i></div>
-									<div class="flex-1">
-										<div class="font-medium">Q2 Internal Audit Complete</div>
-										<div class="text-xs text-emerald-400">Passed • 47 findings resolved</div>
-									</div>
-								</div>
-							</div>
-
-							<button onclick="showSection('audits')" class="mt-4 w-full py-3 text-xs tracking-wider font-semibold border border-zinc-700 hover:bg-zinc-800 transition-colors rounded-2xl">
-								VIEW ALL DEADLINES &amp; TASKS
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<!-- ALERTS SECTION -->
-				<div id="alerts" class="section">
-					<div class="flex items-center justify-between mb-6">
-						<div>
-							<h2 class="text-3xl font-semibold tracking-tight">Alerts &amp; Risks</h2>
-							<p class="text-zinc-400">7 active items • 3 critical</p>
-						</div>
-
-						<div class="flex items-center gap-x-3">
-							<div class="flex bg-zinc-900 border border-zinc-700 rounded-2xl p-1 text-xs">
-								<div class="px-4 py-1.5 rounded-xl bg-zinc-800 font-medium">All</div>
-								<div class="px-4 py-1.5 text-zinc-400 cursor-pointer">Critical</div>
-								<div class="px-4 py-1.5 text-zinc-400 cursor-pointer">Medium</div>
-							</div>
-
-							<button onclick="acknowledgeAllAlerts()" class="px-5 py-2 text-xs font-semibold border border-zinc-700 hover:bg-zinc-800 rounded-2xl flex items-center gap-x-2">
-								<i class="fa-solid fa-check-double"></i>
-								<span>ACKNOWLEDGE ALL</span>
-							</button>
-						</div>
-					</div>
-
-					<!-- Alerts Table -->
-					<div class="glass rounded-3xl border border-zinc-800 overflow-hidden">
-						<table class="w-full data-table">
-							<thead>
-								<tr class="text-xs text-zinc-400 border-b border-zinc-800">
-									<th class="text-left px-6 py-4 font-medium">SEVERITY</th>
-									<th class="text-left px-6 py-4 font-medium">ALERT</th>
-									<th class="text-left px-6 py-4 font-medium">CATEGORY</th>
-									<th class="text-left px-6 py-4 font-medium">DEAL / VEHICLE</th>
-									<th class="text-left px-6 py-4 font-medium">DETECTED</th>
-									<th class="text-right px-6 py-4 font-medium">ACTIONS</th>
-								</tr>
-							</thead>
-							<tbody class="text-sm divide-y divide-zinc-800" id="alerts-tbody">
-								<!-- Populated by JS -->
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<!-- AUDITS SECTION -->
-				<div id="audits" class="section">
-					<div class="flex justify-between items-end mb-6">
-						<div>
-							<h2 class="text-3xl font-semibold tracking-tight">Audits &amp; Open Tasks</h2>
-							<p class="text-zinc-400">18 tasks • 4 audits in progress</p>
-						</div>
-						<button onclick="createNewAudit()" class="px-6 py-2.5 bg-white text-zinc-950 font-semibold rounded-2xl text-sm flex items-center gap-x-2 hover:bg-zinc-100 transition-all">
-							<i class="fa-solid fa-plus"></i>
-							<span>NEW AUDIT</span>
-						</button>
-					</div>
-
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-						<!-- Active Audits -->
-						<div class="glass rounded-3xl border border-zinc-800 p-6">
-							<div class="font-semibold mb-4 flex items-center gap-x-2">
-								<span>Active Audits</span>
-								<span class="text-xs px-3 py-px bg-indigo-500/10 text-indigo-400 rounded-full">4</span>
-							</div>
-
-							<div class="space-y-4">
-								<div class="p-4 bg-zinc-900 rounded-2xl border border-zinc-700">
-									<div class="flex justify-between">
-										<div>
-											<div class="font-medium">Q3 2026 External Compliance Audit</div>
-											<div class="text-xs text-zinc-400 mt-0.5">External • Started Jan 28</div>
-										</div>
-										<div class="text-emerald-400 text-xs font-mono">78% COMPLETE</div>
-									</div>
-									<div class="mt-3 h-1.5 bg-zinc-700 rounded">
-										<div class="h-1.5 w-[78%] bg-emerald-400 rounded"></div>
-									</div>
-								</div>
-
-								<div class="p-4 bg-zinc-900 rounded-2xl border border-zinc-700">
-									<div class="flex justify-between">
-										<div>
-											<div class="font-medium">F&amp;I Process Review — All Stores</div>
-											<div class="text-xs text-zinc-400 mt-0.5">Internal • Started Feb 3</div>
-										</div>
-										<div class="text-amber-400 text-xs font-mono">41% COMPLETE</div>
-									</div>
-									<div class="mt-3 h-1.5 bg-zinc-700 rounded">
-										<div class="h-1.5 w-[41%] bg-amber-400 rounded"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Open Tasks -->
-						<div class="glass rounded-3xl border border-zinc-800 p-6">
-							<div class="font-semibold mb-4">High Priority Open Tasks</div>
-
-							<div class="space-y-3 text-sm">
-								<div class="flex gap-x-3 items-start p-3 rounded-2xl hover:bg-zinc-900">
-									<input type="checkbox" class="mt-1 accent-indigo-500">
-									<div class="flex-1">
-										<div>Resolve missing odometer disclosure on 4 used vehicles</div>
-										<div class="text-xs text-red-400">Overdue • Service Dept</div>
-									</div>
-								</div>
-								<div class="flex gap-x-3 items-start p-3 rounded-2xl hover:bg-zinc-900">
-									<input type="checkbox" class="mt-1 accent-indigo-500" checked>
-									<div class="flex-1">
-										<div>Update privacy notice for all customer portals</div>
-										<div class="text-xs text-emerald-400">Completed today</div>
-									</div>
-								</div>
-								<div class="flex gap-x-3 items-start p-3 rounded-2xl hover:bg-zinc-900">
-									<input type="checkbox" class="mt-1 accent-indigo-500">
-									<div class="flex-1">
-										<div>Retrain 14 sales staff on new FTC advertising guidelines</div>
-										<div class="text-xs text-amber-400">Due Feb 18</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- DOCUMENTS SECTION -->
-				<div id="documents" class="section">
-					<div class="flex justify-between mb-6">
-						<div>
-							<h2 class="text-3xl font-semibold tracking-tight">Document Hub</h2>
-							<p class="text-zinc-400">1,284 active compliance documents • 94% digitized</p>
-						</div>
-						<button class="px-5 h-10 bg-white text-sm text-zinc-900 rounded-2xl font-semibold flex items-center gap-x-2">
-							<i class="fa-solid fa-upload"></i>
-							<span>UPLOAD DOCUMENTS</span>
-						</button>
-					</div>
-
-					<div class="glass rounded-3xl border border-zinc-800 p-1">
-						<div class="grid grid-cols-2 md:grid-cols-4 gap-3 p-5">
-							<div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
-								<i class="fa-solid fa-file-contract text-3xl text-indigo-400 mt-1"></i>
-								<div>
-									<div class="font-semibold">F&amp;I Forms Library</div>
-									<div class="text-xs text-zinc-400">342 files • Last updated 2d ago</div>
-									<div class="text-[10px] mt-3 text-emerald-400">98% signed &amp; stored</div>
-								</div>
-							</div>
-
-							<div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
-								<i class="fa-solid fa-file-shield text-3xl text-emerald-400 mt-1"></i>
-								<div>
-									<div class="font-semibold">Privacy &amp; Data Policies</div>
-									<div class="text-xs text-zinc-400">87 files • Version controlled</div>
-									<div class="text-[10px] mt-3 text-emerald-400">Current as of Jan 2026</div>
-								</div>
-							</div>
-
-							<div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
-								<i class="fa-solid fa-file-alt text-3xl text-amber-400 mt-1"></i>
-								<div>
-									<div class="font-semibold">Audit Reports Archive</div>
-									<div class="text-xs text-zinc-400">156 files • 12 external audits</div>
-								</div>
-							</div>
-
-							<div class="p-5 bg-zinc-900 rounded-2xl flex gap-x-4 items-start border border-zinc-700">
-								<i class="fa-solid fa-file-medical text-3xl text-red-400 mt-1"></i>
-								<div>
-									<div class="font-semibold">Incident &amp; Remediation Logs</div>
-									<div class="text-xs text-zinc-400">41 active incidents</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- ANALYTICS SECTION -->
-				<div id="analytics" class="section">
-					<div class="mb-6">
-						<h2 class="text-3xl font-semibold tracking-tight">Compliance Analytics</h2>
-						<p class="text-zinc-400">Trends across your dealership group — Jan to July 2026</p>
-					</div>
-
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-						<div class="glass rounded-3xl border border-zinc-800 p-6">
-							<div class="font-medium mb-4">Compliance Score Trend</div>
-							<canvas id="trendChart" height="120"></canvas>
-						</div>
-
-						<div class="glass rounded-3xl border border-zinc-800 p-6">
-							<div class="font-medium mb-4">Compliance Distribution by Category</div>
-							<canvas id="categoryChart" height="120"></canvas>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<!-- ALERT DETAIL MODAL -->
-	<div id="alert-modal" onclick="if (event.target.id === 'alert-modal') hideAlertModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center">
-		<div onclick="event.stopImmediatePropagation()" class="glass w-full max-w-lg mx-4 rounded-3xl border border-zinc-700 overflow-hidden">
-			<div class="px-6 pt-5 pb-4 border-b border-zinc-700 flex justify-between items-center">
-				<div class="font-semibold" id="modal-alert-title">Alert Details</div>
-				<button onclick="hideAlertModal()" class="text-zinc-400 hover:text-white"><i class="fa-solid fa-times text-xl"></i></button>
-			</div>
-
-			<div class="p-6 space-y-5 text-sm">
-				<div id="modal-alert-body"></div>
-
-				<div class="pt-4 border-t border-zinc-700 flex gap-x-3">
-					<button onclick="resolveCurrentAlert()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 transition-colors text-white font-semibold rounded-2xl text-sm">
-						MARK AS RESOLVED
-					</button>
-					<button onclick="hideAlertModal()" class="flex-1 py-3 border border-zinc-600 hover:bg-zinc-800 transition-colors font-medium rounded-2xl text-sm">
-						CLOSE
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script>
-		// Tailwind script
-		function initializeTailwind() {
-			document.documentElement.style.setProperty('--accent', '#6366f1');
-
-			tailwind.config = {
-				theme: {
-					extend: {
-						fontFamily: {
-							'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
-						}
-					}
-				}
-			};
-		}
-
-		// Sample alerts data
-		let alerts = [{
-				id: 1,
-				severity: "critical",
-				title: "Missing customer signatures on F&I disclosure forms",
-				category: "F&I / Finance",
-				deal: "Deal #48291 • 2024 Toyota Camry",
-				detected: "2 hours ago",
-				status: "open"
-			},
-			{
-				id: 2,
-				severity: "critical",
-				title: "Expired dealer license detected at North location",
-				category: "Regulatory",
-				deal: "All stores • License #D-44921",
-				detected: "Yesterday",
-				status: "open"
-			},
-			{
-				id: 3,
-				severity: "critical",
-				title: "Potential CCPA data request not responded within 45 days",
-				category: "Data Privacy",
-				deal: "Customer #C-98421",
-				detected: "Jan 29",
-				status: "open"
-			},
-			{
-				id: 4,
-				severity: "medium",
-				title: "Odometer disclosure form incomplete on 3 used vehicles",
-				category: "Title & Registration",
-				deal: "Deals #48102, #48115, #48133",
-				detected: "Jan 28",
-				status: "open"
-			},
-			{
-				id: 5,
-				severity: "medium",
-				title: "Sales team advertising claims flagged by state regulator",
-				category: "Sales & Advertising",
-				deal: "Multiple — Social + Google Ads",
-				detected: "Jan 25",
-				status: "open"
-			},
-			{
-				id: 6,
-				severity: "low",
-				title: "Annual sexual harassment training overdue for 9 employees",
-				category: "Employment & HR",
-				deal: "HR Records",
-				detected: "Jan 20",
-				status: "open"
-			},
-			{
-				id: 7,
-				severity: "medium",
-				title: "Lender compliance packet missing on 2 subprime deals",
-				category: "F&I / Finance",
-				deal: "Deal #47988 & #48003",
-				detected: "Jan 18",
-				status: "open"
-			}
-		];
-
-		function renderAlerts() {
-			const tbody = document.getElementById('alerts-tbody');
-			tbody.innerHTML = '';
-
-			alerts.forEach(alert => {
-				const row = document.createElement('tr');
-				row.className = `alert-row border-b border-zinc-800 last:border-0 cursor-pointer`;
-
-				let severityHTML = '';
-				if (alert.severity === 'critical') {
-					severityHTML = `<span class="status-pill bg-red-500/90 text-white">CRITICAL</span>`;
-				} else if (alert.severity === 'medium') {
-					severityHTML = `<span class="status-pill bg-amber-500/90 text-white">MEDIUM</span>`;
-				} else {
-					severityHTML = `<span class="status-pill bg-zinc-500/90 text-white">LOW</span>`;
-				}
-
-				row.innerHTML = `
+        function renderAlerts() {
+            const tbody = document.getElementById('alerts-tbody');
+            tbody.innerHTML = '';
+            
+            alerts.forEach(alert => {
+                const row = document.createElement('tr');
+                row.className = `alert-row border-b border-zinc-800 last:border-0 cursor-pointer`;
+                
+                let severityHTML = '';
+                if (alert.severity === 'critical') {
+                    severityHTML = `<span class="status-pill bg-red-500/90 text-white">CRITICAL</span>`;
+                } else if (alert.severity === 'medium') {
+                    severityHTML = `<span class="status-pill bg-amber-500/90 text-white">MEDIUM</span>`;
+                } else {
+                    severityHTML = `<span class="status-pill bg-zinc-500/90 text-white">LOW</span>`;
+                }
+                
+                row.innerHTML = `
                     <td class="px-6 py-4">${severityHTML}</td>
                     <td class="px-6 py-4 font-medium">${alert.title}</td>
                     <td class="px-6 py-4 text-zinc-400">${alert.category}</td>
@@ -811,25 +848,25 @@
                         </div>
                     </td>
                 `;
+                
+                row.onclick = () => viewAlert(alert.id);
+                tbody.appendChild(row);
+            });
+        }
 
-				row.onclick = () => viewAlert(alert.id);
-				tbody.appendChild(row);
-			});
-		}
+        let currentAlertId = null;
 
-		let currentAlertId = null;
-
-		function viewAlert(id) {
-			const alert = alerts.find(a => a.id === id);
-			if (!alert) return;
-
-			currentAlertId = id;
-
-			const modal = document.getElementById('alert-modal');
-			const titleEl = document.getElementById('modal-alert-title');
-			const bodyEl = document.getElementById('modal-alert-body');
-
-			titleEl.innerHTML = `
+        function viewAlert(id) {
+            const alert = alerts.find(a => a.id === id);
+            if (!alert) return;
+            
+            currentAlertId = id;
+            
+            const modal = document.getElementById('alert-modal');
+            const titleEl = document.getElementById('modal-alert-title');
+            const bodyEl = document.getElementById('modal-alert-body');
+            
+            titleEl.innerHTML = `
                 <div class="flex items-center gap-x-3">
                     ${alert.severity === 'critical' ? 
                         `<span class="status-pill bg-red-500 text-white">CRITICAL</span>` : 
@@ -839,8 +876,8 @@
                     <span>${alert.title}</span>
                 </div>
             `;
-
-			bodyEl.innerHTML = `
+            
+            bodyEl.innerHTML = `
                 <div class="grid grid-cols-2 gap-y-4 text-sm">
                     <div>
                         <div class="text-xs text-zinc-400">CATEGORY</div>
@@ -865,212 +902,212 @@
                     </div>
                 </div>
             `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
 
-			modal.classList.remove('hidden');
-			modal.classList.add('flex');
-		}
+        function hideAlertModal() {
+            const modal = document.getElementById('alert-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
 
-		function hideAlertModal() {
-			const modal = document.getElementById('alert-modal');
-			modal.classList.remove('flex');
-			modal.classList.add('hidden');
-		}
+        function resolveAlert(id, element) {
+            event.stopImmediatePropagation();
+            
+            alerts = alerts.filter(a => a.id !== id);
+            
+            // Update UI
+            const tbody = document.getElementById('alerts-tbody');
+            if (element && element.closest('tr')) {
+                element.closest('tr').style.transition = 'all .2s';
+                element.closest('tr').style.opacity = '0';
+                setTimeout(() => {
+                    renderAlerts();
+                    updateAlertCount();
+                }, 180);
+            } else {
+                renderAlerts();
+                updateAlertCount();
+            }
+            
+            // Toast
+            showToast("Alert resolved successfully");
+        }
 
-		function resolveAlert(id, element) {
-			event.stopImmediatePropagation();
+        function resolveCurrentAlert() {
+            if (currentAlertId) {
+                alerts = alerts.filter(a => a.id !== currentAlertId);
+                hideAlertModal();
+                renderAlerts();
+                updateAlertCount();
+                showToast("Alert resolved and logged");
+            }
+        }
 
-			alerts = alerts.filter(a => a.id !== id);
+        function acknowledgeAllAlerts() {
+            if (confirm("Acknowledge all open alerts? This will mark them as reviewed but not resolved.")) {
+                alerts.forEach(alert => {
+                    if (alert.status === "open") alert.status = "acknowledged";
+                });
+                renderAlerts();
+                showToast("All alerts acknowledged");
+            }
+        }
 
-			// Update UI
-			const tbody = document.getElementById('alerts-tbody');
-			if (element && element.closest('tr')) {
-				element.closest('tr').style.transition = 'all .2s';
-				element.closest('tr').style.opacity = '0';
-				setTimeout(() => {
-					renderAlerts();
-					updateAlertCount();
-				}, 180);
-			} else {
-				renderAlerts();
-				updateAlertCount();
-			}
+        function updateAlertCount() {
+            // Update sidebar badge
+            const navAlerts = document.getElementById('nav-alerts');
+            if (navAlerts) {
+                const countEl = navAlerts.querySelector('.bg-red-500');
+                if (countEl) {
+                    countEl.textContent = alerts.length;
+                    if (alerts.length === 0) {
+                        countEl.style.display = 'none';
+                    }
+                }
+            }
+        }
 
-			// Toast
-			showToast("Alert resolved successfully");
-		}
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            
+            // Show target
+            const target = document.getElementById(section);
+            if (target) target.classList.add('active');
+            
+            // Update nav active state
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            const navItem = document.getElementById('nav-' + section);
+            if (navItem) navItem.classList.add('active');
+            
+            // Initialize charts if analytics
+            if (section === 'analytics') {
+                setTimeout(initCharts, 80);
+            }
+        }
 
-		function resolveCurrentAlert() {
-			if (currentAlertId) {
-				alerts = alerts.filter(a => a.id !== currentAlertId);
-				hideAlertModal();
-				renderAlerts();
-				updateAlertCount();
-				showToast("Alert resolved and logged");
-			}
-		}
+        let trendChartInstance = null;
+        let categoryChartInstance = null;
 
-		function acknowledgeAllAlerts() {
-			if (confirm("Acknowledge all open alerts? This will mark them as reviewed but not resolved.")) {
-				alerts.forEach(alert => {
-					if (alert.status === "open") alert.status = "acknowledged";
-				});
-				renderAlerts();
-				showToast("All alerts acknowledged");
-			}
-		}
+        function initCharts() {
+            // Destroy old charts if exist
+            if (trendChartInstance) trendChartInstance.destroy();
+            if (categoryChartInstance) categoryChartInstance.destroy();
+            
+            // Trend line chart
+            const trendCtx = document.getElementById('trendChart');
+            if (trendCtx) {
+                trendChartInstance = new Chart(trendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                        datasets: [{
+                            label: 'Overall Compliance %',
+                            data: [84, 87, 85, 89, 91, 90, 92],
+                            borderColor: '#6366f1',
+                            borderWidth: 3,
+                            tension: 0.35,
+                            fill: true,
+                            backgroundColor: 'rgba(99, 102, 241, 0.08)',
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#6366f1',
+                            pointBorderWidth: 2,
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { min: 75, max: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#71717a', stepSize: 5 } },
+                            x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#71717a' } }
+                        },
+                        elements: { line: { borderJoinStyle: 'round' } }
+                    }
+                });
+            }
+            
+            // Category doughnut
+            const catCtx = document.getElementById('categoryChart');
+            if (catCtx) {
+                categoryChartInstance = new Chart(catCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['F&I Finance', 'Data Privacy', 'Title/Reg', 'HR', 'Sales & Ads'],
+                        datasets: [{
+                            data: [96, 89, 82, 98, 71],
+                            backgroundColor: ['#10b981', '#6366f1', '#f59e0b', '#14b8a6', '#ef4444'],
+                            borderWidth: 0,
+                            hoverOffset: 18
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        cutout: '72%',
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: { color: '#a1a1aa', boxWidth: 10, padding: 16, font: { size: 11 } }
+                            }
+                        }
+                    }
+                });
+            }
+        }
 
-		function updateAlertCount() {
-			// Update sidebar badge
-			const navAlerts = document.getElementById('nav-alerts');
-			if (navAlerts) {
-				const countEl = navAlerts.querySelector('.bg-red-500');
-				if (countEl) {
-					countEl.textContent = alerts.length;
-					if (alerts.length === 0) {
-						countEl.style.display = 'none';
-					}
-				}
-			}
-		}
+        function runComplianceScan() {
+            const btns = document.querySelectorAll('button');
+            const originalTexts = [];
+            
+            btns.forEach((btn, i) => {
+                if (btn.innerText.includes('Run Full Scan') || btn.innerText.includes('SCAN')) {
+                    originalTexts[i] = btn.innerHTML;
+                    btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SCANNING...`;
+                    btn.disabled = true;
+                }
+            });
+            
+            setTimeout(() => {
+                // Simulate improvement
+                const scoreEl = document.getElementById('compliance-score');
+                if (scoreEl) {
+                    scoreEl.style.transition = 'all 0.6s cubic-bezier(0.34,1.56,0.64,1)';
+                    scoreEl.textContent = '94';
+                    
+                    // Update progress bar
+                    const progress = document.querySelector('#overview .h-2.bg-gradient-to-r');
+                    if (progress) progress.style.width = '94%';
+                }
+                
+                // Show toast
+                showToast("Full compliance scan completed. Score improved to 94.");
+                
+                // Re-enable buttons
+                btns.forEach((btn, i) => {
+                    if (btn.disabled && originalTexts[i]) {
+                        btn.innerHTML = originalTexts[i];
+                        btn.disabled = false;
+                    }
+                });
+                
+                // Occasionally add a new resolved feel
+                setTimeout(() => {
+                    const nav = document.getElementById('nav-alerts');
+                    if (nav) nav.classList.add('!text-emerald-400');
+                    setTimeout(() => nav && nav.classList.remove('!text-emerald-400'), 1400);
+                }, 800);
+                
+            }, 1850);
+        }
 
-		function showSection(section) {
-			// Hide all sections
-			document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-
-			// Show target
-			const target = document.getElementById(section);
-			if (target) target.classList.add('active');
-
-			// Update nav active state
-			document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-			const navItem = document.getElementById('nav-' + section);
-			if (navItem) navItem.classList.add('active');
-
-			// Initialize charts if analytics
-			if (section === 'analytics') {
-				setTimeout(initCharts, 80);
-			}
-		}
-
-		let trendChartInstance = null;
-		let categoryChartInstance = null;
-
-		function initCharts() {
-			// Destroy old charts if exist
-			if (trendChartInstance) trendChartInstance.destroy();
-			if (categoryChartInstance) categoryChartInstance.destroy();
-
-			// Trend line chart
-			const trendCtx = document.getElementById('trendChart');
-			if (trendCtx) {
-				trendChartInstance = new Chart(trendCtx, {
-					type: 'line',
-					data: {
-						labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-						datasets: [{
-							label: 'Overall Compliance %',
-							data: [84, 87, 85, 89, 91, 90, 92],
-							borderColor: '#6366f1',
-							borderWidth: 3,
-							tension: 0.35,
-							fill: true,
-							backgroundColor: 'rgba(99, 102, 241, 0.08)',
-							pointBackgroundColor: '#fff',
-							pointBorderColor: '#6366f1',
-							pointBorderWidth: 2,
-							pointRadius: 4
-						}]
-					},
-					options: {
-						responsive: true,
-						maintainAspectRatio: false,
-						plugins: { legend: { display: false } },
-						scales: {
-							y: { min: 75, max: 100, grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#71717a', stepSize: 5 } },
-							x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#71717a' } }
-						},
-						elements: { line: { borderJoinStyle: 'round' } }
-					}
-				});
-			}
-
-			// Category doughnut
-			const catCtx = document.getElementById('categoryChart');
-			if (catCtx) {
-				categoryChartInstance = new Chart(catCtx, {
-					type: 'doughnut',
-					data: {
-						labels: ['F&I Finance', 'Data Privacy', 'Title/Reg', 'HR', 'Sales & Ads'],
-						datasets: [{
-							data: [96, 89, 82, 98, 71],
-							backgroundColor: ['#10b981', '#6366f1', '#f59e0b', '#14b8a6', '#ef4444'],
-							borderWidth: 0,
-							hoverOffset: 18
-						}]
-					},
-					options: {
-						responsive: true,
-						cutout: '72%',
-						plugins: {
-							legend: {
-								position: 'right',
-								labels: { color: '#a1a1aa', boxWidth: 10, padding: 16, font: { size: 11 } }
-							}
-						}
-					}
-				});
-			}
-		}
-
-		function runComplianceScan() {
-			const btns = document.querySelectorAll('button');
-			const originalTexts = [];
-
-			btns.forEach((btn, i) => {
-				if (btn.innerText.includes('Run Full Scan') || btn.innerText.includes('SCAN')) {
-					originalTexts[i] = btn.innerHTML;
-					btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SCANNING...`;
-					btn.disabled = true;
-				}
-			});
-
-			setTimeout(() => {
-				// Simulate improvement
-				const scoreEl = document.getElementById('compliance-score');
-				if (scoreEl) {
-					scoreEl.style.transition = 'all 0.6s cubic-bezier(0.34,1.56,0.64,1)';
-					scoreEl.textContent = '94';
-
-					// Update progress bar
-					const progress = document.querySelector('#overview .h-2.bg-gradient-to-r');
-					if (progress) progress.style.width = '94%';
-				}
-
-				// Show toast
-				showToast("Full compliance scan completed. Score improved to 94.");
-
-				// Re-enable buttons
-				btns.forEach((btn, i) => {
-					if (btn.disabled && originalTexts[i]) {
-						btn.innerHTML = originalTexts[i];
-						btn.disabled = false;
-					}
-				});
-
-				// Occasionally add a new resolved feel
-				setTimeout(() => {
-					const nav = document.getElementById('nav-alerts');
-					if (nav) nav.classList.add('!text-emerald-400');
-					setTimeout(() => nav && nav.classList.remove('!text-emerald-400'), 1400);
-				}, 800);
-
-			}, 1850);
-		}
-
-		function createNewAudit() {
-			const modal = document.createElement('div');
-			modal.className = `fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center`;
-			modal.innerHTML = `
+        function createNewAudit() {
+            const modal = document.createElement('div');
+            modal.className = `fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center`;
+            modal.innerHTML = `
                 <div class="glass w-full max-w-md mx-4 rounded-3xl border border-zinc-700 overflow-hidden">
                     <div class="px-6 pt-5 pb-4 border-b border-zinc-700 flex justify-between">
                         <div class="font-semibold">Create New Audit</div>
@@ -1118,13 +1155,13 @@
                     </div>
                 </div>
             `;
-			document.body.appendChild(modal);
-		}
+            document.body.appendChild(modal);
+        }
 
-		function showNotifications() {
-			const notif = document.createElement('div');
-			notif.className = `absolute right-8 top-16 w-80 glass border border-zinc-700 rounded-3xl shadow-2xl z-[200] overflow-hidden`;
-			notif.innerHTML = `
+        function showNotifications() {
+            const notif = document.createElement('div');
+            notif.className = `absolute right-8 top-16 w-80 glass border border-zinc-700 rounded-3xl shadow-2xl z-[200] overflow-hidden`;
+            notif.innerHTML = `
                 <div class="px-5 py-3 border-b border-zinc-700 flex justify-between items-center">
                     <div class="font-semibold">Notifications</div>
                     <div class="text-xs text-emerald-400 cursor-pointer" onclick="this.closest('.absolute').remove()">MARK ALL READ</div>
@@ -1158,130 +1195,188 @@
                     <span class="text-xs text-zinc-400 cursor-pointer hover:text-white">View all notifications →</span>
                 </div>
             `;
+            
+            // Position it
+            const header = document.querySelector('.dashboard-header');
+            header.style.position = 'relative';
+            header.appendChild(notif);
+            
+            // Auto close on outside click
+            setTimeout(() => {
+                document.addEventListener('click', function handler(e) {
+                    if (!notif.contains(e.target)) {
+                        notif.remove();
+                        document.removeEventListener('click', handler);
+                    }
+                }, { once: true });
+            }, 50);
+        }
 
-			// Position it
-			const header = document.querySelector('.dashboard-header');
-			header.style.position = 'relative';
-			header.appendChild(notif);
-
-			// Auto close on outside click
-			setTimeout(() => {
-				document.addEventListener('click', function handler(e) {
-					if (!notif.contains(e.target)) {
-						notif.remove();
-						document.removeEventListener('click', handler);
-					}
-				}, { once: true });
-			}, 50);
-		}
-
-		function showToast(message) {
-			const toast = document.createElement('div');
-			toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-900 border border-zinc-700 text-sm px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-x-3 z-[300]`;
-			toast.innerHTML = `
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-900 border border-zinc-700 text-sm px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-x-3 z-[300]`;
+            toast.innerHTML = `
                 <i class="fa-solid fa-check-circle text-emerald-400"></i>
                 <span>${message}</span>
             `;
-			document.body.appendChild(toast);
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all .25s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 200);
+            }, 2600);
+        }
 
-			setTimeout(() => {
-				toast.style.transition = 'all .25s ease';
-				toast.style.opacity = '0';
-				setTimeout(() => toast.remove(), 200);
-			}, 2600);
-		}
+        function initializeGlobalSearch() {
+            const search = document.getElementById('global-search');
+            if (!search) return;
+            
+            search.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter' && this.value.trim() !== '') {
+                    const term = this.value.toLowerCase();
+                    
+                    // Simple search behavior
+                    if (term.includes('alert') || term.includes('critical')) {
+                        showSection('alerts');
+                    } else if (term.includes('audit')) {
+                        showSection('audits');
+                    } else if (term.includes('doc') || term.includes('form')) {
+                        showSection('documents');
+                    } else if (term.includes('chart') || term.includes('analytic')) {
+                        showSection('analytics');
+                    } else {
+                        showToast(`Searching for "${this.value}" across all records...`);
+                    }
+                    
+                    this.value = '';
+                }
+            });
+            
+            // Bonus: focus hint
+            search.placeholder = "Search deals, alerts, documents... (try 'alert' or 'audit')";
+        }
 
-		function initializeGlobalSearch() {
-			const search = document.getElementById('global-search');
-			if (!search) return;
+        function initializeKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                if (e.metaKey && e.key === "/") {
+                    e.preventDefault();
+                    const search = document.getElementById('global-search');
+                    if (search) search.focus();
+                }
+                
+                if (e.key === "?" && document.activeElement.tagName === "BODY") {
+                    e.preventDefault();
+                    showSection('alerts');
+                }
+            });
+            
+            // Easter egg hint
+            console.log('%c[Engenix] Pro tip: Press ⌘/ to focus search, or ? to jump to alerts.', 'color:#3f3f46');
+        }
 
-			search.addEventListener('keyup', function(e) {
-				if (e.key === 'Enter' && this.value.trim() !== '') {
-					const term = this.value.toLowerCase();
+        function initializeSampleData() {
+            // Render initial alerts
+            renderAlerts();
+            updateAlertCount();
+            
+            // Set initial compliance score animation
+            setTimeout(() => {
+                const score = document.getElementById('compliance-score');
+                if (score) {
+                    score.style.transition = 'all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                }
+            }, 300);
+            
+            // Random subtle live update simulation (demo only)
+            setTimeout(() => {
+                const nav = document.getElementById('nav-alerts');
+                if (nav && alerts.length > 0) {
+                    // Occasionally pulse the alert count
+                    nav.style.transitionDuration = '120ms';
+                }
+            }, 14000);
+        }
 
-					// Simple search behavior
-					if (term.includes('alert') || term.includes('critical')) {
-						showSection('alerts');
-					} else if (term.includes('audit')) {
-						showSection('audits');
-					} else if (term.includes('doc') || term.includes('form')) {
-						showSection('documents');
-					} else if (term.includes('chart') || term.includes('analytic')) {
-						showSection('analytics');
-					} else {
-						showToast(`Searching for "${this.value}" across all records...`);
-					}
+        // Mobile menu toggle for responsive sidebar
+        let mobileMenuOpen = false;
 
-					this.value = '';
-				}
-			});
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar) return;
 
-			// Bonus: focus hint
-			search.placeholder = "Search deals, alerts, documents... (try 'alert' or 'audit')";
-		}
+            mobileMenuOpen = !mobileMenuOpen;
 
-		function initializeKeyboardShortcuts() {
-			document.addEventListener('keydown', function(e) {
-				if (e.metaKey && e.key === "/") {
-					e.preventDefault();
-					const search = document.getElementById('global-search');
-					if (search) search.focus();
-				}
+            if (mobileMenuOpen) {
+                sidebar.classList.remove('hidden');
+                sidebar.classList.add('!block', 'fixed', 'inset-y-0', 'left-0', 'z-[60]', 'w-72', 'shadow-2xl', 'lg:hidden');
+                sidebar.style.transform = 'translateX(0)';
+                
+                // Add overlay
+                let overlay = document.getElementById('mobile-overlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = 'mobile-overlay';
+                    overlay.className = 'fixed inset-0 bg-black/60 z-[55] lg:hidden';
+                    overlay.onclick = () => toggleMobileMenu();
+                    document.body.appendChild(overlay);
+                }
+            } else {
+                sidebar.classList.remove('!block', 'fixed', 'inset-y-0', 'left-0', 'z-[60]', 'w-72', 'shadow-2xl');
+                sidebar.style.transform = '';
+                sidebar.classList.add('hidden');
+                
+                const overlay = document.getElementById('mobile-overlay');
+                if (overlay) overlay.remove();
+            }
+        }
 
-				if (e.key === "?" && document.activeElement.tagName === "BODY") {
-					e.preventDefault();
-					showSection('alerts');
-				}
-			});
+        // Close mobile menu when navigating on small screens
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            
+            // Show target
+            const target = document.getElementById(section);
+            if (target) target.classList.add('active');
+            
+            // Update nav active state
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            const navItem = document.getElementById('nav-' + section);
+            if (navItem) navItem.classList.add('active');
+            
+            // Close mobile menu if open
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar && window.innerWidth < 1024 && mobileMenuOpen) {
+                toggleMobileMenu();
+            }
+            
+            // Initialize charts if analytics
+            if (section === 'analytics') {
+                setTimeout(initCharts, 80);
+            }
+        }
 
-			// Easter egg hint
-			console.log('%c[Engenix] Pro tip: Press ⌘/ to focus search, or ? to jump to alerts.', 'color:#3f3f46');
-		}
+        // Boot everything
+        function initializeDashboard() {
+            initializeTailwind();
+            initializeSampleData();
+            initializeGlobalSearch();
+            initializeKeyboardShortcuts();
+            
+            // Default to overview
+            document.getElementById('overview').classList.add('active');
+            document.getElementById('nav-overview').classList.add('active');
+            
+            // Bonus: Show a friendly first-toast after load (disabled for clean UX)
+            // setTimeout(() => showToast("Welcome back. All systems are looking strong today."), 4200);
+            
+            // Make sure charts are ready if user goes to analytics immediately
+            console.log('%c[Engenix Compliance Dashboard] Prototype initialized successfully. Ready for production build.', 'color:#52525b');
+        }
 
-		function initializeSampleData() {
-			// Render initial alerts
-			renderAlerts();
-			updateAlertCount();
-
-			// Set initial compliance score animation
-			setTimeout(() => {
-				const score = document.getElementById('compliance-score');
-				if (score) {
-					score.style.transition = 'all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
-				}
-			}, 300);
-
-			// Random subtle live update simulation (demo only)
-			setTimeout(() => {
-				const nav = document.getElementById('nav-alerts');
-				if (nav && alerts.length > 0) {
-					// Occasionally pulse the alert count
-					nav.style.transitionDuration = '120ms';
-				}
-			}, 14000);
-		}
-
-		// Boot everything
-		function initializeDashboard() {
-			initializeTailwind();
-			initializeSampleData();
-			initializeGlobalSearch();
-			initializeKeyboardShortcuts();
-
-			// Default to overview
-			document.getElementById('overview').classList.add('active');
-			document.getElementById('nav-overview').classList.add('active');
-
-			// Bonus: Show a friendly first-toast after load (disabled for clean UX)
-			// setTimeout(() => showToast("Welcome back. All systems are looking strong today."), 4200);
-
-			// Make sure charts are ready if user goes to analytics immediately
-			console.log('%c[Engenix Compliance Dashboard] Prototype initialized successfully. Ready for production build.', 'color:#52525b');
-		}
-
-		// Start the app
-		window.onload = initializeDashboard;
-	</script>
+        // Start the app
+        window.onload = initializeDashboard;
+    </script>
 </body>
-
 </html>
