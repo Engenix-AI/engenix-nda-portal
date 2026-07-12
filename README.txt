@@ -1,11 +1,15 @@
-ENGENIX STATIC WEBSITE
+ENGENIX ONE — LIGHT EXPERIENCE
+
+Seven major upgrades included:
+1. Warm light editorial brand system using the transparent ENGENIX logo.
+2. Session-based cinematic loader with a direct Enter ENGENIX control.
+3. Persistent rotating Request Private Demo concierge rail.
+4. Chapter-based scrolling narrative instead of a generic SaaS card stack.
+5. Custom signal-to-evidence visual language derived from the ENGENIX trajectory.
+6. High-contrast dark statement chapter for "Memory is not a record."
+7. Mobile-first interaction, safe-area handling, reduced motion, and simplified diagrams.
 
 Deployment:
-1. Upload the CONTENTS of this folder to the root of the GitHub repository connected to Cloudflare.
-2. Commit to the production branch, usually main.
-3. Cloudflare will automatically build and deploy the new version.
-
-Important:
-- Confirm sales@engenix.co is active before launch.
-- The legacy NDA portal is preserved at /nda.html.
-- Do not upload this folder inside another folder in the repository.
+- Upload the CONTENTS of this folder to the root of the production repository.
+- Preserve nda.html as the confidential portal.
+- Confirm sales@engenix.co is active.

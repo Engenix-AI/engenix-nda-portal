@@ -1,44 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="ENGENIX gives automotive dealership leadership continuous compliance intelligence, prioritized action, and a defensible operating record.">
-<meta name="theme-color" content="#05080d">
+<meta name="theme-color" content="#f5f1e8">
 <meta property="og:title" content="ENGENIX | Dealership Compliance Intelligence">
 <meta property="og:description" content="The dealership is already telling you what's wrong. ENGENIX makes it visible.">
 <meta property="og:type" content="website">
 <title>ENGENIX | Dealership Compliance Intelligence</title>
 <link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
 :root{
-  --ink:#05080d;
-  --ink-soft:#0a1019;
-  --panel:#0d1520;
-  --panel-soft:#111c29;
-  --line:rgba(255,255,255,.11);
-  --text:#f5f7fb;
-  --muted:#9ca9ba;
-  --blue:#3897ff;
-  --blue-soft:#8cc9ff;
-  --orange:#ff7a18;
-  --orange-soft:#ffb05d;
-  --green:#56d6a1;
-  --danger:#ff9f66;
-  --max:1220px;
-  --shadow:0 32px 100px rgba(0,0,0,.52);
+  --paper:#f5f1e8;
+  --paper-2:#fbfaf7;
+  --white:#fff;
+  --ink:#0d1724;
+  --ink-2:#1d2a39;
+  --muted:#647080;
+  --line:rgba(13,23,36,.13);
+  --blue:#0864c9;
+  --blue-2:#42a9ff;
+  --orange:#f47a16;
+  --gold:#f4b541;
+  --green:#188f68;
+  --navy:#091522;
+  --radius:28px;
+  --shadow:0 26px 80px rgba(34,47,64,.12);
+  --max:1240px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:98px}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{
   min-height:100vh;
   overflow-x:hidden;
-  color:var(--text);
+  color:var(--ink);
   background:
-    radial-gradient(circle at 8% -10%,rgba(56,151,255,.14),transparent 32%),
-    radial-gradient(circle at 98% 0%,rgba(255,122,24,.08),transparent 28%),
-    var(--ink);
+    radial-gradient(circle at 12% -5%,rgba(66,169,255,.12),transparent 32%),
+    radial-gradient(circle at 98% 2%,rgba(244,122,22,.10),transparent 26%),
+    var(--paper);
   font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   line-height:1.55;
 }
@@ -47,346 +48,262 @@ body::before{
   position:fixed;
   inset:0;
   z-index:-2;
+  opacity:.23;
   pointer-events:none;
-  opacity:.12;
   background:
-    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    linear-gradient(rgba(13,23,36,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(13,23,36,.035) 1px,transparent 1px);
   background-size:64px 64px;
-  mask-image:linear-gradient(to bottom,black,transparent 86%);
+  mask-image:linear-gradient(to bottom,black,transparent 88%);
 }
+body.loader-open{overflow:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 button,input,textarea,select{font:inherit}
 button{color:inherit}
 .container{width:min(calc(100% - 42px),var(--max));margin-inline:auto}
-.skip-link{position:absolute;left:-9999px;top:12px;padding:10px 14px;border-radius:10px;background:#fff;color:#000;z-index:999}
+.section{padding:120px 0;position:relative}
+.section-tight{padding:82px 0;position:relative}
+.skip-link{position:absolute;left:-9999px;top:12px;z-index:999;padding:10px 14px;border-radius:10px;background:#fff;color:#000}
 .skip-link:focus{left:12px}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:11px;
-  color:#b8d8ff;
-  font-size:.72rem;
-  font-weight:900;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-}
-.eyebrow::before{content:"";width:30px;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.display{
-  margin-top:18px;
-  font-size:clamp(3.4rem,8.2vw,8.3rem);
-  line-height:.86;
-  letter-spacing:-.075em;
-  text-wrap:balance;
-}
-.display span{
-  display:block;
-  color:transparent;
-  background:linear-gradient(102deg,#fff 6%,#9dd2ff 52%,#fff 94%);
-  -webkit-background-clip:text;
-  background-clip:text;
-}
-.section{padding:120px 0}
-.section-tight{padding:82px 0}
-.section-head{max-width:820px;margin-bottom:50px}
-.section-title{
-  margin-top:14px;
-  font-size:clamp(2.6rem,6vw,6rem);
-  line-height:.92;
-  letter-spacing:-.065em;
-  text-wrap:balance;
-}
-.section-copy{margin-top:22px;max-width:720px;color:var(--muted);font-size:clamp(1rem,1.6vw,1.18rem)}
-.button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:52px;
-  padding:0 22px;
-  border:0;
-  border-radius:13px;
-  background:linear-gradient(100deg,var(--orange),#ff9c36);
-  color:#fff;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 14px 34px rgba(255,122,24,.24);
-  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
-}
-.button:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(255,122,24,.34)}
-.button.secondary{background:rgba(255,255,255,.045);border:1px solid var(--line);box-shadow:none}
-.button.secondary:hover{border-color:rgba(56,151,255,.42)}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
+.eyebrow{display:inline-flex;align-items:center;gap:11px;color:var(--blue);font-size:.72rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.eyebrow::before{content:"";width:30px;height:1px;background:linear-gradient(90deg,var(--orange),var(--blue))}
+.display{margin-top:18px;font-size:clamp(3.7rem,8.8vw,9.2rem);line-height:.84;letter-spacing:-.08em;text-wrap:balance}
+.display span{display:block;color:var(--blue)}
+.section-title{margin-top:14px;font-size:clamp(2.8rem,6.4vw,6.5rem);line-height:.9;letter-spacing:-.07em;text-wrap:balance}
+.section-copy{margin-top:22px;max-width:760px;color:var(--muted);font-size:clamp(1rem,1.6vw,1.18rem)}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;border:1px solid transparent;border-radius:999px;background:var(--ink);color:#fff;font-weight:900;cursor:pointer;box-shadow:0 12px 30px rgba(13,23,36,.16);transition:.2s}
+.button:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(13,23,36,.22)}
+.button.secondary{background:transparent;color:var(--ink);border-color:var(--line);box-shadow:none}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .72s ease,transform .72s ease}
 .reveal.visible{opacity:1;transform:none}
 
+/* Loader */
+.loader{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:var(--paper);transition:opacity .7s ease,visibility .7s ease}
+.loader.hidden{opacity:0;visibility:hidden}
+.loader-inner{width:min(calc(100% - 44px),760px);text-align:center}
+.loader-mark{width:min(520px,82vw);margin:0 auto 28px;opacity:0;transform:translateY(12px) scale(.98);animation:loaderMark .7s .12s forwards}
+.loader-line{position:relative;height:3px;margin:28px auto 20px;max-width:560px;overflow:hidden;background:rgba(13,23,36,.08);border-radius:999px}
+.loader-line span{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--orange),var(--gold),var(--blue));animation:loaderProgress 2.9s .2s forwards}
+.loader-copy{min-height:2.5em;color:var(--ink-2);font-size:clamp(1rem,2vw,1.25rem);font-weight:800}
+.loader-copy span{display:none}
+.loader-copy span.active{display:block;animation:copyIn .45s ease}
+.loader-skip{margin-top:18px;border:0;background:none;color:var(--muted);font-weight:800;cursor:pointer;text-decoration:underline;text-underline-offset:4px}
+@keyframes loaderMark{to{opacity:1;transform:none}}
+@keyframes loaderProgress{to{width:100%}}
+@keyframes copyIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Header */
 .site-header{position:fixed;inset:0 0 auto;z-index:100;padding:8px 0;transition:.25s}
-.site-header.scrolled{background:rgba(5,8,13,.88);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
-.nav{min-height:84px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.site-header.scrolled{background:rgba(245,241,232,.86);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+.nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand-logo{width:286px;height:auto}
-.nav-links{display:flex;align-items:center;gap:27px;color:#c6ced9;font-size:.88rem;font-weight:850}
+.nav-links{display:flex;align-items:center;gap:28px;color:var(--ink-2);font-size:.88rem;font-weight:850}
 .nav-links a:not(.nav-cta){position:relative;padding:10px 0}
-.nav-links a:not(.nav-cta)::after{content:"";position:absolute;left:0;right:100%;bottom:3px;height:2px;background:var(--blue);transition:right .22s}
+.nav-links a:not(.nav-cta)::after{content:"";position:absolute;left:0;right:100%;bottom:3px;height:2px;background:linear-gradient(90deg,var(--orange),var(--blue));transition:right .22s}
 .nav-links a:not(.nav-cta):hover::after{right:0}
-.nav-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:13px;background:linear-gradient(100deg,var(--orange),#ff9d39);color:#fff;font-weight:900}
-.mobile-toggle{display:none;width:48px;height:48px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.045)}
+.nav-cta{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;background:var(--ink);color:#fff;font-weight:900}
+.mobile-toggle{display:none;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.72)}
 .mobile-toggle span{display:block;width:21px;height:2px;background:currentColor;margin:4px auto}
 
-.hero{position:relative;min-height:100svh;padding:150px 0 90px;display:grid;align-items:center;overflow:hidden}
-.hero::after{
-  content:"";
-  position:absolute;
-  width:650px;
-  height:650px;
-  right:-240px;
-  top:22%;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(56,151,255,.10),transparent 67%);
-  pointer-events:none;
-}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
-.hero-copy{margin-top:30px;max-width:670px;color:var(--muted);font-size:clamp(1.08rem,1.7vw,1.3rem)}
-.hero-copy strong{color:#fff}
+/* Persistent concierge CTA */
+.demo-rail{position:fixed;right:18px;bottom:18px;z-index:90;width:min(540px,calc(100% - 36px));display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 16px 14px 20px;border:1px solid rgba(13,23,36,.14);border-radius:20px;background:rgba(255,255,255,.84);backdrop-filter:blur(18px);box-shadow:0 18px 50px rgba(34,47,64,.14);transition:opacity .25s,transform .25s,color .25s,background .25s}
+.demo-rail.hidden{opacity:0;pointer-events:none;transform:translateY(16px)}
+.demo-rail.dark{background:rgba(9,21,34,.90);color:#fff;border-color:rgba(255,255,255,.15)}
+.rail-copy{position:relative;min-height:1.5em;flex:1;overflow:hidden;font-size:.88rem;font-weight:850}
+.rail-copy span{display:block;transition:opacity .25s,transform .25s}
+.rail-copy.changing span{opacity:0;transform:translateY(-8px)}
+.rail-link{flex:0 0 auto;display:inline-flex;align-items:center;gap:9px;color:var(--orange);font-size:.76rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+.rail-progress{position:absolute;left:18px;right:18px;bottom:0;height:2px;background:rgba(13,23,36,.08);overflow:hidden;border-radius:999px}
+.rail-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--orange),var(--blue))}
+
+/* Hero */
+.hero{min-height:100svh;padding:148px 0 92px;display:grid;align-items:center;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.hero-copy{margin-top:30px;max-width:680px;color:var(--muted);font-size:clamp(1.08rem,1.7vw,1.3rem)}
+.hero-copy strong{color:var(--ink)}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-.hero-proof{display:flex;gap:15px 26px;flex-wrap:wrap;margin-top:28px;color:#8391a3;font-size:.82rem}
+.hero-proof{display:flex;gap:15px 26px;flex-wrap:wrap;margin-top:28px;color:#768292;font-size:.82rem}
 .hero-proof span{display:flex;align-items:center;gap:8px}
-.hero-proof i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(86,214,161,.08)}
+.hero-proof i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(24,143,104,.08)}
+.hero-art{position:relative;min-height:680px;border:1px solid var(--line);border-radius:34px;background:rgba(255,255,255,.7);box-shadow:var(--shadow);overflow:hidden}
+.hero-art::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(13,23,36,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(13,23,36,.045) 1px,transparent 1px);background-size:48px 48px}
+.hero-orbit{position:absolute;inset:7% 5% 13%;border:1px solid rgba(8,100,201,.2);border-radius:50%;transform:rotate(-11deg)}
+.hero-orbit::before,.hero-orbit::after{content:"";position:absolute;border-radius:50%;background:var(--blue);box-shadow:0 0 24px rgba(66,169,255,.55)}
+.hero-orbit::before{width:10px;height:10px;left:14%;top:31%}.hero-orbit::after{width:8px;height:8px;right:18%;bottom:29%}
+.trajectory{position:absolute;left:7%;right:8%;top:48%;height:3px;background:linear-gradient(90deg,var(--orange),var(--gold) 28%,var(--blue) 72%,transparent);transform:rotate(-19deg);filter:drop-shadow(0 0 12px rgba(66,169,255,.25))}
+.trajectory::before{content:"";position:absolute;left:0;top:-7px;width:16px;height:16px;border-radius:50%;background:var(--orange);box-shadow:0 0 28px rgba(244,122,22,.62)}
+.trajectory::after{content:"";position:absolute;right:7%;top:-9px;width:20px;height:20px;clip-path:polygon(50% 0,63% 36%,100% 50%,63% 63%,50% 100%,37% 63%,0 50%,37% 36%);background:var(--blue);box-shadow:0 0 24px rgba(66,169,255,.62)}
+.hero-logo-art{position:absolute;left:50%;top:20%;transform:translateX(-50%);width:72%;filter:drop-shadow(0 20px 32px rgba(34,47,64,.08))}
+.signal-chip{position:absolute;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.85);box-shadow:0 12px 30px rgba(34,47,64,.08);backdrop-filter:blur(12px)}
+.signal-chip b{display:block;font-size:.82rem}.signal-chip small{display:block;margin-top:4px;color:#7a8695;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em}
+.signal-chip.a{left:8%;top:18%}.signal-chip.b{right:7%;top:34%}.signal-chip.c{left:12%;bottom:20%}.signal-chip.d{right:9%;bottom:16%}
+.hero-caption{position:absolute;left:20px;right:20px;bottom:20px;padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.88);backdrop-filter:blur(15px)}
+.caption-top{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.caption-top p{margin-top:4px;color:#7c8897;font-size:.79rem}
+.live-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;border:1px solid rgba(24,143,104,.2);background:rgba(24,143,104,.07);color:var(--green);font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.live-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}
+.metric{padding:12px;border:1px solid rgba(13,23,36,.08);border-radius:12px;background:rgba(245,241,232,.65)}
+.metric b{display:block;font-size:1.15rem}.metric small{color:#7d8998;font-size:.62rem;text-transform:uppercase;letter-spacing:.07em}
 
-.signal-stage{
-  position:relative;
-  min-height:690px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:30px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 54% 34%,rgba(56,151,255,.16),transparent 28%),
-    linear-gradient(155deg,#0c1420,#080d14 64%,#140d08);
-  box-shadow:var(--shadow);
-}
-.signal-stage::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-  background-size:54px 54px;
-  mask-image:linear-gradient(to bottom,black,transparent 88%);
-}
-.orbit{
-  position:absolute;
-  inset:8% 6% 12%;
-  border:1px solid rgba(112,187,255,.20);
-  border-radius:50%;
-  transform:rotate(-12deg);
-}
-.orbit::before,.orbit::after{content:"";position:absolute;border-radius:50%;background:var(--blue);box-shadow:0 0 22px rgba(56,151,255,.75)}
-.orbit::before{width:9px;height:9px;left:14%;top:30%}
-.orbit::after{width:7px;height:7px;right:20%;bottom:28%}
-.signal-path{
-  position:absolute;
-  left:11%;
-  right:8%;
-  top:24%;
-  height:45%;
-  border-top:3px solid transparent;
-  border-image:linear-gradient(90deg,var(--orange),var(--orange-soft) 27%,var(--blue) 64%,transparent) 1;
-  transform:skewY(-10deg) rotate(-6deg);
-  filter:drop-shadow(0 0 14px rgba(56,151,255,.38));
-}
-.signal-path::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:-8px;
-  width:15px;
-  height:15px;
-  border-radius:50%;
-  background:var(--orange);
-  box-shadow:0 0 30px rgba(255,122,24,.8);
-}
-.signal-path::after{
-  content:"";
-  position:absolute;
-  right:8%;
-  top:-10px;
-  width:18px;
-  height:18px;
-  clip-path:polygon(50% 0,63% 36%,100% 50%,63% 63%,50% 100%,37% 63%,0 50%,37% 36%);
-  background:#dff1ff;
-  box-shadow:0 0 30px rgba(140,201,255,.88);
-}
-.signal-label{position:absolute;padding:12px 14px;border-radius:13px;background:rgba(5,8,13,.72);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px)}
-.signal-label b{display:block;font-size:.82rem}.signal-label small{display:block;color:#7f8da0;font-size:.65rem;margin-top:4px;text-transform:uppercase;letter-spacing:.08em}
-.signal-label.a{left:9%;top:17%}.signal-label.b{right:8%;top:22%}.signal-label.c{left:16%;bottom:18%}.signal-label.d{right:10%;bottom:17%}
-.stage-caption{position:absolute;left:20px;right:20px;bottom:20px;padding:20px;border-radius:18px;background:rgba(5,8,13,.80);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px)}
-.stage-caption-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.stage-caption h3{font-size:1.08rem}.stage-caption p{margin-top:4px;color:#8f9cad;font-size:.79rem}
-.live-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;border:1px solid rgba(86,214,161,.24);background:rgba(86,214,161,.08);color:#7be6b9;font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-.live-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
-.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}
-.metric{padding:12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.065)}
-.metric b{display:block;font-size:1.3rem;line-height:1}.metric small{color:#7d8c9f;font-size:.62rem;text-transform:uppercase;letter-spacing:.07em}
-
-.pressure-strip{border-block:1px solid var(--line);background:rgba(255,255,255,.015)}
-.pressure-grid{display:grid;grid-template-columns:1.5fr repeat(5,1fr);align-items:center;min-height:105px}
-.pressure-lead{font-weight:900;padding-right:26px}
-.pressure-item{text-align:center;padding:12px;border-left:1px solid var(--line);color:#7d8999;font-size:.73rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
-
-.truth{padding:142px 0 92px}
-.truth-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:90px;align-items:start}
-.truth-kicker{position:sticky;top:122px;color:var(--orange-soft);font-size:.74rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
-.truth h2{font-size:clamp(3rem,7.2vw,7.3rem);line-height:.9;letter-spacing:-.075em;text-wrap:balance}
-.truth h2 em{font-style:normal;color:#788596}
+/* Chapters */
+.chapter-strip{border-block:1px solid var(--line);background:rgba(255,255,255,.42)}
+.chapter-grid{display:grid;grid-template-columns:1.6fr repeat(5,1fr);align-items:center;min-height:105px}
+.chapter-lead{font-weight:900;padding-right:26px}
+.chapter-item{text-align:center;padding:12px;border-left:1px solid var(--line);color:#74808f;font-size:.73rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+.truth-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:90px;align-items:start}
+.truth-kicker{position:sticky;top:120px;color:var(--orange);font-size:.74rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+.truth h2{font-size:clamp(3.2rem,7.4vw,7.6rem);line-height:.88;letter-spacing:-.078em;text-wrap:balance}
+.truth h2 em{font-style:normal;color:#8a95a1}
 .truth p{margin-top:30px;max-width:760px;color:var(--muted);font-size:1.08rem}
+.inline-cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;color:var(--ink);font-weight:900;border-bottom:1px solid rgba(13,23,36,.28);padding-bottom:4px}
+.inline-cta span{color:var(--orange)}
 
-.editorial-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
-.editorial-main,.editorial-stack article{
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:
-    radial-gradient(circle at 75% 20%,rgba(56,151,255,.14),transparent 24%),
-    linear-gradient(155deg,#111b28,#090f17);
-  border-radius:26px;
-}
-.editorial-main{min-height:620px;padding:34px}
-.editorial-stack{display:grid;gap:18px}
-.editorial-stack article{min-height:301px;padding:28px}
-.scene-lines{position:absolute;inset:0;opacity:.42}
-.scene-lines::before{content:"";position:absolute;left:-10%;right:-10%;top:52%;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);transform:rotate(-16deg);box-shadow:0 -70px 0 rgba(255,255,255,.06),0 70px 0 rgba(255,255,255,.045)}
-.scene-lines::after{content:"";position:absolute;left:52%;top:-10%;bottom:-10%;width:1px;background:linear-gradient(180deg,transparent,rgba(255,122,24,.8),transparent);transform:rotate(24deg)}
-.editorial-copy{position:absolute;z-index:2;left:34px;right:34px;bottom:32px}
-.editorial-copy .num{color:#657386;font-size:.68rem;font-weight:900;letter-spacing:.13em}
-.editorial-copy h3{margin-top:12px;font-size:clamp(1.8rem,3.8vw,3.7rem);line-height:.98;letter-spacing:-.045em}
-.editorial-copy p{margin-top:12px;max-width:620px;color:#a9b4c2;font-size:.92rem}
-.mini-copy{position:absolute;z-index:2;left:28px;right:28px;bottom:26px}
-.mini-copy .num{color:#657386;font-size:.66rem;font-weight:900;letter-spacing:.13em}
-.mini-copy h3{margin-top:9px;font-size:1.45rem;line-height:1.08}
-.mini-copy p{margin-top:9px;color:#9da9b9;font-size:.84rem}
+.story-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.story-main,.story-stack article{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.68);box-shadow:0 18px 50px rgba(34,47,64,.07)}
+.story-main{min-height:630px;padding:34px}
+.story-stack{display:grid;gap:18px}
+.story-stack article{min-height:306px;padding:28px}
+.story-lines{position:absolute;inset:0;opacity:.62}
+.story-lines::before{content:"";position:absolute;left:-8%;right:-8%;top:52%;height:2px;background:linear-gradient(90deg,transparent,var(--blue),transparent);transform:rotate(-15deg);box-shadow:0 -80px 0 rgba(13,23,36,.055),0 80px 0 rgba(13,23,36,.04)}
+.story-lines::after{content:"";position:absolute;left:54%;top:-10%;bottom:-10%;width:2px;background:linear-gradient(180deg,transparent,var(--orange),transparent);transform:rotate(22deg)}
+.story-copy,.mini-copy{position:absolute;z-index:2;left:34px;right:34px;bottom:32px}
+.story-copy .num,.mini-copy .num{color:#7b8795;font-size:.68rem;font-weight:900;letter-spacing:.13em}
+.story-copy h3{margin-top:12px;font-size:clamp(2rem,4vw,4rem);line-height:.96;letter-spacing:-.05em}
+.story-copy p,.mini-copy p{margin-top:12px;color:#6d7887}
+.mini-copy{left:28px;right:28px;bottom:26px}.mini-copy h3{margin-top:9px;font-size:1.55rem;line-height:1.06}
 
-.flow{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
-.flow-map{position:relative;min-height:590px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(155deg,#0d1521,#080d14);box-shadow:var(--shadow);overflow:hidden}
-.flow-map::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:50px 50px}
-.flow-node{position:absolute;width:172px;padding:15px;border-radius:15px;background:rgba(6,10,16,.84);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(12px)}
-.flow-node b{display:block;font-size:.83rem}.flow-node small{display:block;margin-top:4px;color:#77879a;font-size:.65rem;text-transform:uppercase;letter-spacing:.07em}
+.flow{display:grid;grid-template-columns:.9fr 1.1fr;gap:58px;align-items:center}
+.flow-map{position:relative;min-height:590px;border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.72);box-shadow:var(--shadow);overflow:hidden}
+.flow-map::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(13,23,36,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(13,23,36,.035) 1px,transparent 1px);background-size:48px 48px}
+.flow-node{position:absolute;width:174px;padding:15px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.9);box-shadow:0 12px 26px rgba(34,47,64,.07)}
+.flow-node b{display:block;font-size:.83rem}.flow-node small{display:block;margin-top:4px;color:#7b8796;font-size:.65rem;text-transform:uppercase;letter-spacing:.07em}
 .flow-node.one{left:8%;top:12%}.flow-node.two{right:8%;top:24%}.flow-node.three{left:15%;bottom:20%}.flow-node.four{right:10%;bottom:10%}
-.flow-line{position:absolute;height:2px;transform-origin:left center;background:linear-gradient(90deg,var(--orange),var(--blue));box-shadow:0 0 16px rgba(56,151,255,.30)}
-.flow-line.l1{left:32%;top:27%;width:41%;transform:rotate(8deg)}
-.flow-line.l2{left:22%;top:38%;width:48%;transform:rotate(49deg)}
-.flow-line.l3{left:36%;bottom:32%;width:42%;transform:rotate(-18deg)}
-.flow-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:158px;height:158px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(56,151,255,.24),rgba(8,13,20,.96) 68%);border:1px solid rgba(140,201,255,.34);box-shadow:0 0 70px rgba(56,151,255,.16)}
-.flow-core b{font-size:1.05rem;line-height:1.1}.flow-core span{display:block;margin-top:7px;color:#84a2bf;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
+.flow-line{position:absolute;height:2px;transform-origin:left center;background:linear-gradient(90deg,var(--orange),var(--blue));box-shadow:0 0 14px rgba(66,169,255,.18)}
+.flow-line.l1{left:32%;top:27%;width:41%;transform:rotate(8deg)}.flow-line.l2{left:22%;top:38%;width:48%;transform:rotate(49deg)}.flow-line.l3{left:36%;bottom:32%;width:42%;transform:rotate(-18deg)}
+.flow-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(66,169,255,.15),rgba(255,255,255,.98) 70%);border:1px solid rgba(8,100,201,.26);box-shadow:0 0 70px rgba(66,169,255,.12)}
+.flow-core b{font-size:1.04rem}.flow-core span{display:block;margin-top:7px;color:#6683a1;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
 .steps{display:grid;gap:13px;margin-top:30px}
-.step{display:grid;grid-template-columns:auto 1fr;gap:17px;padding:20px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.022)}
-.step-icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:rgba(56,151,255,.09);border:1px solid rgba(56,151,255,.21);color:#9fd2ff;font-weight:900}
-.step:nth-child(2) .step-icon{background:rgba(255,122,24,.09);border-color:rgba(255,122,24,.21);color:#ffc184}
-.step:nth-child(3) .step-icon{background:rgba(86,214,161,.08);border-color:rgba(86,214,161,.20);color:#7de6bc}
-.step h3{font-size:1.1rem}.step p{margin-top:4px;color:var(--muted);font-size:.88rem}
+.step{display:grid;grid-template-columns:auto 1fr;gap:17px;padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.48)}
+.step-icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(8,100,201,.08);border:1px solid rgba(8,100,201,.18);color:var(--blue);font-weight:900}
+.step:nth-child(2) .step-icon{background:rgba(244,122,22,.08);border-color:rgba(244,122,22,.18);color:var(--orange)}
+.step:nth-child(3) .step-icon{background:rgba(24,143,104,.08);border-color:rgba(24,143,104,.18);color:var(--green)}
+.step p{margin-top:4px;color:var(--muted);font-size:.88rem}
 
-.manifesto{padding:100px 0}
-.manifesto-panel{position:relative;overflow:hidden;padding:clamp(38px,7vw,84px);border-radius:34px;border:1px solid var(--line);background:linear-gradient(120deg,#0c1420,#111c2a 68%,#201207);box-shadow:var(--shadow)}
-.manifesto-panel::after{content:"";position:absolute;right:-130px;top:-170px;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,24,.16),transparent 68%)}
-.manifesto h2{position:relative;z-index:1;max-width:970px;font-size:clamp(3.1rem,7vw,7rem);line-height:.9;letter-spacing:-.075em}
-.manifesto h2 span{color:#7d899a}
-.manifesto p{position:relative;z-index:1;margin-top:28px;max-width:680px;color:var(--muted);font-size:1.08rem}
+.dark-chapter{padding:110px 0;background:var(--navy);color:#fff}
+.dark-panel{position:relative;overflow:hidden;padding:clamp(40px,7vw,88px);border:1px solid rgba(255,255,255,.12);border-radius:34px;background:linear-gradient(120deg,#0b1928,#0e2134 70%,#25160b)}
+.dark-panel::after{content:"";position:absolute;right:-130px;top:-170px;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle,rgba(244,122,22,.16),transparent 68%)}
+.dark-panel h2{position:relative;z-index:1;max-width:980px;font-size:clamp(3.2rem,7vw,7.2rem);line-height:.89;letter-spacing:-.075em}
+.dark-panel h2 span{color:#8b9caf}
+.dark-panel p{position:relative;z-index:1;margin-top:28px;max-width:680px;color:#aebccc}
+.dark-panel .inline-cta{position:relative;z-index:1;color:#fff;border-color:rgba(255,255,255,.28)}
 
 .lanes{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.lane{position:relative;overflow:hidden;padding:36px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.022)}
-.lane::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--blue)}
+.lane{position:relative;overflow:hidden;padding:36px;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.54)}
+.lane::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--blue)}
 .lane.alert::before{background:var(--orange)}
-.lane-label{color:#8fc9ff;font-size:.7rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
-.lane.alert .lane-label{color:#ffbc7d}
-.lane h3{margin-top:16px;font-size:2rem;line-height:1.05}
-.lane p{margin-top:14px;color:var(--muted)}
-.lane ul{display:grid;gap:11px;margin-top:23px;list-style:none}
-.lane li{display:flex;gap:10px;color:#d9e0e8;font-size:.9rem}
-.lane li::before{content:"✓";color:var(--green);font-weight:900}
+.lane-label{color:var(--blue);font-size:.7rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.lane.alert .lane-label{color:var(--orange)}
+.lane h3{margin-top:16px;font-size:2rem;line-height:1.05}.lane p{margin-top:14px;color:var(--muted)}
+.lane ul{display:grid;gap:11px;margin-top:23px;list-style:none}.lane li{display:flex;gap:10px;color:var(--ink-2);font-size:.9rem}.lane li::before{content:"✓";color:var(--green);font-weight:900}
 
-.faq{max-width:860px;margin-inline:auto}
+.faq{max-width:880px;margin-inline:auto}
 .faq-item{border-bottom:1px solid var(--line)}
 .faq-button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:25px 0;background:none;border:0;text-align:left;font-size:1.03rem;font-weight:900;cursor:pointer}
-.faq-plus{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.045);border:1px solid var(--line);transition:.2s;flex:0 0 32px}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.faq-answer p{padding:0 52px 24px 0;color:var(--muted)}
-.faq-item.open .faq-plus{transform:rotate(45deg)}
+.faq-plus{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.55);border:1px solid var(--line);transition:.2s;flex:0 0 32px}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}.faq-answer p{padding:0 52px 24px 0;color:var(--muted)}.faq-item.open .faq-plus{transform:rotate(45deg)}
 
-.cta{padding:72px 0 104px}
-.cta-panel{display:grid;grid-template-columns:1fr .8fr;gap:54px;align-items:center;padding:clamp(34px,6vw,72px);border-radius:34px;border:1px solid rgba(116,190,255,.22);background:linear-gradient(135deg,#10233a 0%,#0c1522 58%,#29170b 120%);box-shadow:var(--shadow)}
-.cta h2{font-size:clamp(2.9rem,6vw,5.8rem);line-height:.9;letter-spacing:-.068em}
-.cta p{margin-top:22px;max-width:640px;color:#b4bfcc}
-.demo-form{padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,.10);background:rgba(5,8,13,.56);backdrop-filter:blur(12px)}
-.field{display:grid;gap:8px;margin-bottom:13px}
-.field label{color:#94a1b2;font-size:.7rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
-.field input,.field select,.field textarea{width:100%;padding:14px;border:1px solid rgba(255,255,255,.09);border-radius:12px;background:#0a121d;color:#fff;outline:none}
-.field textarea{min-height:88px;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(56,151,255,.62);box-shadow:0 0 0 4px rgba(56,151,255,.08)}
-.demo-form .button{width:100%;margin-top:5px}
-.form-note{margin-top:10px;color:#6e7c8f;font-size:.7rem;text-align:center}
-.form-status{min-height:1.2em;margin-top:10px;color:#8ce0bd;font-size:.8rem;text-align:center}
+.cta{padding:80px 0 110px}
+.cta-panel{display:grid;grid-template-columns:1fr .82fr;gap:54px;align-items:center;padding:clamp(34px,6vw,72px);border:1px solid var(--line);border-radius:34px;background:rgba(255,255,255,.72);box-shadow:var(--shadow)}
+.cta h2{font-size:clamp(3rem,6vw,6rem);line-height:.88;letter-spacing:-.07em}.cta p{margin-top:22px;max-width:650px;color:var(--muted)}
+.demo-form{padding:22px;border:1px solid var(--line);border-radius:22px;background:rgba(245,241,232,.74)}
+.field{display:grid;gap:8px;margin-bottom:13px}.field label{color:#6f7b8a;font-size:.7rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.field input,.field select,.field textarea{width:100%;padding:14px;border:1px solid rgba(13,23,36,.12);border-radius:12px;background:#fff;color:var(--ink);outline:none}
+.field textarea{min-height:88px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(8,100,201,.52);box-shadow:0 0 0 4px rgba(8,100,201,.08)}
+.demo-form .button{width:100%;margin-top:5px}.form-note{margin-top:10px;color:#758190;font-size:.7rem;text-align:center}.form-status{min-height:1.2em;margin-top:10px;color:var(--green);font-size:.8rem;text-align:center}
 
-.site-footer{padding:48px 0 38px;border-top:1px solid var(--line);color:#7d8999}
-.footer-grid{display:flex;align-items:center;justify-content:space-between;gap:40px}
-.footer-logo{width:310px}.footer-copy{margin-top:4px;color:#8996a7;font-size:.8rem}
-.footer-links{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap;font-size:.8rem;font-weight:800}
-.footer-links a:hover{color:#fff}
-.legal-note{margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.065);color:#5f6b7b;font-size:.69rem;line-height:1.7}
+.site-footer{padding:48px 0 100px;border-top:1px solid var(--line);color:#7a8695;background:rgba(255,255,255,.3)}
+.footer-grid{display:flex;align-items:center;justify-content:space-between;gap:40px}.footer-logo{width:310px}.footer-copy{margin-top:4px;font-size:.8rem}
+.footer-links{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap;font-size:.8rem;font-weight:800}.footer-links a:hover{color:var(--ink)}
+.legal-note{margin-top:28px;padding-top:22px;border-top:1px solid var(--line);font-size:.69rem;line-height:1.7}
 
 @media(max-width:1020px){
   .brand-logo{width:255px}
-  .nav-links{position:fixed;inset:101px 20px auto;display:none;flex-direction:column;align-items:stretch;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(7,11,18,.98);box-shadow:var(--shadow)}
+  .nav-links{position:fixed;inset:101px 20px auto;display:none;flex-direction:column;align-items:stretch;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(251,250,247,.98);box-shadow:var(--shadow)}
   .nav-links.open{display:flex}.nav-links a{padding:10px}.nav-cta{width:100%}.mobile-toggle{display:block}
-  .hero-grid,.truth-grid,.flow,.cta-panel{grid-template-columns:1fr}.hero{padding-top:140px}.signal-stage{max-width:760px;width:100%;margin-inline:auto;min-height:620px}
-  .truth-grid{gap:28px}.truth-kicker{position:static}.editorial-grid{grid-template-columns:1fr}.editorial-stack{grid-template-columns:1fr 1fr}
-  .flow{gap:36px}.cta-panel{gap:36px}.pressure-grid{grid-template-columns:repeat(3,1fr);padding:18px 0}.pressure-lead{grid-column:1/-1;text-align:center;padding:0 0 14px}
+  .hero-grid,.truth-grid,.flow,.cta-panel{grid-template-columns:1fr}.hero{padding-top:138px}.hero-art{max-width:780px;width:100%;margin-inline:auto;min-height:620px}
+  .truth-grid{gap:28px}.truth-kicker{position:static}.story-grid{grid-template-columns:1fr}.story-stack{grid-template-columns:1fr 1fr}
+  .chapter-grid{grid-template-columns:repeat(3,1fr);padding:18px 0}.chapter-lead{grid-column:1/-1;text-align:center;padding:0 0 14px}.flow{gap:36px}.cta-panel{gap:36px}
 }
 @media(max-width:700px){
   .container{width:min(calc(100% - 26px),var(--max))}.section{padding:84px 0}.section-tight{padding:60px 0}
-  .site-header{padding:4px 0}.nav{min-height:96px}.brand-logo{width:258px;max-width:74vw}.mobile-toggle{width:46px;height:46px;flex:0 0 46px}.nav-links{inset:96px 13px auto}
-  .hero{min-height:auto;padding:128px 0 62px}.display{font-size:clamp(3.15rem,16.5vw,5rem)}.hero-actions{display:grid}.button{width:100%}
-  .signal-stage{min-height:530px;border-radius:24px}.signal-label{transform:scale(.88)}.signal-label.a{left:3%}.signal-label.b{right:2%}.signal-label.c{left:4%}.signal-label.d{right:1%}
-  .stage-caption{left:14px;right:14px;bottom:14px;padding:15px}.metric-row{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:1/-1}
-  .pressure-grid{grid-template-columns:1fr 1fr}.pressure-item{padding:14px 8px}.pressure-item:nth-child(even){border-left:0}.pressure-item:nth-child(n+4){border-top:1px solid var(--line)}
-  .truth{padding:88px 0 58px}.editorial-main{min-height:520px}.editorial-stack{grid-template-columns:1fr}.editorial-stack article{min-height:290px}
-  .flow-map{min-height:500px}.flow-node{width:145px;padding:12px}.flow-core{width:132px;height:132px}.lanes{grid-template-columns:1fr}
-  .manifesto-panel,.cta-panel{border-radius:25px}.cta-panel{padding:28px 20px}.demo-form{padding:17px}
-  .footer-grid{flex-direction:column;align-items:flex-start;gap:20px}.footer-logo{width:270px;max-width:88vw}
+  .site-header{padding:4px 0}.nav{min-height:94px}.brand-logo{width:260px;max-width:74vw}.mobile-toggle{width:46px;height:46px;flex:0 0 46px}.nav-links{inset:94px 13px auto}
+  .hero{min-height:auto;padding:126px 0 64px}.display{font-size:clamp(3.2rem,17vw,5.2rem)}.hero-actions{display:grid}.button{width:100%}
+  .hero-art{min-height:520px;border-radius:26px}.hero-logo-art{width:86%;top:18%}.signal-chip{display:none}.hero-caption{left:14px;right:14px;bottom:14px;padding:15px}.metrics{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:1/-1}
+  .chapter-grid{grid-template-columns:1fr 1fr}.chapter-item{padding:14px 8px}.chapter-item:nth-child(even){border-left:0}.chapter-item:nth-child(n+4){border-top:1px solid var(--line)}
+  .story-main{min-height:520px}.story-stack{grid-template-columns:1fr}.story-stack article{min-height:290px}.flow-map{min-height:500px}.flow-node{width:145px;padding:12px}.flow-core{width:132px;height:132px}
+  .lanes{grid-template-columns:1fr}.dark-panel,.cta-panel{border-radius:26px}.cta-panel{padding:28px 20px}.demo-form{padding:17px}
+  .demo-rail{right:10px;bottom:calc(10px + env(safe-area-inset-bottom));width:calc(100% - 20px);padding:12px 13px 12px 15px;border-radius:17px;gap:12px}
+  .rail-copy{font-size:.75rem;line-height:1.25}.rail-link{font-size:.68rem}.rail-link span{display:none}
+  .footer-grid{flex-direction:column;align-items:flex-start;gap:20px}.footer-logo{width:270px;max-width:88vw}.site-footer{padding-bottom:120px}
 }
 @media(max-width:430px){
-  .signal-label{display:none}.signal-stage{min-height:470px}.flow-node{width:128px}.flow-node small{display:none}.flow-core{width:118px;height:118px}
+  .hero-art{min-height:470px}.flow-node{width:126px}.flow-node small{display:none}.flow-core{width:116px;height:116px}
+  .rail-copy{max-width:64%}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-  .reveal{opacity:1;transform:none}
+  .reveal{opacity:1;transform:none}.loader{display:none}
 }
 </style>
 </head>
-<body>
+<body class="loader-open">
 <a class="skip-link" href="#main">Skip to content</a>
+
+<div class="loader" id="loader" role="dialog" aria-label="ENGENIX introduction">
+  <div class="loader-inner">
+    <img src="engenix-logo.png" alt="ENGENIX" class="loader-mark">
+    <div class="loader-line"><span></span></div>
+    <div class="loader-copy" aria-live="polite">
+      <span class="active">Reviewing dealership signals.</span>
+      <span>Connecting patterns to ownership.</span>
+      <span>Building the operating picture.</span>
+      <span>Ready to see the difference.</span>
+    </div>
+    <button class="loader-skip" id="loaderSkip">Enter ENGENIX</button>
+  </div>
+</div>
 
 <header class="site-header" id="header">
   <div class="container nav">
-    <a class="brand" href="#top" aria-label="ENGENIX home"><img class="brand-logo" src="engenix-logo.png" alt="ENGENIX"></a>
+    <a href="#top" aria-label="ENGENIX home"><img src="engenix-logo.png" alt="ENGENIX" class="brand-logo"></a>
     <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
       <a href="#why-now">Why now</a>
       <a href="#platform">Platform</a>
       <a href="#workflow">How it works</a>
       <a href="#questions">Questions</a>
-      <a class="nav-cta" href="#demo">Book a private demo</a>
+      <a href="#demo" class="nav-cta">Request private demo</a>
     </nav>
   </div>
 </header>
 
+<a href="#demo" class="demo-rail hidden" id="demoRail" aria-label="Request a private ENGENIX demonstration">
+  <div class="rail-copy"><span id="railCopy">See what your dealership is already telling you.</span></div>
+  <div class="rail-link">Request private demo <span>→</span></div>
+  <div class="rail-progress"><span id="railProgress"></span></div>
+</a>
+
 <main id="main">
-<section class="hero" id="top">
+<section class="hero" id="top" data-rail="See what your dealership is already telling you.">
   <div class="container hero-grid">
     <div class="reveal">
       <div class="eyebrow">Dealership compliance intelligence</div>
       <h1 class="display">The dealership is already telling you <span>what's wrong.</span></h1>
       <p class="hero-copy">Ordinary conversations, missing context, repeated shortcuts, and unmanaged access become evidence when pressure arrives. <strong>ENGENIX makes those signals visible while leadership still has time to act.</strong></p>
       <div class="hero-actions">
-        <a class="button" href="#demo">Book a private demo <span aria-hidden="true">→</span></a>
+        <a class="button" href="#demo">Request a private demo</a>
         <a class="button secondary" href="#workflow">See the operating model</a>
       </div>
       <div class="hero-proof">
@@ -395,209 +312,168 @@ button{color:inherit}
         <span><i></i> Defensible documentation</span>
       </div>
     </div>
-
-    <div class="signal-stage reveal" aria-label="Abstract ENGENIX signal-to-evidence visualization">
-      <div class="orbit"></div>
-      <div class="signal-path"></div>
-      <div class="signal-label a"><b>Customer promise</b><small>Signal detected</small></div>
-      <div class="signal-label b"><b>Disclosure gap</b><small>Review required</small></div>
-      <div class="signal-label c"><b>Manager action</b><small>Owner assigned</small></div>
-      <div class="signal-label d"><b>Evidence preserved</b><small>Resolution verified</small></div>
-      <div class="stage-caption">
-        <div class="stage-caption-top">
+    <div class="hero-art reveal" aria-label="ENGENIX signal-to-evidence visualization">
+      <div class="hero-orbit"></div>
+      <div class="trajectory"></div>
+      <img src="engenix-logo.png" alt="" class="hero-logo-art" aria-hidden="true">
+      <div class="signal-chip a"><b>Customer promise</b><small>Signal detected</small></div>
+      <div class="signal-chip b"><b>Disclosure gap</b><small>Review required</small></div>
+      <div class="signal-chip c"><b>Manager action</b><small>Owner assigned</small></div>
+      <div class="signal-chip d"><b>Evidence preserved</b><small>Resolution verified</small></div>
+      <div class="hero-caption">
+        <div class="caption-top">
           <div><h3>Operational intelligence in motion</h3><p>From everyday dealership activity to prioritized leadership action.</p></div>
           <div class="live-pill">Monitoring</div>
         </div>
-        <div class="metric-row">
-          <div class="metric"><b>248</b><small>Signals reviewed</small></div>
-          <div class="metric"><b>7</b><small>Need attention</small></div>
-          <div class="metric"><b>3</b><small>Actions verified</small></div>
+        <div class="metrics">
+          <div class="metric"><b>Signals</b><small>Continuously reviewed</small></div>
+          <div class="metric"><b>Findings</b><small>Human prioritized</small></div>
+          <div class="metric"><b>Evidence</b><small>Verified and preserved</small></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="pressure-strip">
-  <div class="container pressure-grid">
-    <div class="pressure-lead">One operating picture across the dealership.</div>
-    <div class="pressure-item">Sales</div>
-    <div class="pressure-item">F&amp;I</div>
-    <div class="pressure-item">BDC</div>
-    <div class="pressure-item">Service</div>
-    <div class="pressure-item">Leadership</div>
+<section class="chapter-strip">
+  <div class="container chapter-grid">
+    <div class="chapter-lead">One operating picture across the dealership.</div>
+    <div class="chapter-item">Sales</div><div class="chapter-item">F&amp;I</div><div class="chapter-item">BDC</div><div class="chapter-item">Service</div><div class="chapter-item">Leadership</div>
   </div>
 </section>
 
-<section class="truth" id="why-now">
+<section class="section truth" id="why-now" data-rail="Scrutiny changed. Your operating picture should too.">
   <div class="container truth-grid">
     <div class="truth-kicker">Why now</div>
     <div class="reveal">
       <h2>Scrutiny has changed. <em>Most dealership systems have not.</em></h2>
       <p>Annual training, binders, disconnected audits, and after-the-fact investigations cannot show how the dealership is operating today. When customers, lenders, manufacturers, attorneys, or regulators ask what happened, memory is not a record.</p>
+      <a href="#demo" class="inline-cta">See how ENGENIX fits your dealership <span>→</span></a>
     </div>
   </div>
 </section>
 
-<section class="section-tight" id="platform">
+<section class="section-tight" id="platform" data-rail="Find the pattern before it becomes the problem.">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="reveal">
       <div class="eyebrow">Where exposure begins</div>
       <h2 class="section-title">Compliance failures rarely begin with fraud.</h2>
       <p class="section-copy">They begin with ordinary work nobody was watching closely enough: a promise made too casually, a document missing context, a shortcut repeated until it becomes the real process.</p>
     </div>
-
-    <div class="editorial-grid">
-      <article class="editorial-main reveal">
-        <div class="scene-lines"></div>
-        <div class="editorial-copy">
+    <div class="story-grid" style="margin-top:52px">
+      <article class="story-main reveal">
+        <div class="story-lines"></div>
+        <div class="story-copy">
           <div class="num">01 / CUSTOMER INTERACTION</div>
           <h3>What was said becomes what must be explained.</h3>
           <p>Customer conversations, commitments, disclosures, and handoffs can become the center of a complaint long after the moment has passed.</p>
         </div>
       </article>
-      <div class="editorial-stack">
+      <div class="story-stack">
         <article class="reveal">
-          <div class="scene-lines"></div>
-          <div class="mini-copy">
-            <div class="num">02 / DOCUMENTATION</div>
-            <h3>Missing context becomes exposure.</h3>
-            <p>When the record is incomplete, leadership is forced to reconstruct events under pressure.</p>
-          </div>
+          <div class="story-lines"></div>
+          <div class="mini-copy"><div class="num">02 / DOCUMENTATION</div><h3>Missing context becomes exposure.</h3><p>When the record is incomplete, leadership reconstructs events under pressure.</p></div>
         </article>
         <article class="reveal">
-          <div class="scene-lines"></div>
-          <div class="mini-copy">
-            <div class="num">03 / PATTERN</div>
-            <h3>One workaround becomes the operating procedure.</h3>
-            <p>Repeated deviations stay invisible until somebody outside the dealership connects the dots.</p>
-          </div>
+          <div class="story-lines"></div>
+          <div class="mini-copy"><div class="num">03 / PATTERN</div><h3>One workaround becomes the operating procedure.</h3><p>Repeated deviations stay invisible until somebody outside the dealership connects the dots.</p></div>
         </article>
       </div>
     </div>
+    <a href="#demo" class="inline-cta reveal">Recognize these patterns? Request a private review <span>→</span></a>
   </div>
 </section>
 
-<section class="section" id="workflow">
+<section class="section" id="workflow" data-rail="Turn signals into action. Turn action into evidence.">
   <div class="container flow">
-    <div class="flow-map reveal" aria-label="Diagram showing signals becoming findings, actions, evidence, and verified resolution">
-      <div class="flow-line l1"></div>
-      <div class="flow-line l2"></div>
-      <div class="flow-line l3"></div>
+    <div class="flow-map reveal">
+      <div class="flow-line l1"></div><div class="flow-line l2"></div><div class="flow-line l3"></div>
       <div class="flow-node one"><b>Signal</b><small>Activity detected</small></div>
       <div class="flow-node two"><b>Finding</b><small>Human review</small></div>
       <div class="flow-node three"><b>Action</b><small>Owner assigned</small></div>
       <div class="flow-node four"><b>Evidence</b><small>Resolution preserved</small></div>
       <div class="flow-core"><div><b>ENGENIX</b><span>Compliance intelligence</span></div></div>
     </div>
-
     <div class="reveal">
       <div class="eyebrow">A different operating model</div>
       <h2 class="section-title">Find it before someone else defines it.</h2>
       <p class="section-copy">ENGENIX creates a repeatable rhythm around detection, ownership, correction, and evidence—without asking leadership to babysit another dashboard.</p>
       <div class="steps">
-        <article class="step">
-          <div class="step-icon">01</div>
-          <div><h3>Detect</h3><p>Review dealership activity and documentation for inconsistencies, omissions, drift, and recurring patterns.</p></div>
-        </article>
-        <article class="step">
-          <div class="step-icon">02</div>
-          <div><h3>Direct</h3><p>Turn findings into clear actions organized by urgency, ownership, and operational impact.</p></div>
-        </article>
-        <article class="step">
-          <div class="step-icon">03</div>
-          <div><h3>Defend</h3><p>Preserve the finding, responsible party, corrective action, supporting evidence, and verified resolution.</p></div>
-        </article>
+        <article class="step"><div class="step-icon">01</div><div><h3>Detect</h3><p>Review dealership activity and documentation for inconsistencies, omissions, drift, and recurring patterns.</p></div></article>
+        <article class="step"><div class="step-icon">02</div><div><h3>Direct</h3><p>Turn findings into clear actions organized by urgency, ownership, and operational impact.</p></div></article>
+        <article class="step"><div class="step-icon">03</div><div><h3>Defend</h3><p>Preserve the finding, responsible party, corrective action, supporting evidence, and verified resolution.</p></div></article>
       </div>
+      <a href="#demo" class="inline-cta">Request a private demonstration <span>→</span></a>
     </div>
   </div>
 </section>
 
-<section class="manifesto">
+<section class="dark-chapter" data-rail="Memory is not a record." data-dark="true">
   <div class="container">
-    <div class="manifesto-panel reveal">
+    <div class="dark-panel reveal">
       <h2>The question is not whether someone will ask. <span>It is whether your answer already exists.</span></h2>
       <p>ENGENIX gives dealership leadership a living record of what the organization saw, what it did, who owned the correction, and whether the correction held.</p>
+      <a href="#demo" class="inline-cta">Build the record before it is requested <span>→</span></a>
     </div>
   </div>
 </section>
 
-<section class="section-tight">
+<section class="section-tight" data-rail="Prepare before scrutiny. Respond with control under it.">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="reveal">
       <div class="eyebrow">Two moments. One platform.</div>
       <h2 class="section-title">Before scrutiny. Under scrutiny.</h2>
       <p class="section-copy">The best time to build a defensible operating record is before anyone asks for it. The second-best time is the moment attention arrives.</p>
     </div>
-    <div class="lanes">
+    <div class="lanes" style="margin-top:48px">
       <article class="lane reveal">
         <div class="lane-label">Proactive dealerships</div>
         <h3>Build the muscle before the pressure.</h3>
         <p>Create a continuous review and correction process that reduces unmanaged risk across the organization.</p>
-        <ul>
-          <li>Identify recurring operational patterns</li>
-          <li>Coach before mistakes become complaints</li>
-          <li>Preserve corrective action while it happens</li>
-          <li>Give leadership a current risk picture</li>
-        </ul>
+        <ul><li>Identify recurring operational patterns</li><li>Coach before mistakes become complaints</li><li>Preserve corrective action while it happens</li><li>Give leadership a current risk picture</li></ul>
       </article>
       <article class="lane alert reveal">
         <div class="lane-label">Dealerships under attention</div>
         <h3>Respond with control, not chaos.</h3>
         <p>Centralize findings, ownership, deadlines, actions, and evidence while the dealership is under a brighter light.</p>
-        <ul>
-          <li>Organize the response around verified facts</li>
-          <li>Track ownership and deadlines clearly</li>
-          <li>Reduce fragmented email and spreadsheet trails</li>
-          <li>Show sustained correction over time</li>
-        </ul>
+        <ul><li>Organize the response around verified facts</li><li>Track ownership and deadlines clearly</li><li>Reduce fragmented email and spreadsheet trails</li><li>Show sustained correction over time</li></ul>
       </article>
     </div>
+    <a href="#demo" class="inline-cta reveal">Talk through your dealership's position <span>→</span></a>
   </div>
 </section>
 
-<section class="section-tight" id="questions">
+<section class="section-tight" id="questions" data-rail="Get the straight answer. Then see the platform privately.">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="reveal">
       <div class="eyebrow">Straight answers</div>
       <h2 class="section-title">Questions dealership leaders ask first.</h2>
     </div>
-    <div class="faq reveal">
-      <div class="faq-item">
-        <button class="faq-button" aria-expanded="false">Is ENGENIX replacing our compliance officer or attorney?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><p>No. ENGENIX is an operational intelligence and documentation platform. It helps teams identify, route, correct, and preserve issues. Legal conclusions and advice remain with qualified counsel and the dealership's responsible professionals.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-button" aria-expanded="false">Does this create another dashboard managers have to babysit?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><p>The goal is the opposite. ENGENIX prioritizes what requires human attention, assigns ownership, and preserves the resolution so managers spend less time reconstructing what happened.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-button" aria-expanded="false">Can it work across multiple rooftops?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><p>The platform is designed for dealership and dealer-group visibility, with clear separation between locations, roles, users, and records.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-button" aria-expanded="false">Does ENGENIX guarantee compliance?<span class="faq-plus">+</span></button>
-        <div class="faq-answer"><p>No responsible platform can guarantee that. ENGENIX is built to improve visibility, consistency, accountability, and documentation so dealership leadership can make better-informed decisions sooner.</p></div>
-      </div>
+    <div class="faq reveal" style="margin-top:46px">
+      <div class="faq-item"><button class="faq-button" aria-expanded="false">Is ENGENIX replacing our compliance officer or attorney?<span class="faq-plus">+</span></button><div class="faq-answer"><p>No. ENGENIX is an operational intelligence and documentation platform. It helps teams identify, route, correct, and preserve issues. Legal conclusions and advice remain with qualified counsel and the dealership's responsible professionals.</p></div></div>
+      <div class="faq-item"><button class="faq-button" aria-expanded="false">Does this create another dashboard managers have to babysit?<span class="faq-plus">+</span></button><div class="faq-answer"><p>The goal is the opposite. ENGENIX prioritizes what requires human attention, assigns ownership, and preserves the resolution so managers spend less time reconstructing what happened.</p></div></div>
+      <div class="faq-item"><button class="faq-button" aria-expanded="false">Can it work across multiple rooftops?<span class="faq-plus">+</span></button><div class="faq-answer"><p>The platform is designed for dealership and dealer-group visibility, with clear separation between locations, roles, users, and records.</p></div></div>
+      <div class="faq-item"><button class="faq-button" aria-expanded="false">Does ENGENIX guarantee compliance?<span class="faq-plus">+</span></button><div class="faq-answer"><p>No responsible platform can guarantee that. ENGENIX is built to improve visibility, consistency, accountability, and documentation so dealership leadership can make better-informed decisions sooner.</p></div></div>
     </div>
+    <a href="#demo" class="inline-cta reveal">Request a private demo <span>→</span></a>
   </div>
 </section>
 
-<section class="cta" id="demo">
+<section class="cta" id="demo" data-rail="See your dealership before someone else defines it.">
   <div class="container">
     <div class="cta-panel reveal">
       <div>
         <div class="eyebrow">Private product demonstration</div>
-        <h2>Know what happened before someone else tells the story.</h2>
+        <h2>See your dealership before someone else defines it.</h2>
         <p>Tell us a little about your dealership. We will open a prepared email so you can request a private walkthrough without sending sensitive information through this page.</p>
       </div>
       <form class="demo-form" id="demoForm">
         <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required placeholder="Your full name"></div>
         <div class="field"><label for="company">Dealership or group</label><input id="company" name="company" autocomplete="organization" required placeholder="Company name"></div>
-        <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@dealership.com"></div>
+        <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@dealership.com"></div>
         <div class="field"><label for="role">Your role</label><select id="role" name="role"><option>Dealer principal / owner</option><option>General manager</option><option>Compliance / legal</option><option>Operations leader</option><option>Technology / vendor partner</option><option>Other</option></select></div>
         <div class="field"><label for="message">What should we know?</label><textarea id="message" name="message" placeholder="Number of rooftops, current priorities, or the problem you are trying to solve."></textarea></div>
-        <button class="button" type="submit">Request private demo <span aria-hidden="true">→</span></button>
+        <button class="button" type="submit">Request private demo</button>
         <div class="form-note">No sensitive customer or dealership data, please.</div>
         <div class="form-status" id="formStatus" role="status"></div>
       </form>
@@ -609,8 +485,8 @@ button{color:inherit}
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div><img class="footer-logo" src="engenix-logo.png" alt="ENGENIX"><div class="footer-copy">Operational intelligence for modern automotive dealerships.</div></div>
-      <div class="footer-links"><a href="#why-now">Why now</a><a href="#platform">Platform</a><a href="#workflow">How it works</a><a href="#demo">Book a demo</a><a href="nda.html">Confidential portal</a></div>
+      <div><img src="engenix-logo.png" alt="ENGENIX" class="footer-logo"><div class="footer-copy">Operational intelligence for modern automotive dealerships.</div></div>
+      <div class="footer-links"><a href="#why-now">Why now</a><a href="#platform">Platform</a><a href="#workflow">How it works</a><a href="#demo">Private demo</a><a href="nda.html">Confidential portal</a></div>
     </div>
     <p class="legal-note">© 2026 ENGEN LLC d/b/a ENGENIX. All rights reserved. ENGENIX provides operational intelligence, workflow, and documentation technology. It does not provide legal advice and does not guarantee compliance with any law, rule, or regulatory requirement.</p>
   </div>
@@ -618,14 +494,52 @@ button{color:inherit}
 
 <script>
 const CONFIG={salesEmail:"sales@engenix.co"};
+const body=document.body;
+const loader=document.getElementById("loader");
+const loaderSkip=document.getElementById("loaderSkip");
+const loaderMessages=[...document.querySelectorAll(".loader-copy span")];
+const demoRail=document.getElementById("demoRail");
+const railCopy=document.getElementById("railCopy");
+const railProgress=document.getElementById("railProgress");
 const header=document.getElementById("header");
 const mobileToggle=document.getElementById("mobileToggle");
 const navLinks=document.getElementById("navLinks");
+const demoSection=document.getElementById("demo");
+const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function finishLoader(){
+  loader.classList.add("hidden");
+  body.classList.remove("loader-open");
+  demoRail.classList.remove("hidden");
+  sessionStorage.setItem("engenix-intro","seen");
+}
+
+function startLoader(){
+  if(reducedMotion||sessionStorage.getItem("engenix-intro")==="seen"){
+    finishLoader();
+    return;
+  }
+  let index=0;
+  const timer=setInterval(()=>{
+    loaderMessages[index].classList.remove("active");
+    index+=1;
+    if(index>=loaderMessages.length){
+      clearInterval(timer);
+      setTimeout(finishLoader,500);
+      return;
+    }
+    loaderMessages[index].classList.add("active");
+  },760);
+}
+loaderSkip.addEventListener("click",finishLoader);
+startLoader();
 
 function updateHeader(){
   header.classList.toggle("scrolled",window.scrollY>18);
+  const scrollable=document.documentElement.scrollHeight-window.innerHeight;
+  const progress=scrollable>0?window.scrollY/scrollable:0;
+  railProgress.style.width=`${Math.min(100,Math.max(0,progress*100))}%`;
 }
-
 updateHeader();
 window.addEventListener("scroll",updateHeader,{passive:true});
 
@@ -634,38 +548,52 @@ mobileToggle.addEventListener("click",()=>{
   mobileToggle.setAttribute("aria-expanded",String(open));
   mobileToggle.setAttribute("aria-label",open?"Close navigation":"Open navigation");
 });
+document.querySelectorAll(".nav-links a").forEach(link=>link.addEventListener("click",()=>{
+  navLinks.classList.remove("open");
+  mobileToggle.setAttribute("aria-expanded","false");
+}));
 
-document.querySelectorAll(".nav-links a").forEach(link=>{
-  link.addEventListener("click",()=>{
-    navLinks.classList.remove("open");
-    mobileToggle.setAttribute("aria-expanded","false");
-  });
-});
-
-const observer=new IntersectionObserver(entries=>{
+const revealObserver=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
+      revealObserver.unobserve(entry.target);
     }
   });
 },{threshold:.1});
+document.querySelectorAll(".reveal").forEach(element=>revealObserver.observe(element));
 
-document.querySelectorAll(".reveal").forEach(element=>observer.observe(element));
+const chapterObserver=new IntersectionObserver(entries=>{
+  const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(!visible)return;
+  const section=visible.target;
+  const nextCopy=section.dataset.rail;
+  if(nextCopy&&nextCopy!==railCopy.textContent){
+    railCopy.parentElement.classList.add("changing");
+    setTimeout(()=>{
+      railCopy.textContent=nextCopy;
+      railCopy.parentElement.classList.remove("changing");
+    },180);
+  }
+  demoRail.classList.toggle("dark",section.dataset.dark==="true");
+},{rootMargin:"-25% 0px -55% 0px",threshold:[0,.25,.5,.75]});
+document.querySelectorAll("[data-rail]").forEach(section=>chapterObserver.observe(section));
+
+const demoObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>demoRail.classList.toggle("hidden",entry.isIntersecting));
+},{threshold:.15});
+demoObserver.observe(demoSection);
 
 document.querySelectorAll(".faq-item").forEach(item=>{
   const button=item.querySelector(".faq-button");
   const answer=item.querySelector(".faq-answer");
-
   button.addEventListener("click",()=>{
     const opening=!item.classList.contains("open");
-
     document.querySelectorAll(".faq-item.open").forEach(openItem=>{
       openItem.classList.remove("open");
       openItem.querySelector(".faq-button").setAttribute("aria-expanded","false");
       openItem.querySelector(".faq-answer").style.maxHeight=null;
     });
-
     if(opening){
       item.classList.add("open");
       button.setAttribute("aria-expanded","true");
@@ -677,14 +605,10 @@ document.querySelectorAll(".faq-item").forEach(item=>{
 document.getElementById("demoForm").addEventListener("submit",event=>{
   event.preventDefault();
   const form=event.currentTarget;
-
-  if(!form.reportValidity()){
-    return;
-  }
-
+  if(!form.reportValidity())return;
   const data=new FormData(form);
   const subject=encodeURIComponent(`ENGENIX private demo request — ${data.get("company")}`);
-  const body=encodeURIComponent(
+  const bodyText=encodeURIComponent(
 `Name: ${data.get("name")}
 Dealership / Group: ${data.get("company")}
 Work Email: ${data.get("email")}
@@ -695,9 +619,8 @@ ${data.get("message")||"No additional context provided."}
 
 Sent from ENGENIX.co`
   );
-
   document.getElementById("formStatus").textContent=`Opening your email app to contact ${CONFIG.salesEmail}…`;
-  window.location.href=`mailto:${CONFIG.salesEmail}?subject=${subject}&body=${body}`;
+  window.location.href=`mailto:${CONFIG.salesEmail}?subject=${subject}&body=${bodyText}`;
 });
 </script>
 </body>
