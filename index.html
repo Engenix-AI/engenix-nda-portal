@@ -243,14 +243,60 @@ button{color:inherit}
 .product-point b{display:block;color:var(--ice);font-size:.77rem;text-transform:uppercase;letter-spacing:.09em}
 .product-point p{margin-top:7px;color:var(--muted);font-size:.84rem}
 
-/* Success state */
-.form-success{display:none;padding:28px;border:1px solid rgba(118,195,164,.24);border-radius:20px;background:rgba(118,195,164,.08)}
-.form-success.visible{display:block}
-.form-success h3{font-size:1.45rem}
-.form-success p{margin-top:8px;color:var(--muted)}
-.honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
-.demo-form[aria-busy="true"] button{opacity:.65;cursor:wait}
-.demo-form[aria-busy="true"] input,.demo-form[aria-busy="true"] select,.demo-form[aria-busy="true"] textarea{pointer-events:none}
+
+
+/* Tonight final polish */
+.trajectory{
+  animation:trajectoryBreathe 5.5s ease-in-out infinite;
+}
+.hero-logo-art{
+  animation:logoFloat 7s ease-in-out infinite;
+}
+.product-shell{
+  transform:perspective(1500px) rotateX(.7deg);
+  transform-origin:center top;
+}
+.product-shell::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,transparent 22%,rgba(255,255,255,.045) 38%,transparent 52%);
+  transform:translateX(-120%);
+  animation:productSweep 8s ease-in-out infinite;
+}
+.gallery-grid figure img{
+  transition:transform 1.2s cubic-bezier(.2,.7,.2,1);
+}
+.gallery-grid figure:hover img{
+  transform:scale(1.025);
+}
+.section::before,.section-tight::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:min(92%,1100px);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(141,199,239,.16),rgba(217,138,94,.13),transparent);
+}
+@keyframes trajectoryBreathe{
+  0%,100%{filter:drop-shadow(0 0 10px rgba(141,199,239,.18));opacity:.88}
+  50%{filter:drop-shadow(0 0 18px rgba(217,138,94,.26));opacity:1}
+}
+@keyframes logoFloat{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-6px)}
+}
+@keyframes productSweep{
+  0%,72%{transform:translateX(-120%)}
+  88%,100%{transform:translateX(120%)}
+}
+@media(max-width:700px){
+  .trajectory,.hero-logo-art,.product-shell::after{animation:none}
+  .product-shell{transform:none}
+}
 
 @media(max-width:1020px){
   .gallery-grid,.product-copy{grid-template-columns:1fr}
@@ -581,9 +627,7 @@ button{color:inherit}
         <h2>See your dealership before someone else defines it.</h2>
         <p>Tell us a little about your dealership. We will open a prepared email so you can request a private walkthrough without sending sensitive information through this page.</p>
       </div>
-      <form class="demo-form" id="demoForm" novalidate>
-        <div class="honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
-        <input type="hidden" name="source" id="leadSource" value="direct">
+      <form class="demo-form" id="demoForm">
         <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required minlength="2" maxlength="120" placeholder="Your full name"></div>
         <div class="field"><label for="company">Dealership or group</label><input id="company" name="company" autocomplete="organization" required minlength="2" maxlength="160" placeholder="Company name"></div>
         <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="180" placeholder="you@dealership.com"></div>
@@ -593,10 +637,6 @@ button{color:inherit}
         <div class="form-note">No sensitive customer or dealership data, please.</div>
         <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
       </form>
-      <div class="form-success" id="formSuccess" role="status">
-        <h3>Your private demo request is in.</h3>
-        <p>ENGENIX will follow up using the work email you provided.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -701,78 +741,46 @@ document.querySelectorAll(".faq-item").forEach(item=>{
 });
 
 
-function getLeadSource(){
-  const params=new URLSearchParams(window.location.search);
-  return params.get("utm_source")||params.get("ref")||document.referrer||"direct";
-}
 
-async function trackEvent(eventName,metadata={}){
-  try{
-    await fetch("/api/event",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        event_name:eventName,
-        path:window.location.pathname,
-        metadata,
-        session_id:sessionStorage.getItem("engenix-session")||""
-      }),
-      keepalive:true
-    });
-  }catch(error){
-    console.debug("Event tracking unavailable",error);
-  }
-}
-
-if(!sessionStorage.getItem("engenix-session")){
-  sessionStorage.setItem("engenix-session",crypto.randomUUID?.()||`${Date.now()}-${Math.random()}`);
+function trackLocalEvent(eventName,metadata={}){
+  const events=JSON.parse(localStorage.getItem("engenix-events")||"[]");
+  events.push({
+    event_name:eventName,
+    metadata,
+    path:window.location.pathname,
+    created_at:new Date().toISOString()
+  });
+  localStorage.setItem("engenix-events",JSON.stringify(events.slice(-100)));
 }
 
 document.querySelectorAll("[data-track]").forEach(element=>{
-  element.addEventListener("click",()=>trackEvent(element.dataset.track,{
+  element.addEventListener("click",()=>trackLocalEvent(element.dataset.track,{
     rail_copy:element.id==="demoRail"?railCopy.textContent:undefined
   }));
 });
 
-document.getElementById("leadSource").value=getLeadSource();
-
-document.getElementById("demoForm").addEventListener("submit",async event=>{
+document.getElementById("demoForm").addEventListener("submit",event=>{
   event.preventDefault();
   const form=event.currentTarget;
-  const status=document.getElementById("formStatus");
-  const success=document.getElementById("formSuccess");
-
   if(!form.reportValidity())return;
 
-  form.setAttribute("aria-busy","true");
-  status.textContent="Sending your request…";
+  const data=new FormData(form);
+  const subject=encodeURIComponent(`ENGENIX private demo request — ${data.get("company")}`);
+  const bodyText=encodeURIComponent(
+`Name: ${data.get("name")}
+Dealership / Group: ${data.get("company")}
+Work Email: ${data.get("email")}
+Role: ${data.get("role")}
 
-  const payload=Object.fromEntries(new FormData(form).entries());
-  payload.page_url=window.location.href;
-  payload.session_id=sessionStorage.getItem("engenix-session")||"";
+Context:
+${data.get("message")||"No additional context provided."}
 
-  try{
-    const response=await fetch("/api/demo",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(payload)
-    });
-    const result=await response.json();
+Sent from ENGENIX.co`
+  );
 
-    if(!response.ok){
-      throw new Error(result.error||"Unable to submit request.");
-    }
-
-    form.hidden=true;
-    success.classList.add("visible");
-    status.textContent="";
-    trackEvent("demo_request_submitted",{source:payload.source,role:payload.role});
-  }catch(error){
-    status.textContent=error.message||"Unable to submit. Please try again.";
-    trackEvent("demo_request_failed",{message:String(error.message||error)});
-  }finally{
-    form.removeAttribute("aria-busy");
-  }
+  document.getElementById("formStatus").textContent=`Opening your email app to contact ${CONFIG.salesEmail}…`;
+  trackLocalEvent("demo_request_started",{role:data.get("role")});
+  window.location.href=`mailto:${CONFIG.salesEmail}?subject=${subject}&body=${bodyText}`;
 });
 </script>
 </body>

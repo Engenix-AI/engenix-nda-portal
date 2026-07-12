@@ -1,41 +1,23 @@
-ENGENIX — PRODUCT REVEAL + CONVERSION SYSTEM
+ENGENIX — TONIGHT FINAL STATIC BUILD
 
-Included
-- Custom ENGENIX editorial SVG library:
-  - assets/showroom-dawn.svg
-  - assets/finance-desk.svg
-  - assets/service-lane.svg
-  - assets/product-reveal.svg
-- New cinematic dealership story chapter
-- New product reveal chapter
-- Real demo submission endpoint
-- Supabase lead storage
-- CTA and conversion event tracking
-- Spam honeypot and server-side validation
-- Success confirmation state
-- Mobile-first image and layout behavior
+Included tonight:
+- Luxury graphite/navy visual system
+- Mobile-first hero and compact private-demo concierge
+- Custom dealership editorial SVG library
+- Product reveal chapter
+- Subtle logo, trajectory, and product motion
+- Static email fallback for demo requests
+- Local browser event capture for CTA testing
+- Loader, FAQ, NDA portal, robots.txt, and sitemap.xml
 
-Cloudflare Pages environment variables
-Add these under Settings → Environment variables:
+Backend work is intentionally deferred.
+Tomorrow:
+- Add server-side demo submission
+- Store leads in Supabase
+- Add email notifications
+- Add production analytics
 
-SUPABASE_URL
-https://YOUR_PROJECT.supabase.co
-
-SUPABASE_SERVICE_ROLE_KEY
-Your Supabase service role key. Keep this secret and never place it in index.html.
-
-Supabase setup
-Run supabase/schema.sql in the Supabase SQL editor.
-
-Deployment
+Deployment:
 1. Upload the CONTENTS of this folder to the repository root.
-2. Commit and push to the branch Cloudflare deploys.
-3. Confirm the Cloudflare environment variables are configured.
-4. Submit one test demo request.
-5. Confirm the row appears in public.demo_requests.
-6. Click several demo CTAs and confirm events appear in public.site_events.
-
-Security
-- The service role key is used only inside Cloudflare Pages Functions.
-- Public browser code never receives the service role key.
-- Row Level Security blocks public direct table access.
+2. Commit and push to the Cloudflare production branch.
+3. Confirm sales@engenix.co is active.
