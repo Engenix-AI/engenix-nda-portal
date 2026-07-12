@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+<title id="title">ENGENIX product intelligence view</title>
+<desc id="desc">A product visualization showing dealership signals becoming findings, ownership, action, and evidence.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#182535"/>
+    <stop offset="1" stop-color="#0d1621"/>
+  </linearGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+    <stop stop-color="#d98a5e"/>
+    <stop offset=".45" stop-color="#e4ba78"/>
+    <stop offset="1" stop-color="#8dc7ef"/>
+  </linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#02070c" flood-opacity=".42"/></filter>
+</defs>
+<rect width="1800" height="1100" rx="42" fill="url(#bg)"/>
+<g opacity=".16" stroke="#dce8f2">
+  <path d="M0 120H1800M0 240H1800M0 360H1800M0 480H1800M0 600H1800M0 720H1800M0 840H1800M0 960H1800"/>
+  <path d="M150 0V1100M300 0V1100M450 0V1100M600 0V1100M750 0V1100M900 0V1100M1050 0V1100M1200 0V1100M1350 0V1100M1500 0V1100M1650 0V1100"/>
+</g>
+<rect x="70" y="62" width="1660" height="96" rx="22" fill="#223246" stroke="#dce8f2" stroke-opacity=".12"/>
+<circle cx="120" cy="110" r="10" fill="#d98a5e"/>
+<circle cx="155" cy="110" r="10" fill="#e4ba78"/>
+<circle cx="190" cy="110" r="10" fill="#8dc7ef"/>
+<text x="245" y="122" fill="#f1f5f8" font-family="Arial,sans-serif" font-weight="700" font-size="34">ENGENIX Operational Intelligence</text>
+<text x="1450" y="120" fill="#76c3a4" font-family="Arial,sans-serif" font-weight="700" font-size="24">LIVE REVIEW</text>
+
+<g filter="url(#shadow)">
+  <rect x="70" y="200" width="440" height="820" rx="28" fill="#1d2b3d" stroke="#dce8f2" stroke-opacity=".12"/>
+  <rect x="550" y="200" width="1180" height="500" rx="28" fill="#1b293a" stroke="#dce8f2" stroke-opacity=".12"/>
+  <rect x="550" y="740" width="565" height="280" rx="28" fill="#1c2b3d" stroke="#dce8f2" stroke-opacity=".12"/>
+  <rect x="1155" y="740" width="575" height="280" rx="28" fill="#1c2b3d" stroke="#dce8f2" stroke-opacity=".12"/>
+</g>
+
+<text x="110" y="255" fill="#8dc7ef" font-family="Arial,sans-serif" font-size="22" font-weight="700">PRIORITIZED FINDINGS</text>
+<g font-family="Arial,sans-serif">
+  <g transform="translate(105 305)">
+    <rect width="370" height="135" rx="20" fill="#26374b"/>
+    <rect width="8" height="135" rx="4" fill="#d98a5e"/>
+    <text x="32" y="42" fill="#f1f5f8" font-size="25" font-weight="700">Disclosure inconsistency</text>
+    <text x="32" y="78" fill="#a7b4c1" font-size="19">F&amp;I · High priority</text>
+    <text x="32" y="111" fill="#e4ba78" font-size="18">Owner: General Manager</text>
+  </g>
+  <g transform="translate(105 465)">
+    <rect width="370" height="135" rx="20" fill="#26374b"/>
+    <rect width="8" height="135" rx="4" fill="#8dc7ef"/>
+    <text x="32" y="42" fill="#f1f5f8" font-size="25" font-weight="700">Repeated promise pattern</text>
+    <text x="32" y="78" fill="#a7b4c1" font-size="19">Sales · Review required</text>
+    <text x="32" y="111" fill="#8dc7ef" font-size="18">7 linked interactions</text>
+  </g>
+  <g transform="translate(105 625)">
+    <rect width="370" height="135" rx="20" fill="#26374b"/>
+    <rect width="8" height="135" rx="4" fill="#76c3a4"/>
+    <text x="32" y="42" fill="#f1f5f8" font-size="25" font-weight="700">Correction verified</text>
+    <text x="32" y="78" fill="#a7b4c1" font-size="19">Service · Closed</text>
+    <text x="32" y="111" fill="#76c3a4" font-size="18">Evidence preserved</text>
+  </g>
+</g>
+
+<text x="595" y="255" fill="#8dc7ef" font-family="Arial,sans-serif" font-size="22" font-weight="700">SIGNAL → ACTION → EVIDENCE</text>
+<path d="M650 520C805 355 935 610 1080 440S1360 305 1590 450" fill="none" stroke="url(#line)" stroke-width="8" stroke-linecap="round"/>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+  <g transform="translate(650 520)">
+    <circle r="42" fill="#26374b" stroke="#d98a5e" stroke-width="5"/>
+    <text y="8" fill="#f1f5f8" font-size="20" font-weight="700">SIGNAL</text>
+  </g>
+  <g transform="translate(930 500)">
+    <circle r="42" fill="#26374b" stroke="#e4ba78" stroke-width="5"/>
+    <text y="8" fill="#f1f5f8" font-size="20" font-weight="700">FINDING</text>
+  </g>
+  <g transform="translate(1210 410)">
+    <circle r="42" fill="#26374b" stroke="#8dc7ef" stroke-width="5"/>
+    <text y="8" fill="#f1f5f8" font-size="20" font-weight="700">ACTION</text>
+  </g>
+  <g transform="translate(1590 450)">
+    <circle r="42" fill="#26374b" stroke="#76c3a4" stroke-width="5"/>
+    <text y="8" fill="#f1f5f8" font-size="20" font-weight="700">PROOF</text>
+  </g>
+</g>
+
+<text x="595" y="795" fill="#8dc7ef" font-family="Arial,sans-serif" font-size="22" font-weight="700">OWNERSHIP</text>
+<text x="1200" y="795" fill="#8dc7ef" font-family="Arial,sans-serif" font-size="22" font-weight="700">EVIDENCE RECORD</text>
+<g font-family="Arial,sans-serif">
+  <rect x="595" y="835" width="475" height="62" rx="16" fill="#26374b"/>
+  <circle cx="635" cy="866" r="16" fill="#d98a5e"/>
+  <text x="670" y="875" fill="#f1f5f8" font-size="22">General Manager · Due today</text>
+  <rect x="595" y="920" width="475" height="62" rx="16" fill="#26374b"/>
+  <circle cx="635" cy="951" r="16" fill="#8dc7ef"/>
+  <text x="670" y="960" fill="#f1f5f8" font-size="22">Compliance Lead · Reviewing</text>
+
+  <rect x="1200" y="835" width="475" height="62" rx="16" fill="#26374b"/>
+  <text x="1235" y="875" fill="#f1f5f8" font-size="22">Finding recorded · 09:42</text>
+  <rect x="1200" y="920" width="475" height="62" rx="16" fill="#26374b"/>
+  <text x="1235" y="960" fill="#76c3a4" font-size="22">Resolution verified · 14:18</text>
+</g>
+</svg>

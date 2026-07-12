@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+<title id="title">Dealership showroom at dawn</title>
+<desc id="desc">Editorial architectural illustration of a quiet dealership showroom before opening.</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1a2c40"/>
+    <stop offset=".58" stop-color="#31465c"/>
+    <stop offset="1" stop-color="#d39167"/>
+  </linearGradient>
+  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+    <stop stop-color="#a9d2f4" stop-opacity=".22"/>
+    <stop offset="1" stop-color="#182737" stop-opacity=".75"/>
+  </linearGradient>
+  <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+    <stop stop-color="#26384b"/>
+    <stop offset="1" stop-color="#101824"/>
+  </linearGradient>
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="20"/>
+  </filter>
+</defs>
+<rect width="1600" height="1000" fill="#101824"/>
+<rect width="1600" height="560" fill="url(#sky)"/>
+<circle cx="1270" cy="290" r="120" fill="#e7b77c" opacity=".36" filter="url(#glow)"/>
+<rect y="560" width="1600" height="440" fill="url(#floor)"/>
+<path d="M90 280H1510V760H90Z" fill="#182536" stroke="#9fc9e8" stroke-opacity=".18" stroke-width="3"/>
+<g fill="url(#glass)" stroke="#9fc9e8" stroke-opacity=".24" stroke-width="2">
+  <rect x="120" y="310" width="260" height="410"/>
+  <rect x="395" y="310" width="260" height="410"/>
+  <rect x="670" y="310" width="260" height="410"/>
+  <rect x="945" y="310" width="260" height="410"/>
+  <rect x="1220" y="310" width="260" height="410"/>
+</g>
+<g fill="#e8eef4" opacity=".78">
+  <path d="M250 630c24-55 64-92 120-106h165c54 10 93 44 119 106l18 43H232Z"/>
+  <path d="M903 636c22-51 59-85 112-100h158c50 11 88 44 111 100l17 40H887Z"/>
+</g>
+<g fill="#101824">
+  <rect x="275" y="650" width="350" height="42" rx="18"/>
+  <rect x="930" y="653" width="338" height="40" rx="18"/>
+</g>
+<g fill="#8dc7ef" opacity=".75">
+  <rect x="302" y="611" width="82" height="20" rx="10"/>
+  <rect x="514" y="611" width="82" height="20" rx="10"/>
+  <rect x="958" y="618" width="78" height="18" rx="9"/>
+  <rect x="1164" y="618" width="78" height="18" rx="9"/>
+</g>
+<path d="M0 820C430 760 850 748 1600 820V1000H0Z" fill="#0c131e"/>
+<path d="M120 850H1480" stroke="#d39167" stroke-width="4" stroke-linecap="round" opacity=".75"/>
+<circle cx="320" cy="850" r="8" fill="#d39167"/>
+<circle cx="1190" cy="850" r="8" fill="#8dc7ef"/>
+<path d="M320 850C620 790 840 910 1190 850" fill="none" stroke="url(#sky)" stroke-width="5" opacity=".85"/>
+</svg>
