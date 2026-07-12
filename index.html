@@ -218,6 +218,54 @@ button{color:inherit}
 .footer-links{display:flex;align-items:center;gap:10px 20px;flex-wrap:wrap;font-size:.78rem;font-weight:800}
 .legal-note{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:.68rem;line-height:1.7}
 
+
+/* Editorial image library */
+.editorial-gallery{background:#111b28}
+.gallery-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:48px}
+.gallery-feature,.gallery-stack figure{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:28px;background:#172331;box-shadow:var(--shadow)}
+.gallery-feature{min-height:650px}
+.gallery-stack{display:grid;gap:18px}
+.gallery-stack figure{min-height:316px}
+.gallery-grid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gallery-grid figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 34%,rgba(7,13,20,.88))}
+.gallery-caption{position:absolute;z-index:2;left:28px;right:28px;bottom:26px}
+.gallery-caption small{display:block;color:var(--copper);font-size:.66rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.gallery-caption h3{margin-top:8px;font-size:clamp(1.5rem,3vw,3rem);line-height:1}
+.gallery-caption p{margin-top:8px;max-width:580px;color:#aebac6;font-size:.86rem}
+
+/* Product reveal */
+.product-reveal{background:linear-gradient(180deg,#1c2a3a,#152130)}
+.product-shell{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:34px;background:#101924;box-shadow:0 36px 110px rgba(2,8,14,.46)}
+.product-shell img{width:100%;height:auto}
+.product-copy{display:grid;grid-template-columns:.95fr 1.05fr;gap:46px;align-items:end;margin-bottom:46px}
+.product-points{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px}
+.product-point{padding:18px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.035)}
+.product-point b{display:block;color:var(--ice);font-size:.77rem;text-transform:uppercase;letter-spacing:.09em}
+.product-point p{margin-top:7px;color:var(--muted);font-size:.84rem}
+
+/* Success state */
+.form-success{display:none;padding:28px;border:1px solid rgba(118,195,164,.24);border-radius:20px;background:rgba(118,195,164,.08)}
+.form-success.visible{display:block}
+.form-success h3{font-size:1.45rem}
+.form-success p{margin-top:8px;color:var(--muted)}
+.honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.demo-form[aria-busy="true"] button{opacity:.65;cursor:wait}
+.demo-form[aria-busy="true"] input,.demo-form[aria-busy="true"] select,.demo-form[aria-busy="true"] textarea{pointer-events:none}
+
+@media(max-width:1020px){
+  .gallery-grid,.product-copy{grid-template-columns:1fr}
+  .gallery-feature{min-height:560px}
+  .gallery-stack{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-feature{min-height:480px}
+  .gallery-stack{grid-template-columns:1fr}
+  .gallery-stack figure{min-height:320px}
+  .product-points{grid-template-columns:1fr}
+  .product-shell{border-radius:22px}
+}
+
 @media(max-width:1020px){
   .brand-logo{width:248px}
   .nav-links{position:fixed;inset:99px 18px auto;display:none;flex-direction:column;align-items:stretch;padding:17px;border:1px solid var(--line);border-radius:17px;background:rgba(17,26,39,.98);box-shadow:var(--shadow)}
@@ -306,13 +354,14 @@ button{color:inherit}
       <a href="#why-now">Why now</a>
       <a href="#platform">Platform</a>
       <a href="#workflow">How it works</a>
+      <a href="#product">Product</a>
       <a href="#questions">Questions</a>
-      <a href="#demo" class="nav-cta">Request private demo</a>
+      <a href="#demo" class="nav-cta" data-track="nav_demo">Request private demo</a>
     </nav>
   </div>
 </header>
 
-<a href="#demo" class="demo-rail hidden" id="demoRail" aria-label="Request a private ENGENIX demonstration">
+<a href="#demo" class="demo-rail hidden" id="demoRail" data-track="concierge_demo" aria-label="Request a private ENGENIX demonstration">
   <div class="rail-copy" id="railCopy">See what your dealership is already telling you.</div>
   <div class="rail-link">Private demo <span>→</span></div>
   <div class="rail-progress"><span id="railProgress"></span></div>
@@ -330,7 +379,7 @@ button{color:inherit}
       </h1>
       <p class="hero-deck">Ordinary conversations, missing context, repeated shortcuts, and unmanaged access become evidence when pressure arrives. <strong>ENGENIX makes those signals visible while leadership still has time to act.</strong></p>
       <div class="hero-actions">
-        <a class="button" href="#demo">Request a private demo</a>
+        <a class="button" href="#demo" data-track="hero_demo">Request a private demo</a>
         <a class="button secondary" href="#workflow">See how it works</a>
       </div>
       <div class="hero-proof">
@@ -398,6 +447,44 @@ button{color:inherit}
   </div>
 </section>
 
+
+<section class="section editorial-gallery" id="story" data-rail="See the moments where risk becomes evidence.">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">The dealership in motion</div>
+      <h2 class="section-title">Real risk lives inside ordinary moments.</h2>
+      <p class="section-copy">ENGENIX is designed around the places where dealership decisions become promises, patterns, and evidence.</p>
+    </div>
+    <div class="gallery-grid">
+      <figure class="gallery-feature reveal">
+        <img src="assets/showroom-dawn.svg" alt="Quiet dealership showroom before opening">
+        <figcaption class="gallery-caption">
+          <small>Before the doors open</small>
+          <h3>The operating picture is already forming.</h3>
+          <p>Customer commitments, documentation, access, and process decisions begin accumulating before leadership sees a report.</p>
+        </figcaption>
+      </figure>
+      <div class="gallery-stack">
+        <figure class="reveal">
+          <img loading="lazy" src="assets/finance-desk.svg" alt="Finance documents under review">
+          <figcaption class="gallery-caption">
+            <small>Finance office</small>
+            <h3>Context is part of the record.</h3>
+          </figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="assets/service-lane.svg" alt="Dealership service lane operations">
+          <figcaption class="gallery-caption">
+            <small>Service operations</small>
+            <h3>Patterns cross departments.</h3>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <a href="#demo" class="inline-cta reveal" data-track="gallery_demo">See what ENGENIX could reveal <span>→</span></a>
+  </div>
+</section>
+
 <section class="section" id="workflow" data-rail="Turn signals into action. Turn action into evidence.">
   <div class="container flow">
     <div class="flow-map reveal">
@@ -419,6 +506,30 @@ button{color:inherit}
       </div>
       <a href="#demo" class="inline-cta">Request a private demonstration <span>→</span></a>
     </div>
+  </div>
+</section>
+
+
+<section class="section product-reveal" id="product" data-rail="This is what operational intelligence looks like.">
+  <div class="container">
+    <div class="product-copy">
+      <div class="reveal">
+        <div class="eyebrow">A glimpse inside ENGENIX</div>
+        <h2 class="section-title">The record builds while the work is happening.</h2>
+      </div>
+      <div class="reveal">
+        <p class="section-copy">Signals become findings. Findings gain ownership. Corrective action becomes evidence. Leadership sees the current operating picture without reconstructing it later.</p>
+        <div class="product-points">
+          <article class="product-point"><b>Prioritized</b><p>Human attention goes to the findings that matter.</p></article>
+          <article class="product-point"><b>Owned</b><p>Every action has a responsible person and deadline.</p></article>
+          <article class="product-point"><b>Defensible</b><p>The record preserves what happened and what changed.</p></article>
+        </div>
+      </div>
+    </div>
+    <div class="product-shell reveal">
+      <img loading="lazy" src="assets/product-reveal.svg" alt="ENGENIX operational intelligence product interface">
+    </div>
+    <a href="#demo" class="inline-cta reveal" data-track="product_demo">Request a private product demonstration <span>→</span></a>
   </div>
 </section>
 
@@ -470,16 +581,22 @@ button{color:inherit}
         <h2>See your dealership before someone else defines it.</h2>
         <p>Tell us a little about your dealership. We will open a prepared email so you can request a private walkthrough without sending sensitive information through this page.</p>
       </div>
-      <form class="demo-form" id="demoForm">
-        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required placeholder="Your full name"></div>
-        <div class="field"><label for="company">Dealership or group</label><input id="company" name="company" autocomplete="organization" required placeholder="Company name"></div>
-        <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@dealership.com"></div>
+      <form class="demo-form" id="demoForm" novalidate>
+        <div class="honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        <input type="hidden" name="source" id="leadSource" value="direct">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required minlength="2" maxlength="120" placeholder="Your full name"></div>
+        <div class="field"><label for="company">Dealership or group</label><input id="company" name="company" autocomplete="organization" required minlength="2" maxlength="160" placeholder="Company name"></div>
+        <div class="field"><label for="email">Work email</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="180" placeholder="you@dealership.com"></div>
         <div class="field"><label for="role">Your role</label><select id="role" name="role"><option>Dealer principal / owner</option><option>General manager</option><option>Compliance / legal</option><option>Operations leader</option><option>Technology / vendor partner</option><option>Other</option></select></div>
-        <div class="field"><label for="message">What should we know?</label><textarea id="message" name="message" placeholder="Number of rooftops, current priorities, or the problem you are trying to solve."></textarea></div>
+        <div class="field"><label for="message">What should we know?</label><textarea id="message" name="message" maxlength="2000" placeholder="Number of rooftops, current priorities, or the problem you are trying to solve."></textarea></div>
         <button class="button" type="submit">Request private demo</button>
         <div class="form-note">No sensitive customer or dealership data, please.</div>
-        <div class="form-status" id="formStatus" role="status"></div>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
       </form>
+      <div class="form-success" id="formSuccess" role="status">
+        <h3>Your private demo request is in.</h3>
+        <p>ENGENIX will follow up using the work email you provided.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -583,25 +700,79 @@ document.querySelectorAll(".faq-item").forEach(item=>{
   });
 });
 
-document.getElementById("demoForm").addEventListener("submit",event=>{
+
+function getLeadSource(){
+  const params=new URLSearchParams(window.location.search);
+  return params.get("utm_source")||params.get("ref")||document.referrer||"direct";
+}
+
+async function trackEvent(eventName,metadata={}){
+  try{
+    await fetch("/api/event",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        event_name:eventName,
+        path:window.location.pathname,
+        metadata,
+        session_id:sessionStorage.getItem("engenix-session")||""
+      }),
+      keepalive:true
+    });
+  }catch(error){
+    console.debug("Event tracking unavailable",error);
+  }
+}
+
+if(!sessionStorage.getItem("engenix-session")){
+  sessionStorage.setItem("engenix-session",crypto.randomUUID?.()||`${Date.now()}-${Math.random()}`);
+}
+
+document.querySelectorAll("[data-track]").forEach(element=>{
+  element.addEventListener("click",()=>trackEvent(element.dataset.track,{
+    rail_copy:element.id==="demoRail"?railCopy.textContent:undefined
+  }));
+});
+
+document.getElementById("leadSource").value=getLeadSource();
+
+document.getElementById("demoForm").addEventListener("submit",async event=>{
   event.preventDefault();
   const form=event.currentTarget;
+  const status=document.getElementById("formStatus");
+  const success=document.getElementById("formSuccess");
+
   if(!form.reportValidity())return;
-  const data=new FormData(form);
-  const subject=encodeURIComponent(`ENGENIX private demo request — ${data.get("company")}`);
-  const bodyText=encodeURIComponent(
-`Name: ${data.get("name")}
-Dealership / Group: ${data.get("company")}
-Work Email: ${data.get("email")}
-Role: ${data.get("role")}
 
-Context:
-${data.get("message")||"No additional context provided."}
+  form.setAttribute("aria-busy","true");
+  status.textContent="Sending your request…";
 
-Sent from ENGENIX.co`
-  );
-  document.getElementById("formStatus").textContent=`Opening your email app to contact ${CONFIG.salesEmail}…`;
-  window.location.href=`mailto:${CONFIG.salesEmail}?subject=${subject}&body=${bodyText}`;
+  const payload=Object.fromEntries(new FormData(form).entries());
+  payload.page_url=window.location.href;
+  payload.session_id=sessionStorage.getItem("engenix-session")||"";
+
+  try{
+    const response=await fetch("/api/demo",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+    const result=await response.json();
+
+    if(!response.ok){
+      throw new Error(result.error||"Unable to submit request.");
+    }
+
+    form.hidden=true;
+    success.classList.add("visible");
+    status.textContent="";
+    trackEvent("demo_request_submitted",{source:payload.source,role:payload.role});
+  }catch(error){
+    status.textContent=error.message||"Unable to submit. Please try again.";
+    trackEvent("demo_request_failed",{message:String(error.message||error)});
+  }finally{
+    form.removeAttribute("aria-busy");
+  }
 });
 </script>
 </body>
