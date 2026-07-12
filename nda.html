@@ -181,7 +181,7 @@ font-size:14px;
 <div class="container">
 
 <div class="logo">
-<img src="engenix-logo.png" alt="ENGENIX Logo" class="logo-img">
+<img src="logo.PNG" alt="ENGENIX Logo" class="logo-img">
 
 <div class="subtitle">
 ENGENIX AI
@@ -323,7 +323,8 @@ color:#8fc9ff;
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+
 <script>
 
 const SUPABASE_URL =
@@ -471,12 +472,10 @@ alert(
 const canvas =
 document.getElementById('signature-pad');
 
-canvas.style.touchAction = 'none';
-
-function resizeCanvas() {
+function resizeCanvas(){
 
 const ratio =
-Math.max(window.devicePixelRatio || 1, 1);
+Math.max(window.devicePixelRatio || 1,1);
 
 canvas.width =
 canvas.offsetWidth * ratio;
@@ -484,10 +483,8 @@ canvas.offsetWidth * ratio;
 canvas.height =
 250 * ratio;
 
-const ctx =
-canvas.getContext('2d');
-
-ctx.scale(ratio, ratio);
+canvas.getContext('2d')
+.scale(ratio,ratio);
 
 }
 
@@ -500,8 +497,8 @@ resizeCanvas
 
 const signaturePad =
 new SignaturePad(canvas,{
-backgroundColor:'rgb(13,20,29)',
-penColor:'white'
+minWidth:1,
+maxWidth:3
 });
 
 document
@@ -512,7 +509,7 @@ signaturePad.clear();
 
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 
  
 

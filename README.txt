@@ -1,15 +1,15 @@
-ENGENIX ONE — LIGHT EXPERIENCE
+ENGENIX ONE — FULL SEND
 
-Seven major upgrades included:
-1. Warm light editorial brand system using the transparent ENGENIX logo.
-2. Session-based cinematic loader with a direct Enter ENGENIX control.
-3. Persistent rotating Request Private Demo concierge rail.
-4. Chapter-based scrolling narrative instead of a generic SaaS card stack.
-5. Custom signal-to-evidence visual language derived from the ENGENIX trajectory.
-6. High-contrast dark statement chapter for "Memory is not a record."
-7. Mobile-first interaction, safe-area handling, reduced motion, and simplified diagrams.
+Visual refinements:
+1. Replaced the bright white canvas with warm stone and ivory.
+2. Added alternating chapter backgrounds for stronger scroll rhythm.
+3. Preserved one high-impact navy chapter as the emotional center.
+4. Reduced glare in the hero visualization, diagrams, forms, and demo rail.
+5. Increased border and text contrast for readability.
+6. Preserved the loader, rotating private-demo rail, mobile safe-area behavior,
+   reduced-motion support, NDA portal, sitemap, and robots configuration.
 
 Deployment:
-- Upload the CONTENTS of this folder to the root of the production repository.
-- Preserve nda.html as the confidential portal.
-- Confirm sales@engenix.co is active.
+1. Upload the CONTENTS of this folder to the repository root.
+2. Commit to the production branch connected to Cloudflare.
+3. Confirm sales@engenix.co is active.
