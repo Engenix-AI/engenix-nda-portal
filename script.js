@@ -146,7 +146,7 @@ window.addEventListener('resize', () => {
 
 // ENGENIX Google Workspace form transport.
 // Replace this placeholder with the Apps Script Web App /exec URL.
-const ENGENIX_GOOGLE_FORM_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+const ENGENIX_GOOGLE_FORM_URL = 'https://script.google.com/macros/s/AKfycby4Ya8vA2H1fEvm9t6lGEXqLOPhA1g1WSyGUonL4_oxX_0LcOxl_tT4rqktKOLT7ZLHfg/exec';
 
 (() => {
   const forms = [
