@@ -1056,3 +1056,163 @@ body.private-access-open { overflow:hidden; }
   .vision-modules { grid-template-columns:1fr; }
   .private-access-content { padding:78px 22px 36px; }
 }
+
+
+/* =========================================================
+   HUMAN LEADERSHIP LAYER V9
+   Founder + COO credibility without turning the site into
+   a corporate biography wall.
+   ========================================================= */
+.leadership-cinematic {
+  position: relative;
+  padding: 140px 0 118px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(23,102,198,.11), transparent 30%),
+    radial-gradient(circle at 82% 72%, rgba(212,167,58,.08), transparent 28%),
+    #05070b;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.leadership-cinematic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .22;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+}
+.leadership-head {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 68px;
+  align-items: end;
+  margin-bottom: 58px;
+}
+.leadership-head h2 { margin-bottom: 0; }
+.leadership-head p { margin-bottom: 7px; font-size: 1.02rem; }
+
+.leadership-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.leader-card {
+  min-height: 720px;
+  display: grid;
+  grid-template-rows: 1.1fr .9fr;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  box-shadow: 0 34px 100px rgba(0,0,0,.28);
+}
+.leader-card.leader-primary {
+  border-color: rgba(212,167,58,.32);
+}
+.leader-image {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  background: #0a0d13;
+}
+.leader-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 24%;
+  filter: saturate(.86) contrast(1.04);
+  transform: scale(1.015);
+  transition: transform .7s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+}
+.leader-card:hover .leader-image img {
+  transform: scale(1.045);
+  filter: saturate(1) contrast(1.04);
+}
+.leader-image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, #090c12 0%, transparent 38%),
+    linear-gradient(120deg, rgba(23,102,198,.07), rgba(212,167,58,.04));
+}
+.leader-content {
+  padding: 32px 34px 34px;
+  display: flex;
+  flex-direction: column;
+}
+.leader-content h3 {
+  margin: 9px 0 16px;
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+}
+.leader-quote {
+  color: #fff;
+  font-size: 1.05rem;
+  line-height: 1.48;
+  margin-bottom: 18px;
+}
+.leader-content > p:not(.leader-quote) {
+  font-size: .88rem;
+}
+.leader-meta {
+  margin-top: auto;
+  padding-top: 23px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+}
+.leader-meta strong {
+  color: var(--gold-light);
+  font-size: 1.25rem;
+}
+.leader-meta span {
+  color: #7c8593;
+  font-size: .7rem;
+  text-align: right;
+}
+.leadership-principle {
+  position: relative;
+  margin-top: 18px;
+  padding: 30px 34px;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 34px;
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255,255,255,.018);
+}
+.leadership-principle span {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .66rem;
+  font-weight: 750;
+}
+.leadership-principle p {
+  margin: 0;
+  color: #b3bac5;
+  font-size: .95rem;
+}
+
+@media(max-width: 1020px) {
+  .leadership-head { grid-template-columns: 1fr; gap: 24px; }
+  .leadership-grid { grid-template-columns: 1fr; }
+  .leader-card { grid-template-columns: .9fr 1.1fr; grid-template-rows: none; min-height: 520px; }
+  .leader-image { min-height: 520px; }
+}
+@media(max-width: 720px) {
+  .leadership-cinematic { padding: 96px 0 82px; }
+  .leader-card { grid-template-columns: 1fr; min-height: 0; }
+  .leader-image { min-height: 430px; }
+  .leader-content { padding: 26px 24px 28px; }
+  .leadership-principle { grid-template-columns: 1fr; gap: 12px; padding: 25px; }
+}
