@@ -38,3 +38,30 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+const demoForm = document.getElementById('demo-request-form');
+if (demoForm) {
+  demoForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const status = demoForm.querySelector('.form-status');
+    const button = demoForm.querySelector('button[type="submit"]');
+    status.className = 'form-status';
+    if (!demoForm.reportValidity()) return;
+    button.disabled = true;
+    status.textContent = 'Sending your private demo request…';
+    try {
+      const payload = Object.fromEntries(new FormData(demoForm).entries());
+      const response = await fetch(demoForm.action, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) throw new Error(result.error || 'Unable to send request.');
+      demoForm.reset();
+      status.className = 'form-status success';
+      status.textContent = 'Request received. The ENGENIX team will contact you shortly.';
+      button.querySelector('span').textContent = 'Request Received';
+    } catch (error) {
+      status.className = 'form-status error';
+      status.innerHTML = `${error.message || 'Unable to send request.'} You can also email <a href="mailto:demo@engenix.co">demo@engenix.co</a>.`;
+    } finally { button.disabled = false; }
+  });
+}
