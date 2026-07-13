@@ -258,7 +258,40 @@
     </section>
 
     
-    <section class="section-pad intelligence-stage" id="intelligence">
+    
+    <section class="cinematic-stakes">
+      <div class="stakes-bg" aria-hidden="true">
+        <div class="stakes-light"></div>
+        <div class="stakes-lines"></div>
+      </div>
+      <div class="shell stakes-grid">
+        <div class="stakes-copy reveal">
+          <div class="section-kicker">Where the pressure lives</div>
+          <h2>One deal. Ten decisions. No room for invisible mistakes.</h2>
+          <p>Late afternoon. The customer is waiting. The lender needs an answer. Finance is moving. Management sees the gross. Small details are easiest to miss exactly when the pressure is highest.</p>
+          <p class="stakes-emphasis">ENGENIX gives the dealership another set of eyes before the problem leaves the building.</p>
+        </div>
+        <div class="stakes-timeline reveal" data-delay="100">
+          <div class="stakes-time">
+            <span>5:42 PM</span>
+            <strong>Deal jacket uploaded</strong>
+            <small>46 documents received</small>
+          </div>
+          <div class="stakes-time warning">
+            <span>5:43 PM</span>
+            <strong>Disclosure variance detected</strong>
+            <small>Manager review recommended</small>
+          </div>
+          <div class="stakes-time">
+            <span>5:49 PM</span>
+            <strong>Corrective action documented</strong>
+            <small>Issue resolved before delivery</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section-pad intelligence-stage" id="intelligence">
       <div class="shell">
         <div class="section-head reveal">
           <div>
@@ -398,19 +431,25 @@
       </div>
     </section>
 
-<section class="section-pad founder-section" id="company">
-      <div class="shell founder-card reveal">
-        <div>
-          <div class="section-kicker">Built from dealership reality</div>
-          <h2>Designed by someone who spent fifteen years making dealership decisions where every mistake carried consequences.</h2>
-        </div>
-        <div class="founder-copy">
-          <p>ENGENIX was shaped by experience across dealership leadership, sales management, desking, finance, closing, lender relationships, and high-volume operations.</p>
-          <p>That experience revealed a recurring truth: the most expensive mistakes are often small details missed under pressure.</p>
-          <div class="founder-signoff"><strong>Nicholas Engen</strong><span>Founder, ENGENIX</span></div>
+
+    <section class="founder-cinematic" id="company">
+      <div class="founder-image-wrap">
+        <img src="nicholas-engen.jpg" alt="Nicholas Engen, founder of ENGENIX" />
+        <div class="founder-image-shade"></div>
+      </div>
+      <div class="founder-story shell">
+        <div class="founder-story-inner reveal">
+          <div class="section-kicker">Founder perspective</div>
+          <blockquote>“I spent fifteen years making dealership decisions under pressure. Then I built the software I wish I had.”</blockquote>
+          <p>ENGENIX was shaped inside real dealership operations, where one missed detail can affect gross, funding, compliance, lender trust, and customer experience at the same time.</p>
+          <div class="founder-signoff">
+            <strong>Nicholas Engen</strong>
+            <span>Founder, ENGENIX</span>
+          </div>
         </div>
       </div>
     </section>
+
 
     <section class="section-pad platform-roadmap">
       <div class="shell">
@@ -479,7 +518,40 @@
       </div>
     </section>
 
-    <section class="section-pad cta-section" id="demo">
+    
+    <section class="platform-vision-scene">
+      <div class="shell">
+        <div class="vision-copy reveal">
+          <div class="section-kicker">The operating layer</div>
+          <h2>Compliance is the first module.<br><strong>The dealership is the platform.</strong></h2>
+          <p>Every future ENGENIX module is built around the same core idea: codify elite dealership judgment, apply it to live operational context, and help teams make better decisions before mistakes become expensive.</p>
+        </div>
+        <div class="vision-modules">
+          <article class="vision-module active reveal">
+            <small>Available today</small>
+            <h3>Compliance Intelligence</h3>
+            <span>Live product</span>
+          </article>
+          <article class="vision-module reveal" data-delay="70">
+            <small>Next</small>
+            <h3>Workflow Intelligence</h3>
+            <span>Roadmap</span>
+          </article>
+          <article class="vision-module reveal" data-delay="140">
+            <small>Expansion</small>
+            <h3>F&amp;I + Desking</h3>
+            <span>Platform path</span>
+          </article>
+          <article class="vision-module reveal" data-delay="210">
+            <small>Long term</small>
+            <h3>Enterprise Intelligence</h3>
+            <span>Category vision</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<section class="section-pad cta-section" id="demo">
       <div class="shell cta-card reveal">
         <div class="cta-star" aria-hidden="true">✦</div>
         <div class="section-kicker">Private demonstrations available</div>
@@ -513,12 +585,45 @@
   </footer>
 
 
-  <a class="private-demo-dock" href="demo.html" aria-label="Request a private ENGENIX demonstration">
+  
+  <button class="private-demo-dock" id="private-access-trigger" type="button" aria-controls="private-access-panel" aria-expanded="false">
     <span class="dock-status"><i></i> Private access</span>
     <strong>Request a Demo</strong>
     <small>Tailored to your rooftop</small>
     <b aria-hidden="true">↗</b>
-  </a>
+  </button>
+
+  <div class="private-access-backdrop" id="private-access-backdrop" hidden></div>
+  <aside class="private-access-panel" id="private-access-panel" aria-hidden="true" aria-labelledby="private-access-title">
+    <button class="private-access-close" id="private-access-close" type="button" aria-label="Close private access panel">×</button>
+    <div class="private-access-content">
+      <span class="micro">Private access</span>
+      <h2 id="private-access-title">See ENGENIX inside your dealership workflow.</h2>
+      <p>Tell us about your rooftop. We will tailor the demonstration around your current compliance process, deal volume, and operating environment.</p>
+      <form class="quick-demo-form" action="demo.html">
+        <label><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
+        <label><span>Dealership or group</span><input type="text" name="company" required></label>
+        <label><span>Work email</span><input type="email" name="email" autocomplete="email" required></label>
+        <label><span>Role</span>
+          <select name="role" required>
+            <option value="">Select role</option>
+            <option>Dealer Principal / Owner</option>
+            <option>General Manager</option>
+            <option>General Sales Manager</option>
+            <option>Finance Director / Manager</option>
+            <option>Compliance / Legal</option>
+            <option>Investor / Strategic Partner</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <button class="button button-primary form-submit" type="submit">
+          <span>Continue to Private Demo</span><b>↗</b>
+        </button>
+      </form>
+      <small class="private-access-note">No generic sales call. The conversation is built around your operation.</small>
+    </div>
+  </aside>
+
 
   <script src="script.js"></script>
 </body>

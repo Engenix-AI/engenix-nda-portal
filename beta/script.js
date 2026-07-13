@@ -176,3 +176,41 @@ window.addEventListener('resize', () => {
   [docs, signatures, review].forEach(control => control.addEventListener('input', update));
   update();
 })();
+
+
+// Native private-access drawer.
+(() => {
+  const trigger = document.getElementById('private-access-trigger');
+  const panel = document.getElementById('private-access-panel');
+  const backdrop = document.getElementById('private-access-backdrop');
+  const close = document.getElementById('private-access-close');
+  if (!trigger || !panel || !backdrop || !close) return;
+
+  const openPanel = () => {
+    backdrop.hidden = false;
+    requestAnimationFrame(() => {
+      backdrop.classList.add('is-open');
+      panel.classList.add('is-open');
+    });
+    panel.setAttribute('aria-hidden', 'false');
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('private-access-open');
+    window.setTimeout(() => panel.querySelector('input')?.focus(), 350);
+  };
+
+  const closePanel = () => {
+    backdrop.classList.remove('is-open');
+    panel.classList.remove('is-open');
+    panel.setAttribute('aria-hidden', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('private-access-open');
+    window.setTimeout(() => { backdrop.hidden = true; }, 380);
+  };
+
+  trigger.addEventListener('click', openPanel);
+  close.addEventListener('click', closePanel);
+  backdrop.addEventListener('click', closePanel);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
+  });
+})();
