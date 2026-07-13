@@ -181,15 +181,9 @@ function rateLimit_(email) {
 }
 
 function response_(payload) {
-  const safe = JSON.stringify(payload).replace(/</g, '\\u003c');
-  return HtmlService.createHtmlOutput(`
-    <!doctype html><html><body><script>
-      window.top.postMessage(
-        Object.assign({ source: 'engenix-google-form' }, ${safe}),
-        '*'
-      );
-    </script></body></html>
-  `);
+  return ContentService
+    .createTextOutput(JSON.stringify(payload))
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function clean_(value, maxLength) {
