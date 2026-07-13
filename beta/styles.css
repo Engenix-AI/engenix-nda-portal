@@ -568,3 +568,24 @@ body.loader-active { overflow: hidden; }
     transform: translateY(12px);
   }
 }
+
+
+/* Loader impact timing v6 */
+.site-loader {
+  transition-duration: .92s;
+}
+.loader-mark {
+  animation-duration: 1.12s;
+}
+.loader-wordmark {
+  animation-delay: .46s;
+  animation-duration: .82s;
+}
+.loader-label {
+  animation-delay: .72s;
+  animation-duration: .78s;
+}
+.loader-progress span {
+  animation-duration: 1.85s;
+  animation-delay: .32s;
+}

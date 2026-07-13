@@ -82,8 +82,8 @@ if (demoForm) {
     'Compliance intelligence ready'
   ];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const duration = reducedMotion ? 350 : 2650;
-  const messageStep = reducedMotion ? 80 : 540;
+  const duration = reducedMotion ? 350 : 3250;
+  const messageStep = reducedMotion ? 80 : 650;
   let closed = false;
 
   messages.forEach((message, index) => {
@@ -104,14 +104,14 @@ if (demoForm) {
     window.setTimeout(() => {
       loader.classList.add('is-hidden');
       document.body.classList.remove('loader-active');
-    }, reducedMotion ? 0 : 240);
-    window.setTimeout(() => loader.remove(), reducedMotion ? 50 : 1100);
+    }, reducedMotion ? 0 : 360);
+    window.setTimeout(() => loader.remove(), reducedMotion ? 50 : 1380);
   };
 
   // The sequence is time-driven instead of waiting for every remote asset,
   // so a slow analytics request can never trap the visitor on the boot screen.
   window.setTimeout(closeLoader, duration);
-  window.setTimeout(closeLoader, 6000); // hard safety release
+  window.setTimeout(closeLoader, 7000); // hard safety release
 })();
 
 
