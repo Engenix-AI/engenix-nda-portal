@@ -1100,7 +1100,7 @@ body.private-access-open { overflow:hidden; }
 .leadership-grid {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
 }
 .leader-card {
