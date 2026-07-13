@@ -56,6 +56,7 @@
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="platform.html">Platform</a>
         <a href="compliance.html">Compliance Intelligence</a>
+        <a href="#intelligence">Intelligence</a>
         <a href="platform.html#why">Why ENGENIX</a>
         <a href="security.html">Security</a>
         <a href="company.html">Company</a>
@@ -256,7 +257,148 @@
       </div>
     </section>
 
-    <section class="section-pad founder-section" id="company">
+    
+    <section class="section-pad intelligence-stage" id="intelligence">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Operational visibility</div>
+            <h2>See risk move through the dealership.</h2>
+          </div>
+          <p>Explore a live visual model of how ENGENIX turns uploaded deal activity into prioritized findings, documented action, and a clearer compliance posture.</p>
+        </div>
+
+        <div class="intel-grid">
+          <article class="intel-panel risk-pulse reveal">
+            <div class="intel-panel-head">
+              <div>
+                <span class="micro">30-day operational pulse</span>
+                <h3>Compliance posture</h3>
+              </div>
+              <div class="pulse-score"><strong id="pulse-score">76</strong><small>/100</small></div>
+            </div>
+
+            <div class="pulse-chart" aria-label="Compliance health trend">
+              <svg viewBox="0 0 720 250" role="img">
+                <defs>
+                  <linearGradient id="pulseFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#4b97f1" stop-opacity=".36"/>
+                    <stop offset="70%" stop-color="#1766c6" stop-opacity=".06"/>
+                    <stop offset="100%" stop-color="#1766c6" stop-opacity="0"/>
+                  </linearGradient>
+                  <linearGradient id="pulseStroke" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#1766c6"/>
+                    <stop offset="58%" stop-color="#4b97f1"/>
+                    <stop offset="100%" stop-color="#f1cf74"/>
+                  </linearGradient>
+                </defs>
+                <g class="chart-grid-lines">
+                  <line x1="0" y1="50" x2="720" y2="50"/>
+                  <line x1="0" y1="110" x2="720" y2="110"/>
+                  <line x1="0" y1="170" x2="720" y2="170"/>
+                  <line x1="0" y1="230" x2="720" y2="230"/>
+                </g>
+                <path id="pulse-area" d="M0 202 C60 190, 80 184, 125 188 S210 164, 255 172 S338 142, 382 150 S462 118, 510 126 S590 82, 630 94 S690 58, 720 64 L720 250 L0 250 Z" fill="url(#pulseFill)"/>
+                <path id="pulse-line" d="M0 202 C60 190, 80 184, 125 188 S210 164, 255 172 S338 142, 382 150 S462 118, 510 126 S590 82, 630 94 S690 58, 720 64" fill="none" stroke="url(#pulseStroke)" stroke-width="5" stroke-linecap="round"/>
+                <g class="pulse-points">
+                  <circle cx="0" cy="202" r="6"/>
+                  <circle cx="255" cy="172" r="6"/>
+                  <circle cx="510" cy="126" r="6"/>
+                  <circle cx="720" cy="64" r="7"/>
+                </g>
+              </svg>
+              <div class="chart-axis"><span>Day 1</span><span>Day 10</span><span>Day 20</span><span>Today</span></div>
+            </div>
+
+            <div class="pulse-stats">
+              <div><span>Open findings</span><strong id="open-findings">12</strong><small>↓ 5 this period</small></div>
+              <div><span>Resolved</span><strong id="resolved-findings">31</strong><small>82% completion</small></div>
+              <div><span>Review velocity</span><strong id="review-velocity">1.8h</strong><small>Median response</small></div>
+            </div>
+          </article>
+
+          <article class="intel-panel risk-simulator reveal" data-delay="100">
+            <div class="intel-panel-head">
+              <div>
+                <span class="micro">Interactive model</span>
+                <h3>Deal risk simulator</h3>
+              </div>
+              <span class="sim-live"><i></i> Live model</span>
+            </div>
+
+            <div class="sim-controls">
+              <label>
+                <span>Document completeness</span>
+                <input id="sim-docs" type="range" min="40" max="100" value="78"/>
+                <b id="sim-docs-value">78%</b>
+              </label>
+              <label>
+                <span>Signature consistency</span>
+                <input id="sim-signatures" type="range" min="40" max="100" value="84"/>
+                <b id="sim-signatures-value">84%</b>
+              </label>
+              <label>
+                <span>Manager review coverage</span>
+                <input id="sim-review" type="range" min="40" max="100" value="66"/>
+                <b id="sim-review-value">66%</b>
+              </label>
+            </div>
+
+            <div class="sim-output">
+              <div class="risk-dial" id="risk-dial">
+                <div>
+                  <small>Modeled risk</small>
+                  <strong id="risk-score">36</strong>
+                  <span id="risk-label">Moderate</span>
+                </div>
+              </div>
+              <div class="sim-findings">
+                <div><span></span><p><strong id="sim-critical">2</strong> critical review items</p></div>
+                <div><span></span><p><strong id="sim-moderate">5</strong> moderate findings</p></div>
+                <div><span></span><p><strong id="sim-ready">68%</strong> delivery readiness</p></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="activity-stream reveal">
+          <div class="activity-stream-copy">
+            <span class="micro">A dealership in motion</span>
+            <h3>Operational events become a prioritized workstream.</h3>
+            <p>Instead of searching for issues across paper files and disconnected systems, leadership sees what arrived, what changed, and what requires attention next.</p>
+          </div>
+
+          <div class="event-rail" aria-label="Example dealership events">
+            <div class="event-card high">
+              <span class="event-time">09:42</span>
+              <i></i>
+              <div><strong>Deal jacket uploaded</strong><small>#2847 · 46 documents received</small></div>
+              <b>Reviewing</b>
+            </div>
+            <div class="event-card warning">
+              <span class="event-time">09:43</span>
+              <i></i>
+              <div><strong>Disclosure variance found</strong><small>Manager attention recommended</small></div>
+              <b>Priority</b>
+            </div>
+            <div class="event-card">
+              <span class="event-time">09:47</span>
+              <i></i>
+              <div><strong>Corrective action recorded</strong><small>Finding assigned and documented</small></div>
+              <b>In progress</b>
+            </div>
+            <div class="event-card resolved">
+              <span class="event-time">10:02</span>
+              <i></i>
+              <div><strong>Review completed</strong><small>Audit history preserved</small></div>
+              <b>Resolved</b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="section-pad founder-section" id="company">
       <div class="shell founder-card reveal">
         <div>
           <div class="section-kicker">Built from dealership reality</div>

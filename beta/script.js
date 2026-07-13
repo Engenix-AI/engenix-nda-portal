@@ -129,3 +129,50 @@ document.addEventListener('keydown', (event) => {
 window.addEventListener('resize', () => {
   if (window.innerWidth > 820) closeMobileMenu();
 }, { passive: true });
+
+
+// Interactive dealership risk model.
+(() => {
+  const docs = document.getElementById('sim-docs');
+  const signatures = document.getElementById('sim-signatures');
+  const review = document.getElementById('sim-review');
+  if (!docs || !signatures || !review) return;
+
+  const docsValue = document.getElementById('sim-docs-value');
+  const signaturesValue = document.getElementById('sim-signatures-value');
+  const reviewValue = document.getElementById('sim-review-value');
+  const score = document.getElementById('risk-score');
+  const label = document.getElementById('risk-label');
+  const dial = document.getElementById('risk-dial');
+  const critical = document.getElementById('sim-critical');
+  const moderate = document.getElementById('sim-moderate');
+  const ready = document.getElementById('sim-ready');
+
+  const update = () => {
+    const d = Number(docs.value);
+    const s = Number(signatures.value);
+    const r = Number(review.value);
+    const quality = (d * .42) + (s * .31) + (r * .27);
+    const risk = Math.max(4, Math.round(100 - quality));
+
+    docsValue.textContent = `${d}%`;
+    signaturesValue.textContent = `${s}%`;
+    reviewValue.textContent = `${r}%`;
+    score.textContent = risk;
+    ready.textContent = `${Math.max(30, Math.round(quality - 4))}%`;
+    critical.textContent = Math.max(0, Math.round((risk - 18) / 11));
+    moderate.textContent = Math.max(1, Math.round(risk / 7));
+
+    let riskLabel = 'Low';
+    let dialColor = 'var(--success)';
+    if (risk >= 25) { riskLabel = 'Moderate'; dialColor = 'var(--gold)'; }
+    if (risk >= 48) { riskLabel = 'High'; dialColor = 'var(--danger)'; }
+
+    label.textContent = riskLabel;
+    dial.style.setProperty('--risk', risk);
+    dial.style.background = `radial-gradient(circle at center, #090c12 57%, transparent 58%), conic-gradient(${dialColor} ${risk}%, rgba(255,255,255,.07) 0)`;
+  };
+
+  [docs, signatures, review].forEach(control => control.addEventListener('input', update));
+  update();
+})();
