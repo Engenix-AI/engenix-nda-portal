@@ -66,33 +66,66 @@ if (demoForm) {
   });
 }
 
-// Premium launch loader. It plays once per browser tab, then stays out of the way.
+// ENGENIX cinematic boot sequence. Runs on every full page load.
 (() => {
   const loader = document.getElementById('site-loader');
-  if (!loader) return;
-  const key = 'engenix-loader-seen';
-  const seen = sessionStorage.getItem(key) === '1';
-  const hide = (immediate = false) => {
-    if (immediate) loader.style.transitionDuration = '0ms';
-    loader.classList.add('is-hidden');
+  if (!loader) {
     document.body.classList.remove('loader-active');
-    window.setTimeout(() => loader.remove(), immediate ? 0 : 760);
-  };
-  if (seen) {
-    hide(true);
     return;
   }
-  document.body.classList.add('loader-active');
-  const start = performance.now();
-  const minimumDisplay = 1450;
-  const finish = () => {
-    const wait = Math.max(0, minimumDisplay - (performance.now() - start));
+
+  const status = document.getElementById('loader-status');
+  const messages = [
+    'Initializing operational intelligence',
+    'Loading compliance engine',
+    'Verifying secure workspace',
+    'Compliance intelligence ready'
+  ];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const duration = reducedMotion ? 350 : 2650;
+  const messageStep = reducedMotion ? 80 : 540;
+  let closed = false;
+
+  messages.forEach((message, index) => {
     window.setTimeout(() => {
-      sessionStorage.setItem(key, '1');
-      hide(false);
-    }, wait);
+      if (!status || closed) return;
+      status.classList.remove('status-in');
+      window.requestAnimationFrame(() => {
+        status.textContent = message;
+        status.classList.add('status-in');
+      });
+    }, index * messageStep);
+  });
+
+  const closeLoader = () => {
+    if (closed) return;
+    closed = true;
+    loader.classList.add('is-ready');
+    window.setTimeout(() => {
+      loader.classList.add('is-hidden');
+      document.body.classList.remove('loader-active');
+    }, reducedMotion ? 0 : 240);
+    window.setTimeout(() => loader.remove(), reducedMotion ? 50 : 1100);
   };
-  if (document.readyState === 'complete') finish();
-  else window.addEventListener('load', finish, { once: true });
-  window.setTimeout(finish, 3500);
+
+  // The sequence is time-driven instead of waiting for every remote asset,
+  // so a slow analytics request can never trap the visitor on the boot screen.
+  window.setTimeout(closeLoader, duration);
+  window.setTimeout(closeLoader, 6000); // hard safety release
 })();
+
+
+// Mobile navigation hardening.
+const closeMobileMenu = () => {
+  header?.classList.remove('menu-open');
+  document.body.classList.remove('menu-open');
+  toggle?.setAttribute('aria-expanded', 'false');
+};
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeMobileMenu();
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 820) closeMobileMenu();
+}, { passive: true });

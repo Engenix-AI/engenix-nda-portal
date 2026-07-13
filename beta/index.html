@@ -11,18 +11,32 @@
   <link rel="icon" type="image/jpeg" href="favicon.jpeg" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <script>document.documentElement.classList.add('js');</script>
+  <style>
+    /* Critical boot-screen styles are inline so the loader appears before styles.css arrives. */
+    html, body { background: #04070c; }
+    body.loader-active { overflow: hidden; }
+    #site-loader { position: fixed; inset: 0; z-index: 2147483647; display: grid; place-content: center; justify-items: center; background: #04070c; opacity: 1; visibility: visible; }
+  </style>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="site-loader" id="site-loader" role="status" aria-label="Loading ENGENIX">
+<body class="loader-active">
+  <div class="site-loader" id="site-loader" role="status" aria-live="polite" aria-label="Initializing ENGENIX">
+    <div class="loader-grid" aria-hidden="true"></div>
     <div class="loader-aura" aria-hidden="true"></div>
-    <div class="loader-mark-wrap">
-      <img class="loader-mark" src="favicon.png" alt="" aria-hidden="true" />
-      <div class="loader-orbit" aria-hidden="true"></div>
+    <div class="loader-stage">
+      <div class="loader-mark-wrap">
+        <img class="loader-mark" src="favicon.png" alt="" aria-hidden="true" />
+        <div class="loader-orbit" aria-hidden="true"></div>
+        <div class="loader-scan" aria-hidden="true"></div>
+      </div>
+      <img class="loader-wordmark" src="engenix-logo.png" alt="ENGENIX" />
+      <div class="loader-label">Operating Intelligence for Automotive Retail</div>
+      <div class="loader-status" id="loader-status">Initializing operational intelligence</div>
+      <div class="loader-progress" aria-hidden="true"><span></span></div>
+      <div class="loader-readout" aria-hidden="true">
+        <span>SECURE SESSION</span><span>COMPLIANCE INTELLIGENCE</span><span>SYSTEM READY</span>
+      </div>
     </div>
-    <img class="loader-wordmark" src="engenix-logo.png" alt="ENGENIX" />
-    <div class="loader-label">Operating Intelligence for Automotive Retail</div>
-    <div class="loader-progress" aria-hidden="true"><span></span></div>
   </div>
 
   <div class="noise" aria-hidden="true"></div>
