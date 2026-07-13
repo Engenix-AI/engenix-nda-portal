@@ -3,21 +3,79 @@ const toggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelectorAll('.nav-links a');
 const year = document.getElementById('year');
 
+
+// ENGENIX cinematic boot sequence. Always releases the page.
+(() => {
+  const loader = document.getElementById('site-loader');
+
+  if (!loader) {
+    document.body.classList.remove('loader-active');
+    return;
+  }
+
+  const status = document.getElementById('loader-status');
+  const messages = [
+    'Initializing operational intelligence',
+    'Loading compliance engine',
+    'Verifying secure workspace',
+    'Compliance intelligence ready'
+  ];
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const duration = reducedMotion ? 300 : 3250;
+  const messageStep = reducedMotion ? 60 : 650;
+  let closed = false;
+
+  messages.forEach((message, index) => {
+    window.setTimeout(() => {
+      if (!status || closed) return;
+      status.classList.remove('status-in');
+      window.requestAnimationFrame(() => {
+        status.textContent = message;
+        status.classList.add('status-in');
+      });
+    }, index * messageStep);
+  });
+
+  const closeLoader = () => {
+    if (closed) return;
+    closed = true;
+
+    loader.classList.add('is-ready');
+
+    window.setTimeout(() => {
+      loader.classList.add('is-hidden');
+      document.body.classList.remove('loader-active');
+    }, reducedMotion ? 0 : 360);
+
+    window.setTimeout(() => {
+      loader.remove();
+    }, reducedMotion ? 50 : 1380);
+  };
+
+  window.setTimeout(closeLoader, duration);
+  window.setTimeout(closeLoader, 7000);
+  window.addEventListener('pageshow', event => {
+    if (event.persisted) closeLoader();
+  });
+})();
+
+
 const updateHeader = () => {
-  header.classList.toggle('scrolled', window.scrollY > 24);
+  header?.classList.toggle('scrolled', window.scrollY > 24);
 };
 
 updateHeader();
 window.addEventListener('scroll', updateHeader, { passive: true });
 
 toggle?.addEventListener('click', () => {
-  const open = header.classList.toggle('menu-open');
+  const open = header?.classList.toggle('menu-open') || false;
   document.body.classList.toggle('menu-open', open);
   toggle.setAttribute('aria-expanded', String(open));
 });
 
 navLinks.forEach(link => link.addEventListener('click', () => {
-  header.classList.remove('menu-open');
+  header?.classList.remove('menu-open');
   document.body.classList.remove('menu-open');
   toggle?.setAttribute('aria-expanded', 'false');
 }));
