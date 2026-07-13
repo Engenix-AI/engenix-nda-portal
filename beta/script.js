@@ -65,3 +65,34 @@ if (demoForm) {
     } finally { button.disabled = false; }
   });
 }
+
+// Premium launch loader. It plays once per browser tab, then stays out of the way.
+(() => {
+  const loader = document.getElementById('site-loader');
+  if (!loader) return;
+  const key = 'engenix-loader-seen';
+  const seen = sessionStorage.getItem(key) === '1';
+  const hide = (immediate = false) => {
+    if (immediate) loader.style.transitionDuration = '0ms';
+    loader.classList.add('is-hidden');
+    document.body.classList.remove('loader-active');
+    window.setTimeout(() => loader.remove(), immediate ? 0 : 760);
+  };
+  if (seen) {
+    hide(true);
+    return;
+  }
+  document.body.classList.add('loader-active');
+  const start = performance.now();
+  const minimumDisplay = 1450;
+  const finish = () => {
+    const wait = Math.max(0, minimumDisplay - (performance.now() - start));
+    window.setTimeout(() => {
+      sessionStorage.setItem(key, '1');
+      hide(false);
+    }, wait);
+  };
+  if (document.readyState === 'complete') finish();
+  else window.addEventListener('load', finish, { once: true });
+  window.setTimeout(finish, 3500);
+})();
