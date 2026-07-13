@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Request a private ENGENIX demonstration tailored to your dealership workflow, compliance process, and operating environment." />
+  <meta name="theme-color" content="#05070b" />
+  <title>Private Demo | ENGENIX</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <header class="site-header scrolled" id="top">
+    <div class="shell nav-shell">
+      <a href="index.html" class="brand" aria-label="ENGENIX home">
+        <img src="engenix-logo.png" alt="ENGENIX" />
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Platform</a>
+        <a href="compliance.html">Compliance Intelligence</a>
+        <a href="index.html#intelligence">Intelligence</a>
+        <a href="security.html">Security</a>
+        <a href="company.html">Company</a>
+      </nav>
+      <a class="button button-small button-secondary nav-cta" href="index.html">Back to ENGENIX</a>
+    </div>
+  </header>
+
+  <main class="demo-page">
+    <div class="shell demo-layout">
+      <section class="demo-intro reveal">
+        <div class="section-kicker">Private access</div>
+        <h1>See ENGENIX inside your dealership workflow.</h1>
+        <p>Tell us about your operation. We will tailor the demonstration around your current compliance process, deal volume, team structure, and highest-priority risks.</p>
+
+        <div class="demo-expect">
+          <div><span>01</span><p><strong>Built around your rooftop.</strong><br>No generic product tour.</p></div>
+          <div><span>02</span><p><strong>See the live workflow.</strong><br>Upload, evaluate, identify, correct, resolve, preserve.</p></div>
+          <div><span>03</span><p><strong>Leave with a clear next step.</strong><br>Pilot scope, implementation needs, and measurable success criteria.</p></div>
+        </div>
+
+        <p class="privacy-note">Your information is used only to respond to this request and prepare the demonstration.</p>
+      </section>
+
+      <section class="demo-form-card reveal" data-delay="100">
+        <div class="form-head">
+          <small>PRIVATE DEMONSTRATION</small>
+          <h2>Tell us about your operation.</h2>
+          <p>Required fields are marked with an asterisk.</p>
+        </div>
+
+        <form class="demo-form" id="demo-request-form" action="/api/demo-request" method="post" novalidate>
+          <div class="form-grid">
+            <label><span>Full name *</span><input type="text" name="name" autocomplete="name" required maxlength="120"></label>
+            <label><span>Work email *</span><input type="email" name="email" autocomplete="email" required maxlength="180"></label>
+            <label><span>Phone</span><input type="tel" name="phone" autocomplete="tel" maxlength="40"></label>
+            <label><span>Dealership or group *</span><input type="text" name="company" autocomplete="organization" required maxlength="160"></label>
+
+            <label><span>Role *</span>
+              <select name="role" required>
+                <option value="">Select role</option>
+                <option>Dealer Principal / Owner</option>
+                <option>General Manager</option>
+                <option>General Sales Manager</option>
+                <option>Finance Director / Manager</option>
+                <option>Compliance / Legal</option>
+                <option>Investor / Strategic Partner</option>
+                <option>Technology / Vendor Partner</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label><span>Monthly retail volume</span>
+              <select name="monthlyVolume">
+                <option value="">Select range</option>
+                <option>Under 75</option>
+                <option>75–149</option>
+                <option>150–299</option>
+                <option>300–599</option>
+                <option>600+</option>
+              </select>
+            </label>
+
+            <label><span>Number of rooftops</span>
+              <select name="rooftops">
+                <option value="">Select range</option>
+                <option>1</option>
+                <option>2–4</option>
+                <option>5–9</option>
+                <option>10–24</option>
+                <option>25+</option>
+              </select>
+            </label>
+
+            <label><span>Current DMS</span>
+              <select name="dms">
+                <option value="">Select system</option>
+                <option>CDK</option>
+                <option>Reynolds & Reynolds</option>
+                <option>Tekion</option>
+                <option>Dealertrack</option>
+                <option>Auto/Mate</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label class="full"><span>What should we focus on? *</span>
+              <textarea name="challenge" rows="6" maxlength="1800" required placeholder="Describe your current compliance process, audit pressure, operational challenge, or investor interest."></textarea>
+            </label>
+
+            <label class="consent full">
+              <input type="checkbox" name="consent" value="yes" required>
+              <span>I agree that ENGENIX may contact me about this private demonstration request.</span>
+            </label>
+
+            <label class="honey" aria-hidden="true"><span>Website</span><input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            <input type="hidden" name="source" value="Dedicated Private Demo Page">
+          </div>
+
+          <button class="button button-primary form-submit" type="submit">
+            <span>Request Private Demonstration</span><b>↗</b>
+          </button>
+          <div class="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <img src="engenix-logo.png" alt="ENGENIX" />
+        <p>The Operating Intelligence Layer for Automotive Retail.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Platform</a>
+        <a href="company.html">Company</a>
+        <a href="security.html">Security</a>
+      </div>
+      <div class="footer-legal">
+        <span>ENGEN LLC d/b/a ENGENIX</span>
+        <span>© <span id="year"></span> ENGENIX. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
