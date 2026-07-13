@@ -202,103 +202,88 @@ window.addEventListener('resize', () => {
 })();
 
 
-// ENGENIX Google Workspace form transport.
-// Replace this placeholder with the Apps Script Web App /exec URL.
-const ENGENIX_GOOGLE_FORM_URL = 'https://script.google.com/macros/s/AKfycby4Ya8vA2H1fEvm9t6lGEXqLOPhA1g1WSyGUonL4_oxX_0LcOxl_tT4rqktKOLT7ZLHfg/exec';
 
+
+
+// ENGENIX production demo form handler.
+// Browser posts only to ENGENIX. Cloudflare relays securely to Google Workspace.
 (() => {
   const forms = [
     document.getElementById('quick-demo-form'),
     document.getElementById('demo-request-form')
   ].filter(Boolean);
-  const transport = document.getElementById('engenix-form-transport');
-  if (!forms.length || !transport) return;
 
-  let active = null;
-  let fallbackTimer = null;
+  if (!forms.length) return;
 
-  const setStatus = (form, message, type = '') => {
-    const node = form.querySelector('.quick-form-status, .form-status');
-    if (!node) return;
-    const base = node.classList.contains('quick-form-status')
-      ? 'quick-form-status'
-      : 'form-status';
-    node.className = `${base}${type ? ` ${type}` : ''}`;
-    node.textContent = message;
-  };
-
-  forms.forEach(form => {
+  forms.forEach((form) => {
+    form.action = '/api/demo';
     form.method = 'POST';
-    form.target = transport.name;
+    form.removeAttribute('target');
 
-    form.addEventListener('submit', event => {
+    const status = form.querySelector('.quick-form-status, .form-status');
+    const button = form.querySelector('button[type="submit"]');
+    const label = button?.querySelector('span');
+    const defaultLabel = label?.textContent || 'Request Private Access';
+
+    const setStatus = (message, type = '') => {
+      if (!status) return;
+      const base = status.classList.contains('quick-form-status')
+        ? 'quick-form-status'
+        : 'form-status';
+      status.className = `${base}${type ? ` ${type}` : ''}`;
+      status.textContent = message;
+    };
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      setStatus('');
 
-      if (ENGENIX_GOOGLE_FORM_URL.includes('YOUR_GOOGLE')) {
-        setStatus(form, 'Google Workspace form URL has not been added yet.', 'error');
-        return;
-      }
       if (!form.reportValidity()) return;
-
-      form.action = ENGENIX_GOOGLE_FORM_URL;
-
-      const button = form.querySelector('button[type="submit"]');
-      const label = button?.querySelector('span');
-      const defaultLabel = label?.textContent || 'Submit';
 
       if (button) button.disabled = true;
       if (label) label.textContent = 'Sending securely…';
-      setStatus(form, 'Securely sending your request…');
+      setStatus('Securely sending your private access request…');
 
-      const metadata = {
-        page: window.location.href,
-        userAgent: navigator.userAgent,
-        submittedAtClient: new Date().toISOString()
-      };
+      try {
+        const payload = Object.fromEntries(new FormData(form).entries());
+        payload.page = window.location.href;
+        payload.userAgent = navigator.userAgent;
+        payload.submittedAtClient = new Date().toISOString();
 
-      Object.entries(metadata).forEach(([name, value]) => {
-        let input = form.querySelector(`input[name="${name}"]`);
-        if (!input) {
-          input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = name;
-          form.appendChild(input);
+        const response = await fetch('/api/demo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.ok) {
+          throw new Error(result.error || 'We could not deliver your request.');
         }
-        input.value = value;
-      });
 
-      active = { form, button, label, defaultLabel };
+        form.reset();
+        setStatus(
+          'Private access requested. The ENGENIX team will contact you shortly.',
+          'success'
+        );
+        if (label) label.textContent = 'Access Requested';
 
-      clearTimeout(fallbackTimer);
-      fallbackTimer = setTimeout(() => {
-        if (!active) return;
-        active.form.reset();
-        setStatus(active.form, 'Your request was sent. Check your inbox for confirmation.', 'success');
-        if (active.button) active.button.disabled = false;
-        if (active.label) active.label.textContent = 'Request Received';
-        active = null;
-      }, 9000);
-
-      form.submit();
+        window.setTimeout(() => {
+          if (label) label.textContent = defaultLabel;
+        }, 6500);
+      } catch (error) {
+        setStatus(
+          `${error.message || 'Unable to send request.'} Email demo@engenix.co if the issue continues.`,
+          'error'
+        );
+        if (label) label.textContent = defaultLabel;
+      } finally {
+        if (button) button.disabled = false;
+      }
     });
-  });
-
-  window.addEventListener('message', event => {
-    const data = event.data;
-    if (!active || !data || data.source !== 'engenix-google-form') return;
-
-    clearTimeout(fallbackTimer);
-
-    if (data.ok) {
-      active.form.reset();
-      setStatus(active.form, 'Request received. ENGENIX will contact you shortly.', 'success');
-      if (active.label) active.label.textContent = 'Request Received';
-    } else {
-      setStatus(active.form, data.error || 'Unable to send request. Email demo@engenix.co.', 'error');
-      if (active.label) active.label.textContent = active.defaultLabel;
-    }
-
-    if (active.button) active.button.disabled = false;
-    active = null;
   });
 })();
