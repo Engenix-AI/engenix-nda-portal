@@ -57,7 +57,7 @@
           <p>Required fields are marked with an asterisk.</p>
         </div>
 
-        <form class="demo-form" id="demo-request-form" action="/api/demo-request" method="post" novalidate>
+        <form class="demo-form" id="demo-request-form" action="#" data-google-form="true" method="post" novalidate>
           <div class="form-grid">
             <label><span>Full name *</span><input type="text" name="name" autocomplete="name" required maxlength="120"></label>
             <label><span>Work email *</span><input type="email" name="email" autocomplete="email" required maxlength="180"></label>
@@ -153,5 +153,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <iframe id="engenix-form-transport" name="engenix-form-transport"
+    title="Form submission transport" hidden aria-hidden="true"></iframe>
 </body>
 </html>

@@ -41,53 +41,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 
 
-// ENGENIX cinematic boot sequence. Runs on every full page load.
-(() => {
-  const loader = document.getElementById('site-loader');
-  if (!loader) {
-    document.body.classList.remove('loader-active');
-    return;
-  }
-
-  const status = document.getElementById('loader-status');
-  const messages = [
-    'Initializing operational intelligence',
-    'Loading compliance engine',
-    'Verifying secure workspace',
-    'Compliance intelligence ready'
-  ];
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const duration = reducedMotion ? 350 : 3250;
-  const messageStep = reducedMotion ? 80 : 650;
-  let closed = false;
-
-  messages.forEach((message, index) => {
-    window.setTimeout(() => {
-      if (!status || closed) return;
-      status.classList.remove('status-in');
-      window.requestAnimationFrame(() => {
-        status.textContent = message;
-        status.classList.add('status-in');
-      });
-    }, index * messageStep);
-  });
-
-  const closeLoader = () => {
-    if (closed) return;
-    closed = true;
-    loader.classList.add('is-ready');
-    window.setTimeout(() => {
-      loader.classList.add('is-hidden');
-      document.body.classList.remove('loader-active');
-    }, reducedMotion ? 0 : 360);
-    window.setTimeout(() => loader.remove(), reducedMotion ? 50 : 1380);
-  };
-
-  // The sequence is time-driven instead of waiting for every remote asset,
-  // so a slow analytics request can never trap the visitor on the boot screen.
-  window.setTimeout(closeLoader, duration);
-  window.setTimeout(closeLoader, 7000); // hard safety release
-})();
 
 
 // Mobile navigation hardening.
@@ -191,73 +144,103 @@ window.addEventListener('resize', () => {
 })();
 
 
-// ENGENIX production form handler for homepage drawer and dedicated demo page.
+// ENGENIX Google Workspace form transport.
+// Replace this placeholder with the Apps Script Web App /exec URL.
+const ENGENIX_GOOGLE_FORM_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+
 (() => {
   const forms = [
     document.getElementById('quick-demo-form'),
     document.getElementById('demo-request-form')
   ].filter(Boolean);
+  const transport = document.getElementById('engenix-form-transport');
+  if (!forms.length || !transport) return;
 
-  if (!forms.length) return;
+  let active = null;
+  let fallbackTimer = null;
 
-  forms.forEach((form) => {
-    const status = form.querySelector('.quick-form-status, .form-status');
-    const button = form.querySelector('button[type="submit"]');
-    const label = button?.querySelector('span');
-    const defaultLabel = label?.textContent || 'Submit';
+  const setStatus = (form, message, type = '') => {
+    const node = form.querySelector('.quick-form-status, .form-status');
+    if (!node) return;
+    const base = node.classList.contains('quick-form-status')
+      ? 'quick-form-status'
+      : 'form-status';
+    node.className = `${base}${type ? ` ${type}` : ''}`;
+    node.textContent = message;
+  };
 
-    const setStatus = (message, type = '') => {
-      if (!status) return;
-      const base = status.classList.contains('quick-form-status') ? 'quick-form-status' : 'form-status';
-      status.className = `${base}${type ? ` ${type}` : ''}`;
-      status.textContent = message;
-    };
+  forms.forEach(form => {
+    form.method = 'POST';
+    form.target = transport.name;
 
-    form.addEventListener('submit', async (event) => {
+    form.addEventListener('submit', event => {
       event.preventDefault();
-      setStatus('');
 
+      if (ENGENIX_GOOGLE_FORM_URL.includes('YOUR_GOOGLE')) {
+        setStatus(form, 'Google Workspace form URL has not been added yet.', 'error');
+        return;
+      }
       if (!form.reportValidity()) return;
+
+      form.action = ENGENIX_GOOGLE_FORM_URL;
+
+      const button = form.querySelector('button[type="submit"]');
+      const label = button?.querySelector('span');
+      const defaultLabel = label?.textContent || 'Submit';
 
       if (button) button.disabled = true;
       if (label) label.textContent = 'Sending securely…';
-      setStatus('Securely sending your request…');
+      setStatus(form, 'Securely sending your request…');
 
-      try {
-        const payload = Object.fromEntries(new FormData(form).entries());
-        payload.page = window.location.href;
-        payload.userAgent = navigator.userAgent;
+      const metadata = {
+        page: window.location.href,
+        userAgent: navigator.userAgent,
+        submittedAtClient: new Date().toISOString()
+      };
 
-        const response = await fetch(form.action, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok || !result.ok) {
-          throw new Error(result.error || 'We could not deliver the request.');
+      Object.entries(metadata).forEach(([name, value]) => {
+        let input = form.querySelector(`input[name="${name}"]`);
+        if (!input) {
+          input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          form.appendChild(input);
         }
+        input.value = value;
+      });
 
-        form.reset();
-        setStatus('Request received. ENGENIX will contact you shortly.', 'success');
-        if (label) label.textContent = 'Request Received';
+      active = { form, button, label, defaultLabel };
 
-        window.setTimeout(() => {
-          if (label) label.textContent = defaultLabel;
-        }, 6000);
-      } catch (error) {
-        setStatus(
-          `${error.message || 'Unable to send request.'} Email demo@engenix.co if the issue continues.`,
-          'error'
-        );
-        if (label) label.textContent = defaultLabel;
-      } finally {
-        if (button) button.disabled = false;
-      }
+      clearTimeout(fallbackTimer);
+      fallbackTimer = setTimeout(() => {
+        if (!active) return;
+        active.form.reset();
+        setStatus(active.form, 'Your request was sent. Check your inbox for confirmation.', 'success');
+        if (active.button) active.button.disabled = false;
+        if (active.label) active.label.textContent = 'Request Received';
+        active = null;
+      }, 9000);
+
+      form.submit();
     });
+  });
+
+  window.addEventListener('message', event => {
+    const data = event.data;
+    if (!active || !data || data.source !== 'engenix-google-form') return;
+
+    clearTimeout(fallbackTimer);
+
+    if (data.ok) {
+      active.form.reset();
+      setStatus(active.form, 'Request received. ENGENIX will contact you shortly.', 'success');
+      if (active.label) active.label.textContent = 'Request Received';
+    } else {
+      setStatus(active.form, data.error || 'Unable to send request. Email demo@engenix.co.', 'error');
+      if (active.label) active.label.textContent = active.defaultLabel;
+    }
+
+    if (active.button) active.button.disabled = false;
+    active = null;
   });
 })();
