@@ -361,3 +361,35 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
 })();
 
 
+
+
+// BLACK DIAMOND V2.2: subtle cinematic depth without a heavy animation library.
+(() => {
+  const hero = document.querySelector('.cinematic-hero');
+  const visual = hero?.querySelector('.hero-visual');
+  const copy = hero?.querySelector('.hero-copy');
+  if (!hero || !visual || !copy) return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+
+  let ticking = false;
+
+  const render = () => {
+    const rect = hero.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+    visual.style.transform = `translate3d(0, ${progress * 34}px, 0) scale(${1 - progress * .035})`;
+    copy.style.transform = `translate3d(0, ${progress * 18}px, 0)`;
+    copy.style.opacity = String(1 - progress * .32);
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(render);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  render();
+})();

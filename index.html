@@ -67,7 +67,13 @@
   </header>
 
   <main>
-    <section class="hero section-pad">
+    <section class="hero section-pad cinematic-hero">
+      <div class="hero-cinema" aria-hidden="true">
+        <div class="hero-beam hero-beam-one"></div>
+        <div class="hero-beam hero-beam-two"></div>
+        <div class="hero-horizon"></div>
+        <div class="hero-scanline"></div>
+      </div>
       <div class="shell hero-grid">
         <div class="hero-copy reveal">
           <div class="eyebrow"><span></span> Every dealership has blind spots</div>
@@ -81,6 +87,11 @@
             <span><i></i> Working product</span>
             <span>Built by operators</span>
             <span>Private rollout open</span>
+          </div>
+          <div class="hero-status-rail">
+            <div><small>PLATFORM</small><strong>OPERATIONAL</strong></div>
+            <div><small>COMPLIANCE ENGINE</small><strong>ONLINE</strong></div>
+            <div><small>PRIVATE ACCESS</small><strong>OPEN</strong></div>
           </div>
         </div>
 
@@ -155,9 +166,12 @@
           <div class="hero-glow" aria-hidden="true"></div>
         </div>
       </div>
+      <a class="hero-scroll-cue" href="#blind-spots" aria-label="Continue to blind spots">
+        <span>SCROLL TO ENTER</span><i></i>
+      </a>
     </section>
 
-    <section class="proof-strip">
+    <section class="proof-strip cinematic-proof">
       <div class="shell proof-grid">
         <span>Compliance Dashboard</span>
         <span>Deal Jacket Auditing</span>
@@ -168,7 +182,15 @@
       </div>
     </section>
 
-    <section class="blind-spots-scene" id="blind-spots">
+        <section class="operating-thesis" aria-label="ENGENIX operating thesis">
+      <div class="thesis-stage shell">
+        <div class="thesis-line reveal"><span>01</span><h2>Software records the transaction.</h2></div>
+        <div class="thesis-line reveal" data-delay="100"><span>02</span><h2>People carry the judgment.</h2></div>
+        <div class="thesis-line reveal thesis-final" data-delay="200"><span>03</span><h2>ENGENIX connects the two.</h2></div>
+      </div>
+    </section>
+
+<section class="blind-spots-scene" id="blind-spots">
       <div class="shell blind-spots-shell">
         <div class="blind-intro reveal">
           <span class="section-kicker">What dealerships do not see</span>
@@ -494,7 +516,18 @@
 
 
     
-    <section class="operations-center section-pad" id="operations-center">
+        <section class="cinematic-interstitial" aria-label="Operational awareness">
+      <div class="interstitial-grid" aria-hidden="true"></div>
+      <div class="shell interstitial-content reveal">
+        <span class="section-kicker">Operational awareness</span>
+        <h2>Every department sees a piece.<br><strong>ENGENIX sees the operation.</strong></h2>
+        <div class="interstitial-pulse">
+          <span>SALES</span><i></i><span>DESK</span><i></i><span>FINANCE</span><i></i><span>COMPLIANCE</span><i></i><span>DELIVERY</span>
+        </div>
+      </div>
+    </section>
+
+<section class="operations-center section-pad" id="operations-center">
       <div class="shell">
         <div class="section-head reveal">
           <div>
@@ -745,9 +778,9 @@
 <section class="section-pad cta-section" id="demo">
       <div class="shell cta-card reveal">
         <div class="cta-star" aria-hidden="true">✦</div>
-        <div class="section-kicker">Private demonstrations available</div>
+        <div class="section-kicker">Private rollout access</div>
         <h2>Most software tells you what happened.<br><strong>ENGENIX helps change what happens next.</strong></h2>
-        <p>See how ENGENIX helps your team upload deal jackets, surface potential compliance concerns, address findings, and maintain a clearer audit history.</p>
+        <p>Bring us one real workflow. We will show you where ENGENIX enters, what it sees, and how the dealership stays in control.</p>
         <a class="button button-primary button-large" href="demo.html">Request Private Access</a>
         <small>Demonstrations are tailored to your dealership’s current workflow and compliance process.</small>
       </div>
