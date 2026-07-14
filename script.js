@@ -458,3 +458,20 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
     if (event.key === 'Escape') closeMenu();
   });
 })();
+
+
+// BLACK DIAMOND V7 — PERSISTENT CONVERSION SPINE
+(() => {
+  const dock = document.querySelector('.global-founding-dock');
+  const ending = document.querySelector('.scene-ending');
+  if (!dock || !ending) return;
+
+  const observer = new IntersectionObserver(([entry]) => {
+    dock.classList.toggle('is-suppressed', entry.isIntersecting);
+    dock.style.opacity = entry.isIntersecting ? '0' : '';
+    dock.style.visibility = entry.isIntersecting ? 'hidden' : '';
+    dock.style.pointerEvents = entry.isIntersecting ? 'none' : '';
+  }, { threshold: .28 });
+
+  observer.observe(ending);
+})();

@@ -1,0 +1,18 @@
+ENGENIX BLACK DIAMOND V6.1 — HAMBURGER HOTFIX
+
+ROOT CAUSE
+V6 attached two click listeners to the same hamburger button.
+The first opened the menu.
+The second immediately toggled it closed.
+That made the hamburger appear completely nonfunctional.
+
+FIX
+- Removed the duplicate V6 toggle listener.
+- Preserved the original working navigation controller.
+- Preserved cinematic scene direction.
+- Added safe close behavior for navigation links and Escape.
+
+FAST DEPLOY
+Replace script.js only.
+
+No HTML, CSS, form, Worker, or Google Workspace changes.

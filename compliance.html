@@ -43,6 +43,68 @@
       </div>
     </div>
   </footer>
+  
+  <button class="private-demo-dock global-founding-dock" id="private-access-trigger" type="button"
+          aria-controls="private-access-panel" aria-expanded="false">
+    <span class="dock-status"><i></i> FOUNDING NETWORK</span>
+    <strong>Founding Briefing</strong>
+    <small>Help set the standard</small>
+    <b>↗</b>
+  </button>
+
+<div class="private-access-backdrop" id="private-access-backdrop" hidden></div>
+  <aside class="private-access-panel" id="private-access-panel" aria-hidden="true" aria-labelledby="private-access-title">
+    <button class="private-access-close" id="private-access-close" type="button" aria-label="Close private access panel">×</button>
+    <div class="private-access-content">
+      <span class="micro">Founding briefing</span>
+      <h2 id="private-access-title">Help set the standard for operational intelligence.</h2>
+      <p>Tell us about your operation. A member of the ENGENIX leadership team will tailor the founding demonstration around your workflow, priorities, and operating environment.</p>
+      <form class="quick-demo-form" id="quick-demo-form" action="/api/demo" method="post" novalidate>
+        <label><span>Name</span><input type="text" name="name" autocomplete="name" maxlength="120" required></label>
+        <label><span>Dealership or group</span><input type="text" name="company" autocomplete="organization" maxlength="160" required></label>
+        <label><span>Work email</span><input type="email" name="email" autocomplete="email" maxlength="180" required></label>
+        <label><span>Role</span>
+          <select name="role" required>
+            <option value="">Select role</option>
+            <option>Dealer Principal / Owner</option>
+            <option>General Manager</option>
+            <option>General Sales Manager</option>
+            <option>Finance Director / Manager</option>
+            <option>Compliance / Legal</option>
+            <option>Investor / Strategic Partner</option>
+            <option>Technology / Vendor Partner</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label><span>Number of rooftops</span>
+          <select name="rooftops">
+            <option value="">Select range</option>
+            <option>1</option><option>2–4</option><option>5–9</option><option>10–24</option><option>25+</option>
+          </select>
+        </label>
+        <label><span>Preferred briefing</span>
+          <select name="briefing">
+            <option>Live Product Demonstration</option>
+            <option>Executive Leadership Briefing</option>
+            <option>Enterprise Partnership Discussion</option>
+          </select>
+        </label>
+        <label>
+          <span>What should we focus on?</span>
+          <textarea name="challenge" rows="4" maxlength="1800" required placeholder="Where does risk, funding friction, or process inconsistency show up in your operation?"></textarea>
+        </label>
+        <input type="hidden" name="source" value="Homepage Founding Dealership Drawer">
+        <label class="honey" aria-hidden="true">
+          <span>Website</span><input type="text" name="website" tabindex="-1" autocomplete="off">
+        </label>
+        <button class="button button-primary form-submit" type="submit">
+          <span>Become a Founding Dealership</span><b>↗</b>
+        </button>
+        <p class="quick-form-status" role="status" aria-live="polite"></p>
+      </form>
+      <small class="private-access-note">No generic sales call. Founding conversations are led around your operation and the standard you want to help establish.</small>
+    </div>
+  </aside>
   <script src="script.js"></script>
 </body>
 </html>
