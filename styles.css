@@ -1353,3 +1353,74 @@ body.private-access-open { overflow:hidden; }
   .value-output { padding:28px 24px; }
   .value-breakdown { grid-template-columns:1fr; }
 }
+
+
+/* BLACK DIAMOND V2.1 — proof-first value framework */
+.pilot-value {
+  position: relative;
+  background:
+    radial-gradient(circle at 18% 45%, rgba(212,167,58,.075), transparent 32%),
+    #05070b;
+}
+.pilot-scorecard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--line);
+}
+.pilot-scorecard article {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background: #080b10;
+}
+.pilot-scorecard span {
+  color: var(--gold);
+  font-size: .68rem;
+}
+.pilot-scorecard h3 {
+  margin: 92px 0 14px;
+  font-size: 1.45rem;
+}
+.pilot-scorecard p {
+  font-size: .84rem;
+}
+.pilot-scorecard small {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: #747e8d;
+  font-size: .66rem;
+}
+.pilot-principle {
+  margin-top: 18px;
+  padding: 34px;
+  display: grid;
+  grid-template-columns: 1fr .9fr;
+  gap: 54px;
+  align-items: center;
+  border: 1px solid rgba(212,167,58,.30);
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(212,167,58,.08), rgba(255,255,255,.015));
+}
+.pilot-principle h3 {
+  margin: 10px 0 0;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+}
+.pilot-principle p {
+  margin: 0;
+  font-size: .92rem;
+}
+@media(max-width:1020px) {
+  .pilot-scorecard { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:700px) {
+  .pilot-scorecard { grid-template-columns: 1fr; }
+  .pilot-scorecard article { min-height: 250px; }
+  .pilot-scorecard h3 { margin-top: 58px; }
+  .pilot-principle { grid-template-columns: 1fr; gap: 20px; padding: 26px; }
+}
