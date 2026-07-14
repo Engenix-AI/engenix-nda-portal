@@ -380,3 +380,71 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
   addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(render); ticking = true; } }, {passive:true});
   render();
 })();
+
+
+// BLACK DIAMOND V6 — SCENE DIRECTION + CROSS-PAGE NAV HARDENING
+(() => {
+  const siteHeader = document.querySelector('.site-header');
+  const menuToggle = document.querySelector('.nav-toggle');
+
+  // Rebind safely even on secondary pages where earlier versions omitted script setup.
+  if (siteHeader && menuToggle && !menuToggle.dataset.v6Bound) {
+    menuToggle.dataset.v6Bound = 'true';
+    menuToggle.addEventListener('click', () => {
+      const open = siteHeader.classList.toggle('menu-open');
+      document.body.classList.toggle('menu-open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  const scenes = [...document.querySelectorAll('.cinematic-scene')];
+  if (!scenes.length) return;
+
+  const number = document.getElementById('scene-number');
+  const name = document.getElementById('scene-name');
+  const names = [
+    'ENTRY','THRESHOLD','BLIND SPOTS','THE DEAL','SYSTEM',
+    'PRINCIPLE','OPERATORS','HORIZON','TRUST','FOUNDING','SESSION'
+  ];
+
+  const sceneObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      scenes.forEach(scene => scene.classList.remove('scene-active'));
+      entry.target.classList.add('scene-active');
+      const index = scenes.indexOf(entry.target);
+      document.documentElement.style.setProperty('--scene-progress', String((index + 1) / scenes.length));
+      if (number) number.textContent = String(index + 1).padStart(2, '0');
+      if (name) name.textContent = names[index] || 'ENGENIX';
+    });
+  }, { threshold: .42 });
+
+  scenes.forEach(scene => sceneObserver.observe(scene));
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const threshold = document.querySelector('.threshold-content');
+    const silence = document.querySelector('.silent-interlude .shell');
+    let ticking = false;
+
+    const direct = () => {
+      [threshold, silence].forEach(el => {
+        if (!el) return;
+        const rect = el.parentElement.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = Math.abs(innerHeight / 2 - center);
+        const intensity = Math.max(0, 1 - distance / innerHeight);
+        el.style.transform = `scale(${.965 + intensity * .035})`;
+        el.style.opacity = String(.55 + intensity * .45);
+      });
+      ticking = false;
+    };
+
+    addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(direct);
+        ticking = true;
+      }
+    }, { passive:true });
+    direct();
+  }
+})();

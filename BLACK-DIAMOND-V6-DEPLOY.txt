@@ -1,0 +1,27 @@
+ENGENIX BLACK DIAMOND V6 — GRAVITY CUT
+
+NO NEW CONTENT WAS ADDED.
+
+WHAT CHANGED
+- Directed the existing homepage as cinematic scenes.
+- Added controlled light evolution and vignette depth.
+- Slower optical reveals replace generic slide animations.
+- Added scene index and visual pacing.
+- One Deal, Command Center, Operators, Founding, and ending receive stronger gravity.
+- Footer now behaves like a controlled session power-down.
+- No GUI or proprietary mechanics were exposed.
+- Risk Engine, Security, Platform, Company, Demo, and homepage all load script.js.
+- Hamburger behavior is restored and hardened on every page.
+- Tablet breakpoint moved to 1180px to prevent crushed horizontal navigation.
+- Landscape tablet menu remains scroll-safe.
+- Form, Worker, Google Workspace relay, and Founding positioning are preserved.
+
+DEPLOY
+Replace the complete repository root with this package.
+Cloudflare command:
+npx wrangler deploy
+
+FORM TEST
+1. Open /api/demo in a browser. GET should return Method not allowed.
+2. Submit homepage Founding Dealership drawer.
+3. Submit dedicated demo.html form.

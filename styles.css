@@ -1627,3 +1627,392 @@ body.private-access-open { overflow:hidden; }
     gap: clamp(22px, 3.6vh, 34px);
   }
 }
+
+
+/* BLACK DIAMOND V5.2 — MOBILE BLIND-SPOT COPY */
+@media (max-width: 620px) {
+  .blind-final {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px 14px;
+    padding: 34px 22px;
+  }
+
+  .blind-final strong {
+    white-space: nowrap;
+    font-size: clamp(1.2rem, 5.7vw, 1.48rem);
+    letter-spacing: -.035em;
+  }
+
+  .blind-final small {
+    max-width: 28ch;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 360px) {
+  .blind-final strong {
+    font-size: 1.08rem;
+  }
+}
+
+
+/* =========================================================
+   BLACK DIAMOND V6 — GRAVITY CUT
+   No added content. Direction, pacing, light, tension.
+   ========================================================= */
+:root {
+  --scene-cold: 23, 102, 198;
+  --scene-warm: 212, 167, 58;
+  --scene-danger: 231, 121, 36;
+  --scene-progress: 0;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% -20%, rgba(var(--scene-cold), .055), transparent 38%),
+    var(--bg);
+}
+
+.cinematic-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 18;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,.14) 68%, rgba(0,0,0,.48) 120%),
+    linear-gradient(to bottom, rgba(0,0,0,.15), transparent 18%, transparent 80%, rgba(0,0,0,.20));
+  opacity: .82;
+}
+
+.scene-index {
+  position: fixed;
+  z-index: 19;
+  left: 24px;
+  bottom: 25px;
+  display: grid;
+  grid-template-columns: auto 46px auto;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,.34);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.scene-index span {
+  color: var(--gold-light);
+  font-size: .62rem;
+}
+.scene-index i {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212,167,58,.7), rgba(75,151,241,.25));
+  transform-origin: left center;
+  transform: scaleX(calc(.22 + var(--scene-progress) * .78));
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.scene-index small {
+  font-size: .48rem;
+}
+
+.cinematic-scene {
+  position: relative;
+  isolation: isolate;
+}
+.cinematic-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.25s ease;
+}
+.cinematic-scene.scene-active::after { opacity: 1; }
+
+.scene-arrival::after {
+  background: radial-gradient(circle at 74% 35%, rgba(var(--scene-cold),.10), transparent 34%);
+}
+.scene-threshold::after,
+.scene-silence::after {
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.018), transparent 28%);
+}
+.scene-risk::after,
+.scene-deal::after {
+  background: radial-gradient(circle at 76% 46%, rgba(var(--scene-danger),.075), transparent 30%);
+}
+.scene-system::after {
+  background: radial-gradient(circle at 50% 35%, rgba(var(--scene-cold),.10), transparent 34%);
+}
+.scene-operators::after,
+.scene-horizon::after,
+.scene-founding::after,
+.scene-ending::after {
+  background: radial-gradient(circle at 50% 35%, rgba(var(--scene-warm),.07), transparent 34%);
+}
+
+/* Scene reveal has a slow optical settle instead of generic slide-up. */
+.cinematic-scene .reveal {
+  transform: translateY(34px) scale(.992);
+  filter: blur(3px);
+  opacity: 0;
+  transition:
+    opacity 1.05s ease,
+    transform 1.15s cubic-bezier(.18,.8,.2,1),
+    filter 1.05s ease;
+}
+.cinematic-scene .reveal.visible {
+  transform: none;
+  filter: none;
+  opacity: 1;
+}
+
+/* Hero feels like a reveal rather than a layout. */
+.cinematic-hero .hero-copy h1 {
+  text-wrap: balance;
+  text-shadow: 0 20px 70px rgba(0,0,0,.48);
+}
+.cinematic-hero .hero-copy {
+  transition: opacity .2s linear, transform .2s linear;
+}
+.abstract-system {
+  transform: perspective(1500px) rotateY(-3.2deg) rotateX(1.6deg);
+  transition: transform .8s cubic-bezier(.2,.8,.2,1), box-shadow .8s ease;
+}
+.abstract-system:hover {
+  transform: perspective(1500px) rotateY(-1deg) rotateX(.4deg) translateY(-5px);
+  box-shadow: 0 52px 140px rgba(0,0,0,.58), 0 0 70px rgba(23,102,198,.08);
+}
+
+/* The threshold and silent beat breathe. */
+.threshold-content,
+.silent-interlude .shell {
+  transition: transform .25s linear, opacity .25s linear;
+}
+.threshold-scene::before,
+.silent-interlude::before {
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:1px;
+  height:100%;
+  background:linear-gradient(to bottom, transparent, rgba(212,167,58,.18), transparent);
+  opacity:.25;
+}
+
+/* Blind spots land as individual cuts. */
+.blind-line {
+  transition:
+    background .35s ease,
+    padding-left .35s ease,
+    border-color .35s ease,
+    opacity .6s ease;
+}
+.blind-line:hover {
+  padding-left: 15px;
+  background: linear-gradient(90deg, rgba(255,255,255,.025), transparent);
+  border-color: rgba(255,255,255,.16);
+}
+.blind-final {
+  box-shadow: 0 26px 80px rgba(0,0,0,.26);
+}
+
+/* One Deal gains a controlled pulse, no new UI. */
+.deal-console {
+  position: relative;
+  box-shadow: 0 52px 140px rgba(0,0,0,.52);
+}
+.deal-console::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(105deg, transparent 0 45%, rgba(255,255,255,.035) 50%, transparent 55%);
+  transform:translateX(-130%);
+  animation:v6-deal-scan 9s ease-in-out infinite;
+}
+.deal-node.active {
+  box-shadow: 0 24px 55px rgba(23,102,198,.17);
+}
+.deal-node.risk.active {
+  box-shadow: 0 24px 55px rgba(212,167,58,.16);
+}
+
+/* Command center gets depth, not clutter. */
+.intel-panel,
+.activity-stream {
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .45s ease, box-shadow .45s ease;
+}
+.intel-panel:hover,
+.activity-stream:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.17);
+  box-shadow: 0 38px 110px rgba(0,0,0,.42);
+}
+
+/* Operators feel like a documentary ensemble. */
+.leader-image img {
+  filter: saturate(.72) contrast(1.08) brightness(.92);
+}
+.leader-card:hover .leader-image img {
+  filter: saturate(.92) contrast(1.07) brightness(.98);
+}
+.leader-card {
+  transition: transform .55s cubic-bezier(.2,.8,.2,1), border-color .45s ease, box-shadow .55s ease;
+}
+.leader-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255,255,255,.19);
+  box-shadow: 0 50px 135px rgba(0,0,0,.46);
+}
+.leader-primary:hover { transform: translateY(-24px); }
+
+/* Founding invitation becomes the emotional apex. */
+.early-access-grid h2 {
+  text-shadow: 0 30px 90px rgba(0,0,0,.58);
+}
+.early-access-close .button-primary {
+  box-shadow: 0 20px 60px rgba(231,121,36,.22);
+}
+.early-access-close.scene-active .early-access-bg {
+  animation: v6-apex-breathe 5.5s ease-in-out infinite;
+}
+
+/* Ending behaves like a power-down. */
+.command-footer-v3 {
+  position: relative;
+  overflow: hidden;
+}
+.command-footer-v3::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(to bottom, transparent, rgba(0,0,0,.16) 45%, rgba(0,0,0,.60));
+}
+.command-footer-v3 .shell { position:relative; }
+.command-footer-v3.scene-active .command-console > div {
+  animation: v6-console-arrive .75s both;
+}
+.command-footer-v3.scene-active .command-console > div:nth-child(2){animation-delay:.09s}
+.command-footer-v3.scene-active .command-console > div:nth-child(3){animation-delay:.18s}
+.command-footer-v3.scene-active .command-console > div:nth-child(4){animation-delay:.27s}
+.discovery-line strong {
+  animation: v6-found-early 3.6s ease-in-out infinite;
+}
+
+/* Unified navigation stability and interaction. */
+.site-header .nav-shell {
+  width: min(1240px, calc(100% - 40px));
+}
+.nav-links a {
+  position: relative;
+}
+.nav-links a::before {
+  content:"";
+  position:absolute;
+  left:0;
+  right:100%;
+  bottom:-8px;
+  height:1px;
+  background:linear-gradient(90deg,var(--blue-light),var(--gold));
+  transition:right .28s ease;
+}
+.nav-links a:hover::before,
+.nav-links a[aria-current="page"]::before {
+  right:0;
+}
+
+/* Wide tablet and smaller laptop: switch sooner, avoid crushed menu. */
+@media (max-width: 1180px) {
+  .nav-toggle { display:block; justify-self:end; z-index:5; }
+  .nav-cta { display:none; }
+  .site-header .nav-links {
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100dvh;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:clamp(22px,4vh,38px);
+    padding:110px 28px 48px;
+    background:
+      radial-gradient(circle at 50% 38%,rgba(23,102,198,.08),transparent 34%),
+      rgba(5,7,11,.989);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-12px);
+    transition:opacity .3s ease,visibility .3s ease,transform .3s ease;
+    overflow-y:auto;
+  }
+  .site-header.menu-open .nav-links {
+    opacity:1;
+    visibility:visible;
+    transform:none;
+  }
+  .site-header .nav-links a {
+    font-size:clamp(1.45rem,4vw,2.4rem);
+    text-align:center;
+  }
+  .site-header .nav-links a::before { display:none; }
+  .site-header.menu-open {
+    height:100dvh;
+    min-height:100vh;
+    background:rgba(5,7,11,.989);
+    overflow:hidden;
+  }
+  .site-header.menu-open .nav-shell {
+    height:100dvh;
+    min-height:100vh;
+    align-items:start;
+  }
+}
+@media (max-width:1180px) and (max-height:720px) {
+  .site-header .nav-links {
+    justify-content:flex-start;
+    padding-top:105px;
+  }
+}
+@media (max-width:760px) {
+  .scene-index {
+    left:14px;
+    bottom:13px;
+    grid-template-columns:auto 30px auto;
+  }
+  .cinematic-vignette { opacity:.68; }
+}
+@media (max-width:480px) {
+  .scene-index { display:none; }
+}
+
+/* Performance protection. */
+.cinematic-scene {
+  content-visibility:auto;
+  contain-intrinsic-size:850px;
+}
+@keyframes v6-deal-scan {
+  0%,72%{transform:translateX(-130%)}
+  88%,100%{transform:translateX(130%)}
+}
+@keyframes v6-apex-breathe {
+  50%{filter:saturate(1.2) brightness(1.08);transform:scale(1.025)}
+}
+@keyframes v6-console-arrive {
+  from{opacity:.25;transform:translateY(18px)}
+  to{opacity:1;transform:none}
+}
+@keyframes v6-found-early {
+  50%{text-shadow:0 0 28px rgba(212,167,58,.42)}
+}
+@media(prefers-reduced-motion:reduce){
+  .deal-console::before,
+  .early-access-close .early-access-bg,
+  .command-console>div,
+  .discovery-line strong { animation:none!important; }
+}

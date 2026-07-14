@@ -1,0 +1,9 @@
+ENGENIX BLACK DIAMOND V5.2 — MOBILE COPY FIX
+
+Changed:
+- "ENGENIX is built to notice first." → "ENGENIX notices first."
+- Mobile card spacing tightened.
+- Headline remains on one line down to compact phone widths.
+
+Fast deploy:
+Replace index.html and styles.css only.
