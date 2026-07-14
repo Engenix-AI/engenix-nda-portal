@@ -1216,3 +1216,140 @@ body.private-access-open { overflow:hidden; }
   .leader-content { padding: 26px 24px 28px; }
   .leadership-principle { grid-template-columns: 1fr; gap: 12px; padding: 25px; }
 }
+
+
+/* =========================================================
+   BLACK DIAMOND V2
+   Product experience, dealership narrative, investor signals.
+   ========================================================= */
+.play-dot { font-size:.72rem; margin-right:7px; color:var(--gold-light); }
+.hero-proof { display:flex; flex-wrap:wrap; gap:18px; margin-top:22px; color:#7f8998; font-size:.68rem; text-transform:uppercase; letter-spacing:.09em; }
+.hero-proof span { display:flex; align-items:center; gap:7px; }
+.hero-proof i { width:6px; height:6px; border-radius:50%; background:var(--success); box-shadow:0 0 12px rgba(104,201,155,.8); }
+
+.blind-spots-scene { position:relative; padding:145px 0; overflow:hidden; background:#030509; border-block:1px solid var(--line); }
+.blind-spots-scene::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 78% 50%,rgba(231,121,36,.09),transparent 30%); pointer-events:none; }
+.blind-spots-shell { position:relative; display:grid; grid-template-columns:.75fr 1.25fr; gap:90px; }
+.blind-intro { position:sticky; top:150px; align-self:start; }
+.blind-intro h2 { font-size:clamp(2.8rem,5vw,5.6rem); margin-top:20px; }
+.blind-sequence { border-top:1px solid var(--line); }
+.blind-line { display:grid; grid-template-columns:50px 1fr; gap:10px 22px; padding:34px 0; border-bottom:1px solid var(--line); }
+.blind-line span { grid-row:1/3; color:var(--gold); font-size:.7rem; padding-top:5px; }
+.blind-line strong { font-size:clamp(1.55rem,3vw,2.8rem); letter-spacing:-.04em; }
+.blind-line small { color:#737d8c; font-size:.82rem; }
+.blind-final { padding:48px 28px; margin-top:18px; border:1px solid rgba(212,167,58,.34); border-radius:22px; background:linear-gradient(135deg,rgba(212,167,58,.10),rgba(255,255,255,.018)); }
+.blind-final strong { color:var(--gold-light); }
+
+.deal-motion-scene { position:relative; background:radial-gradient(circle at 50% 50%,rgba(23,102,198,.08),transparent 44%); }
+.deal-console { border:1px solid rgba(255,255,255,.12); border-radius:28px; overflow:hidden; background:#080b10; box-shadow:0 45px 120px rgba(0,0,0,.4); }
+.deal-console-top { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:0 26px; border-bottom:1px solid var(--line); background:#0b0f16; }
+.deal-console-top div { display:flex; align-items:center; gap:16px; }
+.deal-console-top strong { font-size:.82rem; }
+.deal-console-top>small { color:#788392; font-family:ui-monospace,monospace; }
+.live-indicator { color:#8dbfa8; font-size:.62rem; letter-spacing:.11em; }
+.live-indicator i { display:inline-block; width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 12px var(--success);margin-right:7px; }
+.deal-track { display:grid; grid-template-columns:repeat(6,1fr); padding:26px; gap:8px; }
+.deal-node { position:relative; min-height:145px; padding:18px; border:1px solid var(--line); border-radius:15px; background:rgba(255,255,255,.018); color:#fff; text-align:left; cursor:pointer; transition:.3s ease; }
+.deal-node::after { content:""; position:absolute; left:18px; right:18px; bottom:14px; height:2px; background:#242b36; }
+.deal-node span,.deal-node b,.deal-node small { display:block; }
+.deal-node span { color:#687281; font-size:.6rem; }
+.deal-node b { margin:40px 0 6px; font-size:.86rem; }
+.deal-node small { color:#6e7887; font-size:.62rem; }
+.deal-node.active { border-color:rgba(75,151,241,.55); transform:translateY(-5px); background:rgba(23,102,198,.10); box-shadow:0 18px 40px rgba(23,102,198,.12); }
+.deal-node.active::after { background:linear-gradient(90deg,var(--blue),var(--gold)); box-shadow:0 0 14px rgba(75,151,241,.45); }
+.deal-node.risk.active { border-color:rgba(212,167,58,.6); background:rgba(212,167,58,.09); }
+.deal-event { margin:0 26px 24px; display:grid; grid-template-columns:52px 1fr auto; gap:18px; align-items:center; padding:24px; border:1px solid var(--line); border-radius:18px; background:#0b0f16; }
+.deal-event-icon { width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(104,201,155,.12);color:var(--success);font-weight:900;font-size:1.2rem; }
+.deal-event span { color:#657080; font-size:.62rem; font-family:ui-monospace,monospace; }
+.deal-event h3 { margin:4px 0 5px; font-size:1.2rem; }
+.deal-event p { margin:0; font-size:.78rem; }
+.deal-event>b { color:var(--success); font-size:.62rem; letter-spacing:.12em; }
+.deal-event.is-risk .deal-event-icon { background:rgba(212,167,58,.12); color:var(--gold-light); }
+.deal-event.is-risk>b { color:var(--gold-light); }
+.deal-progress { height:3px; margin:0 26px 18px; overflow:hidden; background:#202631; }
+.deal-progress span { display:block;height:100%;width:8%;background:linear-gradient(90deg,var(--blue),var(--gold));transition:width .5s ease; }
+.illustrative-label { display:block; color:#535d6b; font-size:.56rem; padding:0 26px 24px; }
+
+.operations-center { background:linear-gradient(180deg,#05070b,#070a10 50%,#05070b); }
+.ops-board { border:1px solid var(--line); border-radius:28px; overflow:hidden; background:#080b10; }
+.ops-statusbar { min-height:60px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line); }
+.ops-statusbar span { color:#9ccdb6;font-size:.66rem;letter-spacing:.12em; }
+.ops-statusbar i { display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 13px var(--success);margin-right:8px; }
+.ops-statusbar small { color:#5f6978; }
+.ops-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line); }
+.ops-card { position:relative;min-height:205px;padding:25px;background:#090c12;overflow:hidden; }
+.ops-card span,.ops-card strong,.ops-card small { display:block;position:relative;z-index:1; }
+.ops-card span { color:#737d8b;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em; }
+.ops-card strong { font-size:3.7rem;margin:32px 0 4px; }
+.ops-card strong::after { content:"%";font-size:1rem;color:#737d8b;margin-left:3px; }
+.ops-card small { color:#738090;font-size:.68rem; }
+.ops-card>i { position:absolute;left:0;bottom:0;height:3px;width:var(--level);background:linear-gradient(90deg,var(--blue),var(--gold));box-shadow:0 0 16px rgba(75,151,241,.45); }
+.ops-feed { padding:18px 24px 24px; }
+.ops-feed>div { display:grid;grid-template-columns:48px 8px 1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line); }
+.ops-feed time { color:#626d7c;font-size:.62rem;font-family:ui-monospace,monospace; }
+.ops-feed i { width:7px;height:7px;border-radius:50%; }
+.ops-feed i.blue{background:var(--blue-light);box-shadow:0 0 12px var(--blue-light)}
+.ops-feed i.gold{background:var(--gold);box-shadow:0 0 12px var(--gold)}
+.ops-feed i.green{background:var(--success);box-shadow:0 0 12px var(--success)}
+.ops-feed span b,.ops-feed span small { display:block; }
+.ops-feed span b { font-size:.76rem; }
+.ops-feed span small { color:#66717f;font-size:.63rem;margin-top:3px; }
+.ops-feed em { font-style:normal;color:#84909e;font-size:.6rem;border:1px solid var(--line);padding:5px 8px;border-radius:999px; }
+
+.executive-value { background:radial-gradient(circle at 18% 50%,rgba(212,167,58,.07),transparent 32%); }
+.value-model { display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:#080b10; }
+.value-controls { padding:38px;border-right:1px solid var(--line);display:grid;gap:28px; }
+.value-controls label { display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center; }
+.value-controls label span { color:#a7afbb;font-size:.78rem; }
+.value-controls label b { color:#fff; }
+.value-controls input { grid-column:1/-1;width:100%;appearance:none;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--gold)); }
+.value-controls input::-webkit-slider-thumb { appearance:none;width:19px;height:19px;border-radius:50%;background:#fff;border:4px solid #13223a;box-shadow:0 0 0 2px var(--blue-light); }
+.value-output { padding:42px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(145deg,rgba(212,167,58,.06),transparent); }
+.value-output>span { color:var(--gold-light);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em; }
+.value-output>strong { font-size:clamp(3.4rem,7vw,7.5rem);line-height:1;margin:18px 0 12px;letter-spacing:-.06em; }
+.value-output>p { font-size:1rem; }
+.value-output>small { color:#626c7a;font-size:.62rem;margin-top:22px; }
+.value-breakdown { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px; }
+.value-breakdown div { background:#090c12;padding:15px; }
+.value-breakdown small,.value-breakdown b { display:block; }
+.value-breakdown small { color:#697382;font-size:.58rem; }
+.value-breakdown b { margin-top:7px; }
+
+.command-footer { padding:110px 0;border-top:1px solid var(--line);background:#030509; }
+.command-grid { display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end; }
+.command-brand h2 { font-size:clamp(2.5rem,5vw,5.2rem);margin:20px 0 0; }
+.command-status { border-top:1px solid var(--line); }
+.command-status>div { display:flex;justify-content:space-between;align-items:center;padding:19px 0;border-bottom:1px solid var(--line); }
+.command-status span { color:#9ba4b2;font-size:.78rem; }
+.command-status b { color:var(--success);font-size:.62rem;letter-spacing:.1em; }
+.command-status b i { display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 11px var(--success);margin-right:7px; }
+.command-status b.learning { color:var(--gold-light); }
+.command-status b.learning i { background:var(--gold);box-shadow:0 0 11px var(--gold); }
+
+@media(max-width:1020px){
+  .blind-spots-shell,.command-grid { grid-template-columns:1fr;gap:48px; }
+  .blind-intro { position:static; }
+  .deal-track { grid-template-columns:repeat(3,1fr); }
+  .ops-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:760px){
+  .blind-spots-scene { padding:96px 0; }
+  .deal-console-top { align-items:flex-start;flex-direction:column;padding:20px; }
+  .deal-console-top div { align-items:flex-start;flex-direction:column;gap:7px; }
+  .deal-track { grid-template-columns:1fr 1fr;padding:18px; }
+  .deal-node { min-height:125px; }
+  .deal-node b { margin-top:26px; }
+  .deal-event { grid-template-columns:44px 1fr;margin:0 18px 18px;padding:18px; }
+  .deal-event>b { grid-column:2; }
+  .deal-progress { margin-inline:18px; }
+  .illustrative-label { padding-inline:18px; }
+  .ops-grid { grid-template-columns:1fr 1fr; }
+  .ops-card { min-height:170px;padding:20px; }
+  .ops-card strong { font-size:2.8rem; }
+  .ops-feed>div { grid-template-columns:42px 8px 1fr; }
+  .ops-feed em { grid-column:3;justify-self:start; }
+  .value-model { grid-template-columns:1fr; }
+  .value-controls { border-right:0;border-bottom:1px solid var(--line);padding:25px; }
+  .value-output { padding:28px 24px; }
+  .value-breakdown { grid-template-columns:1fr; }
+}

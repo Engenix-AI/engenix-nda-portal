@@ -1,0 +1,43 @@
+ENGENIX BLACK DIAMOND V2
+
+DEPLOYMENT MODEL
+This package matches your existing Cloudflare Worker Static Assets setup.
+
+Critical files at repository root:
+- worker.js
+- wrangler.jsonc
+- index.html
+- styles.css
+- script.js
+- demo.html
+- company.html
+- assets/images
+
+Your deploy command remains:
+npx wrangler deploy
+
+The Worker handles:
+POST /api/demo
+
+The static site is served through:
+env.ASSETS.fetch(request)
+
+MOBILE DEPLOY
+1. Upload/replace the package files in the GitHub repository root.
+2. Make sure worker.js and wrangler.jsonc are at root.
+3. Commit changes.
+4. Wait for Cloudflare build/deploy.
+5. Test https://www.engenix.co/api/demo
+   Expected GET response:
+   {"ok":false,"error":"Method not allowed."}
+6. Test homepage form and confirmation pipeline.
+
+BLACK DIAMOND FEATURES
+- New category hero
+- Blind Spots scene
+- Interactive Deal in Motion
+- Live Operations Center
+- Existing three-person Founding Operators section
+- Editable executive value model with labeled assumptions
+- Command-center ending
+- Working Private Access intake

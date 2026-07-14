@@ -62,7 +62,7 @@
         <a href="company.html">Company</a>
       </nav>
 
-      <a class="button button-small button-primary nav-cta" href="demo.html">Request a Demo</a>
+      <a class="button button-small button-primary nav-cta" href="demo.html">Request Private Access</a>
     </div>
   </header>
 
@@ -70,14 +70,18 @@
     <section class="hero section-pad">
       <div class="shell hero-grid">
         <div class="hero-copy reveal">
-          <div class="eyebrow"><span></span> Operating Intelligence for Automotive Retail</div>
-          <h1>Your dealership already records the deal.<br /><strong>ENGENIX helps identify what could go wrong.</strong></h1>
-          <p class="hero-lede">Audit deal jackets, understand current compliance risk, and document corrective action before issues become expensive.</p>
+          <div class="eyebrow"><span></span> Every dealership has blind spots</div>
+          <h1>The Operating Intelligence Layer<br /><strong>for Automotive Retail.</strong></h1>
+          <p class="hero-lede">Every deal. Every manager. Every decision. ENGENIX helps dealerships see risk earlier, protect profit, and turn operational pressure into clear action.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="demo.html">Request a Private Demo</a>
-            <a class="button button-secondary" href="#compliance">Explore Compliance Intelligence</a>
+            <button class="button button-primary" type="button" data-open-private-access>Request Private Access</button>
+            <a class="button button-secondary" href="#deal-in-motion"><span class="play-dot">▶</span> Watch the Product</a>
           </div>
-          <p class="hero-note">Built from real dealership operations. Designed for the decisions that happen before delivery, funding, and audit.</p>
+          <div class="hero-proof">
+            <span><i></i> Working product</span>
+            <span>Built by operators</span>
+            <span>Private rollout open</span>
+          </div>
         </div>
 
         <div class="hero-visual reveal" data-delay="120">
@@ -164,6 +168,22 @@
       </div>
     </section>
 
+    <section class="blind-spots-scene" id="blind-spots">
+      <div class="shell blind-spots-shell">
+        <div class="blind-intro reveal">
+          <span class="section-kicker">What dealerships do not see</span>
+          <h2>Most expensive mistakes arrive quietly.</h2>
+        </div>
+        <div class="blind-sequence" aria-label="Common dealership blind spots">
+          <article class="blind-line reveal"><span>01</span><strong>A rebate missed.</strong><small>Gross disappears before anyone sees the option.</small></article>
+          <article class="blind-line reveal" data-delay="70"><span>02</span><strong>A document unsigned.</strong><small>The exposure surfaces after the customer leaves.</small></article>
+          <article class="blind-line reveal" data-delay="140"><span>03</span><strong>A lender stipulation ignored.</strong><small>Funding slows while context moves to the next deal.</small></article>
+          <article class="blind-line reveal" data-delay="210"><span>04</span><strong>A dead lead forgotten.</strong><small>Opportunity remains buried inside the CRM.</small></article>
+          <article class="blind-line reveal blind-final" data-delay="280"><span>✦</span><strong>ENGENIX is built to notice first.</strong><small>Before the blind spot becomes an expensive story.</small></article>
+        </div>
+      </div>
+    </section>
+
     <section class="section-pad statement-section" id="platform">
       <div class="shell narrow center reveal">
         <div class="section-kicker">The intelligence gap</div>
@@ -186,6 +206,47 @@
           <div><span>03</span><strong>Unresolved compliance question</strong><small>No clear owner or audit trail</small></div>
           <div><span>04</span><strong>Gray-area decision</strong><small>Profit pressure outruns process</small></div>
           <div><span>05</span><strong>Audit reconstruction</strong><small>The review starts when it is already expensive</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="deal-motion-scene section-pad" id="deal-in-motion">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Signature experience</div>
+            <h2>A Deal in Motion.</h2>
+          </div>
+          <p>Watch one transaction move through the dealership while ENGENIX turns an invisible risk into a documented resolution.</p>
+        </div>
+
+        <div class="deal-console reveal">
+          <div class="deal-console-top">
+            <div><span class="live-indicator"><i></i> LIVE WORKFLOW</span><strong>Deal #2847 · 2026 SUV</strong></div>
+            <small id="deal-clock">09:14:02</small>
+          </div>
+
+          <div class="deal-track" id="deal-track">
+            <button class="deal-node active" data-step="0"><span>01</span><b>Customer</b><small>Identity captured</small></button>
+            <button class="deal-node" data-step="1"><span>02</span><b>Desk</b><small>Structure created</small></button>
+            <button class="deal-node" data-step="2"><span>03</span><b>Finance</b><small>Lender selected</small></button>
+            <button class="deal-node risk" data-step="3"><span>04</span><b>Compliance</b><small>Review required</small></button>
+            <button class="deal-node" data-step="4"><span>05</span><b>Manager</b><small>Action documented</small></button>
+            <button class="deal-node" data-step="5"><span>06</span><b>Delivery</b><small>Ready to release</small></button>
+          </div>
+
+          <div class="deal-event" id="deal-event">
+            <div class="deal-event-icon">✓</div>
+            <div>
+              <span id="deal-event-time">09:14:02</span>
+              <h3 id="deal-event-title">Customer identity verified</h3>
+              <p id="deal-event-copy">Required customer information is present and the review can continue.</p>
+            </div>
+            <b id="deal-event-status">CLEAR</b>
+          </div>
+
+          <div class="deal-progress"><span id="deal-progress-bar"></span></div>
+          <small class="illustrative-label">Illustrative workflow. Live product capabilities and roadmap are identified throughout the site.</small>
         </div>
       </div>
     </section>
@@ -433,6 +494,44 @@
 
 
     
+    <section class="operations-center section-pad" id="operations-center">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Live operations center</div>
+            <h2>The dealership, seen as one operation.</h2>
+          </div>
+          <p>Operational signals become one prioritized view instead of scattered conversations, files, and dashboards.</p>
+        </div>
+
+        <div class="ops-board reveal">
+          <div class="ops-statusbar">
+            <span><i></i> PLATFORM OPERATIONAL</span>
+            <small>Illustrative command-center view</small>
+          </div>
+          <div class="ops-grid">
+            <article class="ops-card">
+              <span>Compliance</span><strong data-count="94">0</strong><small>Posture improving</small><i style="--level:94%"></i>
+            </article>
+            <article class="ops-card">
+              <span>Funding readiness</span><strong data-count="91">0</strong><small>3 files need action</small><i style="--level:91%"></i>
+            </article>
+            <article class="ops-card">
+              <span>Manager visibility</span><strong data-count="88">0</strong><small>12 events prioritized</small><i style="--level:88%"></i>
+            </article>
+            <article class="ops-card">
+              <span>Workflow consistency</span><strong data-count="96">0</strong><small>Across active reviews</small><i style="--level:96%"></i>
+            </article>
+          </div>
+          <div class="ops-feed">
+            <div><time>09:42</time><i class="blue"></i><span><b>Deal jacket received</b><small>46 documents entered review</small></span><em>Reviewing</em></div>
+            <div><time>09:43</time><i class="gold"></i><span><b>Disclosure variance surfaced</b><small>Manager attention recommended</small></span><em>Priority</em></div>
+            <div><time>09:49</time><i class="green"></i><span><b>Corrective action recorded</b><small>Finding closed with history preserved</small></span><em>Resolved</em></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="leadership-cinematic" id="company">
       <div class="shell leadership-head reveal">
         <div>
@@ -595,17 +694,64 @@
       </div>
     </section>
 
+    <section class="executive-value section-pad" id="value-model">
+      <div class="shell">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Editable value model</div>
+            <h2>Model the cost of operational friction.</h2>
+          </div>
+          <p>This is an illustrative planning tool, not a performance claim. Adjust the assumptions to frame a pilot around measurable outcomes.</p>
+        </div>
+
+        <div class="value-model reveal">
+          <div class="value-controls">
+            <label><span>Monthly retail deals</span><b id="roi-deals-value">180</b><input id="roi-deals" type="range" min="50" max="800" step="10" value="180"></label>
+            <label><span>Review minutes per deal</span><b id="roi-minutes-value">18</b><input id="roi-minutes" type="range" min="5" max="60" value="18"></label>
+            <label><span>Estimated loaded hourly cost</span><b id="roi-rate-value">$45</b><input id="roi-rate" type="range" min="25" max="120" step="5" value="45"></label>
+            <label><span>Potential review-time reduction</span><b id="roi-reduction-value">35%</b><input id="roi-reduction" type="range" min="10" max="60" step="5" value="35"></label>
+          </div>
+          <div class="value-output">
+            <span>Illustrative annual capacity value</span>
+            <strong id="roi-output">$10,206</strong>
+            <p id="roi-hours">227 staff hours potentially redirected annually</p>
+            <div class="value-breakdown">
+              <div><small>Monthly review hours</small><b id="roi-monthly-hours">54</b></div>
+              <div><small>Hours redirected</small><b id="roi-saved-hours">19</b></div>
+              <div><small>Annualized</small><b id="roi-annual-label">$10.2K</b></div>
+            </div>
+            <small>Excludes avoided incidents, funding improvements, gross impact, and other unproven value streams.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
 <section class="section-pad cta-section" id="demo">
       <div class="shell cta-card reveal">
         <div class="cta-star" aria-hidden="true">✦</div>
         <div class="section-kicker">Private demonstrations available</div>
-        <h2>Better decisions build better dealerships.</h2>
+        <h2>Most software tells you what happened.<br><strong>ENGENIX helps change what happens next.</strong></h2>
         <p>See how ENGENIX helps your team upload deal jackets, surface potential compliance concerns, address findings, and maintain a clearer audit history.</p>
-        <a class="button button-primary button-large" href="demo.html">Request a Private Demo</a>
+        <a class="button button-primary button-large" href="demo.html">Request Private Access</a>
         <small>Demonstrations are tailored to your dealership’s current workflow and compliance process.</small>
       </div>
     </section>
   </main>
+
+  <section class="command-footer">
+    <div class="shell command-grid">
+      <div class="command-brand">
+        <span class="section-kicker">ENGENIX SYSTEM STATUS</span>
+        <h2>Operational confidence,<br>built into the workflow.</h2>
+      </div>
+      <div class="command-status">
+        <div><span>Compliance Engine</span><b><i></i> ONLINE</b></div>
+        <div><span>Decision Infrastructure</span><b><i></i> ACTIVE</b></div>
+        <div><span>Private Rollout</span><b><i></i> OPEN</b></div>
+        <div><span>Platform Expansion</span><b class="learning"><i></i> BUILDING</b></div>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="shell footer-grid">
@@ -618,7 +764,7 @@
         <a href="compliance.html">Compliance Intelligence</a>
         <a href="security.html">Security</a>
         <a href="company.html">Company</a>
-        <a href="demo.html">Request a Demo</a>
+        <a href="demo.html">Request Private Access</a>
       </div>
       <div class="footer-legal">
         <span>ENGEN LLC d/b/a ENGENIX</span>
@@ -632,7 +778,7 @@
   
   <button class="private-demo-dock" id="private-access-trigger" type="button" aria-controls="private-access-panel" aria-expanded="false">
     <span class="dock-status"><i></i> Private access</span>
-    <strong>Request a Demo</strong>
+    <strong>Request Private Access</strong>
     <small>Tailored to your rooftop</small>
     <b aria-hidden="true">↗</b>
   </button>
@@ -644,7 +790,7 @@
       <span class="micro">Private access</span>
       <h2 id="private-access-title">See ENGENIX inside your dealership workflow.</h2>
       <p>Tell us about your rooftop. We will tailor the demonstration around your current compliance process, deal volume, and operating environment.</p>
-      <form class="quick-demo-form" action="#" data-google-form="true">
+      <form class="quick-demo-form" id="quick-demo-form" action="/api/demo" method="post" novalidate>
         <label><span>Name</span><input type="text" name="name" autocomplete="name" required></label>
         <label><span>Dealership or group</span><input type="text" name="company" required></label>
         <label><span>Work email</span><input type="email" name="email" autocomplete="email" required></label>
@@ -670,7 +816,5 @@
 
 
   <script src="script.js"></script>
-  <iframe id="engenix-form-transport" name="engenix-form-transport"
-    title="Form submission transport" hidden aria-hidden="true"></iframe>
 </body>
 </html>
