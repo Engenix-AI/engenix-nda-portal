@@ -1402,3 +1402,73 @@ body.private-access-open { overflow:hidden; }
 @keyframes ringpulse{50%{transform:scale(1.08);opacity:.55}}@keyframes ringspin{to{transform:rotate(360deg)}}@keyframes ringspinrev{to{transform:rotate(-360deg)}}
 @media(max-width:620px){.abstract-readout{grid-template-columns:1fr}.abstract-core{height:330px}.ring-three{width:260px;height:260px}.ring-two{width:190px;height:190px}.signal-node{font-size:.46rem}.node-a{top:58px;left:18px}.node-b{top:78px;right:16px}.node-c{bottom:70px;left:18px}.node-d{bottom:54px;right:16px}}
 @media(prefers-reduced-motion:reduce){.signal-ring{animation:none!important}}
+
+
+/* =========================================================
+   BLACK DIAMOND V5 — FOUNDING DEALERSHIP NETWORK
+   Working solution. Category-forming invitation.
+   ========================================================= */
+.founding-signal {
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--gold-light);
+  font-size:.62rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.founding-signal i {
+  width:7px;height:7px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 16px rgba(212,167,58,.8);
+}
+.quick-demo-form textarea {
+  width:100%;
+  min-height:112px;
+  padding:14px 15px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:10px;
+  background:#05070b;
+  color:#fff;
+  font:inherit;
+  line-height:1.45;
+  resize:vertical;
+  outline:none;
+}
+.quick-demo-form textarea:focus {
+  border-color:rgba(212,167,58,.65);
+  box-shadow:0 0 0 3px rgba(212,167,58,.08);
+}
+.quick-demo-form textarea::placeholder { color:#5f6977; }
+.quick-form-status {
+  min-height:22px;
+  margin:0;
+  color:#8f99a8;
+  font-size:.76rem;
+}
+.quick-form-status.success {
+  padding:18px;
+  border:1px solid rgba(104,201,155,.28);
+  border-radius:12px;
+  background:rgba(104,201,155,.07);
+  color:var(--success);
+}
+.quick-form-status.error { color:#ff8d91; }
+.early-access-close::after {
+  content:"FOUNDING DEALERSHIP NETWORK";
+  position:absolute;
+  right:-5vw;
+  bottom:4vw;
+  color:rgba(255,255,255,.018);
+  font-size:clamp(4rem,10vw,11rem);
+  font-weight:850;
+  letter-spacing:-.06em;
+  white-space:nowrap;
+  pointer-events:none;
+}
+.discovery-line strong {
+  text-shadow:0 0 22px rgba(212,167,58,.22);
+}
+@media(max-width:620px){
+  .early-access-close::after{display:none}
+}

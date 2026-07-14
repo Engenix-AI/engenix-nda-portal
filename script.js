@@ -223,7 +223,7 @@ window.addEventListener('resize', () => {
     const status = form.querySelector('.quick-form-status, .form-status');
     const button = form.querySelector('button[type="submit"]');
     const label = button?.querySelector('span');
-    const defaultLabel = label?.textContent || 'Request Private Access';
+    const defaultLabel = label?.textContent || 'Become a Founding Dealership';
 
     const setStatus = (message, type = '') => {
       if (!status) return;
@@ -242,7 +242,7 @@ window.addEventListener('resize', () => {
 
       if (button) button.disabled = true;
       if (label) label.textContent = 'Sending securely…';
-      setStatus('Securely sending your private access request…');
+      setStatus('Securely submitting your founding dealership request…');
 
       try {
         const payload = Object.fromEntries(new FormData(form).entries());
@@ -267,10 +267,10 @@ window.addEventListener('resize', () => {
 
         form.reset();
         setStatus(
-          'Private access requested. The ENGENIX team will contact you shortly.',
+          'Founding status received. A member of the ENGENIX leadership team will contact you shortly.',
           'success'
         );
-        if (label) label.textContent = 'Access Requested';
+        if (label) label.textContent = 'Founding Request Received';
 
         window.setTimeout(() => {
           if (label) label.textContent = defaultLabel;

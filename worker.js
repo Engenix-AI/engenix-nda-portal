@@ -23,6 +23,8 @@ export default {
 
       try {
         const body = await request.json();
+
+        // Quietly accept bot honeypot submissions.
         if (clean(body.website, 200)) return json({ ok: true });
 
         const payload = {
@@ -34,10 +36,12 @@ export default {
           monthlyVolume: clean(body.monthlyVolume, 80),
           rooftops: clean(body.rooftops, 80),
           dms: clean(body.dms, 100),
+          briefing: clean(body.briefing, 120),
           challenge: clean(body.challenge, 1800),
           source: clean(body.source, 120),
           page: clean(body.page, 500),
-          userAgent: clean(body.userAgent, 500)
+          userAgent: clean(body.userAgent, 500),
+          submittedAtClient: clean(body.submittedAtClient, 80)
         };
 
         if (!payload.name || !payload.company || !payload.email || !payload.role || !payload.challenge) {
@@ -49,7 +53,7 @@ export default {
         }
 
         const form = new URLSearchParams();
-        Object.entries(payload).forEach(([key,value]) => form.set(key,value));
+        Object.entries(payload).forEach(([key, value]) => form.set(key, value));
 
         const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
           method: "POST",
@@ -59,6 +63,7 @@ export default {
         });
 
         const text = await response.text();
+
         if (!response.ok) {
           console.error("Google relay error", response.status, text);
           return json({ ok: false, error: "The request could not be delivered." }, 502);
@@ -66,7 +71,7 @@ export default {
 
         return json({ ok: true });
       } catch (error) {
-        console.error("ENGENIX form error", error);
+        console.error("ENGENIX founding form error", error);
         return json({ ok: false, error: "Unexpected request error." }, 500);
       }
     }
