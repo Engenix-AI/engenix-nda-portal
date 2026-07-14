@@ -2237,3 +2237,51 @@ body.private-access-open .global-founding-dock {
     bottom: calc(14px + env(safe-area-inset-bottom));
   }
 }
+
+
+/* =========================================================
+   LAUNCH CUT — CHAPTER LANDING FIX
+   Hash links now arrive at composed opening frames.
+   ========================================================= */
+:root {
+  --chapter-offset-desktop: 118px;
+  --chapter-offset-mobile: 92px;
+}
+
+.chapter-anchor {
+  scroll-margin-top: var(--chapter-offset-desktop);
+}
+
+/* Give linked chapters a clean first-frame buffer beneath the fixed header. */
+#system {
+  scroll-margin-top: 0;
+}
+#intelligence,
+#why {
+  scroll-margin-top: 112px;
+}
+
+/* Invisible anchor breathing room without adding visible content. */
+#intelligence::before,
+#why::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: -1px;
+  pointer-events: none;
+}
+
+@media (max-width: 1180px) {
+  .chapter-anchor,
+  #intelligence,
+  #why {
+    scroll-margin-top: var(--chapter-offset-mobile);
+  }
+}
+
+@media (max-width: 620px) {
+  #intelligence,
+  #why {
+    scroll-margin-top: 84px;
+  }
+}

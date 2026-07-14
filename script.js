@@ -454,3 +454,74 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
 })();
 
 
+
+
+// ENGENIX LAUNCH CUT — CINEMATIC CHAPTER NAVIGATION
+(() => {
+  const supportedHashes = new Set(['#system', '#intelligence', '#why']);
+
+  const getOffset = () => {
+    const header = document.querySelector('.site-header');
+    const headerHeight = header?.getBoundingClientRect().height || 84;
+    return headerHeight + (window.innerWidth <= 620 ? 14 : 24);
+  };
+
+  const moveToChapter = (hash, behavior = 'smooth') => {
+    if (!supportedHashes.has(hash)) return false;
+
+    const target = document.querySelector(hash);
+    if (!target) return false;
+
+    const top = Math.max(
+      0,
+      window.scrollY + target.getBoundingClientRect().top - getOffset()
+    );
+
+    window.scrollTo({ top, behavior });
+    return true;
+  };
+
+  // Same-page chapter links receive a deliberate offset instead of native hash jumping.
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+
+    const url = new URL(link.href, window.location.href);
+    const sameDocument =
+      url.origin === window.location.origin &&
+      url.pathname === window.location.pathname;
+
+    if (!sameDocument || !supportedHashes.has(url.hash)) return;
+
+    event.preventDefault();
+    history.pushState(null, '', url.hash);
+    document.querySelector('.site-header')?.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
+    document.querySelector('.nav-toggle')?.setAttribute('aria-expanded', 'false');
+
+    moveToChapter(url.hash);
+  });
+
+  // Direct visits from secondary pages wait until the cinematic loader has cleared.
+  const placeInitialHash = () => {
+    if (!supportedHashes.has(window.location.hash)) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const waitForLoader = () => {
+      const loader = document.getElementById('site-loader');
+      if (loader && !loader.classList.contains('is-hidden')) {
+        window.setTimeout(waitForLoader, 120);
+        return;
+      }
+
+      window.requestAnimationFrame(() => {
+        moveToChapter(window.location.hash, reducedMotion ? 'auto' : 'smooth');
+      });
+    };
+
+    waitForLoader();
+  };
+
+  window.addEventListener('load', placeInitialHash);
+  window.addEventListener('hashchange', () => moveToChapter(window.location.hash));
+})();
