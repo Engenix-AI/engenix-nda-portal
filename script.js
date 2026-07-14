@@ -360,36 +360,41 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
   counters.forEach(el => counterObserver.observe(el));
 })();
 
-
-
-
-// BLACK DIAMOND V2.2: subtle cinematic depth without a heavy animation library.
+// BLACK DIAMOND: transparent executive value model.
 (() => {
-  const hero = document.querySelector('.cinematic-hero');
-  const visual = hero?.querySelector('.hero-visual');
-  const copy = hero?.querySelector('.hero-copy');
-  if (!hero || !visual || !copy) return;
+  const deals = document.getElementById('roi-deals');
+  const minutes = document.getElementById('roi-minutes');
+  const rate = document.getElementById('roi-rate');
+  const reduction = document.getElementById('roi-reduction');
+  if (!deals || !minutes || !rate || !reduction) return;
 
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) return;
+  const money = value => new Intl.NumberFormat('en-US', {
+    style:'currency', currency:'USD', maximumFractionDigits:0
+  }).format(value);
 
-  let ticking = false;
+  const compact = value => new Intl.NumberFormat('en-US', {
+    notation:'compact', maximumFractionDigits:1
+  }).format(value);
 
-  const render = () => {
-    const rect = hero.getBoundingClientRect();
-    const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
-    visual.style.transform = `translate3d(0, ${progress * 34}px, 0) scale(${1 - progress * .035})`;
-    copy.style.transform = `translate3d(0, ${progress * 18}px, 0)`;
-    copy.style.opacity = String(1 - progress * .32);
-    ticking = false;
+  const update = () => {
+    const d = Number(deals.value), m = Number(minutes.value);
+    const r = Number(rate.value), pct = Number(reduction.value) / 100;
+    const monthlyHours = d * m / 60;
+    const savedMonthly = monthlyHours * pct;
+    const annualHours = savedMonthly * 12;
+    const annualValue = annualHours * r;
+
+    document.getElementById('roi-deals-value').textContent = d;
+    document.getElementById('roi-minutes-value').textContent = m;
+    document.getElementById('roi-rate-value').textContent = money(r);
+    document.getElementById('roi-reduction-value').textContent = `${Math.round(pct*100)}%`;
+    document.getElementById('roi-output').textContent = money(annualValue);
+    document.getElementById('roi-hours').textContent = `${Math.round(annualHours)} staff hours potentially redirected annually`;
+    document.getElementById('roi-monthly-hours').textContent = Math.round(monthlyHours);
+    document.getElementById('roi-saved-hours').textContent = Math.round(savedMonthly);
+    document.getElementById('roi-annual-label').textContent = `$${compact(annualValue)}`;
   };
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(render);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  render();
+  [deals,minutes,rate,reduction].forEach(input => input.addEventListener('input', update));
+  update();
 })();
