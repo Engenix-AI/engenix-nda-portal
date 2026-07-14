@@ -437,29 +437,6 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
 })();
 
 
-// BLACK DIAMOND V6.1 — MENU HOTFIX
-// The toggle itself is bound once by the primary navigation controller above.
-(() => {
-  const header = document.querySelector('.site-header');
-  const toggle = document.querySelector('.nav-toggle');
-  if (!header || !toggle) return;
-
-  const closeMenu = () => {
-    header.classList.remove('menu-open');
-    document.body.classList.remove('menu-open');
-    toggle.setAttribute('aria-expanded', 'false');
-  };
-
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeMenu();
-  });
-})();
-
-
 // BLACK DIAMOND V7 — PERSISTENT CONVERSION SPINE
 (() => {
   const dock = document.querySelector('.global-founding-dock');
@@ -474,4 +451,38 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
   }, { threshold: .28 });
 
   observer.observe(ending);
+})();
+
+
+// ENGENIX LAUNCH CUT — FINAL INTERACTION HARDENING
+(() => {
+  const header = document.querySelector('.site-header');
+  const toggle = document.querySelector('.nav-toggle');
+  if (!header || !toggle) return;
+
+  if (!toggle.dataset.launchBound) {
+    toggle.dataset.launchBound = 'true';
+
+    toggle.addEventListener('click', event => {
+      event.preventDefault();
+      const open = !header.classList.contains('menu-open');
+      header.classList.toggle('menu-open', open);
+      document.body.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  const close = () => {
+    header.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', close, { once: false });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1180) close();
+  }, { passive: true });
 })();

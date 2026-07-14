@@ -1,49 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05070b" />
   <title>Risk Engine | ENGENIX</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <header class="site-header" id="top">
+<body class="launch-page launch-compliance">
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cinematic-vignette" aria-hidden="true"></div>
+
+  <header class="site-header scrolled" id="top">
     <div class="shell nav-shell">
-      <a href="index.html" class="brand"><img src="engenix-logo.png" alt="ENGENIX"></a>
+      <a href="index.html" class="brand" aria-label="ENGENIX home">
+        <img src="engenix-logo.png" alt="ENGENIX" />
+      </a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span>
       </button>
 
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="index.html#platform" data-nav="system">The System</a>
-        <a href="compliance.html" data-nav="risk" aria-current="page">Risk Engine</a>
-        <a href="index.html#intelligence" data-nav="model">Live Model</a>
-        <a href="index.html#why" data-nav="principle">The Principle</a>
-        <a href="security.html" data-nav="security">Security</a>
-        <a href="company.html" data-nav="operators">Operators</a>
+        <a href="index.html#platform">The System</a>
+        <a href="compliance.html" aria-current="page">Risk Engine</a>
+        <a href="index.html#intelligence">Live Model</a>
+        <a href="index.html#why">The Principle</a>
+        <a href="security.html">Security</a>
+        <a href="company.html">Operators</a>
       </nav>
       <a class="button button-small button-primary nav-cta" href="demo.html">Become a Founding Dealership</a>
     </div>
   </header>
 
-  <main class="section-pad">
-    <div class="shell narrow center">
-      <h1>Risk Engine</h1>
-      <p class="hero-lede">The Compliance Intelligence module is currently the live production experience. The working solution is demonstrated privately to founding dealerships so the implementation and operating logic remain protected.</p>
-      <a class="button button-primary" href="index.html#compliance">See it on the homepage</a>
-      <a class="button button-secondary" href="demo.html" style="margin-left:12px">Become a Founding Dealership</a>
-    </div>
+  <main class="chapter-page">
+    <section class="chapter-hero cinematic-scene">
+      <div class="chapter-light" aria-hidden="true"></div>
+      <div class="shell chapter-grid">
+        <div class="reveal">
+          <div class="section-kicker">Compliance Intelligence</div>
+          <h1>Risk rarely arrives loudly.</h1>
+          <p>ENGENIX helps surface what ordinary systems miss, then preserves the decision trail that follows.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="demo.html">Become a Founding Dealership</a>
+            <a class="button button-secondary" href="index.html">Return to the Briefing</a>
+          </div>
+        </div>
+        <div class="chapter-sequence reveal" data-delay="120">
+          <div><span>01</span><strong>Signals become findings.</strong></div>
+          <div><span>02</span><strong>Findings become action.</strong></div>
+          <div><span>03</span><strong>Action becomes operational memory.</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter-close cinematic-scene">
+      <div class="shell reveal">
+        <span class="section-kicker">Operational Intelligence</span>
+        <h2>The category is forming.<br><strong>Help establish the standard.</strong></h2>
+        <a class="button button-primary button-large" href="demo.html">Become a Founding Dealership</a>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer launch-footer">
     <div class="shell footer-grid">
       <div class="footer-brand">
-        <img src="engenix-logo.png" alt="ENGENIX">
+        <img src="engenix-logo.png" alt="ENGENIX" />
         <p>The Operating Intelligence Layer for Automotive Retail.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html#platform">The System</a>
+        <a href="compliance.html">Risk Engine</a>
+        <a href="security.html">Security</a>
+        <a href="company.html">Operators</a>
+      </div>
+      <div class="footer-legal">
+        <span>ENGEN LLC d/b/a ENGENIX</span>
+        <span>© <span id="year"></span> ENGENIX</span>
       </div>
     </div>
   </footer>
-  
+
   <button class="private-demo-dock global-founding-dock" id="private-access-trigger" type="button"
           aria-controls="private-access-panel" aria-expanded="false">
     <span class="dock-status"><i></i> FOUNDING NETWORK</span>
@@ -105,6 +143,7 @@
       <small class="private-access-note">No generic sales call. Founding conversations are led around your operation and the standard you want to help establish.</small>
     </div>
   </aside>
+
   <script src="script.js"></script>
 </body>
 </html>
