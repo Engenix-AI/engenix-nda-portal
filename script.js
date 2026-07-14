@@ -384,19 +384,6 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
 
 // BLACK DIAMOND V6 — SCENE DIRECTION + CROSS-PAGE NAV HARDENING
 (() => {
-  const siteHeader = document.querySelector('.site-header');
-  const menuToggle = document.querySelector('.nav-toggle');
-
-  // Rebind safely even on secondary pages where earlier versions omitted script setup.
-  if (siteHeader && menuToggle && !menuToggle.dataset.v6Bound) {
-    menuToggle.dataset.v6Bound = 'true';
-    menuToggle.addEventListener('click', () => {
-      const open = siteHeader.classList.toggle('menu-open');
-      document.body.classList.toggle('menu-open', open);
-      menuToggle.setAttribute('aria-expanded', String(open));
-    });
-  }
-
   const scenes = [...document.querySelectorAll('.cinematic-scene')];
   if (!scenes.length) return;
 
@@ -447,4 +434,27 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
     }, { passive:true });
     direct();
   }
+})();
+
+
+// BLACK DIAMOND V6.1 — MENU HOTFIX
+// The toggle itself is bound once by the primary navigation controller above.
+(() => {
+  const header = document.querySelector('.site-header');
+  const toggle = document.querySelector('.nav-toggle');
+  if (!header || !toggle) return;
+
+  const closeMenu = () => {
+    header.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
 })();
