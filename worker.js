@@ -1,4 +1,4 @@
-const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzD3yZvd6TmaI9A-dC8jVUyeBO-Ws1MsOSYvlS_OqVvVgU5ZQcSRGVRX2wgZ47-tHujxQ/exec";
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywIYAIWJGqvBxnmFaiHaIYneGiafeb2KKKOZGnWPidMAqecdy-YwQpwiPEzsH9CB41vQ/exec";
 
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
