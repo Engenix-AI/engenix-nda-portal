@@ -360,41 +360,23 @@ document.querySelectorAll('[data-open-private-access]').forEach(button => {
   counters.forEach(el => counterObserver.observe(el));
 })();
 
-// BLACK DIAMOND: transparent executive value model.
+
+
+// BLACK DIAMOND V3 EDITOR'S CUT
 (() => {
-  const deals = document.getElementById('roi-deals');
-  const minutes = document.getElementById('roi-minutes');
-  const rate = document.getElementById('roi-rate');
-  const reduction = document.getElementById('roi-reduction');
-  if (!deals || !minutes || !rate || !reduction) return;
-
-  const money = value => new Intl.NumberFormat('en-US', {
-    style:'currency', currency:'USD', maximumFractionDigits:0
-  }).format(value);
-
-  const compact = value => new Intl.NumberFormat('en-US', {
-    notation:'compact', maximumFractionDigits:1
-  }).format(value);
-
-  const update = () => {
-    const d = Number(deals.value), m = Number(minutes.value);
-    const r = Number(rate.value), pct = Number(reduction.value) / 100;
-    const monthlyHours = d * m / 60;
-    const savedMonthly = monthlyHours * pct;
-    const annualHours = savedMonthly * 12;
-    const annualValue = annualHours * r;
-
-    document.getElementById('roi-deals-value').textContent = d;
-    document.getElementById('roi-minutes-value').textContent = m;
-    document.getElementById('roi-rate-value').textContent = money(r);
-    document.getElementById('roi-reduction-value').textContent = `${Math.round(pct*100)}%`;
-    document.getElementById('roi-output').textContent = money(annualValue);
-    document.getElementById('roi-hours').textContent = `${Math.round(annualHours)} staff hours potentially redirected annually`;
-    document.getElementById('roi-monthly-hours').textContent = Math.round(monthlyHours);
-    document.getElementById('roi-saved-hours').textContent = Math.round(savedMonthly);
-    document.getElementById('roi-annual-label').textContent = `$${compact(annualValue)}`;
+  const hero = document.querySelector('.cinematic-hero');
+  const visual = hero?.querySelector('.hero-visual');
+  const copy = hero?.querySelector('.hero-copy');
+  if (!hero || !visual || !copy || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let ticking = false;
+  const render = () => {
+    const rect = hero.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+    visual.style.transform = `translate3d(0, ${p*30}px, 0) scale(${1-p*.03})`;
+    copy.style.transform = `translate3d(0, ${p*15}px, 0)`;
+    copy.style.opacity = String(1-p*.28);
+    ticking = false;
   };
-
-  [deals,minutes,rate,reduction].forEach(input => input.addEventListener('input', update));
-  update();
+  addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(render); ticking = true; } }, {passive:true});
+  render();
 })();

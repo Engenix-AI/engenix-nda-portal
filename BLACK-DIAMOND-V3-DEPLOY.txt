@@ -1,0 +1,17 @@
+ENGENIX BLACK DIAMOND V3 — EDITOR'S CUT
+
+Homepage flow:
+Hero → Blind Spots → Silent Interlude → One Deal → Command Center → The Principle → Founding Operators → Platform Expansion → Trust → Private Rollout → Command Footer
+
+Removed:
+- Intelligence gap
+- Hidden exposure
+- Feature grid
+- Workflow strip
+- Duplicate pressure scene
+- Duplicate operations center
+- Duplicate roadmap/vision
+- ROI calculator
+
+Fast mobile deploy:
+Replace index.html, styles.css, and script.js.
