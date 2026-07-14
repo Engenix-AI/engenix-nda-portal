@@ -226,8 +226,7 @@ blockquote { margin: 26px 0 0; font-size: clamp(2.7rem, 5vw, 5.3rem); letter-spa
 .reveal.visible { opacity: 1; transform: none; }
 
 @media (max-width: 1020px) {
-  .nav-links { gap: 22px; }
-  .nav-links a { font-size: .86rem; }
+  .nav-links { gap: 18px; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-copy { max-width: 850px; }
   .hero-visual { max-width: 900px; }
