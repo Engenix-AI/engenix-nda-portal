@@ -15,15 +15,15 @@ const year = document.getElementById('year');
 
   const status = document.getElementById('loader-status');
   const messages = [
-    'Initializing operational intelligence',
-    'Loading compliance engine',
-    'Verifying secure workspace',
-    'Compliance intelligence ready'
+    'Establishing secure session',
+    'Authenticating operator access',
+    'Risk engine online',
+    'Entry authorized'
   ];
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const duration = reducedMotion ? 300 : 3250;
-  const messageStep = reducedMotion ? 60 : 650;
+  const duration = reducedMotion ? 300 : 3900;
+  const messageStep = reducedMotion ? 60 : 760;
   let closed = false;
 
   messages.forEach((message, index) => {

@@ -1,0 +1,10 @@
+ENGENIX BLACK DIAMOND V4 — THE THRESHOLD
+
+Fast deploy:
+Replace index.html, styles.css, and script.js.
+
+This release:
+- turns the loader into authorized entry
+- replaces the public GUI with abstract operational intelligence
+- adds a threshold scene
+- preserves curiosity and protects proprietary product mechanics
