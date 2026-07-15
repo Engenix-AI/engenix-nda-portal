@@ -4213,3 +4213,506 @@ html[data-theme="light"] .expansion-rail p {
     min-width: min(76vw, 292px);
   }
 }
+
+/* =========================================================
+   MOBILE UNBOXING V2.2 — SIGNAL REVEAL
+   Replaces the generic capability ticker with a product-value
+   sequence and brings Signal White back into one disciplined
+   visual system.
+   ========================================================= */
+
+.signal-reveal {
+  position: relative;
+  overflow: hidden;
+  padding: 132px 0 118px;
+  border-block: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 84% 18%, rgba(75,151,241,.10), transparent 28%),
+    radial-gradient(circle at 18% 80%, rgba(231,121,36,.07), transparent 32%),
+    #05080d;
+}
+
+.signal-reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .30;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 82%, transparent);
+}
+
+.signal-reveal-intro {
+  position: relative;
+  z-index: 2;
+  max-width: 920px;
+}
+
+.signal-reveal-intro h2 {
+  max-width: 13ch;
+  margin: 18px 0 24px;
+  font-size: clamp(3rem, 5.7vw, 6rem);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+
+.signal-reveal-intro h2 strong {
+  color: var(--text);
+}
+
+.signal-reveal-intro p {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+}
+
+.signal-reveal-rail {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 62px;
+}
+
+.signal-card {
+  position: relative;
+  min-height: 500px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(75,151,241,.13), transparent 34%),
+    linear-gradient(155deg, rgba(255,255,255,.055), transparent 46%),
+    #090d14;
+  box-shadow: 0 30px 86px rgba(0,0,0,.23);
+}
+
+.signal-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .7;
+  background: linear-gradient(145deg, transparent 54%, rgba(75,151,241,.07));
+}
+
+.signal-card[data-signal="protect"]::before {
+  background: linear-gradient(145deg, transparent 50%, rgba(231,121,36,.09));
+}
+
+.signal-card[data-signal="act"]::before {
+  background: linear-gradient(145deg, transparent 50%, rgba(104,201,155,.08));
+}
+
+.signal-card[data-signal="remember"]::before {
+  background: linear-gradient(145deg, transparent 50%, rgba(241,207,116,.08));
+}
+
+.signal-card-top,
+.signal-card-copy,
+.signal-card-readout {
+  position: relative;
+  z-index: 1;
+}
+
+.signal-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.signal-card-top > span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  color: var(--gold-light);
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.signal-card-top small {
+  color: var(--blue-light);
+  font-size: .67rem;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+
+.signal-card-copy {
+  margin-top: auto;
+  padding: 100px 0 34px;
+}
+
+.signal-card-copy h3 {
+  max-width: 12ch;
+  margin: 0 0 20px;
+  font-size: clamp(1.7rem, 2.3vw, 2.65rem);
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.signal-card-copy p {
+  color: #929cab;
+  font-size: .92rem;
+  line-height: 1.65;
+}
+
+.signal-card-readout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.10);
+}
+
+.signal-card-readout span {
+  color: #737e8e;
+  font-size: .62rem;
+  letter-spacing: .15em;
+}
+
+.signal-card-readout strong {
+  color: var(--gold-light);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-align: right;
+}
+
+.signal-sequence {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 50px;
+  color: #657182;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+
+.signal-sequence i {
+  color: rgba(241,207,116,.62);
+  font-style: normal;
+}
+
+.signal-sequence span.is-active {
+  color: var(--gold-light);
+}
+
+html[data-theme="light"] .signal-reveal {
+  color: #182333;
+  background:
+    radial-gradient(circle at 83% 15%, rgba(22,136,212,.13), transparent 31%),
+    radial-gradient(circle at 16% 84%, rgba(200,146,46,.10), transparent 31%),
+    linear-gradient(180deg, #f7faff 0%, #eaf1f8 100%);
+}
+
+html[data-theme="light"] .signal-reveal::before {
+  opacity: .45;
+  background-image:
+    linear-gradient(rgba(31,48,73,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,48,73,.045) 1px, transparent 1px);
+}
+
+html[data-theme="light"] .signal-reveal-intro h2,
+html[data-theme="light"] .signal-reveal-intro h2 strong,
+html[data-theme="light"] .signal-card-copy h3 {
+  color: #172334;
+}
+
+html[data-theme="light"] .signal-reveal-intro p,
+html[data-theme="light"] .signal-card-copy p {
+  color: #5d6b7d;
+}
+
+html[data-theme="light"] .signal-card {
+  border-color: rgba(31,48,73,.12);
+  background:
+    radial-gradient(circle at 82% 12%, rgba(22,136,212,.10), transparent 34%),
+    linear-gradient(155deg, rgba(255,255,255,.98), rgba(246,249,253,.92));
+  box-shadow: 0 30px 78px rgba(55,75,101,.13);
+}
+
+html[data-theme="light"] .signal-card::before {
+  opacity: .55;
+}
+
+html[data-theme="light"] .signal-card-top > span {
+  border-color: rgba(31,48,73,.14);
+  color: #9c6b16;
+  background: rgba(255,255,255,.72);
+}
+
+html[data-theme="light"] .signal-card-top small {
+  color: #0e75c4;
+}
+
+html[data-theme="light"] .signal-card-readout {
+  border-color: rgba(31,48,73,.11);
+}
+
+html[data-theme="light"] .signal-card-readout span {
+  color: #758297;
+}
+
+html[data-theme="light"] .signal-card-readout strong {
+  color: #0d609d;
+}
+
+html[data-theme="light"] .signal-sequence {
+  color: #8b97a7;
+}
+
+html[data-theme="light"] .signal-sequence span.is-active {
+  color: #0e75c4;
+}
+
+/* Signal White should remain Signal White through the founding close. */
+html[data-theme="light"] .early-access-close {
+  color: #172334;
+  background:
+    radial-gradient(circle at 76% 28%, rgba(22,136,212,.15), transparent 31%),
+    radial-gradient(circle at 18% 76%, rgba(200,146,46,.11), transparent 34%),
+    linear-gradient(180deg, #edf4fb 0%, #f8fbff 100%);
+}
+
+html[data-theme="light"] .early-access-close::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .42;
+  background-image:
+    linear-gradient(rgba(31,48,73,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,48,73,.045) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 82%, transparent);
+}
+
+html[data-theme="light"] .early-access-close .early-access-bg {
+  opacity: .9;
+  background:
+    radial-gradient(circle at 72% 35%, rgba(22,136,212,.13), transparent 29%),
+    radial-gradient(circle at 24% 70%, rgba(200,146,46,.09), transparent 33%);
+}
+
+html[data-theme="light"] .early-access-close h2,
+html[data-theme="light"] .early-access-close h2 strong {
+  color: #172334;
+  text-shadow: none;
+}
+
+html[data-theme="light"] .early-access-close p {
+  color: #536277;
+}
+
+html[data-theme="light"] .early-access-close small {
+  color: #6e7c90;
+}
+
+html[data-theme="light"] .early-access-close .section-kicker {
+  color: #0e75c4;
+}
+
+html[data-theme="light"] .early-access-close .button-primary {
+  color: #fff;
+  border-color: #172334;
+  background: #172334;
+  box-shadow: 0 18px 45px rgba(31,48,73,.18);
+}
+
+/* The accountability chapter should feel institutional, not toy-like. */
+@media (max-width: 820px) {
+  html[data-theme="light"] .trust-item:nth-child(1),
+  html[data-theme="light"] .trust-item:nth-child(2),
+  html[data-theme="light"] .trust-item:nth-child(3),
+  html[data-theme="light"] .trust-item:nth-child(4) {
+    border-color: rgba(31,48,73,.12);
+    background:
+      radial-gradient(circle at 85% 12%, rgba(22,136,212,.08), transparent 30%),
+      linear-gradient(155deg, #ffffff, #f1f5fa);
+    box-shadow: 0 30px 76px rgba(52,72,98,.13);
+  }
+
+  html[data-theme="light"] .trust-item::after {
+    content: "";
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    top: 22px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #1688d4, #d7a33d, transparent 88%);
+  }
+
+  html[data-theme="light"] .trust-item,
+  html[data-theme="light"] .trust-item h3,
+  html[data-theme="light"] .trust-item p,
+  html[data-theme="light"] .trust-item span {
+    color: #172334;
+  }
+
+  html[data-theme="light"] .trust-item p {
+    color: #5d6b7d;
+  }
+}
+
+@media (max-width: 820px) {
+  /* Give the mark breathing room above the progress signal. */
+  .site-header .nav-shell {
+    height: 80px;
+    padding: 7px 20px 10px;
+    border-radius: 24px;
+  }
+
+  .site-header .brand {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+  }
+
+  .site-header .brand img {
+    width: 140px;
+    max-height: 55px;
+    object-fit: contain;
+    transform: translateY(-1px);
+  }
+
+  .site-header .nav-shell::after {
+    left: 20px;
+    right: 20px;
+    bottom: 5px;
+    height: 2px;
+    border-radius: 999px;
+  }
+
+  /* Signal cards replace the old pill ticker with actual operating value. */
+  .signal-reveal {
+    padding: 104px 0 112px;
+  }
+
+  .signal-reveal-intro {
+    width: min(100% - 38px, 700px);
+    margin-inline: auto;
+  }
+
+  .signal-reveal-intro h2 {
+    max-width: 10ch;
+    font-size: clamp(2.85rem, 11.8vw, 4.8rem);
+  }
+
+  .signal-reveal-rail {
+    width: 100%;
+    display: flex;
+    gap: 14px;
+    margin-top: 48px;
+    padding: 0 18px 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 18px;
+    scrollbar-width: none;
+  }
+
+  .signal-reveal-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .signal-card {
+    flex: 0 0 calc(100vw - 42px);
+    min-width: 0;
+    min-height: min(70svh, 610px);
+    padding: 28px;
+    border-radius: 34px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    transition: border-color .35s ease, box-shadow .35s ease, background .35s ease;
+  }
+
+  .signal-card.is-active {
+    border-color: rgba(241,207,116,.38);
+    box-shadow: 0 38px 100px rgba(0,0,0,.31), 0 0 0 1px rgba(241,207,116,.05);
+  }
+
+  html[data-theme="light"] .signal-card.is-active {
+    border-color: rgba(22,136,212,.32);
+    box-shadow: 0 38px 90px rgba(51,77,108,.18), 0 0 0 1px rgba(22,136,212,.04);
+  }
+
+  .signal-card-copy {
+    padding-top: 120px;
+  }
+
+  .signal-card-copy h3 {
+    max-width: 11ch;
+    font-size: clamp(2.05rem, 8.4vw, 3.15rem);
+  }
+
+  .signal-card-copy p {
+    font-size: .96rem;
+  }
+
+  .signal-sequence {
+    width: min(100% - 36px, 700px);
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 15px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(8,11,17,.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    font-size: .58rem;
+    letter-spacing: .13em;
+  }
+
+  html[data-theme="light"] .signal-sequence {
+    border-color: rgba(31,48,73,.11);
+    background: rgba(255,255,255,.78);
+    box-shadow: 0 14px 38px rgba(52,72,98,.10);
+  }
+
+  /* Washed-out cards read as disabled in Signal White. Keep them fully present. */
+  html[data-theme="light"] .mobile-cinematic-frame {
+    opacity: 1 !important;
+  }
+
+  html[data-theme="light"] .leadership-principle p,
+  html[data-theme="light"] .section-head > p {
+    color: #536277;
+  }
+
+  /* Let the founding close breathe without the persistent rail covering its CTA. */
+  .early-access-close .global-founding-dock {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-header .brand img {
+    width: 132px;
+    max-height: 52px;
+  }
+
+  .signal-card {
+    flex-basis: calc(100vw - 30px);
+    padding: 26px;
+  }
+
+  .signal-card-readout {
+    align-items: flex-end;
+  }
+}

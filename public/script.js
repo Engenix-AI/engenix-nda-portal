@@ -668,6 +668,7 @@
   const root = document.documentElement;
 
   const frameSelectors = [
+    '.signal-card',
     '.blind-line',
     '.deal-console',
     '.intel-panel',
@@ -798,7 +799,51 @@
     expansionCleanup = () => rail.removeEventListener('scroll', onRailScroll);
   };
 
+  const buildSignalReveal = () => {
+    const rail = document.querySelector('.signal-reveal-rail');
+    const sequence = document.querySelector('.signal-sequence');
+    if (!rail || !sequence || !mobile.matches) return () => {};
+
+    const cards = Array.from(rail.querySelectorAll(':scope > .signal-card'));
+    const labels = Array.from(sequence.querySelectorAll('[data-signal-label]'));
+    if (!cards.length) return () => {};
+
+    let frame = 0;
+    const updateSignal = () => {
+      frame = 0;
+      const railRect = rail.getBoundingClientRect();
+      const focusX = railRect.left + rail.clientWidth * 0.5;
+      let activeIndex = 0;
+      let distance = Infinity;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const nextDistance = Math.abs(rect.left + rect.width / 2 - focusX);
+        if (nextDistance < distance) {
+          distance = nextDistance;
+          activeIndex = index;
+        }
+      });
+
+      cards.forEach((card, index) => card.classList.toggle('is-active', index === activeIndex));
+      labels.forEach((label, index) => label.classList.toggle('is-active', index === activeIndex));
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(updateSignal);
+    };
+
+    rail.addEventListener('scroll', onScroll, { passive: true });
+    updateSignal();
+    return () => rail.removeEventListener('scroll', onScroll);
+  };
+
+  let signalCleanup = null;
+
   const prepare = () => {
+    signalCleanup?.();
+    signalCleanup = buildSignalReveal();
     frames = frameSelectors.flatMap(selector => Array.from(document.querySelectorAll(selector)));
     frames.forEach(element => element.classList.add('mobile-cinematic-frame'));
     buildExpansionTabs();
@@ -841,12 +886,16 @@
   }, { passive: true });
   window.addEventListener('resize', () => {
     buildExpansionTabs();
+    signalCleanup?.();
+    signalCleanup = buildSignalReveal();
     schedule();
   }, { passive: true });
 
   if (typeof mobile.addEventListener === 'function') {
     mobile.addEventListener('change', () => {
       buildExpansionTabs();
+      signalCleanup?.();
+      signalCleanup = buildSignalReveal();
       schedule();
     });
   }
