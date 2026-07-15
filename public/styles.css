@@ -2285,3 +2285,202 @@ body.private-access-open .global-founding-dock {
     scroll-margin-top: 84px;
   }
 }
+
+/* =========================================================
+   MOBILE HERO CUT — FIRST-FRAME COMPOSITION
+   Desktop remains unchanged. Mobile becomes a designed scene,
+   not a compressed desktop layout.
+   ========================================================= */
+.hero-headline-mobile,
+.hero-lede-mobile {
+  display: none;
+}
+
+@media (max-width: 620px) {
+  .cinematic-hero {
+    min-height: 100svh;
+    padding-top: 104px;
+    padding-bottom: 116px;
+    align-items: start;
+  }
+
+  .cinematic-hero .shell {
+    width: min(100% - 34px, 1180px);
+  }
+
+  .cinematic-hero .hero-grid {
+    display: block;
+  }
+
+  .cinematic-hero .hero-copy {
+    max-width: none;
+  }
+
+  .hero-headline-desktop,
+  .hero-lede-desktop {
+    display: none;
+  }
+
+  .hero-headline-mobile,
+  .hero-lede-mobile {
+    display: block;
+  }
+
+  .cinematic-hero .eyebrow {
+    margin-bottom: 18px;
+    color: var(--gold-light);
+    font-size: clamp(.61rem, 2.75vw, .72rem);
+    line-height: 1.35;
+    letter-spacing: .155em;
+    white-space: nowrap;
+  }
+
+  .cinematic-hero .eyebrow span {
+    width: 28px;
+  }
+
+  .cinematic-hero .hero-headline-mobile {
+    max-width: 9.25ch;
+    margin: 0;
+    color: #aeb6c2;
+    font-size: clamp(2.8rem, 11.35vw, 3.45rem);
+    line-height: .93;
+    letter-spacing: -.058em;
+    text-wrap: balance;
+    text-shadow: 0 24px 65px rgba(0,0,0,.62);
+  }
+
+  .cinematic-hero .hero-headline-mobile strong {
+    display: block;
+    margin-top: .22em;
+    color: #f7f8fb;
+    font-weight: 820;
+  }
+
+  .cinematic-hero .hero-lede-mobile {
+    max-width: 31ch;
+    margin-top: 26px;
+    color: #929cab;
+    font-size: .98rem;
+    line-height: 1.58;
+  }
+
+  .cinematic-hero .hero-actions {
+    margin: 24px 0 0;
+  }
+
+  /* The persistent briefing rail owns conversion on mobile. */
+  .cinematic-hero .hero-actions .button-primary {
+    display: none;
+  }
+
+  .cinematic-hero .hero-actions .button-secondary {
+    min-height: auto;
+    width: fit-content;
+    padding: 0 0 8px;
+    border: 0;
+    border-bottom: 1px solid rgba(241,207,116,.48);
+    border-radius: 0;
+    background: transparent;
+    color: #eef1f6;
+    font-size: .78rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  .cinematic-hero .hero-actions .button-secondary:hover {
+    transform: none;
+  }
+
+  .cinematic-hero .hero-proof,
+  .cinematic-hero .hero-status-rail {
+    display: none;
+  }
+
+  /* Let the intelligence layer enter the first frame without becoming a dashboard screenshot. */
+  .cinematic-hero .hero-visual {
+    position: relative;
+    width: calc(100% + 10px);
+    max-width: none;
+    max-height: 218px;
+    margin: 34px -5px 0;
+    overflow: hidden;
+    border-radius: 18px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
+  }
+
+  .cinematic-hero .abstract-system {
+    min-height: 250px;
+    border-radius: 18px;
+    transform: none;
+    box-shadow: 0 24px 70px rgba(0,0,0,.56), 0 0 44px rgba(23,102,198,.08);
+  }
+
+  .cinematic-hero .abstract-topbar {
+    min-height: 44px;
+    padding-inline: 14px;
+  }
+
+  .cinematic-hero .abstract-topbar span {
+    font-size: .52rem;
+  }
+
+  .cinematic-hero .abstract-topbar small,
+  .cinematic-hero .abstract-readout,
+  .cinematic-hero .signal-node,
+  .cinematic-hero .ring-three {
+    display: none;
+  }
+
+  .cinematic-hero .abstract-core {
+    height: 205px;
+  }
+
+  .cinematic-hero .ring-two {
+    width: 190px;
+    height: 190px;
+  }
+
+  .cinematic-hero .ring-one {
+    width: 118px;
+    height: 118px;
+  }
+
+  .cinematic-hero .signal-core {
+    width: 102px;
+    height: 102px;
+  }
+
+  .cinematic-hero .hero-beam-one {
+    right: -42vw;
+    top: -9vw;
+    width: 110vw;
+    height: 110vw;
+    opacity: .25;
+  }
+
+  .cinematic-hero .hero-beam-two {
+    left: -55vw;
+    bottom: -24vw;
+    width: 115vw;
+    height: 115vw;
+    opacity: .12;
+  }
+
+  .cinematic-hero .hero-horizon {
+    bottom: 8%;
+    opacity: .7;
+  }
+}
+
+@media (max-width: 370px) {
+  .cinematic-hero .eyebrow {
+    font-size: .56rem;
+    letter-spacing: .12em;
+  }
+
+  .cinematic-hero .hero-headline-mobile {
+    font-size: 2.62rem;
+  }
+}
