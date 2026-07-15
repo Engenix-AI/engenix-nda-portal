@@ -3178,3 +3178,85 @@ html[data-theme="light"] .scene-index i {
     left: auto;
   }
 }
+
+/* =========================================================
+   SIGNAL WHITE v1.1 — PLATFORM EXPANSION COMPLETION
+   Corrects the wedge / platform rail that retained Obsidian
+   hard-coded backgrounds while the page was in light mode.
+   ========================================================= */
+html[data-theme="light"] .platform-expansion {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(22,136,212,.11), transparent 36%),
+    linear-gradient(180deg, #f8fafd 0%, #eef3f9 100%);
+  color: var(--text);
+  border-color: var(--line);
+}
+
+html[data-theme="light"] .platform-expansion .section-head h2 {
+  color: #556274;
+}
+
+html[data-theme="light"] .platform-expansion .section-head h2 strong {
+  color: #1f2329;
+}
+
+html[data-theme="light"] .platform-expansion .section-head p {
+  color: #68768a;
+}
+
+html[data-theme="light"] .expansion-rail {
+  background: rgba(31,48,73,.12);
+  border-color: rgba(31,48,73,.15);
+  box-shadow: 0 30px 90px rgba(48,67,92,.13);
+}
+
+html[data-theme="light"] .expansion-rail article {
+  background:
+    linear-gradient(160deg, rgba(255,255,255,.99), rgba(242,246,251,.96));
+  color: var(--text);
+  border-color: var(--line);
+}
+
+html[data-theme="light"] .expansion-rail article.active {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(200,146,46,.12), transparent 34%),
+    linear-gradient(160deg, #ffffff, #f4f7fb);
+}
+
+html[data-theme="light"] .expansion-rail article:hover {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(22,136,212,.08), transparent 34%),
+    linear-gradient(160deg, #ffffff, #f2f6fb);
+}
+
+html[data-theme="light"] .expansion-rail small {
+  color: #a8741f;
+}
+
+html[data-theme="light"] .expansion-rail article:not(.active) small {
+  color: var(--blue);
+}
+
+html[data-theme="light"] .expansion-rail h3 {
+  color: #20252b;
+}
+
+html[data-theme="light"] .expansion-rail p {
+  color: #667487;
+}
+
+@media (max-width: 620px) {
+  html[data-theme="light"] .platform-expansion {
+    background:
+      radial-gradient(circle at 50% 0%, rgba(22,136,212,.09), transparent 28%),
+      linear-gradient(180deg, #f8fafd 0%, #eef3f9 100%);
+  }
+
+  html[data-theme="light"] .expansion-rail {
+    box-shadow: 0 22px 60px rgba(48,67,92,.11);
+  }
+
+  html[data-theme="light"] .expansion-rail article {
+    min-height: 270px;
+  }
+}
