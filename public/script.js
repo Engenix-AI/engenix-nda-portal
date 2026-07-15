@@ -580,3 +580,170 @@
     window.addEventListener('hashchange', () => moveToChapter(window.location.hash));
   })();
 })();
+
+// =============================================================================
+// ENGENIX MOBILE UNBOXING V2
+// Scroll-driven optical framing and premium mobile chapter controls.
+// =============================================================================
+(() => {
+  const mobile = window.matchMedia('(max-width: 820px)');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+
+  const frameSelectors = [
+    '.blind-line',
+    '.deal-console',
+    '.intel-panel',
+    '.activity-stream',
+    '.leader-card',
+    '.expansion-rail article',
+    '.trust-item',
+    '.early-access-grid'
+  ];
+
+  let frames = [];
+  let ticking = false;
+  let expansionCleanup = null;
+
+  const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+
+  const resetFrame = element => {
+    element.style.removeProperty('--m-scale');
+    element.style.removeProperty('--m-lift');
+    element.style.removeProperty('--m-opacity');
+    element.style.removeProperty('--m-radius');
+  };
+
+  const update = () => {
+    ticking = false;
+
+    const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    root.style.setProperty('--mobile-page-progress', String(clamp(window.scrollY / scrollable)));
+
+    if (!mobile.matches || reduced) {
+      frames.forEach(resetFrame);
+      return;
+    }
+
+    const viewport = window.innerHeight;
+    const focusLine = viewport * 0.53;
+
+    frames.forEach(element => {
+      const rect = element.getBoundingClientRect();
+      const center = rect.top + rect.height / 2;
+      const distance = Math.abs(center - focusLine);
+      const focus = clamp(1 - distance / (viewport * 0.82));
+      const scale = 0.945 + focus * 0.055;
+      const lift = (1 - focus) * 26;
+      const opacity = 0.68 + focus * 0.32;
+      const radius = 38 - focus * 6;
+
+      element.style.setProperty('--m-scale', scale.toFixed(4));
+      element.style.setProperty('--m-lift', `${lift.toFixed(1)}px`);
+      element.style.setProperty('--m-opacity', opacity.toFixed(3));
+      element.style.setProperty('--m-radius', `${radius.toFixed(1)}px`);
+    });
+  };
+
+  const schedule = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  const buildExpansionTabs = () => {
+    expansionCleanup?.();
+    expansionCleanup = null;
+
+    const rail = document.querySelector('.expansion-rail');
+    if (!rail || !mobile.matches) return;
+
+    const cards = Array.from(rail.querySelectorAll(':scope > article'));
+    if (!cards.length) return;
+
+    let tabs = rail.previousElementSibling;
+    if (!tabs || !tabs.classList.contains('mobile-expansion-tabs')) {
+      tabs = document.createElement('div');
+      tabs.className = 'mobile-expansion-tabs';
+      tabs.setAttribute('aria-label', 'ENGENIX expansion stages');
+      rail.parentNode.insertBefore(tabs, rail);
+    }
+
+    tabs.replaceChildren();
+
+    const buttons = cards.map((card, index) => {
+      const button = document.createElement('button');
+      const heading = card.querySelector('h3');
+      button.type = 'button';
+      button.textContent = heading?.textContent?.trim() || `Stage ${index + 1}`;
+      button.setAttribute('aria-label', `Show ${button.textContent}`);
+      button.classList.toggle('is-active', index === 0);
+      button.addEventListener('click', () => {
+        card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+        rail.scrollTo({ left: card.offsetLeft - 20, behavior: reduced ? 'auto' : 'smooth' });
+      });
+      tabs.appendChild(button);
+      return button;
+    });
+
+    let railTicking = false;
+    const updateActive = () => {
+      railTicking = false;
+      const railCenter = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+      let activeIndex = 0;
+      let bestDistance = Infinity;
+
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const distance = Math.abs(rect.left + rect.width / 2 - railCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          activeIndex = index;
+        }
+      });
+
+      buttons.forEach((button, index) => {
+        const active = index === activeIndex;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    };
+
+    const onRailScroll = () => {
+      if (railTicking) return;
+      railTicking = true;
+      requestAnimationFrame(updateActive);
+    };
+
+    rail.addEventListener('scroll', onRailScroll, { passive: true });
+    updateActive();
+
+    expansionCleanup = () => rail.removeEventListener('scroll', onRailScroll);
+  };
+
+  const prepare = () => {
+    frames = frameSelectors.flatMap(selector => Array.from(document.querySelectorAll(selector)));
+    frames.forEach(element => element.classList.add('mobile-cinematic-frame'));
+    buildExpansionTabs();
+    schedule();
+  };
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', () => {
+    buildExpansionTabs();
+    schedule();
+  }, { passive: true });
+
+  if (typeof mobile.addEventListener === 'function') {
+    mobile.addEventListener('change', () => {
+      buildExpansionTabs();
+      schedule();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', prepare, { once: true });
+  } else {
+    prepare();
+  }
+})();
