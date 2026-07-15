@@ -5,6 +5,90 @@
   const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+
+  // ---------------------------------------------------------------------------
+  // Display theme: saved choice > device preference > dark fallback
+  // ---------------------------------------------------------------------------
+  (() => {
+    const STORAGE_KEY = 'engenix-theme';
+    const root = document.documentElement;
+    const systemQuery = window.matchMedia('(prefers-color-scheme: light)');
+    const themeColor = qs('#theme-color-meta');
+
+    const readSaved = () => {
+      try {
+        const value = window.localStorage.getItem(STORAGE_KEY);
+        return value === 'light' || value === 'dark' ? value : null;
+      } catch (_) {
+        return null;
+      }
+    };
+
+    const save = theme => {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, theme);
+      } catch (_) {
+        // Private browsing or storage restrictions should never block the theme.
+      }
+    };
+
+    const updateControls = theme => {
+      qsa('[data-theme-toggle]').forEach(button => {
+        const nextTheme = theme === 'light' ? 'dark' : 'light';
+        const label = qs('[data-theme-toggle-label]', button);
+        button.dataset.themeCurrent = theme;
+        button.setAttribute('aria-pressed', String(theme === 'light'));
+        button.setAttribute('aria-label', `Switch to ${nextTheme} website theme`);
+        button.title = `Switch to ${nextTheme === 'light' ? 'Signal White' : 'Obsidian'}`;
+        if (label) label.textContent = theme === 'light' ? 'SIGNAL WHITE' : 'OBSIDIAN';
+      });
+
+      qsa('[data-loader-theme]').forEach(button => {
+        const active = button.dataset.loaderTheme === theme;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    };
+
+    const apply = (theme, { persist = false } = {}) => {
+      const resolved = theme === 'light' ? 'light' : 'dark';
+      root.dataset.theme = resolved;
+      root.style.colorScheme = resolved;
+      if (themeColor) themeColor.content = resolved === 'light' ? '#f3f6fc' : '#05070b';
+      if (persist) save(resolved);
+      updateControls(resolved);
+      window.dispatchEvent(new CustomEvent('engenix:themechange', {
+        detail: { theme: resolved }
+      }));
+    };
+
+    const initial = readSaved() || (systemQuery.matches ? 'light' : 'dark');
+    apply(initial);
+
+    qsa('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        apply(root.dataset.theme === 'light' ? 'dark' : 'light', { persist: true });
+      });
+    });
+
+    qsa('[data-loader-theme]').forEach(button => {
+      button.addEventListener('click', () => {
+        apply(button.dataset.loaderTheme, { persist: true });
+      });
+    });
+
+    const followSystem = event => {
+      if (readSaved()) return;
+      apply(event.matches ? 'light' : 'dark');
+    };
+
+    if (typeof systemQuery.addEventListener === 'function') {
+      systemQuery.addEventListener('change', followSystem);
+    } else if (typeof systemQuery.addListener === 'function') {
+      systemQuery.addListener(followSystem);
+    }
+  })();
+
   // ---------------------------------------------------------------------------
   // Loader
   // ---------------------------------------------------------------------------
@@ -271,11 +355,15 @@
       const dial = qs('#risk-dial');
       if (dial) {
         dial.style.setProperty('--risk', String(risk));
-        dial.style.background = `radial-gradient(circle at center, #090c12 57%, transparent 58%), conic-gradient(${dialColor} ${risk}%, rgba(255,255,255,.07) 0)`;
+        const lightTheme = document.documentElement.dataset.theme === 'light';
+        const dialCenter = lightTheme ? '#ffffff' : '#090c12';
+        const dialTrack = lightTheme ? 'rgba(31,48,73,.12)' : 'rgba(255,255,255,.07)';
+        dial.style.background = `radial-gradient(circle at center, ${dialCenter} 57%, transparent 58%), conic-gradient(${dialColor} ${risk}%, ${dialTrack} 0)`;
       }
     };
 
     [docs, signatures, review].forEach(control => control.addEventListener('input', update));
+    window.addEventListener('engenix:themechange', update);
     update();
   })();
 

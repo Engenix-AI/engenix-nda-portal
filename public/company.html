@@ -5,11 +5,41 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="Meet the dealership operators and systems leaders building ENGENIX for the real pressure of automotive retail." name="description"/>
-<meta content="#05070b" name="theme-color"/>
+<meta content="#05070b" id="theme-color-meta" name="theme-color"/>
 <title>Operators | ENGENIX</title>
+<script id="engenix-theme-init">
+(() => {
+  const STORAGE_KEY = 'engenix-theme';
+  const root = document.documentElement;
+  let saved = null;
+
+  try {
+    saved = window.localStorage.getItem(STORAGE_KEY);
+  } catch (_) {
+    saved = null;
+  }
+
+  const systemLight = window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: light)').matches;
+  const theme = saved === 'light' || saved === 'dark'
+    ? saved
+    : (systemLight ? 'light' : 'dark');
+
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+  const themeColor = document.querySelector('#theme-color-meta');
+  if (themeColor) themeColor.content = theme === 'light' ? '#f3f6fc' : '#05070b';
+  root.classList.add('js');
+  window.__ENGENIX_THEME__ = { key: STORAGE_KEY, saved };
+})();
+</script>
 <link href="styles.css" rel="stylesheet"/>
 <link href="https://www.engenix.co/company.html" rel="canonical"/><meta content="website" property="og:type"/><meta content="Operators | ENGENIX" property="og:title"/><meta content="Meet the dealership operators and systems leaders building ENGENIX for the real pressure of automotive retail." property="og:description"/><meta content="https://www.engenix.co/company.html" property="og:url"/><meta content="https://www.engenix.co/apple-touch-icon.png" property="og:image"/><meta content="summary" name="twitter:card"/><meta content="Operators | ENGENIX" name="twitter:title"/><meta content="Meet the dealership operators and systems leaders building ENGENIX for the real pressure of automotive retail." name="twitter:description"/></head>
 <body class="launch-page launch-company">
+<button class="theme-toggle" data-theme-toggle type="button" aria-label="Switch website color theme" aria-pressed="false">
+  <span class="theme-toggle-orb" aria-hidden="true"></span>
+  <span class="theme-toggle-label" data-theme-toggle-label>OBSIDIAN</span>
+</button>
 <header class="site-header" id="top">
 <div class="shell nav-shell">
 <a aria-label="ENGENIX home" class="brand" href="index.html">

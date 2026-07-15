@@ -5,13 +5,43 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="Request a leadership-led ENGENIX demonstration tailored to your dealership or dealer group." name="description"/>
-<meta content="#05070b" name="theme-color"/>
+<meta content="#05070b" id="theme-color-meta" name="theme-color"/>
 <title>Founding Dealership Briefing | ENGENIX</title>
 <link href="favicon.png" rel="icon" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<script id="engenix-theme-init">
+(() => {
+  const STORAGE_KEY = 'engenix-theme';
+  const root = document.documentElement;
+  let saved = null;
+
+  try {
+    saved = window.localStorage.getItem(STORAGE_KEY);
+  } catch (_) {
+    saved = null;
+  }
+
+  const systemLight = window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: light)').matches;
+  const theme = saved === 'light' || saved === 'dark'
+    ? saved
+    : (systemLight ? 'light' : 'dark');
+
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+  const themeColor = document.querySelector('#theme-color-meta');
+  if (themeColor) themeColor.content = theme === 'light' ? '#f3f6fc' : '#05070b';
+  root.classList.add('js');
+  window.__ENGENIX_THEME__ = { key: STORAGE_KEY, saved };
+})();
+</script>
 <link href="styles.css" rel="stylesheet"/>
 <link href="https://www.engenix.co/demo.html" rel="canonical"/><meta content="website" property="og:type"/><meta content="Founding Dealership Briefing | ENGENIX" property="og:title"/><meta content="Request a leadership-led ENGENIX demonstration tailored to your dealership or dealer group." property="og:description"/><meta content="https://www.engenix.co/demo.html" property="og:url"/><meta content="https://www.engenix.co/apple-touch-icon.png" property="og:image"/><meta content="summary" name="twitter:card"/><meta content="Founding Dealership Briefing | ENGENIX" name="twitter:title"/><meta content="Request a leadership-led ENGENIX demonstration tailored to your dealership or dealer group." name="twitter:description"/></head>
 <body class="launch-page launch-demo">
+<button class="theme-toggle" data-theme-toggle type="button" aria-label="Switch website color theme" aria-pressed="false">
+  <span class="theme-toggle-orb" aria-hidden="true"></span>
+  <span class="theme-toggle-label" data-theme-toggle-label>OBSIDIAN</span>
+</button>
 <div aria-hidden="true" class="noise"></div>
 <div aria-hidden="true" class="ambient ambient-one"></div>
 <div aria-hidden="true" class="ambient ambient-two"></div>

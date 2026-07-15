@@ -4,12 +4,42 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="#05070b" name="theme-color"/>
+<meta content="#05070b" id="theme-color-meta" name="theme-color"/>
 <title>The System | ENGENIX</title>
 <link href="favicon.png" rel="icon" type="image/png"/>
+<script id="engenix-theme-init">
+(() => {
+  const STORAGE_KEY = 'engenix-theme';
+  const root = document.documentElement;
+  let saved = null;
+
+  try {
+    saved = window.localStorage.getItem(STORAGE_KEY);
+  } catch (_) {
+    saved = null;
+  }
+
+  const systemLight = window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: light)').matches;
+  const theme = saved === 'light' || saved === 'dark'
+    ? saved
+    : (systemLight ? 'light' : 'dark');
+
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+  const themeColor = document.querySelector('#theme-color-meta');
+  if (themeColor) themeColor.content = theme === 'light' ? '#f3f6fc' : '#05070b';
+  root.classList.add('js');
+  window.__ENGENIX_THEME__ = { key: STORAGE_KEY, saved };
+})();
+</script>
 <link href="styles.css" rel="stylesheet"/>
 <meta content="Discover the operating intelligence system ENGENIX is building for automotive retail." name="description"/><link href="https://www.engenix.co/platform.html" rel="canonical"/><meta content="website" property="og:type"/><meta content="The System | ENGENIX" property="og:title"/><meta content="Discover the operating intelligence system ENGENIX is building for automotive retail." property="og:description"/><meta content="https://www.engenix.co/platform.html" property="og:url"/><meta content="https://www.engenix.co/apple-touch-icon.png" property="og:image"/><meta content="summary" name="twitter:card"/><meta content="The System | ENGENIX" name="twitter:title"/><meta content="Discover the operating intelligence system ENGENIX is building for automotive retail." name="twitter:description"/></head>
 <body class="launch-page launch-platform">
+<button class="theme-toggle" data-theme-toggle type="button" aria-label="Switch website color theme" aria-pressed="false">
+  <span class="theme-toggle-orb" aria-hidden="true"></span>
+  <span class="theme-toggle-label" data-theme-toggle-label>OBSIDIAN</span>
+</button>
 <div aria-hidden="true" class="noise"></div>
 <div aria-hidden="true" class="cinematic-vignette"></div>
 <header class="site-header scrolled" id="top">
