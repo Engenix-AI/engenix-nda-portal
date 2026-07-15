@@ -369,12 +369,17 @@
 
   // ---------------------------------------------------------------------------
   // One Deal sequence
+  // The active department automatically follows the story on mobile so the
+  // viewer never has to swipe the rail just to see the current phase.
   // ---------------------------------------------------------------------------
   (() => {
     const nodes = qsa('.deal-node');
     const eventBox = qs('#deal-event');
-    if (!nodes.length || !eventBox) return;
+    const track = qs('#deal-track');
+    const consoleBox = eventBox?.closest('.deal-console');
+    if (!nodes.length || !eventBox || !track || !consoleBox) return;
 
+    const mobileWorkflow = window.matchMedia('(max-width: 820px)');
     const events = [
       ['09:14:02', 'Customer identity verified', 'Required customer information is present and the review can continue.', 'CLEAR', '✓', false],
       ['09:16:18', 'Deal structure created', 'Vehicle, trade, cash, and payment structure enter the active workflow.', 'MOVING', '→', false],
@@ -385,11 +390,41 @@
     ];
 
     let current = 0;
-    let timer;
+    let timer = null;
+    let resumeTimer = null;
+    let inView = false;
+    let hasEntered = false;
+    let userHoldUntil = 0;
 
-    const render = index => {
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = null;
+    };
+
+    const centerActiveNode = (index, behavior = 'smooth', force = false) => {
+      if (!mobileWorkflow.matches) return;
+      if (!force && Date.now() < userHoldUntil) return;
+
+      const node = nodes[index];
+      if (!node) return;
+
+      window.requestAnimationFrame(() => {
+        const target = node.offsetLeft - Math.max(0, (track.clientWidth - node.offsetWidth) / 2);
+        track.scrollTo({
+          left: Math.max(0, target),
+          behavior: reducedMotion ? 'auto' : behavior
+        });
+      });
+    };
+
+    const render = (index, options = {}) => {
       current = index;
-      nodes.forEach((node, nodeIndex) => node.classList.toggle('active', nodeIndex === index));
+      nodes.forEach((node, nodeIndex) => {
+        node.classList.toggle('active', nodeIndex === index);
+        node.classList.toggle('complete', nodeIndex < index);
+        node.setAttribute('aria-current', nodeIndex === index ? 'step' : 'false');
+      });
+
       const [time, heading, text, state, symbol, risk] = events[index];
       const assignments = [
         ['#deal-event-time', time],
@@ -402,26 +437,68 @@
         const element = qs(selector);
         if (element) element.textContent = value;
       });
+
       const icon = qs('.deal-event-icon', eventBox);
       if (icon) icon.textContent = symbol;
       eventBox.classList.toggle('is-risk', risk);
+
       const progress = qs('#deal-progress-bar');
       if (progress) progress.style.width = `${((index + 1) / events.length) * 100}%`;
+
+      centerActiveNode(index, options.behavior || 'smooth', Boolean(options.forceFollow));
     };
 
     const start = () => {
-      window.clearInterval(timer);
-      timer = window.setInterval(() => render((current + 1) % events.length), 2600);
+      stop();
+      if (reducedMotion || !inView || Date.now() < userHoldUntil) return;
+      timer = window.setInterval(() => render((current + 1) % events.length), 2800);
+    };
+
+    const holdForManualInteraction = () => {
+      stop();
+      window.clearTimeout(resumeTimer);
+      userHoldUntil = Date.now() + 4800;
+      resumeTimer = window.setTimeout(start, 4900);
     };
 
     nodes.forEach((node, index) => node.addEventListener('click', () => {
-      render(index);
+      userHoldUntil = 0;
+      render(index, { forceFollow: true });
       start();
     }));
-    eventBox.closest('.deal-console')?.addEventListener('mouseenter', () => window.clearInterval(timer));
-    eventBox.closest('.deal-console')?.addEventListener('mouseleave', start);
-    render(0);
-    if (!reducedMotion) start();
+
+    track.addEventListener('pointerdown', holdForManualInteraction, { passive: true });
+    track.addEventListener('touchstart', holdForManualInteraction, { passive: true });
+    consoleBox.addEventListener('mouseenter', stop);
+    consoleBox.addEventListener('mouseleave', start);
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          inView = entry.isIntersecting && entry.intersectionRatio >= 0.32;
+          if (inView) {
+            if (!hasEntered) {
+              hasEntered = true;
+              current = 0;
+              render(0, { behavior: 'auto', forceFollow: true });
+            } else {
+              centerActiveNode(current, 'smooth');
+            }
+            start();
+          } else {
+            stop();
+          }
+        });
+      }, { threshold: [0, 0.32, 0.6] });
+      observer.observe(consoleBox);
+    } else {
+      inView = true;
+      hasEntered = true;
+      render(0, { behavior: 'auto', forceFollow: true });
+      start();
+    }
+
+    render(0, { behavior: 'auto' });
   })();
 
   // ---------------------------------------------------------------------------
@@ -633,10 +710,10 @@
       const center = rect.top + rect.height / 2;
       const distance = Math.abs(center - focusLine);
       const focus = clamp(1 - distance / (viewport * 0.82));
-      const scale = 0.945 + focus * 0.055;
-      const lift = (1 - focus) * 26;
-      const opacity = 0.68 + focus * 0.32;
-      const radius = 38 - focus * 6;
+      const scale = 0.975 + focus * 0.025;
+      const lift = (1 - focus) * 16;
+      const opacity = 0.90 + focus * 0.10;
+      const radius = 36 - focus * 4;
 
       element.style.setProperty('--m-scale', scale.toFixed(4));
       element.style.setProperty('--m-lift', `${lift.toFixed(1)}px`);
@@ -728,7 +805,40 @@
     schedule();
   };
 
-  window.addEventListener('scroll', schedule, { passive: true });
+  // Preserve the briefing invitation without covering the story. The full rail
+  // returns when the viewer scrolls upward; downward reading collapses it into
+  // a Rivian-style action puck.
+  const dock = document.querySelector('.global-founding-dock');
+  let lastScrollY = window.scrollY;
+  let dockTicking = false;
+
+  const updateDock = () => {
+    dockTicking = false;
+    if (!dock || !mobile.matches) {
+      dock?.classList.remove('is-compact');
+      lastScrollY = window.scrollY;
+      return;
+    }
+
+    const delta = window.scrollY - lastScrollY;
+    if (window.scrollY < 300 || delta < -10) {
+      dock.classList.remove('is-compact');
+    } else if (delta > 8) {
+      dock.classList.add('is-compact');
+    }
+    lastScrollY = window.scrollY;
+  };
+
+  const scheduleDock = () => {
+    if (dockTicking) return;
+    dockTicking = true;
+    requestAnimationFrame(updateDock);
+  };
+
+  window.addEventListener('scroll', () => {
+    schedule();
+    scheduleDock();
+  }, { passive: true });
   window.addEventListener('resize', () => {
     buildExpansionTabs();
     schedule();
