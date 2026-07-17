@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
-  <title>ENGENIX | Customer Operating Dashboard</title>
+  <meta name="dashboard-build" content="2026.07.17-chart-stability-fix">
+    <title>ENGENIX | Customer Operating Dashboard</title>
   <style>
     :root {
       --bg: #071018;
@@ -507,8 +508,22 @@
     .card-title { font-size: 12.5px; font-weight: 800; }
     .card-subtitle { margin-top: 3px; color: var(--muted); font-size: 9.5px; }
     .card-body { padding: 17px; }
-    .chart-wrap { height: 264px; position: relative; }
+    .chart-wrap {
+      height: 264px;
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+    }
     .chart-wrap.small { height: 224px; }
+    .chart-wrap canvas {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100%;
+      max-height: 100%;
+    }
     .chart-center {
       position: absolute;
       inset: 0;
@@ -1444,18 +1459,32 @@
 
     function prepareCanvas(id) {
       const canvas = document.getElementById(id);
-      if (!canvas) return null;
-      const rect = canvas.getBoundingClientRect();
-      if (!rect.width || !rect.height) return null;
+      const host = canvas?.parentElement;
+      if (!canvas || !host) return null;
+
+      // Size from the fixed chart container, never from the canvas itself.
+      // This prevents iOS Safari from feeding the newly assigned bitmap size
+      // back into layout and making the chart grow on every redraw.
+      const width = Math.floor(host.clientWidth);
+      const height = Math.floor(host.clientHeight);
+      if (width < 2 || height < 2) return null;
+
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round(rect.height * dpr);
+      const bitmapWidth = Math.max(1, Math.round(width * dpr));
+      const bitmapHeight = Math.max(1, Math.round(height * dpr));
+
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      if (canvas.width !== bitmapWidth) canvas.width = bitmapWidth;
+      if (canvas.height !== bitmapHeight) canvas.height = bitmapHeight;
+
       const ctx = canvas.getContext('2d');
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,bitmapWidth,bitmapHeight);
       ctx.setTransform(dpr,0,0,dpr,0,0);
-      ctx.clearRect(0,0,rect.width,rect.height);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      return { canvas, ctx, width: rect.width, height: rect.height };
+      return { canvas, ctx, width, height };
     }
 
     function drawTrendChart() {
@@ -1569,9 +1598,21 @@
     function drawAllCharts() { drawTrendChart(); drawRiskChart(); drawCategoryChart(); }
     function initCharts() {
       charts = {trend:true,risk:true,category:true};
-      requestAnimationFrame(drawAllCharts);
+
       let resizeTimer;
-      window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer=setTimeout(drawAllCharts,120); });
+      const scheduleChartDraw = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => requestAnimationFrame(drawAllCharts), 80);
+      };
+
+      requestAnimationFrame(drawAllCharts);
+      window.addEventListener('resize', scheduleChartDraw, { passive: true });
+      window.addEventListener('orientationchange', scheduleChartDraw, { passive: true });
+
+      if ('ResizeObserver' in window) {
+        const chartObserver = new ResizeObserver(scheduleChartDraw);
+        document.querySelectorAll('.chart-wrap').forEach(wrap => chartObserver.observe(wrap));
+      }
     }
     function updateRange(days) { currentTrendDays=days; drawTrendChart(); }
 
