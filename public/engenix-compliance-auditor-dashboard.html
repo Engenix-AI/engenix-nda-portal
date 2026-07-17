@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGENIX | Compliance Auditor — Operating View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --obsidian: #0a0a0a;
+            --signal: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        .os-window {
+            background-color: #0a0a0a;
+            border: 1px solid #27272a;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .signal-text {
+            color: #f8f9fa;
+            text-shadow: 0 0 8px rgba(248, 249, 250, 0.15);
+        }
+
+        .status-pill {
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-item:hover {
+            background-color: #18181b;
+            color: #f8f9fa;
+        }
+        
+        .nav-item.active {
+            background-color: #18181b;
+            border-left: 3px solid #f8f9fa;
+            color: #f8f9fa;
+        }
+
+        .kpi-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-1px);
+        }
+
+        .metric-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .compliance-table {
+            font-size: 13px;
+        }
+
+        .finding-row {
+            transition: background-color 0.1s ease;
+        }
+        
+        .finding-row:hover {
+            background-color: #18181b;
+        }
+
+        .status-badge {
+            font-size: 10px;
+            padding: 1px 8px;
+            border-radius: 9999px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .section-number {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        .dashboard-grid {
+            background-image: 
+                linear-gradient(rgba(39, 39, 42, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(39, 39, 42, 0.15) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .glitch-text:hover {
+            animation: subtle-glitch 0.3s ease;
+        }
+
+        @keyframes subtle-glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(1px, -1px); }
+            60% { transform: translate(-1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            100% { transform: translate(0); }
+        }
+
+        .operating-header {
+            background: linear-gradient(to right, #0a0a0a, #111113);
+            border-bottom: 1px solid #27272a;
+        }
+
+        .risk-bar {
+            transition: width 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .chart-container {
+            position: relative;
+        }
+
+        .os-label {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            color: #71717a;
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] text-zinc-200">
+    <!-- Top Operating Header -->
+    <div class="operating-header sticky top-0 z-50">
+        <div class="max-w-[1480px] mx-auto">
+            <div class="px-8 py-4 flex items-center justify-between">
+                <!-- Logo + Session -->
+                <div class="flex items-center gap-x-4">
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-8 h-8 bg-white flex items-center justify-center">
+                            <span class="text-[#0a0a0a] font-black text-xl tracking-tighter">E</span>
+                        </div>
+                        <div>
+                            <div class="font-display text-2xl font-semibold tracking-[-0.04em]">ENGENIX</div>
+                            <div class="text-[9px] text-zinc-500 -mt-1.5 tracking-[1.5px]">OPERATING LAYER</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-x-2 pl-4 border-l border-zinc-800">
+                        <div class="px-3 py-1 bg-emerald-950 border border-emerald-900 rounded text-emerald-400 text-xs font-mono flex items-center gap-x-1.5">
+                            <i class="fa-solid fa-shield-halved text-xs"></i>
+                            <span class="font-semibold">SECURE SESSION</span>
+                        </div>
+                        <div class="px-3 py-1 bg-zinc-900 border border-zinc-700 rounded text-xs font-mono flex items-center gap-x-1.5">
+                            <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                            <span class="text-emerald-400 font-semibold">RISK ENGINE ONLINE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right side controls -->
+                <div class="flex items-center gap-x-6">
+                    <div class="flex items-center gap-x-2 text-xs">
+                        <div class="text-zinc-400">COMPLIANCE AUDITOR</div>
+                        <div class="w-px h-3 bg-zinc-700"></div>
+                        <div class="font-mono text-emerald-400">AUD-7842</div>
+                    </div>
+                    
+                    <div class="flex items-center gap-x-2">
+                        <div class="text-right">
+                            <div class="text-sm font-medium">Marcus Hale</div>
+                            <div class="text-[10px] text-zinc-500">Senior Compliance Auditor • Founding Network</div>
+                        </div>
+                        <div class="w-8 h-8 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid fa-user text-zinc-400 text-sm"></i>
+                        </div>
+                    </div>
+                    
+                    <button onclick="logout()" 
+                            class="flex items-center gap-x-2 px-4 py-2 text-xs font-medium border border-zinc-700 hover:bg-zinc-900 transition-colors rounded">
+                        <i class="fa-solid fa-sign-out-alt"></i>
+                        <span>EXIT SESSION</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-[1480px] mx-auto px-8 pt-6 pb-12">
+        
+        <!-- Entry Banner -->
+        <div class="flex items-end justify-between mb-6">
+            <div>
+                <div class="flex items-center gap-x-3 mb-1">
+                    <div class="section-number text-5xl font-black text-white tracking-[-0.06em]">01</div>
+                    <div>
+                        <div class="font-display text-4xl font-semibold tracking-[-0.04em]">COMPLIANCE OPERATING VIEW</div>
+                        <div class="text-emerald-400 text-sm font-mono tracking-[1px] mt-0.5">DETECT → DECIDE → ACT → REMEMBER</div>
+                    </div>
+                </div>
+                <div class="text-zinc-400 text-sm max-w-md">
+                    Real-time compliance intelligence for the dealership network. 
+                    The audit begins when the deal begins.
+                </div>
+            </div>
+            
+            <div class="text-right">
+                <div class="os-label mb-1">CURRENT NETWORK STATUS</div>
+                <div class="flex items-center justify-end gap-x-2">
+                    <div class="px-4 py-1.5 bg-zinc-900 border border-zinc-700 rounded text-sm flex items-center gap-x-2">
+                        <span class="font-mono text-emerald-400">47</span>
+                        <span class="text-zinc-400">DEALERSHIPS</span>
+                    </div>
+                    <div class="px-4 py-1.5 bg-zinc-900 border border-zinc-700 rounded text-sm flex items-center gap-x-2">
+                        <span class="font-mono text-amber-400">312</span>
+                        <span class="text-zinc-400">DEALS IN MOTION</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Row -->
+        <div class="grid grid-cols-4 gap-4 mb-8">
+            <!-- KPI 1 -->
+            <div class="os-window rounded-2xl p-5 kpi-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="os-label">NETWORK COMPLIANCE POSTURE</div>
+                        <div class="metric-value text-5xl font-semibold tabular-nums tracking-tighter mt-1">87</div>
+                        <div class="text-emerald-400 text-sm font-medium flex items-center gap-x-1">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                            <span>+4 from last period</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs px-2.5 py-1 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">HEALTHY</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI 2 -->
+            <div class="os-window rounded-2xl p-5 kpi-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="os-label">OPEN FINDINGS</div>
+                        <div class="metric-value text-5xl font-semibold tabular-nums tracking-tighter mt-1">47</div>
+                        <div class="text-amber-400 text-sm font-medium flex items-center gap-x-1">
+                            <i class="fa-solid fa-arrow-trend-down"></i>
+                            <span>-12 this period</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs px-2.5 py-1 bg-amber-950 text-amber-400 rounded border border-amber-900">MODERATE</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI 3 -->
+            <div class="os-window rounded-2xl p-5 kpi-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="os-label">DEALS REVIEWED TODAY</div>
+                        <div class="metric-value text-5xl font-semibold tabular-nums tracking-tighter mt-1">84</div>
+                        <div class="text-zinc-400 text-sm font-medium">of 119 flagged</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded border border-zinc-700">71% COMPLETE</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI 4 -->
+            <div class="os-window rounded-2xl p-5 kpi-card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="os-label">AVG RISK SCORE</div>
+                        <div class="metric-value text-5xl font-semibold tabular-nums tracking-tighter mt-1">31</div>
+                        <div class="text-emerald-400 text-sm font-medium flex items-center gap-x-1">
+                            <span>↓ 6 points</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xs px-2.5 py-1 bg-emerald-950 text-emerald-400 rounded border border-emerald-900">LOW</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4">
+            
+            <!-- 30-Day Compliance Posture -->
+            <div class="col-span-12 lg:col-span-7 os-window rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <div class="section-number text-xl font-bold tracking-tight">02 • 30-DAY COMPLIANCE PULSE</div>
+                        <div class="text-xs text-zinc-400">Network-wide compliance posture trend</div>
+                    </div>
+                    <div class="flex items-center gap-x-2 text-xs">
+                        <div class="flex items-center gap-x-1.5 px-3 py-1 bg-zinc-900 rounded border border-zinc-700">
+                            <div class="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                            <span class="font-mono">87.2 AVG</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-container h-[218px]">
+                    <canvas id="complianceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Deal Risk Simulator -->
+            <div class="col-span-12 lg:col-span-5 os-window rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <div class="section-number text-xl font-bold tracking-tight">03 • DEAL RISK SIMULATOR</div>
+                        <div class="text-xs text-zinc-400">Interactive model • Live</div>
+                    </div>
+                    <div id="risk-score-pill" 
+                         class="px-4 py-1 bg-emerald-950 border border-emerald-900 text-emerald-400 text-sm font-mono rounded flex items-center gap-x-2">
+                        <span>RISK</span> 
+                        <span id="risk-score" class="font-bold text-lg tabular-nums">28</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Sliders -->
+                    <div>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <div class="text-zinc-300">Credit Pull Variance</div>
+                            <div id="val1" class="font-mono text-emerald-400">12</div>
+                        </div>
+                        <input type="range" id="slider1" min="0" max="100" value="12" step="1"
+                               class="w-full accent-white bg-zinc-800" oninput="updateRiskScore()">
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <div class="text-zinc-300">Structure Complexity</div>
+                            <div id="val2" class="font-mono text-amber-400">47</div>
+                        </div>
+                        <input type="range" id="slider2" min="0" max="100" value="47" step="1"
+                               class="w-full accent-white bg-zinc-800" oninput="updateRiskScore()">
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <div class="text-zinc-300">Stipulation Gaps</div>
+                            <div id="val3" class="font-mono text-rose-400">31</div>
+                        </div>
+                        <input type="range" id="slider3" min="0" max="100" value="31" step="1"
+                               class="w-full accent-white bg-zinc-800" oninput="updateRiskScore()">
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <div class="text-zinc-300">Documentation Integrity</div>
+                            <div id="val4" class="font-mono text-emerald-400">19</div>
+                        </div>
+                        <input type="range" id="slider4" min="0" max="100" value="19" step="1"
+                               class="w-full accent-white bg-zinc-800" oninput="updateRiskScore()">
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-4 border-t border-zinc-800 flex items-center justify-between text-xs">
+                    <div class="text-zinc-400">Modeled Risk Level</div>
+                    <div id="risk-level" class="font-semibold text-emerald-400">LOW • ACCEPTABLE</div>
+                </div>
+            </div>
+
+            <!-- Recent Findings Table -->
+            <div class="col-span-12 lg:col-span-7 os-window rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <div class="section-number text-xl font-bold tracking-tight">04 • PRIORITIZED FINDINGS</div>
+                        <div class="text-xs text-zinc-400">Explainable • Actionable • Human-controlled</div>
+                    </div>
+                    <button onclick="filterFindings('all')" 
+                            class="text-xs px-4 py-1.5 border border-zinc-700 hover:bg-zinc-900 rounded transition-colors">VIEW ALL</button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full compliance-table">
+                        <thead>
+                            <tr class="border-b border-zinc-800 text-xs text-zinc-400">
+                                <th class="text-left py-3 font-medium px-3">DEAL ID</th>
+                                <th class="text-left py-3 font-medium">DEALERSHIP</th>
+                                <th class="text-left py-3 font-medium">FINDING TYPE</th>
+                                <th class="text-center py-3 font-medium">RISK</th>
+                                <th class="text-center py-3 font-medium">STATUS</th>
+                                <th class="text-right py-3 font-medium pr-3">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="findings-tbody" class="text-sm divide-y divide-zinc-800">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Audit Trail / Activity -->
+            <div class="col-span-12 lg:col-span-5 os-window rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <div class="section-number text-xl font-bold tracking-tight">05 • AUDIT TRAIL</div>
+                        <div class="text-xs text-zinc-400">Last 24 hours • Immutable log</div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-sm max-h-[280px] overflow-y-auto pr-2 custom-scroll">
+                    <div class="flex gap-x-3 text-xs">
+                        <div class="font-mono text-emerald-400 w-16 shrink-0">14:42:19</div>
+                        <div class="flex-1">
+                            <span class="text-zinc-300">Deal #JD-44921</span> reviewed and cleared. 
+                            <span class="text-emerald-400">12 findings resolved.</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-x-3 text-xs">
+                        <div class="font-mono text-emerald-400 w-16 shrink-0">14:31:07</div>
+                        <div class="flex-1">
+                            <span class="text-zinc-300">Deal #AP-88214</span> flagged for structure review. 
+                            <span class="text-amber-400">Risk elevated to 41.</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-x-3 text-xs">
+                        <div class="font-mono text-emerald-400 w-16 shrink-0">13:58:44</div>
+                        <div class="flex-1">
+                            Compliance posture recalculated for <span class="text-zinc-300">Premier Auto Group</span>. 
+                            <span class="text-emerald-400">+3 points.</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-x-3 text-xs">
+                        <div class="font-mono text-emerald-400 w-16 shrink-0">13:12:55</div>
+                        <div class="flex-1">
+                            New stipulation added to <span class="text-zinc-300">Deal #CR-30192</span>. 
+                            Risk model updated.
+                        </div>
+                    </div>
+                    <div class="flex gap-x-3 text-xs">
+                        <div class="font-mono text-emerald-400 w-16 shrink-0">12:49:30</div>
+                        <div class="flex-1">
+                            Auditor <span class="text-zinc-300">Marcus Hale</span> approved override on 
+                            <span class="text-zinc-300">Deal #LM-11987</span>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom status bar -->
+        <div class="mt-8 flex items-center justify-between text-xs border-t border-zinc-800 pt-5 text-zinc-400">
+            <div class="flex items-center gap-x-5">
+                <div>ENGENIX://COMPLIANCE_LAYER v2.4.1</div>
+                <div class="font-mono">SESSION ID: CS-7842-ENG-17JUL26</div>
+            </div>
+            <div class="flex items-center gap-x-2">
+                <div class="px-3 py-1 bg-zinc-900 border border-zinc-700 rounded text-emerald-400 flex items-center gap-x-1.5 text-xs">
+                    <i class="fa-solid fa-check-double"></i>
+                    <span>ALL SYSTEMS NOMINAL</span>
+                </div>
+                <div>Last sync: moments ago</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent', '#f8f9fa');
+        }
+        
+        // Compliance Posture Chart
+        let complianceChartInstance = null;
+        
+        function initComplianceChart() {
+            const ctx = document.getElementById('complianceChart');
+            
+            if (complianceChartInstance) {
+                complianceChartInstance.destroy();
+            }
+            
+            complianceChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan 17', 'Jan 24', 'Jan 31', 'Feb 7', 'Feb 14', 'Feb 21', 'Feb 28', 'Mar 7', 'Mar 14', 'Mar 21', 'Mar 28', 'Apr 4'],
+                    datasets: [{
+                        label: 'Network Compliance Score',
+                        data: [79, 81, 83, 80, 84, 82, 85, 87, 84, 86, 85, 87],
+                        borderColor: '#f8f9fa',
+                        backgroundColor: 'rgba(248, 249, 250, 0.08)',
+                        borderWidth: 2.5,
+                        tension: 0.35,
+                        fill: true,
+                        pointBackgroundColor: '#f8f9fa',
+                        pointBorderColor: '#0a0a0a',
+                        pointBorderWidth: 2,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#18181b',
+                            borderColor: '#3f3f46',
+                            borderWidth: 1,
+                            displayColors: false,
+                            callbacks: {
+                                label: (ctx) => `Score: ${ctx.raw}`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: '#27272a', lineWidth: 0.5 },
+                            ticks: { color: '#71717a', font: { size: 10 } }
+                        },
+                        y: {
+                            min: 70,
+                            max: 95,
+                            grid: { color: '#27272a', lineWidth: 0.5 },
+                            ticks: { 
+                                color: '#71717a', 
+                                font: { size: 10 },
+                                stepSize: 5,
+                                callback: (val) => val
+                            }
+                        }
+                    },
+                    elements: {
+                        line: { borderJoinStyle: 'round' },
+                        point: { hitRadius: 20 }
+                    }
+                }
+            });
+        }
+        
+        // Risk Simulator Logic
+        function updateRiskScore() {
+            const s1 = parseInt(document.getElementById('slider1').value);
+            const s2 = parseInt(document.getElementById('slider2').value);
+            const s3 = parseInt(document.getElementById('slider3').value);
+            const s4 = parseInt(document.getElementById('slider4').value);
+            
+            // Update value displays
+            document.getElementById('val1').innerText = s1;
+            document.getElementById('val2').innerText = s2;
+            document.getElementById('val3').innerText = s3;
+            document.getElementById('val4').innerText = s4;
+            
+            // Weighted risk calculation (lower is better in this model)
+            const risk = Math.round(
+                (s1 * 0.25) + 
+                (s2 * 0.35) + 
+                (s3 * 0.30) + 
+                (s4 * 0.10)
+            );
+            
+            const scoreEl = document.getElementById('risk-score');
+            const pill = document.getElementById('risk-score-pill');
+            const levelEl = document.getElementById('risk-level');
+            
+            scoreEl.innerText = risk;
+            
+            // Update colors and level based on risk
+            if (risk <= 25) {
+                pill.className = 'px-4 py-1 bg-emerald-950 border border-emerald-900 text-emerald-400 text-sm font-mono rounded flex items-center gap-x-2';
+                levelEl.className = 'font-semibold text-emerald-400';
+                levelEl.innerHTML = 'LOW • ACCEPTABLE';
+            } else if (risk <= 45) {
+                pill.className = 'px-4 py-1 bg-amber-950 border border-amber-900 text-amber-400 text-sm font-mono rounded flex items-center gap-x-2';
+                levelEl.className = 'font-semibold text-amber-400';
+                levelEl.innerHTML = 'MODERATE • REVIEW REQUIRED';
+            } else {
+                pill.className = 'px-4 py-1 bg-rose-950 border border-rose-900 text-rose-400 text-sm font-mono rounded flex items-center gap-x-2';
+                levelEl.className = 'font-semibold text-rose-400';
+                levelEl.innerHTML = 'HIGH • ESCALATE';
+            }
+        }
+        
+        // Findings Data
+        const findingsData = [
+            { id: "JD-44921", dealer: "Premier Auto Group", type: "Stipulation Gap", risk: "Low", status: "Cleared", action: "Approved" },
+            { id: "AP-88214", dealer: "Summit Motors", type: "Credit Variance", risk: "Moderate", status: "In Review", action: "Investigate" },
+            { id: "CR-30192", dealer: "Horizon Auto", type: "Documentation", risk: "Low", status: "Cleared", action: "Approved" },
+            { id: "LM-11987", dealer: "Velocity Cars", type: "Structure", risk: "High", status: "Escalated", action: "Override" },
+            { id: "BK-66420", dealer: "Premier Auto Group", type: "Identity", risk: "Moderate", status: "In Review", action: "Request Docs" },
+            { id: "TR-55109", dealer: "Apex Dealership", type: "Stipulation Gap", risk: "Low", status: "Cleared", action: "Approved" }
+        ];
+        
+        function renderFindings(filter = 'all') {
+            const tbody = document.getElementById('findings-tbody');
+            tbody.innerHTML = '';
+            
+            let filtered = findingsData;
+            
+            if (filter === 'high') {
+                filtered = findingsData.filter(f => f.risk === 'High');
+            } else if (filter === 'moderate') {
+                filtered = findingsData.filter(f => f.risk === 'Moderate');
+            } else if (filter === 'low') {
+                filtered = findingsData.filter(f => f.risk === 'Low');
+            }
+            
+            filtered.forEach(finding => {
+                const row = document.createElement('tr');
+                row.className = 'finding-row border-b border-zinc-800 last:border-0';
+                
+                let riskColor = 'emerald';
+                if (finding.risk === 'Moderate') riskColor = 'amber';
+                if (finding.risk === 'High') riskColor = 'rose';
+                
+                let statusColor = 'emerald';
+                if (finding.status === 'In Review') statusColor = 'amber';
+                if (finding.status === 'Escalated') statusColor = 'rose';
+                
+                row.innerHTML = `
+                    <td class="py-3.5 px-3 font-mono text-xs text-zinc-300">${finding.id}</td>
+                    <td class="py-3.5 text-zinc-200">${finding.dealer}</td>
+                    <td class="py-3.5 text-zinc-300">${finding.type}</td>
+                    <td class="py-3.5 text-center">
+                        <span class="status-badge bg-${riskColor}-950 text-${riskColor}-400 border border-${riskColor}-900">${finding.risk}</span>
+                    </td>
+                    <td class="py-3.5 text-center">
+                        <span class="status-badge bg-${statusColor}-950 text-${statusColor}-400 border border-${statusColor}-900">${finding.status}</span>
+                    </td>
+                    <td class="py-3.5 text-right pr-3">
+                        <button onclick="takeAction('${finding.id}', this)" 
+                                class="text-xs px-4 py-1 border border-zinc-700 hover:bg-zinc-900 hover:text-white transition-colors rounded">
+                            ${finding.action}
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        function filterFindings(type) {
+            renderFindings(type);
+        }
+        
+        function takeAction(dealId, btn) {
+            const originalText = btn.innerText;
+            btn.innerHTML = `<i class="fa-solid fa-check mr-1"></i> RECORDED`;
+            btn.disabled = true;
+            btn.classList.add('!border-emerald-700', '!text-emerald-400');
+            
+            // Simulate logging to audit trail
+            setTimeout(() => {
+                const logContainer = document.querySelector('.space-y-3');
+                if (logContainer) {
+                    const newLog = document.createElement('div');
+                    newLog.className = 'flex gap-x-3 text-xs';
+                    newLog.innerHTML = `
+                        <div class="font-mono text-emerald-400 w-16 shrink-0">JUST NOW</div>
+                        <div class="flex-1">
+                            Auditor action recorded on <span class="text-zinc-300">${dealId}</span>. 
+                            <span class="text-emerald-400">Status updated.</span>
+                        </div>
+                    `;
+                    logContainer.prepend(newLog);
+                }
+            }, 600);
+            
+            // Update KPI randomly to simulate live feel
+            setTimeout(() => {
+                const openFindings = document.querySelector('.metric-value');
+                if (openFindings && openFindings.innerText === '47') {
+                    openFindings.innerText = '46';
+                }
+            }, 1200);
+        }
+        
+        function logout() {
+            if (confirm('End secure session and exit ENGENIX Compliance Operating View?')) {
+                document.body.style.transition = 'opacity 0.4s ease';
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.reload();
+                }, 450);
+            }
+        }
+        
+        // Initialize everything
+        function initializeDashboard() {
+            initTailwind();
+            initComplianceChart();
+            
+            // Initialize risk sliders with starting values
+            document.getElementById('slider1').value = 12;
+            document.getElementById('slider2').value = 47;
+            document.getElementById('slider3').value = 31;
+            document.getElementById('slider4').value = 19;
+            
+            // Set initial displays
+            document.getElementById('val1').innerText = '12';
+            document.getElementById('val2').innerText = '47';
+            document.getElementById('val3').innerText = '31';
+            document.getElementById('val4').innerText = '19';
+            
+            // Set initial risk score and pill
+            const scoreEl = document.getElementById('risk-score');
+            scoreEl.innerText = '28';
+            
+            // Render findings table
+            renderFindings('all');
+            
+            // Keyboard shortcut hint (optional polish)
+            console.log('%c[ENGENIX] Compliance Auditor Dashboard initialized. Press "?" for shortcuts.', 'color:#3f3f46');
+            
+            // Subtle live update simulation every 45 seconds
+            setInterval(() => {
+                const postureEl = document.querySelector('.metric-value');
+                if (postureEl && Math.random() > 0.7) {
+                    const current = parseInt(postureEl.innerText);
+                    postureEl.innerText = current + 1;
+                }
+            }, 45000);
+        }
+        
+        // Boot
+        window.onload = initializeDashboard;
+        
+        // Bonus: Keyboard "?" shows a small help toast (fits the OS feel)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '?') {
+                e.preventDefault();
+                const toast = document.createElement('div');
+                toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#18181b;border:1px solid #3f3f46;padding:12px 18px;border-radius:8px;font-size:12px;z-index:9999';
+                toast.innerHTML = `
+                    <div class="font-mono text-emerald-400 mb-1">ENGENIX SHORTCUTS</div>
+                    <div class="text-xs text-zinc-400 space-y-0.5">
+                        <div><span class="font-mono text-white">R</span> — Refresh risk model</div>
+                        <div><span class="font-mono text-white">F</span> — Filter high risk findings</div>
+                        <div><span class="font-mono text-white">ESC</span> — Close modals / exit</div>
+                    </div>
+                `;
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.transition = 'all 0.3s ease';
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 300);
+                }, 2800);
+            }
+            
+            if (e.key.toLowerCase() === 'f' && document.activeElement.tagName === 'BODY') {
+                e.preventDefault();
+                renderFindings('high');
+            }
+            
+            if (e.key.toLowerCase() === 'r') {
+                const sliders = document.querySelectorAll('input[type="range"]');
+                sliders.forEach(s => {
+                    s.value = Math.floor(Math.random() * 60) + 10;
+                });
+                updateRiskScore();
+            }
+        });
+    </script>
+</body>
+</html>
