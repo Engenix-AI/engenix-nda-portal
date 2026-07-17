@@ -203,6 +203,24 @@
         </div>
     </div>
 
+    <!-- Demo Top Navigation -->
+    <div class="border-b border-zinc-800 bg-[#0a0a0a]">
+        <div class="max-w-[1480px] mx-auto px-4 md:px-8">
+            <div class="flex items-center gap-x-1 text-sm">
+                <a href="#" onclick="switchToPage('dashboard'); return false;" 
+                   class="px-4 py-3 text-white border-b-2 border-white font-medium">Dashboard</a>
+                <a href="#" onclick="showDealDetailModal(); return false;" 
+                   class="px-4 py-3 text-zinc-400 hover:text-zinc-200 transition-colors">Deal Review</a>
+                <a href="#" onclick="showNetworkModal(); return false;" 
+                   class="px-4 py-3 text-zinc-400 hover:text-zinc-200 transition-colors">Network Pulse</a>
+                <a href="#" onclick="showReportsModal(); return false;" 
+                   class="px-4 py-3 text-zinc-400 hover:text-zinc-200 transition-colors">Reports</a>
+                <div class="flex-1"></div>
+                <div class="text-xs px-3 py-1 bg-zinc-900 border border-zinc-700 rounded text-emerald-400 font-mono">DEMO MODE</div>
+            </div>
+        </div>
+    </div>
+
     <div class="max-w-[1480px] mx-auto px-4 md:px-8 pt-4 md:pt-6 pb-8 md:pb-12">
         
         <!-- Live Status Bar -->
@@ -704,7 +722,8 @@
                 if (finding.status === 'Escalated') statusColor = 'rose';
                 
                 row.innerHTML = `
-                    <td class="py-3.5 px-3 font-mono text-xs text-zinc-300">${finding.id}</td>
+                    <td class="py-3.5 px-3 font-mono text-xs text-emerald-400 hover:text-emerald-300 cursor-pointer underline decoration-dotted" 
+                        onclick="showDealDetailModal('${finding.id}', '${finding.dealer}', '${finding.type}', '${finding.risk}')">${finding.id}</td>
                     <td class="py-3.5 text-zinc-200">${finding.dealer}</td>
                     <td class="py-3.5 text-zinc-300">${finding.type}</td>
                     <td class="py-3.5 text-center">
@@ -942,6 +961,155 @@
             }
         });
         
+        // ========== DEMO MODE: Deal Detail Modal + Navigation ==========
+        let currentModalDeal = null;
+        
+        function showDealDetailModal(dealId = null, dealer = null, type = null, riskLevel = null) {
+            const modal = document.getElementById('deal-modal');
+            if (!modal) return;
+            
+            if (!dealId) {
+                dealId = 'JD-44921';
+                dealer = 'Premier Auto Group';
+                type = 'Stipulation Gap';
+                riskLevel = 'Low';
+            }
+            
+            currentModalDeal = { id: dealId, dealer: dealer, type: type, risk: riskLevel };
+            
+            document.getElementById('modal-deal-id').innerText = dealId;
+            document.getElementById('modal-dealer').innerText = dealer;
+            
+            const statusEl = document.getElementById('modal-deal-status');
+            statusEl.innerHTML = riskLevel === 'High' ? 
+                '<span class="text-rose-400">ESCALATED</span>' : 
+                '<span class="text-emerald-400">UNDER REVIEW</span>';
+            statusEl.className = `px-3 py-1 text-xs rounded-full border ${riskLevel === 'High' ? 'border-rose-900 text-rose-400' : 'border-emerald-900 text-emerald-400'}`;
+            
+            let baseRisk = riskLevel === 'High' ? 68 : (riskLevel === 'Moderate' ? 41 : 24);
+            document.getElementById('modal-risk-score').innerText = baseRisk;
+            
+            const breakdownContainer = document.getElementById('risk-breakdown');
+            breakdownContainer.innerHTML = `
+                <div class="os-window p-4 rounded-2xl">
+                    <div class="text-xs text-zinc-400 mb-1">Credit Variance</div>
+                    <div class="flex items-end gap-x-2"><div class="text-3xl font-semibold tabular-nums">${Math.floor(baseRisk * 0.9)}</div><div class="text-xs text-zinc-500 mb-1">/100</div></div>
+                    <div class="h-1.5 bg-zinc-800 rounded mt-2"><div class="h-1.5 bg-white rounded" style="width: ${Math.floor(baseRisk * 0.9)}%"></div></div>
+                </div>
+                <div class="os-window p-4 rounded-2xl">
+                    <div class="text-xs text-zinc-400 mb-1">Structure</div>
+                    <div class="flex items-end gap-x-2"><div class="text-3xl font-semibold tabular-nums">${Math.floor(baseRisk * 1.1)}</div><div class="text-xs text-zinc-500 mb-1">/100</div></div>
+                    <div class="h-1.5 bg-zinc-800 rounded mt-2"><div class="h-1.5 bg-white rounded" style="width: ${Math.floor(baseRisk * 1.1)}%"></div></div>
+                </div>
+                <div class="os-window p-4 rounded-2xl">
+                    <div class="text-xs text-zinc-400 mb-1">Stipulations</div>
+                    <div class="flex items-end gap-x-2"><div class="text-3xl font-semibold tabular-nums">${Math.floor(baseRisk * 0.85)}</div><div class="text-xs text-zinc-500 mb-1">/100</div></div>
+                    <div class="h-1.5 bg-zinc-800 rounded mt-2"><div class="h-1.5 bg-white rounded" style="width: ${Math.floor(baseRisk * 0.85)}%"></div></div>
+                </div>
+                <div class="os-window p-4 rounded-2xl">
+                    <div class="text-xs text-zinc-400 mb-1">Docs</div>
+                    <div class="flex items-end gap-x-2"><div class="text-3xl font-semibold tabular-nums">${Math.floor(baseRisk * 0.6)}</div><div class="text-xs text-zinc-500 mb-1">/100</div></div>
+                    <div class="h-1.5 bg-zinc-800 rounded mt-2"><div class="h-1.5 bg-white rounded" style="width: ${Math.floor(baseRisk * 0.6)}%"></div></div>
+                </div>
+            `;
+            
+            const findingsList = document.getElementById('modal-findings-list');
+            findingsList.innerHTML = `
+                <div class="os-window p-4 rounded-2xl flex gap-4">
+                    <div class="text-emerald-400 mt-1"><i class="fa-solid fa-exclamation-circle"></i></div>
+                    <div class="flex-1 text-sm">
+                        <div class="font-medium">${type}</div>
+                        <div class="text-xs text-zinc-400 mt-1">Missing customer acknowledgment on rate adjustment. Standard for deals over $28k.</div>
+                        <div class="text-[10px] text-emerald-400 mt-2">RECOMMENDED: Add stipulation + re-disclose</div>
+                    </div>
+                </div>
+                <div class="os-window p-4 rounded-2xl flex gap-4">
+                    <div class="text-amber-400 mt-1"><i class="fa-solid fa-info-circle"></i></div>
+                    <div class="flex-1 text-sm">
+                        <div class="font-medium">Minor documentation variance on income verification</div>
+                        <div class="text-xs text-zinc-400 mt-1">Pay stub date differs by 3 days from application. Low materiality.</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal-finding-count').innerText = `(${riskLevel === 'High' ? '3' : '2'} open)`;
+            
+            document.getElementById('modal-notes').value = '';
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function hideDealDetailModal() {
+            const modal = document.getElementById('deal-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+        
+        function saveNotes() {
+            const notes = document.getElementById('modal-notes').value.trim();
+            if (!notes) {
+                showToast('No notes to save.', 'info');
+                return;
+            }
+            showToast('Notes saved to deal jacket and audit log.', 'success');
+            
+            const logContainer = document.querySelector('.space-y-3');
+            if (logContainer && currentModalDeal) {
+                const newLog = document.createElement('div');
+                newLog.className = 'flex gap-x-3 text-xs';
+                newLog.innerHTML = `
+                    <div class="font-mono text-emerald-400 w-16 shrink-0">JUST NOW</div>
+                    <div class="flex-1">
+                        Notes added to <span class="text-zinc-300">${currentModalDeal.id}</span> by Marcus Hale.
+                    </div>
+                `;
+                logContainer.prepend(newLog);
+            }
+        }
+        
+        function takeModalAction(action) {
+            let message = '';
+            if (action === 'approve') message = `Deal ${currentModalDeal.id} approved.`;
+            else if (action === 'escalate') message = `Deal ${currentModalDeal.id} escalated to senior compliance.`;
+            else if (action === 'request_info') message = `Information request sent for ${currentModalDeal.id}.`;
+            
+            showToast(message, action === 'escalate' ? 'warning' : 'success');
+            
+            const logContainer = document.querySelector('.space-y-3');
+            if (logContainer && currentModalDeal) {
+                const newLog = document.createElement('div');
+                newLog.className = 'flex gap-x-3 text-xs';
+                newLog.innerHTML = `
+                    <div class="font-mono text-emerald-400 w-16 shrink-0">JUST NOW</div>
+                    <div class="flex-1">${message}</div>
+                `;
+                logContainer.prepend(newLog);
+            }
+            
+            setTimeout(() => hideDealDetailModal(), 650);
+        }
+        
+        function hideNetworkModal() {
+            const m = document.getElementById('network-modal');
+            m.classList.add('hidden'); m.classList.remove('flex');
+        }
+        function hideReportsModal() {
+            const m = document.getElementById('reports-modal');
+            m.classList.add('hidden'); m.classList.remove('flex');
+        }
+        function showNetworkModal() {
+            const m = document.getElementById('network-modal');
+            m.classList.remove('hidden'); m.classList.add('flex');
+        }
+        function showReportsModal() {
+            const m = document.getElementById('reports-modal');
+            m.classList.remove('hidden'); m.classList.add('flex');
+        }
+        
+        function switchToPage(page) {
+            if (page === 'dashboard') window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
         // Toast notification system
         function showToast(message, type = 'success') {
             const toastContainer = document.getElementById('toast-container');
@@ -980,5 +1148,115 @@
     
     <!-- Toast Container -->
     <div id="toast-container" class="fixed bottom-4 right-4 z-[9999] space-y-2"></div>
+    
+    <!-- Deal Detail Modal -->
+    <div id="deal-modal" onclick="if (event.target.id === 'deal-modal') hideDealDetailModal()" 
+         class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="os-window w-full max-w-4xl rounded-3xl overflow-hidden border border-zinc-700 max-h-[92vh] flex flex-col">
+            
+            <!-- Modal Header -->
+            <div class="px-8 py-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-950">
+                <div>
+                    <div class="flex items-center gap-x-3">
+                        <div id="modal-deal-id" class="font-mono text-2xl font-semibold text-emerald-400"></div>
+                        <div id="modal-deal-status" class="px-3 py-1 text-xs rounded-full border"></div>
+                    </div>
+                    <div id="modal-dealer" class="text-zinc-400 text-sm mt-0.5"></div>
+                </div>
+                <div class="flex items-center gap-x-3">
+                    <div class="text-right">
+                        <div class="text-xs text-zinc-500">RISK SCORE</div>
+                        <div id="modal-risk-score" class="text-4xl font-semibold tabular-nums"></div>
+                    </div>
+                    <button onclick="hideDealDetailModal()" 
+                            class="w-9 h-9 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-full transition-colors">
+                        <i class="fa-solid fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-8 space-y-8">
+                
+                <!-- Risk Breakdown -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="font-semibold">Risk Breakdown</div>
+                        <div class="text-xs px-3 py-1 bg-zinc-900 border border-zinc-700 rounded text-zinc-400">Last updated moments ago</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4" id="risk-breakdown">
+                        <!-- Populated dynamically by JS -->
+                    </div>
+                </div>
+                
+                <!-- Findings Detail -->
+                <div>
+                    <div class="font-semibold mb-3 flex items-center justify-between">
+                        <span>Active Findings <span id="modal-finding-count" class="text-xs text-zinc-500 font-normal"></span></span>
+                    </div>
+                    
+                    <div id="modal-findings-list" class="space-y-3">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Notes / Comments -->
+                <div>
+                    <div class="font-semibold mb-2">Auditor Notes</div>
+                    <textarea id="modal-notes" rows="3" 
+                              class="w-full bg-zinc-900 border border-zinc-700 rounded-xl p-4 text-sm resize-y focus:outline-none focus:border-zinc-500"
+                              placeholder="Add internal notes or justification for decision..."></textarea>
+                    <div class="flex justify-end mt-2">
+                        <button onclick="saveNotes()" 
+                                class="text-xs px-5 py-2 bg-white text-black rounded-xl font-medium flex items-center gap-x-2 hover:bg-zinc-200 transition-colors">
+                            <i class="fa-solid fa-save"></i>
+                            <span>SAVE NOTES</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal Footer Actions -->
+            <div class="px-8 py-5 border-t border-zinc-800 bg-zinc-950 flex flex-wrap gap-3 justify-end">
+                <button onclick="takeModalAction('request_info')" 
+                        class="px-6 py-2.5 text-sm border border-zinc-700 hover:bg-zinc-900 rounded-2xl transition-colors flex items-center gap-x-2">
+                    <i class="fa-solid fa-question-circle"></i>
+                    <span>Request More Info</span>
+                </button>
+                <button onclick="takeModalAction('escalate')" 
+                        class="px-6 py-2.5 text-sm border border-rose-900 hover:bg-rose-950 text-rose-400 rounded-2xl transition-colors flex items-center gap-x-2">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>Escalate</span>
+                </button>
+                <button onclick="takeModalAction('approve')" 
+                        class="px-8 py-2.5 text-sm bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl transition-colors flex items-center gap-x-2 font-medium">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Approve Deal</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Simple placeholder modals for other nav items -->
+    <div id="network-modal" onclick="if (event.target.id === 'network-modal') hideNetworkModal()" 
+         class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="os-window max-w-lg w-full rounded-3xl p-8 text-center">
+            <div class="text-6xl mb-4 opacity-50">📡</div>
+            <div class="font-display text-2xl mb-2">Network Pulse</div>
+            <p class="text-zinc-400 mb-6">Aggregate dealership performance, risk heatmaps, and group-level intelligence coming in v2.5.</p>
+            <button onclick="hideNetworkModal()" class="px-8 py-2.5 border border-zinc-700 rounded-2xl text-sm">Close</button>
+        </div>
+    </div>
+    
+    <div id="reports-modal" onclick="if (event.target.id === 'reports-modal') hideReportsModal()" 
+         class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="os-window max-w-lg w-full rounded-3xl p-8 text-center">
+            <div class="text-6xl mb-4 opacity-50">📊</div>
+            <div class="font-display text-2xl mb-2">Reports &amp; Exports</div>
+            <p class="text-zinc-400 mb-6">Full audit reports, CSV/Excel exports, and scheduled compliance summaries available in the full platform.</p>
+            <button onclick="hideReportsModal()" class="px-8 py-2.5 border border-zinc-700 rounded-2xl text-sm">Close</button>
+        </div>
+    </div>
 </body>
 </html>
