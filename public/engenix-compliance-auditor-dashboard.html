@@ -150,25 +150,25 @@
     <!-- Top Operating Header -->
     <div class="operating-header sticky top-0 z-50">
         <div class="max-w-[1480px] mx-auto">
-            <div class="px-8 py-4 flex items-center justify-between">
+            <div class="px-4 md:px-8 py-3 md:py-4 flex flex-wrap md:flex-nowrap items-center justify-between gap-y-2">
                 <!-- Logo + Session -->
-                <div class="flex items-center gap-x-4">
-                    <div class="flex items-center gap-x-3">
-                        <div class="w-8 h-8 bg-white flex items-center justify-center">
-                            <span class="text-[#0a0a0a] font-black text-xl tracking-tighter">E</span>
+                <div class="flex items-center gap-x-3 md:gap-x-4 w-full md:w-auto">
+                    <div class="flex items-center gap-x-2 md:gap-x-3">
+                        <div class="w-7 h-7 md:w-8 md:h-8 bg-white flex items-center justify-center shrink-0">
+                            <span class="text-[#0a0a0a] font-black text-lg md:text-xl tracking-tighter">E</span>
                         </div>
                         <div>
-                            <div class="font-display text-2xl font-semibold tracking-[-0.04em]">ENGENIX</div>
-                            <div class="text-[9px] text-zinc-500 -mt-1.5 tracking-[1.5px]">OPERATING LAYER</div>
+                            <div class="font-display text-xl md:text-2xl font-semibold tracking-[-0.04em]">ENGENIX</div>
+                            <div class="text-[8px] md:text-[9px] text-zinc-500 -mt-1 tracking-[1.5px]">OPERATING LAYER</div>
                         </div>
                     </div>
                     
-                    <div class="flex items-center gap-x-2 pl-4 border-l border-zinc-800">
-                        <div class="px-3 py-1 bg-emerald-950 border border-emerald-900 rounded text-emerald-400 text-xs font-mono flex items-center gap-x-1.5">
-                            <i class="fa-solid fa-shield-halved text-xs"></i>
+                    <div class="flex items-center gap-x-1.5 md:gap-x-2 pl-3 md:pl-4 border-l border-zinc-800 flex-wrap">
+                        <div class="px-2.5 md:px-3 py-0.5 md:py-1 bg-emerald-950 border border-emerald-900 rounded text-emerald-400 text-[10px] md:text-xs font-mono flex items-center gap-x-1">
+                            <i class="fa-solid fa-shield-halved text-[10px]"></i>
                             <span class="font-semibold">SECURE SESSION</span>
                         </div>
-                        <div class="px-3 py-1 bg-zinc-900 border border-zinc-700 rounded text-xs font-mono flex items-center gap-x-1.5">
+                        <div class="px-2.5 md:px-3 py-0.5 md:py-1 bg-zinc-900 border border-zinc-700 rounded text-[10px] md:text-xs font-mono flex items-center gap-x-1">
                             <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
                             <span class="text-emerald-400 font-semibold">RISK ENGINE ONLINE</span>
                         </div>
@@ -177,58 +177,72 @@
 
                 <!-- Right side controls -->
                 <div class="flex items-center gap-x-6">
-                    <div class="flex items-center gap-x-2 text-xs">
+                    <div class="flex items-center gap-x-2 text-xs hidden md:flex">
                         <div class="text-zinc-400">COMPLIANCE AUDITOR</div>
                         <div class="w-px h-3 bg-zinc-700"></div>
                         <div class="font-mono text-emerald-400">AUD-7842</div>
                     </div>
                     
                     <div class="flex items-center gap-x-2">
-                        <div class="text-right">
+                        <div class="text-right hidden md:block">
                             <div class="text-sm font-medium">Marcus Hale</div>
                             <div class="text-[10px] text-zinc-500">Senior Compliance Auditor • Founding Network</div>
                         </div>
-                        <div class="w-8 h-8 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center overflow-hidden">
+                        <div class="w-7 h-7 md:w-8 md:h-8 bg-zinc-800 border border-zinc-700 rounded-full flex items-center justify-center overflow-hidden">
                             <i class="fa-solid fa-user text-zinc-400 text-sm"></i>
                         </div>
                     </div>
                     
                     <button onclick="logout()" 
-                            class="flex items-center gap-x-2 px-4 py-2 text-xs font-medium border border-zinc-700 hover:bg-zinc-900 transition-colors rounded">
+                            class="flex items-center gap-x-1.5 md:gap-x-2 px-3 md:px-4 py-1.5 md:py-2 text-xs font-medium border border-zinc-700 hover:bg-zinc-900 transition-colors rounded">
                         <i class="fa-solid fa-sign-out-alt"></i>
-                        <span>EXIT SESSION</span>
+                        <span class="hidden md:inline">EXIT SESSION</span>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="max-w-[1480px] mx-auto px-8 pt-6 pb-12">
+    <div class="max-w-[1480px] mx-auto px-4 md:px-8 pt-4 md:pt-6 pb-8 md:pb-12">
+        
+        <!-- Live Status Bar -->
+        <div class="flex items-center justify-between mb-4 text-xs">
+            <div class="flex items-center gap-x-2">
+                <div class="flex items-center gap-x-1.5 px-3 py-1 bg-emerald-950 border border-emerald-900 rounded-full">
+                    <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="font-mono text-emerald-400 font-semibold tracking-wider">LIVE</span>
+                </div>
+                <div class="text-zinc-400">
+                    Last sync: <span id="last-sync" class="font-mono text-zinc-300">just now</span>
+                </div>
+            </div>
+            <div class="hidden md:block text-zinc-500 font-mono text-[10px]">ENGENIX v2.4.1 • Session secured</div>
+        </div>
         
         <!-- Entry Banner -->
-        <div class="flex items-end justify-between mb-6">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4 mb-6">
             <div>
-                <div class="flex items-center gap-x-3 mb-1">
-                    <div class="section-number text-5xl font-black text-white tracking-[-0.06em]">01</div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-x-3 gap-y-1 mb-1">
+                    <div class="section-number text-4xl sm:text-5xl font-black text-white tracking-[-0.06em]">01</div>
                     <div>
-                        <div class="font-display text-4xl font-semibold tracking-[-0.04em]">COMPLIANCE OPERATING VIEW</div>
-                        <div class="text-emerald-400 text-sm font-mono tracking-[1px] mt-0.5">DETECT → DECIDE → ACT → REMEMBER</div>
+                        <div class="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.04em] leading-tight">COMPLIANCE OPERATING VIEW</div>
+                        <div class="text-emerald-400 text-xs sm:text-sm font-mono tracking-[1px] mt-0.5">DETECT → DECIDE → ACT → REMEMBER</div>
                     </div>
                 </div>
-                <div class="text-zinc-400 text-sm max-w-md">
+                <div class="text-zinc-400 text-sm max-w-md pr-4">
                     Real-time compliance intelligence for the dealership network. 
                     The audit begins when the deal begins.
                 </div>
             </div>
             
-            <div class="text-right">
-                <div class="os-label mb-1">CURRENT NETWORK STATUS</div>
-                <div class="flex items-center justify-end gap-x-2">
-                    <div class="px-4 py-1.5 bg-zinc-900 border border-zinc-700 rounded text-sm flex items-center gap-x-2">
+            <div class="text-left md:text-right">
+                <div class="os-label mb-1 hidden md:block">CURRENT NETWORK STATUS</div>
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-2">
+                    <div class="px-3 py-1 bg-zinc-900 border border-zinc-700 rounded text-xs sm:text-sm flex items-center gap-x-1.5">
                         <span class="font-mono text-emerald-400">47</span>
                         <span class="text-zinc-400">DEALERSHIPS</span>
                     </div>
-                    <div class="px-4 py-1.5 bg-zinc-900 border border-zinc-700 rounded text-sm flex items-center gap-x-2">
+                    <div class="px-3 py-1 bg-zinc-900 border border-zinc-700 rounded text-xs sm:text-sm flex items-center gap-x-1.5">
                         <span class="font-mono text-amber-400">312</span>
                         <span class="text-zinc-400">DEALS IN MOTION</span>
                     </div>
@@ -237,7 +251,7 @@
         </div>
 
         <!-- KPI Row -->
-        <div class="grid grid-cols-4 gap-4 mb-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
             <!-- KPI 1 -->
             <div class="os-window rounded-2xl p-5 kpi-card">
                 <div class="flex justify-between items-start">
@@ -303,10 +317,10 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
             
             <!-- 30-Day Compliance Posture -->
-            <div class="col-span-12 lg:col-span-7 os-window rounded-2xl p-6">
+            <div class="col-span-1 lg:col-span-7 os-window rounded-2xl p-4 md:p-6">
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <div class="section-number text-xl font-bold tracking-tight">02 • 30-DAY COMPLIANCE PULSE</div>
@@ -320,13 +334,13 @@
                     </div>
                 </div>
                 
-                <div class="chart-container h-[218px]">
+                <div class="chart-container h-[180px] md:h-[218px]">
                     <canvas id="complianceChart"></canvas>
                 </div>
             </div>
 
             <!-- Deal Risk Simulator -->
-            <div class="col-span-12 lg:col-span-5 os-window rounded-2xl p-6">
+            <div class="col-span-1 lg:col-span-5 os-window rounded-2xl p-4 md:p-6">
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <div class="section-number text-xl font-bold tracking-tight">03 • DEAL RISK SIMULATOR</div>
@@ -378,6 +392,16 @@
                     </div>
                 </div>
                 
+                <!-- Preset Buttons -->
+                <div class="mt-3 flex flex-wrap gap-2">
+                    <button onclick="applyRiskPreset('clean')" 
+                            class="text-[10px] px-3 py-1 bg-emerald-950 hover:bg-emerald-900 border border-emerald-900 text-emerald-400 rounded transition-colors">Clean Deal</button>
+                    <button onclick="applyRiskPreset('typical')" 
+                            class="text-[10px] px-3 py-1 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 rounded transition-colors">Typical F&amp;I</button>
+                    <button onclick="applyRiskPreset('high')" 
+                            class="text-[10px] px-3 py-1 bg-rose-950 hover:bg-rose-900 border border-rose-900 text-rose-400 rounded transition-colors">High Risk</button>
+                </div>
+                
                 <div class="mt-4 pt-4 border-t border-zinc-800 flex items-center justify-between text-xs">
                     <div class="text-zinc-400">Modeled Risk Level</div>
                     <div id="risk-level" class="font-semibold text-emerald-400">LOW • ACCEPTABLE</div>
@@ -385,18 +409,27 @@
             </div>
 
             <!-- Recent Findings Table -->
-            <div class="col-span-12 lg:col-span-7 os-window rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-4">
+            <div class="col-span-1 lg:col-span-7 os-window rounded-2xl p-4 md:p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-y-3 mb-4">
                     <div>
                         <div class="section-number text-xl font-bold tracking-tight">04 • PRIORITIZED FINDINGS</div>
                         <div class="text-xs text-zinc-400">Explainable • Actionable • Human-controlled</div>
                     </div>
-                    <button onclick="filterFindings('all')" 
-                            class="text-xs px-4 py-1.5 border border-zinc-700 hover:bg-zinc-900 rounded transition-colors">VIEW ALL</button>
+                    
+                    <div class="flex items-center gap-x-2">
+                        <div class="relative w-full sm:w-64">
+                            <input type="text" id="findings-search" placeholder="Search Deal ID or Dealership..." 
+                                   class="w-full bg-zinc-900 border border-zinc-700 text-sm rounded pl-9 py-1.5 text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:border-zinc-500"
+                                   onkeyup="filterFindingsTable()">
+                            <i class="fa-solid fa-search absolute left-3 top-2.5 text-zinc-500 text-sm"></i>
+                        </div>
+                        <button onclick="filterFindings('all')" 
+                                class="text-xs px-4 py-1.5 border border-zinc-700 hover:bg-zinc-900 rounded transition-colors whitespace-nowrap">VIEW ALL</button>
+                    </div>
                 </div>
 
-                <div class="overflow-x-auto">
-                    <table class="w-full compliance-table">
+                <div class="overflow-x-auto -mx-1 px-1">
+                    <table class="w-full compliance-table min-w-[620px] md:min-w-0">
                         <thead>
                             <tr class="border-b border-zinc-800 text-xs text-zinc-400">
                                 <th class="text-left py-3 font-medium px-3">DEAL ID</th>
@@ -415,7 +448,7 @@
             </div>
 
             <!-- Audit Trail / Activity -->
-            <div class="col-span-12 lg:col-span-5 os-window rounded-2xl p-6">
+            <div class="col-span-1 lg:col-span-5 os-window rounded-2xl p-4 md:p-6">
                 <div class="flex items-center justify-between mb-4">
                     <div>
                         <div class="section-number text-xl font-bold tracking-tight">05 • AUDIT TRAIL</div>
@@ -597,6 +630,43 @@
             }
         }
         
+        // Risk Simulator Presets
+        function applyRiskPreset(preset) {
+            const sliders = {
+                slider1: document.getElementById('slider1'),
+                slider2: document.getElementById('slider2'),
+                slider3: document.getElementById('slider3'),
+                slider4: document.getElementById('slider4')
+            };
+            
+            if (preset === 'clean') {
+                sliders.slider1.value = 8;
+                sliders.slider2.value = 22;
+                sliders.slider3.value = 11;
+                sliders.slider4.value = 7;
+            } else if (preset === 'typical') {
+                sliders.slider1.value = 18;
+                sliders.slider2.value = 41;
+                sliders.slider3.value = 27;
+                sliders.slider4.value = 14;
+            } else if (preset === 'high') {
+                sliders.slider1.value = 67;
+                sliders.slider2.value = 81;
+                sliders.slider3.value = 74;
+                sliders.slider4.value = 39;
+            }
+            
+            updateRiskScore();
+            
+            // Flash effect on the score pill
+            const pill = document.getElementById('risk-score-pill');
+            pill.style.transition = 'all 0.1s ease';
+            pill.style.transform = 'scale(1.08)';
+            setTimeout(() => {
+                pill.style.transform = 'scale(1)';
+            }, 180);
+        }
+        
         // Findings Data
         const findingsData = [
             { id: "JD-44921", dealer: "Premier Auto Group", type: "Stipulation Gap", risk: "Low", status: "Cleared", action: "Approved" },
@@ -658,6 +728,22 @@
             renderFindings(type);
         }
         
+        // Live search filter for findings table
+        function filterFindingsTable() {
+            const searchTerm = document.getElementById('findings-search').value.toLowerCase().trim();
+            const tbody = document.getElementById('findings-tbody');
+            const rows = tbody.getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const rowText = rows[i].textContent.toLowerCase();
+                if (searchTerm === '' || rowText.includes(searchTerm)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+        
         function takeAction(dealId, btn) {
             const originalText = btn.innerText;
             btn.innerHTML = `<i class="fa-solid fa-check mr-1"></i> RECORDED`;
@@ -688,6 +774,11 @@
                     openFindings.innerText = '46';
                 }
             }, 1200);
+            
+            // Show toast notification
+            if (typeof showToast === 'function') {
+                showToast(`Action recorded for ${dealId}. Audit trail updated.`, 'success');
+            }
         }
         
         function logout() {
@@ -727,14 +818,89 @@
             // Keyboard shortcut hint (optional polish)
             console.log('%c[ENGENIX] Compliance Auditor Dashboard initialized. Press "?" for shortcuts.', 'color:#3f3f46');
             
-            // Subtle live update simulation every 45 seconds
+            // Live sync timer + occasional updates
             setInterval(() => {
+                const syncEl = document.getElementById('last-sync');
+                if (syncEl) {
+                    const times = ['just now', 'moments ago', '1m ago', '2m ago'];
+                    syncEl.innerText = times[Math.floor(Math.random() * times.length)];
+                }
+                
+                // Occasionally bump a KPI to feel alive
                 const postureEl = document.querySelector('.metric-value');
-                if (postureEl && Math.random() > 0.7) {
+                if (postureEl && Math.random() > 0.75) {
                     const current = parseInt(postureEl.innerText);
                     postureEl.innerText = current + 1;
                 }
-            }, 45000);
+                
+                // Occasionally add a new finding (makes it feel truly live)
+                if (Math.random() > 0.85) {
+                    addLiveFinding();
+                }
+            }, 28000);
+        }
+        
+        // Add a new live finding dynamically
+        function addLiveFinding() {
+            const tbody = document.getElementById('findings-tbody');
+            if (!tbody) return;
+            
+            const newFindings = [
+                { id: "NX-" + Math.floor(10000 + Math.random()*90000), dealer: "Summit Motors", type: "Credit Variance", risk: "Moderate", status: "In Review", action: "Investigate" },
+                { id: "NX-" + Math.floor(10000 + Math.random()*90000), dealer: "Velocity Cars", type: "Documentation", risk: "Low", status: "Cleared", action: "Approved" }
+            ];
+            
+            const finding = newFindings[Math.floor(Math.random() * newFindings.length)];
+            
+            const row = document.createElement('tr');
+            row.className = 'finding-row border-b border-zinc-800 last:border-0 bg-emerald-950/30';
+            
+            let riskColor = finding.risk === 'Moderate' ? 'amber' : 'emerald';
+            
+            row.innerHTML = `
+                <td class="py-3.5 px-3 font-mono text-xs text-zinc-300">${finding.id}</td>
+                <td class="py-3.5 text-zinc-200">${finding.dealer}</td>
+                <td class="py-3.5 text-zinc-300">${finding.type}</td>
+                <td class="py-3.5 text-center">
+                    <span class="status-badge bg-${riskColor}-950 text-${riskColor}-400 border border-${riskColor}-900">${finding.risk}</span>
+                </td>
+                <td class="py-3.5 text-center">
+                    <span class="status-badge bg-emerald-950 text-emerald-400 border border-emerald-900">${finding.status}</span>
+                </td>
+                <td class="py-3.5 text-right pr-3">
+                    <button onclick="takeAction('${finding.id}', this)" 
+                            class="text-xs px-4 py-1 border border-zinc-700 hover:bg-zinc-900 hover:text-white transition-colors rounded">
+                        ${finding.action}
+                    </button>
+                </td>
+            `;
+            
+            tbody.prepend(row);
+            
+            // Add to audit trail
+            const logContainer = document.querySelector('.space-y-3');
+            if (logContainer) {
+                const newLog = document.createElement('div');
+                newLog.className = 'flex gap-x-3 text-xs';
+                newLog.innerHTML = `
+                    <div class="font-mono text-emerald-400 w-16 shrink-0">LIVE</div>
+                    <div class="flex-1">
+                        New finding auto-detected on <span class="text-zinc-300">${finding.id}</span> • ${finding.dealer}.
+                    </div>
+                `;
+                logContainer.prepend(newLog);
+            }
+            
+            // Show toast
+            if (typeof showToast === 'function') {
+                showToast(`New finding detected: ${finding.id}`, 'info');
+            }
+            
+            // Remove highlight after a few seconds
+            setTimeout(() => {
+                row.style.transition = 'background-color 1.5s ease';
+                row.style.backgroundColor = '';
+            }, 4500);
         }
         
         // Boot
@@ -775,6 +941,44 @@
                 updateRiskScore();
             }
         });
+        
+        // Toast notification system
+        function showToast(message, type = 'success') {
+            const toastContainer = document.getElementById('toast-container');
+            if (!toastContainer) return;
+            
+            const toast = document.createElement('div');
+            let bgClass = 'bg-emerald-950 border-emerald-900 text-emerald-400';
+            let icon = 'fa-check-circle';
+            
+            if (type === 'warning') {
+                bgClass = 'bg-amber-950 border-amber-900 text-amber-400';
+                icon = 'fa-exclamation-triangle';
+            } else if (type === 'info') {
+                bgClass = 'bg-zinc-800 border-zinc-700 text-zinc-300';
+                icon = 'fa-info-circle';
+            }
+            
+            toast.className = `flex items-center gap-x-3 px-4 py-3 rounded-xl border ${bgClass} shadow-2xl text-sm max-w-xs animate-[slideIn_0.2s_ease]`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-lg"></i>
+                <div class="flex-1">${message}</div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.25s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 250);
+            }, 3200);
+        }
+        
+        // Note: Toast is called inside the updated takeAction function below
+        
     </script>
+    
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-[9999] space-y-2"></div>
 </body>
 </html>
