@@ -5894,3 +5894,307 @@ html[data-theme="light"] .hero-folder-tab { background: #efe9dd; }
   0%, 100% { transform: translateY(-22px); opacity: .18; }
   50% { transform: translateY(118px); opacity: 1; }
 }
+
+
+/* =========================================================
+   ENGENIX MOBILE COMPOSITION V3
+   Removes legacy hero collisions and turns the opening into
+   one deliberate mobile scene.
+   ========================================================= */
+@media (max-width: 820px) {
+  :root { --mobile-header-height: 68px; }
+
+  .site-header {
+    top: max(8px, env(safe-area-inset-top));
+    left: 10px;
+    right: 10px;
+  }
+
+  .site-header .nav-shell {
+    height: var(--mobile-header-height);
+    padding: 4px 15px 6px 17px;
+    border-radius: 20px;
+  }
+
+  .site-header .brand {
+    min-width: 0;
+    padding-bottom: 2px;
+  }
+
+  .site-header .brand img {
+    width: 158px;
+    max-height: 50px;
+    transform: translateY(-1px) scale(1.04);
+    transform-origin: left center;
+  }
+
+  .site-header .nav-toggle {
+    width: 38px;
+    height: 38px;
+    padding: 7px;
+  }
+
+  .site-header .nav-toggle span { width: 23px; }
+
+  .site-header .nav-shell::after {
+    left: 17px;
+    right: 17px;
+    bottom: 4px;
+  }
+
+  /* The display control now lives visually inside the header, beside menu. */
+  .theme-toggle {
+    top: calc(max(8px, env(safe-area-inset-top)) + 15px);
+    right: 102px;
+    bottom: auto;
+    left: auto;
+    z-index: 53;
+    width: 38px;
+    min-height: 38px;
+    padding: 6px;
+    justify-content: center;
+    border-color: rgba(255,255,255,.13);
+    background: rgba(11,15,22,.72);
+    box-shadow: none;
+  }
+
+  .theme-toggle-orb {
+    width: 23px;
+    height: 23px;
+    flex-basis: 23px;
+  }
+
+  .theme-toggle-label { display: none; }
+
+  html[data-theme="light"] .theme-toggle {
+    border-color: rgba(31,48,73,.16);
+    background: rgba(255,255,255,.78);
+  }
+
+  /* Old unboxing label was attached to every hero visual. */
+  #hero-entry .hero-command-visual::after { content: none !important; }
+
+  #hero-entry {
+    min-height: auto;
+    padding-top: calc(var(--mobile-header-height) + max(8px, env(safe-area-inset-top)) + 42px);
+    padding-bottom: 96px;
+  }
+
+  #hero-entry .shell { width: min(100% - 32px, 680px); }
+
+  .hero-command-grid { gap: 31px; }
+
+  .hero-command-copy .eyebrow {
+    max-width: 29ch;
+    font-size: .57rem;
+    line-height: 1.55;
+    letter-spacing: .145em;
+  }
+
+  .hero-command-copy h1 {
+    max-width: 10.5ch;
+    margin: 22px 0 0;
+    font-size: clamp(2.82rem, 11.65vw, 3.58rem);
+    line-height: .925;
+    letter-spacing: -.061em;
+  }
+
+  .hero-command-copy h1 strong { margin-top: .19em; }
+
+  .hero-command-visual {
+    margin-top: 4px;
+    transform: none !important;
+  }
+
+  .hero-audit-console {
+    border-radius: 22px;
+    box-shadow: 0 30px 82px rgba(0,0,0,.44), 0 0 0 1px rgba(23,102,198,.055) inset;
+  }
+
+  .hero-audit-topbar {
+    min-height: 50px;
+    padding-inline: 16px;
+  }
+
+  .hero-audit-body { display: block; }
+
+  .hero-jacket-stage {
+    min-height: 292px;
+    padding: 18px 18px 20px;
+  }
+
+  .hero-folder {
+    width: 160px;
+    height: 214px;
+    margin: 22px auto 10px;
+  }
+
+  .hero-review-stage {
+    min-height: 0;
+    padding: 22px 18px 20px;
+    background: linear-gradient(180deg, rgba(255,255,255,.012), rgba(255,255,255,.004));
+  }
+
+  .hero-review-heading { align-items: center; }
+
+  .hero-review-heading strong {
+    max-width: 18ch;
+    font-size: 1.05rem;
+  }
+
+  .hero-review-event {
+    margin: 15px 0 10px;
+    padding: 14px;
+  }
+
+  .hero-review-event p {
+    font-size: .65rem;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
+  }
+
+  .hero-finding {
+    min-height: 54px;
+    padding: 10px 11px;
+  }
+
+  .hero-finding strong { font-size: .59rem; }
+  .hero-finding small { font-size: .49rem; }
+
+  .hero-next-action { margin-top: 10px; padding: 13px; }
+  .hero-next-action strong { font-size: .68rem; }
+
+  .hero-audit-footer {
+    min-height: 58px;
+    padding: 0 12px;
+  }
+
+  .hero-command-copy-bottom {
+    padding-top: 8px;
+    transform: none !important;
+  }
+
+  .hero-command-lede {
+    max-width: 33ch;
+    margin: 0;
+    font-size: .98rem;
+    line-height: 1.62;
+  }
+
+  .hero-command-actions {
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .hero-command-actions .button-primary { min-height: 56px; }
+
+  .hero-command-actions .button-secondary {
+    width: fit-content;
+    min-height: auto;
+    padding: 8px 0 10px;
+    border: 0;
+    border-bottom: 1px solid rgba(241,207,116,.42);
+    border-radius: 0;
+    background: transparent;
+    justify-self: start;
+    font-size: .75rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  /* The next chapter becomes a clean scene instead of a sticky 132svh void. */
+  .threshold-scene {
+    min-height: auto;
+    padding: 112px 0 118px;
+    display: grid;
+    place-items: center;
+  }
+
+  .threshold-scene .threshold-content {
+    position: relative;
+    top: auto;
+    width: min(100% - 36px, 620px);
+    padding: 0;
+    text-align: center;
+  }
+
+  .threshold-scene h2 {
+    max-width: 10.4ch;
+    margin: 20px auto 24px;
+    font-size: clamp(2.72rem, 11.2vw, 4.05rem);
+    line-height: .965;
+  }
+
+  .threshold-scene p {
+    max-width: 32ch;
+    margin-inline: auto;
+  }
+
+  /* A visible, compact briefing entry replaces the cryptic arrow puck. */
+  .global-founding-dock,
+  .global-founding-dock.is-compact {
+    left: auto;
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    width: auto;
+    min-width: 126px;
+    min-height: 52px;
+    padding: 0 15px 0 17px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    border-radius: 999px;
+  }
+
+  .global-founding-dock .dock-status,
+  .global-founding-dock small,
+  .global-founding-dock.is-compact .dock-status,
+  .global-founding-dock.is-compact small { display: none; }
+
+  .global-founding-dock strong,
+  .global-founding-dock.is-compact strong {
+    display: block;
+    grid-column: 1;
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .global-founding-dock b,
+  .global-founding-dock.is-compact b {
+    position: static;
+    grid-column: 2;
+    transform: none;
+    display: grid;
+    place-items: center;
+    width: auto;
+    height: auto;
+    font-size: 1.05rem;
+  }
+
+  .global-founding-dock.is-context-hidden,
+  .global-founding-dock.is-suppressed,
+  body.private-access-open .global-founding-dock {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(12px);
+  }
+
+  /* The retired hero-wide hiding class must never create another dead zone. */
+  .global-founding-dock.is-hero-hidden:not(.is-context-hidden) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-header .brand img { width: 148px; }
+  .hero-command-copy h1 { font-size: clamp(2.68rem, 11.7vw, 3.2rem); }
+  .hero-folder { width: 150px; }
+}

@@ -451,7 +451,6 @@
     if ('IntersectionObserver' in window && hero) {
       const observer = new IntersectionObserver(([entry]) => {
         inView = entry.isIntersecting && entry.intersectionRatio > 0.22;
-        if (dock) dock.classList.toggle('is-hero-hidden', inView);
         if (inView) start(); else stop();
       }, { threshold: [0, .22, .6] });
       observer.observe(hero);
@@ -724,11 +723,17 @@
       let ticking = false;
       const render = () => {
         if (hero && visual && copy) {
-          const rect = hero.getBoundingClientRect();
-          const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
-          visual.style.transform = `translate3d(0, ${progress * 30}px, 0) scale(${1 - progress * 0.03})`;
-          copy.style.transform = `translate3d(0, ${progress * 15}px, 0)`;
-          copy.style.opacity = String(1 - progress * 0.28);
+          if (window.innerWidth <= 820) {
+            visual.style.transform = 'none';
+            copy.style.transform = 'none';
+            copy.style.opacity = '1';
+          } else {
+            const rect = hero.getBoundingClientRect();
+            const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+            visual.style.transform = `translate3d(0, ${progress * 30}px, 0) scale(${1 - progress * 0.03})`;
+            copy.style.transform = `translate3d(0, ${progress * 15}px, 0)`;
+            copy.style.opacity = String(1 - progress * 0.28);
+          }
         }
 
         quietElements.forEach(element => {
@@ -1049,4 +1054,44 @@
   } else {
     prepare();
   }
+})();
+
+
+// =============================================================================
+// ENGENIX MOBILE CONTROL ORCHESTRATION V3
+// Keeps the briefing entry available without covering an on-screen CTA.
+// =============================================================================
+(() => {
+  const dock = document.querySelector('.global-founding-dock');
+  if (!dock) return;
+
+  const contextualButtons = Array.from(document.querySelectorAll('[data-open-private-access]'))
+    .filter(button => button !== dock && !button.closest('#private-access-panel'));
+
+  let visibleButtons = new Set();
+
+  const updateDock = () => {
+    const hiddenByContext = visibleButtons.size > 0;
+    dock.classList.toggle('is-context-hidden', hiddenByContext);
+    dock.setAttribute('aria-hidden', String(hiddenByContext));
+  };
+
+  if ('IntersectionObserver' in window && contextualButtons.length) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const rect = entry.boundingClientRect;
+        const actuallyVisible = entry.isIntersecting && entry.intersectionRatio >= 0.42 && rect.height > 0 && rect.width > 0;
+        if (actuallyVisible) visibleButtons.add(entry.target);
+        else visibleButtons.delete(entry.target);
+      });
+      updateDock();
+    }, {
+      threshold: [0, .42, .75],
+      rootMargin: '-8% 0px -8% 0px'
+    });
+
+    contextualButtons.forEach(button => observer.observe(button));
+  }
+
+  updateDock();
 })();
