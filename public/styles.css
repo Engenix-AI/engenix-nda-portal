@@ -6029,11 +6029,11 @@ html[data-theme="light"] .hero-folder-tab { background: #efe9dd; }
   }
 
   .site-header .nav-toggle {
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+    width: 42px;
+    height: 42px;
+    padding: 9px;
     z-index: 55;
-    right: 8px;
+    right: 6px;
   }
 
   .site-header .nav-toggle span { width: 23px; }
@@ -6360,11 +6360,11 @@ html[data-theme="light"] .hero-folder-tab { background: #efe9dd; }
 @media (max-width: 820px) {
   /* Fix theme toggle positioning */
   .theme-toggle {
-    top: calc(max(8px, env(safe-area-inset-top)) + 12px);
-    right: 52px;
-    width: 34px;
-    min-height: 34px;
-    padding: 5px;
+    top: calc(max(8px, env(safe-area-inset-top)) + 10px);
+    right: 60px;
+    width: 30px;
+    min-height: 30px;
+    padding: 4px;
     border-color: rgba(255,255,255,.12);
     z-index: 54;
   }
