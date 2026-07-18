@@ -4826,3 +4826,141 @@ html[data-theme="light"] .early-access-close .button-primary {
   transform: perspective(1550px) rotateY(-1.8deg) rotateX(.9deg) translateY(-7px);
   box-shadow: 0 58px 155px rgba(0,0,0,.64), 0 0 85px rgba(23,102,198,.14);
 }
+
+/* =========================================================
+   HERO VISUAL — SIGNIFICANTLY MORE ANIMATED & IMPACTFUL
+   New rings, node pulses, data flow lines, stronger core
+   ========================================================= */
+
+/* Extra 4th ring for depth */
+.signal-ring.ring-four {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border: 1px solid rgba(212,167,58,.08);
+  border-radius: 50%;
+  animation: ringspinrev 28s linear infinite;
+  z-index: 1;
+}
+
+/* Stronger, layered core with breathing glow */
+.signal-core {
+  position: relative;
+  z-index: 3;
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(212,167,58,.18), transparent 68%), #0a0e15;
+  border: 1px solid rgba(212,167,58,.38);
+  box-shadow: 
+    0 0 60px rgba(212,167,58,.12),
+    inset 0 0 30px rgba(255,255,255,.03);
+  transition: box-shadow .6s ease;
+}
+
+.core-glow {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,167,58,.22), transparent 70%);
+  animation: coreBreath 4.2s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes coreBreath {
+  0%, 100% { transform: scale(0.92); opacity: 0.6; }
+  50% { transform: scale(1.18); opacity: 0.95; }
+}
+
+/* Individual node activity pulses */
+.signal-node {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #7c8797;
+  font-size: .54rem;
+  letter-spacing: .12em;
+  transition: color .3s ease;
+}
+
+.signal-node i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  box-shadow: 0 0 14px rgba(75,151,241,.7);
+  position: relative;
+}
+
+.node-pulse {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  opacity: 0.4;
+  animation: nodePulse 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.node-b i, .node-b .node-pulse { background: #f1cf74; box-shadow: 0 0 14px rgba(241,207,116,.65); }
+.node-c i, .node-c .node-pulse { background: #68c99b; box-shadow: 0 0 14px rgba(104,201,155,.65); }
+.node-d i, .node-d .node-pulse { background: #9d7ff2; box-shadow: 0 0 14px rgba(157,127,242,.65); }
+
+@keyframes nodePulse {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(2.8); opacity: 0; }
+}
+
+/* Animated data flow lines between nodes and core */
+.data-line {
+  position: absolute;
+  z-index: 2;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(75,151,241,.35), transparent);
+  opacity: 0.6;
+  pointer-events: none;
+  animation: dataFlow 3.6s linear infinite;
+}
+
+.data-line.line-1 { width: 68px; top: 38%; left: 32%; transform: rotate(38deg); animation-delay: 0s; }
+.data-line.line-2 { width: 72px; top: 62%; left: 34%; transform: rotate(-42deg); animation-delay: 1.1s; }
+.data-line.line-3 { width: 65px; top: 35%; right: 33%; transform: rotate(-35deg); animation-delay: 2.3s; }
+.data-line.line-4 { width: 70px; top: 64%; right: 32%; transform: rotate(45deg); animation-delay: 0.6s; }
+
+@keyframes dataFlow {
+  0% { opacity: 0.2; transform: scaleX(0.6); }
+  50% { opacity: 0.85; }
+  100% { opacity: 0.2; transform: scaleX(1.1); }
+}
+
+/* Make existing rings stronger and more varied */
+.signal-ring.ring-one { animation-duration: 3.2s; }
+.signal-ring.ring-two { animation-duration: 14s; border-color: rgba(75,151,241,.22); }
+.signal-ring.ring-three { animation-duration: 19s; border-color: rgba(212,167,58,.16); }
+
+/* Stronger hover state on the whole visual */
+.abstract-system:hover .signal-core {
+  box-shadow: 
+    0 0 85px rgba(212,167,58,.22),
+    inset 0 0 35px rgba(255,255,255,.05);
+}
+
+.abstract-system:hover .data-line {
+  opacity: 0.9;
+}
+
+/* Mobile adjustments for new animated elements */
+@media (max-width: 620px) {
+  .signal-ring.ring-four { display: none; }
+  .data-line { display: none; } /* keep it clean on mobile */
+  .core-glow { animation-duration: 5.5s; }
+  .node-pulse { animation-duration: 3.4s; }
+}
