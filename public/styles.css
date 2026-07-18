@@ -6475,3 +6475,313 @@ html[data-theme="light"] .hero-folder-tab { background: #efe9dd; }
   .hero-command-copy h1 { font-size: clamp(2.68rem, 11.7vw, 3.2rem); }
   .hero-folder { width: 150px; }
 }
+
+/* =========================================================
+   ENGENIX HEADER + MOBILE ALIGNMENT PASS V4
+   Structural control grouping replaces competing fixed offsets.
+   This block intentionally comes last so it is the final authority.
+   ========================================================= */
+.site-header .nav-shell {
+  grid-template-columns: 170px minmax(0, 1fr) auto;
+}
+
+.nav-actions {
+  position: relative;
+  z-index: 56;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* The theme control is now a real header child, not a page-level floater. */
+.nav-actions .theme-toggle {
+  position: static;
+  inset: auto;
+  flex: 0 0 auto;
+  min-height: 40px;
+  width: auto;
+  margin: 0;
+  padding: 6px 12px 6px 7px;
+  transform: none;
+  z-index: auto;
+}
+
+.nav-actions .theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.nav-actions .nav-toggle {
+  position: relative;
+  inset: auto;
+  flex: 0 0 42px;
+  margin: 0;
+}
+
+@media (min-width: 1181px) {
+  .nav-actions .nav-toggle { display: none; }
+}
+
+@media (max-width: 1180px) {
+  .site-header .nav-shell {
+    grid-template-columns: minmax(128px, 1fr) auto;
+    gap: 14px;
+  }
+
+  .site-header .nav-links {
+    grid-column: 1 / -1;
+  }
+
+  .nav-actions {
+    grid-column: 2;
+    gap: 8px;
+  }
+
+  .nav-actions .nav-cta { display: none; }
+
+  .nav-actions .theme-toggle {
+    display: inline-flex;
+    width: 42px;
+    min-height: 42px;
+    padding: 7px;
+    justify-content: center;
+    border-radius: 999px;
+  }
+
+  .nav-actions .theme-toggle-label { display: none; }
+
+  .nav-actions .theme-toggle-orb {
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
+  }
+
+  .nav-actions .nav-toggle {
+    display: grid;
+    place-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    justify-self: auto;
+    right: auto;
+  }
+
+  .site-header.menu-open .nav-actions {
+    position: relative;
+    z-index: 60;
+    align-self: start;
+  }
+}
+
+@media (max-width: 820px) {
+  .site-header .nav-shell {
+    width: 100%;
+    margin: 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 10px;
+    padding: 4px 12px 6px 17px;
+  }
+
+  .site-header .brand {
+    min-width: 0;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .site-header .brand img {
+    width: clamp(132px, 36vw, 154px);
+    max-width: 100%;
+  }
+
+  .nav-actions {
+    align-self: center;
+    gap: 8px;
+  }
+
+  .nav-actions .theme-toggle,
+  .nav-actions .nav-toggle {
+    width: 42px;
+    height: 42px;
+    min-height: 42px;
+  }
+
+  .nav-actions .theme-toggle {
+    position: static !important;
+    inset: auto !important;
+    padding: 7px;
+    background: rgba(11,15,22,.72);
+    box-shadow: none;
+  }
+
+  html[data-theme="light"] .nav-actions .theme-toggle {
+    background: rgba(255,255,255,.82);
+  }
+
+  .site-header .nav-toggle span {
+    width: 23px;
+    margin: 5px 0;
+  }
+
+  /* Keep the top control row composed while the full-screen menu is open. */
+  .site-header.menu-open .nav-shell {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: var(--mobile-header-height) 1fr;
+    align-items: start;
+    padding-top: 4px;
+  }
+
+  .site-header.menu-open .brand,
+  .site-header.menu-open .nav-actions {
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .site-header.menu-open .nav-links {
+    grid-row: 1 / -1;
+  }
+
+  /* Product console alignment on narrow screens. */
+  .hero-audit-topbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .hero-audit-system {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .hero-audit-system span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-audit-topbar time { display: none; }
+
+  .hero-command-copy,
+  .hero-command-copy-bottom,
+  .hero-command-visual {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hero-command-actions .button-primary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-command-actions .button-secondary {
+    max-width: 100%;
+    white-space: normal;
+    text-align: left;
+  }
+
+  /* Card rhythm: remove inherited desktop voids and uneven bottoms. */
+  .trust-item h3 {
+    margin: 34px 0 10px;
+  }
+
+  .trust-item p,
+  .signal-card p,
+  .expansion-rail article p {
+    margin-bottom: 0;
+  }
+
+  .leader-meta {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .leader-meta span {
+    max-width: 22ch;
+    text-align: left;
+  }
+
+  .section-head,
+  .leadership-head,
+  .principle-cut-grid,
+  .early-access-grid {
+    min-width: 0;
+  }
+
+  /* Reserve safe reading space above the persistent briefing pill. */
+  body {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+
+  body.private-access-open,
+  body.menu-open {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-header .nav-shell {
+    padding-left: 14px;
+    padding-right: 10px;
+  }
+
+  .site-header .brand img {
+    width: clamp(122px, 34vw, 142px);
+  }
+
+  .nav-actions { gap: 6px; }
+
+  .nav-actions .theme-toggle,
+  .nav-actions .nav-toggle {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+  }
+
+  .nav-actions .theme-toggle-orb {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+
+  .hero-command-copy h1 {
+    max-width: 10.1ch;
+  }
+
+  .hero-review-heading {
+    align-items: flex-start;
+  }
+
+  .hero-review-pill {
+    flex: 0 0 auto;
+    max-width: 42%;
+    text-align: center;
+  }
+
+  .hero-jacket-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-jacket-meta span:last-child {
+    text-align: left;
+  }
+}
+
+@media (max-width: 350px) {
+  .site-header .brand img { width: 118px; }
+  .nav-actions { gap: 4px; }
+  .nav-actions .theme-toggle,
+  .nav-actions .nav-toggle {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+  }
+}
+
+/* V4 micro-corrections */
+@media (max-width: 820px) {
+  .site-header .nav-shell { position: relative; }
+
+  .global-founding-dock,
+  .global-founding-dock.is-compact {
+    bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+}
