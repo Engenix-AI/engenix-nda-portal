@@ -225,6 +225,94 @@ blockquote { margin: 26px 0 0; font-size: clamp(2.7rem, 5vw, 5.3rem); letter-spa
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .72s ease, transform .72s cubic-bezier(.2,.7,.2,1); transition-delay: var(--delay, 0ms); }
 .reveal.visible { opacity: 1; transform: none; }
 
+/* =========================================================
+   PREMIUM MICRO-FLARE (clean + fast)
+   Subtle, high-quality interactions across the site
+   ========================================================= */
+
+/* Signal Cards */
+.signal-card {
+  transition: transform .35s cubic-bezier(.2,.82,.2,1), 
+              box-shadow .35s ease,
+              border-color .3s ease;
+}
+.signal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* Leader Cards */
+.leader-card {
+  transition: transform .4s cubic-bezier(.2,.82,.2,1), 
+              box-shadow .4s ease;
+}
+.leader-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(0,0,0,.4);
+}
+
+/* Expansion Rail Articles */
+.expansion-rail article {
+  transition: transform .35s cubic-bezier(.2,.82,.2,1), 
+              border-color .3s ease,
+              box-shadow .35s ease;
+}
+.expansion-rail article:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212,167,58,.35);
+  box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}
+
+/* Trust Items */
+.trust-item {
+  transition: transform .35s cubic-bezier(.2,.82,.2,1), 
+              box-shadow .35s ease;
+}
+.trust-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 45px rgba(0,0,0,.32);
+}
+
+/* Intel Panels */
+.intel-panel {
+  transition: transform .35s cubic-bezier(.2,.82,.2,1), 
+              box-shadow .35s ease,
+              border-color .3s ease;
+}
+.intel-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(0,0,0,.38);
+  border-color: rgba(255,255,255,.16);
+}
+
+/* Deal Nodes */
+.deal-node {
+  transition: transform .25s cubic-bezier(.2,.82,.2,1), 
+              box-shadow .25s ease,
+              background .25s ease;
+}
+.deal-node:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(0,0,0,.3);
+}
+.deal-node.active {
+  box-shadow: 0 10px 30px rgba(23,102,198,.25);
+}
+
+/* Refined Button Hover */
+.button {
+  transition: transform .2s cubic-bezier(.2,.82,.2,1), 
+              box-shadow .25s ease,
+              border-color .2s ease;
+}
+.button:hover {
+  transform: translateY(-2px);
+}
+.button-primary:hover {
+  box-shadow: 0 16px 42px rgba(231,121,36,.32);
+}
+
 @media (max-width: 1020px) {
   .nav-links { gap: 18px; }
   .hero-grid { grid-template-columns: 1fr; }
@@ -4824,9 +4912,11 @@ html[data-theme="light"] .early-access-close .button-primary {
 }
 
 .hero-audit-console:hover {
-  transform: rotateY(-.7deg) rotateX(.25deg) translateY(-4px);
-  border-color: rgba(255,255,255,.22);
-  box-shadow: 0 64px 170px rgba(0,0,0,.62), 0 0 72px rgba(23,102,198,.08);
+  transform: rotateY(-0.45deg) rotateX(0.4deg) translateY(-6px);
+  border-color: rgba(255,255,255,.3);
+  box-shadow: 
+    0 78px 195px rgba(0,0,0,.65), 
+    0 0 95px rgba(23,102,198,.13);
 }
 
 .hero-audit-console::before {
@@ -5031,13 +5121,23 @@ html[data-theme="light"] .early-access-close .button-primary {
 .hero-scan-beam {
   position: absolute;
   z-index: 4;
-  left: -8px;
-  right: -8px;
-  top: 78px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #4b97f1 20%, #f1cf74 72%, transparent);
-  box-shadow: 0 0 19px rgba(75,151,241,.9), 0 0 35px rgba(212,167,58,.25);
-  animation: hero-document-scan 3.5s ease-in-out infinite;
+  left: -16px;
+  right: -16px;
+  top: 76px;
+  height: 2.8px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #4b97f1 14%,
+    #f1cf74 46%,
+    #4b97f1 76%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 28px rgba(75,151,241,.98),
+    0 0 58px rgba(212,167,58,.42);
+  animation: hero-document-scan 3.75s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  border-radius: 2px;
 }
 
 .hero-jacket-meta {
