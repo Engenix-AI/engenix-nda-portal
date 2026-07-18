@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#071018" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.17-light-theme-demo-login">
+  <meta name="dashboard-build" content="2026.07.18-deal-journey-identity-demo">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme');
       if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Customer Operating Dashboard Demo</title>
+    <title>ENGENIX | End-to-End Deal Journey Sandbox</title>
   <style>
     :root {
       --bg: #071018;
@@ -1149,6 +1149,237 @@
       .toast { min-width: 0; width: calc(100vw - 28px); }
       .toast-stack { left: 14px; right: 14px; }
     }
+
+
+    /* ======================================================================
+       ENGENIX DEAL JOURNEY + DEAL IDENTITY LAYER
+       Synthetic demonstration workflow. Identity color never communicates risk.
+       ====================================================================== */
+    .fa-route::before { content: "⇢"; }
+    .fa-id-card::before { content: "▣"; }
+    .fa-lock::before { content: "◆"; }
+    .fa-folder-open::before { content: "▱"; }
+
+    .active-deal-banner {
+      position: sticky;
+      top: var(--topbar);
+      z-index: 46;
+      min-height: 58px;
+      padding: 9px clamp(18px, 2.3vw, 34px);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 91%, transparent);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    .active-deal-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: var(--deal-accent, var(--blue));
+    }
+    .active-deal-copy { min-width: 0; flex: 1; }
+    .active-deal-label { color: var(--muted-2); font-size: 8px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .active-deal-title { margin-top: 3px; font-size: 11px; font-weight: 820; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .active-deal-meta { margin-top: 2px; color: var(--muted); font-size: 8.8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .active-deal-status { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+
+    .deal-identity {
+      --deal-accent: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 29px;
+      padding: 4px 9px 4px 6px;
+      border: 1px solid color-mix(in srgb, var(--deal-accent) 42%, var(--line));
+      border-radius: 9px;
+      background: color-mix(in srgb, var(--deal-accent) 11%, transparent);
+      color: var(--text);
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .deal-identity.compact { min-height: 24px; padding: 2px 7px 2px 4px; gap: 5px; border-radius: 7px; }
+    .deal-identity .deal-shape {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      color: var(--deal-accent);
+      font-size: 12px;
+      line-height: 1;
+    }
+    .deal-identity.compact .deal-shape { width: 16px; height: 16px; font-size: 10px; }
+    .deal-identity .deal-code { color: var(--deal-accent); font-size: 9px; font-weight: 900; letter-spacing: .08em; }
+    .deal-identity .deal-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 9px; font-weight: 780; }
+    .deal-row { position: relative; box-shadow: inset 4px 0 0 var(--deal-accent, transparent); }
+    .deal-row.is-active-deal { background: color-mix(in srgb, var(--deal-accent) 7%, transparent); }
+    .deal-row.is-active-deal:hover { background: color-mix(in srgb, var(--deal-accent) 11%, transparent); }
+    .action-card.deal-threaded { box-shadow: inset 3px 0 0 var(--deal-accent, transparent); }
+    .notification-item.deal-threaded { box-shadow: inset 3px 0 0 var(--deal-accent, transparent); }
+    .audit-deal-cell { display: inline-flex; align-items: center; gap: 6px; }
+
+    .journey-shell { display: grid; gap: 12px; }
+    .journey-hero {
+      --deal-accent: #3d8bff;
+      min-height: 170px;
+      padding: clamp(20px, 2.5vw, 30px);
+      border: 1px solid color-mix(in srgb, var(--deal-accent) 28%, var(--line));
+      border-radius: 18px;
+      background:
+        linear-gradient(105deg, color-mix(in srgb, var(--deal-accent) 10%, var(--panel)), var(--panel) 62%),
+        var(--panel);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0,1fr) auto;
+      align-items: center;
+      gap: 24px;
+    }
+    .journey-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(90deg, #000, transparent 85%);
+      pointer-events: none;
+    }
+    .journey-hero > * { position: relative; z-index: 1; }
+    .journey-hero h1 { margin: 11px 0 7px; font-size: clamp(25px, 3vw, 42px); line-height: 1.03; letter-spacing: -.04em; }
+    .journey-hero p { margin: 0; max-width: 720px; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    .journey-hero-actions { min-width: 310px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+    .journey-demo-note { margin-top: 12px; display: inline-flex; align-items: center; gap: 7px; color: var(--gold); font-size: 8.5px; font-weight: 760; letter-spacing: .04em; }
+
+    .journey-stages {
+      display: grid;
+      grid-template-columns: repeat(8,minmax(0,1fr));
+      gap: 7px;
+    }
+    .journey-stage {
+      min-height: 96px;
+      padding: 11px 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.015);
+      color: var(--muted);
+      position: relative;
+      overflow: hidden;
+      transition: .2s ease;
+    }
+    .journey-stage::before { content: ""; position: absolute; inset: auto 0 0; height: 3px; background: var(--line); }
+    .journey-stage.complete { color: var(--text); background: var(--green-soft); border-color: color-mix(in srgb, var(--green) 26%, var(--line)); }
+    .journey-stage.complete::before { background: var(--green); }
+    .journey-stage.active { color: var(--text); border-color: color-mix(in srgb, var(--deal-accent) 48%, var(--line)); background: color-mix(in srgb, var(--deal-accent) 10%, transparent); transform: translateY(-2px); }
+    .journey-stage.active::before { background: var(--deal-accent); }
+    .journey-stage.attention { border-color: rgba(241,189,89,.42); background: var(--amber-soft); }
+    .journey-stage.attention::before { background: var(--amber); }
+    .journey-stage.locked { opacity: .48; }
+    .journey-stage-num { color: currentColor; opacity: .72; font-size: 8px; font-weight: 900; letter-spacing: .12em; }
+    .journey-stage strong { display: block; margin-top: 10px; font-size: 10px; line-height: 1.2; }
+    .journey-stage small { display: block; margin-top: 5px; color: var(--muted); font-size: 8px; line-height: 1.35; }
+
+    .journey-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; }
+    .journey-metric { padding: 14px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.018); }
+    .journey-metric span { color: var(--muted-2); font-size: 8px; font-weight: 850; text-transform: uppercase; letter-spacing: .09em; }
+    .journey-metric strong { display: block; margin-top: 7px; font-size: 17px; letter-spacing: -.02em; }
+    .journey-metric small { display: block; margin-top: 4px; color: var(--muted); font-size: 8px; }
+
+    .workflow-card { min-height: 100%; }
+    .workflow-workspace { display: grid; gap: 12px; }
+    .workflow-action-panel {
+      padding: 17px;
+      border: 1px solid color-mix(in srgb, var(--deal-accent) 32%, var(--line));
+      border-radius: 13px;
+      background: color-mix(in srgb, var(--deal-accent) 7%, transparent);
+    }
+    .workflow-action-label { color: var(--deal-accent); font-size: 8px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .workflow-action-title { margin-top: 8px; font-size: 17px; font-weight: 830; line-height: 1.2; }
+    .workflow-action-copy { margin-top: 7px; color: var(--muted); font-size: 9.5px; line-height: 1.55; }
+    .workflow-checklist { display: grid; gap: 8px; }
+    .workflow-check { min-height: 43px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 10px; display: grid; grid-template-columns: 20px minmax(0,1fr) auto; gap: 9px; align-items: center; background: rgba(255,255,255,.014); }
+    .workflow-check-icon { width: 20px; height: 20px; border-radius: 7px; display: grid; place-items: center; background: var(--blue-soft); color: var(--cyan); font-size: 8px; }
+    .workflow-check.done .workflow-check-icon { background: var(--green-soft); color: var(--green); }
+    .workflow-check.attention .workflow-check-icon { background: var(--amber-soft); color: var(--amber); }
+    .workflow-check strong { font-size: 9.5px; }
+    .workflow-check small { color: var(--muted); font-size: 8px; }
+
+    .term-compare { display: grid; gap: 8px; }
+    .term-row { display: grid; grid-template-columns: minmax(0,1fr) 74px 74px; gap: 8px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 10px; }
+    .term-row span { color: var(--muted); font-size: 8.8px; }
+    .term-row b { font-size: 9px; text-align: right; }
+    .term-row.variance { border-color: rgba(241,189,89,.33); background: var(--amber-soft); }
+    .gate-callout { padding: 13px; border-radius: 11px; border: 1px solid var(--line); display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; }
+    .gate-callout.hold { border-color: rgba(255,110,125,.32); background: var(--red-soft); }
+    .gate-callout.clear { border-color: rgba(79,209,161,.3); background: var(--green-soft); }
+    .gate-icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-size: 12px; }
+    .gate-callout.hold .gate-icon { color: var(--red); background: rgba(255,110,125,.1); }
+    .gate-callout.clear .gate-icon { color: var(--green); background: rgba(79,209,161,.1); }
+    .gate-callout strong { font-size: 10px; }
+    .gate-callout p { margin: 4px 0 0; color: var(--muted); font-size: 8.5px; line-height: 1.45; }
+
+    .workflow-decisions { display: none; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+    .workflow-decisions.visible { display: grid; }
+    .decision-button { min-height: 76px; padding: 11px; border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.018); color: var(--text); text-align: left; cursor: pointer; transition: .16s ease; }
+    .decision-button:hover { border-color: var(--line-strong); background: rgba(255,255,255,.04); transform: translateY(-1px); }
+    .decision-button strong { display: block; font-size: 9.5px; }
+    .decision-button small { display: block; margin-top: 5px; color: var(--muted); font-size: 8px; line-height: 1.4; }
+    .decision-button.preferred { border-color: rgba(79,209,161,.27); background: var(--green-soft); }
+    .decision-button.exception { border-color: rgba(241,189,89,.25); background: var(--amber-soft); }
+
+    .workflow-timeline { display: grid; gap: 0; }
+    .workflow-event { display: grid; grid-template-columns: 58px 23px minmax(0,1fr) auto; gap: 10px; align-items: start; padding: 11px 0; border-bottom: 1px solid rgba(160,187,210,.09); }
+    .workflow-event:last-child { border-bottom: 0; }
+    .workflow-event time { color: var(--muted-2); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 8px; padding-top: 4px; }
+    .workflow-event-mark { width: 23px; height: 23px; border-radius: 8px; display: grid; place-items: center; color: var(--deal-accent); background: color-mix(in srgb, var(--deal-accent) 11%, transparent); font-size: 8px; }
+    .workflow-event strong { display: block; font-size: 9.5px; }
+    .workflow-event p { margin: 4px 0 0; color: var(--muted); font-size: 8.5px; line-height: 1.45; }
+    .workflow-event .badge { margin-top: 1px; }
+
+    .identity-legend { display: inline-flex; flex-wrap: wrap; gap: 7px; align-items: center; color: var(--muted); font-size: 8.5px; }
+    .identity-legend b { color: var(--text); }
+
+    html[data-theme="light"] .active-deal-banner { background: rgba(247,250,252,.92); }
+    html[data-theme="light"] .journey-stage,
+    html[data-theme="light"] .journey-metric,
+    html[data-theme="light"] .workflow-check,
+    html[data-theme="light"] .decision-button { background-color: rgba(255,255,255,.72); }
+
+    @media (max-width: 1250px) {
+      .journey-stages { grid-template-columns: repeat(4,minmax(0,1fr)); }
+      .journey-hero { grid-template-columns: 1fr; }
+      .journey-hero-actions { min-width: 0; max-width: 520px; }
+    }
+    @media (max-width: 980px) {
+      .active-deal-banner { top: var(--topbar); padding-left: 16px; padding-right: 16px; }
+      .active-deal-status .badge:nth-child(2) { display: none; }
+    }
+    @media (max-width: 740px) {
+      .active-deal-banner { gap: 9px; min-height: 62px; }
+      .active-deal-copy { display: none; }
+      .active-deal-status { flex: 1; justify-content: flex-start; }
+      .active-deal-status .badge { display: none; }
+      .active-deal-banner .button { margin-left: auto; }
+      .journey-stages { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .journey-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .journey-hero-actions { grid-template-columns: 1fr 1fr; width: 100%; }
+      .workflow-decisions { grid-template-columns: 1fr; }
+      .term-row { grid-template-columns: minmax(0,1fr) 62px 62px; }
+      .workflow-event { grid-template-columns: 48px 22px minmax(0,1fr); }
+      .workflow-event > .badge { grid-column: 3; justify-self: start; }
+    }
+    @media (max-width: 470px) {
+      .active-deal-banner { padding-left: 12px; padding-right: 12px; }
+      .active-deal-banner .deal-identity .deal-id { display: none; }
+      .journey-hero { padding: 18px; }
+      .journey-hero h1 { font-size: 28px; }
+      .journey-hero-actions { grid-template-columns: 1fr; }
+      .journey-stage { min-height: 84px; }
+      .journey-metrics { grid-template-columns: 1fr 1fr; }
+    }
+
   </style>
 </head>
 <body class="auth-locked">
@@ -1221,6 +1452,9 @@
           <button class="nav-item active" data-view="overview">
             <span class="nav-icon"><i class="fa-solid fa-grid-2"></i></span><span class="nav-text">Command Center</span>
           </button>
+          <button class="nav-item" data-view="journey">
+            <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Deal Journey</span><span class="nav-count" id="journeyStageCount">01</span>
+          </button>
           <button class="nav-item" data-view="queue">
             <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Deal Jacket Queue</span><span class="nav-count" id="queueCount">8</span>
           </button>
@@ -1228,7 +1462,7 @@
             <span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Findings</span><span class="nav-count" id="findingCountNav">7</span>
           </button>
           <button class="nav-item" data-view="actions">
-            <span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Corrective Actions</span><span class="nav-count">6</span>
+            <span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Corrective Actions</span><span class="nav-count" id="actionCountNav">6</span>
           </button>
         </div>
       </nav>
@@ -1294,6 +1528,17 @@
           <div class="avatar" title="Marcus Hale">MH</div>
         </div>
       </header>
+
+      <div class="active-deal-banner" id="activeDealBanner" style="--deal-accent:#3d8bff" aria-label="Active working deal">
+        <div id="activeDealIdentity"></div>
+        <div class="active-deal-copy">
+          <div class="active-deal-label">Active working deal · write actions are locked to this record</div>
+          <div class="active-deal-title" id="activeDealTitle">Jordan Taylor · 2026 Ford Explorer</div>
+          <div class="active-deal-meta" id="activeDealMeta">Premier Ford · Desk Started · Owner: Alex Morgan</div>
+        </div>
+        <div class="active-deal-status"><span class="badge blue" id="activeDealStage">DESK</span><span class="badge green" id="activeDealGate">GATE OPEN</span></div>
+        <button class="button small" type="button" onclick="setActiveDeal('ENX-2847',false);showView('journey')">Open guided journey <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
 
       <div class="content">
         <section class="view active" id="view-overview">
@@ -1371,6 +1616,76 @@
           </div>
         </section>
 
+
+        <section class="view" id="view-journey">
+          <div class="journey-shell" style="--deal-accent:#3d8bff">
+            <div class="journey-hero">
+              <div>
+                <div id="journeyHeroIdentity"></div>
+                <h1>One deal. One identity. One operating record.</h1>
+                <p>Move a synthetic transaction from the desk through approval, lender selection, F&amp;I, compliance review, human decision, delivery, and final archive. Every event updates the same deal thread across the dashboard.</p>
+                <div class="journey-demo-note"><i class="fa-solid fa-shield-halved"></i> Synthetic demonstration transaction · no production integrations or customer information</div>
+              </div>
+              <div class="journey-hero-actions">
+                <button class="button primary" id="workflowPrimaryButton" type="button"><i class="fa-solid fa-play"></i><span>Submit for Manager Approval</span></button>
+                <button class="button" id="workflowAutoButton" type="button"><i class="fa-solid fa-arrows-rotate"></i><span>Auto Play</span></button>
+                <button class="button orange" id="workflowExceptionButton" type="button"><i class="fa-solid fa-triangle-exclamation"></i><span>Inject Exception</span></button>
+                <button class="button" id="workflowResetButton" type="button"><i class="fa-solid fa-rotate-left"></i><span>Reset Demo</span></button>
+              </div>
+            </div>
+
+            <div class="journey-stages" id="journeyStages" aria-label="Deal workflow stages"></div>
+
+            <div class="journey-metrics">
+              <div class="journey-metric"><span>Current risk</span><strong id="journeyRisk">18 · Low</strong><small id="journeyRiskNote">No active exception</small></div>
+              <div class="journey-metric"><span>Delivery gate</span><strong id="journeyGate">Open</strong><small id="journeyGateNote">Deal may continue</small></div>
+              <div class="journey-metric"><span>Current owner</span><strong id="journeyOwner">Alex Morgan</strong><small id="journeyOwnerNote">Desk Manager</small></div>
+              <div class="journey-metric"><span>Operating record</span><strong id="journeyEventCount">1 event</strong><small>Preserved on this deal thread</small></div>
+            </div>
+
+            <div class="grid-12">
+              <article class="card span-7 workflow-card">
+                <div class="card-header"><div><div class="card-title">Current Work</div><div class="card-subtitle" id="workflowStageSubtitle">Desk · preliminary structure in progress</div></div><span class="badge blue" id="workflowStageBadge">ACTIVE</span></div>
+                <div class="card-body workflow-workspace">
+                  <div class="workflow-action-panel">
+                    <div class="workflow-action-label">Next operating action</div>
+                    <div class="workflow-action-title" id="workflowActionTitle">Submit the working structure for manager approval</div>
+                    <div class="workflow-action-copy" id="workflowActionCopy">The original structure, author, and timestamp remain attached to this deal before responsibility moves to the next operator.</div>
+                  </div>
+                  <div class="workflow-checklist" id="workflowChecklist"></div>
+                  <div class="workflow-decisions" id="workflowDecisionChoices">
+                    <button class="decision-button preferred" type="button" data-workflow-decision="correct"><strong>Correct Deal &amp; Document</strong><small>Restore the approved terms, preserve the revised acknowledgment, and clear the gate.</small></button>
+                    <button class="decision-button" type="button" data-workflow-decision="escalate"><strong>Escalate for Leadership Review</strong><small>Keep the delivery hold active and assign the exception to a compliance leader.</small></button>
+                    <button class="decision-button exception" type="button" data-workflow-decision="exception"><strong>Proceed with Documented Exception</strong><small>Require authority, rationale, and an explicit decision trace before release.</small></button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="card span-5 workflow-card">
+                <div class="card-header"><div><div class="card-title">Review Context</div><div class="card-subtitle">Approved structure compared with the active contract</div></div><span class="badge" id="reviewContextBadge">ALIGNED</span></div>
+                <div class="card-body workflow-workspace">
+                  <div class="term-compare">
+                    <div class="term-row"><span>Term</span><b>Approved</b><b>Current</b></div>
+                    <div class="term-row" id="termMonthsRow"><span>Contract term</span><b>72 mo</b><b id="currentTermMonths">72 mo</b></div>
+                    <div class="term-row" id="termPaymentRow"><span>Monthly payment</span><b>$684</b><b id="currentPayment">$684</b></div>
+                    <div class="term-row" id="termAckRow"><span>Customer acknowledgment</span><b>Required</b><b id="currentAcknowledgment">Present</b></div>
+                  </div>
+                  <div class="gate-callout clear" id="workflowGateCallout">
+                    <div class="gate-icon"><i class="fa-solid fa-check"></i></div>
+                    <div><strong id="workflowGateTitle">Operating gate open</strong><p id="workflowGateCopy">No issue currently blocks the deal from moving to the next department.</p></div>
+                  </div>
+                  <div class="identity-legend"><b>Identity</b> uses ◆ A7 and cobalt. <b>Risk</b> uses written Low, Moderate, or High status. The two visual languages never overlap.</div>
+                </div>
+              </article>
+            </div>
+
+            <article class="card">
+              <div class="card-header"><div><div class="card-title">Deal Decision Record</div><div class="card-subtitle">Every handoff, exception, owner, and resolution stays on ENX-2847</div></div><button class="button small" type="button" onclick="showView('audit')">Open full audit history</button></div>
+              <div class="card-body"><div class="workflow-timeline" id="workflowTimeline"></div></div>
+            </article>
+          </div>
+        </section>
+
         <section class="view" id="view-queue">
           <div class="section-row" style="margin-top:0"><div><div class="eyebrow">Active work</div><div class="section-title" style="margin-top:5px">Deal Jacket Queue</div><div class="section-subtitle">Review, assign, and document exceptions before they become operational exposure.</div></div><button class="button primary" onclick="openAuditModal()"><i class="fa-solid fa-plus"></i>Start review</button></div>
           <div class="filter-bar"><div class="filter-left"><input class="input" id="queueSearch" placeholder="Search deal, customer, dealership…" /><div class="select-wrap"><select class="select-control select-small" id="queueRisk"><option value="all">All risk</option><option value="High">High risk</option><option value="Moderate">Moderate</option><option value="Low">Low risk</option></select></div><div class="select-wrap"><select class="select-control select-small" id="queueStatus"><option value="all">All status</option><option value="New">New</option><option value="In Review">In review</option><option value="Awaiting Docs">Awaiting docs</option><option value="Escalated">Escalated</option><option value="Cleared">Cleared</option></select></div></div><div class="filter-right"><button class="button small" onclick="resetQueueFilters()"><i class="fa-solid fa-rotate-left"></i>Reset</button><button class="button small" onclick="exportDeals()"><i class="fa-solid fa-download"></i>Export CSV</button></div></div>
@@ -1379,7 +1694,7 @@
 
         <section class="view" id="view-findings">
           <div class="section-row" style="margin-top:0"><div><div class="eyebrow">Explainable intelligence</div><div class="section-title" style="margin-top:5px">Prioritized Findings</div><div class="section-subtitle">Each finding remains reviewable, assignable, and subject to human judgment.</div></div><div class="segmented" id="findingSegments"><button class="segment active" data-finding-filter="all">All</button><button class="segment" data-finding-filter="High">High</button><button class="segment" data-finding-filter="Moderate">Moderate</button><button class="segment" data-finding-filter="Low">Low</button></div></div>
-          <div class="kpi-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:12px"><div class="kpi" style="min-height:112px;--accent:var(--red);--accent-soft:var(--red-soft)"><div class="kpi-head"><div class="kpi-label">High Priority</div><div class="kpi-icon"><i class="fa-solid fa-fire"></i></div></div><div class="kpi-value" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--amber);--accent-soft:var(--amber-soft)"><div class="kpi-head"><div class="kpi-label">Review Required</div><div class="kpi-icon"><i class="fa-solid fa-eye"></i></div></div><div class="kpi-value" style="font-size:30px">3</div></div><div class="kpi" style="min-height:112px;--accent:var(--green);--accent-soft:var(--green-soft)"><div class="kpi-head"><div class="kpi-label">Low Exposure</div><div class="kpi-icon"><i class="fa-solid fa-check"></i></div></div><div class="kpi-value" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--blue);--accent-soft:var(--blue-soft)"><div class="kpi-head"><div class="kpi-label">Median Age</div><div class="kpi-icon"><i class="fa-solid fa-hourglass-half"></i></div></div><div class="kpi-value" style="font-size:30px">42m</div></div></div>
+          <div class="kpi-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:12px"><div class="kpi" style="min-height:112px;--accent:var(--red);--accent-soft:var(--red-soft)"><div class="kpi-head"><div class="kpi-label">High Priority</div><div class="kpi-icon"><i class="fa-solid fa-fire"></i></div></div><div class="kpi-value" id="findingHighKpi" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--amber);--accent-soft:var(--amber-soft)"><div class="kpi-head"><div class="kpi-label">Review Required</div><div class="kpi-icon"><i class="fa-solid fa-eye"></i></div></div><div class="kpi-value" id="findingModerateKpi" style="font-size:30px">3</div></div><div class="kpi" style="min-height:112px;--accent:var(--green);--accent-soft:var(--green-soft)"><div class="kpi-head"><div class="kpi-label">Low Exposure</div><div class="kpi-icon"><i class="fa-solid fa-check"></i></div></div><div class="kpi-value" id="findingLowKpi" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--blue);--accent-soft:var(--blue-soft)"><div class="kpi-head"><div class="kpi-label">Median Age</div><div class="kpi-icon"><i class="fa-solid fa-hourglass-half"></i></div></div><div class="kpi-value" style="font-size:30px">42m</div></div></div>
           <article class="card"><div class="table-wrap"><table><thead><tr><th>Finding</th><th>Deal</th><th>Dealership</th><th>Category</th><th>Severity</th><th>Owner</th><th>Status</th><th>Action</th></tr></thead><tbody id="findingsBody"></tbody></table></div></article>
         </section>
 
@@ -1559,6 +1874,7 @@
     }
 
     const deals = [
+      { id:'ENX-2847', dealer:'Premier Ford', customer:'Jordan Taylor', finding:'Guided operating workflow', category:'Workflow', risk:'Low', score:18, owner:'Alex Morgan', status:'Active at Desk', age:'Just now', updated:'Just now', vehicle:'2026 Ford Explorer', structure:'Retail Finance', amount:'$48,965', workflow:true },
       { id:'PA-44921', dealer:'Premier Ford', customer:'Avery Coleman', finding:'Stipulation gap', category:'Stipulation', risk:'High', score:78, owner:'Marcus Hale', status:'Escalated', age:'1h 12m', updated:'8m ago', vehicle:'2026 Ford F-150', structure:'Retail', amount:'$58,420' },
       { id:'PH-88214', dealer:'Premier Honda', customer:'Morgan Davis', finding:'Credit bureau variance', category:'Credit', risk:'Moderate', score:46, owner:'Dana Ruiz', status:'In Review', age:'47m', updated:'12m ago', vehicle:'2026 Honda CR-V', structure:'Finance', amount:'$39,175' },
       { id:'SM-30192', dealer:'Summit Motors', customer:'Taylor Brooks', finding:'Missing signed disclosure', category:'Documentation', risk:'Moderate', score:51, owner:'Unassigned', status:'New', age:'36m', updated:'18m ago', vehicle:'2025 Chevrolet Tahoe', structure:'Retail', amount:'$71,890' },
@@ -1610,8 +1926,329 @@
     let currentFindingFilter = 'all';
     let charts = {};
 
+
+    const workflowStages = [
+      { key:'desk', label:'Desk Started', short:'Desk', owner:'Alex Morgan', role:'Desk Manager', action:'Submit for Manager Approval', title:'Submit the working structure for manager approval', copy:'The original structure, author, and timestamp remain attached to this deal before responsibility moves to the next operator.', status:'Preliminary structure in progress' },
+      { key:'approval', label:'Manager Approval', short:'Approval', owner:'Alex Morgan', role:'Desk Manager', action:'Record Manager Approval', title:'Record the manager-approved pencil', copy:'Approval freezes a reviewable snapshot of vehicle, trade, cash, payment target, term, and manager authorization.', status:'Manager decision required' },
+      { key:'credit', label:'Credit & Lender', short:'Credit', owner:'Dana Ruiz', role:'Finance Manager', action:'Record Lender Approval', title:'Preserve the lender path and outstanding conditions', copy:'Credit authorization, lender approval, terms, and stipulations enter the same deal thread without replacing the approved desk snapshot.', status:'Lender path under review' },
+      { key:'fi', label:'F&I Build', short:'F&I', owner:'Dana Ruiz', role:'Finance Manager', action:'Build F&I Package', title:'Assemble the contract, menu, disclosures, and signatures', copy:'The final package is compared against the approved structure before the customer leaves the building.', status:'Contract package in progress' },
+      { key:'compliance', label:'Compliance Gate', short:'Compliance', owner:'ENGENIX Queue', role:'Operating Review', action:'Assign Corrective Action', title:'Convert the structure variance into owned work', copy:'ENGENIX surfaced a difference between the approved worksheet and current contract. The issue must receive an owner before delivery.', status:'Pre-delivery review requires attention' },
+      { key:'decision', label:'Human Decision', short:'Decision', owner:'Marcus Hale', role:'Senior Compliance Auditor', action:'Correct Deal & Document', title:'Choose and document the controlling human decision', copy:'Correct the deal, escalate it, or proceed through an authorized exception. Software does not silently make this decision.', status:'Management decision required' },
+      { key:'delivery', label:'Delivery Release', short:'Delivery', owner:'Alex Morgan', role:'General Manager', action:'Authorize Delivery', title:'Authorize release against the documented record', copy:'The delivery decision references the resolved finding, corrective action, and preserved management response.', status:'Ready for release decision' },
+      { key:'archive', label:'Funding & Archive', short:'Archive', owner:'Controller Queue', role:'Funding & Title', action:'Complete Funding & Archive', title:'Close the operating loop and preserve the final jacket', copy:'Funding, title, registration, and the complete decision history are attached to the final searchable record.', status:'Final completion pending' }
+    ];
+
+    const workflowInitialEvents = [
+      { time:'09:14', icon:'fa-id-card', title:'Deal identity assigned', copy:'◆ A7 and ENX-2847 were attached before work began at the desk.', result:'Identity locked', type:'System' }
+    ];
+
+    let workflowState = {
+      dealId:'ENX-2847', stage:0, completed:false, issueActive:false, actionAssigned:false,
+      resolution:null, autoTimer:null, events:workflowInitialEvents.map(event => ({...event}))
+    };
+    let activeDealId = 'ENX-2847';
+
+    const identityPalette = [
+      { color:'#3d8bff', shape:'◆' }, { color:'#8b5cf6', shape:'●' },
+      { color:'#06a6c7', shape:'■' }, { color:'#c026d3', shape:'▲' },
+      { color:'#64748b', shape:'⬟' }, { color:'#2563eb', shape:'⬢' }
+    ];
+
+    function stringHash(value) {
+      let hash = 2166136261;
+      for (let i = 0; i < value.length; i++) { hash ^= value.charCodeAt(i); hash = Math.imul(hash, 16777619); }
+      return Math.abs(hash >>> 0);
+    }
+
+    function getDealIdentity(dealId) {
+      if (dealId === 'ENX-2847') return { color:'#3d8bff', shape:'◆', code:'A7' };
+      const hash = stringHash(dealId || 'UNKNOWN');
+      const selected = identityPalette[hash % identityPalette.length];
+      const letter = String.fromCharCode(65 + (hash % 26));
+      const number = ((hash >>> 5) % 9) + 1;
+      return { ...selected, code:`${letter}${number}` };
+    }
+
+    function dealIdentityMarkup(dealId, compact=false) {
+      if (!dealId || dealId === '—') return '<span class="mono">—</span>';
+      const identity = getDealIdentity(dealId);
+      return `<span class="deal-identity ${compact ? 'compact':''}" style="--deal-accent:${identity.color}" title="Deal identity ${identity.shape} ${identity.code} · ${dealId}"><span class="deal-shape">${identity.shape}</span><span class="deal-code">${identity.code}</span><span class="deal-id">${dealId}</span></span>`;
+    }
+
+    function actionDealId(action) {
+      if (action.deal) return action.deal;
+      const match = `${action.title} ${action.id}`.match(/(?:ENX|PA|PH|SM|VC|PF)-\d+/);
+      return match ? match[0] : '—';
+    }
+
+    function notificationDealId(notification) {
+      if (notification.deal) return notification.deal;
+      const match = notification.text.match(/(?:ENX|PA|PH|SM|VC|PF)-\d+/);
+      return match ? match[0] : '—';
+    }
+
+    function currentWorkflowDeal() { return deals.find(deal => deal.id === workflowState.dealId); }
+
+    function setActiveDeal(dealId, announce=true) {
+      const deal = deals.find(item => item.id === dealId);
+      if (!deal) return false;
+      activeDealId = dealId;
+      renderActiveDealBanner();
+      refreshAll();
+      if (announce) showToast('Active deal locked', `${dealId} is now the only writable deal context.`, 'success');
+      return true;
+    }
+
+    function confirmDealContext(dealId, actionLabel='continue') {
+      if (!dealId || dealId === '—' || dealId === activeDealId) return true;
+      const active = deals.find(item => item.id === activeDealId);
+      const target = deals.find(item => item.id === dealId);
+      const approved = window.confirm(`This action belongs to ${dealId}, not the active deal ${activeDealId}.\n\nSwitch from ${active?.customer || activeDealId} to ${target?.customer || dealId} before you ${actionLabel}?`);
+      if (!approved) return false;
+      setActiveDeal(dealId);
+      return true;
+    }
+
+    function renderActiveDealBanner() {
+      const deal = deals.find(item => item.id === activeDealId) || currentWorkflowDeal();
+      if (!deal) return;
+      const identity = getDealIdentity(deal.id);
+      const banner = document.getElementById('activeDealBanner');
+      banner.style.setProperty('--deal-accent', identity.color);
+      document.getElementById('activeDealIdentity').innerHTML = dealIdentityMarkup(deal.id);
+      document.getElementById('activeDealTitle').textContent = `${deal.customer} · ${deal.vehicle}`;
+      const isWorkflow = deal.id === workflowState.dealId;
+      const stage = isWorkflow ? workflowStages[workflowState.stage] : null;
+      document.getElementById('activeDealMeta').textContent = `${deal.dealer} · ${stage?.label || deal.status} · Owner: ${stage?.owner || deal.owner}`;
+      const stageBadge = document.getElementById('activeDealStage');
+      stageBadge.textContent = (stage?.short || deal.status).toUpperCase();
+      const gate = document.getElementById('activeDealGate');
+      const onHold = isWorkflow && workflowState.issueActive && !workflowState.resolution;
+      gate.textContent = onHold ? 'DELIVERY HOLD' : workflowState.completed && isWorkflow ? 'ARCHIVED' : 'GATE OPEN';
+      gate.className = `badge ${onHold ? 'red' : 'green'}`;
+    }
+
+    function workflowEvent(title, copy, result, type='Decision', icon='fa-check') {
+      const now = new Date();
+      const time = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      workflowState.events.unshift({ time, icon, title, copy, result, type });
+      addActivity(`<strong>${title}</strong> · ${copy}`, type, workflowState.dealId, workflowStages[workflowState.stage].owner, result, icon);
+    }
+
+    function ensureWorkflowFinding() {
+      let finding = findings.find(item => item.id === 'F-1051');
+      if (!finding) {
+        finding = { id:'F-1051', deal:'ENX-2847', dealer:'Premier Ford', name:'Final contract differs from manager-approved desk structure', category:'Structure', severity:'High', owner:'Unassigned', status:'New' };
+        findings.unshift(finding);
+      } else {
+        Object.assign(finding, { severity:'High', owner:'Unassigned', status:'New' });
+      }
+      const deal = currentWorkflowDeal();
+      Object.assign(deal, { finding:'Structure variance requires review', category:'Structure', risk:'High', score:67, owner:'Unassigned', status:'Delivery Hold', updated:'Just now' });
+      if (!notifications.some(item => item.deal === 'ENX-2847' && item.workflow)) {
+        notifications.unshift({ icon:'fa-triangle-exclamation', deal:'ENX-2847', workflow:true, text:'Structure variance on ENX-2847 requires management review before delivery.', time:'Just now', unread:true });
+      }
+    }
+
+    function ensureWorkflowAction() {
+      let action = actions.find(item => item.id === 'CA-208');
+      if (!action) {
+        actions.unshift({ id:'CA-208', deal:'ENX-2847', title:'Reconcile 75-month contract with approved 72-month desk structure', dealer:'Premier Ford', owner:'Marcus Hale', due:'Before delivery', risk:'High', stage:'open' });
+      } else {
+        Object.assign(action, { deal:'ENX-2847', owner:'Marcus Hale', risk:'High', stage:'open' });
+      }
+      const finding = findings.find(item => item.id === 'F-1051');
+      if (finding) { finding.owner='Marcus Hale'; finding.status='In Review'; }
+      const deal = currentWorkflowDeal();
+      deal.owner='Marcus Hale'; deal.status='Corrective Action Open';
+    }
+
+    function injectWorkflowException({advanceToGate=true, announce=true}={}) {
+      stopWorkflowAuto();
+      workflowState.issueActive = true;
+      workflowState.resolution = null;
+      workflowState.actionAssigned = false;
+      if (advanceToGate) workflowState.stage = 4;
+      ensureWorkflowFinding();
+      if (!workflowState.events.some(event => event.result === 'Delivery hold')) {
+        workflowEvent('Structure variance detected', 'The final contract moved from 72 to 75 months and the revised customer acknowledgment is absent.', 'Delivery hold', 'Finding', 'fa-triangle-exclamation');
+      }
+      renderJourney(); refreshAll(); renderNotifications(); renderActiveDealBanner();
+      document.querySelector('.notification-dot').style.display='block';
+      if (announce) showToast('Sample exception injected', 'ENX-2847 is now on delivery hold and F-1051 is visible across the dashboard.', 'warning');
+    }
+
+    function resolveWorkflowDecision(mode='correct') {
+      if (workflowState.stage !== 5) return;
+      const finding = findings.find(item => item.id === 'F-1051');
+      const action = actions.find(item => item.id === 'CA-208');
+      const deal = currentWorkflowDeal();
+      if (mode === 'escalate') {
+        if (finding) { finding.owner='Compliance Leader'; finding.status='Escalated'; }
+        if (action) { action.owner='Compliance Leader'; action.stage='progress'; }
+        deal.owner='Compliance Leader'; deal.status='Escalated'; deal.score=78; deal.risk='High';
+        workflowEvent('Leadership review requested', 'The delivery hold remains active and ownership moved to the compliance leader.', 'Escalated', 'Decision', 'fa-arrow-up-right-dots');
+        renderJourney(); refreshAll(); renderActiveDealBanner();
+        showToast('Escalation documented', 'The deal remains on hold until leadership records a controlling decision.', 'warning');
+        return;
+      }
+      workflowState.resolution = mode;
+      workflowState.issueActive = false;
+      if (finding) { finding.owner='Marcus Hale'; finding.status='Cleared'; finding.severity = mode === 'exception' ? 'Moderate' : 'Low'; }
+      if (action) { action.owner='Marcus Hale'; action.stage='verify'; action.risk = mode === 'exception' ? 'Moderate' : 'Low'; }
+      deal.owner='Marcus Hale'; deal.status = mode === 'exception' ? 'Authorized Exception' : 'Cleared for Delivery'; deal.score = mode === 'exception' ? 34 : 16; deal.risk = mode === 'exception' ? 'Moderate' : 'Low';
+      workflowEvent(
+        mode === 'exception' ? 'Documented exception authorized' : 'Structure corrected and acknowledged',
+        mode === 'exception' ? 'Authority, rationale, and management acceptance were preserved before release.' : 'The contract returned to 72 months and the revised customer acknowledgment was attached.',
+        mode === 'exception' ? 'Authorized exception' : 'Resolved', 'Decision', mode === 'exception' ? 'fa-scale-balanced' : 'fa-check'
+      );
+      workflowState.stage = 6;
+      renderJourney(); refreshAll(); renderActiveDealBanner();
+      showToast(mode === 'exception' ? 'Exception documented' : 'Finding resolved', `ENX-2847 may now proceed to the delivery authorization decision.`, 'success');
+    }
+
+    function advanceWorkflow({fromAuto=false}={}) {
+      if (!fromAuto) stopWorkflowAuto();
+      const stage = workflowState.stage;
+      if (workflowState.completed) { showToast('Workflow complete', 'Reset the guided deal to run the demonstration again.', 'success'); return; }
+      if (stage === 0) {
+        workflowEvent('Desk structure submitted', 'Vehicle, trade, cash, payment target, 72-month term, and original author were preserved.', 'Submitted', 'Decision', 'fa-file-signature');
+        workflowState.stage = 1;
+      } else if (stage === 1) {
+        workflowEvent('Manager approval recorded', 'Alex Morgan approved the 72-month structure and froze the desk snapshot.', 'Approved', 'Decision', 'fa-user-check');
+        workflowState.stage = 2;
+      } else if (stage === 2) {
+        workflowEvent('Lender path selected', 'Credit authorization, approval terms, and outstanding conditions were attached.', 'Lender approved', 'Decision', 'fa-building-shield');
+        workflowState.stage = 3;
+      } else if (stage === 3) {
+        workflowEvent('F&I package assembled', 'Contract, menu, disclosures, and signature fields entered pre-delivery review.', 'Package built', 'System', 'fa-folder-open');
+        workflowState.stage = 4;
+        injectWorkflowException({advanceToGate:false, announce:false});
+      } else if (stage === 4) {
+        ensureWorkflowAction();
+        workflowState.actionAssigned = true;
+        workflowEvent('Corrective action assigned', 'CA-208 now belongs to Marcus Hale and the delivery hold remains visible.', 'Owner assigned', 'Assignment', 'fa-user-plus');
+        workflowState.stage = 5;
+      } else if (stage === 5) {
+        resolveWorkflowDecision('correct');
+        return;
+      } else if (stage === 6) {
+        workflowEvent('Delivery authorized', 'The general manager released the vehicle against the resolved and documented operating record.', 'Released', 'Decision', 'fa-check');
+        workflowState.stage = 7;
+        const deal = currentWorkflowDeal(); deal.status='Delivered · Funding Pending'; deal.owner='Controller Queue'; deal.updated='Just now';
+      } else if (stage === 7) {
+        workflowEvent('Funding complete and jacket archived', 'Funding, title, registration, findings, actions, and decisions were sealed into the final searchable record.', 'Archived', 'System', 'fa-file-circle-check');
+        workflowState.completed = true;
+        const deal = currentWorkflowDeal(); Object.assign(deal, {status:'Archived', owner:'Controller Queue', risk:'Low', score:12, updated:'Just now'});
+        const action = actions.find(item => item.id === 'CA-208');
+        if (action) actions = actions.filter(item => item.id !== 'CA-208');
+      }
+      renderJourney(); refreshAll(); renderActiveDealBanner();
+    }
+
+    function resetWorkflow() {
+      stopWorkflowAuto();
+      workflowState = { dealId:'ENX-2847', stage:0, completed:false, issueActive:false, actionAssigned:false, resolution:null, autoTimer:null, events:workflowInitialEvents.map(event => ({...event})) };
+      const deal = currentWorkflowDeal();
+      Object.assign(deal, { finding:'Guided operating workflow', category:'Workflow', risk:'Low', score:18, owner:'Alex Morgan', status:'Active at Desk', age:'Just now', updated:'Just now', structure:'Retail Finance' });
+      const findingIndex = findings.findIndex(item => item.id === 'F-1051'); if (findingIndex >= 0) findings.splice(findingIndex,1);
+      actions = actions.filter(item => item.id !== 'CA-208');
+      for (let i = notifications.length - 1; i >= 0; i--) if (notifications[i].workflow) notifications.splice(i,1);
+      setActiveDeal('ENX-2847', false);
+      renderNotifications(); renderJourney(); refreshAll();
+      showToast('Guided deal reset', 'ENX-2847 is back at the desk with a clean operating record.', 'success');
+    }
+
+    function stopWorkflowAuto() {
+      if (workflowState.autoTimer) window.clearInterval(workflowState.autoTimer);
+      workflowState.autoTimer = null;
+      const button = document.getElementById('workflowAutoButton');
+      if (button) button.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i><span>Auto Play</span>';
+    }
+
+    function toggleWorkflowAuto() {
+      if (workflowState.autoTimer) { stopWorkflowAuto(); return; }
+      if (workflowState.completed) resetWorkflow();
+      const button = document.getElementById('workflowAutoButton');
+      button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Pause Auto</span>';
+      workflowState.autoTimer = window.setInterval(() => {
+        if (workflowState.completed) { stopWorkflowAuto(); return; }
+        if (workflowState.stage === 5) resolveWorkflowDecision('correct'); else advanceWorkflow({fromAuto:true});
+      }, 1450);
+    }
+
+    function stageChecklist(stageIndex) {
+      const checklists = [
+        [['Customer and vehicle linked','done'],['Trade and cash structure captured','done'],['Original author and timestamp preserved','done']],
+        [['Approved worksheet snapshot','done'],['Manager identity and authority','attention'],['Revision history preserved','done']],
+        [['Credit authorization present','done'],['Lender approval terms captured','done'],['Stipulations visible to next owner','attention']],
+        [['Menu and products assembled','done'],['Contract generated from active terms','done'],['Disclosures and signatures compared','attention']],
+        [['Approved and current terms compared','attention'],['Finding F-1051 created','done'],['Delivery gate placed on hold','done']],
+        [['Corrective action CA-208 owned','done'],['Decision rationale required','attention'],['Human authority remains controlling','done']],
+        [['Finding disposition verified','done'],['Manager release decision recorded','attention'],['Delivery timestamp pending','attention']],
+        [['Funding confirmation pending','attention'],['Title and registration pending','attention'],['Final jacket and decision trace ready','done']]
+      ];
+      return checklists[stageIndex];
+    }
+
+    function renderJourney() {
+      const root = document.querySelector('#view-journey .journey-shell');
+      if (!root) return;
+      const deal = currentWorkflowDeal();
+      const identity = getDealIdentity(deal.id);
+      root.style.setProperty('--deal-accent', identity.color);
+      document.getElementById('journeyHeroIdentity').innerHTML = dealIdentityMarkup(deal.id);
+      document.getElementById('journeyStages').innerHTML = workflowStages.map((stage,index) => {
+        let state = index < workflowState.stage || workflowState.completed ? 'complete' : index === workflowState.stage ? 'active' : 'locked';
+        if (index === 4 && workflowState.issueActive && workflowState.stage === 4) state += ' attention';
+        return `<div class="journey-stage ${state}" style="--deal-accent:${identity.color}"><span class="journey-stage-num">${String(index+1).padStart(2,'0')}</span><strong>${stage.label}</strong><small>${index < workflowState.stage || workflowState.completed ? 'Recorded' : index === workflowState.stage ? stage.status : 'Awaiting prior stage'}</small></div>`;
+      }).join('');
+      document.getElementById('journeyStageCount').textContent = String(Math.min(workflowState.stage+1,8)).padStart(2,'0');
+      const stage = workflowStages[workflowState.stage];
+      const onHold = workflowState.issueActive && !workflowState.resolution;
+      document.getElementById('journeyRisk').textContent = `${deal.score} · ${deal.risk}`;
+      document.getElementById('journeyRiskNote').textContent = onHold ? 'Structure variance F-1051' : workflowState.completed ? 'Final record archived' : 'No unresolved delivery blocker';
+      document.getElementById('journeyGate').textContent = onHold ? 'Hold' : workflowState.completed ? 'Archived' : 'Open';
+      document.getElementById('journeyGateNote').textContent = onHold ? 'Release is blocked' : workflowState.completed ? 'Operating loop complete' : 'Deal may continue';
+      document.getElementById('journeyOwner').textContent = stage.owner;
+      document.getElementById('journeyOwnerNote').textContent = stage.role;
+      document.getElementById('journeyEventCount').textContent = `${workflowState.events.length} ${workflowState.events.length === 1 ? 'event' : 'events'}`;
+      document.getElementById('workflowStageSubtitle').textContent = `${stage.label} · ${stage.status}`;
+      const stageBadge = document.getElementById('workflowStageBadge');
+      stageBadge.textContent = onHold ? 'ATTENTION' : workflowState.completed ? 'COMPLETE' : 'ACTIVE';
+      stageBadge.className = `badge ${onHold ? 'red' : workflowState.completed ? 'green' : 'blue'}`;
+      document.getElementById('workflowActionTitle').textContent = workflowState.completed ? 'Operating record complete' : stage.title;
+      document.getElementById('workflowActionCopy').textContent = workflowState.completed ? 'The synthetic deal completed funding and its full decision history is preserved in the archive.' : stage.copy;
+      document.getElementById('workflowChecklist').innerHTML = stageChecklist(workflowState.stage).map(([label,state]) => `<div class="workflow-check ${state}"><div class="workflow-check-icon"><i class="fa-solid ${state === 'done' ? 'fa-check' : 'fa-eye'}"></i></div><strong>${label}</strong><small>${state === 'done' ? 'Recorded' : 'Review'}</small></div>`).join('');
+      document.getElementById('workflowDecisionChoices').classList.toggle('visible', workflowState.stage === 5 && !workflowState.resolution);
+
+      const primary = document.getElementById('workflowPrimaryButton');
+      const primaryText = primary.querySelector('span');
+      primary.disabled = workflowState.stage === 5 && workflowState.issueActive && !workflowState.actionAssigned;
+      primaryText.textContent = workflowState.completed ? 'Workflow Complete' : stage.action;
+      primary.querySelector('i').className = `fa-solid ${workflowState.completed ? 'fa-circle-check' : stage.key === 'archive' ? 'fa-file-circle-check' : 'fa-arrow-right'}`;
+
+      const variance = workflowState.issueActive || workflowState.resolution;
+      document.getElementById('currentTermMonths').textContent = variance && !workflowState.resolution ? '75 mo' : '72 mo';
+      document.getElementById('currentPayment').textContent = variance && !workflowState.resolution ? '$657' : '$684';
+      document.getElementById('currentAcknowledgment').textContent = variance && !workflowState.resolution ? 'Missing' : workflowState.resolution === 'exception' ? 'Exception note' : 'Present';
+      ['termMonthsRow','termPaymentRow','termAckRow'].forEach(id => document.getElementById(id).classList.toggle('variance', variance && !workflowState.resolution));
+      const contextBadge = document.getElementById('reviewContextBadge');
+      contextBadge.textContent = variance && !workflowState.resolution ? 'VARIANCE' : workflowState.resolution ? 'DOCUMENTED' : 'ALIGNED';
+      contextBadge.className = `badge ${variance && !workflowState.resolution ? 'red' : workflowState.resolution ? 'green' : ''}`;
+      const gateCallout = document.getElementById('workflowGateCallout');
+      gateCallout.className = `gate-callout ${onHold ? 'hold' : 'clear'}`;
+      gateCallout.querySelector('i').className = `fa-solid ${onHold ? 'fa-lock' : 'fa-check'}`;
+      document.getElementById('workflowGateTitle').textContent = onHold ? 'Delivery gate on hold' : workflowState.completed ? 'Final record archived' : 'Operating gate open';
+      document.getElementById('workflowGateCopy').textContent = onHold ? 'The final contract differs from the approved desk structure. Management review is required before release.' : workflowState.completed ? 'Funding, final documents, and the complete decision trace are preserved.' : 'No unresolved issue currently blocks movement to the next department.';
+
+      document.getElementById('workflowTimeline').innerHTML = workflowState.events.map(event => `<div class="workflow-event"><time>${event.time}</time><div class="workflow-event-mark"><i class="fa-solid ${event.icon}"></i></div><div><strong>${event.title}</strong><p>${event.copy}</p></div><span class="badge ${badgeClass(event.result)}">${event.result}</span></div>`).join('');
+      renderActiveDealBanner();
+    }
+
     const pageMeta = {
       overview: ['Command Center','Operating intelligence for active dealership compliance work'],
+      journey: ['Deal Journey','One synthetic transaction from desk creation through final operating record'],
       queue: ['Deal Jacket Queue','Prioritized human review across the selected dealership scope'],
       findings: ['Findings','Explainable exceptions with ownership and disposition'],
       actions: ['Corrective Actions','Accountable work from issue to verified resolution'],
@@ -1623,8 +2260,9 @@
     function badgeClass(status) {
       if (['High','Escalated'].includes(status)) return 'red';
       if (['Moderate','In Review','Awaiting Docs'].includes(status)) return 'amber';
-      if (['Low','Cleared','Verified'].includes(status)) return 'green';
-      if (['New','Open'].includes(status)) return 'blue';
+      if (['Low','Cleared','Verified','Resolved','Approved','Released','Archived','Identity locked','Complete','Submitted','Lender approved','Package built'].includes(status)) return 'green';
+      if (['New','Open','Active at Desk','Owner assigned','Created'].includes(status)) return 'blue';
+      if (['Delivery Hold','Corrective Action Open','Authorized Exception','Review Required','Delivery hold'].includes(status)) return 'red';
       return '';
     }
 
@@ -1637,13 +2275,15 @@
     }
 
     function renderOverviewQueue() {
-      const rows = scopedDeals().filter(d => d.status !== 'Cleared').slice(0,5);
-      document.getElementById('overviewQueueBody').innerHTML = rows.length ? rows.map(d => `
-        <tr class="clickable-row" onclick="openDeal('${d.id}')">
-          <td><div class="cell-main mono">${d.id}</div><div class="cell-sub">${d.vehicle}</div></td>
+      const rows = scopedDeals().filter(d => d.status !== 'Cleared' && d.status !== 'Archived').slice(0,5);
+      document.getElementById('overviewQueueBody').innerHTML = rows.length ? rows.map(d => {
+        const identity = getDealIdentity(d.id);
+        return `<tr class="clickable-row deal-row ${d.id === activeDealId ? 'is-active-deal':''}" style="--deal-accent:${identity.color}" onclick="openDeal('${d.id}')">
+          <td><div>${dealIdentityMarkup(d.id,true)}</div><div class="cell-sub">${d.vehicle}</div></td>
           <td><div class="dealer-cell"><div class="dealer-mark">${initials(d.dealer)}</div><div><div class="cell-main">${d.dealer}</div><div class="cell-sub">${d.structure}</div></div></div></td>
           <td>${d.customer}</td><td>${d.finding}</td><td><span class="risk-score ${riskClass(d.risk)}">${d.score}</span></td><td><span class="badge ${badgeClass(d.status)}">${d.status}</span></td><td>${d.age}</td><td><button class="button small icon-only" onclick="event.stopPropagation();openDeal('${d.id}')"><i class="fa-solid fa-arrow-right"></i></button></td>
-        </tr>`).join('') : `<tr><td colspan="8"><div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-filter-circle-xmark"></i></div>No active deal jackets match this scope.</div></td></tr>`;
+        </tr>`;
+      }).join('') : `<tr><td colspan="8"><div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-filter-circle-xmark"></i></div>No active deal jackets match this scope.</div></td></tr>`;
     }
 
     function renderDealQueue() {
@@ -1651,18 +2291,22 @@
       const risk = document.getElementById('queueRisk').value;
       const status = document.getElementById('queueStatus').value;
       const rows = scopedDeals().filter(d => {
-        const hit = [d.id,d.dealer,d.customer,d.finding,d.vehicle].join(' ').toLowerCase().includes(q);
+        const hit = [d.id,d.dealer,d.customer,d.finding,d.vehicle,getDealIdentity(d.id).code].join(' ').toLowerCase().includes(q);
         return hit && (risk === 'all' || d.risk === risk) && (status === 'all' || d.status === status);
       });
-      document.getElementById('dealQueueBody').innerHTML = rows.length ? rows.map(d => `
-        <tr class="clickable-row" onclick="openDeal('${d.id}')"><td><div class="cell-main mono">${d.id}</div><div class="cell-sub">${d.vehicle}</div></td><td>${d.dealer}</td><td>${d.customer}</td><td>${d.finding}</td><td><span class="risk-score ${riskClass(d.risk)}">${d.score}</span></td><td>${d.owner}</td><td><span class="badge ${badgeClass(d.status)}">${d.status}</span></td><td>${d.updated}</td><td><button class="button small icon-only" onclick="event.stopPropagation();openDeal('${d.id}')"><i class="fa-solid fa-arrow-right"></i></button></td></tr>`).join('') : `<tr><td colspan="9"><div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div>No deal jackets match the selected filters.</div></td></tr>`;
+      document.getElementById('dealQueueBody').innerHTML = rows.length ? rows.map(d => {
+        const identity = getDealIdentity(d.id);
+        return `<tr class="clickable-row deal-row ${d.id === activeDealId ? 'is-active-deal':''}" style="--deal-accent:${identity.color}" onclick="openDeal('${d.id}')"><td><div>${dealIdentityMarkup(d.id,true)}</div><div class="cell-sub">${d.vehicle}</div></td><td>${d.dealer}</td><td>${d.customer}</td><td>${d.finding}</td><td><span class="risk-score ${riskClass(d.risk)}">${d.score}</span></td><td>${d.owner}</td><td><span class="badge ${badgeClass(d.status)}">${d.status}</span></td><td>${d.updated}</td><td><button class="button small icon-only" onclick="event.stopPropagation();openDeal('${d.id}')"><i class="fa-solid fa-arrow-right"></i></button></td></tr>`;
+      }).join('') : `<tr><td colspan="9"><div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div>No deal jackets match the selected filters.</div></td></tr>`;
     }
 
     function renderFindings() {
       const scope = document.getElementById('rooftopSelect').value;
       const rows = findings.filter(f => (scope === 'all' || f.dealer === scope) && (currentFindingFilter === 'all' || f.severity === currentFindingFilter));
-      document.getElementById('findingsBody').innerHTML = rows.length ? rows.map(f => `
-        <tr><td><div class="cell-main">${f.name}</div><div class="cell-sub mono">${f.id}</div></td><td><button class="button small" onclick="openDeal('${f.deal}')">${f.deal}</button></td><td>${f.dealer}</td><td>${f.category}</td><td><span class="badge ${badgeClass(f.severity)}">${f.severity}</span></td><td>${f.owner}</td><td><span class="badge ${badgeClass(f.status)}">${f.status}</span></td><td>${f.status === 'Cleared' ? '<span class="badge green">Resolved</span>' : `<button class="button small primary" onclick="resolveFinding('${f.id}')">Resolve</button>`}</td></tr>`).join('') : `<tr><td colspan="8"><div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-circle-check"></i></div>No findings match this view.</div></td></tr>`;
+      document.getElementById('findingsBody').innerHTML = rows.length ? rows.map(f => {
+        const identity = getDealIdentity(f.deal);
+        return `<tr class="deal-row ${f.deal === activeDealId ? 'is-active-deal':''}" style="--deal-accent:${identity.color}"><td><div class="cell-main">${f.name}</div><div class="cell-sub mono">${f.id}</div></td><td><button class="button small" onclick="openDeal('${f.deal}')">${dealIdentityMarkup(f.deal,true)}</button></td><td>${f.dealer}</td><td>${f.category}</td><td><span class="badge ${badgeClass(f.severity)}">${f.severity}</span></td><td>${f.owner}</td><td><span class="badge ${badgeClass(f.status)}">${f.status}</span></td><td>${f.status === 'Cleared' ? '<span class="badge green">Resolved</span>' : f.deal === 'ENX-2847' ? `<button class="button small primary" onclick="setActiveDeal('ENX-2847',false);showView('journey')">Open decision</button>` : `<button class="button small primary" onclick="resolveFinding('${f.id}')">Resolve ${f.deal}</button>`}</td></tr>`;
+      }).join('') : `<tr><td colspan="8"><div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-circle-check"></i></div>No findings match this view.</div></td></tr>`;
     }
 
     function renderActions() {
@@ -1673,7 +2317,10 @@
       ];
       document.getElementById('actionBoard').innerHTML = stages.map(s => {
         const items = actions.filter(a => a.stage === s.key);
-        return `<section class="kanban-col"><div class="kanban-head"><div><div class="kanban-title">${s.title}</div><div class="card-subtitle">${s.label}</div></div><div class="kanban-count">${items.length}</div></div><div class="kanban-body">${items.map(a => `<div class="action-card"><div class="action-top"><div class="action-id">${a.id}</div><span class="badge ${badgeClass(a.risk)}">${a.risk}</span></div><div class="action-title">${a.title}</div><div class="action-meta">${a.dealer}<br />Owner: ${a.owner}<br />Due: ${a.due}</div><div class="action-footer"><span class="badge ${a.owner === 'Unassigned' ? 'orange' : 'blue'}">${a.owner}</span><button class="button small" onclick="advanceAction('${a.id}')">${s.key === 'verify' ? 'Verify' : 'Advance'} <i class="fa-solid fa-arrow-right"></i></button></div></div>`).join('') || '<div class="empty-state">No actions in this stage.</div>'}</div></section>`;
+        return `<section class="kanban-col"><div class="kanban-head"><div><div class="kanban-title">${s.title}</div><div class="card-subtitle">${s.label}</div></div><div class="kanban-count">${items.length}</div></div><div class="kanban-body">${items.map(a => {
+          const dealId = actionDealId(a); const identity = getDealIdentity(dealId);
+          return `<div class="action-card deal-threaded" style="--deal-accent:${identity.color}"><div class="action-top"><div>${dealIdentityMarkup(dealId,true)}<div class="action-id" style="margin-top:6px">${a.id}</div></div><span class="badge ${badgeClass(a.risk)}">${a.risk}</span></div><div class="action-title">${a.title}</div><div class="action-meta">${a.dealer}<br />Owner: ${a.owner}<br />Due: ${a.due}</div><div class="action-footer"><span class="badge ${a.owner === 'Unassigned' ? 'orange' : 'blue'}">${a.owner}</span><button class="button small" onclick="${dealId === 'ENX-2847' ? `setActiveDeal('ENX-2847',false);showView('journey')` : `advanceAction('${a.id}')`}">${dealId === 'ENX-2847' ? 'Open Deal Journey' : s.key === 'verify' ? `Verify ${dealId}` : `Advance ${dealId}`} <i class="fa-solid fa-arrow-right"></i></button></div></div>`;
+        }).join('') || '<div class="empty-state">No actions in this stage.</div>'}</div></section>`;
       }).join('');
     }
 
@@ -1688,27 +2335,33 @@
       const rows = activities.filter(a => [a.text.replace(/<[^>]+>/g,''),a.deal,a.actor,a.result].join(' ').toLowerCase().includes(q) && (type === 'all' || a.type === type));
       const body = document.getElementById('auditBody');
       if (!body) return;
-      body.innerHTML = rows.length ? rows.map(a => `<tr><td class="mono">${a.time}</td><td>${a.text.replace(/<[^>]+>/g,'')}</td><td class="mono">${a.deal}</td><td>${a.actor}</td><td><span class="badge blue">${a.type}</span></td><td>${a.result}</td></tr>`).join('') : `<tr><td colspan="6"><div class="empty-state">No audit events match this search.</div></td></tr>`;
+      body.innerHTML = rows.length ? rows.map(a => { const identity = getDealIdentity(a.deal); return `<tr class="deal-row ${a.deal === activeDealId ? 'is-active-deal':''}" style="--deal-accent:${identity.color}"><td class="mono">${a.time}</td><td>${a.text.replace(/<[^>]+>/g,'')}</td><td>${dealIdentityMarkup(a.deal,true)}</td><td>${a.actor}</td><td><span class="badge blue">${a.type}</span></td><td>${a.result}</td></tr>`; }).join('') : `<tr><td colspan="6"><div class="empty-state">No audit events match this search.</div></td></tr>`;
     }
 
     function renderNotifications() {
-      document.getElementById('notificationList').innerHTML = notifications.map(n => `<div class="notification-item ${n.unread ? 'unread':''}"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div><div class="notification-copy">${n.text}</div><div class="notification-time">${n.time}</div></div></div>`).join('');
+      document.getElementById('notificationList').innerHTML = notifications.map(n => { const dealId = notificationDealId(n); const identity = getDealIdentity(dealId); return `<div class="notification-item deal-threaded ${n.unread ? 'unread':''}" style="--deal-accent:${identity.color}"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div>${dealId !== '—' ? dealIdentityMarkup(dealId,true) : ''}<div class="notification-copy" style="margin-top:${dealId !== '—' ? '6px':'0'}">${n.text}</div><div class="notification-time">${n.time}</div></div></div>`; }).join('');
+      const count = notifications.filter(item => item.unread).length;
+      const dot = document.querySelector('.notification-dot'); if (dot) dot.style.display = count ? 'block' : 'none';
+      const subtitle = document.querySelector('#notificationPanel .card-subtitle'); if (subtitle) subtitle.textContent = `${count} ${count === 1 ? 'item needs' : 'items need'} attention`;
     }
 
     function openDeal(id) {
       const d = deals.find(x => x.id === id);
       if (!d) return;
       currentDeal = d;
-      document.getElementById('drawerDealId').textContent = d.id;
-      document.getElementById('drawerDealSub').textContent = `${d.dealer} · ${d.customer}`;
+      const identity = getDealIdentity(d.id);
+      document.getElementById('drawerDealId').innerHTML = dealIdentityMarkup(d.id);
+      document.getElementById('drawerDealSub').textContent = `${d.dealer} · ${d.customer} · ${d.id === activeDealId ? 'ACTIVE WORKING DEAL' : 'VIEW ONLY'}`;
       const dealFindings = findings.filter(f => f.deal === d.id);
+      const dealEvents = activities.filter(a => a.deal === d.id).slice(0,5);
       document.getElementById('drawerBody').innerHTML = `
-        <div class="detail-hero"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px"><div><div class="eyebrow">Current review posture</div><div style="margin-top:7px;font-size:19px;font-weight:850;letter-spacing:-.02em">${d.finding}</div><div style="margin-top:6px;color:var(--muted);font-size:9.5px">Human review remains the controlling decision point.</div></div><span class="risk-score ${riskClass(d.risk)}" style="width:42px;height:42px;font-size:14px">${d.score}</span></div></div>
+        ${d.id !== activeDealId ? `<div style="margin-bottom:12px;padding:12px;border:1px solid rgba(241,189,89,.25);border-radius:11px;background:var(--amber-soft);font-size:9px;line-height:1.5"><strong style="color:var(--amber)">Context protection:</strong> You are viewing ${d.id}, but write actions remain locked to ${activeDealId}.<div style="margin-top:9px"><button class="button small" onclick="if(confirmDealContext('${d.id}','make changes')) openDeal('${d.id}')">Switch active deal to ${d.id}</button></div></div>` : ''}
+        <div class="detail-hero" style="--deal-accent:${identity.color};box-shadow:inset 4px 0 0 ${identity.color}"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px"><div><div class="eyebrow">Current review posture</div><div style="margin-top:7px;font-size:19px;font-weight:850;letter-spacing:-.02em">${d.finding}</div><div style="margin-top:6px;color:var(--muted);font-size:9.5px">Identity, risk, and workflow stage remain visually separate.</div></div><span class="risk-score ${riskClass(d.risk)}" style="width:42px;height:42px;font-size:14px">${d.score}</span></div></div>
         <div class="detail-grid"><div class="detail-cell"><div class="detail-label">Customer</div><div class="detail-value">${d.customer}</div></div><div class="detail-cell"><div class="detail-label">Vehicle</div><div class="detail-value">${d.vehicle}</div></div><div class="detail-cell"><div class="detail-label">Structure</div><div class="detail-value">${d.structure}</div></div><div class="detail-cell"><div class="detail-label">Amount</div><div class="detail-value">${d.amount}</div></div><div class="detail-cell"><div class="detail-label">Owner</div><div class="detail-value">${d.owner}</div></div><div class="detail-cell"><div class="detail-label">Status</div><div class="detail-value"><span class="badge ${badgeClass(d.status)}">${d.status}</span></div></div></div>
         <div class="section-row" style="margin:18px 0 8px"><div><div class="section-title" style="font-size:12px">Review findings</div><div class="section-subtitle">Visible rationale and disposition</div></div></div>
         <div class="finding-list">${dealFindings.length ? dealFindings.map(f => `<div class="finding-item"><div class="finding-severity ${f.severity.toLowerCase()}"></div><div class="finding-copy"><div class="finding-name">${f.name}</div><div class="finding-note">Category: ${f.category} · Owner: ${f.owner}<br />Status: ${f.status}</div></div><span class="badge ${badgeClass(f.severity)}">${f.severity}</span></div>`).join('') : '<div class="empty-state">No active finding is attached to this deal.</div>'}</div>
-        <div class="section-row" style="margin:18px 0 8px"><div><div class="section-title" style="font-size:12px">Decision history</div><div class="section-subtitle">Most recent workspace events</div></div></div>
-        <div class="activity-list"><div class="activity-item"><div class="activity-icon"><i class="fa-solid fa-eye"></i></div><div class="activity-copy"><strong>${d.owner}</strong> opened this deal-jacket review.</div><div class="activity-time">${d.updated}</div></div><div class="activity-item"><div class="activity-icon"><i class="fa-solid fa-robot"></i></div><div class="activity-copy">The demonstration risk model assigned a score of <strong>${d.score}</strong>.</div><div class="activity-time">${d.age}</div></div></div>`;
+        <div class="section-row" style="margin:18px 0 8px"><div><div class="section-title" style="font-size:12px">Decision history</div><div class="section-subtitle">Events preserved on this deal identity</div></div></div>
+        <div class="activity-list">${dealEvents.length ? dealEvents.map(event => `<div class="activity-item"><div class="activity-icon"><i class="fa-solid ${event.icon}"></i></div><div class="activity-copy">${event.text}</div><div class="activity-time">${event.time}</div></div>`).join('') : '<div class="empty-state">No decision events recorded yet.</div>'}</div>`;
       document.getElementById('panelOverlay').classList.add('open');
       document.getElementById('dealDrawer').classList.add('open');
       document.getElementById('dealDrawer').setAttribute('aria-hidden','false');
@@ -1721,7 +2374,7 @@
     }
 
     function assignCurrentDeal() {
-      if (!currentDeal) return;
+      if (!currentDeal || !confirmDealContext(currentDeal.id,'assign ownership')) return;
       currentDeal.owner = 'Marcus Hale';
       currentDeal.status = 'In Review';
       addActivity(`Review ownership for <strong>${currentDeal.id}</strong> was assigned to Marcus Hale.`, 'Assignment', currentDeal.id, 'Marcus Hale', 'Assigned', 'fa-user-plus');
@@ -1730,7 +2383,7 @@
     }
 
     function escalateCurrentDeal() {
-      if (!currentDeal) return;
+      if (!currentDeal || !confirmDealContext(currentDeal.id,'escalate this review')) return;
       currentDeal.status = 'Escalated';
       currentDeal.risk = 'High';
       currentDeal.score = Math.max(currentDeal.score, 76);
@@ -1740,7 +2393,13 @@
     }
 
     function clearCurrentDeal() {
-      if (!currentDeal) return;
+      if (!currentDeal || !confirmDealContext(currentDeal.id,'clear this review')) return;
+      if (currentDeal.id === 'ENX-2847') {
+        closeDrawer(); setActiveDeal('ENX-2847',false); showView('journey');
+        if (workflowState.stage < 5) showToast('Decision not ready','Advance ENX-2847 through the compliance gate before clearing the finding.','warning');
+        else resolveWorkflowDecision('correct');
+        return;
+      }
       currentDeal.status = 'Cleared';
       currentDeal.risk = 'Low';
       currentDeal.score = 18;
@@ -1752,7 +2411,7 @@
 
     function resolveFinding(id) {
       const f = findings.find(x => x.id === id);
-      if (!f) return;
+      if (!f || !confirmDealContext(f.deal,'resolve this finding')) return;
       f.status = 'Cleared';
       const d = deals.find(x => x.id === f.deal);
       if (d) { d.status = 'Cleared'; d.risk = 'Low'; d.score = Math.min(d.score, 22); }
@@ -1764,6 +2423,8 @@
     function advanceAction(id) {
       const a = actions.find(x => x.id === id);
       if (!a) return;
+      const dealId = actionDealId(a);
+      if (!confirmDealContext(dealId,'advance this corrective action')) return;
       if (a.stage === 'open') a.stage = 'progress';
       else if (a.stage === 'progress') a.stage = 'verify';
       else { actions = actions.filter(x => x.id !== id); showToast('Action verified', `${id} has been completed and removed from active work.`, 'success'); renderActions(); return; }
@@ -1785,6 +2446,7 @@
       document.getElementById('pageSubtitle').textContent = subtitle;
       document.getElementById('sidebar').classList.remove('open');
       window.scrollTo({top:0,behavior:'smooth'});
+      if (view === 'journey') renderJourney();
       if (view === 'audit') renderAudit();
       if (view === 'actions') renderActions();
       if (view === 'queue') renderDealQueue();
@@ -1803,7 +2465,7 @@
       deals.unshift({ id, dealer, customer, finding, category:finding.split(' ')[0], risk:'Moderate', score:44, owner:'Unassigned', status:'New', age:'Just now', updated:'Just now', vehicle:'Vehicle pending', structure:'Pending', amount:'Pending' });
       findings.unshift({ id:`F-${1050 + findings.length}`, deal:id, dealer, name:finding, category:finding.split(' ')[0], severity:'Moderate', owner:'Unassigned', status:'New' });
       addActivity(`A new review was created for <strong>${id}</strong>.`, 'System', id, 'Marcus Hale', 'Created', 'fa-file-circle-plus');
-      closeAuditModal(); refreshAll(); showView('queue'); showToast('Review created',`${id} was added to the deal-jacket queue.`,'success');
+      closeAuditModal(); refreshAll(); showView('queue'); showToast('Review created',`${id} was added with identity ${getDealIdentity(id).shape} ${getDealIdentity(id).code}. Active deal remains ${activeDealId}.`,'success');
     }
 
     function resetQueueFilters() { document.getElementById('queueSearch').value=''; document.getElementById('queueRisk').value='all'; document.getElementById('queueStatus').value='all'; renderDealQueue(); }
@@ -1883,10 +2545,14 @@
       document.getElementById('riskHighCount').textContent = severityCounts[0];
       document.getElementById('riskModerateCount').textContent = severityCounts[1];
       document.getElementById('riskLowCount').textContent = severityCounts[2];
+      const highKpi=document.getElementById('findingHighKpi'); if(highKpi) highKpi.textContent=severityCounts[0];
+      const moderateKpi=document.getElementById('findingModerateKpi'); if(moderateKpi) moderateKpi.textContent=severityCounts[1];
+      const lowKpi=document.getElementById('findingLowKpi'); if(lowKpi) lowKpi.textContent=severityCounts[2];
+      const actionCount=document.getElementById('actionCountNav'); if(actionCount) actionCount.textContent=actions.length;
       drawRiskChart();
     }
 
-    function refreshAll() { renderOverviewQueue(); renderDealQueue(); renderFindings(); renderActions(); renderActivities(); refreshCounts(); }
+    function refreshAll() { renderOverviewQueue(); renderDealQueue(); renderFindings(); renderActions(); renderActivities(); renderNotifications(); renderJourney(); renderActiveDealBanner(); refreshCounts(); }
 
     let currentTrendDays = 30;
     const trendSets = {
@@ -2080,6 +2746,12 @@
     }
     function updateRange(days) { currentTrendDays=days; drawTrendChart(); }
 
+    document.getElementById('workflowPrimaryButton').addEventListener('click', advanceWorkflow);
+    document.getElementById('workflowAutoButton').addEventListener('click', toggleWorkflowAuto);
+    document.getElementById('workflowExceptionButton').addEventListener('click', () => injectWorkflowException());
+    document.getElementById('workflowResetButton').addEventListener('click', resetWorkflow);
+    document.querySelectorAll('[data-workflow-decision]').forEach(button => button.addEventListener('click', () => resolveWorkflowDecision(button.dataset.workflowDecision)));
+
     document.querySelectorAll('.nav-item').forEach(n => n.addEventListener('click', () => showView(n.dataset.view)));
     document.querySelectorAll('#rangeControl .segment').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('#rangeControl .segment').forEach(x => x.classList.remove('active')); b.classList.add('active'); updateRange(Number(b.dataset.range)); }));
     document.querySelectorAll('[data-finding-filter]').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('[data-finding-filter]').forEach(x => x.classList.remove('active')); b.classList.add('active'); currentFindingFilter=b.dataset.findingFilter; renderFindings(); }));
@@ -2113,6 +2785,8 @@
     initializeEntryExperience();
     loadSettings();
     renderNotifications();
+    renderJourney();
+    renderActiveDealBanner();
     renderOverviewQueue();
     renderDealQueue();
     renderFindings();
