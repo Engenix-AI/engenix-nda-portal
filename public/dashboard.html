@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.18-light-first-login-v2">
+  <meta name="dashboard-build" content="2026.07.18-completion-watch-v5">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Dealer Portal Daily Briefing Demo</title>
+    <title>ENGENIX | Dealer Portal + Completion Watch Demo</title>
   <style>
     :root {
       --bg: #071018;
@@ -1728,6 +1728,71 @@
       body.printing-brief #printBriefRoot, body.printing-brief #printBriefRoot * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     }
 
+  
+
+    /* Completion Watch · office, funding, title, and customer-promise handoff */
+    .completion-kpis { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+    .completion-kpi { min-height:112px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .completion-kpi-label { color:var(--muted); font-size:9px; font-weight:820; letter-spacing:.08em; text-transform:uppercase; }
+    .completion-kpi-value { margin-top:10px; font-size:27px; font-weight:850; letter-spacing:-.04em; }
+    .completion-kpi-copy { margin-top:4px; color:var(--muted); font-size:9px; line-height:1.45; }
+    .completion-layout { margin-top:12px; display:grid; grid-template-columns:minmax(0,1.55fr) minmax(310px,.75fr); gap:12px; align-items:start; }
+    .completion-workspace { overflow:hidden; }
+    .completion-identity-head { padding:18px; border-bottom:1px solid var(--line); display:flex; align-items:flex-start; justify-content:space-between; gap:16px; box-shadow:inset 4px 0 0 var(--deal-accent,var(--blue)); }
+    .completion-record-title { margin-top:8px; font-size:21px; font-weight:850; letter-spacing:-.025em; }
+    .completion-record-copy { margin-top:5px; color:var(--muted); font-size:10px; line-height:1.55; }
+    .completion-stage-grid { padding:14px 18px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; border-bottom:1px solid var(--line); }
+    .completion-stage { min-height:88px; padding:12px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.018); }
+    .completion-stage-label { color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .completion-stage strong { display:block; margin-top:8px; font-size:11px; line-height:1.35; }
+    .completion-stage span { display:block; margin-top:4px; color:var(--muted); font-size:8.5px; line-height:1.4; }
+    .completion-stage.ready { border-color:rgba(79,209,161,.24); background:var(--green-soft); }
+    .completion-stage.attention { border-color:rgba(241,189,89,.26); background:var(--amber-soft); }
+    .completion-stage.blocked { border-color:rgba(255,110,125,.25); background:var(--red-soft); }
+    .completion-body { padding:18px; }
+    .completion-next-action { padding:14px; border:1px solid rgba(61,139,255,.22); border-radius:12px; background:var(--blue-soft); display:flex; align-items:center; justify-content:space-between; gap:14px; }
+    .completion-next-action strong { display:block; font-size:11px; }
+    .completion-next-action span { display:block; margin-top:4px; color:var(--muted); font-size:9px; line-height:1.45; }
+    .completion-item-list { margin-top:14px; display:grid; gap:8px; }
+    .completion-item { padding:12px; border:1px solid var(--line); border-radius:11px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; background:rgba(255,255,255,.016); }
+    .completion-item.resolved { opacity:.68; }
+    .completion-item-type { color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .completion-item-title { margin-top:5px; font-size:10.5px; font-weight:780; }
+    .completion-item-meta { margin-top:5px; color:var(--muted); font-size:8.7px; line-height:1.4; }
+    .completion-item-actions { display:flex; align-items:center; gap:7px; }
+    .handoff-panel { padding:17px; }
+    .handoff-panel h3 { margin:7px 0 0; font-size:16px; letter-spacing:-.02em; }
+    .handoff-panel p { margin:7px 0 0; color:var(--muted); font-size:9.5px; line-height:1.55; }
+    .handoff-checklist { margin-top:15px; display:grid; gap:9px; }
+    .handoff-check { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-bottom:9px; border-bottom:1px solid var(--line); font-size:9.5px; }
+    .handoff-check:last-child { border-bottom:0; padding-bottom:0; }
+    .handoff-actions { margin-top:17px; display:grid; gap:8px; }
+    .handoff-actions .button { width:100%; }
+    .completion-table-card { margin-top:12px; }
+    .completion-status-pill { white-space:nowrap; }
+    .completion-row-active { box-shadow:inset 4px 0 0 var(--deal-accent); background:var(--blue-soft); }
+    html[data-theme="light"] .completion-kpi,
+    html[data-theme="light"] .completion-stage,
+    html[data-theme="light"] .completion-item { background:#fff; }
+    html[data-theme="light"] .completion-stage.ready { background:var(--green-soft); }
+    html[data-theme="light"] .completion-stage.attention { background:var(--amber-soft); }
+    html[data-theme="light"] .completion-stage.blocked { background:var(--red-soft); }
+    @media (max-width:1250px) {
+      .completion-kpis { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .completion-layout { grid-template-columns:1fr; }
+    }
+    @media (max-width:740px) {
+      .completion-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .completion-stage-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .completion-identity-head, .completion-next-action { align-items:flex-start; flex-direction:column; }
+      .completion-item { grid-template-columns:1fr; }
+      .completion-item-actions { justify-content:space-between; }
+    }
+    @media (max-width:470px) {
+      .completion-kpis { grid-template-columns:1fr; }
+      .completion-stage-grid { grid-template-columns:1fr; }
+    }
+
   </style>
 
   <style id="engenix-light-first-friendly-layer">
@@ -2017,6 +2082,9 @@
           </button>
           <button class="nav-item" data-view="queue">
             <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Deal Queue</span><span class="nav-count" id="queueCount">8</span>
+          </button>
+          <button class="nav-item" data-view="completion">
+            <span class="nav-icon"><i class="fa-solid fa-file-circle-check"></i></span><span class="nav-text">Completion Watch</span><span class="nav-count" id="completionCountNav">5</span>
           </button>
         </div>
       </nav>
@@ -2328,6 +2396,31 @@
           <article class="card"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Dealership</th><th>Customer</th><th>Finding</th><th>Risk</th><th>Owner</th><th>Status</th><th>Updated</th><th></th></tr></thead><tbody id="dealQueueBody"></tbody></table></div></article>
         </section>
 
+        <section class="view" id="view-completion">
+          <div class="section-row" style="margin-top:0">
+            <div><div class="eyebrow">Post-compliance operating handoff</div><div class="section-title" style="margin-top:5px">Completion Watch</div><div class="section-subtitle">Turn the audited deal jacket into a clear office, funding, title, and customer-promise roadmap.</div></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="button" type="button" onclick="exportCompletionWatch()"><i class="fa-solid fa-download"></i>Export watch</button><button class="button" type="button" onclick="resetCompletionDemo()"><i class="fa-solid fa-rotate-left"></i>Reset demo</button></div>
+          </div>
+
+          <div class="completion-kpis">
+            <div class="completion-kpi"><div class="completion-kpi-label">Ready for Office</div><div class="completion-kpi-value trend-up" id="completionReadyKpi">0</div><div class="completion-kpi-copy">No open handoff blockers</div></div>
+            <div class="completion-kpi"><div class="completion-kpi-label">Funding Blocked</div><div class="completion-kpi-value trend-down" id="completionFundingKpi">0</div><div class="completion-kpi-copy">Evidence or stipulation required</div></div>
+            <div class="completion-kpi"><div class="completion-kpi-label">Title Follow-Up</div><div class="completion-kpi-value trend-warn" id="completionTitleKpi">0</div><div class="completion-kpi-copy">Trade, payoff, or title item open</div></div>
+            <div class="completion-kpi"><div class="completion-kpi-label">Customer Promises</div><div class="completion-kpi-value" id="completionPromiseKpi">0</div><div class="completion-kpi-copy">Due bills and We-Owe items</div></div>
+            <div class="completion-kpi"><div class="completion-kpi-label">Completed Handoffs</div><div class="completion-kpi-value" id="completionDoneKpi">0</div><div class="completion-kpi-copy">Accepted by the office</div></div>
+          </div>
+
+          <div class="completion-layout">
+            <article class="card completion-workspace" id="completionWorkspace"></article>
+            <aside class="card handoff-panel" id="completionHandoffPanel"></aside>
+          </div>
+
+          <article class="card completion-table-card">
+            <div class="card-header"><div><div class="card-title">Deal completion queue</div><div class="card-subtitle">The same deal identity follows each record beyond the compliance decision.</div></div><span class="badge blue" id="completionQueueScope">All rooftops</span></div>
+            <div class="table-wrap"><table><thead><tr><th>Deal</th><th>Compliance</th><th>Funding</th><th>Title / Trade</th><th>Customer Promise</th><th>Owner</th><th>Next Due</th><th>Status</th><th></th></tr></thead><tbody id="completionTableBody"></tbody></table></div>
+          </article>
+        </section>
+
         <section class="view" id="view-findings">
           <div class="section-row" style="margin-top:0"><div><div class="eyebrow">Explainable intelligence</div><div class="section-title" style="margin-top:5px">Prioritized Findings</div><div class="section-subtitle">Each finding remains reviewable, assignable, and subject to human judgment.</div></div><div class="segmented" id="findingSegments"><button class="segment active" data-finding-filter="all">All</button><button class="segment" data-finding-filter="High">High</button><button class="segment" data-finding-filter="Moderate">Moderate</button><button class="segment" data-finding-filter="Low">Low</button></div></div>
           <div class="kpi-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:12px"><div class="kpi" style="min-height:112px;--accent:var(--red);--accent-soft:var(--red-soft)"><div class="kpi-head"><div class="kpi-label">High Priority</div><div class="kpi-icon"><i class="fa-solid fa-fire"></i></div></div><div class="kpi-value" id="findingHighKpi" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--amber);--accent-soft:var(--amber-soft)"><div class="kpi-head"><div class="kpi-label">Review Required</div><div class="kpi-icon"><i class="fa-solid fa-eye"></i></div></div><div class="kpi-value" id="findingModerateKpi" style="font-size:30px">3</div></div><div class="kpi" style="min-height:112px;--accent:var(--green);--accent-soft:var(--green-soft)"><div class="kpi-head"><div class="kpi-label">Low Exposure</div><div class="kpi-icon"><i class="fa-solid fa-check"></i></div></div><div class="kpi-value" id="findingLowKpi" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--blue);--accent-soft:var(--blue-soft)"><div class="kpi-head"><div class="kpi-label">Median Age</div><div class="kpi-icon"><i class="fa-solid fa-hourglass-half"></i></div></div><div class="kpi-value" style="font-size:30px">42m</div></div></div>
@@ -2538,6 +2631,37 @@
       { id:'SM-77341', dealer:'Summit Motors', customer:'Casey Monroe', finding:'Product acknowledgment', category:'Product', risk:'Low', score:19, owner:'Dana Ruiz', status:'New', age:'14m', updated:'35m ago', vehicle:'2025 GMC Sierra', structure:'Finance', amount:'$64,770' },
       { id:'VC-23018', dealer:'Velocity Cars', customer:'Hayden Lewis', finding:'Stipulation expiration', category:'Stipulation', risk:'Moderate', score:39, owner:'Unassigned', status:'Awaiting Docs', age:'8m', updated:'41m ago', vehicle:'2026 Audi Q7', structure:'Lease', amount:'$79,125' }
     ];
+
+    const completionSeed = [
+      { deal:'ENX-2847', compliance:'Pending', owner:'Alex Morgan', due:'Today · 2:00 PM', officeAccepted:false, returned:false, items:[
+        { id:'CW-2847-1', type:'Funding', title:'Proof of insurance is not present in the completion packet.', owner:'Alex Morgan', due:'Today · 2:00 PM', status:'Open' },
+        { id:'CW-2847-2', type:'Customer Promise', title:'Second-key We-Owe requires an owner and completion date.', owner:'Parts Department', due:'Tomorrow · 10:00 AM', status:'Open' }
+      ]},
+      { deal:'PA-44921', compliance:'Review Required', owner:'Marcus Hale', due:'Today · 4:30 PM', officeAccepted:false, returned:false, items:[
+        { id:'CW-44921-1', type:'Funding', title:'Current income verification is still required by the lender.', owner:'Marcus Hale', due:'Today · 4:30 PM', status:'Open' }
+      ]},
+      { deal:'PH-88214', compliance:'Cleared', owner:'Dana Ruiz', due:'Ready now', officeAccepted:false, returned:false, items:[] },
+      { deal:'SM-30192', compliance:'Cleared', owner:'Title Team', due:'Today · 3:00 PM', officeAccepted:false, returned:false, items:[
+        { id:'CW-30192-1', type:'Title', title:'Trade title has not been matched to the deal jacket.', owner:'Title Team', due:'Today · 3:00 PM', status:'Open' }
+      ]},
+      { deal:'VC-11987', compliance:'Review Required', owner:'Marcus Hale', due:'Today · 10:00 AM', officeAccepted:false, returned:false, items:[
+        { id:'CW-11987-1', type:'Manager', title:'Structure variance disposition must be documented before office acceptance.', owner:'Marcus Hale', due:'Today · 10:00 AM', status:'Open' }
+      ]},
+      { deal:'PF-66420', compliance:'Cleared', owner:'Delivery Team', due:'Tomorrow · 9:00 AM', officeAccepted:false, returned:false, items:[
+        { id:'CW-66420-1', type:'Customer Promise', title:'Accessory installation commitment remains open.', owner:'Delivery Team', due:'Tomorrow · 9:00 AM', status:'Open' }
+      ]}
+    ];
+
+    function cloneCompletionSeed() { return completionSeed.map(record => ({...record, items:record.items.map(item => ({...item}))})); }
+    function loadCompletionRecords() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('engenix-completion-watch-v5') || 'null');
+        if (Array.isArray(saved)) return saved;
+      } catch (error) {}
+      return cloneCompletionSeed();
+    }
+    let completionRecords = loadCompletionRecords();
+    let activeCompletionDealId = 'ENX-2847';
 
     const findings = [
       { id:'F-1048', deal:'PA-44921', dealer:'Premier Ford', name:'Income verification document not present', category:'Stipulation', severity:'High', owner:'Marcus Hale', status:'Escalated' },
@@ -2912,7 +3036,7 @@
         { id:'MB-02', group:'Leadership decision', deal:'VC-11987', priority:'Critical', title:'The final contract structure differs from the approved worksheet.', decision:'Approve a documented correction path or require the missing supporting evidence.', owner:'Marcus Hale', due:'Today · 10:00 AM', outcome:'Escalated review', discussed:false, note:'' },
         { id:'MB-03', group:'Ownership gap', deal:'SM-30192', priority:'High', title:'A signed disclosure is absent and no individual owner is assigned.', decision:'Assign ownership before the deal changes departments and the operating context thins out.', owner:'Unassigned', due:'Today · 5:00 PM', outcome:'Assign owner', discussed:false, note:'' },
         { id:'MB-04', group: workflowHold ? 'Active delivery hold' : 'Guided deal review', deal:'ENX-2847', priority: workflowHold ? 'Critical' : 'Watch', title: workflowHold ? 'The guided deal has an unresolved structure variance.' : 'The guided transaction is ready for the next operating checkpoint.', decision: workflowHold ? 'Choose correction, escalation, or a documented exception before release.' : 'Confirm the next owner and move the record through the guided workflow.', owner: workflowStages[workflowState.stage]?.owner || 'Alex Morgan', due:'Before delivery', outcome: workflowHold ? 'Human decision required' : workflowStages[workflowState.stage]?.label || 'Desk Started', discussed:false, note:'' },
-        { id:'MB-05', group:'Funding and title watch', deal:'—', priority:'Watch', title:'Two delivered transactions are approaching the internal funding follow-up threshold.', decision:'Confirm which department owns each follow-up and the next verification time.', owner:'Controller Queue', due:'Today · Noon', outcome:'Confirm follow-up', discussed:false, note:'' }
+        { id:'MB-05', group:'Deal completion watch', deal:'SM-30192', priority: completionSummary().attention ? 'High' : 'Watch', title:`${completionSummary().attention} deals require funding, title, promise, or office-handoff follow-up.`, decision:'Confirm the accountable owner, deadline, and evidence needed before each deal is accepted as complete.', owner:'Controller Queue', due:'Today · Noon', outcome:'Clear completion blockers', discussed:false, note:'' }
       ];
     }
 
@@ -3022,7 +3146,7 @@
         {title:'Desk → F&I',meta:'One deal needs a clearer approval handoff',value:'3 clear',tone:'green'},
         {title:'F&I → Compliance',meta:'Two packages require supporting evidence',value:'2 holds',tone:'red'},
         {title:'Compliance → Delivery',meta:'One decision remains with leadership',value:'1 decision',tone:'amber'},
-        {title:'Delivery → Funding',meta:'Two records require follow-up today',value:'2 watch',tone:'blue'}
+        {title:'Compliance → Office',meta:'Completion Watch preserves funding, title, and customer promises',value:`${completionSummary().attention} watch`,tone:completionSummary().attention ? 'amber' : 'green'}
       ].map(item => `<div class="handoff-row"><div><strong>${item.title}</strong><span>${item.meta}</span></div><div class="handoff-score"><strong class="${item.tone === 'red' ? 'trend-down' : item.tone === 'amber' ? 'trend-warn' : 'trend-up'}">${item.value}</strong></div></div>`).join('');
 
       document.getElementById('briefReadout').innerHTML = `<div class="brief-callout critical"><strong>${summary.holds} release-review ${summary.holds === 1 ? 'item' : 'items'}</strong><p>Begin with the deals where delivery, funding, or documentation could move faster than the operating record.</p></div><div class="brief-callout commitment"><strong>${summary.unassigned} ownership gaps</strong><p>Assign names and due times while the responsible leaders are in the room.</p></div><div class="brief-callout"><strong>Yesterday returns until verified</strong><p>Open commitments remain visible so yesterday’s promise cannot quietly become tomorrow’s surprise.</p></div>`;
@@ -3376,6 +3500,7 @@
       overview: ['Command Center','Today’s work, operating risk, and the next required decisions'],
       journey: ['Deal Journey','One synthetic transaction from desk creation through final operating record'],
       queue: ['Deal Queue','Active deals prioritized for human review'],
+      completion: ['Completion Watch','Funding, title, customer promises, and office handoff after compliance'],
       findings: ['Findings','Review the issue, evidence, owner, and disposition'],
       actions: ['Corrective Actions','Move each issue to an owned and verified resolution'],
       reports: ['Reports & Briefings','Leadership-ready summaries from the current workspace'],
@@ -3564,6 +3689,218 @@
       renderActivities();
     }
 
+
+    function saveCompletionRecords() {
+      try { localStorage.setItem('engenix-completion-watch-v5', JSON.stringify(completionRecords)); } catch (error) {}
+    }
+
+    function completionDeal(record) { return deals.find(deal => deal.id === record.deal); }
+    function completionOpenItems(record) { return record.items.filter(item => item.status !== 'Resolved'); }
+
+    function syncGuidedCompletionRecord() {
+      const record = completionRecords.find(item => item.deal === workflowState.dealId);
+      if (!record) return;
+      if (workflowState.resolution || workflowState.completed) record.compliance = 'Cleared';
+      else if (workflowState.issueActive) record.compliance = 'Review Required';
+      else if (workflowState.stage >= 4) record.compliance = 'In Review';
+      else record.compliance = 'Pending';
+      if (record.compliance !== 'Cleared') record.officeAccepted = false;
+    }
+
+    function completionStatus(record) {
+      if (record.returned) return 'Returned to F&I';
+      if (record.compliance !== 'Cleared') return record.compliance === 'Review Required' ? 'Manager Review' : 'Compliance Review';
+      const open = completionOpenItems(record);
+      if (open.some(item => item.type === 'Funding')) return 'Funding Blocked';
+      if (open.some(item => item.type === 'Title')) return 'Title Follow-Up';
+      if (open.some(item => item.type === 'Customer Promise')) return 'Customer Promise Open';
+      if (open.some(item => item.type === 'Manager')) return 'Manager Review';
+      return record.officeAccepted ? 'Completed' : 'Ready for Office';
+    }
+
+    function completionStatusTone(status) {
+      if (['Funding Blocked','Manager Review','Returned to F&I'].includes(status)) return 'red';
+      if (['Title Follow-Up','Customer Promise Open','Compliance Review'].includes(status)) return 'amber';
+      if (['Ready for Office','Completed'].includes(status)) return 'green';
+      return 'blue';
+    }
+
+    function completionSummary() {
+      syncGuidedCompletionRecord();
+      const scope = document.getElementById('rooftopSelect')?.value || 'all';
+      const records = completionRecords.filter(record => scope === 'all' || completionDeal(record)?.dealer === scope);
+      const statuses = records.map(completionStatus);
+      return {
+        records,
+        ready:statuses.filter(status => status === 'Ready for Office').length,
+        funding:records.filter(record => completionOpenItems(record).some(item => item.type === 'Funding')).length,
+        title:records.filter(record => completionOpenItems(record).some(item => item.type === 'Title')).length,
+        promises:records.filter(record => completionOpenItems(record).some(item => item.type === 'Customer Promise')).length,
+        completed:statuses.filter(status => status === 'Completed').length,
+        attention:statuses.filter(status => status !== 'Ready for Office' && status !== 'Completed').length
+      };
+    }
+
+    function selectCompletionDeal(dealId) {
+      if (!completionRecords.some(record => record.deal === dealId)) return;
+      activeCompletionDealId = dealId;
+      setActiveDeal(dealId, false);
+      renderCompletionWatch();
+    }
+
+    function resolveCompletionItem(dealId, itemId) {
+      if (!confirmDealContext(dealId, 'complete this handoff item')) return;
+      const record = completionRecords.find(item => item.deal === dealId);
+      const item = record?.items.find(entry => entry.id === itemId);
+      if (!record || !item) return;
+      item.status = 'Resolved';
+      record.returned = false;
+      record.officeAccepted = false;
+      saveCompletionRecords();
+      addActivity(`<strong>${item.title}</strong> was marked received for office handoff.`, 'Assignment', dealId, 'Marcus Hale', 'Evidence received', 'fa-file-circle-check');
+      renderCompletionWatch();
+      renderMorningBrief();
+      showToast('Handoff item resolved', completionStatus(record) === 'Ready for Office' ? `${dealId} is ready for office acceptance.` : `${dealId} still has completion work open.`, 'success');
+    }
+
+    function acceptCompletionHandoff(dealId) {
+      if (!confirmDealContext(dealId, 'accept the office handoff')) return;
+      const record = completionRecords.find(item => item.deal === dealId);
+      if (!record) return;
+      const status = completionStatus(record);
+      if (status !== 'Ready for Office') {
+        showToast('Handoff not ready', `${dealId} must be cleared and all completion items resolved first.`, 'warning');
+        return;
+      }
+      record.officeAccepted = true;
+      record.returned = false;
+      saveCompletionRecords();
+      addActivity(`<strong>${dealId}</strong> was accepted by the office with no open completion blockers.`, 'Decision', dealId, 'Controller Queue', 'Office accepted', 'fa-circle-check');
+      renderCompletionWatch();
+      renderMorningBrief();
+      showToast('Office handoff accepted', `${dealId} is now marked completed.`, 'success');
+    }
+
+    function returnCompletionHandoff(dealId) {
+      if (!confirmDealContext(dealId, 'return the deal to F&I')) return;
+      const record = completionRecords.find(item => item.deal === dealId);
+      if (!record) return;
+      record.returned = true;
+      record.officeAccepted = false;
+      if (!record.items.some(item => item.id === `${dealId}-RETURN` && item.status !== 'Resolved')) {
+        record.items.unshift({ id:`${dealId}-RETURN`, type:'Manager', title:'Office returned the handoff for F&I correction and resubmission.', owner:'F&I Director', due:'Today · 1 hour', status:'Open' });
+      }
+      saveCompletionRecords();
+      addActivity(`<strong>${dealId}</strong> was returned to F&I for correction before office acceptance.`, 'Decision', dealId, 'Controller Queue', 'Returned to F&I', 'fa-rotate-left');
+      renderCompletionWatch();
+      renderMorningBrief();
+      showToast('Returned to F&I', `${dealId} now carries an owned resubmission item.`, 'warning');
+    }
+
+    function reopenCompletionHandoff(dealId) {
+      const record = completionRecords.find(item => item.deal === dealId);
+      if (!record) return;
+      record.officeAccepted = false;
+      saveCompletionRecords();
+      renderCompletionWatch();
+      showToast('Handoff reopened', `${dealId} is available for another office review.`, 'success');
+    }
+
+    function resetCompletionDemo() {
+      if (!window.confirm('Reset Completion Watch to the original synthetic records?')) return;
+      completionRecords = cloneCompletionSeed();
+      activeCompletionDealId = 'ENX-2847';
+      saveCompletionRecords();
+      renderCompletionWatch();
+      renderMorningBrief();
+      showToast('Completion Watch reset', 'Funding, title, promise, and handoff records were restored.', 'success');
+    }
+
+    function exportCompletionWatch() {
+      const rows = completionSummary().records.map(record => {
+        const deal = completionDeal(record) || {};
+        const open = completionOpenItems(record);
+        return [record.deal, deal.dealer || '', deal.customer || '', record.compliance, completionStatus(record), record.owner, record.due, open.length, open.map(item => `${item.type}: ${item.title}`).join(' | ')];
+      });
+      exportCsv('engenix-completion-watch.csv', ['Deal','Dealership','Customer','Compliance','Completion Status','Owner','Next Due','Open Items','Open Item Detail'], rows);
+      showToast('Completion Watch exported', 'The current completion roadmap was downloaded as CSV.', 'success');
+    }
+
+    function renderCompletionWatch() {
+      const view = document.getElementById('view-completion');
+      if (!view) return;
+      syncGuidedCompletionRecord();
+      const summary = completionSummary();
+      const records = summary.records;
+      if (!records.some(record => record.deal === activeCompletionDealId)) activeCompletionDealId = records[0]?.deal || completionRecords[0]?.deal;
+      const record = completionRecords.find(item => item.deal === activeCompletionDealId) || records[0];
+      if (!record) return;
+      const deal = completionDeal(record) || {dealer:'Unknown dealership',customer:'Unknown customer',vehicle:'Vehicle pending'};
+      const identity = getDealIdentity(record.deal);
+      const status = completionStatus(record);
+      const open = completionOpenItems(record);
+      const itemTypeStatus = type => open.some(item => item.type === type) ? 'Attention' : 'Ready';
+      const stageClass = value => value === 'Ready' ? 'ready' : value === 'Blocked' ? 'blocked' : 'attention';
+      const complianceValue = record.compliance;
+      const fundingValue = open.some(item => item.type === 'Funding') ? 'Blocked' : 'Ready';
+      const titleValue = open.some(item => item.type === 'Title') ? 'Attention' : 'Ready';
+      const promiseValue = open.some(item => item.type === 'Customer Promise') ? 'Attention' : 'Ready';
+      const nextItem = open[0];
+
+      document.getElementById('completionReadyKpi').textContent = summary.ready;
+      document.getElementById('completionFundingKpi').textContent = summary.funding;
+      document.getElementById('completionTitleKpi').textContent = summary.title;
+      document.getElementById('completionPromiseKpi').textContent = summary.promises;
+      document.getElementById('completionDoneKpi').textContent = summary.completed;
+      document.getElementById('completionCountNav').textContent = summary.attention;
+      document.getElementById('completionQueueScope').textContent = document.getElementById('rooftopSelect').value === 'all' ? 'All rooftops' : document.getElementById('rooftopSelect').value;
+
+      document.getElementById('completionWorkspace').innerHTML = `
+        <div class="completion-identity-head" style="--deal-accent:${identity.color}">
+          <div><div>${dealIdentityMarkup(record.deal)}</div><div class="completion-record-title">${deal.customer} · ${deal.vehicle}</div><div class="completion-record-copy">${deal.dealer} · ${open.length} open completion ${open.length === 1 ? 'item' : 'items'} · Owner: ${record.owner}</div></div>
+          <span class="badge ${completionStatusTone(status)} completion-status-pill">${status}</span>
+        </div>
+        <div class="completion-stage-grid">
+          <div class="completion-stage ${record.compliance === 'Cleared' ? 'ready' : record.compliance === 'Review Required' ? 'blocked' : 'attention'}"><div class="completion-stage-label">Compliance</div><strong>${record.compliance}</strong><span>${record.compliance === 'Cleared' ? 'Disposition preserved' : 'Audit must finish first'}</span></div>
+          <div class="completion-stage ${stageClass(fundingValue)}"><div class="completion-stage-label">Funding Readiness</div><strong>${fundingValue}</strong><span>${fundingValue === 'Ready' ? 'No evidence blocker' : 'Supporting evidence required'}</span></div>
+          <div class="completion-stage ${stageClass(titleValue)}"><div class="completion-stage-label">Title / Trade</div><strong>${titleValue}</strong><span>${titleValue === 'Ready' ? 'No open title item' : 'Title or payoff follow-up'}</span></div>
+          <div class="completion-stage ${stageClass(promiseValue)}"><div class="completion-stage-label">Customer Promises</div><strong>${promiseValue}</strong><span>${promiseValue === 'Ready' ? 'No open We-Owe item' : 'Commitment needs ownership'}</span></div>
+        </div>
+        <div class="completion-body">
+          <div class="completion-next-action"><div><strong>${nextItem ? nextItem.title : status === 'Ready for Office' ? 'The completion packet is ready for office acceptance.' : status === 'Completed' ? 'Office handoff accepted and preserved.' : 'No operational item is currently open.'}</strong><span>${nextItem ? `${nextItem.owner} · ${nextItem.due}` : `Current status: ${status}`}</span></div>${nextItem ? `<button class="button primary small" type="button" onclick="resolveCompletionItem('${record.deal}','${nextItem.id}')">Mark received</button>` : ''}</div>
+          <div class="section-row" style="margin:18px 0 10px"><div><div class="card-title">Completion items</div><div class="card-subtitle">Evidence, promises, and handoff exceptions remain attached to the same deal identity.</div></div><span class="badge ${open.length ? 'amber':'green'}">${open.length} open</span></div>
+          <div class="completion-item-list">${record.items.length ? record.items.map(item => `<div class="completion-item ${item.status === 'Resolved' ? 'resolved':''}"><div><div class="completion-item-type">${item.type}</div><div class="completion-item-title">${item.title}</div><div class="completion-item-meta">${item.owner} · ${item.due}</div></div><div class="completion-item-actions"><span class="badge ${item.status === 'Resolved' ? 'green':'amber'}">${item.status}</span>${item.status !== 'Resolved' ? `<button class="button small" type="button" onclick="resolveCompletionItem('${record.deal}','${item.id}')">Mark received</button>` : ''}</div></div>`).join('') : `<div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-circle-check"></i></div>No open completion items remain on this deal.</div>`}</div>
+        </div>`;
+
+      const ready = status === 'Ready for Office';
+      const completed = status === 'Completed';
+      document.getElementById('completionHandoffPanel').innerHTML = `
+        <div class="eyebrow">Office handoff</div><h3>${completed ? 'Completion accepted' : ready ? 'Ready for acceptance' : 'Handoff not ready'}</h3><p>${completed ? 'The office accepted responsibility and the completion record is preserved.' : ready ? 'Compliance is cleared and no funding, title, or customer-promise blocker remains.' : 'Resolve the visible items before responsibility moves to the office.'}</p>
+        <div class="handoff-checklist">
+          <div class="handoff-check"><span>Compliance disposition</span><span class="badge ${record.compliance === 'Cleared' ? 'green':'amber'}">${record.compliance}</span></div>
+          <div class="handoff-check"><span>Open completion items</span><strong>${open.length}</strong></div>
+          <div class="handoff-check"><span>Accountable owner</span><strong>${record.owner}</strong></div>
+          <div class="handoff-check"><span>Next deadline</span><strong>${record.due}</strong></div>
+        </div>
+        <div class="handoff-actions">
+          ${completed ? `<button class="button" type="button" onclick="reopenCompletionHandoff('${record.deal}')">Reopen handoff</button>` : `<button class="button primary" type="button" ${ready ? '' : 'disabled'} onclick="acceptCompletionHandoff('${record.deal}')"><i class="fa-solid fa-circle-check"></i>Accept Office Handoff</button>`}
+          <button class="button" type="button" onclick="returnCompletionHandoff('${record.deal}')"><i class="fa-solid fa-rotate-left"></i>Return to F&I</button>
+          <button class="button" type="button" onclick="openDeal('${record.deal}')">Open Deal Record</button>
+        </div>`;
+
+      document.getElementById('completionTableBody').innerHTML = records.map(item => {
+        const rowDeal = completionDeal(item) || {};
+        const rowIdentity = getDealIdentity(item.deal);
+        const rowStatus = completionStatus(item);
+        const rowOpen = completionOpenItems(item);
+        const funding = rowOpen.some(entry => entry.type === 'Funding') ? 'Blocked' : 'Ready';
+        const title = rowOpen.some(entry => entry.type === 'Title') ? 'Follow-Up' : 'Ready';
+        const promiseCount = rowOpen.filter(entry => entry.type === 'Customer Promise').length;
+        return `<tr class="clickable-row deal-row ${item.deal === activeCompletionDealId ? 'completion-row-active':''}" style="--deal-accent:${rowIdentity.color}" onclick="selectCompletionDeal('${item.deal}')"><td><div>${dealIdentityMarkup(item.deal,true)}</div><div class="cell-sub">${rowDeal.customer || ''} · ${rowDeal.vehicle || ''}</div></td><td><span class="badge ${item.compliance === 'Cleared' ? 'green' : item.compliance === 'Review Required' ? 'red':'amber'}">${item.compliance}</span></td><td><span class="badge ${funding === 'Ready' ? 'green':'red'}">${funding}</span></td><td><span class="badge ${title === 'Ready' ? 'green':'amber'}">${title}</span></td><td><span class="badge ${promiseCount ? 'amber':'green'}">${promiseCount ? `${promiseCount} open`:'Ready'}</span></td><td>${item.owner}</td><td>${item.due}</td><td><span class="badge ${completionStatusTone(rowStatus)}">${rowStatus}</span></td><td><button class="button small icon-only" type="button" onclick="event.stopPropagation();selectCompletionDeal('${item.deal}')"><i class="fa-solid fa-arrow-right"></i></button></td></tr>`;
+      }).join('') || `<tr><td colspan="9"><div class="empty-state">No completion records match this rooftop scope.</div></td></tr>`;
+      saveCompletionRecords();
+    }
+
     function showView(view) {
       document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === `view-${view}`));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === view));
@@ -3577,6 +3914,7 @@
       if (view === 'audit') renderAudit();
       if (view === 'actions') renderActions();
       if (view === 'queue') renderDealQueue();
+      if (view === 'completion') renderCompletionWatch();
       if (view === 'findings') renderFindings();
     }
 
@@ -3703,7 +4041,7 @@
       if (gateCopy) gateCopy.textContent = hold ? 'F-1051 requires a human decision' : workflowState.completed ? 'Decision trace preserved' : 'No active blocker';
     }
 
-    function refreshAll() { renderMorningBrief(); renderOverviewQueue(); renderDealQueue(); renderFindings(); renderActions(); renderActivities(); renderNotifications(); renderJourney(); renderActiveDealBanner(); renderOperatorFocus(); refreshCounts(); }
+    function refreshAll() { renderMorningBrief(); renderOverviewQueue(); renderDealQueue(); renderCompletionWatch(); renderFindings(); renderActions(); renderActivities(); renderNotifications(); renderJourney(); renderActiveDealBanner(); renderOperatorFocus(); refreshCounts(); }
 
     let currentTrendDays = 30;
     const trendSets = {
@@ -3943,6 +4281,7 @@
     renderOperatorFocus();
     renderOverviewQueue();
     renderDealQueue();
+    renderCompletionWatch();
     renderFindings();
     renderActions();
     renderActivities();
