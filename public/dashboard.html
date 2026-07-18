@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" style="color-scheme: light;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#071018" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.18-deal-journey-identity-demo">
+  <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
+  <meta name="dashboard-build" content="2026.07.18-light-first-login-v2">
   <script>
     try {
-      const savedTheme = localStorage.getItem('engenix-demo-theme');
-      if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
+      const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
+      const initialTheme = savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : 'light';
+      document.documentElement.dataset.theme = initialTheme;
+      document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | End-to-End Deal Journey Sandbox</title>
+    <title>ENGENIX | Dealer Operating Portal Demo</title>
   <style>
     :root {
       --bg: #071018;
@@ -1380,9 +1382,334 @@
       .journey-metrics { grid-template-columns: 1fr 1fr; }
     }
 
+
+
+    /* =========================================================
+       ENGENIX LIGHT-FIRST LOGIN V2
+       The first frame now matches the dealer portal by default.
+       Dark mode remains an intentional operator choice.
+       ========================================================= */
+    html[data-theme="light"] .auth-gate {
+      position: fixed;
+      isolation: isolate;
+      background:
+        linear-gradient(rgba(44,114,214,.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(44,114,214,.032) 1px, transparent 1px),
+        radial-gradient(circle at 12% 8%, rgba(44,114,214,.13), transparent 30%),
+        radial-gradient(circle at 88% 92%, rgba(201,104,40,.085), transparent 30%),
+        linear-gradient(145deg, #f8fafc, #edf3f7 56%, #f5f8fa);
+      background-size: 44px 44px, 44px 44px, auto, auto, auto;
+    }
+    html[data-theme="light"] .auth-gate::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, transparent 0 58%, rgba(255,255,255,.54) 74%, transparent 88%);
+      opacity: .8;
+    }
+    html[data-theme="light"] .auth-grid {
+      position: relative;
+      z-index: 1;
+    }
+    html[data-theme="light"] .auth-story-mark {
+      color: #176ea8;
+      border-color: rgba(44,114,214,.18);
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 12px 28px rgba(45,72,92,.07);
+    }
+    html[data-theme="light"] .auth-story h1 {
+      color: #10283a;
+      text-shadow: 0 18px 45px rgba(35,65,87,.08);
+    }
+    html[data-theme="light"] .auth-story p {
+      color: #5f7587;
+    }
+    html[data-theme="light"] .auth-promise-item {
+      border-color: rgba(28,57,78,.10);
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 14px 34px rgba(40,66,84,.065);
+    }
+    html[data-theme="light"] .auth-promise-item strong {
+      color: #17344a;
+    }
+    html[data-theme="light"] .login-card {
+      position: relative;
+      overflow: hidden;
+      border-color: rgba(28,57,78,.14);
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 34px 90px rgba(41,63,80,.16), 0 1px 0 rgba(255,255,255,.9) inset;
+    }
+    html[data-theme="light"] .login-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #2c72d6, #55a8df 46%, #d88a31 76%, #ef8a3c);
+    }
+    html[data-theme="light"] .login-logo {
+      border-color: rgba(28,57,78,.13);
+      box-shadow: 0 12px 26px rgba(30,52,69,.10);
+    }
+    html[data-theme="light"] .login-theme-button {
+      background: #f7fafc;
+      border-color: rgba(28,57,78,.13);
+    }
+    html[data-theme="light"] .login-kicker {
+      color: #176ea8;
+    }
+    html[data-theme="light"] .login-title {
+      color: #132737;
+    }
+    html[data-theme="light"] .demo-credentials {
+      border-color: rgba(154,106,18,.18);
+      background: #fffaf0;
+    }
+    html[data-theme="light"] .demo-credential {
+      border-color: rgba(154,106,18,.12);
+      background: rgba(255,255,255,.88);
+    }
+    html[data-theme="light"] .login-input {
+      color: #132737;
+      border-color: rgba(28,57,78,.16);
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(20,46,64,.02) inset;
+    }
+    html[data-theme="light"] .login-input::placeholder {
+      color: #92a2af;
+    }
+    html[data-theme="light"] .login-input:focus {
+      border-color: rgba(44,114,214,.5);
+      box-shadow: 0 0 0 4px rgba(44,114,214,.09);
+    }
+    html[data-theme="light"] .login-button {
+      box-shadow: 0 12px 28px rgba(44,114,214,.20);
+    }
+    html[data-theme="light"] .login-foot {
+      color: #8193a1;
+    }
+    @media (max-width: 880px) {
+      html[data-theme="light"] .auth-gate {
+        background:
+          radial-gradient(circle at 50% 0%, rgba(44,114,214,.12), transparent 38%),
+          linear-gradient(145deg, #f8fafc, #edf3f7 62%, #f5f8fa);
+      }
+      html[data-theme="light"] .login-card {
+        box-shadow: 0 26px 68px rgba(41,63,80,.15);
+      }
+    }
+
+  </style>
+
+  <style id="engenix-light-first-friendly-layer">
+    /* Light-first operator layer: features remain, visual competition is reduced. */
+    :root {
+      --sidebar: 242px;
+      --topbar: 68px;
+      --radius: 14px;
+    }
+
+    html:not([data-theme="dark"]) { color-scheme: light; }
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(circle at 82% -18%, rgba(44,114,214,.075), transparent 34%),
+        linear-gradient(180deg, #f7f9fb 0%, #f2f6f9 100%);
+    }
+
+    .sidebar {
+      padding: 14px 12px 12px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+    html[data-theme="light"] .sidebar {
+      background: rgba(255,255,255,.96);
+      box-shadow: 12px 0 34px rgba(34,57,75,.055);
+    }
+    .brand { height: 62px; border-radius: 12px; }
+    .brand-tag { font-size: 7.5px; }
+    .workspace { margin-top: 10px; padding: 10px 11px; }
+    html[data-theme="light"] .workspace { background: #f7f9fb; }
+    .workspace-title { font-size: 12.5px; }
+    .workspace-meta { font-size: 10px; }
+
+    .sidebar-primary-action {
+      width: 100%;
+      margin-top: 10px;
+      min-height: 52px;
+      padding: 8px 10px;
+      border: 1px solid rgba(44,114,214,.22);
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(44,114,214,.12), rgba(44,114,214,.055));
+      color: var(--text);
+      display: grid;
+      grid-template-columns: 30px minmax(0,1fr);
+      gap: 9px;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+    }
+    .sidebar-primary-action:hover { border-color: rgba(44,114,214,.38); background: rgba(44,114,214,.12); }
+    .sidebar-primary-icon { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; color: var(--blue); background: var(--blue-soft); }
+    .sidebar-primary-action strong { display: block; font-size: 11px; }
+    .sidebar-primary-action small { display: block; margin-top: 3px; color: var(--muted); font-size: 8.5px; }
+
+    .nav-group { margin-top: 14px; }
+    .nav-label { padding: 0 9px 6px; font-size: 8px; letter-spacing: .11em; }
+    .nav-list { gap: 3px; }
+    .nav-item { min-height: 40px; padding: 8px 9px; border-radius: 9px; gap: 9px; }
+    .nav-icon { width: 20px; }
+    .nav-text { font-size: 11.5px; }
+    html[data-theme="light"] .nav-item.active {
+      background: #edf4ff;
+      border-color: rgba(44,114,214,.18);
+      box-shadow: inset 3px 0 0 var(--blue);
+    }
+    .nav-count { font-size: 8px; }
+    .system-card { padding: 10px; }
+
+    .topbar { height: var(--topbar); padding: 0 clamp(15px,2vw,28px); }
+    html[data-theme="light"] .topbar { background: rgba(255,255,255,.9); }
+    .page-title { font-size: 15px; }
+    .page-subtitle { font-size: 10.5px; }
+    .demo-pill { background: #fff7df; color: #8c6419; border-color: rgba(154,106,18,.19); }
+    .search-trigger { min-width: 210px; background: rgba(255,255,255,.8); }
+
+    .content { max-width: 1540px; padding: 22px clamp(16px,2vw,28px) 38px; }
+    .hero {
+      min-height: 142px;
+      padding: 22px 24px;
+      border-radius: 16px;
+      box-shadow: none;
+    }
+    html[data-theme="light"] .hero {
+      background:
+        linear-gradient(105deg, rgba(255,255,255,.99), rgba(248,251,253,.99) 64%, rgba(237,244,250,.96));
+      border-color: rgba(28,57,78,.13);
+    }
+    .hero-kicker { font-size: 9px; }
+    .hero h1 { margin: 7px 0 8px; max-width: 680px; font-size: clamp(25px,2.5vw,36px); line-height: 1.08; }
+    .hero p { max-width: 720px; font-size: 12px; line-height: 1.55; }
+    .hero-actions { min-width: 290px; gap: 8px; }
+    .button { min-height: 38px; font-size: 10.5px; }
+
+    .operator-focus {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1.35fr repeat(3,minmax(0,1fr));
+      gap: 10px;
+    }
+    .operator-focus-card {
+      min-width: 0;
+      min-height: 76px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--panel);
+      color: var(--text);
+      display: grid;
+      grid-template-columns: 34px minmax(0,1fr) auto;
+      gap: 10px;
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+      transition: .16s ease;
+    }
+    html[data-theme="light"] .operator-focus-card { background: rgba(255,255,255,.94); box-shadow: 0 8px 20px rgba(34,57,75,.045); }
+    .operator-focus-card:hover { transform: translateY(-1px); border-color: var(--line-strong); }
+    .operator-focus-card.primary { border-color: rgba(44,114,214,.24); background: var(--blue-soft); }
+    html[data-theme="light"] .operator-focus-card.primary { background: #edf4ff; }
+    .operator-focus-icon { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: var(--blue); background: var(--blue-soft); }
+    .operator-focus-icon.attention { color: var(--amber); background: var(--amber-soft); }
+    .operator-focus-icon.hold { color: var(--green); background: var(--green-soft); }
+    .operator-focus-card small { display: block; color: var(--muted-2); font-size: 8px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .operator-focus-card strong { display: block; margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+    .operator-focus-card em { display: block; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 8.8px; font-style: normal; }
+    .operator-focus-arrow { color: var(--muted-2); font-size: 9px; }
+
+    .section-row { margin: 22px 0 10px; }
+    .section-title { font-size: 15px; }
+    .section-subtitle { font-size: 10.5px; }
+    .kpi-grid { gap: 10px; }
+    .kpi { min-height: 116px; padding: 15px; border-radius: 13px; }
+    html[data-theme="light"] .kpi { box-shadow: 0 8px 20px rgba(34,57,75,.045); }
+    .kpi-label { font-size: 8.5px; }
+    .kpi-value { margin-top: 9px; font-size: clamp(26px,2.1vw,33px); }
+    .kpi-foot { font-size: 9px; }
+
+    .grid-12 { gap: 10px; }
+    .card { border-radius: 13px; box-shadow: none; }
+    html[data-theme="light"] .card,
+    html[data-theme="light"] .action-card,
+    html[data-theme="light"] .report-card {
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 8px 22px rgba(34,57,75,.045);
+    }
+    .card-header { min-height: 58px; padding: 13px 15px; }
+    .card-title { font-size: 12px; }
+    .card-subtitle { font-size: 9.5px; }
+    .card-body { padding: 15px; }
+    .chart-wrap { height: 238px; }
+    .chart-wrap.small { height: 202px; }
+    th { height: 39px; font-size: 8.5px; }
+    td { height: 52px; font-size: 10.5px; }
+    .cell-sub { font-size: 8.8px; }
+
+    .active-deal-banner { min-height: 57px; }
+    html[data-theme="light"] .active-deal-banner { background: rgba(255,255,255,.94); box-shadow: 0 7px 20px rgba(34,57,75,.045); }
+    .active-deal-title { font-size: 11px; }
+    .active-deal-meta { font-size: 8.8px; }
+
+    .journey-hero { min-height: auto; padding: 20px; }
+    .journey-hero h1 { font-size: clamp(24px,2.6vw,36px); }
+    .journey-metrics { gap: 9px; }
+    .journey-metric { min-height: 84px; padding: 12px; }
+    .journey-stage { min-height: 88px; padding: 12px; }
+    .workflow-action-panel { padding: 15px; }
+    .workflow-action-title { font-size: 16px; }
+    .workflow-action-copy { font-size: 9.8px; }
+    .workflow-check strong { font-size: 10px; }
+    .workflow-check small { font-size: 8.5px; }
+    .decision-button { min-height: 108px; }
+
+    .filter-bar { padding: 9px; }
+    .input, .select-small { height: 38px; font-size: 10.5px; }
+    .action-card { padding: 12px; }
+    .report-card { padding: 16px; }
+
+    @media (max-width: 1250px) {
+      .operator-focus { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .search-trigger { min-width: 44px; width: 44px; justify-content: center; }
+      .search-trigger .search-copy, .search-trigger .keycap { display: none; }
+    }
+    @media (max-width: 980px) {
+      .sidebar { width: 250px; }
+      .operator-focus { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .hero-actions { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 740px) {
+      .content { padding: 14px 12px 32px; }
+      .hero { padding: 18px; }
+      .hero h1 { font-size: 27px; }
+      .operator-focus { grid-template-columns: 1fr; }
+      .operator-focus-card { min-height: 68px; }
+      .search-trigger { min-width: 40px; }
+      .journey-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 470px) {
+      .topbar { padding: 0 11px; }
+      .hero-actions { grid-template-columns: 1fr 1fr; }
+      .hero-actions .button { white-space: normal; text-align: center; }
+      .operator-focus-card { grid-template-columns: 32px minmax(0,1fr); }
+      .operator-focus-arrow { display: none; }
+      .journey-metrics { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
-<body class="auth-locked">
+<body class="auth-locked operator-friendly">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
     <div class="auth-grid">
       <section class="auth-story" aria-label="ENGENIX operating intelligence introduction">
@@ -1446,8 +1773,13 @@
         <div class="workspace-meta">4 rooftops · Founding Network</div>
       </div>
 
-      <nav class="nav-group" aria-label="Primary navigation">
-        <div class="nav-label">Operating View</div>
+      <button class="sidebar-primary-action" type="button" onclick="openAuditModal()">
+        <span class="sidebar-primary-icon"><i class="fa-solid fa-plus"></i></span>
+        <span><strong>Start a Review</strong><small>Create a synthetic deal-jacket review</small></span>
+      </button>
+
+      <nav class="nav-group" aria-label="Daily work navigation">
+        <div class="nav-label">Daily Work</div>
         <div class="nav-list">
           <button class="nav-item active" data-view="overview">
             <span class="nav-icon"><i class="fa-solid fa-grid-2"></i></span><span class="nav-text">Command Center</span>
@@ -1456,8 +1788,14 @@
             <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Deal Journey</span><span class="nav-count" id="journeyStageCount">01</span>
           </button>
           <button class="nav-item" data-view="queue">
-            <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Deal Jacket Queue</span><span class="nav-count" id="queueCount">8</span>
+            <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Deal Queue</span><span class="nav-count" id="queueCount">8</span>
           </button>
+        </div>
+      </nav>
+
+      <nav class="nav-group" aria-label="Resolution navigation">
+        <div class="nav-label">Resolve</div>
+        <div class="nav-list">
           <button class="nav-item" data-view="findings">
             <span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Findings</span><span class="nav-count" id="findingCountNav">7</span>
           </button>
@@ -1467,8 +1805,8 @@
         </div>
       </nav>
 
-      <nav class="nav-group" aria-label="Intelligence navigation">
-        <div class="nav-label">Intelligence</div>
+      <nav class="nav-group" aria-label="Records navigation">
+        <div class="nav-label">Records</div>
         <div class="nav-list">
           <button class="nav-item" data-view="reports">
             <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Reports</span>
@@ -1477,7 +1815,7 @@
             <span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Audit History</span>
           </button>
           <button class="nav-item" data-view="settings">
-            <span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Workspace Settings</span>
+            <span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span>
           </button>
         </div>
       </nav>
@@ -1544,9 +1882,9 @@
         <section class="view active" id="view-overview">
           <div class="hero">
             <div class="hero-copy">
-              <div class="hero-kicker">Detect → Decide → Act → Remember</div>
-              <h1>Know where operational risk is forming before it hardens.</h1>
-              <p>Review the active deal-jacket queue, prioritize findings, document human decisions, and preserve a clear operating history across the dealership group.</p>
+              <div class="hero-kicker">Your dealership operating view</div>
+              <h1>See what needs attention, who owns it, and what happens next.</h1>
+              <p>Start with today’s work. Open a deal, review the evidence, assign the next action, and preserve every decision in one operating record.</p>
             </div>
             <div class="hero-actions">
               <button class="button primary" onclick="openAuditModal()"><i class="fa-solid fa-play"></i>Start Review</button>
@@ -1555,6 +1893,26 @@
               <button class="button orange" onclick="simulateSync(this)"><i class="fa-solid fa-arrows-rotate"></i>Sync Workspace</button>
             </div>
           </div>
+
+          <section class="operator-focus" aria-label="Current operator priorities">
+            <button class="operator-focus-card primary" type="button" onclick="showView('journey')">
+              <span class="operator-focus-icon"><i class="fa-solid fa-route"></i></span>
+              <span><small>Continue active deal</small><strong id="focusActiveDeal">◆ A7 · ENX-2847</strong><em id="focusActiveStage">Desk · Alex Morgan</em></span>
+              <i class="fa-solid fa-arrow-right operator-focus-arrow"></i>
+            </button>
+            <button class="operator-focus-card" type="button" onclick="showView('findings')">
+              <span class="operator-focus-icon attention"><i class="fa-solid fa-triangle-exclamation"></i></span>
+              <span><small>Needs a decision</small><strong id="focusHighFindings">2 high-priority findings</strong><em>Open the review queue</em></span>
+            </button>
+            <button class="operator-focus-card" type="button" onclick="showView('actions')">
+              <span class="operator-focus-icon"><i class="fa-solid fa-user-plus"></i></span>
+              <span><small>Needs ownership</small><strong id="focusUnassigned">2 unassigned items</strong><em>Assign before context moves</em></span>
+            </button>
+            <button class="operator-focus-card" type="button" onclick="showView('journey')">
+              <span class="operator-focus-icon hold"><i class="fa-solid fa-shield-halved"></i></span>
+              <span><small>Delivery control</small><strong id="focusDeliveryGate">Gate open</strong><em id="focusDeliveryCopy">No active blocker</em></span>
+            </button>
+          </section>
 
           <div class="section-row">
             <div><div class="section-title">Network operating posture</div><div class="section-subtitle">Current demo scope · <span class="scopeLabel">All rooftops</span></div></div>
@@ -1785,7 +2143,7 @@
       document.documentElement.dataset.theme = resolved;
       updateThemeControls();
       if (persist) {
-        try { localStorage.setItem('engenix-demo-theme', resolved); } catch (error) {}
+        try { localStorage.setItem('engenix-demo-theme-v3', resolved); } catch (error) {}
       }
       requestAnimationFrame(() => { if (typeof drawAllCharts === 'function') drawAllCharts(); });
     }
@@ -2247,13 +2605,13 @@
     }
 
     const pageMeta = {
-      overview: ['Command Center','Operating intelligence for active dealership compliance work'],
+      overview: ['Command Center','Today’s work, operating risk, and the next required decisions'],
       journey: ['Deal Journey','One synthetic transaction from desk creation through final operating record'],
-      queue: ['Deal Jacket Queue','Prioritized human review across the selected dealership scope'],
-      findings: ['Findings','Explainable exceptions with ownership and disposition'],
-      actions: ['Corrective Actions','Accountable work from issue to verified resolution'],
-      reports: ['Reports & Briefings','Operator-ready outputs from visible demonstration data'],
-      audit: ['Audit History','Chronological decisions, events, and review activity'],
+      queue: ['Deal Queue','Active deals prioritized for human review'],
+      findings: ['Findings','Review the issue, evidence, owner, and disposition'],
+      actions: ['Corrective Actions','Move each issue to an owned and verified resolution'],
+      reports: ['Reports & Briefings','Leadership-ready summaries from the current workspace'],
+      audit: ['Audit History','A chronological record of every action and decision'],
       settings: ['Workspace Settings','Display, alert, and review preferences']
     };
 
@@ -2552,7 +2910,31 @@
       drawRiskChart();
     }
 
-    function refreshAll() { renderOverviewQueue(); renderDealQueue(); renderFindings(); renderActions(); renderActivities(); renderNotifications(); renderJourney(); renderActiveDealBanner(); refreshCounts(); }
+    function renderOperatorFocus() {
+      const active = deals.find(deal => deal.id === activeDealId) || currentWorkflowDeal();
+      const identity = getDealIdentity(active.id);
+      const activeStage = active.id === workflowState.dealId ? workflowStages[workflowState.stage] : null;
+      const highCount = findings.filter(item => item.status !== 'Cleared' && item.severity === 'High').length;
+      const unassignedCount = findings.filter(item => item.status !== 'Cleared' && item.owner === 'Unassigned').length + actions.filter(item => item.owner === 'Unassigned').length;
+      const hold = workflowState.issueActive && !workflowState.resolution;
+      const activeNode = document.getElementById('focusActiveDeal');
+      if (activeNode) {
+        activeNode.textContent = `${identity.shape} ${identity.code} · ${active.id}`;
+        activeNode.style.color = identity.color;
+      }
+      const stageNode = document.getElementById('focusActiveStage');
+      if (stageNode) stageNode.textContent = activeStage ? `${activeStage.label} · ${activeStage.owner}` : `${active.status} · ${active.owner}`;
+      const highNode = document.getElementById('focusHighFindings');
+      if (highNode) highNode.textContent = `${highCount} high-priority ${highCount === 1 ? 'finding' : 'findings'}`;
+      const unassignedNode = document.getElementById('focusUnassigned');
+      if (unassignedNode) unassignedNode.textContent = `${unassignedCount} unassigned ${unassignedCount === 1 ? 'item' : 'items'}`;
+      const gateNode = document.getElementById('focusDeliveryGate');
+      const gateCopy = document.getElementById('focusDeliveryCopy');
+      if (gateNode) gateNode.textContent = hold ? 'Delivery hold active' : workflowState.completed ? 'Deal archived' : 'Gate open';
+      if (gateCopy) gateCopy.textContent = hold ? 'F-1051 requires a human decision' : workflowState.completed ? 'Decision trace preserved' : 'No active blocker';
+    }
+
+    function refreshAll() { renderOverviewQueue(); renderDealQueue(); renderFindings(); renderActions(); renderActivities(); renderNotifications(); renderJourney(); renderActiveDealBanner(); renderOperatorFocus(); refreshCounts(); }
 
     let currentTrendDays = 30;
     const trendSets = {
@@ -2787,6 +3169,7 @@
     renderNotifications();
     renderJourney();
     renderActiveDealBanner();
+    renderOperatorFocus();
     renderOverviewQueue();
     renderDealQueue();
     renderFindings();
