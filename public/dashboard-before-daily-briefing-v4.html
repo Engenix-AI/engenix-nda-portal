@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Dealer Portal Daily Briefing Demo</title>
+    <title>ENGENIX | Dealer Operating Portal Demo</title>
   <style>
     :root {
       --bg: #071018;
@@ -1506,7 +1506,7 @@
   
 
     /* =========================================================
-       ENGENIX LEADERSHIP DAILY BRIEFING + ON-DEMAND MANAGER ROADMAP V4
+       ENGENIX LEADERSHIP MORNING BRIEF + MEETING MODE V3
        ========================================================= */
     .fa-print::before { content: "▧"; }
     .fa-users::before { content: "◎"; }
@@ -1688,7 +1688,7 @@
 
     @media (max-width: 1080px) {
       .brief-hero-grid { grid-template-columns: 1fr; }
-      .brief-actions { grid-template-columns: repeat(4,minmax(0,1fr)); min-width:0; }
+      .brief-actions { grid-template-columns: repeat(3,minmax(0,1fr)); min-width:0; }
       .brief-actions .button { justify-content:center; }
       .brief-grid { grid-template-columns: 1fr; }
     }
@@ -2007,7 +2007,7 @@
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
           <button class="nav-item active" data-view="brief">
-            <span class="nav-icon"><i class="fa-solid fa-building-shield"></i></span><span class="nav-text">Daily Briefing</span><span class="nav-count" id="briefOpenCount">5</span>
+            <span class="nav-icon"><i class="fa-solid fa-building-shield"></i></span><span class="nav-text">Morning Brief</span><span class="nav-count" id="briefOpenCount">5</span>
           </button>
           <button class="nav-item" data-view="overview">
             <span class="nav-icon"><i class="fa-solid fa-grid-2"></i></span><span class="nav-text">Command Center</span>
@@ -2072,8 +2072,8 @@
         <div class="topbar-left">
           <button class="icon-button mobile-menu" id="mobileMenu" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
           <div class="page-heading">
-            <div class="page-title" id="pageTitle">Leadership Daily Briefing</div>
-            <div class="page-subtitle" id="pageSubtitle">An on-demand operating roadmap for priorities, owners, decisions, and deadlines</div>
+            <div class="page-title" id="pageTitle">Leadership Morning Brief</div>
+            <div class="page-subtitle" id="pageSubtitle">Today’s priorities, ownership, decisions, and meeting commitments</div>
           </div>
           <span class="demo-pill">DEMO DATA</span>
         </div>
@@ -2113,34 +2113,34 @@
             <header class="brief-hero">
               <div class="brief-hero-grid">
                 <div>
-                  <div class="brief-kicker">On-demand manager operating roadmap</div>
-                  <h1 id="briefGreeting">Your daily operating roadmap is ready.</h1>
-                  <p>Run this briefing at any point in the day to align managers around blocked deals, required decisions, accountable owners, deadlines, and the next operating move.</p>
+                  <div class="brief-kicker">Daily leadership cadence</div>
+                  <h1 id="briefGreeting">Good morning, Premier Auto Group.</h1>
+                  <p>Walk into the manager meeting knowing which deals are blocked, what needs a decision, who owns the next move, and which commitments carried forward from yesterday.</p>
                   <div class="brief-meta">
                     <span class="brief-meta-chip"><i class="fa-solid fa-calendar-day"></i><span id="briefDateLabel">Today</span></span>
-                    <span class="brief-meta-chip"><i class="fa-solid fa-user-check"></i>Briefing leader: Marcus Hale</span>
-                    <span class="brief-meta-chip"><i class="fa-solid fa-shield-halved"></i><span id="briefMeetingStatus">Ready to run at any time</span></span>
-                    <span class="brief-meta-chip"><i class="fa-solid fa-download"></i><span id="briefGeneratedStatus">No briefing file generated yet</span></span><span class="brief-meta-chip">Synthetic demonstration records</span>
+                    <span class="brief-meta-chip"><i class="fa-solid fa-user-check"></i>Meeting leader: Marcus Hale</span>
+                    <span class="brief-meta-chip"><i class="fa-solid fa-shield-halved"></i><span id="briefMeetingStatus">Ready to run</span></span>
+                    <span class="brief-meta-chip">Synthetic demonstration records</span>
                   </div>
                 </div>
                 <div class="brief-actions">
-                  <button class="button primary" type="button" onclick="startMorningMeeting()"><i class="fa-solid fa-play"></i>Run Daily Briefing</button>
-                  <button class="button" type="button" onclick="downloadDailyBriefingPdf()"><i class="fa-solid fa-download"></i>Download Briefing PDF</button><button class="button" type="button" onclick="printMorningBrief()"><i class="fa-solid fa-print"></i>Print Briefing</button>
-                  <button class="button orange" type="button" onclick="completeMorningMeeting()"><i class="fa-solid fa-clipboard-check"></i>Complete & Archive Briefing</button>
+                  <button class="button primary" type="button" onclick="startMorningMeeting()"><i class="fa-solid fa-play"></i>Run Morning Meeting</button>
+                  <button class="button" type="button" onclick="printMorningBrief()"><i class="fa-solid fa-print"></i>Print Meeting Brief</button>
+                  <button class="button orange" type="button" onclick="completeMorningMeeting()"><i class="fa-solid fa-clipboard-check"></i>Complete & Archive</button>
                 </div>
               </div>
             </header>
 
-            <section class="brief-metrics" aria-label="Daily leadership summary">
+            <section class="brief-metrics" aria-label="Morning leadership summary">
               <article class="brief-metric attention"><div><small>Delivery attention</small><strong id="briefHoldMetric">3</strong><em id="briefHoldCopy">Deals requiring release review</em></div><span class="brief-metric-icon"><i class="fa-solid fa-shield-halved"></i></span></article>
               <article class="brief-metric warning"><div><small>Leadership decisions</small><strong id="briefDecisionMetric">2</strong><em>High-priority exceptions still open</em></div><span class="brief-metric-icon"><i class="fa-solid fa-scale-balanced"></i></span></article>
               <article class="brief-metric owner"><div><small>Needs an owner</small><strong id="briefOwnerMetric">3</strong><em>Work that could lose context today</em></div><span class="brief-metric-icon"><i class="fa-solid fa-user-plus"></i></span></article>
-              <article class="brief-metric"><div><small>Briefing completion</small><strong id="briefCompletionMetric">0%</strong><em id="briefCompletionCopy">Five agenda items remain</em></div><span class="brief-metric-icon"><i class="fa-solid fa-list-check"></i></span></article>
+              <article class="brief-metric"><div><small>Meeting completion</small><strong id="briefCompletionMetric">0%</strong><em id="briefCompletionCopy">Five agenda items remain</em></div><span class="brief-metric-icon"><i class="fa-solid fa-list-check"></i></span></article>
             </section>
 
             <section class="brief-grid">
               <article class="brief-panel">
-                <div class="brief-panel-head"><div><div class="brief-panel-title">Manager action roadmap</div><div class="brief-panel-copy">Ordered by operating consequence, with owners and deadlines attached.</div></div><div class="brief-progress"><div class="brief-progress-meta"><span>Discussed</span><strong id="briefProgressText">0 of 5</strong></div><div class="brief-progress-track"><div class="brief-progress-fill" id="briefProgressFill"></div></div></div></div>
+                <div class="brief-panel-head"><div><div class="brief-panel-title">Today’s leadership agenda</div><div class="brief-panel-copy">Ordered by operating consequence, not by when the alert arrived.</div></div><div class="brief-progress"><div class="brief-progress-meta"><span>Discussed</span><strong id="briefProgressText">0 of 5</strong></div><div class="brief-progress-track"><div class="brief-progress-fill" id="briefProgressFill"></div></div></div></div>
                 <div class="brief-panel-body"><div class="brief-agenda-list" id="briefAgendaList"></div></div>
               </article>
 
@@ -2342,7 +2342,7 @@
         <section class="view" id="view-reports">
           <div class="section-row" style="margin-top:0"><div><div class="eyebrow">Operator-ready output</div><div class="section-title" style="margin-top:5px">Reports & Briefings</div><div class="section-subtitle">Create dealership-specific summaries from the visible demonstration dataset.</div></div><button class="button primary" onclick="generateReport('Executive compliance briefing')"><i class="fa-solid fa-wand-magic-sparkles"></i>Generate briefing</button></div>
           <div class="report-grid" id="reportGrid">
-            <div class="report-card"><div class="report-icon" style="color:var(--blue);background:var(--blue-soft)"><i class="fa-solid fa-building-shield"></i></div><div class="report-title">Leadership Daily Briefing</div><div class="report-copy">Generate an on-demand manager roadmap, capture ownership and decisions, then download, print, or archive the operating packet.</div><div class="report-meta"><span>On-demand operating roadmap</span><span style="display:flex;gap:6px"><button class="button small" onclick="showView('brief')">Open</button><button class="button small" onclick="downloadDailyBriefingPdf()">Download PDF</button></span></div></div>
+            <div class="report-card"><div class="report-icon" style="color:var(--blue);background:var(--blue-soft)"><i class="fa-solid fa-building-shield"></i></div><div class="report-title">Leadership Morning Brief</div><div class="report-copy">Run the daily manager meeting, capture ownership and decisions, then print or archive the operating packet.</div><div class="report-meta"><span>Daily operating cadence</span><button class="button small" onclick="showView('brief')">Open</button></div></div>
             <div class="report-card"><div class="report-icon"><i class="fa-solid fa-building-shield"></i></div><div class="report-title">Executive Compliance Briefing</div><div class="report-copy">A concise operator view of posture, high-priority findings, aging work, and decisions requiring leadership attention.</div><div class="report-meta"><span>PDF-ready preview</span><button class="button small" onclick="generateReport('Executive compliance briefing')">Generate</button></div></div>
             <div class="report-card"><div class="report-icon" style="color:var(--orange);background:var(--orange-soft)"><i class="fa-solid fa-file-signature"></i></div><div class="report-title">Deal Jacket Exception Register</div><div class="report-copy">A structured export of deal IDs, exception categories, severity, ownership, and current disposition.</div><div class="report-meta"><span>CSV export</span><button class="button small" onclick="exportDeals()">Export</button></div></div>
             <div class="report-card"><div class="report-icon" style="color:var(--green);background:var(--green-soft)"><i class="fa-solid fa-user-check"></i></div><div class="report-title">Corrective Action Status</div><div class="report-copy">Tracks open, in-progress, and verified corrective actions with owners and due dates.</div><div class="report-meta"><span>Live workspace view</span><button class="button small" onclick="showView('actions')">Open</button></div></div>
@@ -2401,13 +2401,13 @@
 
 
   <div class="meeting-overlay" id="meetingOverlay" aria-hidden="true">
-    <section class="meeting-shell" aria-label="Leadership daily briefing mode">
+    <section class="meeting-shell" aria-label="Leadership morning meeting mode">
       <header class="meeting-head">
-        <div class="meeting-brand"><div class="meeting-brand-mark">E</div><div><div class="meeting-title">Leadership Daily Briefing</div><div class="meeting-subtitle" id="meetingHeaderMeta">Premier Auto Group · On demand · Marcus Hale</div></div></div>
-        <div class="meeting-head-actions"><button class="button" type="button" onclick="downloadDailyBriefingPdf()"><i class="fa-solid fa-download"></i>Download PDF</button><button class="button" type="button" onclick="printMorningBrief()"><i class="fa-solid fa-print"></i>Print packet</button><button class="icon-button" type="button" onclick="closeMorningMeeting()" aria-label="Close briefing mode"><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="meeting-brand"><div class="meeting-brand-mark">E</div><div><div class="meeting-title">Leadership Morning Meeting</div><div class="meeting-subtitle" id="meetingHeaderMeta">Premier Auto Group · Today · Marcus Hale</div></div></div>
+        <div class="meeting-head-actions"><button class="button" type="button" onclick="printMorningBrief()"><i class="fa-solid fa-print"></i>Print packet</button><button class="icon-button" type="button" onclick="closeMorningMeeting()" aria-label="Close meeting mode"><i class="fa-solid fa-xmark"></i></button></div>
       </header>
       <div class="meeting-body">
-        <aside class="meeting-rail"><div class="meeting-rail-label">Briefing roadmap</div><div class="meeting-rail-progress"><div class="brief-progress-meta"><span>Progress</span><strong id="meetingProgressText">0 of 5</strong></div><div class="brief-progress-track"><div class="brief-progress-fill" id="meetingProgressFill"></div></div></div><div class="meeting-rail-list" id="meetingAgendaRail"></div><button class="button small" style="width:100%;margin-top:16px" type="button" onclick="resetMorningMeeting()"><i class="fa-solid fa-rotate-left"></i>Start fresh briefing</button></aside>
+        <aside class="meeting-rail"><div class="meeting-rail-label">Meeting agenda</div><div class="meeting-rail-progress"><div class="brief-progress-meta"><span>Progress</span><strong id="meetingProgressText">0 of 5</strong></div><div class="brief-progress-track"><div class="brief-progress-fill" id="meetingProgressFill"></div></div></div><div class="meeting-rail-list" id="meetingAgendaRail"></div><button class="button small" style="width:100%;margin-top:16px" type="button" onclick="resetMorningMeeting()"><i class="fa-solid fa-rotate-left"></i>Reset today’s meeting</button></aside>
         <main class="meeting-main" id="meetingMain"></main>
       </div>
     </section>
@@ -2919,15 +2919,13 @@
     function loadMorningBriefState() {
       let saved = null;
       try { saved = JSON.parse(localStorage.getItem('engenix-morning-brief-state') || 'null'); } catch (error) { saved = null; }
-      const base = { started:false, completed:false, startedAt:null, completedAt:null, generatedAt:null, runNumber:1, currentIndex:0, meetingNote:'', items:buildMorningAgenda() };
+      const base = { started:false, completed:false, startedAt:null, completedAt:null, currentIndex:0, meetingNote:'', items:buildMorningAgenda() };
       if (!saved || !Array.isArray(saved.items)) return base;
       const fresh = buildMorningAgenda();
       base.started = !!saved.started;
       base.completed = !!saved.completed;
       base.startedAt = saved.startedAt || null;
       base.completedAt = saved.completedAt || null;
-      base.generatedAt = saved.generatedAt || null;
-      base.runNumber = Number.isInteger(saved.runNumber) && saved.runNumber > 0 ? saved.runNumber : 1;
       base.currentIndex = Number.isInteger(saved.currentIndex) ? Math.min(Math.max(saved.currentIndex,0),fresh.length-1) : 0;
       base.meetingNote = saved.meetingNote || '';
       base.items = fresh.map(item => {
@@ -2943,20 +2941,8 @@
       try { localStorage.setItem('engenix-morning-brief-state', JSON.stringify(morningBriefState)); } catch (error) {}
     }
 
-    function morningDateLabel(date = new Date()) {
-      return new Intl.DateTimeFormat('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' }).format(date);
-    }
-
-    function dailyBriefGreeting() {
-      const hour = new Date().getHours();
-      if (hour < 12) return 'Good morning';
-      if (hour < 17) return 'Good afternoon';
-      return 'Good evening';
-    }
-
-    function briefingFileStamp(date = new Date()) {
-      const pad = value => String(value).padStart(2,'0');
-      return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}`;
+    function morningDateLabel() {
+      return new Intl.DateTimeFormat('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(new Date());
     }
 
     function currentBriefScope() {
@@ -2993,11 +2979,9 @@
       syncMorningAgendaContext();
       const summary = morningSummary();
       const scope = currentBriefScope();
-      document.getElementById('briefGreeting').textContent = `${dailyBriefGreeting()}, ${scope}.`;
+      document.getElementById('briefGreeting').textContent = `Good morning, ${scope}.`;
       document.getElementById('briefDateLabel').textContent = morningDateLabel();
-      document.getElementById('briefMeetingStatus').textContent = morningBriefState.completed ? 'Briefing completed and archived' : morningBriefState.started ? 'Briefing in progress' : 'Ready to run at any time';
-      const generatedStatus = document.getElementById('briefGeneratedStatus');
-      if (generatedStatus) generatedStatus.textContent = morningBriefState.generatedAt ? `PDF generated ${new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit'}).format(new Date(morningBriefState.generatedAt))}` : 'No briefing file generated yet';
+      document.getElementById('briefMeetingStatus').textContent = morningBriefState.completed ? 'Meeting completed and archived' : morningBriefState.started ? 'Meeting in progress' : 'Ready to run';
       document.getElementById('briefHoldMetric').textContent = summary.holds;
       document.getElementById('briefHoldCopy').textContent = summary.holds === 1 ? 'Deal requiring release review' : 'Deals requiring release review';
       document.getElementById('briefDecisionMetric').textContent = summary.high;
@@ -3030,14 +3014,10 @@
     }
 
     function startMorningMeeting() {
-      if (morningBriefState.completed) {
-        if (!window.confirm('Start a new Daily Briefing using the current operating record?')) return;
-        morningBriefState = { started:false, completed:false, startedAt:null, completedAt:null, generatedAt:null, runNumber:(morningBriefState.runNumber || 1) + 1, currentIndex:0, meetingNote:'', items:buildMorningAgenda() };
-      }
       if (!morningBriefState.started) {
         morningBriefState.started = true;
         morningBriefState.startedAt = new Date().toISOString();
-        addActivity('A <strong>Leadership Daily Briefing</strong> was started for the current workspace.', 'Decision', '—', 'Marcus Hale', 'Briefing started', 'fa-play');
+        addActivity('The <strong>Leadership Morning Meeting</strong> was started for the current workspace.', 'Decision', '—', 'Marcus Hale', 'Meeting started', 'fa-play');
       }
       saveMorningBriefState();
       document.getElementById('meetingOverlay').classList.add('open');
@@ -3068,7 +3048,7 @@
       document.getElementById('meetingProgressFill').style.width = `${summary.percent}%`;
       document.getElementById('meetingAgendaRail').innerHTML = morningBriefState.items.map((agenda,index) => `<button class="meeting-rail-item ${index === morningBriefState.currentIndex ? 'active':''} ${agenda.discussed ? 'done':''}" type="button" onclick="selectMeetingItem(${index})"><span class="meeting-rail-number">${agenda.discussed ? '✓' : index+1}</span><span>${escapeMorningText(agenda.group)}</span></button>`).join('');
       const deal = item.deal !== '—' ? deals.find(dealItem => dealItem.id === item.deal) : null;
-      document.getElementById('meetingMain').innerHTML = `<div class="meeting-step-kicker">Agenda ${morningBriefState.currentIndex+1} of ${morningBriefState.items.length} · ${escapeMorningText(item.group)}</div><h2 class="meeting-step-title">${escapeMorningText(item.title)}</h2><p class="meeting-step-copy">${escapeMorningText(item.decision)}</p><div class="meeting-context"><div class="meeting-context-cell"><small>Deal</small><strong>${item.deal === '—' ? 'Network follow-up' : agendaDealMarkup(item)}</strong></div><div class="meeting-context-cell"><small>Current owner</small><strong>${escapeMorningText(item.owner)}</strong></div><div class="meeting-context-cell"><small>Due</small><strong>${escapeMorningText(item.due)}</strong></div><div class="meeting-context-cell"><small>Current disposition</small><strong>${escapeMorningText(item.outcome)}</strong></div></div><div class="meeting-form"><div class="field"><label for="meetingOwner">Accountable owner</label><select id="meetingOwner"><option ${item.owner === 'Marcus Hale' ? 'selected':''}>Marcus Hale</option><option ${item.owner === 'Dana Ruiz' ? 'selected':''}>Dana Ruiz</option><option ${item.owner === 'Alex Morgan' ? 'selected':''}>Alex Morgan</option><option ${item.owner === 'Controller Queue' ? 'selected':''}>Controller Queue</option><option ${item.owner === 'Unassigned' ? 'selected':''}>Unassigned</option></select></div><div class="field"><label for="meetingOutcome">Briefing decision</label><select id="meetingOutcome"><option ${item.outcome === 'Assign owner' ? 'selected':''}>Assign owner</option><option ${item.outcome === 'Keep hold in place' ? 'selected':''}>Keep hold in place</option><option ${item.outcome === 'Escalated review' ? 'selected':''}>Escalated review</option><option ${item.outcome === 'Correction required' ? 'selected':''}>Correction required</option><option ${item.outcome === 'Documented exception' ? 'selected':''}>Documented exception</option><option ${item.outcome === 'Confirm follow-up' ? 'selected':''}>Confirm follow-up</option><option ${item.outcome === 'Resolved' ? 'selected':''}>Resolved</option><option ${!['Assign owner','Keep hold in place','Escalated review','Correction required','Documented exception','Confirm follow-up','Resolved'].includes(item.outcome) ? 'selected':''}>${escapeMorningText(item.outcome)}</option></select></div><div class="field"><label for="meetingDue">Commitment due</label><select id="meetingDue"><option ${item.due === 'Today · 10:00 AM' ? 'selected':''}>Today · 10:00 AM</option><option ${item.due === 'Today · Noon' ? 'selected':''}>Today · Noon</option><option ${item.due === 'Today · 4:30 PM' ? 'selected':''}>Today · 4:30 PM</option><option ${item.due === 'Today · 5:00 PM' ? 'selected':''}>Today · 5:00 PM</option><option ${item.due === 'Before delivery' ? 'selected':''}>Before delivery</option><option ${item.due === 'Tomorrow morning' ? 'selected':''}>Tomorrow morning</option></select></div><div class="field full"><label for="meetingItemNote">Decision note / commitment</label><textarea id="meetingItemNote" placeholder="Capture what leadership decided, who owns it, and what must be verified next.">${escapeMorningText(item.note)}</textarea></div></div><div class="meeting-footer"><div class="meeting-footer-group"><button class="button" type="button" onclick="moveMeetingItem(-1)" ${morningBriefState.currentIndex === 0 ? 'disabled':''}><i class="fa-solid fa-arrow-right" style="transform:rotate(180deg)"></i>Previous</button><button class="button" type="button" onclick="saveMeetingItem(false)">Save commitment</button>${item.deal !== '—' ? `<button class="button" type="button" onclick="openDeal('${item.deal}');closeMorningMeeting()">Open full deal</button>` : ''}</div><div class="meeting-footer-group"><button class="button primary" type="button" onclick="saveMeetingItem(true)"><i class="fa-solid fa-check"></i>${item.discussed ? 'Update & Continue' : 'Mark Discussed & Continue'}</button><button class="button orange" type="button" onclick="completeMorningMeeting()"><i class="fa-solid fa-clipboard-check"></i>Complete Briefing</button></div></div>`;
+      document.getElementById('meetingMain').innerHTML = `<div class="meeting-step-kicker">Agenda ${morningBriefState.currentIndex+1} of ${morningBriefState.items.length} · ${escapeMorningText(item.group)}</div><h2 class="meeting-step-title">${escapeMorningText(item.title)}</h2><p class="meeting-step-copy">${escapeMorningText(item.decision)}</p><div class="meeting-context"><div class="meeting-context-cell"><small>Deal</small><strong>${item.deal === '—' ? 'Network follow-up' : agendaDealMarkup(item)}</strong></div><div class="meeting-context-cell"><small>Current owner</small><strong>${escapeMorningText(item.owner)}</strong></div><div class="meeting-context-cell"><small>Due</small><strong>${escapeMorningText(item.due)}</strong></div><div class="meeting-context-cell"><small>Current disposition</small><strong>${escapeMorningText(item.outcome)}</strong></div></div><div class="meeting-form"><div class="field"><label for="meetingOwner">Accountable owner</label><select id="meetingOwner"><option ${item.owner === 'Marcus Hale' ? 'selected':''}>Marcus Hale</option><option ${item.owner === 'Dana Ruiz' ? 'selected':''}>Dana Ruiz</option><option ${item.owner === 'Alex Morgan' ? 'selected':''}>Alex Morgan</option><option ${item.owner === 'Controller Queue' ? 'selected':''}>Controller Queue</option><option ${item.owner === 'Unassigned' ? 'selected':''}>Unassigned</option></select></div><div class="field"><label for="meetingOutcome">Meeting decision</label><select id="meetingOutcome"><option ${item.outcome === 'Assign owner' ? 'selected':''}>Assign owner</option><option ${item.outcome === 'Keep hold in place' ? 'selected':''}>Keep hold in place</option><option ${item.outcome === 'Escalated review' ? 'selected':''}>Escalated review</option><option ${item.outcome === 'Correction required' ? 'selected':''}>Correction required</option><option ${item.outcome === 'Documented exception' ? 'selected':''}>Documented exception</option><option ${item.outcome === 'Confirm follow-up' ? 'selected':''}>Confirm follow-up</option><option ${item.outcome === 'Resolved' ? 'selected':''}>Resolved</option><option ${!['Assign owner','Keep hold in place','Escalated review','Correction required','Documented exception','Confirm follow-up','Resolved'].includes(item.outcome) ? 'selected':''}>${escapeMorningText(item.outcome)}</option></select></div><div class="field"><label for="meetingDue">Commitment due</label><select id="meetingDue"><option ${item.due === 'Today · 10:00 AM' ? 'selected':''}>Today · 10:00 AM</option><option ${item.due === 'Today · Noon' ? 'selected':''}>Today · Noon</option><option ${item.due === 'Today · 4:30 PM' ? 'selected':''}>Today · 4:30 PM</option><option ${item.due === 'Today · 5:00 PM' ? 'selected':''}>Today · 5:00 PM</option><option ${item.due === 'Before delivery' ? 'selected':''}>Before delivery</option><option ${item.due === 'Tomorrow morning' ? 'selected':''}>Tomorrow morning</option></select></div><div class="field full"><label for="meetingItemNote">Decision note / commitment</label><textarea id="meetingItemNote" placeholder="Capture what leadership decided, who owns it, and what must be verified next.">${escapeMorningText(item.note)}</textarea></div></div><div class="meeting-footer"><div class="meeting-footer-group"><button class="button" type="button" onclick="moveMeetingItem(-1)" ${morningBriefState.currentIndex === 0 ? 'disabled':''}><i class="fa-solid fa-arrow-right" style="transform:rotate(180deg)"></i>Previous</button><button class="button" type="button" onclick="saveMeetingItem(false)">Save commitment</button>${item.deal !== '—' ? `<button class="button" type="button" onclick="openDeal('${item.deal}');closeMorningMeeting()">Open full deal</button>` : ''}</div><div class="meeting-footer-group"><button class="button primary" type="button" onclick="saveMeetingItem(true)"><i class="fa-solid fa-check"></i>${item.discussed ? 'Update & Continue' : 'Mark Discussed & Continue'}</button><button class="button orange" type="button" onclick="completeMorningMeeting()"><i class="fa-solid fa-clipboard-check"></i>Complete Meeting</button></div></div>`;
     }
 
     function selectMeetingItem(index) {
@@ -3092,7 +3072,7 @@
       item.note = document.getElementById('meetingItemNote').value.trim();
       if (markDiscussed) item.discussed = true;
       saveMorningBriefState();
-      if (markDiscussed && !wasDiscussed) addActivity(`Daily briefing roadmap item <strong>${item.id}</strong> was discussed${item.deal !== '—' ? ` for <strong>${item.deal}</strong>` : ''}.`, 'Decision', item.deal, 'Marcus Hale', item.outcome, 'fa-clipboard-check');
+      if (markDiscussed && !wasDiscussed) addActivity(`Morning meeting agenda item <strong>${item.id}</strong> was discussed${item.deal !== '—' ? ` for <strong>${item.deal}</strong>` : ''}.`, 'Decision', item.deal, 'Marcus Hale', item.outcome, 'fa-clipboard-check');
       showToast(markDiscussed ? 'Agenda item discussed' : 'Commitment saved', `${item.owner} owns the next move by ${item.due}.`, 'success');
       if (markDiscussed && morningBriefState.currentIndex < morningBriefState.items.length-1) morningBriefState.currentIndex += 1;
       renderMeetingMode();
@@ -3101,259 +3081,39 @@
     }
 
     function completeMorningMeeting() {
-      if (morningBriefState.completed) { showToast('Briefing already archived','Run Daily Briefing to begin a fresh on-demand briefing.','warning'); return; }
+      if (morningBriefState.completed) { showToast('Meeting already archived','Reset today’s synthetic meeting to run it again.','warning'); return; }
       if (!morningBriefState.started) morningBriefState.started = true;
       const remaining = morningBriefState.items.filter(item => !item.discussed).length;
-      if (remaining && !window.confirm(`${remaining} agenda ${remaining === 1 ? 'item remains' : 'items remain'} undiscussed. Archive the briefing anyway?`)) return;
+      if (remaining && !window.confirm(`${remaining} agenda ${remaining === 1 ? 'item remains' : 'items remain'} undiscussed. Archive the meeting anyway?`)) return;
       morningBriefState.completed = true;
       morningBriefState.completedAt = new Date().toISOString();
       saveMorningBriefState();
-      addActivity('The <strong>Leadership Daily Briefing</strong> was completed and archived with its commitments.', 'Decision', '—', 'Marcus Hale', 'Briefing archived', 'fa-file-circle-check');
+      addActivity('The <strong>Leadership Morning Meeting</strong> was completed and archived with its commitments.', 'Decision', '—', 'Marcus Hale', 'Meeting archived', 'fa-file-circle-check');
       closeMorningMeeting();
       renderMorningBrief();
       renderActivities();
-      showToast('Daily briefing archived','The current decisions, owners, deadlines, and notes were preserved in the demonstration record.','success');
+      showToast('Morning meeting archived','Today’s decisions, owners, deadlines, and notes were preserved in the demonstration record.','success');
     }
 
     function resetMorningMeeting() {
-      if (!window.confirm('Start a fresh synthetic Daily Briefing and clear the current discussion progress?')) return;
-      morningBriefState = { started:false, completed:false, startedAt:null, completedAt:null, generatedAt:null, runNumber:(morningBriefState.runNumber || 1) + 1, currentIndex:0, meetingNote:'', items:buildMorningAgenda() };
+      if (!window.confirm('Reset today’s synthetic morning meeting and clear its discussion progress?')) return;
+      morningBriefState = { started:false, completed:false, startedAt:null, completedAt:null, currentIndex:0, meetingNote:'', items:buildMorningAgenda() };
       saveMorningBriefState();
       renderMorningBrief();
       renderMeetingMode();
-      showToast('Daily briefing refreshed','A new on-demand manager roadmap is ready to run.','success');
+      showToast('Morning brief reset','The synthetic meeting is ready to run again.','success');
     }
 
     function buildPrintPacket() {
       const summary = morningSummary();
-      const status = morningBriefState.completed ? 'Completed and archived' : morningBriefState.started ? 'Briefing in progress' : 'Prepared on demand';
+      const status = morningBriefState.completed ? 'Completed and archived' : morningBriefState.started ? 'Meeting in progress' : 'Prepared for meeting';
       const agendaRows = morningBriefState.items.map(item => {
         const identity = item.deal !== '—' ? getDealIdentity(item.deal) : null;
         const dealToken = identity ? `<span class="print-deal-token"><span class="print-deal-dot" style="background:${identity.color}"></span>${identity.shape} ${identity.code} · ${item.deal}</span>` : 'Network';
         return `<tr><td>${dealToken}</td><td><strong>${escapeMorningText(item.title)}</strong><br><span style="color:#627789">${escapeMorningText(item.decision)}</span></td><td>${escapeMorningText(item.owner)}<br>${escapeMorningText(item.due)}</td><td>${escapeMorningText(item.outcome)}<br>${item.discussed ? 'Discussed' : 'Open'}</td></tr>`;
       }).join('');
-      const commitments = morningBriefState.items.filter(item => item.discussed || item.note).map(item => `<tr><td>${escapeMorningText(item.id)}</td><td>${escapeMorningText(item.owner)}</td><td>${escapeMorningText(item.due)}</td><td>${escapeMorningText(item.outcome)}</td><td>${escapeMorningText(item.note || 'Decision captured during briefing.')}</td></tr>`).join('') || '<tr><td colspan="5">No meeting commitments have been recorded yet.</td></tr>';
-      return `<div class="print-packet"><header class="print-header"><div><div class="print-brand">ENGEN<span>IX</span></div><div class="print-document-title">Leadership Daily Briefing</div></div><div class="print-header-meta"><strong>${escapeMorningText(currentBriefScope())}</strong><br>${escapeMorningText(morningDateLabel())}<br>Briefing leader: Marcus Hale<br>Briefing run: ${morningBriefState.runNumber || 1}<br>Status: ${status}</div></header><section class="print-summary"><div class="print-summary-card"><small>Delivery attention</small><strong>${summary.holds}</strong></div><div class="print-summary-card"><small>Leadership decisions</small><strong>${summary.high}</strong></div><div class="print-summary-card"><small>Needs an owner</small><strong>${summary.unassigned}</strong></div><div class="print-summary-card"><small>Agenda completion</small><strong>${summary.percent}%</strong></div></section><section class="print-section"><h2>Manager action roadmap</h2><table class="print-table"><thead><tr><th style="width:18%">Deal</th><th style="width:42%">Operating issue and required decision</th><th style="width:18%">Owner / due</th><th style="width:22%">Disposition</th></tr></thead><tbody>${agendaRows}</tbody></table></section><section class="print-section"><h2>Manager commitments</h2><table class="print-table"><thead><tr><th>Item</th><th>Owner</th><th>Due</th><th>Decision</th><th>Leadership note</th></tr></thead><tbody>${commitments}</tbody></table></section><section class="print-section"><h2>Manager briefing notes</h2><div class="print-note-box">Use this area for additional commitments, blockers, staffing context, or cross-department follow-up identified during the briefing.</div></section><section class="print-signoff"><div class="print-sign-line">Briefing leader / date</div><div class="print-sign-line">General manager / date</div><div class="print-sign-line">Controller or compliance leader / date</div></section><footer class="print-footer"><span>ENGENIX preserves the operating context behind dealership decisions. This packet was generated from synthetic demonstration records.</span><span>Generated ${new Date().toLocaleString()}</span></footer></div>`;
-    }
-
-
-    function pdfAscii(value) {
-      return String(value ?? '')
-        .replace(/[\u2018\u2019]/g,"'")
-        .replace(/[\u201C\u201D]/g,'"')
-        .replace(/[\u2013\u2014]/g,'-')
-        .replace(/\u00B7/g,'-')
-        .replace(/[^\x20-\x7E]/g,' ')
-        .replace(/\s+/g,' ')
-        .trim();
-    }
-
-    function pdfEscape(value) {
-      return pdfAscii(value).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
-    }
-
-    function pdfHexRgb(hex) {
-      const clean = String(hex || '#2c72d6').replace('#','');
-      const full = clean.length === 3 ? clean.split('').map(character => character + character).join('') : clean.padEnd(6,'0').slice(0,6);
-      return [parseInt(full.slice(0,2),16)/255,parseInt(full.slice(2,4),16)/255,parseInt(full.slice(4,6),16)/255].map(value => Number(value.toFixed(3)));
-    }
-
-    function pdfWrap(value, maxChars) {
-      const words = pdfAscii(value).split(' ').filter(Boolean);
-      if (!words.length) return [''];
-      const lines = [];
-      let line = '';
-      words.forEach(word => {
-        const candidate = line ? `${line} ${word}` : word;
-        if (candidate.length > maxChars && line) { lines.push(line); line = word; }
-        else line = candidate;
-      });
-      if (line) lines.push(line);
-      return lines;
-    }
-
-    function buildDailyBriefingPdfBlob() {
-      const summary = morningSummary();
-      const PAGE_W = 612, PAGE_H = 792, M = 42;
-      const pages = [];
-      let commands = [], y = 0, sectionTitle = '';
-      const navy = '#102a3b', blue = '#2c72d6', orange = '#c96828', textColor = '#173247', muted = '#617789', lineColor = '#d6e0e7', pale = '#f3f7fa';
-
-      function fill(hex) { const [r,g,b] = pdfHexRgb(hex); commands.push(`${r} ${g} ${b} rg`); }
-      function stroke(hex) { const [r,g,b] = pdfHexRgb(hex); commands.push(`${r} ${g} ${b} RG`); }
-      function rect(x, top, width, height, fillHex, strokeHex = null, lineWidth = 1) {
-        const bottom = PAGE_H - top - height;
-        if (fillHex) fill(fillHex);
-        if (strokeHex) { stroke(strokeHex); commands.push(`${lineWidth} w`); }
-        commands.push(`${x} ${bottom} ${width} ${height} re ${fillHex && strokeHex ? 'B' : fillHex ? 'f' : 'S'}`);
-      }
-      function line(x1, top1, x2, top2, color = lineColor, width = 1) {
-        stroke(color); commands.push(`${width} w ${x1} ${PAGE_H-top1} m ${x2} ${PAGE_H-top2} l S`);
-      }
-      function text(value, x, top, size = 10, bold = false, color = textColor) {
-        fill(color);
-        commands.push(`BT /${bold ? 'F2' : 'F1'} ${size} Tf 1 0 0 1 ${x} ${PAGE_H-top-size} Tm (${pdfEscape(value)}) Tj ET`);
-      }
-      function wrapped(value, x, top, width, size = 9, bold = false, color = textColor, leading = size * 1.35, maxLines = 99) {
-        const maxChars = Math.max(12, Math.floor(width / (size * 0.52)));
-        const lines = pdfWrap(value, maxChars).slice(0,maxLines);
-        lines.forEach((entry,index) => text(entry,x,top + index*leading,size,bold,color));
-        return top + Math.max(1,lines.length)*leading;
-      }
-      function footer(pageNumber, totalPages) {
-        line(M,755,PAGE_W-M,755,'#cbd7df',0.7);
-        text('ENGENIX | Operating Intelligence Layer for Automotive Retail',M,762,7,false,muted);
-        text(`Synthetic demonstration records | Page ${pageNumber} of ${totalPages}`,PAGE_W-210,762,7,false,muted);
-      }
-      function startPage(title = 'Leadership Daily Briefing') {
-        if (commands.length) pages.push(commands);
-        commands = [];
-        sectionTitle = title;
-        rect(0,0,PAGE_W,88,navy);
-        rect(M,24,4,37,orange);
-        text('ENGENIX',M+14,20,18,true,'#ffffff');
-        text(title,M+14,45,12,true,'#ffffff');
-        text(currentBriefScope(),PAGE_W-220,20,9,true,'#ffffff');
-        text(morningDateLabel(),PAGE_W-220,36,8,false,'#d9e8f2');
-        text(`Briefing leader: Marcus Hale | Run ${morningBriefState.runNumber || 1}`,PAGE_W-220,52,8,false,'#d9e8f2');
-        y = 108;
-      }
-      function ensure(height, title = 'Manager Action Roadmap') {
-        if (y + height > 742) startPage(title);
-      }
-
-      startPage();
-      text('OPERATING SNAPSHOT',M,y,8,true,blue); y += 15;
-      const metrics = [
-        ['DELIVERY ATTENTION',String(summary.holds),'Release review'],
-        ['LEADERSHIP DECISIONS',String(summary.high),'High priority'],
-        ['NEEDS AN OWNER',String(summary.unassigned),'Context at risk'],
-        ['ROADMAP COMPLETE',`${summary.percent}%`,`${summary.discussed} of ${summary.total}`]
-      ];
-      const metricGap = 8, metricW = (PAGE_W - M*2 - metricGap*3)/4;
-      metrics.forEach((metric,index) => {
-        const x = M + index*(metricW+metricGap);
-        rect(x,y,metricW,68,'#f7fafc','#d7e1e8',0.8);
-        text(metric[0],x+10,y+10,6.7,true,muted);
-        text(metric[1],x+10,y+25,21,true,textColor);
-        text(metric[2],x+10,y+51,7,false,muted);
-      });
-      y += 88;
-      text('MANAGER ACTION ROADMAP',M,y,9,true,blue); y += 18;
-      wrapped('Priorities are ordered by operating consequence. Each item names the decision, owner, and deadline required to move the dealership forward.',M,y,PAGE_W-M*2,8.5,false,muted,11.5); y += 29;
-
-      morningBriefState.items.forEach((item,index) => {
-        const titleLines = pdfWrap(item.title,70);
-        const decisionLines = pdfWrap(item.decision,86);
-        const noteLines = item.note ? pdfWrap(item.note,86) : [];
-        const cardH = Math.max(92, 52 + titleLines.length*11 + decisionLines.length*9 + Math.min(noteLines.length,2)*8);
-        ensure(cardH + 12);
-        const identity = item.deal !== '—' ? getDealIdentity(item.deal) : {color:'#8294a3',code:'NW',shape:'Network'};
-        rect(M,y,PAGE_W-M*2,cardH,'#ffffff','#d7e1e8',0.8);
-        rect(M,y,5,cardH,identity.color || blue);
-        rect(M+14,y+12,34,24,identity.color || blue);
-        text(String(index+1).padStart(2,'0'),M+24,y+17,10,true,'#ffffff');
-        text(item.group.toUpperCase(),M+60,y+11,7,true,blue);
-        text(item.deal === '—' ? 'NETWORK ITEM' : `${identity.code} | ${item.deal}`,PAGE_W-180,y+11,7,true,muted);
-        let cursor = wrapped(item.title,M+60,y+27,PAGE_W-M*2-78,10,true,textColor,12,3);
-        cursor = wrapped(item.decision,M+60,cursor+3,PAGE_W-M*2-78,8,false,muted,10,4);
-        line(M+60,cursor+3,PAGE_W-M-12,cursor+3,'#e2e9ee',0.6);
-        text(`OWNER: ${item.owner}`,M+60,cursor+10,7.2,true,textColor);
-        text(`DUE: ${item.due}`,M+200,cursor+10,7.2,true,textColor);
-        text(`DECISION: ${item.outcome}`,M+335,cursor+10,7.2,true,textColor);
-        text(item.discussed ? 'DISCUSSED' : 'OPEN',PAGE_W-100,cursor+10,7.2,true,item.discussed ? '#168167' : orange);
-        if (item.note) wrapped(`NOTE: ${item.note}`,M+60,cursor+25,PAGE_W-M*2-78,7.2,false,muted,9,2);
-        y += cardH + 10;
-      });
-
-      ensure(150,'Manager Commitments');
-      text('MANAGER COMMITMENTS',M,y,9,true,blue); y += 18;
-      const commitments = morningBriefState.items.filter(item => item.discussed || item.note);
-      if (!commitments.length) {
-        rect(M,y,PAGE_W-M*2,52,pale,'#d7e1e8',0.8);
-        wrapped('No commitments have been recorded yet. Run the Daily Briefing to assign owners, decisions, due times, and verification notes.',M+12,y+13,PAGE_W-M*2-24,8.5,false,muted,11);
-        y += 68;
-      } else {
-        commitments.forEach(item => {
-          ensure(54,'Manager Commitments');
-          rect(M,y,PAGE_W-M*2,46,'#ffffff','#d7e1e8',0.7);
-          text(item.id,M+10,y+9,7.2,true,blue);
-          text(item.owner,M+62,y+9,8,true,textColor);
-          text(item.due,M+180,y+9,8,false,muted);
-          text(item.outcome,M+315,y+9,8,true,textColor);
-          wrapped(item.note || 'Decision captured during briefing.',M+62,y+25,PAGE_W-M-62-12,7,false,muted,8.5,2);
-          y += 52;
-        });
-      }
-
-      ensure(120,'Leadership Sign-off');
-      text('LEADERSHIP NOTES AND SIGN-OFF',M,y,9,true,blue); y += 18;
-      rect(M,y,PAGE_W-M*2,58,'#f7fafc','#d7e1e8',0.8);
-      text('Additional blockers, staffing context, or cross-department follow-up:',M+12,y+11,7.2,true,muted);
-      line(M+12,y+30,PAGE_W-M-12,y+30,'#cbd7df',0.6);
-      line(M+12,y+45,PAGE_W-M-12,y+45,'#cbd7df',0.6);
-      y += 82;
-      const signW = (PAGE_W-M*2-30)/3;
-      ['Briefing leader / date','General manager / date','Controller or compliance leader / date'].forEach((label,index) => {
-        const x = M + index*(signW+15);
-        line(x,y+20,x+signW,y+20,'#617789',0.8);
-        text(label,x,y+26,6.8,false,muted);
-      });
-
-      if (commands.length) pages.push(commands);
-      const totalPages = pages.length;
-      pages.forEach((page,index) => {
-        commands = page;
-        footer(index+1,totalPages);
-        pages[index] = commands.join('\n');
-      });
-
-      const objects = [];
-      const pageIds = pages.map((_,index) => 5 + index*2);
-      objects[1] = '<< /Type /Catalog /Pages 2 0 R >>';
-      objects[2] = `<< /Type /Pages /Kids [${pageIds.map(id => `${id} 0 R`).join(' ')}] /Count ${pages.length} >>`;
-      objects[3] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
-      objects[4] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
-      pages.forEach((stream,index) => {
-        const pageId = pageIds[index], contentId = pageId + 1;
-        objects[pageId] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PAGE_W} ${PAGE_H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${contentId} 0 R >>`;
-        objects[contentId] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
-      });
-      let pdf = '%PDF-1.4\n%ENGENIX\n';
-      const offsets = [0];
-      for (let id=1; id<objects.length; id++) {
-        offsets[id] = pdf.length;
-        pdf += `${id} 0 obj\n${objects[id]}\nendobj\n`;
-      }
-      const xref = pdf.length;
-      pdf += `xref\n0 ${objects.length}\n0000000000 65535 f \n`;
-      for (let id=1; id<objects.length; id++) pdf += `${String(offsets[id]).padStart(10,'0')} 00000 n \n`;
-      pdf += `trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
-      return new Blob([pdf],{type:'application/pdf'});
-    }
-
-    function downloadDailyBriefingPdf() {
-      try {
-        const generatedAt = new Date();
-        const blob = buildDailyBriefingPdfBlob();
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `ENGENIX_Daily_Briefing_${briefingFileStamp(generatedAt)}.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        setTimeout(() => URL.revokeObjectURL(url),1500);
-        morningBriefState.generatedAt = generatedAt.toISOString();
-        saveMorningBriefState();
-        addActivity('A <strong>Leadership Daily Briefing PDF</strong> was generated from the current operating record.', 'Report', '—', 'Marcus Hale', 'PDF generated', 'fa-download');
-        renderMorningBrief();
-        renderActivities();
-        showToast('Daily briefing PDF generated','The branded operating roadmap is ready to download, share, or print.','success');
-      } catch (error) {
-        console.error(error);
-        showToast('PDF generation failed','The printable briefing is still available through Print Briefing.','error');
-      }
+      const commitments = morningBriefState.items.filter(item => item.discussed || item.note).map(item => `<tr><td>${escapeMorningText(item.id)}</td><td>${escapeMorningText(item.owner)}</td><td>${escapeMorningText(item.due)}</td><td>${escapeMorningText(item.outcome)}</td><td>${escapeMorningText(item.note || 'Decision captured during meeting.')}</td></tr>`).join('') || '<tr><td colspan="5">No meeting commitments have been recorded yet.</td></tr>';
+      return `<div class="print-packet"><header class="print-header"><div><div class="print-brand">ENGEN<span>IX</span></div><div class="print-document-title">Leadership Morning Meeting Brief</div></div><div class="print-header-meta"><strong>${escapeMorningText(currentBriefScope())}</strong><br>${escapeMorningText(morningDateLabel())}<br>Meeting leader: Marcus Hale<br>Status: ${status}</div></header><section class="print-summary"><div class="print-summary-card"><small>Delivery attention</small><strong>${summary.holds}</strong></div><div class="print-summary-card"><small>Leadership decisions</small><strong>${summary.high}</strong></div><div class="print-summary-card"><small>Needs an owner</small><strong>${summary.unassigned}</strong></div><div class="print-summary-card"><small>Agenda completion</small><strong>${summary.percent}%</strong></div></section><section class="print-section"><h2>Today’s leadership agenda</h2><table class="print-table"><thead><tr><th style="width:18%">Deal</th><th style="width:42%">Operating issue and required decision</th><th style="width:18%">Owner / due</th><th style="width:22%">Disposition</th></tr></thead><tbody>${agendaRows}</tbody></table></section><section class="print-section"><h2>Meeting commitments</h2><table class="print-table"><thead><tr><th>Item</th><th>Owner</th><th>Due</th><th>Decision</th><th>Leadership note</th></tr></thead><tbody>${commitments}</tbody></table></section><section class="print-section"><h2>Manager meeting notes</h2><div class="print-note-box">Use this area for additional commitments, blockers, staffing context, or cross-department follow-up.</div></section><section class="print-signoff"><div class="print-sign-line">Meeting leader / date</div><div class="print-sign-line">General manager / date</div><div class="print-sign-line">Controller or compliance leader / date</div></section><footer class="print-footer"><span>ENGENIX preserves the operating context behind dealership decisions. This packet was generated from synthetic demonstration records.</span><span>Generated ${new Date().toLocaleString()}</span></footer></div>`;
     }
 
     function printMorningBrief() {
@@ -3372,7 +3132,7 @@
     }
 
     const pageMeta = {
-      brief: ['Leadership Daily Briefing','An on-demand operating roadmap for priorities, owners, decisions, and deadlines'],
+      brief: ['Leadership Morning Brief','Today’s priorities, ownership, decisions, and meeting commitments'],
       overview: ['Command Center','Today’s work, operating risk, and the next required decisions'],
       journey: ['Deal Journey','One synthetic transaction from desk creation through final operating record'],
       queue: ['Deal Queue','Active deals prioritized for human review'],
