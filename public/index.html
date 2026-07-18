@@ -1,69 +1,580 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>V4 Threshold Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="The Operating Intelligence Layer for Automotive Retail. Become a Founding Dealership and help establish the next operating standard." name="description"/>
+<meta content="#05070b" id="theme-color-meta" name="theme-color"/>
+<title>ENGENIX | Authorized Operational Briefing</title>
+<link as="image" href="engenix-logo.png" rel="preload"/>
+<link href="favicon.png" rel="icon" type="image/png"/>
+<link href="favicon.jpeg" rel="icon" type="image/jpeg"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 
-  <!-- Background Ambient Glows -->
-  <div class="ambient-glow bg-glow-left"></div>
-  <div class="ambient-glow bg-glow-right"></div>
+<style>
+    /* Critical boot-screen styles are inline so the selected theme never flashes. */
+    html, body { background: #04070c; }
+    html[data-theme="light"], html[data-theme="light"] body { background: #f3f6fc; }
+    body.loader-active { overflow: hidden; }
+    #site-loader { position: fixed; inset: 0; z-index: 2147483647; display: grid; place-content: center; justify-items: center; background: #04070c; opacity: 1; visibility: visible; }
+    html[data-theme="light"] #site-loader { background: #f3f6fc; }
+  </style>
+<script id="engenix-theme-init">
+(() => {
+  const STORAGE_KEY = 'engenix-theme';
+  const root = document.documentElement;
+  let saved = null;
 
-  <!-- Header Section -->
-  <header class="v4-header">
-    <div class="header-inner">
-      <div class="brand">
-        <h1>V4 <span>Threshold</span></h1>
-      </div>
-      <nav class="nav-links">
-        <a href="#" class="active">Dashboard</a>
-        <a href="#">Analytics</a>
-        <a href="#">System</a>
-      </nav>
-    </div>
-  </header>
+  try {
+    saved = window.localStorage.getItem(STORAGE_KEY);
+  } catch (_) {
+    saved = null;
+  }
 
-  <!-- Main System Container -->
-  <main class="abstract-system">
-    
-    <!-- Central Core Visualizer -->
-    <div class="abstract-core">
-      <!-- Animated Visualizer Rings -->
-      <div class="v3-ring ring-one"></div>
-      <div class="v3-ring ring-two"></div>
-      <div class="v3-ring ring-three"></div>
-      
-      <!-- Core HUD Overlay -->
-      <div class="core-hud">
-        <h2>94.2<span>%</span></h2>
-        <p>SYSTEM INTEGRITY</p>
-      </div>
-    </div>
+  const systemLight = window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: light)').matches;
+  const theme = saved === 'light' || saved === 'dark'
+    ? saved
+    : (systemLight ? 'light' : 'dark');
 
-    <!-- Multi-Column Metrics Readout -->
-    <div class="abstract-readout">
-      <div>
-        <span>Core Frequency</span>
-        <strong>4.82 GHz</strong>
-      </div>
-      <div>
-        <span>Network Load</span>
-        <strong>14.2 Gbps</strong>
-      </div>
-      <div>
-        <span>Thermal Array</span>
-        <strong>38°C</strong>
-      </div>
-      <div>
-        <span>Operational Status</span>
-        <strong style="color: #10b981;">OPTIMAL</strong>
-      </div>
-    </div>
-
-  </main>
-
-</body>
-</html>
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+  const themeColor = document.querySelector('#theme-color-meta');
+  if (themeColor) themeColor.content = theme === 'light' ? '#f3f6fc' : '#05070b';
+  root.classList.add('js');
+  window.__ENGENIX_THEME__ = { key: STORAGE_KEY, saved };
+})();
+</script>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://www.engenix.co/" rel="canonical"/><meta content="website" property="og:type"/><meta content="ENGENIX | Authorized Operational Briefing" property="og:title"/><meta content="The Operating Intelligence Layer for Automotive Retail. Become a Founding Dealership and help establish the next operating standard." property="og:description"/><meta content="https://www.engenix.co/" property="og:url"/><meta content="https://www.engenix.co/apple-touch-icon.png" property="og:image"/><meta content="summary" name="twitter:card"/><meta content="ENGENIX | Authorized Operational Briefing" name="twitter:title"/><meta content="The Operating Intelligence Layer for Automotive Retail. Become a Founding Dealership and help establish the next operating standard." name="twitter:description"/></head>
+<body class="loader-active">
+<button class="theme-toggle" data-theme-toggle type="button" aria-label="Switch website color theme" aria-pressed="false">
+  <span class="theme-toggle-orb" aria-hidden="true"></span>
+  <span class="theme-toggle-label" data-theme-toggle-label>OBSIDIAN</span>
+</button>
+<div aria-label="Initializing ENGENIX" aria-live="polite" class="site-loader" id="site-loader" role="status">
+<div aria-hidden="true" class="loader-grid"></div>
+<div aria-hidden="true" class="loader-aura"></div>
+<div class="loader-stage">
+<div class="loader-mark-wrap">
+<img alt="" aria-hidden="true" class="loader-mark" src="favicon.png"/>
+<div aria-hidden="true" class="loader-orbit"></div>
+<div aria-hidden="true" class="loader-scan"></div>
+</div>
+<img alt="ENGENIX" class="loader-wordmark" src="engenix-logo.png"/>
+<div class="loader-label">Operating Intelligence for Automotive Retail</div>
+<div aria-label="Choose display mode" class="loader-theme-picker" role="group">
+  <button data-loader-theme="dark" type="button"><i aria-hidden="true"></i><span>OBSIDIAN</span></button>
+  <button data-loader-theme="light" type="button"><i aria-hidden="true"></i><span>SIGNAL WHITE</span></button>
+</div>
+<div class="loader-theme-note">Device preference detected · choose anytime</div>
+<div class="loader-status" id="loader-status">Establishing secure session</div>
+<div aria-hidden="true" class="loader-progress"><span></span></div>
+<div aria-hidden="true" class="loader-readout">
+<span>SECURE SESSION</span><span>RISK ENGINE</span><span>ENTRY AUTHORIZED</span>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="cinematic-vignette"></div>
+<div aria-hidden="true" class="scene-index">
+<span id="scene-number">01</span>
+<i></i>
+<small id="scene-name">ENTRY</small>
+</div>
+<div aria-hidden="true" class="ambient ambient-one"></div>
+<div aria-hidden="true" class="ambient ambient-two"></div>
+<header class="site-header" id="top">
+<div class="shell nav-shell">
+<a aria-label="ENGENIX home" class="brand" href="#top">
+<img alt="ENGENIX" src="engenix-logo.png"/>
+</a>
+<button aria-expanded="false" aria-label="Toggle navigation" class="nav-toggle">
+<span></span><span></span>
+</button>
+<nav aria-label="Primary navigation" class="nav-links">
+<a href="index.html#system">The System</a>
+<a href="compliance.html">Risk Engine</a>
+<a href="index.html#intelligence">Live Model</a>
+<a href="index.html#why">The Principle</a>
+<a href="security.html">Security</a>
+<a href="company.html">Operators</a>
+</nav>
+<a class="button button-small button-primary nav-cta" href="demo.html">Become a Founding Dealership</a>
+</div>
+</header>
+<main><section class="hero section-pad cinematic-hero cinematic-scene scene-arrival" id="hero-entry">
+<div aria-hidden="true" class="hero-cinema">
+<div class="hero-beam hero-beam-one"></div><div class="hero-beam hero-beam-two"></div>
+<div class="hero-horizon"></div><div class="hero-scanline"></div></div>
+<div class="shell hero-grid hero-command-grid">
+<div class="hero-copy hero-command-copy reveal">
+<div class="eyebrow"><span></span> The Operating Intelligence Layer for Automotive Retail</div>
+<h1>Before the deal leaves the building, <strong>know exactly what is leaving with it.</strong></h1>
+</div>
+<div class="hero-visual hero-command-visual reveal" data-delay="120">
+<div class="hero-audit-console" id="hero-audit-console" aria-label="Illustrative ENGENIX deal jacket review sequence">
+<div class="hero-audit-topbar">
+<div class="hero-audit-system"><i></i><span>ENGENIX://DEAL_REVIEW</span></div>
+<strong>Deal #2847</strong>
+<time id="hero-audit-clock">17:42:08</time>
+</div>
+<div class="hero-audit-body">
+<section class="hero-jacket-stage" aria-label="Incoming deal jacket">
+<div class="hero-panel-label"><span>INCOMING DEAL JACKET</span><b id="hero-document-state">46 DOCUMENTS</b></div>
+<div class="hero-folder">
+<div class="hero-folder-tab">2847</div>
+<div class="hero-paper paper-one"><span>BUYER'S ORDER</span><i></i><i></i><i></i></div>
+<div class="hero-paper paper-two"><span>RETAIL CONTRACT</span><i></i><i></i><i></i></div>
+<div class="hero-paper paper-three"><span>DISCLOSURES</span><i></i><i></i><i></i></div>
+<div class="hero-scan-beam"></div>
+<div class="hero-folder-front"><span>DEAL JACKET</span><strong>#2847</strong></div>
+</div>
+<div class="hero-jacket-meta">
+<span><i></i> Customer file received</span>
+<span id="hero-jacket-status">Structuring review context</span>
+</div>
+</section>
+<section class="hero-review-stage" aria-live="polite">
+<div class="hero-review-heading">
+<div><small>LIVE REVIEW</small><strong id="hero-review-title">Deal jacket received</strong></div>
+<span class="hero-review-pill" id="hero-review-pill">STRUCTURING</span>
+</div>
+<div class="hero-review-event">
+<time id="hero-review-time">17:42:08</time>
+<p id="hero-review-copy">Documents are entering a structured review while the transaction is still active.</p>
+</div>
+<div class="hero-finding-list" aria-label="Illustrative review findings">
+<div class="hero-finding" data-hero-finding="0"><i></i><span><strong>Required documentation</strong><small>Indexing file contents</small></span><b>CHECKING</b></div>
+<div class="hero-finding" data-hero-finding="1"><i></i><span><strong>Disclosure alignment</strong><small>Waiting for review</small></span><b>QUEUED</b></div>
+<div class="hero-finding" data-hero-finding="2"><i></i><span><strong>Signature consistency</strong><small>Waiting for review</small></span><b>QUEUED</b></div>
+</div>
+<div class="hero-next-action">
+<span>NEXT OPERATING ACTION</span>
+<strong id="hero-next-action">Building review context</strong>
+<small id="hero-action-owner">ENGENIX review sequence active</small>
+</div>
+</section>
+</div>
+<div class="hero-audit-footer">
+<div class="hero-phase is-active" data-hero-phase="0"><span>01</span><b>DETECT</b></div>
+<i>→</i>
+<div class="hero-phase" data-hero-phase="1"><span>02</span><b>DECIDE</b></div>
+<i>→</i>
+<div class="hero-phase" data-hero-phase="2"><span>03</span><b>ACT</b></div>
+<i>→</i>
+<div class="hero-phase" data-hero-phase="3"><span>04</span><b>REMEMBER</b></div>
+<small>Illustrative product sequence</small>
+</div>
+</div>
+<div aria-hidden="true" class="hero-glow"></div>
+</div>
+<div class="hero-command-copy-bottom reveal" data-delay="180">
+<p class="hero-command-lede">ENGENIX turns deal-jacket complexity into prioritized findings, documented action, and management visibility while your team still has time to act.</p>
+<div class="hero-actions hero-command-actions">
+<button class="button button-primary" data-open-private-access="" type="button">Request a Founding Briefing</button>
+<a class="button button-secondary" href="#deal-in-motion"><span class="play-dot">▶</span> Watch a Deal Get Reviewed</a>
+</div>
+<div class="hero-command-proof" aria-label="ENGENIX proof points">
+<span><i></i> Working product</span>
+<span>Built by dealership operators</span>
+<span>Founding network forming</span>
+</div>
+</div>
+</div>
+</section>
+<section class="threshold-scene cinematic-scene scene-threshold chapter-anchor" id="system"><div class="threshold-grid"></div><div class="shell threshold-content reveal">
+<span class="section-kicker">Threshold crossed</span>
+<h2>You are not browsing a software company.<br/><strong>You are entering an operating system.</strong></h2>
+<p>The solution is working. The public briefing shows the stakes, signals, and operators behind it. The full engine is reserved for founding demonstrations.</p>
+</div></section>
+<section class="signal-reveal cinematic-scene" aria-labelledby="signal-reveal-title">
+<div class="shell signal-reveal-intro reveal">
+<span class="section-kicker">What ENGENIX changes</span>
+<h2 id="signal-reveal-title">The store does not need more data.<br/><strong>It needs the next decision.</strong></h2>
+<p>ENGENIX turns operational pressure into a sequence leadership can act on before the moment disappears.</p>
+</div>
+<div class="shell signal-reveal-rail" aria-label="ENGENIX operating-intelligence outcomes">
+<article class="signal-card reveal" data-signal="detect">
+<div class="signal-card-top"><span>01</span><small>DETECTION</small></div>
+<div class="signal-card-copy">
+<h3>See the exposure while the deal can still be corrected.</h3>
+<p>Missing documentation, inconsistent terms, and process drift become visible before delivery turns them into history.</p>
+</div>
+<div class="signal-card-readout"><span>DEAL STATE</span><strong>REVIEW REQUIRED</strong></div>
+</article>
+<article class="signal-card reveal" data-signal="protect" data-delay="70">
+<div class="signal-card-top"><span>02</span><small>PROTECTION</small></div>
+<div class="signal-card-copy">
+<h3>Protect gross before leakage becomes a month-end explanation.</h3>
+<p>Structure, incentive, approval, and stipulation pressure is surfaced while leadership still has room to intervene.</p>
+</div>
+<div class="signal-card-readout"><span>OPERATING SIGNAL</span><strong>ATTENTION NOW</strong></div>
+</article>
+<article class="signal-card reveal" data-signal="act" data-delay="140">
+<div class="signal-card-top"><span>03</span><small>ACTION</small></div>
+<div class="signal-card-copy">
+<h3>Turn every finding into ownership, timing, and resolution.</h3>
+<p>The operating question changes from “Who knew?” to “Who owns the next action, and when is it complete?”</p>
+</div>
+<div class="signal-card-readout"><span>CORRECTIVE ACTION</span><strong>OWNER ASSIGNED</strong></div>
+</article>
+<article class="signal-card reveal" data-signal="remember" data-delay="210">
+<div class="signal-card-top"><span>04</span><small>MEMORY</small></div>
+<div class="signal-card-copy">
+<h3>Preserve the judgment so the same failure does not return.</h3>
+<p>Findings, decisions, and completed actions become operating memory instead of disappearing into inboxes and conversations.</p>
+</div>
+<div class="signal-card-readout"><span>DECISION TRACE</span><strong>DOCUMENTED</strong></div>
+</article>
+</div>
+<div class="shell signal-sequence reveal" aria-label="ENGENIX operating sequence">
+<span data-signal-label="0">DETECT</span><i>→</i><span data-signal-label="1">DECIDE</span><i>→</i><span data-signal-label="2">ACT</span><i>→</i><span data-signal-label="3">REMEMBER</span>
+</div>
+</section>
+<section class="blind-spots-scene cinematic-scene scene-risk" id="blind-spots">
+<div class="shell blind-spots-shell">
+<div class="blind-intro reveal">
+<span class="section-kicker">What dealerships do not see</span>
+<h2>The expensive mistake rarely announces itself.</h2>
+</div>
+<div aria-label="Common dealership blind spots" class="blind-sequence">
+<article class="blind-line reveal"><span>01</span><strong>A rebate missed.</strong><small>Gross disappears before anyone sees the option.</small></article>
+<article class="blind-line reveal" data-delay="70"><span>02</span><strong>A document unsigned.</strong><small>The exposure surfaces after the customer leaves.</small></article>
+<article class="blind-line reveal" data-delay="140"><span>03</span><strong>A lender stipulation ignored.</strong><small>Funding slows while context moves to the next deal.</small></article>
+<article class="blind-line reveal" data-delay="210"><span>04</span><strong>A dead lead forgotten.</strong><small>Opportunity remains buried inside the CRM.</small></article>
+<article class="blind-line reveal blind-final" data-delay="280"><span>✦</span><strong>ENGENIX is built to notice first.</strong><small>Before the blind spot becomes an expensive story.</small></article>
+</div>
+</div>
+</section>
+<section class="silent-interlude cinematic-scene scene-silence"><div class="shell reveal"><span class="section-kicker">Every operator remembers one</span><h2>The deal that should have never left the building.</h2></div></section>
+<section class="deal-motion-scene section-pad cinematic-scene scene-deal" id="deal-in-motion">
+<div class="shell">
+<div class="section-head reveal">
+<div>
+<div class="section-kicker">One deal · one operating story</div>
+<h2>One Deal.</h2>
+</div>
+<p>Follow one transaction through the dealership while ENGENIX turns invisible pressure into a visible, documented decision.</p>
+</div>
+<div class="deal-console reveal">
+<div class="deal-console-top">
+<div><span class="live-indicator"><i></i> LIVE WORKFLOW</span><strong>Deal #2847 · 2026 SUV</strong></div>
+<small id="deal-clock">09:14:02</small>
+</div>
+<div class="deal-track" id="deal-track">
+<button class="deal-node active" data-step="0"><span>01</span><b>Customer</b><small>Identity captured</small></button>
+<button class="deal-node" data-step="1"><span>02</span><b>Desk</b><small>Structure created</small></button>
+<button class="deal-node" data-step="2"><span>03</span><b>Finance</b><small>Lender selected</small></button>
+<button class="deal-node risk" data-step="3"><span>04</span><b>Compliance</b><small>Review required</small></button>
+<button class="deal-node" data-step="4"><span>05</span><b>Manager</b><small>Action documented</small></button>
+<button class="deal-node" data-step="5"><span>06</span><b>Delivery</b><small>Ready to release</small></button>
+</div>
+<div class="deal-event" id="deal-event">
+<div class="deal-event-icon">✓</div>
+<div>
+<span id="deal-event-time">09:14:02</span>
+<h3 id="deal-event-title">Customer identity verified</h3>
+<p id="deal-event-copy">Required customer information is present and the review can continue.</p>
+</div>
+<b id="deal-event-status">CLEAR</b>
+</div>
+<div class="deal-progress"><span id="deal-progress-bar"></span></div>
+<small class="illustrative-label">Illustrative workflow. Live product capabilities and roadmap are identified throughout the site.</small>
+</div>
+</div>
+</section>
+<section class="section-pad intelligence-stage cinematic-scene scene-system chapter-anchor" id="intelligence">
+<div class="shell">
+<div class="section-head reveal">
+<div>
+<div class="section-kicker">The command center</div>
+<h2>Every department sees a piece.<br/><strong>ENGENIX sees the operation.</strong></h2>
+</div>
+<p>One prioritized operating view for what arrived, what changed, what requires attention, and what was resolved.</p>
+</div>
+<div class="intel-grid">
+<article class="intel-panel risk-pulse reveal">
+<div class="intel-panel-head">
+<div>
+<span class="micro">30-day operational pulse</span>
+<h3>Compliance posture</h3>
+</div>
+<div class="pulse-score"><strong id="pulse-score">76</strong><small>/100</small></div>
+</div>
+<div aria-label="Compliance health trend" class="pulse-chart">
+<svg role="img" viewbox="0 0 720 250">
+<defs>
+<lineargradient id="pulseFill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#4b97f1" stop-opacity=".36"></stop>
+<stop offset="70%" stop-color="#1766c6" stop-opacity=".06"></stop>
+<stop offset="100%" stop-color="#1766c6" stop-opacity="0"></stop>
+</lineargradient>
+<lineargradient id="pulseStroke" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#1766c6"></stop>
+<stop offset="58%" stop-color="#4b97f1"></stop>
+<stop offset="100%" stop-color="#f1cf74"></stop>
+</lineargradient>
+</defs>
+<g class="chart-grid-lines">
+<line x1="0" x2="720" y1="50" y2="50"></line>
+<line x1="0" x2="720" y1="110" y2="110"></line>
+<line x1="0" x2="720" y1="170" y2="170"></line>
+<line x1="0" x2="720" y1="230" y2="230"></line>
+</g>
+<path d="M0 202 C60 190, 80 184, 125 188 S210 164, 255 172 S338 142, 382 150 S462 118, 510 126 S590 82, 630 94 S690 58, 720 64 L720 250 L0 250 Z" fill="url(#pulseFill)" id="pulse-area"></path>
+<path d="M0 202 C60 190, 80 184, 125 188 S210 164, 255 172 S338 142, 382 150 S462 118, 510 126 S590 82, 630 94 S690 58, 720 64" fill="none" id="pulse-line" stroke="url(#pulseStroke)" stroke-linecap="round" stroke-width="5"></path>
+<g class="pulse-points">
+<circle cx="0" cy="202" r="6"></circle>
+<circle cx="255" cy="172" r="6"></circle>
+<circle cx="510" cy="126" r="6"></circle>
+<circle cx="720" cy="64" r="7"></circle>
+</g>
+</svg>
+<div class="chart-axis"><span>Day 1</span><span>Day 10</span><span>Day 20</span><span>Today</span></div>
+</div>
+<div class="pulse-stats">
+<div><span>Open findings</span><strong id="open-findings">12</strong><small>↓ 5 this period</small></div>
+<div><span>Resolved</span><strong id="resolved-findings">31</strong><small>82% completion</small></div>
+<div><span>Review velocity</span><strong id="review-velocity">1.8h</strong><small>Median response</small></div>
+</div>
+</article>
+<article class="intel-panel risk-simulator reveal" data-delay="100">
+<div class="intel-panel-head">
+<div>
+<span class="micro">Interactive model</span>
+<h3>Deal risk simulator</h3>
+</div>
+<span class="sim-live"><i></i> Live model</span>
+</div>
+<div class="sim-controls">
+<label>
+<span>Document completeness</span>
+<input id="sim-docs" max="100" min="40" type="range" value="78"/>
+<b id="sim-docs-value">78%</b>
+</label>
+<label>
+<span>Signature consistency</span>
+<input id="sim-signatures" max="100" min="40" type="range" value="84"/>
+<b id="sim-signatures-value">84%</b>
+</label>
+<label>
+<span>Manager review coverage</span>
+<input id="sim-review" max="100" min="40" type="range" value="66"/>
+<b id="sim-review-value">66%</b>
+</label>
+</div>
+<div class="sim-output">
+<div class="risk-dial" id="risk-dial">
+<div>
+<small>Modeled risk</small>
+<strong id="risk-score">36</strong>
+<span id="risk-label">Moderate</span>
+</div>
+</div>
+<div class="sim-findings">
+<div><span></span><p><strong id="sim-critical">2</strong> critical review items</p></div>
+<div><span></span><p><strong id="sim-moderate">5</strong> moderate findings</p></div>
+<div><span></span><p><strong id="sim-ready">68%</strong> delivery readiness</p></div>
+</div>
+</div>
+</article>
+</div>
+<div class="activity-stream reveal">
+<div class="activity-stream-copy">
+<span class="micro">A dealership in motion</span>
+<h3>Operational events become a prioritized workstream.</h3>
+<p>Instead of searching for issues across paper files and disconnected systems, leadership sees what arrived, what changed, and what requires attention next.</p>
+</div>
+<div aria-label="Example dealership events" class="event-rail">
+<div class="event-card high">
+<span class="event-time">09:42</span>
+<i></i>
+<div><strong>Deal jacket uploaded</strong><small>#2847 · 46 documents received</small></div>
+<b>Reviewing</b>
+</div>
+<div class="event-card warning">
+<span class="event-time">09:43</span>
+<i></i>
+<div><strong>Disclosure variance found</strong><small>Manager attention recommended</small></div>
+<b>Priority</b>
+</div>
+<div class="event-card">
+<span class="event-time">09:47</span>
+<i></i>
+<div><strong>Corrective action recorded</strong><small>Finding assigned and documented</small></div>
+<b>In progress</b>
+</div>
+<div class="event-card resolved">
+<span class="event-time">10:02</span>
+<i></i>
+<div><strong>Review completed</strong><small>Audit history preserved</small></div>
+<b>Resolved</b>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="principle-cut section-pad cinematic-scene scene-principle chapter-anchor" id="why"><div class="shell principle-cut-grid">
+<div class="reveal"><span class="section-kicker">The principle</span><h2>The audit should begin when the deal begins.</h2></div>
+<div class="reveal" data-delay="90"><p>Traditional review begins after context has already started disappearing. ENGENIX moves oversight closer to the moment a decision is made.</p><strong>Not to replace judgment. To preserve it under pressure.</strong></div>
+</div></section>
+<section class="leadership-cinematic cinematic-scene scene-operators" id="company">
+<div class="shell leadership-head reveal">
+<div>
+<div class="section-kicker">Founding operators</div>
+<h2>Over forty years combined inside automotive retail and the systems that power it.<br/><strong>Not observing the workflow. Living it.</strong></h2>
+</div>
+<p>ENGENIX is being built by leaders who have worked through the pressure, complexity, lender relationships, compliance exposure, and daily operational decisions that define a dealership.</p>
+</div>
+<div class="shell leadership-grid">
+<article class="leader-card leader-primary reveal">
+<div class="leader-image">
+<img alt="Nicholas Engen, Founder and CEO of ENGENIX" src="nicholas-engen.jpg"/>
+<div class="leader-image-overlay"></div>
+</div>
+<div class="leader-content">
+<span class="micro">Founder &amp; CEO</span>
+<h3>Nicholas Engen</h3>
+<p class="leader-quote">“I spent twenty years making dealership decisions under pressure. Then I built the software I wish I had.”</p>
+<p>Experience across general sales management, new-car leadership, desking, finance, closing, lender relationships, and high-volume dealership operations.</p>
+<div class="leader-meta"><strong>20 years</strong><span>Automotive retail experience</span></div>
+</div>
+</article>
+<article class="leader-card reveal" data-delay="110">
+<div class="leader-image">
+<img alt="Miguel Figueroa, COO of ENGENIX" src="miguel-figueroa.jpg"/>
+<div class="leader-image-overlay"></div>
+</div>
+<div class="leader-content">
+<span class="micro">Chief Operating Officer</span>
+<h3>Miguel Figueroa</h3>
+<p class="leader-quote">“Dealership software only works when it respects the pace, pressure, and accountability of the people using it.”</p>
+<p>Miguel brings twelve years of dealership experience and an operator’s view of execution, process discipline, customer experience, and day-to-day adoption.</p>
+<div class="leader-meta"><strong>12 years</strong><span>Dealership operating experience</span></div>
+</div>
+</article>
+<!-- Jacob Leyva -->
+<article class="leader-card reveal" data-delay="220">
+<div class="leader-image">
+<img alt="Jacob Leyva, Chief Systems Engineer of ENGENIX" src="jacob-leyva.jpg"/>
+<div class="leader-image-overlay"></div>
+</div>
+<div class="leader-content">
+<span class="micro">Chief Systems Engineer</span>
+<h3>Jacob Leyva</h3>
+<p class="leader-quote">“The best systems disappear. They just make the right decision obvious exactly when the pressure is highest.”</p>
+<p>Six years building and implementing systems across dealership information flows and AI-driven technology solutions. Jacob bridges real dealership data with the intelligence layer that actually gets used under pressure.</p>
+<div class="leader-meta"><strong>9</strong>years</strong><span>Systems/Framework Engineer</span></div>
+</div>
+</article>
+</div>
+<div class="shell leadership-principle reveal">
+<span>What this means for customers</span>
+<p>ENGENIX is not being designed around generic software assumptions. It is being shaped around how dealership teams actually work, where mistakes happen, and what managers need to see before a problem becomes expensive.</p>
+</div>
+</section>
+<section class="platform-expansion section-pad cinematic-scene scene-horizon chapter-anchor" id="horizon"><div class="shell">
+<div class="section-head reveal"><div><div class="section-kicker">The wedge and the platform</div><h2>Compliance enters first.<br/><strong>Operating intelligence expands from there.</strong></h2></div>
+<p>ENGENIX begins with a painful, measurable workflow and expands into finance, desking, lead recovery, management visibility, and enterprise performance.</p></div>
+<div class="expansion-rail reveal">
+<article class="active"><small>LIVE TODAY</small><h3>Compliance Intelligence</h3><p>Deal-jacket review, findings, corrective action, and audit history.</p></article>
+<article><small>NEXT</small><h3>Workflow Intelligence</h3><p>Earlier detection, alerts, policy intelligence, and deeper integration.</p></article>
+<article><small>EXPANSION</small><h3>F&amp;I + Desking</h3><p>Decision support around structure, approvals, LTV, and gross protection.</p></article>
+<article><small>PLATFORM</small><h3>Dealer Group Intelligence</h3><p>One operating layer across rooftops, teams, workflows, and outcomes.</p></article>
+</div></div></section>
+<section class="section-pad trust-section cinematic-scene scene-trust" id="trust">
+<div class="shell">
+<div class="section-head reveal">
+<div>
+<div class="section-kicker">Built for accountability</div>
+<h2>Powerful intelligence.<br/><strong>Visible accountability.</strong></h2>
+</div>
+<p>ENGENIX supports dealership review. Qualified dealership personnel remain responsible for final decisions.</p>
+</div>
+<div class="trust-grid">
+<div class="trust-item reveal"><span>01</span><h3>Explainable findings</h3><p>Recommendations should provide clear context and support review.</p></div>
+<div class="trust-item reveal" data-delay="60"><span>02</span><h3>Human control</h3><p>The dealership remains accountable for every operational decision.</p></div>
+<div class="trust-item reveal" data-delay="120"><span>03</span><h3>Historical records</h3><p>Findings, corrective actions, and completed reviews remain documented.</p></div>
+<div class="trust-item reveal" data-delay="180"><span>04</span><h3>Institutional consistency</h3><p>Structured workflows help valuable operational knowledge persist.</p></div>
+</div>
+</div>
+</section>
+<section class="early-access-close section-pad cinematic-scene scene-founding" id="demo"><div class="early-access-bg"></div><div class="shell early-access-grid reveal">
+<div><span class="section-kicker">Set the flagship</span><h2>Help establish the first<br/><strong>operational-intelligence standard.</strong></h2></div>
+<div><p>ENGENIX is onboarding a select group of founding dealerships ready to establish the first benchmark for operational intelligence in automotive retail.</p>
+<button class="button button-primary button-large" data-open-private-access="" type="button">Become a Founding Dealership</button>
+<small>Working solution. Leadership-led demonstration. Priority founding-dealership onboarding.</small></div>
+</div></section></main><section class="command-footer command-footer-v3 cinematic-scene scene-ending"><div class="shell">
+<div class="command-top"><div><span class="section-kicker">ENGENIX SYSTEM STATUS</span><h2>Operational confidence,<br/><strong>built into the workflow.</strong></h2></div>
+<button class="button button-primary" data-open-private-access="" type="button">Become a Founding Dealership</button></div>
+<div class="command-console">
+<div><span>Risk Engine</span><b><i></i> ONLINE</b></div><div><span>Deal Jacket Intelligence</span><b><i></i> ACTIVE</b></div>
+<div><span>Founding Dealer Network</span><b><i></i> FORMING</b></div><div><span>Founding Enrollment</span><b class="limited"><i></i> OPEN</b></div></div>
+<div class="command-bottom"><div><img alt="ENGENIX" src="engenix-logo.png"/><p>The Operating Intelligence Layer for Automotive Retail.</p></div>
+<nav><a href="platform.html">The System</a><a href="compliance.html">Risk Engine</a><a href="security.html">Security</a><a href="company.html">Operators</a></nav>
+<div class="command-legal"><span>ENGEN LLC d/b/a ENGENIX</span><span>© <span id="year"></span> ENGENIX</span></div></div>
+<div class="discovery-line"><span>FOUNDING NETWORK · 2026</span><strong>You found the category early.</strong><span>OPERATING INTELLIGENCE · AUTOMOTIVE RETAIL</span></div>
+</div></section>
+<button aria-controls="private-access-panel" aria-expanded="false" class="private-demo-dock global-founding-dock" id="private-access-trigger" type="button">
+<span class="dock-status"><i></i> FOUNDING NETWORK</span>
+<strong>Founding Briefing</strong>
+<small>Help set the standard</small>
+<b>↗</b>
+</button>
+<div class="private-access-backdrop" hidden="" id="private-access-backdrop"></div>
+<aside aria-hidden="true" aria-labelledby="private-access-title" class="private-access-panel" id="private-access-panel">
+<button aria-label="Close private access panel" class="private-access-close" id="private-access-close" type="button">×</button>
+<div class="private-access-content">
+<span class="micro">Founding briefing</span>
+<h2 id="private-access-title">Help set the standard for operational intelligence.</h2>
+<p>Tell us about your operation. A member of the ENGENIX leadership team will tailor the founding demonstration around your workflow, priorities, and operating environment.</p>
+<form action="/api/demo" class="quick-demo-form" id="quick-demo-form" method="post" novalidate="">
+<label><span>Name</span><input autocomplete="name" maxlength="120" name="name" required="" type="text"/></label>
+<label><span>Dealership or group</span><input autocomplete="organization" maxlength="160" name="company" required="" type="text"/></label>
+<label><span>Work email</span><input autocomplete="email" maxlength="180" name="email" required="" type="email"/></label>
+<label><span>Role</span>
+<select name="role" required="">
+<option value="">Select role</option>
+<option>Dealer Principal / Owner</option>
+<option>General Manager</option>
+<option>General Sales Manager</option>
+<option>Finance Director / Manager</option>
+<option>Compliance / Legal</option>
+<option>Investor / Strategic Partner</option>
+<option>Technology / Vendor Partner</option>
+<option>Other</option>
+</select>
+</label>
+<label><span>Number of rooftops</span>
+<select name="rooftops">
+<option value="">Select range</option>
+<option>1</option><option>2–4</option><option>5–9</option><option>10–24</option><option>25+</option>
+</select>
+</label>
+<label><span>Preferred briefing</span>
+<select name="briefing">
+<option>Live Product Demonstration</option>
+<option>Executive Leadership Briefing</option>
+<option>Enterprise Partnership Discussion</option>
+</select>
+</label>
+<label>
+<span>What should we focus on?</span>
+<textarea maxlength="1800" name="challenge" placeholder="Where does risk, funding friction, or process inconsistency show up in your operation?" required="" rows="4"></textarea>
+</label>
+<input name="source" type="hidden" value="Homepage Founding Dealership Drawer"/>
+<label aria-hidden="true" class="honey">
+<span>Website</span><input autocomplete="off" name="website" tabindex="-1" type="text"/>
+</label>
+<button class="button button-primary form-submit" type="submit">
+<span>Become a Founding Dealership</span><b>↗</b>
+</button>
+<p aria-live="polite" class="quick-form-status" role="status"></p>
+</form>
+<small class="private-access-note">No generic sales call. Founding conversations are led around your operation and the standard you want to help establish.</small>
+</div>
+</aside>
+<script src="script.js"></script>
+</body></html>
