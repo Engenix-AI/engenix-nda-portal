@@ -106,8 +106,9 @@
       'Risk engine online',
       'Entry authorized'
     ];
-    const duration = reducedMotion ? 250 : 3900;
-    const messageStep = reducedMotion ? 50 : 760;
+    const compactViewport = window.matchMedia('(max-width: 620px)').matches;
+    const duration = reducedMotion ? 250 : (compactViewport ? 1250 : 2300);
+    const messageStep = reducedMotion ? 50 : (compactViewport ? 280 : 520);
     let closed = false;
 
     messages.forEach((message, index) => {
@@ -315,6 +316,149 @@
         }
       });
     });
+  })();
+
+
+  // ---------------------------------------------------------------------------
+  // Hero deal-jacket review sequence
+  // A product-led opening scene that remains readable and useful without motion.
+  // ---------------------------------------------------------------------------
+  (() => {
+    const consoleBox = qs('#hero-audit-console');
+    if (!consoleBox) return;
+
+    const clock = qs('#hero-audit-clock');
+    const documentState = qs('#hero-document-state');
+    const jacketStatus = qs('#hero-jacket-status');
+    const title = qs('#hero-review-title');
+    const pill = qs('#hero-review-pill');
+    const eventTime = qs('#hero-review-time');
+    const copy = qs('#hero-review-copy');
+    const action = qs('#hero-next-action');
+    const owner = qs('#hero-action-owner');
+    const findings = qsa('[data-hero-finding]', consoleBox);
+    const phases = qsa('[data-hero-phase]', consoleBox);
+    const hero = qs('#hero-entry');
+    const dock = qs('.global-founding-dock');
+
+    const states = [
+      {
+        time: '17:42:08', documentState: '46 DOCUMENTS', jacket: 'Structuring review context',
+        title: 'Deal jacket received', pill: 'STRUCTURING', tone: 'neutral', phase: 0,
+        copy: 'Documents are entering a structured review while the transaction is still active.',
+        action: 'Building review context', owner: 'ENGENIX review sequence active',
+        findings: [
+          ['checking', 'Indexing file contents', 'CHECKING'],
+          ['queued', 'Waiting for review', 'QUEUED'],
+          ['queued', 'Waiting for review', 'QUEUED']
+        ]
+      },
+      {
+        time: '17:42:10', documentState: 'STRUCTURED', jacket: 'Required documents organized',
+        title: 'Review context established', pill: 'REVIEWING', tone: 'active', phase: 0,
+        copy: 'The jacket is organized into a reviewable operating record without losing transaction context.',
+        action: 'Comparing documents and terms', owner: 'Review continues before delivery',
+        findings: [
+          ['clear', 'Required items identified', 'CLEAR'],
+          ['checking', 'Comparing transaction terms', 'CHECKING'],
+          ['checking', 'Comparing signature fields', 'CHECKING']
+        ]
+      },
+      {
+        time: '17:42:12', documentState: 'REVIEW REQUIRED', jacket: 'Attention surfaced before release',
+        title: 'Disclosure variance detected', pill: 'ATTENTION', tone: 'risk', phase: 1,
+        copy: 'A disclosure appears inconsistent with the active deal structure. Management review is recommended before delivery.',
+        action: 'Review disclosure variance', owner: 'Management attention recommended',
+        findings: [
+          ['clear', 'Required items present', 'CLEAR'],
+          ['risk', 'Terms require management review', 'REVIEW'],
+          ['clear', 'Signature fields consistent', 'CLEAR']
+        ]
+      },
+      {
+        time: '17:42:16', documentState: 'ACTION ASSIGNED', jacket: 'Finding converted into ownership',
+        title: 'Corrective action assigned', pill: 'OWNER ASSIGNED', tone: 'action', phase: 2,
+        copy: 'The finding now has an owner, a required response, and a visible place in the active deal workflow.',
+        action: 'Resolve before vehicle release', owner: 'Owner: General Manager · Status: Open',
+        findings: [
+          ['clear', 'Required items present', 'CLEAR'],
+          ['action', 'Corrective action in progress', 'OWNED'],
+          ['clear', 'Signature fields consistent', 'CLEAR']
+        ]
+      },
+      {
+        time: '17:42:21', documentState: 'DOCUMENTED', jacket: 'Decision history preserved',
+        title: 'Decision trace preserved', pill: 'DOCUMENTED', tone: 'resolved', phase: 3,
+        copy: 'The review, management response, and completed action remain attached to the operating record.',
+        action: 'Deal cleared with documented review', owner: 'Decision trace available for leadership',
+        findings: [
+          ['clear', 'Required items present', 'CLEAR'],
+          ['resolved', 'Variance reviewed and resolved', 'RESOLVED'],
+          ['clear', 'Signature fields consistent', 'CLEAR']
+        ]
+      }
+    ];
+
+    let index = 0;
+    let timer = null;
+    let inView = true;
+
+    const render = nextIndex => {
+      index = nextIndex;
+      const state = states[index];
+      consoleBox.dataset.heroTone = state.tone;
+      if (clock) clock.textContent = state.time;
+      if (documentState) documentState.textContent = state.documentState;
+      if (jacketStatus) jacketStatus.textContent = state.jacket;
+      if (title) title.textContent = state.title;
+      if (pill) pill.textContent = state.pill;
+      if (eventTime) eventTime.textContent = state.time;
+      if (copy) copy.textContent = state.copy;
+      if (action) action.textContent = state.action;
+      if (owner) owner.textContent = state.owner;
+
+      findings.forEach((finding, findingIndex) => {
+        const [tone, detail, status] = state.findings[findingIndex];
+        finding.dataset.state = tone;
+        const detailNode = qs('small', finding);
+        const statusNode = qs('b', finding);
+        if (detailNode) detailNode.textContent = detail;
+        if (statusNode) statusNode.textContent = status;
+      });
+
+      phases.forEach((phase, phaseIndex) => {
+        phase.classList.toggle('is-active', phaseIndex === state.phase);
+        phase.classList.toggle('is-complete', phaseIndex < state.phase);
+      });
+    };
+
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = null;
+    };
+
+    const start = () => {
+      stop();
+      if (reducedMotion || !inView) return;
+      timer = window.setInterval(() => render((index + 1) % states.length), 2300);
+    };
+
+    consoleBox.addEventListener('mouseenter', stop);
+    consoleBox.addEventListener('mouseleave', start);
+    consoleBox.addEventListener('focusin', stop);
+    consoleBox.addEventListener('focusout', start);
+
+    if ('IntersectionObserver' in window && hero) {
+      const observer = new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting && entry.intersectionRatio > 0.22;
+        if (dock) dock.classList.toggle('is-hero-hidden', inView);
+        if (inView) start(); else stop();
+      }, { threshold: [0, .22, .6] });
+      observer.observe(hero);
+    }
+
+    render(reducedMotion ? 2 : 0);
+    start();
   })();
 
   // ---------------------------------------------------------------------------
