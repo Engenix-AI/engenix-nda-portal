@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal · Ownership Concierge V6</title>
+    <title>ENGENIX | Unified Portal · Desking Strategy & Rescue V7</title>
   <style>
     :root {
       --bg: #071018;
@@ -3001,6 +3001,162 @@
     }
   </style>
 
+
+  <style id="engenix-desking-strategy-rescue-v7">
+    /* Desking Intelligence V7 · Deal Strategy & Rescue */
+    .fa-clipboard-list::before { content:"☷"; }
+    .fa-copy::before { content:"▣"; }
+    .fa-chess::before { content:"♜"; }
+    .fa-phone::before { content:"◖"; }
+    .fa-life-ring::before { content:"⊙"; }
+    .fa-user-shield::before { content:"♢"; }
+    .fa-handshake::before { content:"⌁"; }
+    .fa-gas-pump::before { content:"▰"; }
+    .fa-stopwatch::before { content:"◴"; }
+    .fa-arrow-up-right-dots::before { content:"↗"; }
+    .fa-circle-dollar-to-slot::before { content:"◉"; }
+    .fa-scale-unbalanced::before { content:"≋"; }
+    .fa-bullseye::before { content:"◎"; }
+
+    .desk-v7-shell { display:grid; gap:12px; }
+    .desk-v7-hero {
+      padding:clamp(22px,2.7vw,34px); border:1px solid rgba(114,87,232,.23); border-radius:18px;
+      background:linear-gradient(118deg,#17162f,#1b2940 61%,#20354a); color:#f8f9ff; position:relative; overflow:hidden;
+    }
+    .desk-v7-hero::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 86% 16%,rgba(114,87,232,.33),transparent 29%),radial-gradient(circle at 92% 90%,rgba(217,123,49,.2),transparent 26%),linear-gradient(120deg,transparent 45%,rgba(255,255,255,.035)); }
+    .desk-v7-hero-grid { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:center; }
+    .desk-v7-hero h1 { margin:8px 0 8px; max-width:860px; font-size:clamp(28px,3.1vw,45px); line-height:1.04; letter-spacing:-.045em; }
+    .desk-v7-hero p { margin:0; max-width:760px; color:#b7c3d5; font-size:11.5px; line-height:1.65; }
+    .desk-v7-actions { min-width:240px; display:grid; gap:8px; }
+    .desk-v7-actions .button { min-height:42px; justify-content:flex-start; }
+
+    .desk-brief-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr); gap:12px; align-items:start; }
+    .desk-v7-metrics { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .desk-v7-metric { min-height:104px; padding:14px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .desk-v7-metric small { color:var(--muted-2); font-size:7.7px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .desk-v7-metric strong { display:block; margin-top:9px; font-size:25px; letter-spacing:-.035em; }
+    .desk-v7-metric span { display:block; margin-top:5px; color:var(--muted); font-size:8.4px; line-height:1.4; }
+
+    .desk-obstacle { padding:14px; border:1px solid rgba(217,123,49,.24); border-radius:12px; background:rgba(217,123,49,.075); display:grid; grid-template-columns:34px minmax(0,1fr); gap:11px; align-items:start; }
+    .desk-obstacle-icon { width:34px; height:34px; display:grid; place-items:center; border-radius:10px; color:#d97b31; background:rgba(217,123,49,.12); }
+    .desk-obstacle strong { display:block; font-size:11px; }
+    .desk-obstacle p { margin:5px 0 0; color:var(--muted); font-size:9px; line-height:1.55; }
+    .desk-obstacle.secondary { border-color:rgba(114,87,232,.2); background:rgba(114,87,232,.06); }
+    .desk-obstacle.secondary .desk-obstacle-icon { color:#7257e8; background:rgba(114,87,232,.11); }
+
+    .desk-objective-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .desk-v7-field { min-width:0; display:grid; gap:6px; }
+    .desk-v7-field label { color:var(--muted); font-size:8.5px; font-weight:760; }
+    .desk-v7-field input,.desk-v7-field select,.desk-v7-field textarea { width:100%; min-height:43px; padding:0 11px; border:1px solid var(--line); border-radius:10px; color:var(--text); background:var(--panel-2); outline:none; font-size:10.5px; }
+    .desk-v7-field textarea { min-height:86px; padding-top:10px; resize:vertical; }
+    .desk-v7-field input:focus,.desk-v7-field select:focus,.desk-v7-field textarea:focus { border-color:rgba(114,87,232,.45); box-shadow:0 0 0 3px rgba(114,87,232,.08); }
+    .desk-v7-field.full { grid-column:1/-1; }
+
+    .desk-intake-summary { display:grid; gap:9px; }
+    .desk-intake-row { padding:11px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; }
+    .desk-intake-row:last-child { border-bottom:0; }
+    .desk-intake-row small { display:block; color:var(--muted-2); font-size:7.5px; text-transform:uppercase; letter-spacing:.08em; }
+    .desk-intake-row strong { display:block; margin-top:4px; font-size:10px; line-height:1.4; }
+    .desk-intake-row b { font-size:10px; text-align:right; }
+
+    .desk-attention-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .desk-attention-card { padding:15px; border:1px solid var(--line); border-radius:13px; background:var(--panel); display:grid; grid-template-columns:38px minmax(0,1fr) auto; gap:11px; align-items:start; box-shadow:inset 4px 0 0 var(--attention-color,#7257e8); }
+    .desk-attention-icon { width:38px; height:38px; border-radius:11px; display:grid; place-items:center; color:var(--attention-color,#7257e8); background:color-mix(in srgb,var(--attention-color,#7257e8) 11%,transparent); }
+    .desk-attention-card small { color:var(--muted-2); font-size:7.5px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .desk-attention-card h3 { margin:5px 0 0; font-size:12px; }
+    .desk-attention-card p { margin:5px 0 0; color:var(--muted); font-size:8.8px; line-height:1.5; }
+    .desk-attention-card footer { margin-top:10px; display:flex; gap:6px; flex-wrap:wrap; }
+
+    .desk-goal-bar { padding:13px; border:1px solid rgba(114,87,232,.20); border-radius:13px; background:rgba(114,87,232,.055); display:grid; grid-template-columns:minmax(180px,.8fr) minmax(140px,.55fr) minmax(160px,.65fr) auto; gap:9px; align-items:end; }
+    .desk-pencil-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .desk-pencil-card { min-height:302px; padding:15px; border:1px solid var(--line); border-radius:14px; background:var(--panel); display:flex; flex-direction:column; position:relative; overflow:hidden; }
+    .desk-pencil-card::before { content:""; position:absolute; left:0; right:0; top:0; height:4px; background:var(--pencil-color,#7257e8); }
+    .desk-pencil-card.active { border-color:color-mix(in srgb,var(--pencil-color,#7257e8) 42%,var(--line)); box-shadow:0 12px 28px rgba(63,50,130,.10); }
+    .desk-pencil-card header { display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+    .desk-pencil-card h3 { margin:5px 0 0; font-size:13px; }
+    .desk-pencil-card p { margin:6px 0 0; color:var(--muted); font-size:8.6px; line-height:1.45; }
+    .desk-pencil-metrics { margin-top:13px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .desk-pencil-metric { padding:9px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); }
+    .desk-pencil-metric small { display:block; color:var(--muted-2); font-size:6.8px; text-transform:uppercase; letter-spacing:.07em; }
+    .desk-pencil-metric strong { display:block; margin-top:4px; font-size:10px; }
+    .desk-pencil-card footer { margin-top:auto; padding-top:12px; display:grid; gap:7px; }
+
+    .desk-equity-bridge { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; align-items:stretch; }
+    .desk-equity-node { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel); text-align:center; position:relative; }
+    .desk-equity-node:not(:last-child)::after { content:"→"; position:absolute; right:-10px; top:50%; transform:translateY(-50%); color:var(--muted-2); z-index:2; }
+    .desk-equity-node small { display:block; color:var(--muted-2); font-size:7px; text-transform:uppercase; letter-spacing:.07em; }
+    .desk-equity-node strong { display:block; margin-top:7px; font-size:15px; }
+    .desk-equity-node.negative strong { color:var(--red); }
+    .desk-equity-node.positive strong { color:var(--green); }
+
+    .desk-collateral-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .desk-collateral-card { min-height:286px; padding:14px; border:1px solid var(--line); border-radius:14px; background:var(--panel); display:flex; flex-direction:column; }
+    .desk-collateral-card.recommended { border-color:rgba(28,155,140,.32); box-shadow:inset 0 4px 0 #1c9b8c; }
+    .desk-vehicle-visual { height:70px; border-radius:11px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,#242744,#32516d); font-size:26px; overflow:hidden; position:relative; }
+    .desk-vehicle-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.12),transparent 70%); }
+    .desk-collateral-card h3 { margin:12px 0 0; font-size:11px; line-height:1.35; }
+    .desk-collateral-card p { margin:5px 0 0; color:var(--muted); font-size:8px; line-height:1.4; }
+    .desk-collateral-stats { margin-top:12px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .desk-collateral-stat { padding:8px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); }
+    .desk-collateral-stat small { color:var(--muted-2); font-size:6.7px; text-transform:uppercase; }
+    .desk-collateral-stat strong { display:block; margin-top:4px; font-size:9px; }
+    .desk-collateral-card footer { margin-top:auto; padding-top:12px; }
+
+    .desk-sequence { display:grid; gap:9px; }
+    .desk-sequence-item { padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel); display:grid; grid-template-columns:32px minmax(0,1fr) auto; gap:11px; align-items:center; }
+    .desk-sequence-rank { width:32px; height:32px; border-radius:10px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,#7257e8,#168ed8); font-size:11px; font-weight:850; }
+    .desk-sequence-item h3 { margin:0; font-size:10.5px; }
+    .desk-sequence-item p { margin:4px 0 0; color:var(--muted); font-size:8.3px; line-height:1.45; }
+
+    .desk-callback-table td.changed { color:#d97b31; font-weight:800; background:rgba(217,123,49,.055); }
+    .desk-callback-banner { padding:15px; border:1px solid rgba(217,123,49,.24); border-radius:13px; background:rgba(217,123,49,.07); display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+    .desk-callback-banner strong { display:block; font-size:12px; }
+    .desk-callback-banner p { margin:5px 0 0; color:var(--muted); font-size:8.8px; line-height:1.5; }
+
+    .desk-rescue-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .desk-rescue-card { min-height:265px; padding:15px; border:1px solid var(--line); border-radius:14px; background:var(--panel); display:flex; flex-direction:column; }
+    .desk-rescue-card.preferred { border-color:rgba(28,155,140,.30); box-shadow:inset 0 4px 0 #1c9b8c; }
+    .desk-rescue-card h3 { margin:10px 0 0; font-size:12px; }
+    .desk-rescue-card p { margin:6px 0 0; color:var(--muted); font-size:8.5px; line-height:1.48; }
+    .desk-rescue-impact { margin-top:12px; display:grid; gap:7px; }
+    .desk-rescue-impact div { display:flex; justify-content:space-between; gap:10px; padding-bottom:7px; border-bottom:1px solid var(--line); font-size:8.5px; }
+    .desk-rescue-card footer { margin-top:auto; padding-top:12px; }
+
+    .desk-approval-list { display:grid; gap:9px; }
+    .desk-approval-card { padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--panel); display:grid; grid-template-columns:38px minmax(0,1fr) auto; gap:11px; align-items:center; }
+    .desk-approval-card.pending { box-shadow:inset 4px 0 0 var(--amber); }
+    .desk-approval-card.approved { box-shadow:inset 4px 0 0 var(--green); opacity:.78; }
+    .desk-approval-icon { width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:var(--amber-soft); color:var(--amber); }
+    .desk-approval-card.approved .desk-approval-icon { background:var(--green-soft); color:var(--green); }
+    .desk-approval-card h3 { margin:0; font-size:10.5px; }
+    .desk-approval-card p { margin:4px 0 0; color:var(--muted); font-size:8.3px; line-height:1.45; }
+
+    .desk-handoff-readiness { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:12px; align-items:start; }
+    .desk-handoff-score { padding:20px; border:1px solid var(--line); border-radius:15px; background:var(--panel); text-align:center; }
+    .desk-handoff-ring { width:122px; height:122px; margin:0 auto; border-radius:50%; display:grid; place-items:center; background:conic-gradient(var(--handoff-color,#d97b31) calc(var(--handoff-progress,0)*1%),var(--bg-deep) 0); position:relative; }
+    .desk-handoff-ring::before { content:""; position:absolute; inset:11px; border-radius:50%; background:var(--panel); }
+    .desk-handoff-ring strong { position:relative; z-index:1; font-size:30px; }
+    .desk-handoff-score h3 { margin:13px 0 0; font-size:14px; }
+    .desk-handoff-score p { margin:6px 0 0; color:var(--muted); font-size:8.7px; line-height:1.5; }
+    .desk-handoff-checks { display:grid; gap:8px; }
+    .desk-handoff-check { padding:11px; border:1px solid var(--line); border-radius:10px; background:var(--panel); display:grid; grid-template-columns:25px minmax(0,1fr) auto; gap:9px; align-items:center; }
+    .desk-handoff-check i { width:25px; height:25px; border-radius:8px; display:grid; place-items:center; color:var(--amber); background:var(--amber-soft); }
+    .desk-handoff-check.done i { color:var(--green); background:var(--green-soft); }
+    .desk-handoff-check strong { display:block; font-size:9.3px; }
+    .desk-handoff-check span { display:block; margin-top:3px; color:var(--muted); font-size:7.8px; }
+
+    .desk-decision-filter { display:flex; gap:7px; flex-wrap:wrap; }
+    .desk-decision-chip { min-height:30px; padding:0 10px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--muted); font-size:8.5px; cursor:pointer; }
+    .desk-decision-chip.active { color:#674cd1; border-color:rgba(114,87,232,.25); background:rgba(114,87,232,.08); }
+
+    html[data-theme="light"] .desk-v7-metric,html[data-theme="light"] .desk-attention-card,html[data-theme="light"] .desk-pencil-card,html[data-theme="light"] .desk-equity-node,html[data-theme="light"] .desk-collateral-card,html[data-theme="light"] .desk-sequence-item,html[data-theme="light"] .desk-rescue-card,html[data-theme="light"] .desk-approval-card,html[data-theme="light"] .desk-handoff-score,html[data-theme="light"] .desk-handoff-check { background:rgba(255,255,255,.97); box-shadow:0 8px 22px rgba(53,43,102,.045); }
+
+    @media (max-width:1400px) { .desk-pencil-grid,.desk-rescue-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-collateral-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } .desk-v7-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:1100px) { .desk-v7-hero-grid,.desk-brief-grid,.desk-handoff-readiness { grid-template-columns:1fr; } .desk-v7-actions { min-width:0; grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-goal-bar { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-objective-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-collateral-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:740px) { .desk-v7-metrics,.desk-attention-grid,.desk-pencil-grid,.desk-rescue-grid,.desk-collateral-grid { grid-template-columns:1fr; } .desk-objective-grid,.desk-goal-bar { grid-template-columns:1fr; } .desk-equity-bridge { grid-template-columns:1fr 1fr; } .desk-equity-node::after { display:none; } .desk-v7-actions { grid-template-columns:1fr; } .desk-approval-card,.desk-attention-card { grid-template-columns:34px minmax(0,1fr); } .desk-approval-card > :last-child,.desk-attention-card > :last-child { grid-column:2; justify-self:start; } }
+    @media (max-width:470px) { .desk-equity-bridge { grid-template-columns:1fr; } .desk-v7-hero { padding:19px; } .desk-v7-hero h1 { font-size:29px; } }
+  </style>
+
 </head>
 <body class="auth-locked operator-friendly" data-workspace="compliance">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
@@ -3144,16 +3300,37 @@
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
           <button class="nav-item desk-nav-item active" data-desk-view="desk-command">
-            <span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Desk Command</span><span class="nav-count" id="deskActiveCountNav">4</span>
+            <span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Desk Command</span><span class="nav-count" id="deskActiveCountNav">6</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-intake">
+            <span class="nav-icon"><i class="fa-solid fa-clipboard-list"></i></span><span class="nav-text">Deal Intake</span><span class="nav-count">LIVE</span>
           </button>
           <button class="nav-item desk-nav-item" data-desk-view="desk-structure">
-            <span class="nav-icon"><i class="fa-solid fa-calculator"></i></span><span class="nav-text">Structure Lab</span><span class="nav-count">LIVE</span>
-          </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-pathways">
-            <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Lender Pathways</span><span class="nav-count" id="deskPathCountNav">4</span>
+            <span class="nav-icon"><i class="fa-solid fa-calculator"></i></span><span class="nav-text">Structure Lab</span><span class="nav-count">MODEL</span>
           </button>
           <button class="nav-item desk-nav-item" data-desk-view="desk-deals">
             <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Active Deals</span><span class="nav-count">6</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-attention">
+            <span class="nav-icon"><i class="fa-solid fa-bell"></i></span><span class="nav-text">Manager Attention</span><span class="nav-count" id="deskAttentionCountNav">4</span>
+          </button>
+        </div>
+      </nav>
+
+      <nav class="nav-group desking-shell" aria-label="Desking structure navigation">
+        <div class="nav-label">Structure</div>
+        <div class="nav-list">
+          <button class="nav-item desk-nav-item" data-desk-view="desk-stack">
+            <span class="nav-icon"><i class="fa-solid fa-copy"></i></span><span class="nav-text">Deal Stack</span><span class="nav-count" id="deskPencilCountNav">4</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-trade">
+            <span class="nav-icon"><i class="fa-solid fa-arrow-right-arrow-left"></i></span><span class="nav-text">Trade &amp; Equity</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-collateral">
+            <span class="nav-icon"><i class="fa-solid fa-car"></i></span><span class="nav-text">Collateral Rescue</span><span class="nav-count">5</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-pathways">
+            <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Lender Pathways</span><span class="nav-count" id="deskPathCountNav">4</span>
           </button>
         </div>
       </nav>
@@ -3161,11 +3338,20 @@
       <nav class="nav-group desking-shell" aria-label="Desking decision navigation">
         <div class="nav-label">Decide</div>
         <div class="nav-list">
-          <button class="nav-item desk-nav-item" data-desk-view="desk-submissions">
-            <span class="nav-icon"><i class="fa-solid fa-paper-plane"></i></span><span class="nav-text">Submissions & Conditions</span><span class="nav-count" id="deskConditionCountNav">2</span>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-strategy">
+            <span class="nav-icon"><i class="fa-solid fa-chess"></i></span><span class="nav-text">Submission Strategy</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-outcomes">
-            <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Outcome Memory</span>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-callbacks">
+            <span class="nav-icon"><i class="fa-solid fa-phone"></i></span><span class="nav-text">Callbacks &amp; Conditions</span><span class="nav-count" id="deskConditionCountNav">2</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-rescue">
+            <span class="nav-icon"><i class="fa-solid fa-life-ring"></i></span><span class="nav-text">Deal Rescue</span><span class="nav-count" id="deskRescueCountNav">NEW</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-approvals">
+            <span class="nav-icon"><i class="fa-solid fa-user-shield"></i></span><span class="nav-text">Manager Approvals</span><span class="nav-count" id="deskApprovalCountNav">2</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-handoff">
+            <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">F&amp;I Handoff</span><span class="nav-count" id="deskHandoffCountNav">HOLD</span>
           </button>
         </div>
       </nav>
@@ -3175,6 +3361,12 @@
         <div class="nav-list">
           <button class="nav-item desk-nav-item" data-desk-view="desk-knowledge">
             <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span><span class="nav-text">Lender Knowledge</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-outcomes">
+            <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Outcome Memory</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-history">
+            <span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Decision History</span>
           </button>
           <button class="nav-item desk-nav-item" data-desk-view="desk-settings">
             <span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span>
@@ -3877,6 +4069,131 @@
           <div class="desk-knowledge-status" id="deskKnowledgeStatus"><strong>Demo knowledge base:</strong> Four synthetic program records are available. Uploaded files remain local and are not parsed or transmitted.</div>
           <div class="desk-lender-grid" id="deskLenderGrid"></div>
           <article class="card desk-card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">Program Change Log</div><div class="card-subtitle">What changed, who reviewed it, and which pathways were affected</div></div></div><div class="table-wrap"><table><thead><tr><th>Time</th><th>Program</th><th>Change</th><th>Reviewed by</th><th>Affected pathways</th><th>Status</th></tr></thead><tbody id="deskKnowledgeChangeBody"></tbody></table></div></article>
+        </section>
+
+
+        <section class="view desking-view" id="view-desk-intake">
+          <div class="desk-v7-shell">
+            <header class="desk-v7-hero">
+              <div class="desk-v7-hero-grid">
+                <div><div class="desk-kicker">Deal Intelligence Brief</div><h1>Understand what makes the deal hard before touching the pencil.</h1><p>Capture the customer objective, authorized credit summary, collateral posture, trade pressure, and economic gap in one protected operating record.</p></div>
+                <div class="desk-v7-actions"><button class="button desk-primary" onclick="saveDeskIntake()"><i class="fa-solid fa-floppy-disk"></i>Save Deal Brief</button><button class="button desk-button" onclick="showDeskView('desk-stack')"><i class="fa-solid fa-copy"></i>Build Strategic Pencils</button></div>
+              </div>
+            </header>
+            <div class="desk-v7-metrics" id="deskIntakeMetrics"></div>
+            <div class="desk-brief-grid">
+              <article class="card desk-card">
+                <div class="card-header"><div><div class="card-title">Customer Objective</div><div class="card-subtitle">What the customer is trying to accomplish, not merely the first structure entered</div></div><span class="badge desk-badge">MANAGER INPUT</span></div>
+                <div class="card-body"><div class="desk-objective-grid">
+                  <div class="desk-v7-field"><label for="deskTargetPayment">Target payment</label><input class="desk-v7-number" id="deskTargetPayment" type="number" inputmode="decimal"></div>
+                  <div class="desk-v7-field"><label for="deskMaxCash">Maximum comfortable cash</label><input class="desk-v7-number" id="deskMaxCash" type="number" inputmode="decimal"></div>
+                  <div class="desk-v7-field"><label for="deskOwnershipGoal">Expected ownership</label><select id="deskOwnershipGoal"><option value="36">About 3 years</option><option value="60">About 5 years</option><option value="84">7+ years</option></select></div>
+                  <div class="desk-v7-field"><label for="deskVehicleFlex">Vehicle flexibility</label><select id="deskVehicleFlex"><option value="selected">Selected vehicle only</option><option value="trim">Flexible on trim</option><option value="model">Flexible on model</option><option value="inventory">Open to best structure</option></select></div>
+                  <div class="desk-v7-field"><label for="deskUrgency">Purchase urgency</label><select id="deskUrgency"><option value="today">Buying today</option><option value="soon">Within 7 days</option><option value="exploring">Exploring options</option></select></div>
+                  <div class="desk-v7-field"><label for="deskPriority">Primary customer priority</label><select id="deskPriority"><option value="payment">Payment</option><option value="cash">Cash down</option><option value="vehicle">Selected vehicle</option><option value="term">Shorter term</option><option value="balanced">Balanced outcome</option></select></div>
+                  <div class="desk-v7-field full"><label for="deskCustomerNotes">Manager observations</label><textarea id="deskCustomerNotes" placeholder="Example: Customer rejected additional cash twice but accepted up to $35 in payment movement."></textarea></div>
+                </div></div>
+              </article>
+              <div class="desk-intake-summary" id="deskIntakeSummary"></div>
+            </div>
+            <div class="grid-12">
+              <article class="card desk-card span-6"><div class="card-header"><div><div class="card-title">Primary Deal Obstacles</div><div class="card-subtitle">Visible pressures that require a desk strategy</div></div></div><div class="card-body" id="deskObstacleList"></div></article>
+              <article class="card desk-card span-6"><div class="card-header"><div><div class="card-title">Authorized Credit Summary</div><div class="card-subtitle">Synthetic values only, separated from protected-class information</div></div></div><div class="card-body" id="deskCreditBrief"></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-attention">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Live manager queue</div><div class="section-title" style="margin-top:5px">Manager Attention</div><div class="section-subtitle">The desk sees the next decision, the economic risk, and the clock attached to it.</div></div><button class="button desk-primary" onclick="showDeskView('desk-stack')"><i class="fa-solid fa-bolt"></i>Work Active Deal</button></div>
+            <div class="desk-v7-metrics" id="deskAttentionMetrics"></div>
+            <div class="desk-attention-grid" id="deskAttentionGrid"></div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-stack">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Immutable deal pencils</div><div class="section-title" style="margin-top:5px">Deal Stack</div><div class="section-subtitle">Generate goal-driven structures, compare every concession, and preserve who changed what.</div></div><button class="button desk-button" onclick="addCurrentDeskPencil()"><i class="fa-solid fa-plus"></i>Capture Current Pencil</button></div>
+            <div class="desk-goal-bar">
+              <div class="desk-v7-field"><label for="deskStrategyGoal">Structure objective</label><select id="deskStrategyGoal"><option value="balanced">Balanced manager recommendation</option><option value="payment">Hit target payment</option><option value="fit">Maximize lender fit</option><option value="gross">Preserve front gross</option><option value="cash">Minimize cash down</option><option value="speed">Fastest viable approval</option></select></div>
+              <div class="desk-v7-field"><label for="deskStackTargetPayment">Target payment</label><input class="desk-v7-number" id="deskStackTargetPayment" type="number" inputmode="decimal"></div>
+              <div class="desk-v7-field"><label for="deskMaxGrossGive">Maximum gross sacrifice</label><input class="desk-v7-number" id="deskMaxGrossGive" type="number" inputmode="decimal"></div>
+              <button class="button desk-primary" onclick="generateStrategicPencils()"><i class="fa-solid fa-wand-magic-sparkles"></i>Build Strategic Pencils</button>
+            </div>
+            <div class="desk-pencil-grid" id="deskPencilGrid"></div>
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">Pencil Comparison</div><div class="card-subtitle">Movement from the original structure remains visible</div></div><span class="badge desk-badge">VERSION CONTROL</span></div><div class="table-wrap"><table><thead><tr><th>Pencil</th><th>Payment</th><th>Cash</th><th>Term</th><th>Amount financed</th><th>LTV</th><th>Front gross</th><th>Change from original</th><th>Manager</th></tr></thead><tbody id="deskPencilTable"></tbody></table></div></article>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-trade">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Trade and equity intelligence</div><div class="section-title" style="margin-top:5px">Trade &amp; Equity</div><div class="section-subtitle">Separate ACV, customer allowance, payoff, over-allowance, recon, and verified cancellation proceeds.</div></div><button class="button desk-primary" onclick="saveDeskTrade()"><i class="fa-solid fa-floppy-disk"></i>Save Trade Structure</button></div>
+            <div class="desk-equity-bridge" id="deskEquityBridge"></div>
+            <div class="desk-brief-grid">
+              <article class="card desk-card"><div class="card-header"><div><div class="card-title">Trade Appraisal &amp; Payoff</div><div class="card-subtitle">Customer-facing allowance stays separate from actual economic value</div></div></div><div class="card-body"><div class="desk-objective-grid">
+                <div class="desk-v7-field"><label for="deskTradeAcv">Actual cash value</label><input class="desk-v7-number" id="deskTradeAcv" type="number"></div>
+                <div class="desk-v7-field"><label for="deskTradeAllowance">Customer allowance</label><input class="desk-v7-number" id="deskTradeAllowance" type="number"></div>
+                <div class="desk-v7-field"><label for="deskTradePayoff">Payoff</label><input class="desk-v7-number" id="deskTradePayoff" type="number"></div>
+                <div class="desk-v7-field"><label for="deskTradeRecon">Recon estimate</label><input class="desk-v7-number" id="deskTradeRecon" type="number"></div>
+                <div class="desk-v7-field"><label for="deskTradeWholesale">Wholesale estimate</label><input class="desk-v7-number" id="deskTradeWholesale" type="number"></div>
+                <div class="desk-v7-field"><label>Payoff status</label><button class="button desk-button" onclick="verifyDeskPayoff()"><i class="fa-solid fa-circle-check"></i>Verify Payoff</button></div>
+              </div></div></article>
+              <article class="card desk-card"><div class="card-header"><div><div class="card-title">Prior Product Value</div><div class="card-subtitle">Potential customer value never silently becomes cash down</div></div><span class="badge amber">VERIFICATION CONTROL</span></div><div class="card-body" id="deskCancellationPanel"></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-collateral">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Inventory as a deal-closing tool</div><div class="section-title" style="margin-top:5px">Collateral Rescue Board</div><div class="section-subtitle">See which available vehicles improve payment, advance, gross, and lender coverage.</div></div><span class="badge desk-badge">SYNTHETIC INVENTORY</span></div>
+            <div class="desk-collateral-grid" id="deskCollateralGrid"></div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-strategy">
+          <div class="desk-v7-shell">
+            <header class="desk-v7-hero"><div class="desk-v7-hero-grid"><div><div class="desk-kicker">Submission Strategy</div><h1>Submit with intention, not lender confetti.</h1><p>Rank the programs that materially improve the deal, preserve the fallback sequence, and hold unnecessary submissions until they are needed.</p></div><div class="desk-v7-actions"><button class="button desk-primary" onclick="submitRecommendedDeskLender()"><i class="fa-solid fa-paper-plane"></i>Submit Recommended Path</button><button class="button desk-button" onclick="showDeskView('desk-pathways')"><i class="fa-solid fa-route"></i>Compare All Pathways</button></div></div></header>
+            <div class="desk-brief-grid"><article class="card desk-card"><div class="card-header"><div><div class="card-title">Recommended Submission Order</div><div class="card-subtitle">Objective fit, economics, conditions, and response time considered together</div></div></div><div class="card-body"><div class="desk-sequence" id="deskSubmissionSequence"></div></div></article><article class="card desk-card"><div class="card-header"><div><div class="card-title">Submission Guardrails</div><div class="card-subtitle">Why the next lenders are held in reserve</div></div></div><div class="card-body" id="deskSubmissionGuardrails"></div></article></div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-callbacks">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Approval callback workspace</div><div class="section-title" style="margin-top:5px">Callbacks &amp; Conditions</div><div class="section-subtitle">Compare submitted and approved terms, preserve expiration, and route every condition.</div></div><button class="button desk-primary" onclick="simulateDeskCallback()"><i class="fa-solid fa-phone"></i>Simulate Lender Callback</button></div>
+            <div class="desk-callback-banner" id="deskCallbackBanner"></div>
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">Callback Comparison</div><div class="card-subtitle">Every lender movement becomes an explicit manager decision</div></div><span class="badge desk-badge">SYNTHETIC CALLBACK</span></div><div class="table-wrap"><table class="desk-callback-table"><thead><tr><th>Element</th><th>Submitted</th><th>Approved</th><th>Variance</th><th>Disposition</th></tr></thead><tbody id="deskCallbackTable"></tbody></table></div></article>
+            <div class="desk-command-grid"><article class="card desk-card"><div class="card-header"><div><div class="card-title">Owned Conditions</div><div class="card-subtitle">Resolve required evidence before accepting the approval</div></div></div><div class="card-body" id="deskV7ConditionList"></div></article><article class="card desk-card"><div class="card-header"><div><div class="card-title">Approval Control</div><div class="card-subtitle">Expiration, callback contact, and manager acceptance</div></div></div><div class="card-body" id="deskCallbackControl"></div></article></div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-rescue">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Rehash and deal recovery</div><div class="section-title" style="margin-top:5px">Deal Rescue</div><div class="section-subtitle">Turn a lender shortfall into several visible ways forward, showing exactly who absorbs the difference.</div></div><button class="button desk-button" onclick="simulateDeskCallback()"><i class="fa-solid fa-arrows-rotate"></i>Refresh From Callback</button></div>
+            <div class="desk-v7-metrics" id="deskRescueMetrics"></div>
+            <div class="desk-rescue-grid" id="deskRescueGrid"></div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-approvals">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Manager authority controls</div><div class="section-title" style="margin-top:5px">Manager Approvals</div><div class="section-subtitle">Discounts, trade over-allowance, gross exceptions, and manual pathway overrides require visible authority.</div></div><span class="badge desk-badge">AUDITABLE AUTHORITY</span></div>
+            <div class="desk-v7-metrics" id="deskApprovalMetrics"></div>
+            <div class="desk-approval-list" id="deskApprovalList"></div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-handoff">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Locked structure handoff</div><div class="section-title" style="margin-top:5px">F&amp;I Handoff</div><div class="section-subtitle">Send the exact accepted structure, customer expectations, lender conditions, and back-end capacity into F&amp;I Intelligence.</div></div><button class="button desk-primary" id="deskSendHandoffButton" onclick="sendDeskToFinance()"><i class="fa-solid fa-handshake"></i>Send to F&amp;I Intelligence</button></div>
+            <div class="desk-handoff-readiness"><article class="card desk-card"><div class="card-header"><div><div class="card-title">Handoff Brief</div><div class="card-subtitle">The accepted structure and customer promise entering F&amp;I</div></div><span class="badge desk-badge" id="deskHandoffVersionBadge">PENCIL</span></div><div class="card-body" id="deskHandoffBrief"></div></article><div class="desk-handoff-score" id="deskHandoffScore"></div></div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-history">
+          <div class="desk-v7-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Preserved operating memory</div><div class="section-title" style="margin-top:5px">Decision History</div><div class="section-subtitle">Pencils, concessions, submissions, callbacks, approvals, and handoffs remain attached to the deal.</div></div><div class="desk-decision-filter"><button class="desk-decision-chip active" onclick="filterDeskHistory('all',this)">All</button><button class="desk-decision-chip" onclick="filterDeskHistory('structure',this)">Structure</button><button class="desk-decision-chip" onclick="filterDeskHistory('lender',this)">Lender</button><button class="desk-decision-chip" onclick="filterDeskHistory('approval',this)">Approvals</button></div></div>
+            <div class="desk-command-grid"><article class="card desk-card"><div class="card-header"><div><div class="card-title">Complete Decision Trail</div><div class="card-subtitle">Newest event first</div></div></div><div class="card-body"><div class="desk-timeline" id="deskV7DecisionTimeline"></div></div></article><article class="card desk-card"><div class="card-header"><div><div class="card-title">Version Ledger</div><div class="card-subtitle">Every pencil and its economic movement</div></div></div><div class="table-wrap"><table><thead><tr><th>Version</th><th>Objective</th><th>Payment</th><th>Cash</th><th>Front gross</th><th>Created</th></tr></thead><tbody id="deskVersionLedger"></tbody></table></div></article></div>
+          </div>
         </section>
 
         <section class="view desking-view" id="view-desk-settings">
@@ -7244,6 +7561,179 @@
     renderAllFinance=function(){renderAllFinanceConciergeBase();ensureFinanceConciergeState();renderOwnershipConcierge();renderConciergeQueue();renderConciergeRecovery();renderConciergeCommand();renderConciergeBriefConnection();};
     document.getElementById('conciergeReplyInput')?.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();submitConciergeReply();}});
     renderAllFinance();
+  
+
+    /* =========================================================
+       ENGENIX DESKING INTELLIGENCE V7 · DEAL STRATEGY & RESCUE
+       ========================================================= */
+    const deskRescueInventoryV7 = [
+      {id:'explorer',label:'2026 Ford Explorer ST-Line',price:48540,book:46200,cost:44490,days:17,rebate:1500,tag:'Selected vehicle'},
+      {id:'bronco',label:'2025 Ford Bronco Sport Badlands',price:40980,book:39750,cost:37420,days:61,rebate:2250,tag:'Payment rescue'},
+      {id:'escape',label:'2025 Ford Escape Active',price:33740,book:32600,cost:30650,days:44,rebate:2750,tag:'Strongest advance'},
+      {id:'f150',label:'2026 Ford F-150 XLT',price:54890,book:52600,cost:50740,days:9,rebate:1000,tag:'Gross opportunity'},
+      {id:'edge',label:'2024 Ford Edge Titanium CPO',price:35890,book:34900,cost:32150,days:79,rebate:0,tag:'Aged-unit rescue'}
+    ];
+
+    function ensureDeskV7State(){
+      if(!deskState.intake) deskState.intake={targetPayment:700,maxCash:5000,ownershipMonths:84,vehicleFlex:'inventory',urgency:'today',priority:'payment',notes:'Customer rejected additional cash twice but accepted up to $35 in payment movement.',savedAt:null};
+      if(!deskState.trade) deskState.trade={acv:18000,allowance:19500,payoff:22700,recon:950,wholesale:17600,payoffVerified:false,cancellationEstimate:2418,cancellationVerified:0,cancellationModeled:false};
+      if(!deskState.strategy) deskState.strategy={goal:'balanced',targetPayment:700,maxGrossGive:1250,pencils:[],selectedPencil:null,original:null};
+      if(!deskState.callback) deskState.callback={received:false,accepted:false,lender:null,expires:null,submitted:null,approved:null,rescueApplied:null};
+      if(!deskState.approvals) deskState.approvals=[
+        {id:'AP-201',type:'Trade over-allowance',amount:1500,authority:'Desk Director',reason:'Customer allowance exceeds ACV by $1,500.',status:'pending',owner:'Alex Morgan'},
+        {id:'AP-202',type:'Gross exception',amount:850,authority:'General Sales Manager',reason:'Balanced rescue path exceeds the desk manager gross-give authority by $850.',status:'pending',owner:'Dana Ruiz'}
+      ];
+      if(!deskState.handoff) deskState.handoff={sent:false,sentAt:null,version:null};
+      if(!deskState.strategy.original){const m=deskMetrics();deskState.strategy.original={payment:m.payment,cashDown:m.cashDown,term:m.term,amountFinanced:m.amountFinanced,ltv:m.ltv,frontGross:m.frontGross,sellingPrice:m.sellingPrice,vehicleId:deskState.vehicleId};}
+      if(!deskState.strategy.pencils.length) buildStrategicPencilsV7(false);
+    }
+    function deskDealV7(){return deskDeals.find(d=>d.id===deskState.activeDealId)||deskDeals[0];}
+    function deskV7Num(id,fallback=0){const el=document.getElementById(id);return el&&el.value!==''?Number(el.value):fallback;}
+    function deskV7Text(id,fallback=''){const el=document.getElementById(id);return el?el.value:fallback;}
+    function deskV7Delta(value){const n=Number(value)||0;return `${n>0?'+':''}${money(n)}`;}
+    function deskV7Event(title,copy,icon='fa-bolt',kind='structure'){deskAddEvent(title,copy,icon);deskState.timeline[0].kind=kind;deskSave();}
+
+    function buildStrategicPencilsV7(record=true){
+      ensureDeskV7StateShallow();
+      const base=deskMetrics();const alt=deskVehicleById('bronco');const low=deskVehicleById('escape');const target=Number(deskState.strategy.targetPayment||deskState.intake.targetPayment||700);const maxGive=Number(deskState.strategy.maxGrossGive||1250);
+      const raw=[
+        {id:'P1',name:'Gross Defense',objective:'Preserve front gross and selected collateral',color:'#7257e8',overrides:{},manager:'Alex Morgan'},
+        {id:'P2',name:'Balanced Close',objective:'Blend cash, discount, and term inside manager guardrails',color:'#168ed8',overrides:{cashDown:Math.min(deskState.intake.maxCash,base.cashDown+1000),sellingPrice:Math.max(base.vehicle.cost+maxGive,base.sellingPrice-750),term:75,apr:9.99},manager:'ENGENIX + Alex Morgan'},
+        {id:'P3',name:'Payment Target',objective:`Move toward ${money(target)} without hiding total finance cost`,color:'#d97b31',overrides:{cashDown:Math.min(deskState.intake.maxCash,base.cashDown+1500),term:84,apr:11.25},manager:'ENGENIX goal engine'},
+        {id:'P4',name:'Collateral Rescue',objective:'Lower amount financed and expand lender coverage',color:'#1c9b8c',overrides:{vehicleId:alt.id,sellingPrice:alt.price,cashDown:base.cashDown,term:72,apr:9.75},manager:'ENGENIX inventory model'}
+      ];
+      deskState.strategy.pencils=raw.map((p,i)=>{const m=deskMetrics(p.overrides);return {...p,version:`V${i+1}`,created:i?deskTime():'10:06',metrics:{payment:m.payment,cashDown:m.cashDown,term:m.term,amountFinanced:m.amountFinanced,ltv:m.ltv,pti:m.pti,frontGross:m.frontGross,sellingPrice:m.sellingPrice,vehicleId:m.vehicle.id,vehicle:m.vehicle.label,apr:m.apr}};});
+      if(!deskState.strategy.selectedPencil)deskState.strategy.selectedPencil='P2';
+      if(record)deskV7Event('Strategic pencils generated',`${deskState.strategy.pencils.length} structures were built around the ${deskState.strategy.goal} objective.`,'fa-copy','structure');
+      deskSave();
+    }
+    function ensureDeskV7StateShallow(){
+      if(!deskState.intake) deskState.intake={targetPayment:700,maxCash:5000,ownershipMonths:84,vehicleFlex:'inventory',urgency:'today',priority:'payment',notes:'',savedAt:null};
+      if(!deskState.strategy) deskState.strategy={goal:'balanced',targetPayment:700,maxGrossGive:1250,pencils:[],selectedPencil:null,original:null};
+    }
+
+    function renderDeskIntakeV7(){
+      ensureDeskV7State();const m=deskMetrics();const i=deskState.intake;const t=deskState.trade;const deal=deskDealV7();
+      const map={deskTargetPayment:i.targetPayment,deskMaxCash:i.maxCash,deskOwnershipGoal:String(i.ownershipMonths),deskVehicleFlex:i.vehicleFlex,deskUrgency:i.urgency,deskPriority:i.priority,deskCustomerNotes:i.notes};Object.entries(map).forEach(([id,v])=>{const el=document.getElementById(id);if(el&&document.activeElement!==el)el.value=v;});
+      const gap=m.payment-i.targetPayment;const neg=Math.max(0,t.payoff-t.allowance);
+      const metrics=document.getElementById('deskIntakeMetrics');if(metrics)metrics.innerHTML=[['Payment objective',money(i.targetPayment),`${money(Math.max(0,gap))} current gap`],['Maximum cash',money(i.maxCash),`${money(Math.max(0,i.maxCash-m.cashDown))} remaining flexibility`],['Negative equity',money(neg),t.payoffVerified?'Payoff verified':'Payoff pending verification'],['Modeled advance',pct(m.ltv),`${money(m.amountFinanced)} amount financed`],['Front gross',money(m.frontGross),`${deal.owner} owns the next decision`]].map(x=>`<div class="desk-v7-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+      const sum=document.getElementById('deskIntakeSummary');if(sum)sum.innerHTML=`<article class="card desk-card"><div class="card-header"><div><div class="card-title">Deal Intelligence Summary</div><div class="card-subtitle">What the manager needs in the first thirty seconds</div></div></div><div class="card-body"><div class="desk-intake-row"><div><small>Customer</small><strong>${deal.customer}</strong></div><b>${deskState.profile.toUpperCase()}</b></div><div class="desk-intake-row"><div><small>Selected collateral</small><strong>${m.vehicle.label}</strong></div><b>${money(m.sellingPrice)}</b></div><div class="desk-intake-row"><div><small>Primary objective</small><strong>${i.priority==='payment'?'Reach the payment without destroying gross':i.priority}</strong></div><b>${money(i.targetPayment)}/mo</b></div><div class="desk-intake-row"><div><small>Strongest lever</small><strong>${i.vehicleFlex!=='selected'?'Collateral plus verified cash flexibility':'Verified cash and term discipline'}</strong></div><b>${i.vehicleFlex==='inventory'?'OPEN':'LIMITED'}</b></div></div></article>`;
+      const obs=document.getElementById('deskObstacleList');if(obs)obs.innerHTML=`<div class="desk-obstacle"><div class="desk-obstacle-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div><strong>Primary obstacle · payment and negative-equity collision</strong><p>${money(neg)} negative equity combined with a ${money(i.targetPayment)} payment objective leaves a modeled ${money(Math.max(0,gap))} monthly gap.</p></div></div><div class="desk-obstacle secondary" style="margin-top:9px"><div class="desk-obstacle-icon"><i class="fa-solid fa-car"></i></div><div><strong>Secondary obstacle · collateral advance</strong><p>${m.vehicle.label} produces ${pct(m.ltv)} modeled LTV. The strongest clean lever is ${i.vehicleFlex==='selected'?'additional verified cash':'an alternate collateral path'}.</p></div></div>`;
+      const credit=document.getElementById('deskCreditBrief');if(credit)credit.innerHTML=`<div class="desk-summary-grid">${[['Bureau',deskState.bureauScore],['Auto score',deskState.autoScore],['PTI',pct(m.pti)],['DTI',pct(m.dti)],['Income',money(deskState.income)],['Housing',money(deskState.housing)],['Recent auto history','Synthetic stable'],['Discrepancies','Income evidence']].map(x=>`<div class="desk-summary-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="desk-disclaimer" style="margin-top:12px"><strong>Boundary:</strong> Synthetic authorized-credit summary only. No protected-class characteristic is present or used.</div>`;
+    }
+    function saveDeskIntake(){ensureDeskV7State();deskState.intake={...deskState.intake,targetPayment:deskV7Num('deskTargetPayment',700),maxCash:deskV7Num('deskMaxCash',5000),ownershipMonths:Number(deskV7Text('deskOwnershipGoal','84')),vehicleFlex:deskV7Text('deskVehicleFlex','inventory'),urgency:deskV7Text('deskUrgency','today'),priority:deskV7Text('deskPriority','payment'),notes:deskV7Text('deskCustomerNotes',''),savedAt:new Date().toISOString()};deskState.strategy.targetPayment=deskState.intake.targetPayment;deskV7Event('Deal Intelligence Brief saved',`${deskDealV7().customer} is targeting ${money(deskState.intake.targetPayment)} with maximum comfortable cash of ${money(deskState.intake.maxCash)}.`,'fa-clipboard-list','structure');buildStrategicPencilsV7(false);renderAllDesk();showToast('Deal brief saved','Customer objective and manager observations are now attached to the deal.','success');}
+
+    function deskAttentionItemsV7(){ensureDeskV7State();const callback=deskState.callback.received;return [
+      {color:'#c34555',icon:'fa-stopwatch',label:'Customer waiting · 22 min',title:'DX-4312 needs a revised pencil',copy:'Payment objective remains $71 above the last presentation. No manager response recorded.',action:"showDeskView('desk-stack')",button:'Build pencil'},
+      {color:'#d97b31',icon:'fa-phone',label:'Lender callback',title:callback?'DX-7314 callback requires acceptance':'DX-7308 returned with two conditions',copy:callback?'Approval reduces amount financed and back-end capacity. Manager response required before expiration.':'Proof of income and trade payoff are still open.',action:"showDeskView('desk-callbacks')",button:'Open callback'},
+      {color:'#7257e8',icon:'fa-coins',label:'Protect gross',title:'Alternative path preserves $1,850 more gross',copy:'A tighter cash structure improves lender fit without changing selected collateral.',action:"showDeskView('desk-strategy')",button:'Compare paths'},
+      {color:'#1c9b8c',icon:'fa-car',label:'Prevent fallout · 47 min',title:'One approval expires this hour',copy:'Customer re-presentation and F&I handoff remain incomplete.',action:"showDeskView('desk-handoff')",button:'Review handoff'}
+    ];}
+    function renderDeskAttentionV7(){const items=deskAttentionItemsV7();const metrics=document.getElementById('deskAttentionMetrics');if(metrics)metrics.innerHTML=[['Customers waiting','6','2 over the 15-minute store target'],['Awaiting first pencil','3','Oldest wait: 12 minutes'],['Lender responses','2','One approval expires this hour'],['Gross at risk',money(6850),'Across four active decisions'],['Ready for F&I','1','Two more blocked by owned work']].map(x=>`<div class="desk-v7-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');const grid=document.getElementById('deskAttentionGrid');if(grid)grid.innerHTML=items.map(x=>`<article class="desk-attention-card" style="--attention-color:${x.color}"><div class="desk-attention-icon"><i class="fa-solid ${x.icon}"></i></div><div><small>${x.label}</small><h3>${x.title}</h3><p>${x.copy}</p><footer><span class="badge desk-badge">MANAGER ACTION</span></footer></div><button class="button small desk-button" onclick="${x.action}">${x.button}</button></article>`).join('');const count=document.getElementById('deskAttentionCountNav');if(count)count.textContent=items.length;}
+
+    function generateStrategicPencils(){ensureDeskV7State();deskState.strategy.goal=deskV7Text('deskStrategyGoal','balanced');deskState.strategy.targetPayment=deskV7Num('deskStackTargetPayment',deskState.intake.targetPayment);deskState.strategy.maxGrossGive=deskV7Num('deskMaxGrossGive',1250);buildStrategicPencilsV7(true);renderAllDesk();showToast('Strategic pencils generated','Four explainable paths are ready for comparison.','success');}
+    function addCurrentDeskPencil(){ensureDeskV7State();const m=deskMetrics();const id=`P${deskState.strategy.pencils.length+1}`;deskState.strategy.pencils.push({id,version:`V${deskState.strategy.pencils.length+1}`,name:'Manager Manual',objective:'Current Structure Lab values captured by the manager',color:'#8a6fbd',manager:'Alex Morgan',created:deskTime(),metrics:{payment:m.payment,cashDown:m.cashDown,term:m.term,amountFinanced:m.amountFinanced,ltv:m.ltv,pti:m.pti,frontGross:m.frontGross,sellingPrice:m.sellingPrice,vehicleId:m.vehicle.id,vehicle:m.vehicle.label,apr:m.apr}});deskState.strategy.selectedPencil=id;deskV7Event('Manual pencil captured',`${id} preserved the current ${money(m.payment)} payment structure.`,'fa-copy','structure');renderAllDesk();}
+    function selectDeskPencilV7(id){ensureDeskV7State();deskState.strategy.selectedPencil=id;const p=deskState.strategy.pencils.find(x=>x.id===id);deskV7Event('Manager selected deal pencil',`${p.name} is the current operating structure at ${money(p.metrics.payment)} per month.`,'fa-scale-balanced','structure');deskSave();renderAllDesk();showToast('Pencil selected',`${p.name} is now the working structure.`,'success');}
+    function applyDeskPencilV7(id){ensureDeskV7State();const p=deskState.strategy.pencils.find(x=>x.id===id);if(!p)return;Object.assign(deskState,{vehicleId:p.metrics.vehicleId,sellingPrice:p.metrics.sellingPrice,cashDown:p.metrics.cashDown,term:p.metrics.term,apr:p.metrics.apr});deskState.strategy.selectedPencil=id;deskState.snapshotSavedAt=null;deskState.snapshotSignature=null;deskPathways=[];syncDeskInputsFromState();deskV7Event('Pencil loaded into Structure Lab',`${p.name} moved into the live working structure.`,'fa-calculator','structure');renderAllDesk();showDeskView('desk-structure');showToast('Structure loaded',`${p.name} is ready for refinement and snapshot.`,'success');}
+    function renderDeskStackV7(){ensureDeskV7State();const s=deskState.strategy;const map={deskStrategyGoal:s.goal,deskStackTargetPayment:s.targetPayment,deskMaxGrossGive:s.maxGrossGive};Object.entries(map).forEach(([id,v])=>{const el=document.getElementById(id);if(el&&document.activeElement!==el)el.value=v;});const original=s.original||deskMetrics();const grid=document.getElementById('deskPencilGrid');if(grid)grid.innerHTML=s.pencils.map(p=>{const active=p.id===s.selectedPencil;return `<article class="desk-pencil-card ${active?'active':''}" style="--pencil-color:${p.color}"><header><div><span class="badge ${active?'green':'desk-badge'}">${active?'WORKING':'OPTION'} · ${p.version}</span><h3>${p.name}</h3><p>${p.objective}</p></div><strong>${money(p.metrics.payment)}</strong></header><div class="desk-pencil-metrics">${[['Cash',money(p.metrics.cashDown)],['Term',`${p.metrics.term} mo`],['LTV',pct(p.metrics.ltv)],['Front gross',money(p.metrics.frontGross)],['Amount financed',money(p.metrics.amountFinanced)],['Vehicle',p.metrics.vehicle.split(' ').slice(-2).join(' ')]].map(x=>`<div class="desk-pencil-metric"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><footer><button class="button small ${active?'desk-primary':'desk-button'}" onclick="selectDeskPencilV7('${p.id}')">${active?'Selected':'Select Pencil'}</button><button class="button small" onclick="applyDeskPencilV7('${p.id}')">Load in Structure Lab</button></footer></article>`}).join('');const body=document.getElementById('deskPencilTable');if(body)body.innerHTML=s.pencils.map(p=>`<tr><td><strong>${p.version}</strong><div class="cell-sub">${p.name}</div></td><td>${money(p.metrics.payment)}</td><td>${money(p.metrics.cashDown)}</td><td>${p.metrics.term}</td><td>${money(p.metrics.amountFinanced)}</td><td>${pct(p.metrics.ltv)}</td><td>${money(p.metrics.frontGross)}</td><td>${deskV7Delta(p.metrics.frontGross-original.frontGross)} gross · ${deskV7Delta(p.metrics.payment-original.payment)} payment</td><td>${p.manager}</td></tr>`).join('');const count=document.getElementById('deskPencilCountNav');if(count)count.textContent=s.pencils.length;}
+
+    function renderDeskTradeV7(){ensureDeskV7State();const t=deskState.trade;const ids={deskTradeAcv:t.acv,deskTradeAllowance:t.allowance,deskTradePayoff:t.payoff,deskTradeRecon:t.recon,deskTradeWholesale:t.wholesale};Object.entries(ids).forEach(([id,v])=>{const el=document.getElementById(id);if(el&&document.activeElement!==el)el.value=v;});const equity=t.allowance-t.payoff,over=t.allowance-t.acv,net=t.acv-t.recon;const bridge=document.getElementById('deskEquityBridge');if(bridge)bridge.innerHTML=[['ACV',money(t.acv),''],['Allowance',money(t.allowance),over>0?'negative':''],['Payoff',money(t.payoff),'negative'],['Customer equity',money(equity),equity>=0?'positive':'negative'],['Net trade value',money(net),net>=0?'positive':'negative']].map(x=>`<div class="desk-equity-node ${x[2]}"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('');const panel=document.getElementById('deskCancellationPanel');if(panel)panel.innerHTML=`<div class="desk-intake-row"><div><small>Estimated cancellation value</small><strong>Preliminary calculation only</strong></div><b>${money(t.cancellationEstimate)}</b></div><div class="desk-intake-row"><div><small>Administrator-verified value</small><strong>${t.cancellationVerified?'Verified customer value':'Verification pending'}</strong></div><b>${money(t.cancellationVerified)}</b></div><div class="desk-intake-row"><div><small>Structure treatment</small><strong>${t.cancellationModeled?'Modeled as an authorized structure source':'Excluded from cash down'}</strong></div><b>${t.cancellationModeled?'MODELED':'HELD'}</b></div><div style="margin-top:12px;display:grid;gap:8px"><button class="button desk-button" onclick="verifyDeskCancellation()"><i class="fa-solid fa-circle-check"></i>Verify Cancellation Value</button><button class="button ${t.cancellationVerified?'desk-primary':'desk-button'}" ${t.cancellationVerified?'':'disabled'} onclick="modelDeskCancellation()"><i class="fa-solid fa-coins"></i>Model Verified Value</button></div><div class="desk-disclaimer" style="margin-top:12px"><strong>Control:</strong> Potential cancellation value never becomes cash down without verification and manager treatment.</div>`;}
+    function saveDeskTrade(){ensureDeskV7State();const t=deskState.trade;t.acv=deskV7Num('deskTradeAcv',t.acv);t.allowance=deskV7Num('deskTradeAllowance',t.allowance);t.payoff=deskV7Num('deskTradePayoff',t.payoff);t.recon=deskV7Num('deskTradeRecon',t.recon);t.wholesale=deskV7Num('deskTradeWholesale',t.wholesale);deskState.tradeEquity=t.allowance-t.payoff;deskState.snapshotSavedAt=null;deskState.snapshotSignature=null;deskV7Event('Trade structure saved',`${money(t.allowance)} allowance against ${money(t.payoff)} payoff creates ${money(deskState.tradeEquity)} customer equity.`,'fa-arrow-right-arrow-left','structure');deskSave();renderAllDesk();showToast('Trade structure saved','ACV, allowance, payoff, and recon remain separately visible.','success');}
+    function verifyDeskPayoff(){ensureDeskV7State();deskState.trade.payoffVerified=true;deskV7Event('Trade payoff verified',`${money(deskState.trade.payoff)} payoff was verified in the synthetic record.`,'fa-circle-check','approval');renderAllDesk();showToast('Payoff verified','The payoff is cleared for the structure model.','success');}
+    function verifyDeskCancellation(){ensureDeskV7State();deskState.trade.cancellationVerified=2186;deskV7Event('Cancellation value verified',`${money(2186)} was confirmed as synthetic prior-product value.`,'fa-circle-check','approval');renderAllDesk();showToast('Cancellation value verified','Verified value remains held until the manager chooses a treatment.','success');}
+    function modelDeskCancellation(){ensureDeskV7State();if(!deskState.trade.cancellationVerified)return;if(deskState.trade.cancellationModeled){showToast('Value already modeled','Verified cancellation value is already included in the working structure.','warning');return;}deskState.trade.cancellationModeled=true;deskState.cashDown+=deskState.trade.cancellationVerified;deskState.snapshotSavedAt=null;deskState.snapshotSignature=null;deskV7Event('Verified cancellation value modeled',`${money(deskState.trade.cancellationVerified)} was intentionally modeled as an authorized structure source.`,'fa-coins','structure');syncDeskInputsFromState();renderAllDesk();showToast('Verified value modeled','The structure changed and requires a new snapshot.','success');}
+
+    function renderDeskCollateralV7(){ensureDeskV7State();const current=deskMetrics();const grid=document.getElementById('deskCollateralGrid');if(grid)grid.innerHTML=deskRescueInventoryV7.map((v,index)=>{const baseVehicle=deskVehicles.find(x=>x.id===v.id)||{id:v.id,label:v.label,price:v.price,cost:v.cost,book:v.book};const m=deskMetrics({vehicleId:baseVehicle.id,sellingPrice:v.price});const fit=Math.round(deskClamp(86-(m.ltv-115)*1.7-(m.pti-15)*2,48,96));const payDelta=m.payment-current.payment;const grossDelta=m.frontGross-current.frontGross;return `<article class="desk-collateral-card ${index===2?'recommended':''}"><div class="desk-vehicle-visual"><i class="fa-solid fa-car"></i></div><span class="badge ${index===2?'green':'desk-badge'}" style="margin-top:11px;align-self:flex-start">${index===2?'RECOMMENDED':v.tag.toUpperCase()}</span><h3>${v.label}</h3><p>${v.days} days in stock · ${money(v.rebate)} configured incentive</p><div class="desk-collateral-stats">${[['Payment',money(m.payment)],['Change',deskV7Delta(payDelta)],['LTV',pct(m.ltv)],['Fit',fit],['Front gross',money(m.frontGross)],['Gross change',deskV7Delta(grossDelta)]].map(x=>`<div class="desk-collateral-stat"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><footer><button class="button ${index===2?'desk-primary':'desk-button'}" style="width:100%" onclick="selectDeskCollateralV7('${v.id}',${v.price})">Rebuild on This Vehicle</button></footer></article>`}).join('');}
+    function selectDeskCollateralV7(id,price){const vehicle=deskVehicles.find(v=>v.id===id);if(!vehicle){showToast('Synthetic inventory option',`${id.toUpperCase()} is displayed for comparison; the guided rebuild uses available demo inventory.`,'warning');return;}deskState.vehicleId=id;deskState.sellingPrice=price;deskState.snapshotSavedAt=null;deskState.snapshotSignature=null;deskPathways=[];syncDeskInputsFromState();deskV7Event('Collateral rescue selected',`${vehicle.label} replaced the prior vehicle in the working structure.`,'fa-car','structure');buildStrategicPencilsV7(false);renderAllDesk();showDeskView('desk-structure');showToast('Collateral rebuilt','Payment, advance, gross, and lender pathways were refreshed.','success');}
+
+    function renderDeskSubmissionStrategyV7(){ensureDeskV7State();ensureDeskPathways();const sorted=[...deskPathways].sort((a,b)=>b.fit-a.fit);const seq=document.getElementById('deskSubmissionSequence');if(seq)seq.innerHTML=sorted.slice(0,3).map((p,i)=>`<div class="desk-sequence-item"><div class="desk-sequence-rank">${i+1}</div><div><h3>${p.lender.name} · ${p.name}</h3><p>${i===0?'Strongest objective fit and best current economic posture.':i===1?'Fallback if the preferred pathway conditions outside tolerance.':'Hold as a targeted rescue path rather than submitting immediately.'}</p></div><div style="text-align:right"><span class="badge ${deskFitTone(p.fit)}">FIT ${p.fit}</span><div class="cell-sub">${p.lender.speed}</div></div></div>`).join('');const guard=document.getElementById('deskSubmissionGuardrails');if(guard)guard.innerHTML=`<div class="desk-obstacle secondary"><div class="desk-obstacle-icon"><i class="fa-solid fa-shield-halved"></i></div><div><strong>Hold unnecessary submissions</strong><p>Two additional programs do not materially improve payment, gross, or advance. Preserve them until the preferred paths decline or condition outside tolerance.</p></div></div><div class="desk-intake-summary" style="margin-top:10px"><div class="desk-intake-row"><div><small>Preferred submission</small><strong>${sorted[0].lender.name}</strong></div><b>${sorted[0].fit}</b></div><div class="desk-intake-row"><div><small>Fallback trigger</small><strong>Advance or income condition outside manager tolerance</strong></div><b>CONTROLLED</b></div><div class="desk-intake-row"><div><small>Customer impact</small><strong>${money(sorted[0].metrics.payment)} modeled payment</strong></div><b>${money(sorted[0].metrics.cashDown)} CASH</b></div></div>`;}
+    function submitRecommendedDeskLender(){ensureDeskPathways();const p=[...deskPathways].sort((a,b)=>b.fit-a.fit)[0];deskState.selectedPath=p.id;if(!deskSnapshotCurrent()){saveDeskStructure();}submitSelectedDeskPath();showDeskView('desk-callbacks');}
+
+    function simulateDeskCallback(){ensureDeskV7State();ensureDeskPathways();const m=deskMetrics();const p=deskPathways.find(x=>x.id===deskState.selectedPath)||deskPathways[0];deskState.callback={received:true,accepted:false,lender:p.lender.name,expires:'47 minutes',submitted:{amountFinanced:m.amountFinanced,term:m.term,rate:m.apr,cash:m.cashDown,backEnd:m.products,payment:m.payment},approved:{amountFinanced:m.amountFinanced-3140,term:72,rate:m.apr+.75,cash:m.cashDown+1500,backEnd:2800,payment:deskPayment(m.amountFinanced-3140,m.apr+.75,72)},rescueApplied:null};deskState.submissionStage='conditional';deskV7Event('Lender callback received',`${p.lender.name} approved a reduced amount financed with ${money(1500)} additional cash and lower back-end capacity.`,'fa-phone','lender');deskSave();renderAllDesk();showToast('Synthetic callback received','The approved structure now requires a manager rehash decision.','warning');}
+    function callbackRowsV7(){const c=deskState.callback;if(!c.received)return[];return [['Amount financed',c.submitted.amountFinanced,c.approved.amountFinanced,'money'],['Term',c.submitted.term,c.approved.term,'term'],['Rate',c.submitted.rate,c.approved.rate,'pct'],['Cash down',c.submitted.cash,c.approved.cash,'money'],['Back-end allowance',c.submitted.backEnd,c.approved.backEnd,'money'],['Payment',c.submitted.payment,c.approved.payment,'money']];}
+    function renderDeskCallbacksV7(){ensureDeskV7State();const c=deskState.callback;const banner=document.getElementById('deskCallbackBanner');if(banner)banner.innerHTML=c.received?`<div><strong>${c.lender} · Conditional approval</strong><p>Approval expires in ${c.expires}. The callback creates a ${money(c.submitted.amountFinanced-c.approved.amountFinanced)} amount-financed shortfall and reduces available back-end.</p></div><span class="badge amber">MANAGER DECISION REQUIRED</span>`:`<div><strong>No callback recorded for the active deal.</strong><p>Run the synthetic lender callback to demonstrate term comparison, conditions, expiration, and rescue paths.</p></div><button class="button desk-primary" onclick="simulateDeskCallback()">Run Callback</button>`;const body=document.getElementById('deskCallbackTable');if(body)body.innerHTML=c.received?callbackRowsV7().map(r=>{const [name,s,a,type]=r;const fmt=v=>type==='money'?money(v):type==='pct'?pct(v,2):`${v} mo`;const variance=a-s;return `<tr><td><strong>${name}</strong></td><td>${fmt(s)}</td><td class="changed">${fmt(a)}</td><td>${type==='money'?deskV7Delta(variance):type==='pct'?`${variance>0?'+':''}${variance.toFixed(2)} pts`:`${variance>0?'+':''}${variance} mo`}</td><td><span class="badge ${name==='Payment'&&a<=deskState.intake.targetPayment?'green':'amber'}">${name==='Payment'&&a<=deskState.intake.targetPayment?'WITHIN OBJECTIVE':'REVIEW'}</span></td></tr>`}).join(''):'<tr><td colspan="5"><div class="empty-state">No synthetic callback has been received.</div></td></tr>';const list=document.getElementById('deskV7ConditionList');if(list)list.innerHTML=`<div class="desk-condition-list">${deskState.conditions.map(x=>`<div class="desk-condition-item ${x.done?'done':''}"><div class="desk-condition-icon"><i class="fa-solid ${x.done?'fa-check':'fa-triangle-exclamation'}"></i></div><div><strong>${x.title}</strong><span>${x.owner} · ${x.due}</span></div>${x.done?'<span class="badge green">DONE</span>':`<button class="button small desk-button" onclick="resolveDeskCondition('${x.id}')">Resolve</button>`}</div>`).join('')}</div>`;const control=document.getElementById('deskCallbackControl');if(control)control.innerHTML=c.received?`<div class="desk-intake-summary"><div class="desk-intake-row"><div><small>Callback contact</small><strong>Jamie R. · Synthetic Credit Analyst</strong></div><b>${c.lender}</b></div><div class="desk-intake-row"><div><small>Approval expiration</small><strong>Customer re-presentation required</strong></div><b>${c.expires}</b></div><div class="desk-intake-row"><div><small>Manager acceptance</small><strong>${c.accepted?'Approval terms accepted':'Pending rescue selection and open conditions'}</strong></div><b>${c.accepted?'ACCEPTED':'PENDING'}</b></div></div><div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px"><button class="button desk-button" onclick="showDeskView('desk-rescue')"><i class="fa-solid fa-life-ring"></i>Open Deal Rescue</button><button class="button ${c.accepted?'desk-button':'desk-primary'}" onclick="acceptDeskCallback()"><i class="fa-solid fa-check"></i>${c.accepted?'Accepted':'Accept Terms'}</button></div>`:`<div class="empty-state">Callback controls appear after a synthetic lender response.</div>`;}
+    function acceptDeskCallback(){ensureDeskV7State();if(!deskState.callback.received)return;if(deskState.conditions.some(x=>!x.done)){showToast('Conditions remain open','Resolve the owned conditions before accepting the callback.','warning');return;}if(!deskState.callback.rescueApplied){showToast('Rescue decision required','Choose how the amount-financed shortfall will be solved.','warning');return;}deskState.callback.accepted=true;deskState.submissionStage='ready';deskV7Event('Lender callback accepted',`${deskState.callback.lender} terms were accepted after ${deskState.callback.rescueApplied} rescue.`,'fa-check','lender');deskSave();renderAllDesk();showToast('Callback accepted','The structure can now move toward the F&I handoff.','success');}
+
+    function deskRescueOptionsV7(){ensureDeskV7State();const c=deskState.callback;const gap=c.received?Math.max(0,c.submitted.amountFinanced-c.approved.amountFinanced):3140;return [
+      {id:'cash',name:'Customer Cash',preferred:false,copy:'Solve the full shortfall with additional verified customer funds.',payment:-28,cash:gap,gross:0,owner:'Customer'},
+      {id:'blend',name:'Balanced Rescue',preferred:true,copy:'Blend a controlled discount with additional cash to preserve more gross.',payment:-34,cash:1740,gross:-1400,owner:'Customer + Store'},
+      {id:'collateral',name:'Collateral Shift',preferred:false,copy:'Move to the Escape Active and reduce amount financed without forcing the full cash increase.',payment:-96,cash:0,gross:-520,owner:'Vehicle selection'},
+      {id:'next',name:'Next Lender Path',preferred:false,copy:'Hold the customer structure and submit the next targeted lender pathway.',payment:18,cash:0,gross:0,owner:'Submission strategy'}
+    ];}
+    function renderDeskRescueV7(){ensureDeskV7State();const c=deskState.callback;const gap=c.received?c.submitted.amountFinanced-c.approved.amountFinanced:3140;const metrics=document.getElementById('deskRescueMetrics');if(metrics)metrics.innerHTML=[['Amount-financed gap',money(gap),c.received?'From current lender callback':'Synthetic modeled shortfall'],['Additional cash asked',money(c.received?c.approved.cash-c.submitted.cash:1500),'Customer contribution pressure'],['Back-end reduction',money(c.received?c.submitted.backEnd-c.approved.backEnd:1400),'Capacity entering F&I'],['Approval expiration',c.received?c.expires:'Not started','Clock remains attached to the decision'],['Selected rescue',c.rescueApplied||'None','Manager decision required']].map(x=>`<div class="desk-v7-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');const grid=document.getElementById('deskRescueGrid');if(grid)grid.innerHTML=deskRescueOptionsV7().map(o=>`<article class="desk-rescue-card ${o.preferred?'preferred':''}"><span class="badge ${o.preferred?'green':'desk-badge'}" style="align-self:flex-start">${o.preferred?'RECOMMENDED':'RESCUE PATH'}</span><h3>${o.name}</h3><p>${o.copy}</p><div class="desk-rescue-impact"><div><span>Payment movement</span><strong>${deskV7Delta(o.payment)}</strong></div><div><span>Additional cash</span><strong>${money(o.cash)}</strong></div><div><span>Front-gross impact</span><strong>${deskV7Delta(o.gross)}</strong></div><div><span>Difference absorbed by</span><strong>${o.owner}</strong></div></div><footer><button class="button ${o.preferred?'desk-primary':'desk-button'}" style="width:100%" onclick="applyDeskRescueV7('${o.id}')">Apply Rescue Path</button></footer></article>`).join('');const nav=document.getElementById('deskRescueCountNav');if(nav)nav.textContent=c.rescueApplied?'SET':'NEW';}
+    function applyDeskRescueV7(id){ensureDeskV7State();if(deskState.callback.rescueApplied===id){showToast('Rescue already applied','Choose a different path or return to the Structure Lab before applying again.','warning');return;}const gap=deskState.callback.received?deskState.callback.submitted.amountFinanced-deskState.callback.approved.amountFinanced:3140;if(id==='cash')deskState.cashDown+=gap;if(id==='blend'){deskState.cashDown+=1740;deskState.sellingPrice-=1400;}if(id==='collateral'){deskState.vehicleId='escape';deskState.sellingPrice=deskVehicleById('escape').price;}if(id==='next'){ensureDeskPathways();const currentIndex=Math.max(0,deskPathways.findIndex(x=>x.id===deskState.selectedPath));deskState.selectedPath=deskPathways[Math.min(deskPathways.length-1,currentIndex+1)].id;}deskState.callback.rescueApplied=id;deskState.snapshotSavedAt=null;deskState.snapshotSignature=null;deskPathways=[];syncDeskInputsFromState();deskV7Event('Deal rescue applied',`${id} rescue was selected to solve the callback shortfall.`,'fa-life-ring','lender');buildStrategicPencilsV7(false);renderAllDesk();showToast('Rescue path applied','The working structure changed and requires a fresh snapshot.','success');}
+
+    function renderDeskApprovalsV7(){ensureDeskV7State();const pending=deskState.approvals.filter(x=>x.status==='pending').length;const metrics=document.getElementById('deskApprovalMetrics');if(metrics)metrics.innerHTML=[['Pending authority',pending,'Structure cannot hand off while open'],['Approved today','7','Synthetic rooftop total'],['Average response','2.4 min','Store operating standard'],['Gross exceptions','1','Active deal'],['Manual overrides','0','No unexplained lender override']].map(x=>`<div class="desk-v7-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');const list=document.getElementById('deskApprovalList');if(list)list.innerHTML=deskState.approvals.map(a=>`<article class="desk-approval-card ${a.status}"><div class="desk-approval-icon"><i class="fa-solid ${a.status==='approved'?'fa-check':'fa-user-shield'}"></i></div><div><h3>${a.type} · ${money(a.amount)}</h3><p>${a.reason} Required authority: ${a.authority}. Requested by ${a.owner}.</p></div>${a.status==='approved'?'<span class="badge green">APPROVED</span>':`<button class="button small desk-primary" onclick="approveDeskAuthorityV7('${a.id}')">Approve</button>`}</article>`).join('');const nav=document.getElementById('deskApprovalCountNav');if(nav)nav.textContent=pending;}
+    function approveDeskAuthorityV7(id){ensureDeskV7State();const a=deskState.approvals.find(x=>x.id===id);if(!a)return;a.status='approved';a.approvedBy='Dana Ruiz';a.approvedAt=new Date().toLocaleString();deskV7Event('Manager authority approved',`${a.type} was approved by ${a.approvedBy} for ${money(a.amount)}.`,'fa-user-shield','approval');deskSave();renderAllDesk();showToast('Authority approved',`${a.type} is preserved in the decision trail.`,'success');}
+
+    function deskHandoffChecksV7(){ensureDeskV7State();const selected=deskState.strategy.pencils.find(x=>x.id===deskState.strategy.selectedPencil);return [
+      {title:'Customer objective preserved',copy:`Target ${money(deskState.intake.targetPayment)} · maximum cash ${money(deskState.intake.maxCash)}`,done:!!deskState.intake.savedAt},
+      {title:'Working pencil selected',copy:selected?`${selected.version} · ${selected.name}`:'No deal pencil selected',done:!!selected},
+      {title:'Structure snapshot current',copy:deskSnapshotCurrent()?'Current economics preserved':'Structure changed after the last snapshot',done:deskSnapshotCurrent()},
+      {title:'Lender callback accepted',copy:deskState.callback.received?(deskState.callback.accepted?'Accepted terms preserved':'Callback still requires manager acceptance'):'No lender callback recorded',done:deskState.callback.accepted},
+      {title:'Conditions resolved',copy:`${deskState.conditions.filter(x=>x.done).length} of ${deskState.conditions.length} complete`,done:deskState.conditions.every(x=>x.done)},
+      {title:'Manager authority cleared',copy:`${deskState.approvals.filter(x=>x.status==='pending').length} approval requests remain`,done:deskState.approvals.every(x=>x.status==='approved')}
+    ];}
+    function renderDeskHandoffV7(){ensureDeskV7State();const checks=deskHandoffChecksV7();const done=checks.filter(x=>x.done).length;const progress=Math.round(done/checks.length*100);const selected=deskState.strategy.pencils.find(x=>x.id===deskState.strategy.selectedPencil);const m=selected?.metrics||deskMetrics();const brief=document.getElementById('deskHandoffBrief');if(brief)brief.innerHTML=`<div class="desk-summary-grid">${[['Approved lender',deskState.callback.lender||'Pending'],['Structure version',selected?.version||'Pending'],['Payment',money(m.payment)],['Cash expectation',money(m.cashDown)],['Term',`${m.term} months`],['Maximum back-end',money(deskState.callback.approved?.backEnd||deskState.products)],['Customer priority',deskState.intake.priority],['Approval expiration',deskState.callback.expires||'Not started']].map(x=>`<div class="desk-summary-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="desk-obstacle secondary" style="margin-top:12px"><div class="desk-obstacle-icon"><i class="fa-solid fa-comments"></i></div><div><strong>Customer expectation entering F&amp;I</strong><p>${deskState.intake.notes||'No manager observation recorded.'} Products or amounts discussed at the desk: none represented in this synthetic record.</p></div></div><div class="desk-handoff-checks" style="margin-top:12px">${checks.map(x=>`<div class="desk-handoff-check ${x.done?'done':''}"><i class="fa-solid ${x.done?'fa-check':'fa-triangle-exclamation'}"></i><div><strong>${x.title}</strong><span>${x.copy}</span></div><span class="badge ${x.done?'green':'amber'}">${x.done?'CLEAR':'OPEN'}</span></div>`).join('')}</div>`;const score=document.getElementById('deskHandoffScore');if(score)score.innerHTML=`<div class="desk-handoff-ring" style="--handoff-progress:${progress};--handoff-color:${progress===100?'#168167':'#d97b31'}"><strong>${progress}%</strong></div><h3>${progress===100?'Ready for F&I':'Handoff held'}</h3><p>${progress===100?'The accepted structure, conditions, authority, and customer expectations are ready to transfer.':`${checks.length-done} controls remain open. ENGENIX will not silently send an incomplete desk structure.`}</p><span class="badge ${progress===100?'green':'amber'}" style="margin-top:12px">${progress===100?'READY':'CONTROLLED HOLD'}</span>`;const btn=document.getElementById('deskSendHandoffButton');if(btn){btn.disabled=progress<100;btn.setAttribute('aria-disabled',String(progress<100));}const badge=document.getElementById('deskHandoffVersionBadge');if(badge)badge.textContent=selected?.version||'PENCIL';const nav=document.getElementById('deskHandoffCountNav');if(nav)nav.textContent=progress===100?'READY':'HOLD';}
+    function sendDeskToFinance(){ensureDeskV7State();if(deskHandoffChecksV7().some(x=>!x.done)){showToast('Handoff controls remain open','Clear the snapshot, callback, conditions, and authority before sending the deal.','warning');return;}const selected=deskState.strategy.pencils.find(x=>x.id===deskState.strategy.selectedPencil);deskState.handoff={sent:true,sentAt:new Date().toLocaleString(),version:selected?.version||'Current'};deskV7Event('Deal sent to F&I Intelligence',`${deskState.handoff.version} and the accepted lender structure were transferred with customer expectations and remaining capacity.`,'fa-handshake','approval');deskSave();renderAllDesk();showToast('F&I handoff complete','The locked desk structure is now ready in F&I Intelligence.','success');setTimeout(()=>switchPortalWorkspace('finance','fi-command'),650);}
+
+    function renderDeskHistoryV7(filter='all'){ensureDeskV7State();const events=filter==='all'?deskState.timeline:deskState.timeline.filter(e=>(e.kind||'structure')===filter);renderDeskTimeline('deskV7DecisionTimeline',events);const body=document.getElementById('deskVersionLedger');if(body)body.innerHTML=deskState.strategy.pencils.map(p=>`<tr><td><strong>${p.version}</strong><div class="cell-sub">${p.name}</div></td><td>${p.objective}</td><td>${money(p.metrics.payment)}</td><td>${money(p.metrics.cashDown)}</td><td>${money(p.metrics.frontGross)}</td><td>${p.created}</td></tr>`).join('');}
+    function filterDeskHistory(filter,button){document.querySelectorAll('.desk-decision-chip').forEach(x=>x.classList.remove('active'));button?.classList.add('active');renderDeskHistoryV7(filter);}
+
+    function renderDeskCommandV7(){ensureDeskV7State();ensureDeskPathways();const m=deskMetrics();const best=[...deskPathways].sort((a,b)=>b.fit-a.fit)[0];const pending=deskState.approvals.filter(x=>x.status==='pending').length;const focus=document.getElementById('deskFocusGrid');if(focus)focus.innerHTML=[
+      {label:'Primary obstacle',title:`${money(Math.max(0,m.payment-deskState.intake.targetPayment))} payment gap`,copy:`${money(Math.max(0,deskState.trade.payoff-deskState.trade.allowance))} negative equity · ${pct(m.ltv)} LTV`,icon:'fa-triangle-exclamation',view:'desk-intake',primary:true},
+      {label:'Next best action',title:deskState.callback.received?'Resolve lender callback':'Build strategic pencils',copy:deskState.callback.received?`${money(deskState.callback.submitted.amountFinanced-deskState.callback.approved.amountFinanced)} shortfall · ${deskState.callback.expires}`:'Four goal-driven paths ready',icon:deskState.callback.received?'fa-phone':'fa-copy',view:deskState.callback.received?'desk-callbacks':'desk-stack'},
+      {label:'Strongest lender path',title:`${best.name} · ${best.fit}`,copy:`${best.lender.name} · ${best.band}`,icon:'fa-route',view:'desk-strategy'},
+      {label:'Authority gate',title:`${pending} approvals remain`,copy:pending?'Handoff remains controlled':'All authority clear',icon:'fa-user-shield',view:'desk-approvals'}
+    ].map(x=>`<button class="desk-focus-card ${x.primary?'primary':''}" onclick="showDeskView('${x.view}')"><div class="desk-focus-icon"><i class="fa-solid ${x.icon}"></i></div><div><small>${x.label}</small><strong>${x.title}</strong><em>${x.copy}</em></div><i class="fa-solid fa-arrow-right desk-focus-arrow"></i></button>`).join('');const metrics=document.getElementById('deskCommandMetrics');if(metrics)metrics.innerHTML=[['Customers waiting','6','Two beyond the store response target'],['Awaiting lender','3','Oldest response: 19 minutes'],['Conditional approvals','2','One expires in 47 minutes'],['Gross at risk',money(6850),'Across manager decisions'],['F&I ready',deskHandoffChecksV7().every(x=>x.done)?'1':'0','Active deal remains protected']].map(x=>`<div class="desk-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');const summary=document.getElementById('deskActiveStructureSummary');if(summary)summary.innerHTML=`<div class="desk-structure-summary"><div class="desk-structure-head"><div><span class="badge desk-badge">${deskState.strategy.pencils.find(x=>x.id===deskState.strategy.selectedPencil)?.version||'LIVE'}</span><h3>${m.vehicle.label}</h3><div class="cell-sub">${deskDealV7().customer} · ${deskState.intake.priority} objective · ${money(deskState.intake.targetPayment)} target</div></div><span class="badge ${m.payment<=deskState.intake.targetPayment?'green':'amber'}">${money(m.payment)} / MO</span></div><div class="desk-summary-grid">${[['Amount financed',money(m.amountFinanced)],['Cash down',money(m.cashDown)],['LTV',pct(m.ltv)],['PTI',pct(m.pti)],['Front gross',money(m.frontGross)],['Trade equity',money(deskState.trade.allowance-deskState.trade.payoff)],['Best lender fit',best.fit],['Next action',deskState.callback.received?'Callback':'Pencil']].map(x=>`<div class="desk-summary-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="desk-obstacle" style="margin-top:2px"><div class="desk-obstacle-icon"><i class="fa-solid fa-bullseye"></i></div><div><strong>Manager recommendation</strong><p>${deskState.callback.received?'Use Deal Rescue to solve the callback shortfall before accepting the lender terms.':'Build the Balanced Close pencil, then compare collateral rescue before giving away additional selling price.'}</p></div></div></div>`;renderDeskTimeline('deskCommandTimeline',deskState.timeline.slice(0,7));const body=document.getElementById('deskCommandDealBody');if(body)body.innerHTML=deskDeals.slice(0,5).map((d,i)=>`<tr><td>${deskToken(d.id,true)}</td><td><strong>${d.customer}</strong><div class="cell-sub">${d.vehicle}</div></td><td><span class="badge desk-badge">${d.band} · ${d.bureau}</span></td><td>${money(d.payment*72*.9)}</td><td>${i===2?'Deal Rescue':i===1?'Approval Strength':i===4?'Gross Guard':'Balanced Close'}</td><td>${i===2?'<span class="badge red">$2,140 AT RISK</span>':'<span class="badge green">PROTECTED</span>'}</td><td><span class="badge ${d.status==='Conditional'?'amber':d.status==='Ready for F&I'?'green':'desk-badge'}">${d.status}</span></td><td><button class="button small desk-button" onclick="openDeskDeal('${d.id}')">Open</button></td></tr>`).join('');}
+
+    function renderDeskDecisionHistoryPageV7(){renderDeskHistoryV7('all');}
+    function renderAllDeskV7(){ensureDeskV7State();renderDeskIntakeV7();renderDeskAttentionV7();renderDeskStackV7();renderDeskTradeV7();renderDeskCollateralV7();renderDeskSubmissionStrategyV7();renderDeskCallbacksV7();renderDeskRescueV7();renderDeskApprovalsV7();renderDeskHandoffV7();renderDeskDecisionHistoryPageV7();}
+
+    Object.assign(deskPageMeta,{
+      'desk-intake':['Deal Intake','Customer objective, authorized credit summary, trade pressure, and the reason the deal is hard'],
+      'desk-attention':['Manager Attention','Waiting customers, lender callbacks, gross exposure, and expiring approvals'],
+      'desk-stack':['Deal Stack','Goal-driven pencils, concessions, counters, and immutable version history'],
+      'desk-trade':['Trade & Equity','ACV, allowance, payoff, recon, over-allowance, and verified cancellation value'],
+      'desk-collateral':['Collateral Rescue','Alternative inventory modeled against payment, advance, gross, and lender fit'],
+      'desk-strategy':['Submission Strategy','Intentional lender sequence, fallbacks, guardrails, and shotgun-submission control'],
+      'desk-callbacks':['Callbacks & Conditions','Submitted versus approved terms, expiration, conditions, and manager acceptance'],
+      'desk-rescue':['Deal Rescue','Cash, gross, collateral, and lender alternatives for solving a callback shortfall'],
+      'desk-approvals':['Manager Approvals','Visible authority for discounts, trade over-allowance, gross exceptions, and overrides'],
+      'desk-handoff':['F&I Handoff','Locked structure, customer expectations, conditions, capacity, and decision record'],
+      'desk-history':['Decision History','Every pencil, concession, submission, callback, approval, and handoff']
+    });
+
+    const renderAllDeskV7Base=renderAllDesk;
+    renderAllDesk=function(){renderAllDeskV7Base();renderDeskCommandV7();renderAllDeskV7();};
+
+    const resetDeskingDemoV7Base=resetDeskingDemo;
+    resetDeskingDemo=function(){resetDeskingDemoV7Base();ensureDeskV7State();deskSave();renderAllDesk();};
+
+    const openDeskDealV7Base=openDeskDeal;
+    openDeskDeal=function(id){openDeskDealV7Base(id);deskState.intake=null;deskState.trade=null;deskState.strategy=null;deskState.callback=null;deskState.approvals=null;deskState.handoff=null;ensureDeskV7State();deskSave();renderAllDesk();};
+
+    const priorDeskSearchV7=renderSearchResults;
+    renderSearchResults=function(query){
+      if(currentPortalWorkspace!=='desking'){priorDeskSearchV7(query);return;}
+      const q=(query||'').toLowerCase().trim();const extra=[
+        {icon:'fa-clipboard-list',title:'Deal Intake',sub:'Customer objective and deal obstacle brief',type:'Desking tool',action:"showDeskView('desk-intake');closeSearch()"},
+        {icon:'fa-copy',title:'Deal Stack',sub:'Goal-driven pencils and version history',type:'Desking tool',action:"showDeskView('desk-stack');closeSearch()"},
+        {icon:'fa-car',title:'Collateral Rescue',sub:'Alternative inventory and structure impact',type:'Desking tool',action:"showDeskView('desk-collateral');closeSearch()"},
+        {icon:'fa-life-ring',title:'Deal Rescue',sub:'Callback shortfall recovery paths',type:'Desking tool',action:"showDeskView('desk-rescue');closeSearch()"}
+      ];const items=[...deskDeals.map(d=>({icon:'fa-car',title:d.id,sub:`${d.customer} · ${d.vehicle} · ${d.status}`,type:'Desk deal',action:`openDeskDeal('${d.id}');closeSearch()`})),...deskLenders.map(l=>({icon:'fa-landmark',title:l.name,sub:`${l.program} · ${l.source}`,type:'Program',action:`showDeskView('desk-knowledge');closeSearch()`})),...extra].filter(x=>!q||`${x.title} ${x.sub} ${x.type}`.toLowerCase().includes(q)).slice(0,12);document.getElementById('searchResults').innerHTML=items.length?items.map(i=>`<button class="search-result" onclick="${i.action}"><div class="search-result-icon"><i class="fa-solid ${i.icon}"></i></div><div><div class="search-result-title">${i.title}</div><div class="search-result-sub">${i.sub}</div></div><div class="search-result-type">${i.type}</div></button>`).join(''):'<div class="empty-state">No desking results found.</div>';
+    };
+
+    const priorDeskNotificationsV7=renderNotifications;
+    renderNotifications=function(){if(currentPortalWorkspace!=='desking'){priorDeskNotificationsV7();return;}ensureDeskV7State();const n=[{icon:'fa-stopwatch',text:'DX-4312 has waited 22 minutes for a revised pencil.',time:'Now',unread:true},{icon:'fa-phone',text:deskState.callback.received?'DX-7314 lender callback requires a rescue decision.':'DX-7308 returned with two synthetic lender conditions.',time:'4 min ago',unread:true},{icon:'fa-user-shield',text:`${deskState.approvals.filter(x=>x.status==='pending').length} manager authority requests remain open.`,time:'8 min ago',unread:true},{icon:'fa-car',text:'One collateral rescue path improves payment by $96.',time:'14 min ago',unread:false}];document.getElementById('notificationList').innerHTML=n.map(x=>`<div class="notification-item deal-threaded ${x.unread?'unread':''}" style="--deal-accent:#7257e8"><div class="notification-icon" style="color:#7257e8;background:rgba(114,87,232,.10)"><i class="fa-solid ${x.icon}"></i></div><div><div class="notification-copy">${x.text}</div><div class="notification-time">${x.time}</div></div></div>`).join('');const count=n.filter(x=>x.unread).length;const dot=document.querySelector('.notification-dot');if(dot)dot.style.display=count?'block':'none';const subtitle=document.querySelector('#notificationPanel .card-subtitle');if(subtitle)subtitle.textContent=`${count} desking items need attention`;};
+
+    const downloadDeskStructureBriefV7Base=downloadDeskStructureBrief;
+    downloadDeskStructureBrief=function(){ensureDeskV7State();ensureDeskPathways();const m=deskMetrics();const selected=deskState.strategy.pencils.find(x=>x.id===deskState.strategy.selectedPencil)||deskState.strategy.pencils[0];const best=[...deskPathways].sort((a,b)=>b.fit-a.fit)[0];const html=`<!doctype html><html><head><meta charset="utf-8"><title>ENGENIX Deal Strategy Brief</title><style>@page{size:Letter;margin:.45in}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#15283a;background:#fff}.header{padding:22px 24px;background:linear-gradient(115deg,#17162f,#253c59);color:#fff;border-radius:15px}.brand{letter-spacing:.17em;font-weight:900;font-size:13px}.header h1{margin:9px 0 5px;font-size:29px}.header p{margin:0;color:#c4cedd;font-size:11px}.meta{margin-top:14px;display:flex;gap:7px;flex-wrap:wrap}.chip{padding:6px 8px;border:1px solid rgba(255,255,255,.2);border-radius:7px;font-size:8px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.cell{padding:10px;border:1px solid #d8dfea;border-radius:9px}.cell small{display:block;color:#758497;text-transform:uppercase;font-size:7px;letter-spacing:.07em}.cell strong{display:block;margin-top:5px;font-size:13px}.section{margin-top:15px}.section h2{margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid #7257e8;font-size:12px;text-transform:uppercase;letter-spacing:.08em}.callout{padding:12px;border:1px solid #ead5c2;border-radius:9px;background:#fff8f1;font-size:10px;line-height:1.5}.paths{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.path{padding:11px;border:1px solid #d8dfea;border-radius:9px}.path h3{margin:0;font-size:11px}.path p{margin:5px 0 0;color:#65758a;font-size:9px;line-height:1.45}table{width:100%;border-collapse:collapse}th,td{padding:7px;border-bottom:1px solid #dce3eb;text-align:left;font-size:8px}th{color:#6a7b90;text-transform:uppercase;letter-spacing:.06em}.footer{margin-top:18px;padding-top:8px;border-top:1px solid #d8dfea;color:#718196;font-size:7px;line-height:1.5}</style></head><body><div class="header"><div class="brand">ENGENIX</div><h1>Deal Strategy & Rescue Brief</h1><p>${deskDealV7().customer} · ${m.vehicle.label} · ${deskState.activeDealId}</p><div class="meta"><span class="chip">Working pencil ${selected.version}</span><span class="chip">Best lender fit ${best.fit}</span><span class="chip">Manager Alex Morgan</span><span class="chip">Generated ${new Date().toLocaleString()}</span></div></div><div class="grid">${[['Payment target',money(deskState.intake.targetPayment)],['Working payment',money(m.payment)],['Cash down',money(m.cashDown)],['Amount financed',money(m.amountFinanced)],['LTV',pct(m.ltv)],['PTI',pct(m.pti)],['Front gross',money(m.frontGross)],['Trade equity',money(deskState.trade.allowance-deskState.trade.payoff)]].map(x=>`<div class="cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="section"><h2>Deal obstacle</h2><div class="callout">${money(Math.max(0,deskState.trade.payoff-deskState.trade.allowance))} negative equity and a ${money(deskState.intake.targetPayment)} payment objective are the primary constraints. ENGENIX recommends comparing the balanced pencil against collateral rescue before giving away additional selling price.</div></div><div class="section"><h2>Strategic pencils</h2><div class="paths">${deskState.strategy.pencils.slice(0,4).map(p=>`<div class="path"><h3>${p.version} · ${p.name}</h3><p>${p.objective}<br><b>${money(p.metrics.payment)}</b> · ${money(p.metrics.cashDown)} cash · ${pct(p.metrics.ltv)} LTV · ${money(p.metrics.frontGross)} front gross</p></div>`).join('')}</div></div><div class="section"><h2>Submission strategy</h2><table><thead><tr><th>Priority</th><th>Program</th><th>Path</th><th>Fit</th><th>Payment</th><th>Conditions</th></tr></thead><tbody>${[...deskPathways].sort((a,b)=>b.fit-a.fit).slice(0,3).map((p,i)=>`<tr><td>${i+1}</td><td>${p.lender.name}</td><td>${p.name}</td><td>${p.fit}</td><td>${money(p.metrics.payment)}</td><td>${p.conditions.join(', ')}</td></tr>`).join('')}</tbody></table></div><div class="footer">Synthetic demonstration only. Estimated lender alignment is decision support, not lender approval. Human manager selection, lender terms, customer consent, and verified evidence remain controlling.</div></body></html>`;const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`ENGENIX_Deal_Strategy_Brief_${deskState.activeDealId}.html`;a.click();URL.revokeObjectURL(url);deskV7Event('Deal Strategy Brief downloaded','A print-ready strategy and rescue packet was generated.','fa-download','approval');showToast('Strategy brief downloaded','Open the HTML packet to print or save as PDF.','success');};
+
+    ensureDeskV7State();
+    document.querySelectorAll('.desk-v7-number').forEach(input=>{input.addEventListener('focus',()=>requestAnimationFrame(()=>input.select()));input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();input.blur();}});input.addEventListener('wheel',e=>{if(document.activeElement===input){e.preventDefault();input.blur();}},{passive:false});});
+    renderAllDesk();
+
   </script>
 
 </body>
