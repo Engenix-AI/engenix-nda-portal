@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal + Compliance Copilot Demo</title>
+    <title>ENGENIX | Unified Portal · F&amp;I Full Send V5</title>
   <style>
     :root {
       --bg: #071018;
@@ -2658,6 +2658,187 @@
     }
   </style>
 
+
+  <style id="engenix-fi-full-send-v5">
+    /* =========================================================
+       F&I FULL SEND V5 · AI OWNERSHIP BRIEF + FUNDING ASSURANCE
+       Customer persuasion remains transparent, optional, and reviewable.
+       ========================================================= */
+    .fa-file-contract::before { content:"▥"; }
+    .fa-signature::before { content:"✎"; }
+    .fa-bank::before { content:"▦"; }
+    .fa-stamp::before { content:"◆"; }
+    .fa-clipboard-list::before { content:"☷"; }
+    .fa-paper-plane::before { content:"➤"; }
+    .fa-sparkles::before { content:"✦"; }
+    .fa-arrow-up-right::before { content:"↗"; }
+
+    .fi-action-strip.v5 { grid-template-columns:repeat(5,minmax(0,1fr)); }
+
+    .ownership-preview {
+      border:1px solid rgba(12,143,131,.2); border-radius:20px; overflow:hidden;
+      background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--fi-teal) 5%,var(--panel)) 58%,color-mix(in srgb,var(--fi-gold) 5%,var(--panel)));
+      box-shadow:0 24px 70px rgba(22,61,58,.1);
+    }
+    .ownership-preview-hero {
+      position:relative; min-height:245px; padding:clamp(24px,4vw,48px); overflow:hidden;
+      color:#fff; background:
+        radial-gradient(circle at 88% 5%,rgba(255,255,255,.22),transparent 28%),
+        linear-gradient(125deg,#073d3b 0%,#096b67 46%,#0c8f83 72%,#a87728 145%);
+    }
+    .ownership-preview-hero::before { content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px); background-size:32px 32px; mask-image:linear-gradient(90deg,#000,transparent 85%); }
+    .ownership-preview-hero::after { content:"BRONCO SPORT"; position:absolute; right:-18px; bottom:-28px; color:rgba(255,255,255,.075); font-size:clamp(62px,10vw,145px); font-weight:950; letter-spacing:-.08em; white-space:nowrap; }
+    .ownership-preview-hero > * { position:relative; z-index:1; }
+    .ownership-brandline { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .ownership-brand { font-size:11px; font-weight:900; letter-spacing:.18em; }
+    .ownership-doc-id { padding:6px 9px; border:1px solid rgba(255,255,255,.24); border-radius:999px; background:rgba(255,255,255,.08); font-size:8px; letter-spacing:.1em; }
+    .ownership-preview-hero h2 { margin:24px 0 8px; max-width:760px; font-size:clamp(32px,5vw,62px); line-height:.98; letter-spacing:-.055em; }
+    .ownership-preview-hero p { margin:0; max-width:650px; color:rgba(255,255,255,.78); font-size:12px; line-height:1.65; }
+    .ownership-profile-strip { margin-top:24px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; max-width:780px; }
+    .ownership-profile-item { padding:11px 12px; border:1px solid rgba(255,255,255,.18); border-radius:11px; background:rgba(4,32,31,.22); backdrop-filter:blur(8px); }
+    .ownership-profile-item small { display:block; color:rgba(255,255,255,.6); font-size:7px; text-transform:uppercase; letter-spacing:.09em; }
+    .ownership-profile-item strong { display:block; margin-top:5px; font-size:10px; line-height:1.35; }
+
+    .ownership-preview-body { padding:clamp(18px,3vw,30px); }
+    .ownership-insight-row { display:grid; grid-template-columns:1.15fr repeat(3,minmax(0,1fr)); gap:10px; }
+    .ownership-insight { min-height:94px; padding:14px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .ownership-insight.primary { border-color:rgba(12,143,131,.24); background:var(--fi-teal-soft); }
+    .ownership-insight small { display:block; color:var(--muted-2); font-size:7.5px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .ownership-insight strong { display:block; margin-top:8px; font-size:16px; letter-spacing:-.025em; }
+    .ownership-insight span { display:block; margin-top:5px; color:var(--muted); font-size:8.5px; line-height:1.4; }
+
+    .ownership-path-grid { margin-top:14px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .ownership-path { position:relative; min-height:330px; padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--panel); overflow:hidden; display:flex; flex-direction:column; }
+    .ownership-path::after { content:""; position:absolute; width:110px; height:110px; right:-45px; top:-45px; border-radius:50%; background:color-mix(in srgb,var(--fi-teal) 7%,transparent); }
+    .ownership-path.recommended { border-color:rgba(12,143,131,.42); box-shadow:inset 0 0 0 1px rgba(12,143,131,.12),0 16px 38px rgba(12,143,131,.09); transform:translateY(-3px); }
+    .ownership-path.current { background:linear-gradient(145deg,var(--fi-teal-soft),var(--panel)); }
+    .ownership-path-badge { align-self:flex-start; min-height:24px; padding:0 8px; border:1px solid var(--line); border-radius:999px; display:inline-flex; align-items:center; color:var(--muted); font-size:7.5px; font-weight:850; letter-spacing:.07em; text-transform:uppercase; }
+    .ownership-path.recommended .ownership-path-badge { color:var(--fi-teal); background:var(--fi-teal-soft); border-color:rgba(12,143,131,.22); }
+    .ownership-path h3 { margin:14px 0 0; font-size:18px; }
+    .ownership-payment { margin-top:18px; font-size:36px; line-height:1; letter-spacing:-.055em; font-weight:900; }
+    .ownership-payment small { font-size:10px; color:var(--muted); font-weight:700; letter-spacing:0; }
+    .ownership-delta { margin-top:6px; color:var(--fi-teal); font-size:9px; font-weight:800; }
+    .ownership-path-copy { margin:13px 0 0; color:var(--muted); font-size:9px; line-height:1.55; }
+    .ownership-benefit-list { margin:15px 0; display:grid; gap:7px; }
+    .ownership-benefit { display:grid; grid-template-columns:18px minmax(0,1fr); gap:7px; align-items:start; color:var(--text); font-size:8.8px; line-height:1.4; }
+    .ownership-benefit i { color:var(--fi-teal); padding-top:2px; }
+    .ownership-path .button { margin-top:auto; width:100%; }
+
+    .ownership-why-grid { margin-top:14px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .ownership-why { padding:15px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .ownership-why h3 { margin:0; font-size:11px; }
+    .ownership-why p { margin:6px 0 0; color:var(--muted); font-size:9px; line-height:1.55; }
+    .ownership-reason-chips { margin-top:10px; display:flex; flex-wrap:wrap; gap:6px; }
+
+    .ownership-upgrade-coach { margin-top:14px; padding:18px; border:1px solid rgba(189,139,53,.26); border-radius:15px; background:linear-gradient(110deg,var(--fi-gold-soft),var(--panel)); display:grid; grid-template-columns:44px minmax(0,1fr) auto; gap:13px; align-items:center; }
+    .ownership-upgrade-icon { width:44px; height:44px; border-radius:13px; display:grid; place-items:center; color:var(--fi-gold); background:rgba(189,139,53,.12); font-size:15px; }
+    .ownership-upgrade-coach h3 { margin:0; font-size:13px; }
+    .ownership-upgrade-coach p { margin:5px 0 0; color:var(--muted); font-size:9px; line-height:1.5; }
+    .ownership-upgrade-actions { display:flex; gap:7px; flex-wrap:wrap; justify-content:flex-end; }
+
+    .funding-hero { padding:22px; border:1px solid var(--line); border-radius:17px; background:linear-gradient(120deg,var(--panel),color-mix(in srgb,var(--fi-teal) 7%,var(--panel))); display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:18px; align-items:center; }
+    .funding-grade { --grade-color:var(--amber); width:104px; height:104px; border-radius:50%; display:grid; place-items:center; background:conic-gradient(var(--grade-color) var(--grade),var(--bg-deep) 0); position:relative; }
+    .funding-grade::before { content:""; position:absolute; inset:9px; border-radius:50%; background:var(--panel); border:1px solid var(--line); }
+    .funding-grade-content { position:relative; z-index:1; text-align:center; }
+    .funding-grade-content strong { display:block; font-size:24px; letter-spacing:-.04em; }
+    .funding-grade-content span { display:block; margin-top:2px; color:var(--muted); font-size:7px; text-transform:uppercase; letter-spacing:.08em; }
+    .funding-hero-copy h2 { margin:6px 0 5px; font-size:25px; letter-spacing:-.035em; }
+    .funding-hero-copy p { margin:0; color:var(--muted); font-size:9.5px; line-height:1.55; }
+    .funding-hero-actions { display:grid; gap:8px; min-width:190px; }
+    .funding-status-pill { min-height:28px; padding:0 9px; border-radius:999px; display:inline-flex; align-items:center; font-size:8px; font-weight:900; letter-spacing:.08em; }
+    .funding-status-pill.blocked { color:var(--red); background:var(--red-soft); border:1px solid rgba(195,69,85,.22); }
+    .funding-status-pill.review { color:var(--amber); background:var(--amber-soft); border:1px solid rgba(173,116,28,.22); }
+    .funding-status-pill.ready { color:var(--fi-teal); background:var(--fi-teal-soft); border:1px solid rgba(12,143,131,.22); }
+
+    .funding-metrics { margin-top:12px; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; }
+    .funding-metric { padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
+    .funding-metric small { display:block; color:var(--muted-2); font-size:7px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .funding-metric strong { display:block; margin-top:7px; font-size:20px; letter-spacing:-.035em; }
+    .funding-metric span { display:block; margin-top:4px; color:var(--muted); font-size:8px; line-height:1.35; }
+
+    .funding-control-bar { margin-top:12px; padding:12px; border:1px solid var(--line); border-radius:13px; background:var(--panel); display:flex; align-items:end; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .funding-lender-field { min-width:270px; display:grid; gap:6px; }
+    .funding-lender-field label { color:var(--muted); font-size:8px; font-weight:800; }
+    .funding-lender-field select { min-height:40px; padding:0 34px 0 11px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); color:var(--text); }
+
+    .funding-document-list { display:grid; gap:8px; }
+    .funding-document-row { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel); display:grid; grid-template-columns:35px minmax(0,1fr) 128px 115px auto; gap:11px; align-items:center; }
+    .funding-document-row.blocked { border-color:rgba(195,69,85,.22); background:var(--red-soft); }
+    .funding-document-row.review { border-color:rgba(173,116,28,.22); background:var(--amber-soft); }
+    .funding-document-row.verified { border-color:rgba(12,143,131,.16); }
+    .funding-doc-icon { width:35px; height:35px; border-radius:10px; display:grid; place-items:center; background:var(--panel-2); color:var(--muted); }
+    .funding-document-row.verified .funding-doc-icon { color:var(--fi-teal); background:var(--fi-teal-soft); }
+    .funding-document-row.blocked .funding-doc-icon { color:var(--red); background:var(--red-soft); }
+    .funding-document-row.review .funding-doc-icon { color:var(--amber); background:var(--amber-soft); }
+    .funding-document-row h3 { margin:0; font-size:10px; }
+    .funding-document-row p { margin:4px 0 0; color:var(--muted); font-size:8.3px; line-height:1.4; }
+    .funding-doc-meta small { display:block; color:var(--muted-2); font-size:7px; text-transform:uppercase; letter-spacing:.07em; }
+    .funding-doc-meta strong { display:block; margin-top:4px; font-size:8.8px; }
+    .funding-row-actions { display:flex; justify-content:flex-end; gap:6px; }
+
+    .stip-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .stip-card { min-height:170px; padding:15px; border:1px solid var(--line); border-radius:13px; background:var(--panel); display:flex; flex-direction:column; }
+    .stip-card h3 { margin:10px 0 0; font-size:11px; }
+    .stip-card p { margin:6px 0 0; color:var(--muted); font-size:8.7px; line-height:1.5; }
+    .stip-card .button { margin-top:auto; align-self:flex-start; }
+    .funding-release-panel { padding:18px; border:1px solid rgba(12,143,131,.24); border-radius:14px; background:linear-gradient(120deg,var(--fi-teal-soft),var(--panel)); }
+    .funding-release-panel h3 { margin:0; font-size:16px; }
+    .funding-release-panel p { margin:6px 0 0; color:var(--muted); font-size:9px; line-height:1.55; }
+
+    @media(max-width:1250px){
+      .fi-action-strip.v5{grid-template-columns:repeat(3,minmax(0,1fr));}
+      .ownership-insight-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .funding-metrics{grid-template-columns:repeat(3,minmax(0,1fr));}
+    }
+    @media(max-width:980px){
+      .ownership-path-grid{grid-template-columns:1fr;}
+      .ownership-path.recommended{transform:none;}
+      .funding-hero{grid-template-columns:auto minmax(0,1fr);}
+      .funding-hero-actions{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr));}
+      .stip-grid{grid-template-columns:1fr 1fr;}
+      .funding-document-row{grid-template-columns:35px minmax(0,1fr) 110px auto;}
+      .funding-document-row .funding-doc-meta:nth-of-type(2){display:none;}
+    }
+    @media(max-width:740px){
+      .fi-action-strip.v5,.ownership-insight-row,.ownership-why-grid,.stip-grid,.funding-metrics{grid-template-columns:1fr;}
+      .ownership-profile-strip{grid-template-columns:1fr 1fr;}
+      .ownership-upgrade-coach{grid-template-columns:40px minmax(0,1fr);}
+      .ownership-upgrade-actions{grid-column:1/-1;justify-content:flex-start;}
+      .funding-hero{grid-template-columns:1fr;text-align:left;}
+      .funding-grade{width:88px;height:88px;}
+      .funding-hero-actions{grid-column:auto;grid-template-columns:1fr;}
+      .funding-document-row{grid-template-columns:32px minmax(0,1fr);}
+      .funding-document-row .funding-doc-meta{grid-column:2;display:block!important;}
+      .funding-row-actions{grid-column:2;justify-content:flex-start;}
+      .funding-control-bar{align-items:stretch;}
+      .funding-lender-field{min-width:0;width:100%;}
+    }
+    @media(max-width:470px){.ownership-profile-strip{grid-template-columns:1fr;}.ownership-preview-hero{padding:22px 18px;}.ownership-preview-body{padding:14px;}}
+  </style>
+
+
+  <style id="engenix-fi-v5-button-contrast-fix">
+    html[data-theme="light"] body[data-workspace="finance"] .button.fi-button.primary {
+      color:#fff !important;
+      background:linear-gradient(135deg,#0f9588,#08736d) !important;
+      border-color:rgba(12,143,131,.38) !important;
+      box-shadow:0 12px 28px rgba(12,143,131,.18) !important;
+    }
+    html[data-theme="light"] body[data-workspace="finance"] .button.fi-button.gold {
+      color:#fff8e8 !important;
+      background:linear-gradient(135deg,#bd8b35,#93631d) !important;
+      border-color:rgba(189,139,53,.38) !important;
+      box-shadow:0 12px 26px rgba(151,104,32,.16) !important;
+    }
+    html[data-theme="light"] body[data-workspace="finance"] .button.fi-button.primary:disabled,
+    html[data-theme="light"] body[data-workspace="finance"] .button.fi-button.gold:disabled {
+      color:#55706d !important;
+      background:#edf3f2 !important;
+      border-color:rgba(28,57,78,.13) !important;
+      box-shadow:none !important;
+      opacity:.72;
+    }
+  </style>
 </head>
 <body class="auth-locked operator-friendly" data-workspace="compliance">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
@@ -2859,6 +3040,7 @@
         <div class="nav-list">
           <button class="nav-item finance-nav-item" data-finance-view="fi-fit"><span class="nav-icon"><i class="fa-solid fa-shield-heart"></i></span><span class="nav-text">Product Fit</span><span class="nav-count" id="fiFitCountNav">6</span></button>
           <button class="nav-item finance-nav-item" data-finance-view="fi-menu"><span class="nav-icon"><i class="fa-solid fa-tags"></i></span><span class="nav-text">Menu Studio</span><span class="nav-count">LIVE</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-brief"><span class="nav-icon"><i class="fa-solid fa-sparkles"></i></span><span class="nav-text">AI Ownership Brief</span><span class="nav-count">NEW</span></button>
           <button class="nav-item finance-nav-item" data-finance-view="fi-cancel"><span class="nav-icon"><i class="fa-solid fa-coins"></i></span><span class="nav-text">Cancellation &amp; Carryover</span><span class="nav-count" id="fiCancelCountNav">3</span></button>
         </div>
       </nav>
@@ -2869,6 +3051,15 @@
           <button class="nav-item finance-nav-item" data-finance-view="fi-presentation"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Customer Presentation</span></button>
           <button class="nav-item finance-nav-item" data-finance-view="fi-exceptions"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Exceptions &amp; Overrides</span><span class="nav-count" id="fiExceptionCountNav">2</span></button>
           <button class="nav-item finance-nav-item" data-finance-view="fi-handoff"><span class="nav-icon"><i class="fa-solid fa-file-circle-check"></i></span><span class="nav-text">F&amp;I Handoff</span></button>
+        </div>
+      </nav>
+
+      <nav class="nav-group finance-shell" aria-label="F&I funding navigation">
+        <div class="nav-label">Fund</div>
+        <div class="nav-list">
+          <button class="nav-item finance-nav-item" data-finance-view="fi-funding"><span class="nav-icon"><i class="fa-solid fa-user-shield"></i></span><span class="nav-text">Funding Assurance</span><span class="nav-count" id="fiFundingNavCount">4</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-packet"><span class="nav-icon"><i class="fa-solid fa-file-contract"></i></span><span class="nav-text">Lender Packet Review</span><span class="nav-count" id="fiPacketNavCount">15</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-stips"><span class="nav-icon"><i class="fa-solid fa-clipboard-list"></i></span><span class="nav-text">Stipulation Tracker</span><span class="nav-count" id="fiStipNavCount">3</span></button>
         </div>
       </nav>
 
@@ -3544,11 +3735,12 @@
           <div class="fi-shell">
             <header class="fi-hero"><div class="fi-hero-grid"><div><div class="fi-kicker">F&amp;I Intelligence · Synthetic ownership-decision environment</div><h1>Build the right ownership decision without losing the deal behind it.</h1><p>Recognize prior coverage, reconcile cancellation value, recommend products from objective vehicle and customer-declared needs, preserve individual choice, and hand a clean record into Compliance.</p></div><div class="fi-hero-actions"><button class="button fi-button primary" onclick="showFinanceView('fi-prior')"><i class="fa-solid fa-repeat"></i>Recognize Prior Deal</button><button class="button fi-button" onclick="showFinanceView('fi-menu')"><i class="fa-solid fa-tags"></i>Open Menu Studio</button><button class="button fi-button gold" onclick="downloadFinanceMenuBrief()"><i class="fa-solid fa-download"></i>Download Menu Brief</button></div></div></header>
             <div class="fi-metrics" id="fiCommandMetrics"></div>
-            <div class="fi-action-strip">
+            <div class="fi-action-strip v5">
               <button class="fi-action-card attention" onclick="showFinanceView('fi-prior')"><small>Prior relationship</small><strong id="fiActionPriorTitle">Recognition available</strong><span id="fiActionPriorCopy">One synthetic prior vehicle and four product contracts may affect this menu.</span></button>
               <button class="fi-action-card" onclick="showFinanceView('fi-cancel')"><small>Cancellation value</small><strong id="fiActionCancelTitle">Verification pending</strong><span id="fiActionCancelCopy">Estimated value is visible but not yet treated as available funds.</span></button>
               <button class="fi-action-card ready" onclick="showFinanceView('fi-menu')"><small>Menu economics</small><strong id="fiActionMenuTitle">Ownership pathway modeled</strong><span id="fiActionMenuCopy">Payment, product gross, and lender headroom update together.</span></button>
               <button class="fi-action-card" onclick="showFinanceView('fi-handoff')"><small>Next handoff</small><strong id="fiActionHandoffTitle">Customer presentation required</strong><span id="fiActionHandoffCopy">Complete individual selections and optional-product acknowledgment.</span></button>
+              <button class="fi-action-card attention" id="fiFundingActionCard" onclick="showFinanceView('fi-funding')"><small>Funding assurance</small><strong id="fiActionFundingTitle">Packet review open</strong><span id="fiActionFundingCopy">Select the lender and verify required signatures, documents, and stipulations.</span></button>
             </div>
             <div class="fi-grid-2">
               <article class="card fi-card"><div class="card-header"><div><div class="card-title">Active Ownership Decision</div><div class="card-subtitle">The desk-approved structure and F&amp;I economics in one record</div></div><button class="button small fi-button" onclick="showFinanceView('fi-menu')">Open builder</button></div><div class="card-body" id="fiActiveDecision"></div></article>
@@ -3591,13 +3783,20 @@
         </section>
 
         <section class="view finance-view" id="view-fi-menu">
-          <div class="fi-section-head"><div><div class="fi-eyebrow">Customer-controlled ownership choices</div><h2>Menu Studio</h2><p>Build transparent options while payment, gross, advance, prior coverage, and duplication controls remain visible.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="button fi-button" onclick="saveFinanceMenuSnapshot()"><i class="fa-solid fa-floppy-disk"></i>Save Menu Snapshot</button><button class="button fi-button primary" onclick="showFinanceView('fi-presentation')"><i class="fa-solid fa-handshake"></i>Begin Presentation</button></div></div>
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Customer-controlled ownership choices</div><h2>Menu Studio</h2><p>Build transparent options while payment, gross, advance, prior coverage, and duplication controls remain visible.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="button fi-button" onclick="saveFinanceMenuSnapshot()"><i class="fa-solid fa-floppy-disk"></i>Save Menu Snapshot</button><button class="button fi-button gold" onclick="showFinanceView('fi-brief')"><i class="fa-solid fa-sparkles"></i>Build Ownership Brief</button><button class="button fi-button primary" onclick="showFinanceView('fi-presentation')"><i class="fa-solid fa-handshake"></i>Begin Presentation</button></div></div>
           <div class="fi-menu-packages" id="fiPackageGrid"></div>
           <div class="fi-grid-2" style="margin-top:12px">
             <article class="card fi-card"><div class="card-header"><div><div class="card-title">Individual Product Builder</div><div class="card-subtitle">Every product remains individually priced and individually selectable</div></div><span class="badge finance-badge" id="fiMenuStatusBadge">DRAFT</span></div><div class="card-body"><div class="fi-product-builder" id="fiProductBuilder"></div></div></article>
             <aside class="card fi-card"><div class="card-header"><div><div class="card-title">Live Menu Economics</div><div class="card-subtitle">Payment, product gross, and lender headroom</div></div></div><div class="card-body" id="fiMenuEconomics"></div></aside>
           </div>
           <article class="card fi-card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">Recommendation &amp; Duplication Guard</div><div class="card-subtitle">The menu remains explainable before it reaches the customer</div></div></div><div class="card-body" id="fiMenuGuardrails"></div></article>
+        </section>
+
+
+        <section class="view finance-view" id="view-fi-brief">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">AI-generated customer ownership infographic</div><h2>AI Ownership Brief</h2><p>A premium, tailored presentation that explains the ownership decision, preserves individual prices, and supports a transparent upgrade conversation.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="button fi-button" onclick="downloadFinanceMenuBrief()"><i class="fa-solid fa-download"></i>Download Brief</button><button class="button fi-button gold" onclick="printFinanceOwnershipBrief()"><i class="fa-solid fa-print"></i>Print / Save PDF</button></div></div>
+          <div class="fi-disclaimer"><strong>Customer-choice boundary:</strong> This tool explains optional products and value differences. It does not hide pricing, imply that a product is required for financing, or finalize a selection without an affirmative customer choice.</div>
+          <div id="fiOwnershipBriefPreview" style="margin-top:12px"></div>
         </section>
 
         <section class="view finance-view" id="view-fi-presentation">
@@ -3619,6 +3818,24 @@
             <article class="card fi-card"><div class="card-header"><div><div class="card-title">Handoff Readiness</div><div class="card-subtitle">Required operating evidence before submission</div></div><span class="badge" id="fiHandoffStatus">INCOMPLETE</span></div><div class="card-body"><div class="fi-checklist" id="fiHandoffChecklist"></div></div></article>
             <aside class="card fi-card"><div class="card-header"><div><div class="card-title">Final F&amp;I Summary</div><div class="card-subtitle">What Compliance receives with the deal</div></div></div><div class="card-body" id="fiHandoffSummary"></div></aside>
           </div>
+        </section>
+
+
+        <section class="view finance-view" id="view-fi-funding">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Lender-aware packet protection</div><h2>Funding Assurance</h2><p>Verify every required signature, document, stipulation, product election, and structure match before the deal is released for funding.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="button fi-button" onclick="simulateFundingCorrections()"><i class="fa-solid fa-wand-magic-sparkles"></i>Simulate Corrected Packet</button><button class="button fi-button primary" onclick="runFundingAssurance()"><i class="fa-solid fa-user-shield"></i>Run Funding Assurance</button></div></div>
+          <div class="funding-control-bar"><div class="funding-lender-field"><label for="fiFundingLender">Selected lender / program</label><select id="fiFundingLender" aria-label="Selected synthetic lender program"><option value="northstar">Northstar Prime Auto · Retail 72</option><option value="summit">Summit Financial Services · Near Prime</option><option value="harbor">Harbor Auto Credit · Structured Approval</option></select></div><label class="button fi-button" for="fiFundingPacketFile"><i class="fa-solid fa-file-circle-plus"></i>Attach Funding Packet<input id="fiFundingPacketFile" type="file" accept=".pdf,.zip,.jpg,.jpeg,.png" hidden></label><span class="badge finance-badge" id="fiFundingPacketFileStatus">Synthetic packet loaded</span></div>
+          <div id="fiFundingAssuranceHost" style="margin-top:12px"></div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-packet">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Document-by-document verification</div><h2>Lender Packet Review</h2><p>Open items are organized by funding consequence, required signer, packet source, and the exact correction needed.</p></div><button class="button fi-button primary" onclick="runFundingAssurance()"><i class="fa-solid fa-arrows-rotate"></i>Re-run Verification</button></div>
+          <div class="fi-grid-2"><article class="card fi-card"><div class="card-header"><div><div class="card-title">Required Funding Documents</div><div class="card-subtitle" id="fiPacketSubtitle">Selected lender requirements</div></div><span class="badge" id="fiPacketStatusBadge">NOT SCANNED</span></div><div class="card-body"><div class="funding-document-list" id="fiFundingDocumentList"></div></div></article><aside class="card fi-card"><div class="card-header"><div><div class="card-title">Packet Integrity Readout</div><div class="card-subtitle">What prevents or permits funding release</div></div></div><div class="card-body" id="fiFundingIntegrityReadout"></div></aside></div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-stips">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Condition ownership and deadline control</div><h2>Stipulation Tracker</h2><p>Keep lender conditions, customer-supplied evidence, interviews, and callbacks visible until the funding packet is complete.</p></div><button class="button fi-button" onclick="satisfyAllFundingStips()"><i class="fa-solid fa-check"></i>Satisfy Demo Stips</button></div>
+          <div class="stip-grid" id="fiFundingStipGrid"></div>
+          <div class="funding-release-panel" style="margin-top:12px" id="fiFundingReleasePanel"></div>
         </section>
 
         <section class="view finance-view" id="view-fi-knowledge">
@@ -6439,6 +6656,163 @@
       renderAllFinance();
     }
     initializeFinanceWorkspace();
+  </script>
+
+
+  <script id="engenix-fi-full-send-v5-script">
+    /* F&I V5 extension: keeps V4 intact and layers richer customer presentation + funding controls. */
+    const fiFundingLenders={
+      northstar:{name:'Northstar Prime Auto',program:'Retail 72',code:'NPA-72',sla:'Same-day review',maxAdvance:'125% modeled',stips:[
+        {id:'insurance',name:'Proof of full-coverage insurance',owner:'Customer / F&I',due:'Before delivery',copy:'Binder must identify the vehicle and Northstar lienholder.'},
+        {id:'residence',name:'Proof of residence',owner:'Customer',due:'Before funding',copy:'Current utility, lease, or approved alternative dated inside the configured window.'},
+        {id:'callback',name:'Customer funding interview',owner:'Northstar callback desk',due:'Same day',copy:'Customer confirms vehicle, payment, optional products, and delivery status.'}
+      ]},
+      summit:{name:'Summit Financial Services',program:'Near Prime',code:'SFS-NP',sla:'One business day',maxAdvance:'118% modeled',stips:[
+        {id:'income',name:'Proof of income',owner:'Customer / F&I',due:'Before funding',copy:'Most recent approved pay evidence must support the submitted income.'},
+        {id:'residence',name:'Proof of residence',owner:'Customer',due:'Before delivery',copy:'Address must match the submitted application or documented exception.'},
+        {id:'references',name:'Two verified references',owner:'F&I',due:'Before funding',copy:'Reference names and telephone numbers must be complete and legible.'},
+        {id:'callback',name:'Customer funding interview',owner:'Summit funding',due:'Same day',copy:'Customer confirms structure and optional products.'}
+      ]},
+      harbor:{name:'Harbor Auto Credit',program:'Structured Approval',code:'HAC-SA',sla:'One to two business days',maxAdvance:'112% modeled',stips:[
+        {id:'income',name:'Proof of income',owner:'Customer / F&I',due:'Before delivery',copy:'Income documents must match the approved structure.'},
+        {id:'residence',name:'Proof of residence',owner:'Customer',due:'Before delivery',copy:'Residence evidence must satisfy the lender checklist.'},
+        {id:'insurance',name:'Proof of full-coverage insurance',owner:'Customer / F&I',due:'Before delivery',copy:'Binder requires correct VIN, deductible, and lienholder.'},
+        {id:'downpayment',name:'Verified down payment evidence',owner:'Cashier / F&I',due:'Before funding',copy:'Receipt and source documentation must match the approval.'},
+        {id:'callback',name:'Welcome call completed',owner:'Harbor funding',due:'Before funding',copy:'Customer verifies contract terms and delivery.'}
+      ]}
+    };
+    const fiFundingDocuments=[
+      {id:'approval',name:'Lender Approval & Callback',category:'Lender',source:'Dealertrack-style approval record',signer:'Manager review',required:'all',initial:'verified',detail:'Rate, term, advance, and approved structure are present.'},
+      {id:'creditapp',name:'Credit Application',category:'Credit',source:'Signed application',signer:'Buyer',required:'all',initial:'verified',detail:'Applicant information and authorization are complete.'},
+      {id:'risc',name:'Retail Installment Contract',category:'Contract',source:'Final contract',signer:'Buyer + Dealer',required:'all',initial:'blocked',detail:'Dealer acceptance signature is missing in the synthetic packet.'},
+      {id:'buyersorder',name:"Buyer's Order",category:'Deal',source:'Final buyer order',signer:'Buyer + Dealer',required:'all',initial:'verified',detail:'Selling price, trade, down payment, and products reconcile.'},
+      {id:'menu',name:'Optional Product Menu & Choice Record',category:'F&I',source:'ENGENIX menu snapshot',signer:'Buyer',required:'all',initial:'dynamic',detail:'Requires saved menu, individual decisions, and optional-product acknowledgment.'},
+      {id:'odometer',name:'Odometer Disclosure',category:'Title',source:'State disclosure',signer:'Buyer + Dealer',required:'all',initial:'verified',detail:'Mileage and signatures are present.'},
+      {id:'titleapp',name:'Title Application / Reassignment',category:'Title',source:'State title packet',signer:'Buyer + Dealer',required:'all',initial:'review',detail:'One reassignment field requires visual confirmation.'},
+      {id:'privacy',name:'Privacy Notice Acknowledgment',category:'Compliance',source:'Dealer privacy packet',signer:'Buyer',required:'all',initial:'verified',detail:'Acknowledgment is present.'},
+      {id:'insurance',name:'Proof of Insurance',category:'Stipulation',source:'Insurance binder',signer:'Carrier',required:['northstar','harbor'],initial:'blocked',detail:'Binder is not attached to the synthetic funding packet.'},
+      {id:'income',name:'Proof of Income',category:'Stipulation',source:'Customer documents',signer:'Employer / source',required:['summit','harbor'],initial:'review',detail:'Document is present but the gross-income figure requires comparison.'},
+      {id:'residence',name:'Proof of Residence',category:'Stipulation',source:'Customer documents',signer:'Issuer',required:['northstar','summit','harbor'],initial:'review',detail:'Address match requires reviewer confirmation.'},
+      {id:'vsc',name:'Service Contract Election',category:'Product',source:'Administrator contract',signer:'Buyer + F&I',required:'selected:vsc',initial:'dynamicProduct',detail:'Required when the service contract is selected.'},
+      {id:'gap',name:'GAP Election & Eligibility',category:'Product',source:'GAP waiver/addendum',signer:'Buyer + F&I',required:'selected:gap',initial:'dynamicProduct',detail:'Required when GAP is selected and must reconcile to the contract.'},
+      {id:'productcontracts',name:'All Selected Product Contracts',category:'Product',source:'Administrator forms',signer:'Buyer + F&I',required:'selected:any',initial:'dynamicProduct',detail:'Every customer-selected product requires its matching contract or enrollment.'},
+      {id:'delivery',name:'Delivery / Customer Acceptance Record',category:'Delivery',source:'Delivery confirmation',signer:'Buyer',required:'all',initial:'review',detail:'Customer acceptance signature is pending final delivery confirmation.'}
+    ];
+
+    function ensureFinanceV5State(){
+      const defaults={selectedLender:'northstar',fundingScanAt:null,fundingReleasedAt:null,fundingPacketFile:null,fundingResolved:{},fundingStips:{},upgradeOutcome:null,upgradePackage:null};
+      Object.keys(defaults).forEach(k=>{if(financeState[k]===undefined)financeState[k]=JSON.parse(JSON.stringify(defaults[k]));});
+      fiSave();
+    }
+    ensureFinanceV5State();
+    financePageMeta['fi-brief']=['AI Ownership Brief','A tailored customer infographic with transparent package comparison and value upgrade coaching'];
+    financePageMeta['fi-funding']=['Funding Assurance','Lender-aware signatures, documents, stipulations, and release control'];
+    financePageMeta['fi-packet']=['Lender Packet Review','Document-level verification organized by funding consequence'];
+    financePageMeta['fi-stips']=['Stipulation Tracker','Owners, evidence, deadlines, and lender conditions before funding'];
+
+    function fiPackageStats(id){
+      const pkg=financePackages[id]||financePackages.custom;
+      const products=id==='custom'?fiSelectedProducts():financeProducts.filter(p=>pkg.products.includes(p.id));
+      const total=products.reduce((s,p)=>s+Number(financeState.prices[p.id]||p.price),0);
+      const cost=products.reduce((s,p)=>s+p.cost,0);
+      const payment=fiPayment(fiBasePrincipal()+total-financeState.appliedCancellation,financeState.apr,financeState.term);
+      return {pkg,products,total,cost,gross:total-cost,payment,delta:payment-fiBasePayment()};
+    }
+    function fiRecommendedPackage(){
+      const n=financeState.needs;
+      if(n.annualMiles>=18000&&n.ownershipMonths>=72&&n.repairConcern==='High')return 'complete';
+      if(n.ownershipMonths>=60||n.budgetShock==='High')return 'ownership';
+      return 'essential';
+    }
+    function fiNextUpgradePackage(){
+      const order=['essential','ownership','complete'];
+      const current=order.includes(financeState.selectedPackage)?financeState.selectedPackage:'ownership';
+      return order[Math.min(order.length-1,order.indexOf(current)+1)];
+    }
+    function fiOwnershipReasons(){
+      const n=financeState.needs;const reasons=[];
+      if(n.ownershipMonths>=72)reasons.push(`${n.ownershipMonths}-month ownership horizon`);
+      if(n.annualMiles>=15000)reasons.push(`${Number(n.annualMiles).toLocaleString()} expected miles each year`);
+      if(n.repairConcern==='High')reasons.push('repair-cost concern identified');
+      if(n.budgetShock==='High')reasons.push('preference for predictable ownership costs');
+      if(n.outdoor)reasons.push('vehicle regularly parked outdoors');
+      return reasons;
+    }
+    function useRecommendedOwnershipPlan(){const id=fiRecommendedPackage();selectFinancePackage(id);financeState.upgradeOutcome='recommended';financeState.upgradePackage=id;fiEvent('AI ownership plan applied',`${financePackages[id].name} was loaded from the visible vehicle and customer-needs context.`,'fa-sparkles');showFinanceView('fi-brief');}
+    function acceptFinanceUpgrade(){const id=fiNextUpgradePackage();if(id===financeState.selectedPackage){showToast('Top pathway already selected','The current menu is already the most comprehensive configured pathway.','success');return;}selectFinancePackage(id);financeState.upgradeOutcome='accepted';financeState.upgradePackage=id;fiEvent('Customer chose value upgrade',`${financePackages[id].name} was selected after the individual price and payment difference were presented.`,'fa-arrow-up-right');renderAllFinance();showFinanceView('fi-brief');showToast('Upgrade recorded','The upgraded pathway remains individually priced and customer-controlled.','success');}
+    function keepCurrentFinancePlan(){financeState.upgradeOutcome='kept-current';financeState.upgradePackage=financeState.selectedPackage;fiEvent('Customer kept current ownership plan',`${financePackages[financeState.selectedPackage].name} remained selected after the upgrade comparison.`,'fa-handshake');renderAllFinance();showToast('Current plan preserved','The customer choice was added to the decision trail.','success');}
+
+    function renderFinanceOwnershipBrief(){
+      const host=document.getElementById('fiOwnershipBriefPreview');if(!host)return;
+      const recommended=fiRecommendedPackage();const current=financeState.selectedPackage==='custom'?'ownership':financeState.selectedPackage;
+      const packageIds=['essential','ownership','complete'];const reasons=fiOwnershipReasons();const next=fiNextUpgradePackage();const currentStats=fiPackageStats(current);const nextStats=fiPackageStats(next);const added=nextStats.products.filter(p=>!currentStats.products.some(x=>x.id===p.id));
+      host.innerHTML=`<article class="ownership-preview"><header class="ownership-preview-hero"><div class="ownership-brandline"><div class="ownership-brand">ENGENIX · OWNERSHIP INTELLIGENCE</div><div class="ownership-doc-id">${financeState.activeDealId} · MENU V${financeState.menuSavedAt?'2':'1'}</div></div><h2>${financeState.customer.split(' ')[0]}, meet your ownership plan.</h2><p>A clear view of the protection choices built around your ${financeState.vehicle}, expected ownership period, annual mileage, existing coverage, and monthly budget.</p><div class="ownership-profile-strip"><div class="ownership-profile-item"><small>Vehicle</small><strong>${financeState.vehicle}</strong></div><div class="ownership-profile-item"><small>Ownership horizon</small><strong>${financeState.needs.ownershipMonths} months</strong></div><div class="ownership-profile-item"><small>Annual driving</small><strong>${Number(financeState.needs.annualMiles).toLocaleString()} miles</strong></div><div class="ownership-profile-item"><small>Base payment</small><strong>${money(fiBasePayment())} / month</strong></div></div></header><div class="ownership-preview-body"><div class="ownership-insight-row"><div class="ownership-insight primary"><small>AI recommendation</small><strong>${financePackages[recommended].name}</strong><span>Built from the visible ownership conversation and product eligibility.</span></div><div class="ownership-insight"><small>Factory coverage</small><strong>36 mo / 36k</strong><span>Modeled comprehensive coverage window.</span></div><div class="ownership-insight"><small>Prior value found</small><strong>${money(financeState.cancellationVerified?fiVerifiedTotal():fiEstimateTotal())}</strong><span>${financeState.cancellationVerified?'Verified demo value':'Estimate pending verification'}</span></div><div class="ownership-insight"><small>Current pathway</small><strong>${financePackages[financeState.selectedPackage].name}</strong><span>${fiSelectedProducts().length} individually priced products.</span></div></div><div class="ownership-path-grid">${packageIds.map(id=>{const s=fiPackageStats(id);const benefit=s.products.slice(0,4).map(p=>`<div class="ownership-benefit"><i class="fa-solid fa-check"></i><span>${p.short} · ${p.term}</span></div>`).join('');return `<article class="ownership-path ${id===recommended?'recommended':''} ${id===financeState.selectedPackage?'current':''}"><span class="ownership-path-badge">${id===recommended?'Best fit':id===financeState.selectedPackage?'Current plan':'Ownership option'}</span><h3>${s.pkg.name}</h3><div class="ownership-payment">${money(s.payment)} <small>/ month</small></div><div class="ownership-delta">${money(s.delta)} from base payment</div><p class="ownership-path-copy">${s.pkg.copy}</p><div class="ownership-benefit-list">${benefit||'<div class="ownership-benefit"><i class="fa-solid fa-check"></i><span>Manager-selected custom products</span></div>'}</div><button class="button ${id===recommended?'fi-button primary':'fi-button'}" type="button" onclick="selectFinancePackage('${id}');showFinanceView('fi-brief')">${id===financeState.selectedPackage?'Selected':'Choose this plan'}</button></article>`}).join('')}</div><div class="ownership-why-grid"><div class="ownership-why"><h3>Why this recommendation fits</h3><p>The recommendation is based only on visible vehicle facts, eligible product rules, prior coverage, and answers confirmed during the customer conversation.</p><div class="ownership-reason-chips">${reasons.map(r=>`<span class="badge finance-badge">${r}</span>`).join('')}</div></div><div class="ownership-why"><h3>What remains customer-controlled</h3><p>Every product is optional, individually priced, individually selectable, and removable. Choosing or declining a product does not change the lender decision in this demonstration.</p><div class="ownership-reason-chips"><span class="badge green">Individual prices visible</span><span class="badge green">Selections preserved</span><span class="badge green">No hidden bundle</span></div></div></div><div class="ownership-upgrade-coach"><div class="ownership-upgrade-icon"><i class="fa-solid fa-arrow-up-right"></i></div><div><h3>Value Upgrade Coach · ${financePackages[current].name} → ${financePackages[next].name}</h3><p>${next===current?'This plan already includes every configured ownership option.':`For ${money(nextStats.payment-currentStats.payment)} more per month, the customer adds ${added.map(p=>p.short).join(', ')||'the next protection level'}. The full retail difference is ${money(nextStats.total-currentStats.total)} and remains visible before any selection.`}</p></div><div class="ownership-upgrade-actions">${next===current?'<span class="badge finance-badge">Top pathway selected</span>':`<button class="button fi-button gold" onclick="acceptFinanceUpgrade()"><i class="fa-solid fa-arrow-up-right"></i>Choose Upgrade</button><button class="button fi-button" onclick="keepCurrentFinancePlan()">Keep Current</button>`}<button class="button fi-button" onclick="useRecommendedOwnershipPlan()"><i class="fa-solid fa-sparkles"></i>Use AI Best Fit</button></div></div></div></article>`;
+    }
+
+    function buildFinanceOwnershipBriefDocument(autoPrint=false){
+      const packageIds=['essential','ownership','complete'];const recommended=fiRecommendedPackage();const reasons=fiOwnershipReasons();const selected=fiSelectedProducts();const prior=financePriorProducts.filter(p=>p.status!=='Expired');
+      const productCards=selected.map(p=>{const f=fiFit(p);return `<article class="product"><div class="product-num">${String(selected.indexOf(p)+1).padStart(2,'0')}</div><div><span>${p.category}</span><h3>${p.name}</h3><p>${f.reasons.join(' · ')}. Coverage: ${p.term}.</p></div><div class="product-price"><strong>${money(financeState.prices[p.id])}</strong><small>${money(fiPayment(Number(financeState.prices[p.id]),financeState.apr,financeState.term))}/mo</small></div></article>`}).join('');
+      return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ENGENIX Ownership Brief · ${financeState.customer}</title><style>
+        @page{size:Letter portrait;margin:.34in}*{box-sizing:border-box}body{margin:0;background:#eaf1f0;color:#153837;font-family:Inter,Arial,sans-serif}.page{width:7.82in;min-height:10.32in;margin:.22in auto;background:#fff;position:relative;overflow:hidden;page-break-after:always;box-shadow:0 16px 50px rgba(20,50,48,.12)}.page:last-child{page-break-after:auto}.hero{min-height:4.45in;padding:.48in;color:#fff;background:radial-gradient(circle at 88% 10%,rgba(255,255,255,.22),transparent 29%),linear-gradient(125deg,#063d3a,#08756d 55%,#b4812f 145%);position:relative;overflow:hidden}.hero:after{content:'BRONCO SPORT';position:absolute;right:-.15in;bottom:-.22in;font-size:1.05in;font-weight:900;letter-spacing:-.08em;color:rgba(255,255,255,.08)}.brand{font-size:9pt;font-weight:900;letter-spacing:.18em}.doc{float:right;border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:6px 9px;font-size:7pt}.hero h1{margin:.55in 0 .12in;font-size:42pt;line-height:.94;letter-spacing:-.055em;max-width:6.4in}.hero p{margin:0;max-width:5.7in;color:rgba(255,255,255,.76);font-size:10pt;line-height:1.6}.profile{position:absolute;left:.48in;right:.48in;bottom:.35in;display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.profile div{padding:10px;border:1px solid rgba(255,255,255,.2);border-radius:9px;background:rgba(3,34,32,.28)}small,label{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:6.5pt;color:#718685}.profile small{color:rgba(255,255,255,.58)}.profile strong{display:block;margin-top:4px;font-size:8pt}.intro{padding:.36in .48in}.intro h2,.section h2{margin:0;font-size:19pt;letter-spacing:-.035em}.intro p,.section-copy{margin:.08in 0 0;color:#617675;font-size:8.5pt;line-height:1.55}.reasons{margin-top:.18in;display:flex;gap:6px;flex-wrap:wrap}.chip{padding:5px 7px;border-radius:99px;background:#e8f5f3;color:#08766e;font-size:6.5pt;font-weight:800}.paths{padding:0 .48in .42in;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.path{min-height:3.22in;padding:.18in;border:1px solid #d5e0df;border-radius:13px;position:relative}.path.best{border:2px solid #0c8f83;background:#f1faf8}.path .label{display:inline-block;padding:5px 7px;border-radius:99px;background:#edf2f2;color:#617675;font-size:6pt;font-weight:900;letter-spacing:.07em;text-transform:uppercase}.path.best .label{background:#dff3ef;color:#08766e}.path h3{margin:.16in 0 0;font-size:13pt}.pay{margin:.22in 0 0;font-size:25pt;font-weight:900;letter-spacing:-.05em}.pay span{font-size:7pt;color:#748785;font-weight:700}.delta{margin-top:4px;color:#08766e;font-size:7pt;font-weight:800}.path p{font-size:7.5pt;color:#617675;line-height:1.45}.path ul{padding-left:.16in;margin:.14in 0 0}.path li{margin-bottom:5px;font-size:7pt;line-height:1.35}.section{padding:.4in .48in}.section-head{padding-bottom:.12in;border-bottom:3px solid #0c8f83}.summary-grid{margin:.18in 0;display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.summary{padding:10px;border:1px solid #d5e0df;border-radius:9px}.summary strong{display:block;margin-top:4px;font-size:14pt}.product{display:grid;grid-template-columns:.35in 1fr 1.15in;gap:.12in;align-items:center;padding:.14in 0;border-bottom:1px solid #e1e8e7}.product-num{width:.3in;height:.3in;border-radius:8px;background:#e2f4f1;color:#08766e;display:grid;place-items:center;font-size:7pt;font-weight:900}.product span{font-size:6pt;color:#7a8d8b;text-transform:uppercase;letter-spacing:.08em}.product h3{margin:3px 0 0;font-size:10pt}.product p{margin:4px 0 0;color:#617675;font-size:7pt;line-height:1.4}.product-price{text-align:right}.product-price strong{display:block;font-size:11pt}.product-price small{margin-top:3px}.prior-row{display:grid;grid-template-columns:1.45fr .8fr .8fr .85fr;gap:7px;padding:9px 0;border-bottom:1px solid #e1e8e7;font-size:7.5pt}.choice{margin-top:.2in;padding:.2in;border:1px solid #cbd9d7;border-radius:11px}.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.12in}.line{margin-top:.28in;padding-top:.08in;border-top:1px solid #70817f;font-size:6.5pt;color:#687c7a}.footer{position:absolute;left:.48in;right:.48in;bottom:.28in;border-top:1px solid #d5e0df;padding-top:.08in;display:flex;justify-content:space-between;color:#7b8e8c;font-size:6pt}.optional{padding:.14in;border-radius:9px;background:#fff7e8;color:#71571e;font-size:7pt;line-height:1.5}@media print{body{background:#fff}.page{margin:0;box-shadow:none}}
+      </style></head><body><section class="page"><div class="hero"><div class="brand">ENGENIX · OWNERSHIP INTELLIGENCE <span class="doc">${financeState.activeDealId} · CUSTOMER BRIEF</span></div><h1>${financeState.customer.split(' ')[0]}, your ownership plan is ready.</h1><p>Built around your vehicle, how long you expect to own it, how much you drive, the coverage you already have, and the ownership costs you said matter most.</p><div class="profile"><div><small>Vehicle</small><strong>${financeState.vehicle}</strong></div><div><small>Ownership</small><strong>${financeState.needs.ownershipMonths} months</strong></div><div><small>Annual miles</small><strong>${Number(financeState.needs.annualMiles).toLocaleString()}</strong></div><div><small>Base payment</small><strong>${money(fiBasePayment())}/mo</strong></div></div></div><div class="intro"><h2>Three clear ways to own it.</h2><p>Every product is optional, individually priced, and removable. The highlighted path reflects the information confirmed during your ownership conversation.</p><div class="reasons">${reasons.map(r=>`<span class="chip">${r}</span>`).join('')}</div></div><div class="paths">${packageIds.map(id=>{const s=fiPackageStats(id);return `<article class="path ${id===recommended?'best':''}"><span class="label">${id===recommended?'Recommended fit':'Ownership option'}</span><h3>${s.pkg.name}</h3><div class="pay">${money(s.payment)} <span>/ month</span></div><div class="delta">${money(s.delta)} from base</div><p>${s.pkg.copy}</p><ul>${s.products.map(p=>`<li>${p.short} · ${p.term}</li>`).join('')}</ul></article>`}).join('')}</div><div class="footer"><span>ENGENIX F&I Intelligence · Synthetic customer demonstration</span><span>Page 1 of 3</span></div></section><section class="page"><div class="section"><div class="section-head"><label>YOUR SELECTED OWNERSHIP PATH</label><h2>${financePackages[financeState.selectedPackage].name}</h2><p class="section-copy">Each product below remains individually selectable. Pricing and monthly impact are shown separately.</p></div><div class="summary-grid"><div class="summary"><small>Base payment</small><strong>${money(fiBasePayment())}</strong></div><div class="summary"><small>Plan payment</small><strong>${money(fiMenuPayment())}</strong></div><div class="summary"><small>Monthly difference</small><strong>${money(fiMenuPayment()-fiBasePayment())}</strong></div><div class="summary"><small>Products shown</small><strong>${selected.length}</strong></div></div>${productCards}<div class="optional" style="margin-top:.2in"><strong>Important:</strong> Optional products are not required to obtain financing in this demonstration. Coverage, exclusions, cancellation terms, and final contract language are controlled by the applicable product documents.</div></div><div class="footer"><span>${financeState.customer} · ${financeState.vehicle}</span><span>Page 2 of 3</span></div></section><section class="page"><div class="section"><div class="section-head"><label>PRIOR COVERAGE & CUSTOMER CHOICE</label><h2>Nothing hidden. Nothing duplicated without review.</h2><p class="section-copy">Existing coverage and potential cancellation value are reviewed before a new product decision is finalized.</p></div><div style="margin-top:.18in">${prior.map(p=>`<div class="prior-row"><strong>${p.name}</strong><span>${p.status}</span><span>${financeState.cancellationVerified?money(p.verified):money(p.estimate)}</span><span>${p.action}</span></div>`).join('')}</div><div class="choice"><h3 style="margin:0;font-size:12pt">Customer choice record</h3><div class="choice-grid" style="margin-top:.14in"><div><small>Selected products</small><strong>${selected.filter(p=>financeState.choices[p.id]==='selected').map(p=>p.short).join(' · ')||'To be completed during presentation'}</strong></div><div><small>Declined products</small><strong>${selected.filter(p=>financeState.choices[p.id]==='declined').map(p=>p.short).join(' · ')||'To be completed during presentation'}</strong></div><div><small>Final modeled payment</small><strong>${money(financeState.presentationStatus==='complete'?fiFinalPayment():fiMenuPayment())}</strong></div><div><small>Verified cancellation value</small><strong>${money(financeState.verifiedCancellation)}</strong></div></div><div class="line">Customer signature / date</div><div class="line">F&I manager signature / date</div></div><div class="optional" style="margin-top:.18in">This ownership brief summarizes the presentation. Final coverage, price, eligibility, exclusions, and cancellation provisions are governed by the signed product contracts. Estimated cancellation value is not available cash unless separately verified and approved for treatment.</div></div><div class="footer"><span>Menu version preserved by ENGENIX</span><span>Page 3 of 3</span></div></section>${autoPrint?'<script>window.onload=()=>setTimeout(()=>window.print(),350)<\/script>':''}</body></html>`;
+    }
+    function downloadFinanceMenuBrief(){const html=buildFinanceOwnershipBriefDocument(false);const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`ENGENIX_Ownership_Brief_${financeState.activeDealId}.html`;a.click();URL.revokeObjectURL(url);fiEvent('AI ownership brief downloaded','A three-page customer ownership infographic was generated with transparent package and product pricing.','fa-download');showToast('Ownership brief downloaded','Open the file to present, print, or save it as PDF.','success');}
+    function printFinanceOwnershipBrief(){const win=window.open('','_blank');if(!win){showToast('Print window blocked','Allow pop-ups for this local demo and try again.','warning');return;}win.document.open();win.document.write(buildFinanceOwnershipBriefDocument(true));win.document.close();fiEvent('AI ownership brief opened for print','The three-page customer infographic was opened in the print workflow.','fa-print');}
+
+    function fiCurrentLender(){return fiFundingLenders[financeState.selectedLender]||fiFundingLenders.northstar;}
+    function fiDocRequired(doc){if(doc.required==='all')return true;if(Array.isArray(doc.required))return doc.required.includes(financeState.selectedLender);if(doc.required==='selected:any')return fiSelectedProducts().length>0;if(String(doc.required).startsWith('selected:'))return financeState.selectedProducts.includes(String(doc.required).split(':')[1]);return false;}
+    function fiDocumentStatus(doc){
+      if(financeState.fundingResolved[doc.id])return 'verified';
+      if(doc.initial==='dynamic')return financeState.menuSavedAt&&financeState.presentationStatus==='complete'&&financeState.optionalAcknowledged?'verified':'blocked';
+      if(doc.initial==='dynamicProduct')return financeState.presentationStatus==='complete'?'verified':'review';
+      return doc.initial;
+    }
+    function fiRequiredDocuments(){return fiFundingDocuments.filter(fiDocRequired);}
+    function fiRequiredStips(){return fiCurrentLender().stips;}
+    function fiStipStatus(id){return financeState.fundingStips[id]||((id==='income'&&financeState.selectedLender==='summit')?'review':'blocked');}
+    function fiFundingSummary(){
+      const docs=fiRequiredDocuments();const statuses=docs.map(fiDocumentStatus);const stips=fiRequiredStips().map(s=>fiStipStatus(s.id));
+      const blocked=statuses.filter(s=>s==='blocked').length+stips.filter(s=>s==='blocked').length;
+      const review=statuses.filter(s=>s==='review').length+stips.filter(s=>s==='review').length;
+      const verified=statuses.filter(s=>s==='verified').length+stips.filter(s=>s==='verified').length;
+      const total=docs.length+stips.length;const score=Math.round(verified/Math.max(1,total)*100);
+      const label=financeState.fundingReleasedAt?'RELEASED FOR FUNDING':blocked?'DO NOT SEND':review?'REVIEW REQUIRED':'READY TO FUND';
+      const tone=financeState.fundingReleasedAt||(!blocked&&!review)?'ready':blocked?'blocked':'review';
+      return {docs,statuses,stips,blocked,review,verified,total,score,label,tone,ready:!blocked&&!review&&!!financeState.fundingScanAt};
+    }
+    function runFundingAssurance(){financeState.fundingScanAt=new Date().toLocaleString();financeState.fundingReleasedAt=null;fiEvent('Funding Assurance scan completed',`${fiCurrentLender().name} requirements were checked against signatures, documents, product elections, and stipulations.`,'fa-user-shield');renderAllFinance();showFinanceView('fi-funding');const s=fiFundingSummary();showToast(s.label,`${s.blocked} blocker${s.blocked===1?'':'s'} and ${s.review} review item${s.review===1?'':'s'} remain.` ,s.ready?'success':s.blocked?'error':'warning');}
+    function changeFundingLender(value){financeState.selectedLender=value;financeState.fundingScanAt=null;financeState.fundingReleasedAt=null;financeState.fundingResolved={};financeState.fundingStips={};fiEvent('Funding program changed',`${fiCurrentLender().name} · ${fiCurrentLender().program} is now the selected synthetic funding checklist.`,'fa-bank');fiSave();renderAllFinance();}
+    function resolveFundingDocument(id){financeState.fundingResolved[id]=true;financeState.fundingReleasedAt=null;const doc=fiFundingDocuments.find(d=>d.id===id);fiEvent('Funding document verified',`${doc?.name||id} was marked verified after the synthetic correction and reviewer confirmation.`,'fa-signature');renderAllFinance();showToast('Document verified',doc?.name||id,'success');}
+    function reopenFundingDocument(id){delete financeState.fundingResolved[id];financeState.fundingReleasedAt=null;fiEvent('Funding document reopened',`${fiFundingDocuments.find(d=>d.id===id)?.name||id} returned to its configured review state.`,'fa-file-contract');renderAllFinance();}
+    function satisfyFundingStip(id){financeState.fundingStips[id]='verified';financeState.fundingReleasedAt=null;const stip=fiRequiredStips().find(s=>s.id===id);fiEvent('Lender stipulation satisfied',`${stip?.name||id} was verified and attached to the synthetic funding record.`,'fa-clipboard-check');renderAllFinance();showToast('Stipulation satisfied',stip?.name||id,'success');}
+    function satisfyAllFundingStips(){fiRequiredStips().forEach(s=>financeState.fundingStips[s.id]='verified');financeState.fundingReleasedAt=null;fiEvent('All synthetic lender stipulations satisfied',`${fiRequiredStips().length} conditions were marked verified for ${fiCurrentLender().name}.`,'fa-clipboard-check');renderAllFinance();showToast('Demo stipulations satisfied','Funding Assurance will re-evaluate the packet.','success');}
+    function simulateFundingCorrections(){fiRequiredDocuments().forEach(d=>financeState.fundingResolved[d.id]=true);fiRequiredStips().forEach(s=>financeState.fundingStips[s.id]='verified');financeState.menuSavedAt=financeState.menuSavedAt||new Date().toLocaleString();financeState.optionalAcknowledged=true;financeState.presentationStatus='complete';financeState.fundingScanAt=new Date().toLocaleString();financeState.fundingReleasedAt=null;fiEvent('Corrected funding packet simulated','All required signatures, documents, product elections, and lender stipulations were corrected for the demonstration.','fa-wand-magic-sparkles');renderAllFinance();showToast('Corrected packet simulated','The deal is ready for a final Funding Assurance scan.','success');}
+    function releaseDealForFunding(){const s=fiFundingSummary();if(!s.ready){showToast('Funding release blocked','Resolve every blocker and review item, then run Funding Assurance again.','error');return;}financeState.fundingReleasedAt=new Date().toLocaleString();fiEvent('Deal released for funding',`${financeState.activeDealId} was cleared for ${fiCurrentLender().name} with a complete synthetic packet and customer-choice record.`,'fa-paper-plane');renderAllFinance();showToast('Released for funding','The store now has a preserved funding-clearance record.','success');}
+
+    function renderFundingAssurance(){
+      const host=document.getElementById('fiFundingAssuranceHost');if(!host)return;const s=fiFundingSummary();const lender=fiCurrentLender();
+      const color=s.tone==='ready'?'var(--fi-teal)':s.tone==='blocked'?'var(--red)':'var(--amber)';
+      host.innerHTML=`<div class="funding-hero"><div class="funding-grade" style="--grade:${s.score*3.6}deg;--grade-color:${color}"><div class="funding-grade-content"><strong>${s.score}</strong><span>readiness</span></div></div><div class="funding-hero-copy"><span class="funding-status-pill ${s.tone}">${s.label}</span><h2>${lender.name} · ${lender.program}</h2><p>${financeState.fundingScanAt?`Last assurance scan: ${financeState.fundingScanAt}.`:'No Funding Assurance scan has been recorded yet.'} ${s.blocked?`${s.blocked} item${s.blocked===1?'':'s'} prevent release.`:s.review?`${s.review} item${s.review===1?'':'s'} require human confirmation.`:'Required packet evidence is complete.'}</p></div><div class="funding-hero-actions"><button class="button fi-button" onclick="showFinanceView('fi-packet')"><i class="fa-solid fa-file-contract"></i>Review Packet</button><button class="button fi-button" onclick="showFinanceView('fi-stips')"><i class="fa-solid fa-clipboard-list"></i>Open Stips</button><button class="button fi-button primary" ${s.ready&&!financeState.fundingReleasedAt?'':'disabled'} onclick="releaseDealForFunding()"><i class="fa-solid fa-paper-plane"></i>${financeState.fundingReleasedAt?'Funding Released':'Release for Funding'}</button></div></div><div class="funding-metrics"><div class="funding-metric"><small>Required documents</small><strong>${s.docs.length}</strong><span>Lender and deal-specific packet items</span></div><div class="funding-metric"><small>Verified</small><strong>${s.statuses.filter(x=>x==='verified').length}</strong><span>Signature and document controls passed</span></div><div class="funding-metric"><small>Blocking</small><strong>${s.blocked}</strong><span>Must be corrected before send</span></div><div class="funding-metric"><small>Human review</small><strong>${s.review}</strong><span>Visual or manager confirmation</span></div><div class="funding-metric"><small>Lender SLA</small><strong style="font-size:14px">${lender.sla}</strong><span>${lender.maxAdvance}</span></div></div><div class="fi-grid-2" style="margin-top:12px"><article class="card fi-card"><div class="card-header"><div><div class="card-title">Critical Funding Controls</div><div class="card-subtitle">What Funding Assurance checks before release</div></div></div><div class="card-body"><div class="fi-checklist">${[['Final structure matches lender approval',true],['Required signatures and initials verified',s.statuses.every(x=>x==='verified')],['Every selected product has election evidence',financeState.presentationStatus==='complete'],['Customer optional-product choice preserved',financeState.optionalAcknowledged],['All lender stipulations satisfied',s.stips.every(x=>x==='verified')],['Packet released by authorized operator',!!financeState.fundingReleasedAt]].map(x=>`<div class="fi-check ${x[1]?'done':''}"><div class="fi-check-mark"><i class="fa-solid ${x[1]?'fa-check':'fa-hourglass-half'}"></i></div><div><strong>${x[0]}</strong><span>${x[1]?'Verified in the synthetic record':'Open or awaiting confirmation'}</span></div><span class="badge ${x[1]?'green':'amber'}">${x[1]?'PASS':'OPEN'}</span></div>`).join('')}</div></div></article><aside class="card fi-card"><div class="card-header"><div><div class="card-title">Store Protection Record</div><div class="card-subtitle">Evidence retained with the deal</div></div></div><div class="card-body"><div class="fi-callout ${s.tone==='ready'?'success':'warning'}"><strong>${s.label}</strong><p>${s.ready?'The packet can be released after an authorized operator confirms the scan.':'ENGENIX prevents the record from being marked ready while required evidence remains open.'}</p></div><div class="fi-economics" style="margin-top:10px"><div class="fi-econ-row"><span>Customer</span><strong>${financeState.customer}</strong></div><div class="fi-econ-row"><span>Vehicle</span><strong>${financeState.vehicle}</strong></div><div class="fi-econ-row"><span>Selected lender</span><strong>${lender.code}</strong></div><div class="fi-econ-row"><span>Final modeled payment</span><strong>${money(financeState.presentationStatus==='complete'?fiFinalPayment():fiMenuPayment())}</strong></div><div class="fi-econ-row"><span>Packet file</span><strong>${financeState.fundingPacketFile||'Synthetic packet'}</strong></div><div class="fi-econ-row total"><span>Release status</span><strong>${financeState.fundingReleasedAt?'Recorded':'Not released'}</strong></div></div></div></aside></div>`;
+    }
+    function renderFundingPacket(){
+      const docs=fiRequiredDocuments();const s=fiFundingSummary();const list=document.getElementById('fiFundingDocumentList');if(list)list.innerHTML=docs.map(doc=>{const status=fiDocumentStatus(doc);return `<div class="funding-document-row ${status}"><div class="funding-doc-icon"><i class="fa-solid ${status==='verified'?'fa-check':status==='blocked'?'fa-circle-xmark':'fa-eye'}"></i></div><div><h3>${doc.name}</h3><p>${doc.detail}</p></div><div class="funding-doc-meta"><small>Required signer</small><strong>${doc.signer}</strong></div><div class="funding-doc-meta"><small>Packet source</small><strong>${doc.source}</strong></div><div class="funding-row-actions"><span class="badge ${status==='verified'?'green':status==='blocked'?'red':'amber'}">${status.toUpperCase()}</span>${status==='verified'?`<button class="button small" onclick="reopenFundingDocument('${doc.id}')">Reopen</button>`:`<button class="button small fi-button primary" onclick="resolveFundingDocument('${doc.id}')">Verify</button>`}</div></div>`}).join('');
+      const badge=document.getElementById('fiPacketStatusBadge');if(badge){badge.textContent=s.label;badge.className=`badge ${s.tone==='ready'?'green':s.tone==='blocked'?'red':'amber'}`;}const sub=document.getElementById('fiPacketSubtitle');if(sub)sub.textContent=`${fiCurrentLender().name} · ${docs.length} required documents`;
+      const read=document.getElementById('fiFundingIntegrityReadout');if(read)read.innerHTML=`<div class="fi-callout ${s.blocked?'warning':'success'}"><strong>${s.blocked?s.blocked+' funding blockers':'No document blocker detected'}</strong><p>${s.blocked?'Missing required signatures or evidence prevents a ready-to-fund status.':'All required documents are present or in human review.'}</p></div><div class="fi-economics" style="margin-top:9px"><div class="fi-econ-row"><span>Contract structure</span><strong>Matches approval</strong></div><div class="fi-econ-row"><span>Product amount</span><strong>${money(fiFinalProductTotal()||fiProductTotal())}</strong></div><div class="fi-econ-row"><span>Customer choices</span><strong>${financeState.presentationStatus==='complete'?'Complete':'Open'}</strong></div><div class="fi-econ-row"><span>Required signatures</span><strong>${docs.filter(d=>fiDocumentStatus(d)==='verified').length} / ${docs.length}</strong></div><div class="fi-econ-row"><span>Scan timestamp</span><strong>${financeState.fundingScanAt||'Not run'}</strong></div></div><button class="button fi-button primary" style="width:100%;margin-top:10px" onclick="simulateFundingCorrections()"><i class="fa-solid fa-wand-magic-sparkles"></i>Simulate Corrected Packet</button>`;
+    }
+    function renderFundingStips(){
+      const stips=fiRequiredStips();const grid=document.getElementById('fiFundingStipGrid');if(grid)grid.innerHTML=stips.map(stip=>{const status=fiStipStatus(stip.id);return `<article class="stip-card"><span class="badge ${status==='verified'?'green':status==='review'?'amber':'red'}">${status==='verified'?'SATISFIED':status==='review'?'REVIEW':'MISSING'}</span><h3>${stip.name}</h3><p>${stip.copy}</p><div class="fi-economics" style="margin:9px 0"><div class="fi-econ-row"><span>Owner</span><strong>${stip.owner}</strong></div><div class="fi-econ-row"><span>Deadline</span><strong>${stip.due}</strong></div></div>${status==='verified'?'<span class="badge green">Evidence attached</span>':`<button class="button small fi-button primary" onclick="satisfyFundingStip('${stip.id}')">Mark satisfied</button>`}</article>`}).join('');
+      const s=fiFundingSummary();const release=document.getElementById('fiFundingReleasePanel');if(release)release.innerHTML=`<h3>${s.label}</h3><p>${s.ready?'All lender conditions and packet controls are satisfied. An authorized operator can release the deal for funding.':`${s.blocked} blocking item${s.blocked===1?'':'s'} and ${s.review} review item${s.review===1?'':'s'} remain across the packet and stipulation set.`}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="button fi-button" onclick="runFundingAssurance()"><i class="fa-solid fa-user-shield"></i>Run Assurance</button><button class="button fi-button primary" ${s.ready&&!financeState.fundingReleasedAt?'':'disabled'} onclick="releaseDealForFunding()"><i class="fa-solid fa-paper-plane"></i>${financeState.fundingReleasedAt?'Released':'Release for Funding'}</button></div>`;
+    }
+    function renderFinanceV5Command(){const s=fiFundingSummary();const title=document.getElementById('fiActionFundingTitle');if(title)title.textContent=s.label;const copy=document.getElementById('fiActionFundingCopy');if(copy)copy.textContent=financeState.fundingScanAt?`${s.blocked} blocker${s.blocked===1?'':'s'} · ${s.review} review item${s.review===1?'':'s'} · ${fiCurrentLender().name}`:'Select the lender and verify required signatures, documents, and stipulations.';const card=document.getElementById('fiFundingActionCard');if(card){card.classList.toggle('ready',s.ready||!!financeState.fundingReleasedAt);card.classList.toggle('attention',!s.ready&&!financeState.fundingReleasedAt);}const nav=document.getElementById('fiFundingNavCount');if(nav)nav.textContent=s.blocked+s.review||'✓';const packet=document.getElementById('fiPacketNavCount');if(packet)packet.textContent=s.docs.length;const stip=document.getElementById('fiStipNavCount');if(stip)stip.textContent=s.stips.filter(x=>x!=='verified').length||'✓';}
+
+    const renderAllFinanceV4=renderAllFinance;
+    renderAllFinance=function(){ensureFinanceV5State();renderAllFinanceV4();renderFinanceOwnershipBrief();renderFundingAssurance();renderFundingPacket();renderFundingStips();renderFinanceV5Command();const lender=document.getElementById('fiFundingLender');if(lender&&lender.value!==financeState.selectedLender)lender.value=financeState.selectedLender;const file=document.getElementById('fiFundingPacketFileStatus');if(file)file.textContent=financeState.fundingPacketFile||'Synthetic packet loaded';};
+    const renderFinanceActiveBannerV4=renderFinanceActiveBanner;
+    renderFinanceActiveBanner=function(){renderFinanceActiveBannerV4();if(financeState.fundingReleasedAt){document.getElementById('fiActiveStage').textContent='RELEASED TO FUNDING';document.getElementById('fiActivePrior').textContent=fiCurrentLender().code;}else if(financeState.fundingScanAt&&fiFundingSummary().ready){document.getElementById('fiActiveStage').textContent='READY TO FUND';}};
+
+    document.getElementById('fiFundingLender')?.addEventListener('change',e=>changeFundingLender(e.target.value));
+    document.getElementById('fiFundingPacketFile')?.addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;financeState.fundingPacketFile=file.name;financeState.fundingScanAt=null;financeState.fundingReleasedAt=null;fiEvent('Funding packet filename attached',`${file.name} was attached locally for the synthetic verification workflow. No file contents were transmitted.`,'fa-file-contract');renderAllFinance();showToast('Funding packet attached','Run Funding Assurance to verify the synthetic checklist.','success');});
+    renderAllFinance();
   </script>
 
 </body>
