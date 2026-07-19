@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="dashboard-build" content="2026.07.19-controller-contrast-routing-fix-v13">
+  <meta name="dashboard-build" content="2026.07.19-layer-transition-fix-v14">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -17,7 +17,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal Controller Contrast & Routing Fix V13</title>
+    <title>ENGENIX | Unified Portal Layer Transition Fix V14</title>
   <style>
     :root {
       --bg: #071018;
@@ -9411,6 +9411,104 @@
         select.value = requested;
       });
     });
+  })();
+  </script>
+
+
+
+  <style id="engenix-layer-transition-fix-v14-style">
+    .toast.workspace-transition-toast {
+      border-color: color-mix(in srgb, var(--cyan) 32%, var(--line-strong));
+      box-shadow: 0 18px 50px rgba(0,0,0,.22), inset 3px 0 0 var(--cyan);
+    }
+    .toast.workspace-transition-toast .toast-icon { color: var(--cyan); }
+    @media (max-width: 980px) {
+      .toast-stack {
+        top: calc(env(safe-area-inset-top, 0px) + 78px);
+        bottom: auto;
+        left: 14px;
+        right: 14px;
+        z-index: 400;
+      }
+      .toast.workspace-transition-toast {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+      }
+    }
+  </style>
+
+  <script id="engenix-layer-transition-fix-v14-script">
+  (() => {
+    const workspaceMeta = {
+      command: {
+        name: 'Operating Command',
+        copy: 'Cross-layer priorities, reconciliation, ownership, and next actions are now in view.'
+      },
+      desking: {
+        name: 'Desking Intelligence',
+        copy: 'Deal strategy, structure modeling, lender pathways, and rescue controls are now in view.'
+      },
+      finance: {
+        name: 'F&I Intelligence',
+        copy: 'Ownership decisions, prior coverage, menu intelligence, and funding controls are now in view.'
+      },
+      compliance: {
+        name: 'Compliance Intelligence',
+        copy: 'Deal control, findings, corrective actions, and audit evidence are now in view.'
+      },
+      finalization: {
+        name: 'Controller Intelligence',
+        copy: 'Operating close, Controlled Variable, financial exceptions, and statement readiness are now in view.'
+      }
+    };
+
+    function closeMobileNavigation() {
+      const sidebar = document.getElementById('sidebar');
+      const backdrop = document.getElementById('mobileNavBackdrop');
+      const menuButton = document.getElementById('mobileMenu');
+      sidebar?.classList.remove('open');
+      backdrop?.classList.remove('open');
+      document.body.classList.remove('mobile-nav-open');
+      if (menuButton) {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation');
+      }
+      if (backdrop) backdrop.setAttribute('aria-hidden', 'true');
+    }
+
+    function announceWorkspace(workspace) {
+      const meta = workspaceMeta[workspace];
+      if (!meta || typeof window.showToast !== 'function') return;
+      window.showToast(`Switched to ${meta.name}`, meta.copy, 'success');
+      const toast = document.querySelector('#toastStack .toast:last-child');
+      if (toast) {
+        toast.classList.add('workspace-transition-toast');
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+      }
+    }
+
+    const baseSwitch = window.switchPortalWorkspace;
+    if (typeof baseSwitch === 'function') {
+      window.switchPortalWorkspace = switchPortalWorkspace = function(workspace, targetView = null) {
+        const before = document.body.dataset.workspace || '';
+        const result = baseSwitch(workspace, targetView);
+        const after = document.body.dataset.workspace || workspace;
+        closeMobileNavigation();
+        if (after && after !== before) {
+          requestAnimationFrame(() => announceWorkspace(after));
+        }
+        return result;
+      };
+    }
+
+    const select = document.getElementById('workspaceSelect');
+    select?.addEventListener('change', () => {
+      requestAnimationFrame(closeMobileNavigation);
+    });
+
+    window.addEventListener('pageshow', closeMobileNavigation);
   })();
   </script>
 
