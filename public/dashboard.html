@@ -3716,6 +3716,114 @@
       .sidebar, .mobile-nav-backdrop { transition: none !important; }
     }
   </style>
+
+  <style id="engenix-controller-intelligence-v12-styles">
+    .fa-calculator::before { content:"▦"; }
+    .fa-chart-line::before { content:"⌁"; }
+    .fa-file-invoice-dollar::before { content:"▧"; }
+    .fa-car-side::before { content:"▰"; }
+    .fa-money-bill-transfer::before { content:"⇄"; }
+    .fa-sack-dollar::before { content:"$"; }
+    .fa-heart-pulse::before { content:"♥"; }
+    .fa-tower-broadcast::before { content:"⌁"; }
+    .fa-box-archive::before { content:"▣"; }
+
+    body[data-workspace="finalization"] {
+      --controller-navy:#17344a;
+      --controller-copper:#b97720;
+      --controller-teal:#18756f;
+      --controller-soft:rgba(185,119,32,.10);
+      --controller-teal-soft:rgba(24,117,111,.10);
+    }
+    body[data-workspace="finalization"] .product-switch-mark { color:var(--controller-copper); background:var(--controller-soft); }
+    body[data-workspace="finalization"] .finalization-nav-item.active { box-shadow:inset 3px 0 0 var(--controller-copper); }
+    .controller-shell { gap:12px; }
+    .controller-hero { border-color:color-mix(in srgb,var(--controller-copper) 24%,var(--line)); background:linear-gradient(105deg,color-mix(in srgb,var(--controller-copper) 5%,var(--panel)),var(--panel) 60%,color-mix(in srgb,var(--controller-teal) 5%,var(--panel))); }
+    .controller-trust-line { margin-top:15px; display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:9px; }
+    .controller-trust-line span { min-height:27px; padding:0 9px; border:1px solid var(--line); border-radius:8px; background:var(--panel-2); display:inline-flex; align-items:center; gap:6px; }
+    .controller-close-strip { display:grid; grid-template-columns:1.3fr repeat(3,minmax(0,1fr)); gap:10px; }
+    .controller-close-card { min-height:92px; padding:14px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .controller-close-card.primary { border-color:rgba(185,119,32,.24); background:linear-gradient(135deg,var(--controller-soft),var(--panel)); }
+    .controller-close-card small,.controller-summary-card small { display:block; color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .controller-close-card strong { display:block; margin-top:8px; font-size:23px; letter-spacing:-.035em; }
+    .controller-close-card span { display:block; margin-top:5px; color:var(--muted); font-size:8.8px; line-height:1.45; }
+    .controller-readiness-panel { padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--panel); display:grid; grid-template-columns:160px minmax(0,1fr); gap:22px; align-items:center; }
+    .controller-readiness-ring { --p:78; width:138px; aspect-ratio:1; border-radius:50%; display:grid; place-items:center; background:conic-gradient(var(--controller-teal) calc(var(--p)*1%),var(--bg-deep) 0); position:relative; }
+    .controller-readiness-ring::after { content:""; position:absolute; inset:12px; border-radius:50%; background:var(--panel); }
+    .controller-readiness-ring div { position:relative; z-index:1; text-align:center; }
+    .controller-readiness-ring strong { display:block; font-size:31px; letter-spacing:-.04em; }
+    .controller-readiness-ring span { color:var(--muted); font-size:8px; text-transform:uppercase; letter-spacing:.1em; }
+    .controller-readiness-copy h2 { margin:0; font-size:22px; letter-spacing:-.025em; }
+    .controller-readiness-copy p { margin:7px 0 0; color:var(--muted); font-size:10px; line-height:1.6; }
+    .controller-progress-track { height:9px; margin-top:16px; border-radius:999px; background:var(--bg-deep); overflow:hidden; }
+    .controller-progress-fill { height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--controller-teal),var(--controller-copper)); }
+    .controller-progress-meta { margin-top:7px; display:flex; justify-content:space-between; gap:12px; color:var(--muted); font-size:8.5px; }
+    .controller-two-col { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr); gap:12px; align-items:start; }
+    .controller-blocker-list,.controller-dept-list,.controller-exception-list { display:grid; gap:8px; }
+    .controller-blocker,.controller-dept,.controller-exception { padding:12px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.015); }
+    .controller-blocker { display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:10px; align-items:start; }
+    .controller-blocker-icon { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; background:var(--red-soft); color:var(--red); }
+    .controller-blocker strong,.controller-exception strong { display:block; font-size:10.5px; line-height:1.4; }
+    .controller-blocker span,.controller-exception p { display:block; margin:4px 0 0; color:var(--muted); font-size:8.7px; line-height:1.5; }
+    .controller-dept { display:grid; gap:7px; }
+    .controller-dept-head { display:flex; justify-content:space-between; gap:10px; font-size:9.5px; }
+    .controller-dept-bar { height:7px; border-radius:999px; background:var(--bg-deep); overflow:hidden; }
+    .controller-dept-bar span { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--controller-teal),var(--cyan)); }
+    .controller-dept-foot { display:flex; justify-content:space-between; color:var(--muted); font-size:8px; }
+    .controller-summary-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .controller-summary-card { min-height:94px; padding:14px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .controller-summary-card strong { display:block; margin-top:9px; font-size:22px; letter-spacing:-.035em; }
+    .controller-summary-card span { display:block; margin-top:5px; color:var(--muted); font-size:8.5px; line-height:1.4; }
+    .controller-exception { display:grid; grid-template-columns:8px minmax(0,1fr) auto; gap:11px; align-items:start; }
+    .controller-exception-mark { width:8px; min-height:58px; border-radius:999px; background:var(--amber); }
+    .controller-exception.critical .controller-exception-mark { background:var(--red); }
+    .controller-exception.timing .controller-exception-mark { background:var(--blue); }
+    .controller-exception-actions { display:grid; justify-items:end; gap:6px; }
+    .controller-exception-meta { margin-top:7px; display:flex; flex-wrap:wrap; gap:6px; }
+    .controlled-waterfall { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; align-items:end; }
+    .controlled-step { min-height:150px; padding:11px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); display:flex; flex-direction:column; justify-content:flex-end; position:relative; overflow:hidden; }
+    .controlled-step::before { content:""; position:absolute; left:0; right:0; bottom:0; height:var(--h,50%); background:linear-gradient(180deg,color-mix(in srgb,var(--controller-teal) 24%,transparent),color-mix(in srgb,var(--controller-teal) 8%,transparent)); }
+    .controlled-step.negative::before { background:linear-gradient(180deg,color-mix(in srgb,var(--red) 24%,transparent),color-mix(in srgb,var(--red) 8%,transparent)); }
+    .controlled-step > * { position:relative; z-index:1; }
+    .controlled-step small { color:var(--muted); font-size:7.5px; text-transform:uppercase; letter-spacing:.08em; }
+    .controlled-step strong { margin-top:5px; font-size:16px; }
+    .controlled-step span { margin-top:4px; color:var(--muted); font-size:8px; line-height:1.35; }
+    .controller-cause-row { padding:10px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; }
+    .controller-cause-row:last-child { border-bottom:0; }
+    .controller-cause-row strong { display:block; font-size:9.5px; }
+    .controller-cause-row span { display:block; margin-top:4px; color:var(--muted); font-size:8.3px; }
+    .controller-decision-callout { padding:13px; border:1px solid rgba(185,119,32,.24); border-radius:11px; background:var(--controller-soft); }
+    .controller-decision-callout strong { display:block; font-size:11px; }
+    .controller-decision-callout p { margin:5px 0 0; color:var(--muted); font-size:9px; line-height:1.5; }
+    .controller-table td { height:58px; }
+    .controller-table .variance-negative { color:var(--red); font-weight:800; }
+    .controller-table .variance-positive { color:var(--green); font-weight:800; }
+    .controller-liability-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+    .controller-liability { padding:13px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); }
+    .controller-liability small { color:var(--muted-2); font-size:7.5px; font-weight:850; text-transform:uppercase; letter-spacing:.08em; }
+    .controller-liability strong { display:block; margin-top:7px; font-size:17px; }
+    .controller-liability p { margin:6px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; }
+    .controller-checklist-summary { display:grid; grid-template-columns:1fr repeat(3,minmax(0,1fr)); gap:10px; }
+    .controller-checklist { display:grid; }
+    .controller-check-item { width:100%; padding:12px 0; border:0; border-bottom:1px solid var(--line); background:transparent; color:inherit; display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:11px; align-items:center; text-align:left; cursor:pointer; }
+    .controller-check-item:last-child { border-bottom:0; }
+    .controller-check-icon { width:28px; height:28px; border-radius:9px; display:grid; place-items:center; color:var(--muted); background:var(--panel-2); border:1px solid var(--line); }
+    .controller-check-item.done .controller-check-icon { color:var(--green); background:var(--green-soft); border-color:rgba(22,129,103,.2); }
+    .controller-check-item strong { display:block; font-size:10px; }
+    .controller-check-item span { display:block; margin-top:4px; color:var(--muted); font-size:8.5px; }
+    .controller-brief { padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--panel); }
+    .controller-brief-head { padding-bottom:14px; border-bottom:3px solid var(--controller-copper); display:flex; justify-content:space-between; gap:20px; }
+    .controller-brief-head h2 { margin:5px 0 0; font-size:22px; }
+    .controller-brief-grid { margin-top:14px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; }
+    .controller-brief-section { margin-top:18px; }
+    .controller-brief-section h3 { margin:0 0 8px; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    html[data-theme="light"] .controller-close-card,html[data-theme="light"] .controller-readiness-panel,html[data-theme="light"] .controller-summary-card,html[data-theme="light"] .controller-blocker,html[data-theme="light"] .controller-dept,html[data-theme="light"] .controller-exception { background:#fff; }
+    @media(max-width:1250px){.controller-close-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.controller-summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.controlled-waterfall{grid-template-columns:repeat(4,minmax(0,1fr))}.controller-liability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:880px){.controller-two-col{grid-template-columns:1fr}.controller-readiness-panel{grid-template-columns:130px minmax(0,1fr)}.controller-readiness-ring{width:120px}.controller-checklist-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.controller-brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:620px){.controller-close-strip,.controller-summary-grid,.controller-checklist-summary{grid-template-columns:1fr 1fr}.controller-readiness-panel{grid-template-columns:1fr;text-align:center}.controller-readiness-ring{margin:auto}.controlled-waterfall{grid-template-columns:repeat(2,minmax(0,1fr))}.controller-liability-grid{grid-template-columns:1fr}.controller-exception{grid-template-columns:8px minmax(0,1fr)}.controller-exception-actions{grid-column:2;grid-auto-flow:column;justify-content:start}.controller-brief-head{display:block}.controller-brief-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:420px){.controller-close-strip,.controller-summary-grid,.controller-checklist-summary,.controller-brief-grid{grid-template-columns:1fr}.controlled-waterfall{grid-template-columns:1fr 1fr}.controller-check-item{grid-template-columns:28px minmax(0,1fr)}.controller-check-item>.badge{grid-column:2;justify-self:start}}
+  </style>
+
 </head>
 <body class="auth-locked operator-friendly" data-workspace="command">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
@@ -3723,7 +3831,7 @@
       <section class="auth-story" aria-label="ENGENIX operating intelligence introduction">
         <div class="auth-story-mark"><span class="dot"></span> Customer demonstration environment</div>
         <h1>Operational judgment, preserved under pressure.</h1>
-        <p>Enter the ENGENIX customer sandbox to see what requires action across the dealership, why it matters, who owns the next move, and how each deal remains reconciled from desk through finalization.</p>
+        <p>Enter the ENGENIX customer sandbox to see what requires action across the dealership, why it matters, who owns the next move, and how each deal remains reconciled from desk through operating close.</p>
         <div class="auth-promise">
           <div class="auth-promise-item"><strong>Detect</strong><span>Surface operational risk while there is still time to act.</span></div>
           <div class="auth-promise-item"><strong>Decide</strong><span>Keep human judgment visible, explainable, and accountable.</span></div>
@@ -3738,7 +3846,7 @@
         </div>
         <div class="login-kicker">Authorized demonstration access</div>
         <h2 class="login-title">Enter Operating Command.</h2>
-        <p class="login-copy">Start at the supervisory operating tower, then move into Desking, F&amp;I, Compliance, or Deal Finalization without relearning the portal.</p>
+        <p class="login-copy">Start at the supervisory operating tower, then move into Desking, F&amp;I, Compliance, or Controller Intelligence without relearning the portal.</p>
 
         <div class="demo-credentials" aria-label="Demo login credentials">
           <div class="demo-credentials-label">Use these demonstration credentials</div>
@@ -3791,7 +3899,7 @@
             <option value="desking">Desking Intelligence</option>
             <option value="finance">F&amp;I Intelligence</option>
             <option value="compliance">Compliance Intelligence</option>
-            <option value="finalization">Deal Finalization Intelligence</option>
+            <option value="finalization">Controller Intelligence</option>
           </select>
         </div>
         <div class="product-switch-copy" id="workspaceSwitchCopy">Cross-layer priorities, reconciliation, ownership, and next actions</div>
@@ -3821,30 +3929,50 @@
       </nav>
 
       <button class="sidebar-primary-action finalization-shell finalization-primary-action" type="button" onclick="runFinalizationSweep()">
-        <span class="sidebar-primary-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
-        <span><strong>Run Closeout Sweep</strong><small>Recheck funding, title, refunds, and promises</small></span>
+        <span class="sidebar-primary-icon"><i class="fa-solid fa-calculator"></i></span>
+        <span><strong>Run Operating Close</strong><small>Reconcile deals, cash, liabilities, and close blockers</small></span>
       </button>
-      <nav class="nav-group finalization-shell" aria-label="Deal Finalization daily work navigation">
+      <nav class="nav-group finalization-shell" aria-label="Controller Intelligence daily work navigation">
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
-          <button type="button" class="nav-item finalization-nav-item active" data-final-view="final-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Finalization Command</span><span class="nav-count" id="finalActionCountNav">8</span></button>
+          <button type="button" class="nav-item finalization-nav-item active" data-final-view="final-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Controller Command</span><span class="nav-count" id="finalActionCountNav">13</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-close-readiness"><span class="nav-icon"><i class="fa-solid fa-clipboard-check"></i></span><span class="nav-text">Close Readiness</span><span class="nav-count" id="controllerReadinessNav">78%</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-exceptions"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Exception Queue</span><span class="nav-count" id="controllerExceptionNav">10</span></button>
           <button type="button" class="nav-item finalization-nav-item" data-final-view="final-cit"><span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span><span class="nav-text">Contracts in Transit</span><span class="nav-count" id="finalCitCountNav">4</span></button>
-          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-title"><span class="nav-icon"><i class="fa-solid fa-car-side"></i></span><span class="nav-text">Title &amp; Payoff</span><span class="nav-count" id="finalTitleCountNav">3</span></button>
         </div>
       </nav>
-      <nav class="nav-group finalization-shell" aria-label="Deal Finalization obligations navigation">
-        <div class="nav-label">Obligations</div>
+      <nav class="nav-group finalization-shell" aria-label="Controller Intelligence reconciliation navigation">
+        <div class="nav-label">Reconcile</div>
         <div class="nav-list">
-          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-cancellations"><span class="nav-icon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="nav-text">Cancellations &amp; Refunds</span><span class="nav-count" id="finalCancelCountNav">4</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-controlled-variable"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span><span class="nav-text">Controlled Variable</span><span class="nav-count">LIVE</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-deal-ledger"><span class="nav-icon"><i class="fa-solid fa-link"></i></span><span class="nav-text">Deal-to-Ledger</span><span class="nav-count">6</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-title"><span class="nav-icon"><i class="fa-solid fa-car-side"></i></span><span class="nav-text">Trade &amp; Payoff</span><span class="nav-count" id="finalTitleCountNav">3</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-cancellations"><span class="nav-icon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="nav-text">Cancellations &amp; Chargebacks</span><span class="nav-count" id="finalCancelCountNav">4</span></button>
           <button type="button" class="nav-item finalization-nav-item" data-final-view="final-promises"><span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Customer Promises</span><span class="nav-count" id="finalPromiseCountNav">2</span></button>
-          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-gross"><span class="nav-icon"><i class="fa-solid fa-scale-balanced"></i></span><span class="nav-text">Final Gross Reconciliation</span><span class="nav-count">2</span></button>
         </div>
       </nav>
-      <nav class="nav-group finalization-shell" aria-label="Deal Finalization records navigation">
+      <nav class="nav-group finalization-shell" aria-label="Controller Intelligence financial operations navigation">
+        <div class="nav-label">Financial Operations</div>
+        <div class="nav-list">
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-ar"><span class="nav-icon"><i class="fa-solid fa-arrow-down"></i></span><span class="nav-text">Accounts Receivable</span><span class="nav-count">9</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-ap"><span class="nav-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></span><span class="nav-text">Accounts Payable</span><span class="nav-count">7</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-payroll"><span class="nav-icon"><i class="fa-solid fa-users"></i></span><span class="nav-text">Payroll &amp; Commissions</span><span class="nav-count">4</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-accruals"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Accruals &amp; Liabilities</span><span class="nav-count">8</span></button>
+        </div>
+      </nav>
+      <nav class="nav-group finalization-shell" aria-label="Controller Intelligence month end navigation">
+        <div class="nav-label">Close</div>
+        <div class="nav-list">
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-statement"><span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Statement Readiness</span><span class="nav-count">82%</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-checklist"><span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Month-End Checklist</span><span class="nav-count" id="controllerChecklistNav">9/14</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-close-brief"><span class="nav-icon"><i class="fa-solid fa-print"></i></span><span class="nav-text">Controller Close Brief</span></button>
+        </div>
+      </nav>
+      <nav class="nav-group finalization-shell" aria-label="Controller Intelligence records navigation">
         <div class="nav-label">Records</div>
         <div class="nav-list">
-          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-completed"><span class="nav-icon"><i class="fa-solid fa-box-archive"></i></span><span class="nav-text">Completed Archive</span><span class="nav-count">12</span></button>
-          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-completed"><span class="nav-icon"><i class="fa-solid fa-box-archive"></i></span><span class="nav-text">Closed Periods</span><span class="nav-count">12</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Controller Settings</span></button>
         </div>
       </nav>
 
@@ -4251,13 +4379,36 @@
         </section>
 
         <section class="view finalization-view" id="view-final-command">
-          <div class="final-shell">
-            <header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Deal Finalization Intelligence</div><h1>Protect the store’s cash after the customer leaves.</h1><p>Track contracts in transit, lender shortages, title and payoff, product cancellations, customer refunds, We-Owes, remittance, accounting exceptions, and final gross until every obligation is closed and evidenced.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="runFinalizationSweep()"><i class="fa-solid fa-arrows-rotate"></i>Run Closeout Sweep</button><button class="button" type="button" onclick="showFinalView('final-gross')"><i class="fa-solid fa-scale-balanced"></i>Reconcile Final Gross</button><button class="button" type="button" onclick="switchPortalWorkspace('command','command-command')"><i class="fa-solid fa-tower-broadcast"></i>Operating Command</button></div></div></header>
+          <div class="final-shell controller-shell">
+            <header class="final-hero controller-hero"><div class="final-hero-grid"><div><div class="final-kicker">Controller Intelligence · Operating Close</div><h1>Turn every operating decision into trusted financial truth.</h1><p>Reconcile expected economics, funding proceeds, receivables, payables, payroll, accruals, chargebacks, customer obligations, and statement readiness without replacing the DMS or the controller’s judgment.</p><div class="controller-trust-line"><span><i class="fa-solid fa-link"></i> Deal-to-ledger traceability</span><span><i class="fa-solid fa-scale-balanced"></i> Timing versus true leakage</span><span><i class="fa-solid fa-clipboard-check"></i> Explainable close readiness</span></div></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="runFinalizationSweep()"><i class="fa-solid fa-calculator"></i>Run Operating Close</button><button class="button" type="button" onclick="showFinalView('final-controlled-variable')"><i class="fa-solid fa-chart-line"></i>Open Controlled Variable</button><button class="button" type="button" onclick="showFinalView('final-close-brief')"><i class="fa-solid fa-print"></i>Build Close Brief</button></div></div></header>
+            <div class="controller-close-strip" id="controllerCloseStrip"></div>
             <div class="final-metrics" id="finalMetrics"></div>
-            <section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Closeout Pipeline</div><div class="final-card-copy">Work remaining after delivery, funding release, or office acceptance</div></div></div><div class="final-card-body"><div class="final-pipeline" id="finalPipeline"></div></div></section>
-            <div class="final-section-grid"><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Priority Closeout Queue</div><div class="final-card-copy">Ordered by cash exposure, customer obligation, aging, and funding dependency</div></div><div class="segmented status-filter-row" id="finalPriorityFilters"><button class="segment active" type="button" data-final-filter="open">Open</button><button class="segment" type="button" data-final-filter="blocked">Blocked</button><button class="segment" type="button" data-final-filter="customer">Customer</button><button class="segment" type="button" data-final-filter="all">All</button></div></div><div class="final-card-body"><div class="final-queue" id="finalPriorityList"></div></div></section><aside class="final-card"><div class="final-card-head"><div><div class="final-card-title">Cash Protection</div><div class="final-card-copy">Current post-delivery exposure requiring proof or ownership</div></div></div><div class="final-card-body"><div class="accountability-list" id="finalCashProtection"></div></div></aside></div>
+            <section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Operating Close Pipeline</div><div class="final-card-copy">From delivered deal through funded, posted, accrued, reconciled, and statement-ready</div></div><button class="button small" type="button" onclick="showFinalView('final-close-readiness')">Review blockers <i class="fa-solid fa-arrow-right"></i></button></div><div class="final-card-body"><div class="final-pipeline" id="finalPipeline"></div></div></section>
+            <div class="final-section-grid"><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Controller Exception Queue</div><div class="final-card-copy">Ordered by statement impact, cash exposure, customer liability, aging, and ownership</div></div><div class="segmented status-filter-row" id="finalPriorityFilters"><button class="segment active" type="button" data-final-filter="open">Open</button><button class="segment" type="button" data-final-filter="blocked">Blocked</button><button class="segment" type="button" data-final-filter="customer">Customer</button><button class="segment" type="button" data-final-filter="all">All</button></div></div><div class="final-card-body"><div class="final-queue" id="finalPriorityList"></div></div></section><aside class="final-card"><div class="final-card-head"><div><div class="final-card-title">Financial Exposure</div><div class="final-card-copy">Current amounts requiring proof, posting, accrual, or ownership</div></div></div><div class="final-card-body"><div class="accountability-list" id="finalCashProtection"></div></div></aside></div>
           </div>
         </section>
+
+        <section class="view finalization-view" id="view-final-close-readiness"><div class="final-shell controller-shell"><header class="final-hero controller-hero"><div class="final-hero-grid"><div><div class="final-kicker">Close Readiness</div><h1>Know whether the statement can be trusted before the calendar says the month is over.</h1><p>Readiness is built from explainable controls across funding, cash, title, refunds, AP, AR, payroll, accruals, deal-to-ledger reconciliation, and controller signoff.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="runFinalizationSweep()"><i class="fa-solid fa-arrows-rotate"></i>Refresh Close</button><button class="button" type="button" onclick="showFinalView('final-checklist')">Open Checklist</button></div></div></header><div id="controllerReadinessHero"></div><div class="controller-two-col"><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Blocking the Close</div><div class="final-card-copy">Controls that prevent controller signoff or reduce statement confidence</div></div></div><div class="final-card-body"><div class="controller-blocker-list" id="controllerBlockerList"></div></div></section><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Department Readiness</div><div class="final-card-copy">Completion and exposure by operating owner</div></div></div><div class="final-card-body"><div class="controller-dept-list" id="controllerDepartmentReadiness"></div></div></section></div></div></section>
+
+        <section class="view finalization-view" id="view-final-exceptions"><div class="final-shell controller-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Controller Exception Queue</div><h1>Separate timing differences from true leakage before they blur together at month end.</h1><p>Each exception carries financial impact, source evidence, statement treatment, owner, age, and a defined path to resolution.</p></div></div></header><div class="controller-summary-grid" id="controllerExceptionMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Financial Exceptions</div><div class="final-card-copy">Synthetic queue spanning deals, cash, liabilities, payroll, AP, AR, and posting controls</div></div></div><div class="final-card-body"><div class="controller-exception-list" id="controllerExceptionList"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-controlled-variable"><div class="final-shell controller-shell"><header class="final-hero controller-hero"><div class="final-hero-grid"><div><div class="final-kicker">Controlled Variable</div><h1>Trace variable gross from the first pencil to realized financial outcome.</h1><p>Controlled Variable explains where value moved, who absorbed the change, whether it is timing or leakage, and which source record supports the conclusion.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="reconcileFinalGross()"><i class="fa-solid fa-scale-balanced"></i>Recalculate Bridge</button><button class="button" type="button" onclick="showFinalView('final-deal-ledger')">Open Deal-to-Ledger</button></div></div></header><div class="controller-summary-grid" id="controlledVariableMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Variable Gross Bridge</div><div class="final-card-copy">Expected to realized, with every economic movement classified</div></div></div><div class="final-card-body"><div class="controlled-waterfall" id="controlledVariableWaterfall"></div></div></section><div class="controller-two-col"><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Root-Cause Ledger</div><div class="final-card-copy">What changed, why, and whether the effect is temporary or permanent</div></div></div><div class="final-card-body"><div id="controlledVariableCauses"></div></div></section><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Controller Decision</div><div class="final-card-copy">Accept, assign, accrue, or reopen the operating record</div></div></div><div class="final-card-body" id="controlledVariableDecision"></div></section></div></div></section>
+
+        <section class="view finalization-view" id="view-final-deal-ledger"><div class="final-shell controller-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Deal-to-Ledger Reconciliation</div><h1>Connect every booked number to the operating decision that created it.</h1><p>Compare accepted desk economics, F&amp;I results, lender proceeds, DMS posting, and realized gross without asking the controller to reconstruct the story by hand.</p></div></div></header><div class="controller-summary-grid" id="dealLedgerMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Deal Reconciliation Ledger</div><div class="final-card-copy">Synthetic source-level comparison with statement treatment</div></div></div><div class="final-card-body"><div class="table-wrap"><table class="controller-table"><thead><tr><th>Deal</th><th>Expected</th><th>Booked</th><th>Realized</th><th>Variance</th><th>Classification</th><th>Owner</th><th>Action</th></tr></thead><tbody id="dealLedgerRows"></tbody></table></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-ar"><div class="final-shell controller-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Accounts Receivable Intelligence</div><h1>Every receivable should have a source, owner, aging clock, and expected resolution.</h1><p>Funding shortages, manufacturer money, customer balances, cancellations, warranty receivables, and dealer trades stay connected to the operation that created them.</p></div></div></header><div class="controller-summary-grid" id="controllerArMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Receivable Exception Ledger</div><div class="final-card-copy">Synthetic balances prioritized by age, collectability, and statement impact</div></div></div><div class="final-card-body"><div class="table-wrap"><table class="controller-table"><thead><tr><th>Source</th><th>Reference</th><th>Amount</th><th>Age</th><th>Expected</th><th>Owner</th><th>Status</th></tr></thead><tbody id="controllerArRows"></tbody></table></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-ap"><div class="final-shell controller-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Accounts Payable Intelligence</div><h1>Match every expense to the deal, promise, product, vendor, or operating decision behind it.</h1><p>Surface unmatched invoices, duplicate risk, unapproved spend, We-Owe costs, recon overruns, and product remittance discrepancies before close.</p></div></div></header><div class="controller-summary-grid" id="controllerApMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Payable Exception Ledger</div><div class="final-card-copy">Synthetic AP exceptions tied back to operating records</div></div></div><div class="final-card-body"><div class="table-wrap"><table class="controller-table"><thead><tr><th>Vendor / Source</th><th>Reference</th><th>Amount</th><th>Issue</th><th>Accrued</th><th>Owner</th><th>Status</th></tr></thead><tbody id="controllerApRows"></tbody></table></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-payroll"><div class="final-shell controller-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Payroll &amp; Commission Reconciliation</div><h1>Pay the plan against realized economics, not a stale snapshot of the deal.</h1><p>Compare pay-plan rules, splits, units, front gross, back gross, chargebacks, cancellations, and posted payroll while preserving controller authority.</p></div></div></header><div class="controller-summary-grid" id="controllerPayrollMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Commission Exceptions</div><div class="final-card-copy">Synthetic pay-plan calculations for demonstration only</div></div></div><div class="final-card-body"><div class="table-wrap"><table class="controller-table"><thead><tr><th>Employee</th><th>Role</th><th>Reference</th><th>Calculated</th><th>Posted</th><th>Variance</th><th>Reason</th><th>Status</th></tr></thead><tbody id="controllerPayrollRows"></tbody></table></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-accruals"><div class="final-shell controller-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Accruals &amp; Liabilities</div><h1>Make unfinished obligations financially visible before they become next month’s surprise.</h1><p>We-Owes, customer refunds, chargebacks, unpaid vendor work, product remittance, title exposure, and policy expense remain visible until accrued, paid, or resolved.</p></div></div></header><div class="controller-summary-grid" id="controllerAccrualMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Open Liability Register</div><div class="final-card-copy">Estimated, verified, accrued, and paid are kept separate</div></div></div><div class="final-card-body"><div class="controller-liability-grid" id="controllerAccrualRows"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-statement"><div class="final-shell controller-shell"><header class="final-hero controller-hero"><div class="final-hero-grid"><div><div class="final-kicker">Statement Readiness</div><h1>Explain the developing statement before leadership reads the final number.</h1><p>Bridge operating volume, front gross, F&amp;I performance, personnel expense, policy, chargebacks, accruals, and unresolved variances into one controller-reviewed view.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="printControllerCloseBrief()"><i class="fa-solid fa-print"></i>Print Close Brief</button><button class="button" type="button" onclick="showFinalView('final-checklist')">Review Checklist</button></div></div></header><div class="controller-summary-grid" id="statementMetrics"></div><div class="controller-two-col"><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Statement Bridge</div><div class="final-card-copy">Operating expectation to current statement estimate</div></div></div><div class="final-card-body"><div id="statementBridge"></div></div></section><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Controller Narrative</div><div class="final-card-copy">Explainable drivers behind the month</div></div></div><div class="final-card-body" id="statementNarrative"></div></section></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Department Statement Readiness</div><div class="final-card-copy">Synthetic current-period financial operating view</div></div></div><div class="final-card-body"><div class="table-wrap"><table class="controller-table"><thead><tr><th>Department</th><th>Plan</th><th>Current</th><th>Variance</th><th>Primary Driver</th><th>Confidence</th></tr></thead><tbody id="statementRows"></tbody></table></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-checklist"><div class="final-shell controller-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Month-End Checklist</div><h1>A close is complete only when every material control has evidence and an accountable owner.</h1><p>Run the operating close in sequence, preserve signoff, and keep reopened controls visible instead of burying them in email and spreadsheets.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="completeNextCloseItem()"><i class="fa-solid fa-check"></i>Complete Next Control</button><button class="button" type="button" onclick="resetControllerDemo()">Reset Demo</button></div></div></header><div class="controller-checklist-summary" id="controllerChecklistSummary"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Operating Close Controls</div><div class="final-card-copy">Click any control to record or reopen synthetic completion</div></div></div><div class="final-card-body"><div class="controller-checklist" id="controllerChecklistRows"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-close-brief"><div class="final-shell controller-shell"><header class="final-hero controller-hero"><div class="final-hero-grid"><div><div class="final-kicker">Controller Close Brief</div><h1>Give ownership a clean explanation of what closed, what moved, and what remains exposed.</h1><p>The brief converts controller work into a leadership-ready operating narrative without exposing private source documents or replacing the financial statement.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="printControllerCloseBrief()"><i class="fa-solid fa-print"></i>Print Controller Brief</button><button class="button" type="button" onclick="showFinalView('final-close-readiness')">Review Readiness</button></div></div></header><div id="controllerCloseBriefPreview"></div></div></section>
 
         <section class="view finalization-view" id="view-final-cit"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Contracts in Transit</div><h1>Turn every funding delay into an owned, timed operating action.</h1><p>Funding status, shortages, lender communication, aging, and missing evidence stay attached to the deal until proceeds are received and reconciled.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="runFinalizationSweep()">Refresh Funding Readiness</button></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">CIT Aging &amp; Shortage Queue</div><div class="final-card-copy">Synthetic funding records ordered by age and cash exposure</div></div></div><div class="final-card-body"><div class="final-queue" id="finalCitList"></div></div></section></div></section>
 
@@ -4267,11 +4418,11 @@
 
         <section class="view finalization-view" id="view-final-promises"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Customer Promise Control</div><h1>Every We-Owe and dealership commitment remains visible until fulfilled.</h1><p>Owner, due date, customer communication, evidence, and completion status stay attached to the delivered deal.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Open Customer Commitments</div><div class="final-card-copy">Synthetic We-Owe, second-key, accessory, and refund obligations</div></div></div><div class="final-card-body"><div class="final-queue" id="finalPromiseList"></div></div></section></div></section>
 
-        <section class="view finalization-view" id="view-final-gross"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Final Gross Reconciliation</div><h1>Reconcile the economics the desk expected with the cash accounting actually records.</h1><p>Compare desk front, F&amp;I product gross, reserve, chargebacks, lender shortages, cancellations, and final accounting so leakage cannot disappear inside month-end noise.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="reconcileFinalGross()"><i class="fa-solid fa-scale-balanced"></i>Run Gross Reconciliation</button></div></div></header><div class="final-metrics" id="finalGrossMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Deal Economics Comparison</div><div class="final-card-copy">Expected, contracted, funded, and accounting values</div></div></div><div class="final-card-body"><div class="gross-reconcile" id="finalGrossRows"></div></div></section></div></section>
+        <section class="view finalization-view" id="view-final-gross"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Controlled Variable · Deal Economics</div><h1>See exactly where expected variable gross changed before it reached the statement.</h1><p>Trace desk gross through contracted, funded, booked, and realized economics. Every variance is classified as timing, posting error, liability, shortage, or true leakage.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="reconcileFinalGross()"><i class="fa-solid fa-scale-balanced"></i>Run Controlled Variable</button></div></div></header><div class="final-metrics" id="finalGrossMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Controlled Variable Bridge</div><div class="final-card-copy">Expected, contracted, funded, booked, and realized values with source-level explanation</div></div></div><div class="final-card-body"><div class="gross-reconcile" id="finalGrossRows"></div></div></section></div></section>
 
-        <section class="view finalization-view" id="view-final-completed"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Completed Deal Archive</div><h1>Closed obligations become searchable operating memory.</h1><p>Final funding, title, cancellation, promises, product remittance, and accounting results remain attached to the deal for audit, pattern learning, and future customer recognition.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Recently Completed Records</div><div class="final-card-copy">Synthetic finalization outcomes</div></div></div><div class="final-card-body"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer</th><th>Funded</th><th>Title</th><th>Refunds</th><th>Promises</th><th>Final Gross</th></tr></thead><tbody id="finalCompletedRows"></tbody></table></div></div></section></div></section>
+        <section class="view finalization-view" id="view-final-completed"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Closed Periods &amp; Deal Archive</div><h1>Every accepted close becomes searchable financial operating memory.</h1><p>Final funding, title, cancellation, promises, product remittance, and accounting results remain attached to the deal for audit, pattern learning, and future customer recognition.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Recently Completed Records</div><div class="final-card-copy">Synthetic closed-deal and prior-period outcomes</div></div></div><div class="final-card-body"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer</th><th>Funded</th><th>Title</th><th>Refunds</th><th>Promises</th><th>Final Gross</th></tr></thead><tbody id="finalCompletedRows"></tbody></table></div></div></section></div></section>
 
-        <section class="view finalization-view" id="view-final-settings"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Finalization Controls</div><h1>Configure the obligations that keep a delivered deal open.</h1><p>These demonstration controls show how each dealership could define aging thresholds, ownership rules, escalation windows, and completion evidence.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Dealer-Controlled Rules</div><div class="final-card-copy">Synthetic sandbox settings only</div></div></div><div class="final-card-body"><div class="setting-row"><div><div class="setting-title">Escalate contracts in transit after three business days</div><div class="setting-copy">Adds the deal to Operating Command and the Leadership Briefing.</div></div><button class="toggle on" type="button" aria-label="Escalate contracts in transit after three business days" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Require administrator verification before refund completion</div><div class="setting-copy">Estimated cancellation values remain pending until supported.</div></div><button class="toggle on" type="button" aria-label="Require administrator verification before refund completion" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Block completed status while customer promises remain open</div><div class="setting-copy">We-Owes and written commitments cannot disappear at delivery.</div></div><button class="toggle on" type="button" aria-label="Block completed status while customer promises remain open" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Reconcile final gross against desk and F&amp;I expectations</div><div class="setting-copy">Variance thresholds can require controller review.</div></div><button class="toggle on" type="button" aria-label="Reconcile final gross against desk and F&amp;I expectations" aria-pressed="true"><span class="toggle-knob"></span></button></div></div></section></div></section>
+        <section class="view finalization-view" id="view-final-settings"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Controller Intelligence Controls</div><h1>Configure the evidence, ownership, thresholds, and authority required to close.</h1><p>These demonstration controls show how each dealership could define aging thresholds, ownership rules, escalation windows, and completion evidence.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Dealer-Controlled Rules</div><div class="final-card-copy">Synthetic sandbox settings only</div></div></div><div class="final-card-body"><div class="setting-row"><div><div class="setting-title">Escalate contracts in transit after three business days</div><div class="setting-copy">Adds the deal to Operating Command and the Leadership Briefing.</div></div><button class="toggle on" type="button" aria-label="Escalate contracts in transit after three business days" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Require administrator verification before refund completion</div><div class="setting-copy">Estimated cancellation values remain pending until supported.</div></div><button class="toggle on" type="button" aria-label="Require administrator verification before refund completion" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Block completed status while customer promises remain open</div><div class="setting-copy">We-Owes and written commitments cannot disappear at delivery.</div></div><button class="toggle on" type="button" aria-label="Block completed status while customer promises remain open" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Reconcile final gross against desk and F&amp;I expectations</div><div class="setting-copy">Variance thresholds can require controller review.</div></div><button class="toggle on" type="button" aria-label="Reconcile final gross against desk and F&amp;I expectations" aria-pressed="true"><span class="toggle-knob"></span></button></div></div></section></div></section>
 
 
         <section class="view active" id="view-brief">
@@ -8682,7 +8833,7 @@
       const saveFinal=()=>{try{localStorage.setItem(FINAL_STORAGE_KEY,JSON.stringify(finalState));}catch(e){}};
       const money=v=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(v)||0);
       const openCount=list=>list.filter(x=>x.status!=='resolved'&&x.status!=='complete').length;
-      const workspaceLabel=w=>({desking:'Desking',finance:'F&I',compliance:'Compliance',finalization:'Finalization',command:'Operating Command'}[w]||w);
+      const workspaceLabel=w=>({desking:'Desking',finance:'F&I',compliance:'Compliance',finalization:'Controller',command:'Operating Command'}[w]||w);
       const iconClass=t=>t==='immediate'||t==='urgent'?'urgent':t==='revenue'?'revenue':t==='customer'?'customer':'clear';
 
       window.showCommandView=function(view){
@@ -8708,15 +8859,15 @@
         document.querySelectorAll('.finalization-nav-item').forEach(n=>n.classList.toggle('active',n.dataset.finalView===lastFinalView));
         const target=document.getElementById('view-'+lastFinalView);if(target)target.classList.add('active');
         const meta={
-          'final-command':['Deal Finalization Command','Funding, title, refunds, promises, and final economics after delivery'],
+          'final-command':['Controller Command','Operating close, financial exceptions, cash protection, and statement readiness'],
           'final-cit':['Contracts in Transit','Funding aging, shortages, lender response, and proceeds reconciliation'],
           'final-title':['Title & Payoff','Trade payoff, lien release, state packet, and ownership transfer'],
           'final-cancellations':['Cancellations & Refunds','Administrator verification, received funds, customer treatment, and evidence'],
           'final-promises':['Customer Promise Control','We-Owes and written commitments remain open until completed'],
-          'final-gross':['Final Gross Reconciliation','Compare desk, contract, funding, and accounting economics'],
-          'final-completed':['Completed Archive','Closed obligations become searchable operating memory'],
-          'final-settings':['Finalization Settings','Dealer-controlled thresholds, ownership, escalation, and evidence rules']
-        }[lastFinalView]||['Deal Finalization Intelligence','Post-delivery operating control'];
+          'final-gross':['Controlled Variable','Trace expected, contracted, funded, booked, and realized economics'],
+          'final-completed':['Closed Periods','Accepted close records and deal-level financial memory'],
+          'final-settings':['Controller Settings','Dealer-controlled close thresholds, authority, evidence, and retention rules']
+        }[lastFinalView]||['Controller Intelligence','From every deal to a trusted statement'];
         const title=document.getElementById('pageTitle');if(title)title.textContent=meta[0];
         const sub=document.getElementById('pageSubtitle');if(sub)sub.textContent=meta[1];
         document.getElementById('sidebar')?.classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});renderFinalAll();
@@ -8739,11 +8890,11 @@
           currentPortalWorkspace='finalization';document.body.dataset.workspace='finalization';
           const select=document.getElementById('workspaceSelect');if(select)select.value='finalization';
           const mark=document.getElementById('workspaceSwitchMark');if(mark)mark.textContent='✓';
-          const copy=document.getElementById('workspaceSwitchCopy');if(copy)copy.textContent='Funding, title, refunds, promises, and final economics';
-          const role=document.getElementById('sessionRole');if(role)role.textContent='Controller · Deal Finalization';
-          const pill=document.getElementById('demoPill');if(pill)pill.textContent='FINALIZATION DEMO';
-          const search=document.getElementById('searchCopy');if(search)search.textContent='Search CIT, title, refunds, promises, gross';
-          const label=document.getElementById('operatingStatusLabel');if(label)label.textContent='Closeout Control';
+          const copy=document.getElementById('workspaceSwitchCopy');if(copy)copy.textContent='Operating close, controlled variable, cash, liabilities, and statement readiness';
+          const role=document.getElementById('sessionRole');if(role)role.textContent='Controller · Operating Close';
+          const pill=document.getElementById('demoPill');if(pill)pill.textContent='CONTROLLER DEMO';
+          const search=document.getElementById('searchCopy');if(search)search.textContent='Search deals, receivables, payables, payroll, accruals';
+          const label=document.getElementById('operatingStatusLabel');if(label)label.textContent='Close Readiness';
           showFinalView(targetView||lastFinalView);renderNotifications();return;
         }
         previousSwitchPortalWorkspaceV9(workspace,targetView);
@@ -8894,14 +9045,14 @@
       function renderFinalAll(){renderFinalMetrics();renderFinalPipeline();renderFinalPriority();renderFinalLists();renderFinalGross();renderCompleted();}
 
       window.completeFinalItem=function(id){const x=finalState.items.find(x=>x.id===id);if(!x)return;x.status=x.status==='complete'?'open':'complete';saveFinal();renderFinalAll();renderCommandAll();showToast(x.status==='complete'?'Closeout action completed':'Closeout action reopened',`${x.deal} remains preserved in Deal Memory.`,'success');};
-      window.runFinalizationSweep=function(){renderFinalAll();showToast('Closeout sweep complete',`${finalState.items.filter(x=>x.status==='open').length} obligations remain open across the finalization pipeline.`,'success');};
+      window.runFinalizationSweep=function(){renderFinalAll();};
       window.reconcileFinalGross=function(){showToast('Final gross reconciliation complete','Two synthetic economic lines remain outside the configured variance threshold.','warning');renderFinalGross();};
 
       window.printOperatingBrief=function(){
         const openP=commandState.priorities.filter(x=>x.status==='open');
         const win=window.open('','_blank');if(!win){showToast('Print window blocked','Allow pop-ups to open the Operating Brief.','warning');return;}
         const rows=openP.map(x=>`<tr><td>${x.deal}</td><td>${workspaceLabel(x.workspace)}</td><td>${x.title}</td><td>${x.owner}</td><td>${x.due}</td></tr>`).join('');
-        win.document.write(`<!doctype html><html><head><title>ENGENIX Operating Brief</title><style>body{font-family:Arial;color:#132737;margin:32px}header{border-bottom:4px solid #0f7187;padding-bottom:18px;margin-bottom:20px}h1{margin:0;font-size:28px}p{color:#607789}section{margin-top:24px}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #d6e0e6;text-align:left;font-size:12px}th{font-size:10px;text-transform:uppercase;color:#607789}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{border:1px solid #ccd8df;border-radius:8px;padding:12px}.metric strong{display:block;font-size:22px;margin-top:6px}.foot{margin-top:26px;font-size:10px;color:#718695}</style></head><body><header><div style="font-weight:900;letter-spacing:.15em">ENGENIX</div><h1>Operating Command Brief</h1><p>Premier Auto Group · Synthetic demonstration · ${new Date().toLocaleString()}</p></header><div class="metrics"><div class="metric">Open actions<strong>${openP.length}</strong></div><div class="metric">Immediate<strong>${openP.filter(x=>x.type==='immediate').length}</strong></div><div class="metric">Reconciliation<strong>${commandState.reconciliations.filter(x=>x.status==='open').length}</strong></div><div class="metric">Finalization<strong>${finalState.items.filter(x=>x.status==='open').length}</strong></div></div><section><h2>Manager Attention Queue</h2><table><thead><tr><th>Deal</th><th>Layer</th><th>Required Action</th><th>Owner</th><th>Due</th></tr></thead><tbody>${rows}</tbody></table></section><div class="foot">ENGENIX preserves operator judgment under pressure. Synthetic customer demonstration only.</div><script>setTimeout(()=>window.print(),350)<\/script></body></html>`);win.document.close();
+        win.document.write(`<!doctype html><html><head><title>ENGENIX Operating Brief</title><style>body{font-family:Arial;color:#132737;margin:32px}header{border-bottom:4px solid #0f7187;padding-bottom:18px;margin-bottom:20px}h1{margin:0;font-size:28px}p{color:#607789}section{margin-top:24px}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #d6e0e6;text-align:left;font-size:12px}th{font-size:10px;text-transform:uppercase;color:#607789}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{border:1px solid #ccd8df;border-radius:8px;padding:12px}.metric strong{display:block;font-size:22px;margin-top:6px}.foot{margin-top:26px;font-size:10px;color:#718695}</style></head><body><header><div style="font-weight:900;letter-spacing:.15em">ENGENIX</div><h1>Operating Command Brief</h1><p>Premier Auto Group · Synthetic demonstration · ${new Date().toLocaleString()}</p></header><div class="metrics"><div class="metric">Open actions<strong>${openP.length}</strong></div><div class="metric">Immediate<strong>${openP.filter(x=>x.type==='immediate').length}</strong></div><div class="metric">Reconciliation<strong>${commandState.reconciliations.filter(x=>x.status==='open').length}</strong></div><div class="metric">Controller<strong>${finalState.items.filter(x=>x.status==='open').length}</strong></div></div><section><h2>Manager Attention Queue</h2><table><thead><tr><th>Deal</th><th>Layer</th><th>Required Action</th><th>Owner</th><th>Due</th></tr></thead><tbody>${rows}</tbody></table></section><div class="foot">ENGENIX preserves operator judgment under pressure. Synthetic customer demonstration only.</div><script>setTimeout(()=>window.print(),350)<\/script></body></html>`);win.document.close();
       };
 
       document.querySelectorAll('[data-command-view]').forEach(n=>n.addEventListener('click',()=>showCommandView(n.dataset.commandView)));
@@ -8923,7 +9074,238 @@
     })();
   </script>
 
-  <script id="engenix-mobile-drawer-fix-v11-script">
+  
+  <script id="engenix-controller-intelligence-v12-script">
+  (() => {
+    const KEY='engenix-controller-intelligence-v12';
+    const seed={
+      period:'July 2026',
+      closeDay:'Day 2 of 4',
+      exceptions:[
+        {id:'ce1',severity:'critical',type:'True leakage',title:'Booked variable gross is below accepted deal economics',copy:'VC-11987 is $1,420 below the accepted desk and F&I record. $800 is explained; $620 remains unclassified.',amount:1420,owner:'Controller',age:'Today',status:'open',view:'final-controlled-variable'},
+        {id:'ce2',severity:'critical',type:'Cash exposure',title:'Funding proceeds remain outside configured CIT threshold',copy:'PA-44921 has $58,420 outstanding and an approval/stipulation window closing today.',amount:58420,owner:'Dana Ruiz',age:'3 days',status:'open',view:'final-cit'},
+        {id:'ce3',severity:'warning',type:'Liability',title:'Verified customer refund has no accounting treatment',copy:'PF-66218 has $2,186 verified by the administrator but not received, posted, or released.',amount:2186,owner:'Renee Cole',age:'7 days',status:'open',view:'final-cancellations'},
+        {id:'ce4',severity:'warning',type:'Timing',title:'Manufacturer receivable remains unposted',copy:'Two incentive claims totaling $6,840 are approved but not reflected in the current receivable ledger.',amount:6840,owner:'Accounting Clerk',age:'5 days',status:'open',view:'final-ar'},
+        {id:'ce5',severity:'warning',type:'Accrual',title:'Open We-Owe expenses lack complete accrual support',copy:'Six delivered deals contain written obligations. $8,740 is estimated; $6,210 is currently accrued.',amount:2530,owner:'Controller',age:'Month end',status:'open',view:'final-accruals'},
+        {id:'ce6',severity:'warning',type:'Payroll',title:'Commission was calculated before a product cancellation',copy:'FI-8421 payroll uses $4,280 back gross. Realized back gross is currently $3,610.',amount:134,owner:'Payroll Admin',age:'Today',status:'open',view:'final-payroll'},
+        {id:'ce7',severity:'timing',type:'AP match',title:'Recon invoice exceeds the approved estimate',copy:'Vendor invoice is $485 above the appraisal recon estimate and lacks manager approval.',amount:485,owner:'Used Car Manager',age:'4 days',status:'open',view:'final-ap'},
+        {id:'ce8',severity:'timing',type:'Title',title:'Trade payoff per diem created an unposted shortage',copy:'Final payoff exceeded the buyer-order amount by $620.',amount:620,owner:'Title Clerk',age:'6 days',status:'open',view:'final-title'},
+        {id:'ce9',severity:'warning',type:'Remittance',title:'Product remittance does not match contracted election',copy:'One synthetic service-contract remittance is $340 below the contracted provider cost.',amount:340,owner:'F&I Product Admin',age:'3 days',status:'open',view:'final-ap'},
+        {id:'ce10',severity:'timing',type:'Customer promise',title:'Delivered accessory cost remains open',copy:'Cargo organizer installation is unscheduled and the $295 liability remains estimated.',amount:295,owner:'Delivery Coordinator',age:'2 days',status:'open',view:'final-promises'}
+      ],
+      checklist:[
+        ['c1','Lock delivered-deal population','Controller','done'],
+        ['c2','Reconcile contracts in transit and lender shortages','Finance Office','open'],
+        ['c3','Verify customer cash and deposit clearing','Cashier','done'],
+        ['c4','Reconcile trade payoff and lien-release exposure','Title Office','open'],
+        ['c5','Post verified cancellations and customer refunds','Accounting','open'],
+        ['c6','Accrue open We-Owes and customer promises','Controller','open'],
+        ['c7','Match product remittance and provider invoices','F&I Product Admin','done'],
+        ['c8','Reconcile variable gross deal-to-ledger','Controller','open'],
+        ['c9','Review AP unmatched and duplicate-risk invoices','AP Clerk','done'],
+        ['c10','Review AR aging and collectability','AR Clerk','done'],
+        ['c11','Reconcile payroll and commission exceptions','Payroll Admin','open'],
+        ['c12','Review chargeback and cancellation exposure','Controller','done'],
+        ['c13','Complete department statement variance narrative','Controller','done'],
+        ['c14','Controller final signoff and close brief','Controller','open']
+      ].map(x=>({id:x[0],label:x[1],owner:x[2],status:x[3]})),
+      ledger:[
+        ['VC-11987','Cameron Reed',7410,6790,5990,-1420,'True leakage','Controller','open'],
+        ['FI-8421','Morgan Davis',7680,7340,7010,-670,'Cancellation / chargeback','F&I Director','open'],
+        ['PA-44921','Avery Coleman',5340,5340,0,-5340,'Funding timing','Finance Office','open'],
+        ['PF-66218','Taylor Brooks',4810,4810,2624,-2186,'Customer refund liability','Accounting','open'],
+        ['ENX-2847','Jordan Taylor',6120,6120,5710,-410,'Open customer promise','Service Liaison','open'],
+        ['PH-88214','Riley Morgan',6420,6420,6420,0,'Reconciled','Controller','accepted']
+      ].map(x=>({deal:x[0],customer:x[1],expected:x[2],booked:x[3],realized:x[4],variance:x[5],classification:x[6],owner:x[7],status:x[8]})),
+      ar:[
+        ['Lender proceeds','PA-44921',58420,'3 days','Today','Dana Ruiz','Blocked'],
+        ['Manufacturer incentive','JUL-RB-218',4380,'5 days','Jul 22','Accounting Clerk','Approved'],
+        ['Manufacturer incentive','JUL-RB-226',2460,'4 days','Jul 22','Accounting Clerk','Approved'],
+        ['Customer receivable','VC-11987',1180,'2 days','Today','Renee Cole','Correction signed'],
+        ['Product cancellation','PF-66218',2186,'7 days','Pending receipt','Renee Cole','Verified'],
+        ['Warranty receivable','RO-77112',1860,'12 days','Jul 25','Warranty Admin','Submitted'],
+        ['Dealer trade','DT-4408',32750,'8 days','Jul 21','Inventory Admin','Open'],
+        ['Lender reserve','SM-30192',980,'1 day','Jul 20','Finance Office','Pending'],
+        ['Customer refund offset','PH-88214',1420,'Today','Today','Controller','Received']
+      ],
+      ap:[
+        ['Southwest Recon','VC-11987',1985,'Invoice exceeds estimate by $485','No','Used Car Manager','Review'],
+        ['Premier Accessories','FI-8421',295,'Customer promise not scheduled','Partial','Delivery Coordinator','Open'],
+        ['KeyWorks','ENX-2847',410,'Second-key invoice lacks completion evidence','Yes','Service Liaison','Open'],
+        ['Shield VSC Admin','FI-8421',1340,'Provider cost differs by $340','Yes','F&I Product Admin','Mismatch'],
+        ['Metro Title Services','PF-66218',180,'Duplicate invoice risk','No','AP Clerk','Hold'],
+        ['Digital Advertising','JUL-MKT',6200,'Department allocation incomplete','Yes','Marketing Director','Allocate'],
+        ['Transport Logistics','DT-4408',875,'Dealer-trade freight unmatched','No','Inventory Admin','Open']
+      ],
+      payroll:[
+        ['Dana Ruiz','F&I Manager','FI-8421',856,722,-134,'Product cancellation changed realized back gross','Review'],
+        ['Alex Morgan','Desk Manager','VC-11987',392,330,-62,'Final gross below accepted pencil','Review'],
+        ['Carlos Vega','Sales Consultant','PA-44921',410,410,0,'Funding pending; commission held','Held'],
+        ['Marcus Hale','General Manager','JUL-BONUS',1250,1000,-250,'Volume bonus threshold not yet final','Pending']
+      ],
+      accruals:[
+        ['We-Owes and promises',8740,6210,2530,'Six delivered deals'],
+        ['Customer refunds',3606,1420,2186,'Two administrator-verified items'],
+        ['Chargeback reserve',2480,1860,620,'Reserve and early-cancellation exposure'],
+        ['Trade payoff shortage',620,0,620,'Per diem difference'],
+        ['Product remittance',1680,1340,340,'Provider-cost mismatch'],
+        ['Payroll adjustment',446,0,446,'Four commission exceptions'],
+        ['Policy / goodwill',1290,890,400,'Two open customer resolutions'],
+        ['Unmatched vendor work',1540,1055,485,'Recon invoice above estimate']
+      ],
+      statement:[
+        ['New Vehicle',184000,176400,-7600,'Unit volume and front-gross compression','92%'],
+        ['Used Vehicle',142000,134800,-7200,'Recon and over-allowance variance','84%'],
+        ['F&I',126000,118700,-7300,'Product cancellations and reserve','88%'],
+        ['Service',214000,218500,4500,'Labor efficiency and warranty mix','95%'],
+        ['Parts',98000,96500,-1500,'Wholesale timing','94%'],
+        ['Total Store',764000,744900,-19100,'Variable gross and unresolved close items','86%']
+      ],
+      acceptedVariable:false
+    };
+    const clone=v=>JSON.parse(JSON.stringify(v));
+    let state;
+    try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');state=saved&&saved.checklist&&saved.exceptions?Object.assign(clone(seed),saved):clone(seed);}catch(e){state=clone(seed);}
+    const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}};
+    const fmt=v=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(v)||0);
+    const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const completion=()=>Math.round(state.checklist.filter(x=>x.status==='done').length/state.checklist.length*100);
+    const openExceptions=()=>state.exceptions.filter(x=>x.status==='open');
+    const totalExposure=()=>openExceptions().reduce((sum,x)=>sum+x.amount,0);
+
+    function metric(label,value,copy,klass=''){return `<div class="controller-summary-card ${klass}"><small>${label}</small><strong>${value}</strong><span>${copy}</span></div>`;}
+    function renderCloseStrip(){
+      const p=completion(),open=openExceptions();
+      const el=document.getElementById('controllerCloseStrip');if(!el)return;
+      el.innerHTML=`<div class="controller-close-card primary"><small>${esc(state.period)} operating close</small><strong>${p}% ready</strong><span>${esc(state.closeDay)} · ${state.checklist.filter(x=>x.status==='done').length} of ${state.checklist.length} controls complete</span></div><div class="controller-close-card"><small>Statement confidence</small><strong>86%</strong><span>Three material classifications still require controller review</span></div><div class="controller-close-card"><small>Financial exposure</small><strong>${fmt(totalExposure())}</strong><span>${open.length} open exceptions across cash, liabilities, payroll, AP, and AR</span></div><div class="controller-close-card"><small>Unexplained leakage</small><strong>${fmt(620)}</strong><span>Remaining variance after known timing and liability effects</span></div>`;
+    }
+    function renderReadiness(){
+      const p=completion(),done=state.checklist.filter(x=>x.status==='done').length;
+      const hero=document.getElementById('controllerReadinessHero');if(hero)hero.innerHTML=`<div class="controller-readiness-panel"><div class="controller-readiness-ring" style="--p:${p}"><div><strong>${p}%</strong><span>Close ready</span></div></div><div class="controller-readiness-copy"><h2>${p>=90?'Controller signoff approaching':'Material close controls remain open'}</h2><p>${done} of ${state.checklist.length} close controls are evidenced. Funding, refund treatment, gross classification, payroll, and final signoff remain visible.</p><div class="controller-progress-track"><div class="controller-progress-fill" style="width:${p}%"></div></div><div class="controller-progress-meta"><span>${state.period}</span><span>${state.closeDay}</span><span>${state.checklist.length-done} open controls</span></div></div></div>`;
+      const blockers=[
+        ['Funding proceeds','$58,420','PA-44921 remains outside the CIT threshold','Finance Office'],
+        ['Customer refunds','$2,186','Verified cancellation lacks completed treatment','Accounting'],
+        ['Gross classification','$620','True leakage remains unassigned','Controller'],
+        ['Accrual support','$2,530','Open promise cost is not fully accrued','Controller'],
+        ['Payroll review','$446','Commission adjustments remain pending','Payroll Admin']
+      ];
+      const be=document.getElementById('controllerBlockerList');if(be)be.innerHTML=blockers.map(x=>`<div class="controller-blocker"><div class="controller-blocker-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><div><strong>${x[0]} · ${x[1]}</strong><span>${x[2]}</span></div><span class="badge amber">${x[3]}</span></div>`).join('');
+      const deps=[['Finance Office',68,'$59,600 cash exposure'],['Accounting',76,'4 posting / refund controls'],['Title Office',71,'3 payoff / title exceptions'],['F&I Admin',88,'1 remittance mismatch'],['Payroll',82,'4 commission reviews'],['Controller',64,'5 signoff dependencies']];
+      const de=document.getElementById('controllerDepartmentReadiness');if(de)de.innerHTML=deps.map(x=>`<div class="controller-dept"><div class="controller-dept-head"><strong>${x[0]}</strong><b>${x[1]}%</b></div><div class="controller-dept-bar"><span style="width:${x[1]}%"></span></div><div class="controller-dept-foot"><span>${x[2]}</span><span>${x[1]>=85?'Within window':'Action required'}</span></div></div>`).join('');
+      const nav=document.getElementById('controllerReadinessNav');if(nav)nav.textContent=p+'%';
+    }
+    function renderExceptions(){
+      const open=openExceptions(),trueLeak=open.filter(x=>x.type==='True leakage').reduce((s,x)=>s+x.amount,0),cash=open.filter(x=>x.type==='Cash exposure').reduce((s,x)=>s+x.amount,0),liab=open.filter(x=>['Liability','Accrual'].includes(x.type)).reduce((s,x)=>s+x.amount,0);
+      const me=document.getElementById('controllerExceptionMetrics');if(me)me.innerHTML=[metric('Open exceptions',open.length,'Across controller operating close'),metric('Cash exposure',fmt(cash),'Unreceived or unsupported proceeds'),metric('Liability / accrual',fmt(liab),'Customer and operating obligations'),metric('True leakage',fmt(trueLeak),'Permanent economic loss under review'),metric('Timing differences',open.filter(x=>x.type==='Timing'||x.severity==='timing').length,'Expected to reverse or post')].join('');
+      const el=document.getElementById('controllerExceptionList');if(el)el.innerHTML=state.exceptions.map(x=>`<article class="controller-exception ${x.severity}" style="opacity:${x.status==='resolved'?'.6':'1'}"><span class="controller-exception-mark"></span><div><strong>${esc(x.title)}</strong><p>${esc(x.copy)}</p><div class="controller-exception-meta"><span class="badge ${x.severity==='critical'?'red':x.severity==='warning'?'amber':'blue'}">${esc(x.type)}</span><span class="badge blue">${fmt(x.amount)}</span><span class="badge">Owner: ${esc(x.owner)}</span><span class="badge">${esc(x.age)}</span>${x.status==='resolved'?'<span class="badge green">RESOLVED</span>':''}</div></div><div class="controller-exception-actions"><button class="button small" type="button" onclick="showFinalView('${x.view}')">Open source</button><button class="button small ${x.status==='resolved'?'':'final-primary'}" type="button" onclick="resolveControllerException('${x.id}')">${x.status==='resolved'?'Reopen':'Record resolution'}</button></div></article>`).join('');
+      const nav=document.getElementById('controllerExceptionNav');if(nav)nav.textContent=open.length;
+    }
+    function renderControlledVariable(){
+      const bridge=[['Desk expected',7410,'Accepted economics',''],['Contract change',0,'No front change',''],['Product variance',-340,'Provider cost / selection','negative'],['Reserve shortfall',-300,'Lender funding result','negative'],['Cancellation',-160,'Realized chargeback','negative'],['Posting / accrual',-620,'Unclassified difference','negative'],['Realized gross',5990,'Current outcome','']];
+      const start=7410,end=5990,variance=end-start;
+      const me=document.getElementById('controlledVariableMetrics');if(me)me.innerHTML=[metric('Expected gross',fmt(start),'Desk + F&I accepted economics'),metric('Realized gross',fmt(end),'Current financial outcome'),metric('Total variance',fmt(variance),'19.2% below accepted economics'),metric('Explained movement',fmt(-800),'Known reserve, product, and cancellation effects'),metric('Unexplained leakage',fmt(-620),'Controller classification required')].join('');
+      const wf=document.getElementById('controlledVariableWaterfall');if(wf)wf.innerHTML=bridge.map((x,i)=>`<div class="controlled-step ${x[3]}" style="--h:${Math.max(22,Math.min(96,Math.abs(x[1])/(i===0||i===6?80:8)))}%"><small>${x[0]}</small><strong>${x[1]>=0&&i>0&&i<6?'+':''}${fmt(x[1])}</strong><span>${x[2]}</span></div>`).join('');
+      const causes=[['Product-cost variance',-340,'True leakage · provider remittance differs from contracted economics'],['Finance reserve shortfall',-300,'True leakage · funded reserve below expected amount'],['Cancellation effect',-160,'Realized liability · early product cancellation'],['Unclassified posting difference',-620,'Open · source evidence and controller treatment required']];
+      const ce=document.getElementById('controlledVariableCauses');if(ce)ce.innerHTML=causes.map(x=>`<div class="controller-cause-row"><div><strong>${x[0]}</strong><span>${x[2]}</span></div><span class="badge ${x[3]?'red':'amber'}">${fmt(x[1])}</span></div>`).join('');
+      const de=document.getElementById('controlledVariableDecision');if(de)de.innerHTML=`<div class="controller-decision-callout"><strong>${state.acceptedVariable?'Controller decision recorded':'Controller review required'}</strong><p>${state.acceptedVariable?'The known movements were accepted and the remaining $620 was assigned for correction before final close.':'Accept known timing and liability movements, assign the unclassified difference, or reopen the source deal record.'}</p></div><div style="margin-top:10px;display:grid;gap:8px"><button class="button final-primary" type="button" onclick="acceptControlledVariable()">${state.acceptedVariable?'Reopen Controller Decision':'Accept & Assign Remaining Variance'}</button><button class="button" type="button" onclick="showFinalView('final-deal-ledger')">Inspect Source Deals</button></div>`;
+    }
+    function renderLedger(){
+      const open=state.ledger.filter(x=>x.status!=='accepted'),variance=state.ledger.reduce((s,x)=>s+x.variance,0);
+      const me=document.getElementById('dealLedgerMetrics');if(me)me.innerHTML=[metric('Deals reconciled',state.ledger.length-open.length,`of ${state.ledger.length} sampled records`),metric('Open variances',open.length,'Deal-level controller review'),metric('Net variance',fmt(variance),'Expected to realized'),metric('Timing / liability',fmt(-8616),'Expected to reverse, post, or be paid'),metric('True leakage',fmt(-2090),'Economic loss requiring explanation')].join('');
+      const el=document.getElementById('dealLedgerRows');if(el)el.innerHTML=state.ledger.map(x=>`<tr><td><span class="mono">${x.deal}</span><div class="cell-sub">${x.customer}</div></td><td>${fmt(x.expected)}</td><td>${fmt(x.booked)}</td><td>${fmt(x.realized)}</td><td class="${x.variance<0?'variance-negative':'variance-positive'}">${fmt(x.variance)}</td><td><span class="badge ${x.classification==='Reconciled'?'green':x.classification.includes('timing')?'blue':'amber'}">${x.classification}</span></td><td>${x.owner}</td><td><button class="button small" type="button" onclick="acceptLedgerVariance('${x.deal}')">${x.status==='accepted'?'Reopen':'Accept treatment'}</button></td></tr>`).join('');
+    }
+    function renderAr(){
+      const total=state.ar.reduce((s,x)=>s+x[2],0),aged=state.ar.filter(x=>parseInt(x[3])>=5).reduce((s,x)=>s+x[2],0);
+      const me=document.getElementById('controllerArMetrics');if(me)me.innerHTML=[metric('Open receivables',fmt(total),`${state.ar.length} synthetic balances`),metric('Over 5 days',fmt(aged),'Aging beyond configured attention window'),metric('Lender proceeds',fmt(59600),'CIT and shortage exposure'),metric('Manufacturer',fmt(6840),'Approved incentive claims'),metric('Customer / product',fmt(4786),'Refunds, shortages, and offsets')].join('');
+      const el=document.getElementById('controllerArRows');if(el)el.innerHTML=state.ar.map(x=>`<tr><td>${x[0]}</td><td><span class="mono">${x[1]}</span></td><td>${fmt(x[2])}</td><td>${x[3]}</td><td>${x[4]}</td><td>${x[5]}</td><td><span class="badge ${x[6]==='Blocked'?'red':x[6]==='Received'?'green':'amber'}">${x[6]}</span></td></tr>`).join('');
+    }
+    function renderAp(){
+      const total=state.ap.reduce((s,x)=>s+x[2],0),unaccrued=state.ap.filter(x=>x[4]==='No').reduce((s,x)=>s+x[2],0);
+      const me=document.getElementById('controllerApMetrics');if(me)me.innerHTML=[metric('AP exceptions',state.ap.length,'Invoices requiring match or approval'),metric('Exception value',fmt(total),'Synthetic invoice population'),metric('Not accrued',fmt(unaccrued),'Potential current-period expense'),metric('Duplicate risk',fmt(180),'One invoice on hold'),metric('Deal-linked',5,'Exceptions attached to delivered deals')].join('');
+      const el=document.getElementById('controllerApRows');if(el)el.innerHTML=state.ap.map(x=>`<tr><td>${x[0]}</td><td><span class="mono">${x[1]}</span></td><td>${fmt(x[2])}</td><td>${x[3]}</td><td><span class="badge ${x[4]==='Yes'?'green':x[4]==='Partial'?'amber':'red'}">${x[4]}</span></td><td>${x[5]}</td><td><span class="badge amber">${x[6]}</span></td></tr>`).join('');
+    }
+    function renderPayroll(){
+      const calc=state.payroll.reduce((s,x)=>s+x[3],0),posted=state.payroll.reduce((s,x)=>s+x[4],0);
+      const me=document.getElementById('controllerPayrollMetrics');if(me)me.innerHTML=[metric('Calculated payroll',fmt(calc),'Based on configured synthetic pay plans'),metric('Posted / held',fmt(posted),'Current payroll record'),metric('Variance',fmt(posted-calc),'Four items require review'),metric('Chargeback effect',fmt(134),'Product cancellation adjustment'),metric('Final signoff','Pending','Controller and payroll authority')].join('');
+      const el=document.getElementById('controllerPayrollRows');if(el)el.innerHTML=state.payroll.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td><td><span class="mono">${x[2]}</span></td><td>${fmt(x[3])}</td><td>${fmt(x[4])}</td><td class="${x[5]<0?'variance-negative':''}">${fmt(x[5])}</td><td>${x[6]}</td><td><span class="badge ${x[7]==='Held'?'red':'amber'}">${x[7]}</span></td></tr>`).join('');
+    }
+    function renderAccruals(){
+      const estimate=state.accruals.reduce((s,x)=>s+x[1],0),accrued=state.accruals.reduce((s,x)=>s+x[2],0),gap=state.accruals.reduce((s,x)=>s+x[3],0);
+      const me=document.getElementById('controllerAccrualMetrics');if(me)me.innerHTML=[metric('Estimated liabilities',fmt(estimate),'Current operating obligations'),metric('Accrued',fmt(accrued),'Supported current-period expense'),metric('Accrual gap',fmt(gap),'Evidence or posting remains open'),metric('Customer-related',fmt(4716),'Promises and refunds'),metric('Economic adjustments',fmt(1891),'Chargeback, payroll, payoff, and remittance')].join('');
+      const el=document.getElementById('controllerAccrualRows');if(el)el.innerHTML=state.accruals.map(x=>`<article class="controller-liability"><small>${x[0]}</small><strong>${fmt(x[1])}</strong><p>${x[4]}</p><div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap"><span class="badge green">Accrued ${fmt(x[2])}</span><span class="badge ${x[3]?'amber':'green'}">Gap ${fmt(x[3])}</span></div></article>`).join('');
+    }
+    function renderStatement(){
+      const total=state.statement[state.statement.length-1],variance=total[3];
+      const me=document.getElementById('statementMetrics');if(me)me.innerHTML=[metric('Operating plan',fmt(total[1]),'Department contribution plan'),metric('Current estimate',fmt(total[2]),'Developing statement view'),metric('Variance',fmt(variance),'2.5% below plan'),metric('Close confidence','86%','Material controls still open'),metric('Unclassified effect',fmt(-620),'Controller assignment required')].join('');
+      const bridge=[['Operating plan',764000,''],['Volume / mix',-9800,'negative'],['Front gross compression',-7600,'negative'],['F&I cancellations / reserve',-7300,'negative'],['Fixed operations outperformance',4500,''],['Expense / accrual timing',1100,''],['Current estimate',744900,'']];
+      const be=document.getElementById('statementBridge');if(be)be.innerHTML=bridge.map(x=>`<div class="controller-cause-row"><div><strong>${x[0]}</strong><span>${x[0]==='Operating plan'||x[0]==='Current estimate'?'Statement anchor':'Current explainable driver'}</span></div><span class="badge ${x[2]==='negative'?'red':'green'}">${x[1]>0&&x[0]!=='Operating plan'&&x[0]!=='Current estimate'?'+':''}${fmt(x[1])}</span></div>`).join('');
+      const ne=document.getElementById('statementNarrative');if(ne)ne.innerHTML=`<div class="controller-decision-callout"><strong>Variable gross is the primary current-period pressure.</strong><p>New and used variable departments are ${fmt(-14800)} below plan. F&I contributes another ${fmt(-7300)} of pressure from cancellations and reserve. Fixed operations offsets ${fmt(4500)}. ${fmt(-620)} remains unclassified pending Controlled Variable review.</p></div><div style="margin-top:10px" class="activity-list"><div class="activity-item"><div class="activity-icon">1</div><div class="activity-copy"><strong>What changed:</strong> Unit volume, front-gross compression, and realized back-end economics.</div></div><div class="activity-item"><div class="activity-icon">2</div><div class="activity-copy"><strong>What is timing:</strong> CIT, manufacturer receivables, and open accrual support.</div></div><div class="activity-item"><div class="activity-icon">3</div><div class="activity-copy"><strong>What leadership should watch:</strong> ${fmt(totalExposure())} in open financial exceptions.</div></div></div>`;
+      const el=document.getElementById('statementRows');if(el)el.innerHTML=state.statement.map(x=>`<tr><td><strong>${x[0]}</strong></td><td>${fmt(x[1])}</td><td>${fmt(x[2])}</td><td class="${x[3]<0?'variance-negative':'variance-positive'}">${fmt(x[3])}</td><td>${x[4]}</td><td><span class="badge ${parseInt(x[5])>=90?'green':'amber'}">${x[5]}</span></td></tr>`).join('');
+    }
+    function renderChecklist(){
+      const done=state.checklist.filter(x=>x.status==='done').length,p=completion();
+      const se=document.getElementById('controllerChecklistSummary');if(se)se.innerHTML=`<div class="controller-close-card primary"><small>Month-end close</small><strong>${p}%</strong><span>${done} of ${state.checklist.length} controls evidenced</span></div><div class="controller-close-card"><small>Open controls</small><strong>${state.checklist.length-done}</strong><span>Owned actions before signoff</span></div><div class="controller-close-card"><small>Controller signoff</small><strong>${p===100?'Ready':'Pending'}</strong><span>Final authority remains human-controlled</span></div><div class="controller-close-card"><small>Period</small><strong>${state.period}</strong><span>${state.closeDay}</span></div>`;
+      const el=document.getElementById('controllerChecklistRows');if(el)el.innerHTML=state.checklist.map((x,i)=>`<button class="controller-check-item ${x.status==='done'?'done':''}" type="button" onclick="toggleControllerCheck('${x.id}')"><span class="controller-check-icon">${x.status==='done'?'✓':String(i+1).padStart(2,'0')}</span><span><strong>${x.label}</strong><span>Owner: ${x.owner} · ${x.status==='done'?'Evidence recorded':'Awaiting completion evidence'}</span></span><span class="badge ${x.status==='done'?'green':'amber'}">${x.status==='done'?'COMPLETE':'OPEN'}</span></button>`).join('');
+      const nav=document.getElementById('controllerChecklistNav');if(nav)nav.textContent=`${done}/${state.checklist.length}`;
+    }
+    function renderBrief(){
+      const p=completion(),open=openExceptions();
+      const el=document.getElementById('controllerCloseBriefPreview');if(el)el.innerHTML=`<article class="controller-brief"><div class="controller-brief-head"><div><div style="font-weight:900;letter-spacing:.14em">ENGENIX</div><h2>${state.period} Controller Close Brief</h2><p style="margin:5px 0 0;color:var(--muted);font-size:9px">Premier Auto Group · Synthetic operating close demonstration</p></div><span class="badge ${p>=90?'green':'amber'}">${p}% CLOSE READY</span></div><div class="controller-brief-grid">${metric('Statement estimate',fmt(744900),'Current developing result')}${metric('Plan variance',fmt(-19100),'2.5% below operating plan')}${metric('Open exposure',fmt(totalExposure()),`${open.length} exceptions`)}${metric('Unexplained leakage',fmt(-620),'Controller classification required')}</div><div class="controller-brief-section"><h3>Executive readout</h3><div class="controller-decision-callout"><strong>Variable operations remain the primary pressure on the month.</strong><p>Funding timing, customer liabilities, and accrual gaps are visible and owned. Fixed operations partially offsets variable pressure. The statement should not be treated as final until five material close controls are completed.</p></div></div><div class="controller-brief-section"><h3>Top close blockers</h3>${open.slice(0,5).map(x=>`<div class="controller-cause-row"><div><strong>${x.title}</strong><span>${x.owner} · ${x.type}</span></div><span class="badge amber">${fmt(x.amount)}</span></div>`).join('')}</div><div class="controller-brief-section"><h3>Leadership decisions</h3><div class="activity-list"><div class="activity-item"><div class="activity-icon">1</div><div class="activity-copy">Assign the remaining ${fmt(620)} Controlled Variable difference.</div></div><div class="activity-item"><div class="activity-icon">2</div><div class="activity-copy">Protect ${fmt(58420)} in lender proceeds before the approval window closes.</div></div><div class="activity-item"><div class="activity-icon">3</div><div class="activity-copy">Complete customer refund and open-promise accounting treatment.</div></div></div></div></article>`;
+    }
+    function renderAll(){renderCloseStrip();renderReadiness();renderExceptions();renderControlledVariable();renderLedger();renderAr();renderAp();renderPayroll();renderAccruals();renderStatement();renderChecklist();renderBrief();}
+
+    window.resolveControllerException=id=>{const x=state.exceptions.find(v=>v.id===id);if(!x)return;x.status=x.status==='resolved'?'open':'resolved';save();renderAll();if(window.showToast)showToast(x.status==='resolved'?'Controller exception resolved':'Controller exception reopened',x.title,'success');};
+    window.acceptControlledVariable=()=>{state.acceptedVariable=!state.acceptedVariable;save();renderAll();if(window.showToast)showToast(state.acceptedVariable?'Controlled Variable decision recorded':'Controlled Variable decision reopened',state.acceptedVariable?'Known movements accepted; $620 assigned for source correction.':'Controller review is active again.','success');};
+    window.acceptLedgerVariance=deal=>{const x=state.ledger.find(v=>v.deal===deal);if(!x)return;x.status=x.status==='accepted'?'open':'accepted';save();renderAll();if(window.showToast)showToast(x.status==='accepted'?'Ledger treatment accepted':'Ledger treatment reopened',`${deal} remains attached to the source decision record.`,'success');};
+    window.toggleControllerCheck=id=>{const x=state.checklist.find(v=>v.id===id);if(!x)return;x.status=x.status==='done'?'open':'done';save();renderAll();if(window.showToast)showToast(x.status==='done'?'Close control completed':'Close control reopened',x.label,'success');};
+    window.completeNextCloseItem=()=>{const x=state.checklist.find(v=>v.status!=='done');if(!x){if(window.showToast)showToast('Operating close complete','All synthetic controls are evidenced.','success');return;}x.status='done';save();renderAll();if(window.showToast)showToast('Next close control completed',x.label,'success');};
+    window.resetControllerDemo=()=>{state=clone(seed);save();renderAll();if(window.showToast)showToast('Controller demo reset','Synthetic close controls and exceptions returned to their starting state.','success');};
+    window.printControllerCloseBrief=()=>{
+      const p=completion(),open=openExceptions();const win=window.open('','_blank');if(!win){if(window.showToast)showToast('Print window blocked','Allow pop-ups to open the Controller Close Brief.','warning');return;}
+      const rows=open.slice(0,8).map(x=>`<tr><td>${esc(x.type)}</td><td>${esc(x.title)}</td><td>${fmt(x.amount)}</td><td>${esc(x.owner)}</td><td>${esc(x.age)}</td></tr>`).join('');
+      win.document.write(`<!doctype html><html><head><title>ENGENIX Controller Close Brief</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>@page{size:Letter portrait;margin:.5in}body{font-family:Arial;color:#132737;margin:0}header{border-bottom:4px solid #b97720;padding-bottom:16px}.brand{font-weight:900;letter-spacing:.14em}.meta{color:#627789;font-size:11px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}.card{border:1px solid #ccd8df;border-radius:8px;padding:10px}.card small{font-size:8px;text-transform:uppercase;color:#627789}.card strong{display:block;margin-top:5px;font-size:19px}h1{margin:6px 0}h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid #ccd8df;padding-bottom:6px;margin-top:20px}table{width:100%;border-collapse:collapse}th,td{padding:7px;border-bottom:1px solid #dce4e9;text-align:left;font-size:9px;vertical-align:top}th{font-size:7px;text-transform:uppercase;color:#627789}.callout{padding:11px;border:1px solid #dec9a9;border-radius:8px;background:#fff9ef;font-size:10px;line-height:1.5}.foot{margin-top:20px;padding-top:8px;border-top:1px solid #ccd8df;font-size:7px;color:#718695}</style></head><body><header><div class="brand">ENGENIX</div><h1>${esc(state.period)} Controller Close Brief</h1><div class="meta">Premier Auto Group · Synthetic demonstration · ${new Date().toLocaleString()}</div></header><div class="grid"><div class="card"><small>Close readiness</small><strong>${p}%</strong></div><div class="card"><small>Statement estimate</small><strong>${fmt(744900)}</strong></div><div class="card"><small>Plan variance</small><strong>${fmt(-19100)}</strong></div><div class="card"><small>Open exposure</small><strong>${fmt(totalExposure())}</strong></div></div><h2>Controller narrative</h2><div class="callout"><strong>Variable operations remain the primary pressure on the month.</strong><br>Funding timing, customer liabilities, accrual gaps, and payroll adjustments are visible and owned. The statement should not be treated as final until the remaining controls are evidenced and the ${fmt(620)} Controlled Variable difference is assigned.</div><h2>Material exceptions</h2><table><thead><tr><th>Type</th><th>Exception</th><th>Impact</th><th>Owner</th><th>Age</th></tr></thead><tbody>${rows}</tbody></table><h2>Leadership decisions</h2><table><tbody><tr><td>1</td><td>Protect lender proceeds before approval and stipulation windows close.</td></tr><tr><td>2</td><td>Complete customer refund, promise, and accrual treatment.</td></tr><tr><td>3</td><td>Assign unexplained gross movement before controller signoff.</td></tr></tbody></table><div class="foot">ENGENIX is an operating intelligence layer. The dealership accounting system remains the book of record, and controller judgment remains authoritative.</div><script>setTimeout(()=>window.print(),350)<\/script></body></html>`);win.document.close();
+    };
+
+    // Extend the current Finalization workspace into Controller Intelligence without changing its internal route key.
+    const baseShowFinal=window.showFinalView;
+    window.showFinalView=function(view){
+      baseShowFinal(view);
+      const meta={
+        'final-command':['Controller Command','Operating close, financial exceptions, cash protection, and statement readiness'],
+        'final-close-readiness':['Close Readiness','Explainable controller controls and blockers before final signoff'],
+        'final-exceptions':['Controller Exception Queue','Timing differences, true leakage, liabilities, cash exposure, and ownership'],
+        'final-controlled-variable':['Controlled Variable','Expected economics through booked and realized outcome'],
+        'final-deal-ledger':['Deal-to-Ledger Reconciliation','Connect every booked number to the operating decision that created it'],
+        'final-ar':['Accounts Receivable Intelligence','Aging, collectability, source, owner, and expected resolution'],
+        'final-ap':['Accounts Payable Intelligence','Deal-linked expenses, invoice matching, accruals, and duplicate risk'],
+        'final-payroll':['Payroll & Commission Reconciliation','Pay-plan calculations against realized economics'],
+        'final-accruals':['Accruals & Liabilities','Estimated, verified, accrued, paid, and unresolved obligations'],
+        'final-statement':['Statement Readiness','Explain the developing statement and current confidence'],
+        'final-checklist':['Month-End Checklist','Evidence and ownership for every material close control'],
+        'final-close-brief':['Controller Close Brief','Leadership-ready close narrative, exceptions, and decisions'],
+        'final-cit':['Contracts in Transit','Funding aging, shortages, lender response, and proceeds reconciliation'],
+        'final-title':['Trade & Payoff','Payoff, lien release, title packet, and ownership-transfer exposure'],
+        'final-cancellations':['Cancellations & Chargebacks','Customer refunds, provider verification, and economic exposure'],
+        'final-promises':['Customer Promise Control','We-Owes, liabilities, accruals, and completion evidence'],
+        'final-gross':['Controlled Variable · Legacy Deal View','Expected, contracted, funded, and accounting economics'],
+        'final-completed':['Closed Periods','Accepted close records and searchable financial operating memory'],
+        'final-settings':['Controller Settings','Close thresholds, evidence, authority, and retention rules']
+      }[view];
+      if(meta){const t=document.getElementById('pageTitle');if(t)t.textContent=meta[0];const sub=document.getElementById('pageSubtitle');if(sub)sub.textContent=meta[1];}
+      renderAll();
+    };
+
+    const baseRun=window.runFinalizationSweep;
+    window.runFinalizationSweep=function(){if(baseRun)baseRun();renderAll();if(window.showToast)setTimeout(()=>showToast('Operating close sweep complete',`${completion()}% ready · ${openExceptions().length} financial exceptions remain open.`,'success'),50);};
+
+    // Upgrade visible legacy language on load.
+    const option=[...document.querySelectorAll('#workspaceSelect option')].find(o=>o.value==='finalization');if(option)option.textContent='Controller Intelligence';
+    document.querySelectorAll('[aria-label*="Deal Finalization"]').forEach(el=>el.setAttribute('aria-label',el.getAttribute('aria-label').replace('Deal Finalization','Controller Intelligence')));
+    renderAll();
+  })();
+  </script>
+
+<script id="engenix-mobile-drawer-fix-v11-script">
   (() => {
     const sidebar = document.getElementById('sidebar');
     const oldMenuButton = document.getElementById('mobileMenu');
