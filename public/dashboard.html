@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="dashboard-build" content="2026.07.19-mobile-drawer-fix-v11">
+  <meta name="dashboard-build" content="2026.07.19-controller-contrast-routing-fix-v13">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -17,7 +17,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal Mobile Drawer Fix V11</title>
+    <title>ENGENIX | Unified Portal Controller Contrast & Routing Fix V13</title>
   <style>
     :root {
       --bg: #071018;
@@ -3824,6 +3824,55 @@
     @media(max-width:420px){.controller-close-strip,.controller-summary-grid,.controller-checklist-summary,.controller-brief-grid{grid-template-columns:1fr}.controlled-waterfall{grid-template-columns:1fr 1fr}.controller-check-item{grid-template-columns:28px minmax(0,1fr)}.controller-check-item>.badge{grid-column:2;justify-self:start}}
   </style>
 
+
+  <style id="engenix-controller-contrast-routing-fix-v13-styles">
+    /* Controller cards use panel colors, so light mode must not inherit the dark final-hero foreground. */
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero {
+      color: var(--text);
+      background:
+        radial-gradient(circle at 88% 14%, rgba(185,119,32,.10), transparent 30%),
+        radial-gradient(circle at 95% 90%, rgba(24,117,111,.09), transparent 28%),
+        linear-gradient(105deg, rgba(185,119,32,.055), var(--panel) 58%, rgba(24,117,111,.045));
+    }
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero h1 {
+      color: #172b3c;
+      text-shadow: none;
+    }
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero p {
+      color: #687f91;
+    }
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero .final-kicker {
+      color: #a76712;
+    }
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero .controller-trust-line,
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero .controller-trust-line span {
+      color: #5a7183;
+    }
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero .controller-trust-line span {
+      background: rgba(255,255,255,.76);
+      border-color: rgba(85,111,132,.18);
+    }
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero .final-hero-actions .button:not(.final-primary) {
+      color: #172b3c;
+      background: rgba(255,255,255,.84);
+      border-color: rgba(85,111,132,.20);
+    }
+    html[data-theme="light"] body[data-workspace="finalization"] .controller-hero .final-hero-actions .button:not(.final-primary):hover {
+      background: #fff;
+      border-color: rgba(185,119,32,.34);
+    }
+    @media (max-width: 760px) {
+      html[data-theme="light"] body[data-workspace="finalization"] .controller-hero h1 {
+        font-size: clamp(29px, 9.2vw, 42px);
+        line-height: 1.04;
+      }
+      html[data-theme="light"] body[data-workspace="finalization"] .controller-hero p {
+        font-size: 15px;
+        line-height: 1.55;
+      }
+    }
+  </style>
+
 </head>
 <body class="auth-locked operator-friendly" data-workspace="command">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
@@ -7521,7 +7570,7 @@
       const label=document.getElementById('operatingStatusLabel'); if(label) label.textContent=currentPortalWorkspace==='desking'?'Decision Engine':'Operating Status';
       if(currentPortalWorkspace==='desking'){ renderAllDesk(); showDeskView(targetView||lastDeskView); } else { renderNotifications(); showView(targetView||lastComplianceView); }
       renderNotifications();
-      showToast(currentPortalWorkspace==='desking'?'Desking Intelligence opened':'Compliance Intelligence opened',currentPortalWorkspace==='desking'?'Same portal navigation, new decision-support cockpit.':'Deal control and audit workspace restored.','success');
+      /* V13: workspace switches are intentionally silent. */
     }
 
     function selectDeskProfile(profile){ const preset=deskProfilePresets[profile]; if(!preset)return; deskState.profile=profile; Object.assign(deskState,preset); deskState.creditFile=null; deskState.snapshotSavedAt=null; deskState.snapshotSignature=null; deskPathways=[]; syncDeskInputsFromState(); deskAddEvent('Synthetic credit profile changed',`${preset.label} profile loaded with bureau ${preset.bureauScore} and auto score ${preset.autoScore}.`,'fa-id-card'); renderAllDesk(); }
@@ -8031,7 +8080,7 @@
       const pill=document.getElementById('demoPill');if(pill)pill.textContent='F&I DEMO';
       const search=document.getElementById('searchCopy');if(search)search.textContent='Search F&I deals, products, prior contracts';
       const label=document.getElementById('operatingStatusLabel');if(label)label.textContent='Menu Intelligence';
-      renderAllFinance();showFinanceView(targetView||lastFinanceView);renderNotifications();showToast('F&I Intelligence opened','Same portal navigation, refined ownership-decision cockpit.','success');
+      renderAllFinance();showFinanceView(targetView||lastFinanceView);renderNotifications();/* V13: workspace switches are intentionally silent. */
     };
 
     function renderFinanceActiveBanner(){
@@ -9344,6 +9393,24 @@
     document.addEventListener('keydown', event => { if (event.key === 'Escape') setOpen(false); });
     window.addEventListener('resize', () => { if (!isMobile()) setOpen(false); }, { passive: true });
     window.addEventListener('pageshow', () => setOpen(false));
+  })();
+  </script>
+
+
+  <script id="engenix-controller-contrast-routing-fix-v13-script">
+  (() => {
+    const select = document.getElementById('workspaceSelect');
+    if (!select || select.dataset.v13RoutingGuard === 'true') return;
+    select.dataset.v13RoutingGuard = 'true';
+    select.addEventListener('change', () => {
+      const requested = select.value;
+      requestAnimationFrame(() => {
+        if (document.body.dataset.workspace !== requested) {
+          document.body.dataset.workspace = requested;
+        }
+        select.value = requested;
+      });
+    });
   })();
   </script>
 
