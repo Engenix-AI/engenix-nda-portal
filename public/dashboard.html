@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.18-completion-watch-v5">
+  <meta name="dashboard-build" content="2026.07.19-unified-portal-desking-v1">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Dealer Portal + Completion Watch Demo</title>
+    <title>ENGENIX | Unified Dealer Portal Demo</title>
   <style>
     :root {
       --bg: #071018;
@@ -1998,8 +1998,179 @@
       .journey-metrics { grid-template-columns: 1fr 1fr; }
     }
   </style>
+
+  <style id="engenix-desking-intelligence-v1">
+    /* Unified workspace switcher */
+    .product-switcher { margin-top:10px; padding:10px; border:1px solid var(--line); border-radius:12px; background:var(--panel-2); position:relative; }
+    .product-switcher label { display:block; color:var(--muted-2); font-size:7.5px; font-weight:850; letter-spacing:.11em; text-transform:uppercase; }
+    .product-switch-select { margin-top:7px; display:grid; grid-template-columns:28px minmax(0,1fr); gap:8px; align-items:center; }
+    .product-switch-mark { width:28px; height:28px; border-radius:9px; display:grid; place-items:center; color:var(--blue); background:var(--blue-soft); font-size:12px; font-weight:900; }
+    .product-switch-select select { width:100%; height:32px; padding:0 28px 0 8px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:var(--panel); outline:none; font-size:10px; font-weight:780; cursor:pointer; }
+    .product-switch-copy { margin-top:7px; color:var(--muted); font-size:8px; line-height:1.4; }
+    .desking-shell { display:none !important; }
+    body[data-workspace="desking"] .compliance-shell { display:none !important; }
+    body[data-workspace="desking"] .desking-shell { display:block !important; }
+    body[data-workspace="desking"] button.desking-shell { display:grid !important; }
+    body[data-workspace="desking"] nav.desking-shell { display:block !important; }
+    body[data-workspace="desking"] .desk-active-banner.desking-shell { display:flex !important; }
+    body[data-workspace="desking"] .view:not(.desking-view) { display:none !important; }
+    body[data-workspace="compliance"] .desking-view { display:none !important; }
+    body[data-workspace="desking"] .product-switch-mark { color:#7257e8; background:rgba(114,87,232,.12); }
+    body[data-workspace="desking"] .desk-nav-item.active { color:var(--text); background:linear-gradient(90deg,rgba(114,87,232,.16),rgba(217,123,49,.055)); border-color:rgba(114,87,232,.22); box-shadow:inset 3px 0 0 #7257e8; }
+    body[data-workspace="desking"] .desk-primary-action { border-color:rgba(114,87,232,.22); background:linear-gradient(135deg,rgba(114,87,232,.13),rgba(217,123,49,.055)); }
+    body[data-workspace="desking"] .desk-primary-action .sidebar-primary-icon { color:#7257e8; background:rgba(114,87,232,.12); }
+    html[data-theme="light"] body[data-workspace="desking"] .sidebar { background:linear-gradient(180deg,#fcfbff,#f4f2fb 62%,#f7f5f1); }
+    html[data-theme="dark"] body[data-workspace="desking"] .sidebar { background:linear-gradient(180deg,#0d0d19,#0a101b 64%,#12100f); }
+    body[data-workspace="desking"] .demo-pill { color:#6e4ccf; background:rgba(114,87,232,.09); border-color:rgba(114,87,232,.2); }
+
+    /* Desking identity */
+    .fa-car::before { content:"▰"; }
+    .fa-coins::before { content:"◉"; }
+    .fa-calculator::before { content:"▦"; }
+    .fa-landmark::before { content:"▥"; }
+    .fa-bolt::before { content:"ϟ"; }
+    .fa-book-open::before { content:"▱"; }
+    .fa-paper-plane::before { content:"➤"; }
+    .fa-arrow-right-arrow-left::before { content:"⇄"; }
+    .desk-shell { display:grid; gap:12px; --desk-violet:#7257e8; --desk-electric:#168ed8; --desk-copper:#d97b31; --desk-violet-soft:rgba(114,87,232,.105); --desk-copper-soft:rgba(217,123,49,.10); }
+    .desk-eyebrow, .desk-kicker { color:#7257e8; }
+    .desk-badge { color:#674cd1; background:rgba(114,87,232,.10); border-color:rgba(114,87,232,.20); }
+    .desk-button { border-color:rgba(114,87,232,.20); background:rgba(114,87,232,.065); }
+    .desk-button:hover { border-color:rgba(114,87,232,.36); background:rgba(114,87,232,.11); }
+    .desk-primary { color:#fff; border-color:rgba(255,255,255,.14); background:linear-gradient(135deg,#7257e8,#506ed8 58%,#168ed8); box-shadow:0 10px 24px rgba(80,86,210,.22); }
+    .desk-primary:hover { color:#fff; background:linear-gradient(135deg,#7d63ec,#5879df 58%,#1a99e5); }
+    .desk-card { border-color:color-mix(in srgb,#7257e8 9%,var(--line)); }
+
+    .desk-active-banner { position:sticky; top:var(--topbar); z-index:46; min-height:60px; padding:9px clamp(18px,2.3vw,34px); border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--bg) 91%,transparent); backdrop-filter:blur(18px); align-items:center; gap:14px; box-shadow:0 10px 30px rgba(47,35,99,.08); }
+    .desk-active-banner::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:linear-gradient(180deg,#7257e8,#d97b31); }
+    .desk-record-token { min-height:31px; padding:4px 9px 4px 6px; border:1px solid rgba(114,87,232,.25); border-radius:9px; display:inline-flex; align-items:center; gap:6px; background:rgba(114,87,232,.08); white-space:nowrap; }
+    .desk-record-token span,.desk-record-token b { color:#7257e8; } .desk-record-token b { font-size:9px; letter-spacing:.08em; } .desk-record-token code { color:var(--text); font-size:9px; font-weight:780; }
+    .desk-active-copy { min-width:0; flex:1; }
+
+    .desk-hero { min-height:230px; padding:clamp(24px,3vw,36px); border:1px solid rgba(114,87,232,.22); border-radius:19px; background:linear-gradient(115deg,#15152b,#18253c 58%,#1a3144); color:#f7f8ff; position:relative; overflow:hidden; box-shadow:0 22px 54px rgba(31,34,69,.18); }
+    .desk-hero::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 83% 18%,rgba(114,87,232,.34),transparent 30%),radial-gradient(circle at 92% 90%,rgba(217,123,49,.22),transparent 27%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:auto,auto,30px 30px,30px 30px; }
+    .desk-hero-grid { position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:28px; align-items:center; }
+    .desk-kicker { font-size:9px; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
+    .desk-hero .desk-kicker { color:#b8adff; }
+    .desk-hero h1 { margin:10px 0 10px; max-width:820px; font-size:clamp(29px,3.45vw,49px); line-height:1.02; letter-spacing:-.048em; }
+    .desk-hero p { margin:0; max-width:720px; color:#aebbd0; font-size:12px; line-height:1.65; }
+    .desk-hero-meta { margin-top:17px; display:flex; flex-wrap:wrap; gap:8px; }
+    .desk-hero-meta span { min-height:28px; padding:0 9px; border:1px solid rgba(255,255,255,.10); border-radius:8px; display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.045); color:#cbd5e8; font-size:8.5px; }
+    .desk-hero-actions { min-width:255px; display:grid; gap:8px; position:relative; z-index:2; }
+    .desk-hero-actions .button { min-height:42px; justify-content:flex-start; }
+    .desk-signal-field { position:absolute; right:-60px; bottom:-66px; width:430px; height:210px; transform:rotate(-9deg); opacity:.78; }
+    .desk-signal-field span { position:absolute; left:0; right:0; height:2px; border-radius:999px; background:linear-gradient(90deg,transparent,#7257e8 23%,#32a8e4 63%,#d97b31 82%,transparent); box-shadow:0 0 16px rgba(114,87,232,.35); }
+    .desk-signal-field span:nth-child(1){top:18px;transform:scaleX(.78)} .desk-signal-field span:nth-child(2){top:52px;transform:scaleX(.91)} .desk-signal-field span:nth-child(3){top:88px} .desk-signal-field span:nth-child(4){top:126px;transform:scaleX(.88)} .desk-signal-field span:nth-child(5){top:164px;transform:scaleX(.68)}
+
+    .desk-focus-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .desk-focus-card { min-height:80px; padding:13px; border:1px solid var(--line); border-radius:13px; background:var(--panel); display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:10px; align-items:center; text-align:left; cursor:pointer; transition:.16s ease; }
+    .desk-focus-card:hover { transform:translateY(-1px); border-color:rgba(114,87,232,.28); }
+    .desk-focus-card.primary { border-color:rgba(114,87,232,.24); background:rgba(114,87,232,.075); }
+    .desk-focus-icon { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; color:#7257e8; background:rgba(114,87,232,.11); }
+    .desk-focus-card small { display:block; color:var(--muted-2); font-size:8px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    .desk-focus-card strong { display:block; margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; }
+    .desk-focus-card em { display:block; margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--muted); font-size:8.5px; font-style:normal; }
+    .desk-focus-arrow { color:var(--muted-2); }
+
+    .desk-metric-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .desk-metric { min-height:112px; padding:15px; border:1px solid var(--line); border-radius:14px; background:var(--panel); position:relative; overflow:hidden; }
+    .desk-metric::after { content:""; position:absolute; width:70px; height:70px; right:-27px; top:-28px; border-radius:50%; background:var(--desk-metric-soft,rgba(114,87,232,.08)); }
+    .desk-metric small { color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .desk-metric strong { display:block; margin-top:10px; font-size:28px; line-height:1; letter-spacing:-.04em; }
+    .desk-metric span { display:block; margin-top:7px; color:var(--muted); font-size:8.7px; line-height:1.4; }
+    .desk-command-grid { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr); gap:10px; align-items:start; }
+
+    .desk-structure-summary { display:grid; gap:12px; }
+    .desk-structure-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+    .desk-structure-head h3 { margin:6px 0 0; font-size:20px; letter-spacing:-.025em; }
+    .desk-summary-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .desk-summary-cell { padding:11px; border:1px solid var(--line); border-radius:10px; background:var(--panel-2); }
+    .desk-summary-cell small { display:block; color:var(--muted-2); font-size:7.5px; text-transform:uppercase; letter-spacing:.08em; }
+    .desk-summary-cell strong { display:block; margin-top:6px; font-size:11px; }
+    .desk-fit-strip { padding:12px; border:1px solid rgba(114,87,232,.18); border-radius:11px; background:rgba(114,87,232,.06); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px; align-items:center; }
+    .desk-fit-track { height:8px; margin-top:7px; border-radius:999px; background:var(--bg-deep); overflow:hidden; }
+    .desk-fit-fill { height:100%; border-radius:inherit; background:linear-gradient(90deg,#d97b31,#7257e8,#168ed8); }
+    .desk-fit-number { font-size:25px; font-weight:850; letter-spacing:-.04em; }
+
+    .desk-timeline { display:grid; }
+    .desk-timeline-event { display:grid; grid-template-columns:52px 24px minmax(0,1fr); gap:9px; padding:10px 0; border-bottom:1px solid var(--line); }
+    .desk-timeline-event:last-child { border-bottom:0; }
+    .desk-timeline-event time { padding-top:4px; color:var(--muted-2); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:8px; }
+    .desk-timeline-mark { width:24px; height:24px; border-radius:8px; display:grid; place-items:center; color:#7257e8; background:rgba(114,87,232,.10); font-size:8px; }
+    .desk-timeline-event strong { display:block; font-size:9.5px; } .desk-timeline-event p { margin:4px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; }
+
+    .desk-lab-grid { display:grid; grid-template-columns:minmax(480px,.95fr) minmax(420px,1.05fr); gap:12px; align-items:start; }
+    .desk-lab-controls,.desk-lab-results { display:grid; gap:12px; }
+    .desk-profile-presets { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+    .desk-preset { min-height:34px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); color:var(--muted); font-size:9px; font-weight:780; cursor:pointer; }
+    .desk-preset.active { color:#674cd1; border-color:rgba(114,87,232,.25); background:rgba(114,87,232,.09); }
+    .desk-upload-row { margin-top:13px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:9px; align-items:center; }
+    .desk-upload-button { min-height:48px; padding:9px 11px; border:1px dashed rgba(114,87,232,.28); border-radius:10px; display:flex; align-items:center; gap:10px; background:rgba(114,87,232,.045); cursor:pointer; }
+    .desk-upload-button i { color:#7257e8; } .desk-upload-button strong { display:block; font-size:9.5px; } .desk-upload-button small { display:block; margin-top:3px; color:var(--muted); font-size:8px; }
+    .desk-upload-status { max-width:150px; color:var(--muted); font-size:8px; line-height:1.35; text-align:right; overflow-wrap:anywhere; }
+    .desk-range-block { margin-top:14px; padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); }
+    .desk-range-meta { display:flex; justify-content:space-between; gap:10px; font-size:9px; }
+    .desk-range-block input[type="range"] { width:100%; margin-top:10px; accent-color:#7257e8; }
+    .desk-live-card { padding:20px; border:1px solid rgba(114,87,232,.22); border-radius:16px; background:linear-gradient(145deg,color-mix(in srgb,#7257e8 7%,var(--panel)),var(--panel)); box-shadow:0 18px 42px rgba(62,49,121,.10); }
+    .desk-live-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+    .desk-live-head h2 { margin:7px 0 0; font-size:24px; letter-spacing:-.03em; }
+    .desk-live-score { min-width:106px; padding:11px; border:1px solid rgba(114,87,232,.18); border-radius:12px; background:rgba(114,87,232,.08); text-align:right; }
+    .desk-live-score span,.desk-live-score small { display:block; color:var(--muted); font-size:7.5px; text-transform:uppercase; letter-spacing:.07em; } .desk-live-score strong { display:block; margin:4px 0; color:#7257e8; font-size:31px; letter-spacing:-.05em; }
+    .desk-live-metrics { margin-top:16px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+    .desk-live-metric { padding:11px; border:1px solid var(--line); border-radius:10px; background:var(--panel); }
+    .desk-live-metric small { color:var(--muted-2); font-size:7.5px; text-transform:uppercase; letter-spacing:.07em; } .desk-live-metric strong { display:block; margin-top:6px; font-size:14px; } .desk-live-metric span { display:block; margin-top:4px; color:var(--muted); font-size:8px; }
+    .desk-guardrails { margin-top:14px; display:grid; gap:7px; }
+    .desk-guardrail { min-height:40px; padding:9px 10px; border:1px solid var(--line); border-radius:9px; display:grid; grid-template-columns:20px minmax(0,1fr) auto; gap:8px; align-items:center; background:var(--panel); }
+    .desk-guardrail i { color:#7257e8; } .desk-guardrail strong { font-size:9px; } .desk-guardrail span { color:var(--muted); font-size:8px; }
+    .desk-guardrail.attention { border-color:rgba(217,123,49,.22); background:rgba(217,123,49,.07); }
+    .desk-live-actions { margin-top:15px; display:flex; flex-wrap:wrap; gap:8px; }
+    .desk-sensitivity-list { display:grid; gap:8px; }
+    .desk-sensitivity-row { padding:10px; border:1px solid var(--line); border-radius:10px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; }
+    .desk-sensitivity-row strong { display:block; font-size:9.5px; } .desk-sensitivity-row span { display:block; margin-top:3px; color:var(--muted); font-size:8px; } .desk-sensitivity-value { text-align:right; font-size:11px; font-weight:820; }
+    .desk-disclaimer { padding:13px; border:1px solid rgba(217,123,49,.20); border-radius:11px; background:rgba(217,123,49,.065); color:var(--muted); font-size:9px; line-height:1.55; } .desk-disclaimer strong { color:#b15f24; }
+
+    .desk-pathway-hero { padding:22px; border:1px solid rgba(114,87,232,.20); border-radius:17px; background:linear-gradient(110deg,rgba(114,87,232,.095),var(--panel) 66%,rgba(217,123,49,.06)); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:22px; align-items:center; }
+    .desk-pathway-hero h1 { margin:8px 0 7px; max-width:850px; font-size:clamp(25px,3vw,40px); line-height:1.06; letter-spacing:-.04em; } .desk-pathway-hero p { margin:0; color:var(--muted); font-size:10px; line-height:1.55; }
+    .desk-pathway-actions { min-width:190px; display:grid; gap:8px; }
+    .desk-pathway-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .desk-path-card { min-height:335px; padding:15px; border:1px solid var(--line); border-radius:15px; background:var(--panel); display:flex; flex-direction:column; position:relative; overflow:hidden; }
+    .desk-path-card.recommended { border-color:rgba(114,87,232,.34); box-shadow:0 16px 36px rgba(72,57,154,.11); }
+    .desk-path-card.selected { box-shadow:inset 0 0 0 2px #7257e8,0 16px 36px rgba(72,57,154,.11); }
+    .desk-path-card::before { content:""; position:absolute; inset:0 0 auto; height:4px; background:var(--path-color,#7257e8); }
+    .desk-path-top { display:flex; align-items:flex-start; justify-content:space-between; gap:9px; }
+    .desk-path-label { color:var(--muted-2); font-size:7.5px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .desk-path-title { margin-top:5px; font-size:13px; font-weight:820; }
+    .desk-path-fit { text-align:right; } .desk-path-fit strong { display:block; color:var(--path-color,#7257e8); font-size:25px; line-height:1; letter-spacing:-.04em; } .desk-path-fit span { display:block; margin-top:3px; color:var(--muted); font-size:7.5px; }
+    .desk-path-lender { margin-top:12px; padding:10px; border:1px solid var(--line); border-radius:10px; background:var(--panel-2); } .desk-path-lender strong { display:block; font-size:9.5px; } .desk-path-lender span { display:block; margin-top:4px; color:var(--muted); font-size:8px; }
+    .desk-path-economics { margin-top:11px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .desk-path-economic { padding:8px; border:1px solid var(--line); border-radius:9px; } .desk-path-economic small { color:var(--muted-2); font-size:7px; text-transform:uppercase; } .desk-path-economic strong { display:block; margin-top:4px; font-size:10px; }
+    .desk-path-reasons { margin-top:11px; display:grid; gap:6px; } .desk-path-reason { display:grid; grid-template-columns:16px minmax(0,1fr); gap:6px; color:var(--muted); font-size:8px; line-height:1.35; } .desk-path-reason i { color:var(--path-color,#7257e8); }
+    .desk-path-actions { margin-top:auto; padding-top:13px; display:grid; grid-template-columns:1fr auto; gap:7px; }
+
+    .desk-submission-summary { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .desk-submission-card { min-height:92px; padding:13px; border:1px solid var(--line); border-radius:13px; background:var(--panel); } .desk-submission-card small { color:var(--muted-2); font-size:7.5px; text-transform:uppercase; letter-spacing:.08em; } .desk-submission-card strong { display:block; margin-top:8px; font-size:13px; } .desk-submission-card span { display:block; margin-top:4px; color:var(--muted); font-size:8px; }
+    .desk-submission-board { margin-top:12px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .desk-submission-col { min-height:260px; border:1px solid var(--line); border-radius:14px; background:var(--panel-2); overflow:hidden; } .desk-submission-col-head { padding:12px 13px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:10px; } .desk-submission-col-head strong { font-size:10px; } .desk-submission-col-body { padding:10px; display:grid; gap:8px; }
+    .desk-submission-item { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel); box-shadow:inset 3px 0 0 #7257e8; } .desk-submission-item strong { display:block; font-size:10px; } .desk-submission-item p { margin:5px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; } .desk-submission-item footer { margin-top:10px; padding-top:9px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:8px; align-items:center; }
+    .desk-condition-list { display:grid; gap:8px; } .desk-condition-item { padding:11px; border:1px solid var(--line); border-radius:10px; display:grid; grid-template-columns:24px minmax(0,1fr) auto; gap:9px; align-items:center; } .desk-condition-item.done { opacity:.65; } .desk-condition-icon { width:24px; height:24px; border-radius:8px; display:grid; place-items:center; color:#d97b31; background:rgba(217,123,49,.10); } .desk-condition-item.done .desk-condition-icon { color:var(--green); background:var(--green-soft); } .desk-condition-item strong { display:block; font-size:9.5px; } .desk-condition-item span { display:block; margin-top:3px; color:var(--muted); font-size:8px; }
+
+    .desk-learning-list { display:grid; gap:9px; } .desk-learning-item { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); } .desk-learning-item strong { display:block; font-size:10px; } .desk-learning-item p { margin:5px 0 0; color:var(--muted); font-size:8.7px; line-height:1.5; }
+    .desk-knowledge-status { padding:13px; border:1px solid rgba(114,87,232,.18); border-radius:11px; background:rgba(114,87,232,.06); color:var(--muted); font-size:9px; line-height:1.5; } .desk-knowledge-status strong { color:#674cd1; }
+    .desk-lender-grid { margin-top:12px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .desk-lender-card { min-height:255px; padding:15px; border:1px solid var(--line); border-radius:14px; background:var(--panel); } .desk-lender-head { display:flex; align-items:flex-start; justify-content:space-between; gap:9px; } .desk-lender-head h3 { margin:0; font-size:12px; } .desk-lender-head p { margin:4px 0 0; color:var(--muted); font-size:8px; } .desk-lender-criteria { margin-top:13px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; } .desk-lender-criterion { padding:8px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); } .desk-lender-criterion small { color:var(--muted-2); font-size:7px; text-transform:uppercase; } .desk-lender-criterion strong { display:block; margin-top:4px; font-size:9.5px; } .desk-lender-note { margin-top:12px; color:var(--muted); font-size:8.5px; line-height:1.5; }
+
+    html[data-theme="light"] .desk-focus-card,html[data-theme="light"] .desk-metric,html[data-theme="light"] .desk-path-card,html[data-theme="light"] .desk-submission-card,html[data-theme="light"] .desk-lender-card { background:rgba(255,255,255,.97); box-shadow:0 8px 22px rgba(53,43,102,.045); }
+    html[data-theme="light"] .desk-active-banner { background:rgba(255,255,255,.94); }
+
+    @media (max-width:1300px) { .desk-pathway-grid,.desk-lender-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-metric-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } .desk-focus-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-lab-grid { grid-template-columns:1fr; } }
+    @media (max-width:1080px) { .desk-hero-grid,.desk-pathway-hero { grid-template-columns:1fr; } .desk-hero-actions { min-width:0; grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-command-grid { grid-template-columns:1fr; } .desk-submission-summary { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:820px) { .desk-active-copy { display:none; } .desk-active-banner .active-deal-status { flex:1; justify-content:flex-start; } .desk-active-banner .desk-button { margin-left:auto; } .desk-submission-board { grid-template-columns:1fr; } .desk-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:740px) { .desk-focus-grid,.desk-metric-grid { grid-template-columns:1fr 1fr; } .desk-pathway-grid,.desk-lender-grid { grid-template-columns:1fr; } .desk-live-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-hero-actions { grid-template-columns:1fr 1fr; } .desk-pathway-actions { grid-template-columns:1fr 1fr; } .desk-upload-row { grid-template-columns:1fr; } .desk-upload-status { max-width:none; text-align:left; } }
+    @media (max-width:470px) { .desk-active-banner { padding-left:12px; padding-right:12px; } .desk-record-token code { display:none; } .desk-active-banner .badge { display:none; } .desk-hero { padding:20px; } .desk-hero h1 { font-size:29px; } .desk-hero-actions,.desk-pathway-actions { grid-template-columns:1fr; } .desk-focus-grid,.desk-metric-grid,.desk-submission-summary { grid-template-columns:1fr; } .desk-live-head { flex-direction:column; } .desk-live-score { width:100%; text-align:left; } .desk-live-metrics,.desk-summary-grid { grid-template-columns:1fr 1fr; } .desk-profile-presets { grid-template-columns:1fr; } }
+  </style>
+
 </head>
-<body class="auth-locked operator-friendly">
+<body class="auth-locked operator-friendly" data-workspace="compliance">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
     <div class="auth-grid">
       <section class="auth-story" aria-label="ENGENIX operating intelligence introduction">
@@ -2063,12 +2234,24 @@
         <div class="workspace-meta">4 rooftops · Founding Network</div>
       </div>
 
-      <button class="sidebar-primary-action" type="button" onclick="openAuditModal()">
+      <div class="product-switcher" aria-label="Choose ENGENIX intelligence workspace">
+        <label for="workspaceSelect">ENGENIX Intelligence Layer</label>
+        <div class="product-switch-select">
+          <span class="product-switch-mark" id="workspaceSwitchMark">◇</span>
+          <select id="workspaceSelect" aria-label="Switch ENGENIX workspace">
+            <option value="compliance">Compliance Intelligence</option>
+            <option value="desking">Desking Intelligence</option>
+          </select>
+        </div>
+        <div class="product-switch-copy" id="workspaceSwitchCopy">Deal control, findings, and accountable resolution</div>
+      </div>
+
+      <button class="sidebar-primary-action compliance-shell" type="button" onclick="openAuditModal()">
         <span class="sidebar-primary-icon"><i class="fa-solid fa-plus"></i></span>
         <span><strong>Start a Review</strong><small>Create a synthetic deal-jacket review</small></span>
       </button>
 
-      <nav class="nav-group" aria-label="Daily work navigation">
+      <nav class="nav-group compliance-shell" aria-label="Compliance daily work navigation">
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
           <button class="nav-item active" data-view="brief">
@@ -2089,7 +2272,7 @@
         </div>
       </nav>
 
-      <nav class="nav-group" aria-label="Resolution navigation">
+      <nav class="nav-group compliance-shell" aria-label="Compliance resolution navigation">
         <div class="nav-label">Resolve</div>
         <div class="nav-list">
           <button class="nav-item" data-view="findings">
@@ -2101,7 +2284,7 @@
         </div>
       </nav>
 
-      <nav class="nav-group" aria-label="Records navigation">
+      <nav class="nav-group compliance-shell" aria-label="Compliance records navigation">
         <div class="nav-label">Records</div>
         <div class="nav-list">
           <button class="nav-item" data-view="reports">
@@ -2116,10 +2299,57 @@
         </div>
       </nav>
 
+      <button class="sidebar-primary-action desking-shell desk-primary-action" type="button" onclick="showDeskView('desk-structure')">
+        <span class="sidebar-primary-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span><strong>Start a Structure</strong><small>Open the active synthetic desking workspace</small></span>
+      </button>
+
+      <nav class="nav-group desking-shell" aria-label="Desking daily work navigation">
+        <div class="nav-label">Daily Work</div>
+        <div class="nav-list">
+          <button class="nav-item desk-nav-item active" data-desk-view="desk-command">
+            <span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Desk Command</span><span class="nav-count" id="deskActiveCountNav">4</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-structure">
+            <span class="nav-icon"><i class="fa-solid fa-calculator"></i></span><span class="nav-text">Structure Lab</span><span class="nav-count">LIVE</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-pathways">
+            <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Lender Pathways</span><span class="nav-count" id="deskPathCountNav">4</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-deals">
+            <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Active Deals</span><span class="nav-count">6</span>
+          </button>
+        </div>
+      </nav>
+
+      <nav class="nav-group desking-shell" aria-label="Desking decision navigation">
+        <div class="nav-label">Decide</div>
+        <div class="nav-list">
+          <button class="nav-item desk-nav-item" data-desk-view="desk-submissions">
+            <span class="nav-icon"><i class="fa-solid fa-paper-plane"></i></span><span class="nav-text">Submissions & Conditions</span><span class="nav-count" id="deskConditionCountNav">2</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-outcomes">
+            <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Outcome Memory</span>
+          </button>
+        </div>
+      </nav>
+
+      <nav class="nav-group desking-shell" aria-label="Desking records navigation">
+        <div class="nav-label">Records</div>
+        <div class="nav-list">
+          <button class="nav-item desk-nav-item" data-desk-view="desk-knowledge">
+            <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span><span class="nav-text">Lender Knowledge</span>
+          </button>
+          <button class="nav-item desk-nav-item" data-desk-view="desk-settings">
+            <span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span>
+          </button>
+        </div>
+      </nav>
+
       <div class="sidebar-foot">
         <div class="system-card">
           <div class="system-row">
-            <span class="workspace-label">Operating Status</span>
+            <span class="workspace-label" id="operatingStatusLabel">Operating Status</span>
             <span class="system-status"><span class="dot"></span>ONLINE</span>
           </div>
           <div class="system-small">Last workspace sync: <span id="lastSync">moments ago</span><br />Synthetic demonstration data only.</div>
@@ -2128,7 +2358,7 @@
           <div class="avatar">MH</div>
           <div style="min-width:0; flex:1;">
             <div class="session-name">Marcus Hale</div>
-            <div class="session-role">Senior Compliance Auditor</div>
+            <div class="session-role" id="sessionRole">Senior Compliance Auditor</div>
           </div>
           <i class="fa-solid fa-ellipsis-vertical" style="color:var(--muted-2);font-size:10px"></i>
         </div>
@@ -2143,7 +2373,7 @@
             <div class="page-title" id="pageTitle">Leadership Daily Briefing</div>
             <div class="page-subtitle" id="pageSubtitle">An on-demand operating roadmap for priorities, owners, decisions, and deadlines</div>
           </div>
-          <span class="demo-pill">DEMO DATA</span>
+          <span class="demo-pill" id="demoPill">COMPLIANCE DEMO</span>
         </div>
         <div class="topbar-right">
           <div class="select-wrap">
@@ -2155,7 +2385,7 @@
               <option value="Velocity Cars">Velocity Cars</option>
             </select>
           </div>
-          <button class="search-trigger" id="searchTrigger"><i class="fa-solid fa-magnifying-glass"></i><span class="search-copy">Search deals, findings, actions</span><span class="keycap">⌘ K</span></button>
+          <button class="search-trigger" id="searchTrigger"><i class="fa-solid fa-magnifying-glass"></i><span class="search-copy" id="searchCopy">Search deals, findings, actions</span><span class="keycap">⌘ K</span></button>
           <button class="icon-button" id="notificationButton" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="notification-dot"></span></button>
           <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" title="Switch color theme"><i class="fa-solid fa-moon theme-icon-moon"></i><i class="fa-solid fa-sun theme-icon-sun"></i></button>
           <button class="icon-button" id="logoutButton" type="button" aria-label="Sign out of demo" title="Sign out of demo"><i class="fa-solid fa-right-from-bracket"></i></button>
@@ -2163,7 +2393,7 @@
         </div>
       </header>
 
-      <div class="active-deal-banner" id="activeDealBanner" style="--deal-accent:#3d8bff" aria-label="Active working deal">
+      <div class="active-deal-banner compliance-shell" id="activeDealBanner" style="--deal-accent:#3d8bff" aria-label="Active working deal">
         <div id="activeDealIdentity"></div>
         <div class="active-deal-copy">
           <div class="active-deal-label">Active working deal · write actions are locked to this record</div>
@@ -2172,6 +2402,17 @@
         </div>
         <div class="active-deal-status"><span class="badge blue" id="activeDealStage">DESK</span><span class="badge green" id="activeDealGate">GATE OPEN</span></div>
         <button class="button small" type="button" onclick="setActiveDeal('ENX-2847',false);showView('journey')">Open guided journey <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+
+      <div class="desk-active-banner desking-shell" id="deskActiveBanner" aria-label="Active desking record">
+        <div class="desk-record-token" id="deskActiveToken"><span>◈</span><b>D4</b><code>DX-7314</code></div>
+        <div class="desk-active-copy">
+          <div class="active-deal-label">Active desking record · all structure changes remain attached to this decision trail</div>
+          <div class="active-deal-title" id="deskActiveTitle">Jordan Taylor · 2026 Ford Explorer ST-Line</div>
+          <div class="active-deal-meta" id="deskActiveMeta">Premier Ford · Structure modeling · Owner: Alex Morgan</div>
+        </div>
+        <div class="active-deal-status"><span class="badge desk-badge" id="deskActiveStage">MODELING</span><span class="badge green" id="deskActiveFit">4 PATHS</span></div>
+        <button class="button small desk-button" type="button" onclick="showDeskView('desk-structure')">Open Structure Lab <i class="fa-solid fa-arrow-right"></i></button>
       </div>
 
       <div class="content">
@@ -2476,6 +2717,174 @@
             <article class="card"><div class="card-header"><div><div class="card-title">Workspace profile</div><div class="card-subtitle">Current demonstration identity and scope.</div></div></div><div class="card-body"><div class="detail-grid" style="margin-top:0"><div class="detail-cell"><div class="detail-label">Workspace</div><div class="detail-value">Premier Auto Group</div></div><div class="detail-cell"><div class="detail-label">Rooftops</div><div class="detail-value">4 active</div></div><div class="detail-cell"><div class="detail-label">Role</div><div class="detail-value">Senior Auditor</div></div><div class="detail-cell"><div class="detail-label">Environment</div><div class="detail-value">Customer Sandbox</div></div></div><div style="margin-top:14px;padding:13px;border:1px solid rgba(243,201,107,.2);border-radius:11px;background:rgba(243,201,107,.05);color:var(--muted);font-size:9px;line-height:1.55"><strong style="color:var(--gold)">Demonstration notice:</strong> Data, customers, deal IDs, findings, scores, and operational activity shown here are synthetic and do not represent live dealership records.</div></div></article>
           </div>
         </section>
+
+
+        <section class="view desking-view" id="view-desk-command">
+          <div class="desk-shell">
+            <header class="desk-hero">
+              <div class="desk-hero-grid">
+                <div>
+                  <div class="desk-kicker">Desking Intelligence · Synthetic decision-support environment</div>
+                  <h1>Build the strongest explainable path before the deal starts drifting.</h1>
+                  <p>Model payment, advance, lender alignment, gross impact, and likely conditions without hiding the manager’s judgment behind a mystery score.</p>
+                  <div class="desk-hero-meta">
+                    <span><i class="fa-solid fa-id-card"></i> Synthetic credit profile</span>
+                    <span><i class="fa-solid fa-car"></i> Live collateral modeling</span>
+                    <span><i class="fa-solid fa-scale-balanced"></i> Human decision preserved</span>
+                  </div>
+                </div>
+                <div class="desk-hero-actions">
+                  <button class="button desk-primary" type="button" onclick="showDeskView('desk-structure')"><i class="fa-solid fa-calculator"></i>Open Structure Lab</button>
+                  <button class="button desk-button" type="button" onclick="generateDeskPathways(true)"><i class="fa-solid fa-wand-magic-sparkles"></i>Generate Pathways</button>
+                  <button class="button desk-button" type="button" onclick="downloadDeskStructureBrief()"><i class="fa-solid fa-download"></i>Download Structure Brief</button>
+                  <button class="button" type="button" onclick="resetDeskingDemo()"><i class="fa-solid fa-rotate-left"></i>Reset Demo</button>
+                </div>
+              </div>
+              <div class="desk-signal-field" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+            </header>
+
+            <div class="desk-focus-grid" id="deskFocusGrid"></div>
+
+            <div class="desk-metric-grid" id="deskCommandMetrics"></div>
+
+            <div class="desk-command-grid">
+              <article class="card desk-card">
+                <div class="card-header"><div><div class="card-title">Active Structure</div><div class="card-subtitle">The current deal economics and lender-fit posture</div></div><button class="button small desk-button" onclick="showDeskView('desk-structure')">Edit structure</button></div>
+                <div class="card-body" id="deskActiveStructureSummary"></div>
+              </article>
+              <article class="card desk-card">
+                <div class="card-header"><div><div class="card-title">Manager Decision Trail</div><div class="card-subtitle">Every modeled path, selection, and outcome remains visible</div></div><span class="badge desk-badge">LIVE MEMORY</span></div>
+                <div class="card-body"><div class="desk-timeline" id="deskCommandTimeline"></div></div>
+              </article>
+            </div>
+
+            <div class="section-row"><div><div class="eyebrow desk-eyebrow">Desk workload</div><div class="section-title" style="margin-top:5px">Deals requiring a structure decision</div><div class="section-subtitle">Synthetic records only. Lender-fit confidence is not an approval.</div></div><button class="button" onclick="showDeskView('desk-deals')">Open all active deals <i class="fa-solid fa-arrow-right"></i></button></div>
+            <article class="card desk-card"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer / vehicle</th><th>Profile</th><th>Amount financed</th><th>Strongest path</th><th>Gross posture</th><th>Status</th><th></th></tr></thead><tbody id="deskCommandDealBody"></tbody></table></div></article>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-structure">
+          <div class="desk-shell">
+            <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Live structure modeling</div><div class="section-title" style="margin-top:5px">Structure Lab</div><div class="section-subtitle">Adjust the deal, watch the economics move, then generate explainable synthetic lender pathways.</div></div><div class="identity-legend"><b>Decision support only:</b> estimated lender alignment is not a lender approval or credit decision.</div></div>
+
+            <div class="desk-lab-grid">
+              <div class="desk-lab-controls">
+                <article class="card desk-card">
+                  <div class="card-header"><div><div class="card-title">Synthetic Credit Profile</div><div class="card-subtitle">Use a preset or attach a local filename to simulate intake</div></div><span class="badge desk-badge" id="deskProfileSourceBadge">SYNTHETIC PROFILE</span></div>
+                  <div class="card-body">
+                    <div class="desk-profile-presets">
+                      <button class="desk-preset active" type="button" data-desk-profile="near">Near Prime</button>
+                      <button class="desk-preset" type="button" data-desk-profile="prime">Prime</button>
+                      <button class="desk-preset" type="button" data-desk-profile="challenged">Challenged</button>
+                    </div>
+                    <div class="form-grid" style="margin-top:13px">
+                      <div class="field"><label for="deskBureauScore">Bureau score</label><input id="deskBureauScore" type="number" min="400" max="850" /></div>
+                      <div class="field"><label for="deskAutoScore">Auto score</label><input id="deskAutoScore" type="number" min="400" max="900" /></div>
+                      <div class="field"><label for="deskIncome">Verified monthly income</label><input id="deskIncome" type="number" min="0" step="100" /></div>
+                      <div class="field"><label for="deskHousing">Monthly housing</label><input id="deskHousing" type="number" min="0" step="50" /></div>
+                    </div>
+                    <div class="desk-upload-row">
+                      <label class="desk-upload-button" for="deskCreditFile"><i class="fa-solid fa-file-circle-plus"></i><span><strong>Attach credit report filename</strong><small>Local demo only. File contents are not transmitted or parsed.</small></span></label>
+                      <input id="deskCreditFile" type="file" accept=".pdf,.txt,.json" hidden />
+                      <span class="desk-upload-status" id="deskCreditFileStatus">No file selected</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="card desk-card">
+                  <div class="card-header"><div><div class="card-title">Vehicle & Deal Economics</div><div class="card-subtitle">Model collateral, cash, term, trade equity, and rate</div></div><span class="badge blue">LIVE MODEL</span></div>
+                  <div class="card-body">
+                    <div class="form-grid">
+                      <div class="field full"><label for="deskVehicle">Selected vehicle</label><select id="deskVehicle"></select></div>
+                      <div class="field"><label for="deskSellingPrice">Selling price</label><input id="deskSellingPrice" type="number" min="0" step="100" /></div>
+                      <div class="field"><label for="deskCashDown">Cash down</label><input id="deskCashDown" type="number" min="0" step="250" /></div>
+                      <div class="field"><label for="deskTradeEquity">Trade equity (negative = upside down)</label><input id="deskTradeEquity" type="number" step="250" /></div>
+                      <div class="field"><label for="deskTerm">Requested term</label><select id="deskTerm"><option>60</option><option>66</option><option selected>72</option><option>75</option><option>84</option></select></div>
+                      <div class="field"><label for="deskApr">Modeled APR</label><input id="deskApr" type="number" min="0" step="0.25" /></div>
+                      <div class="field"><label for="deskProducts">Product allowance</label><input id="deskProducts" type="number" min="0" step="250" /></div>
+                    </div>
+                    <div class="desk-range-block">
+                      <div class="desk-range-meta"><span>Cash-down sensitivity</span><strong id="deskDownRangeValue">$3,500</strong></div>
+                      <input id="deskDownRange" type="range" min="0" max="10000" step="250" />
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div class="desk-lab-results">
+                <article class="desk-live-card">
+                  <div class="desk-live-head"><div><div class="desk-kicker">Current modeled structure</div><h2 id="deskLiveVehicle">2026 Ford Explorer ST-Line</h2></div><div class="desk-live-score"><span>Strongest fit</span><strong id="deskLiveFit">84</strong><small id="deskLiveBand">Strong alignment</small></div></div>
+                  <div class="desk-live-metrics" id="deskLiveMetrics"></div>
+                  <div class="desk-guardrails" id="deskGuardrails"></div>
+                  <div class="desk-live-actions"><button class="button desk-primary" type="button" onclick="generateDeskPathways(true)"><i class="fa-solid fa-route"></i>Generate Lender Pathways</button><button class="button desk-button" type="button" onclick="saveDeskStructure()"><i class="fa-solid fa-floppy-disk"></i>Save Structure Snapshot</button></div>
+                </article>
+                <article class="card desk-card">
+                  <div class="card-header"><div><div class="card-title">Economic Sensitivity</div><div class="card-subtitle">How the next $1,500 changes the structure</div></div></div>
+                  <div class="card-body" id="deskSensitivity"></div>
+                </article>
+                <article class="desk-disclaimer"><strong>Operator control:</strong> ENGENIX models possible pathways from synthetic criteria and historical-demo patterns. The manager chooses the structure. The lender remains the source of truth.</article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-pathways">
+          <div class="desk-shell">
+            <header class="desk-pathway-hero">
+              <div><div class="desk-kicker">Explainable funding pathways</div><h1>Compare the structure, economics, and reasons before choosing where to send the deal.</h1><p id="deskPathwayHeroCopy">Four synthetic lender paths generated from the active profile, vehicle, cash down, and modeled term.</p></div>
+              <div class="desk-pathway-actions"><button class="button desk-primary" onclick="generateDeskPathways(false)"><i class="fa-solid fa-arrows-rotate"></i>Regenerate</button><button class="button desk-button" onclick="downloadDeskStructureBrief()"><i class="fa-solid fa-download"></i>Download Brief</button></div>
+            </header>
+            <div class="desk-pathway-grid" id="deskPathwayGrid"></div>
+            <div class="section-row"><div><div class="eyebrow desk-eyebrow">Side-by-side economics</div><div class="section-title" style="margin-top:5px">Pathway Comparison</div><div class="section-subtitle">Identity, status, and risk remain separate from the lender-fit confidence band.</div></div></div>
+            <article class="card desk-card"><div class="table-wrap"><table><thead><tr><th>Path</th><th>Lender program</th><th>Fit band</th><th>Payment</th><th>LTV</th><th>PTI</th><th>Cash down</th><th>Front gross variance</th><th>Likely conditions</th></tr></thead><tbody id="deskPathwayTable"></tbody></table></div></article>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-deals">
+          <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Active desk workload</div><div class="section-title" style="margin-top:5px">Active Deals</div><div class="section-subtitle">Open a synthetic structure without losing the identity of the deal already being worked.</div></div><button class="button desk-primary" onclick="showDeskView('desk-structure')"><i class="fa-solid fa-plus"></i>New Structure</button></div>
+          <div class="filter-bar"><div class="filter-left"><input class="input" id="deskDealSearch" placeholder="Search customer, vehicle, deal…" /><div class="select-wrap"><select class="select-control select-small" id="deskDealStatus"><option value="all">All statuses</option><option value="Structuring">Structuring</option><option value="Decision Required">Decision Required</option><option value="Conditional">Conditional</option><option value="Ready for F&I">Ready for F&I</option></select></div></div><div class="filter-right"><span class="badge desk-badge">SYNTHETIC DEALS</span></div></div>
+          <article class="card desk-card"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer</th><th>Vehicle</th><th>Credit band</th><th>Down</th><th>Modeled payment</th><th>Best fit</th><th>Gross</th><th>Status</th><th></th></tr></thead><tbody id="deskDealBody"></tbody></table></div></article>
+        </section>
+
+        <section class="view desking-view" id="view-desk-submissions">
+          <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Submission control</div><div class="section-title" style="margin-top:5px">Submissions & Conditions</div><div class="section-subtitle">Track what was submitted, what came back, and why the manager restructured the deal.</div></div><button class="button desk-primary" onclick="submitSelectedDeskPath()"><i class="fa-solid fa-paper-plane"></i>Submit Selected Path</button></div>
+          <div class="desk-submission-summary" id="deskSubmissionSummary"></div>
+          <div class="desk-submission-board" id="deskSubmissionBoard"></div>
+          <div class="desk-command-grid" style="margin-top:12px">
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">Condition Resolution</div><div class="card-subtitle">Owned work required before the F&I handoff</div></div></div><div class="card-body" id="deskConditionList"></div></article>
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">Submission Timeline</div><div class="card-subtitle">The decision record behind every restructure</div></div></div><div class="card-body"><div class="desk-timeline" id="deskSubmissionTimeline"></div></div></article>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-outcomes">
+          <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Dealership operating memory</div><div class="section-title" style="margin-top:5px">Outcome Memory</div><div class="section-subtitle">Synthetic funded outcomes show how future confidence could be calibrated without replacing manager judgment.</div></div><button class="button desk-button" onclick="exportDeskOutcomes()"><i class="fa-solid fa-download"></i>Export Outcomes</button></div>
+          <div class="desk-metric-grid" id="deskOutcomeMetrics"></div>
+          <div class="desk-command-grid">
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">Recent Funded Outcomes</div><div class="card-subtitle">Modeled structure compared with the recorded result</div></div></div><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Selected path</th><th>Initial fit</th><th>Result</th><th>Gross variance</th><th>Conditions</th><th>Learning note</th></tr></thead><tbody id="deskOutcomeBody"></tbody></table></div></article>
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">What the Store Is Learning</div><div class="card-subtitle">Synthetic patterns surfaced for operator review</div></div></div><div class="card-body" id="deskLearningSignals"></div></article>
+          </div>
+        </section>
+
+        <section class="view desking-view" id="view-desk-knowledge">
+          <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Controlled program knowledge</div><div class="section-title" style="margin-top:5px">Lender Knowledge</div><div class="section-subtitle">Synthetic lender criteria, store notes, and program provenance supporting each pathway.</div></div><label class="button desk-button" for="deskKnowledgeFile"><i class="fa-solid fa-file-circle-plus"></i>Attach Program Bulletin<input id="deskKnowledgeFile" type="file" accept=".pdf,.csv,.txt" hidden /></label></div>
+          <div class="desk-knowledge-status" id="deskKnowledgeStatus"><strong>Demo knowledge base:</strong> Four synthetic program records are available. Uploaded files remain local and are not parsed or transmitted.</div>
+          <div class="desk-lender-grid" id="deskLenderGrid"></div>
+          <article class="card desk-card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">Program Change Log</div><div class="card-subtitle">What changed, who reviewed it, and which pathways were affected</div></div></div><div class="table-wrap"><table><thead><tr><th>Time</th><th>Program</th><th>Change</th><th>Reviewed by</th><th>Affected pathways</th><th>Status</th></tr></thead><tbody id="deskKnowledgeChangeBody"></tbody></table></div></article>
+        </section>
+
+        <section class="view desking-view" id="view-desk-settings">
+          <div class="section-row" style="margin-top:0"><div><div class="eyebrow desk-eyebrow">Desking workspace controls</div><div class="section-title" style="margin-top:5px">Settings</div><div class="section-subtitle">Synthetic controls for pathway visibility, manager review, and outcome memory.</div></div><button class="button desk-primary" onclick="saveDeskSettings()"><i class="fa-solid fa-floppy-disk"></i>Save Changes</button></div>
+          <div class="settings-grid">
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">Decision-Support Guardrails</div><div class="card-subtitle">Keep recommendations explainable and operator-controlled</div></div></div><div class="card-body">
+              <div class="setting-row"><div><div class="setting-title">Require manager selection reason</div><div class="setting-copy">Preserve why the chosen structure was selected over the alternatives.</div></div><button class="toggle on" data-desk-setting="selectionReason"><div class="toggle-knob"></div></button></div>
+              <div class="setting-row"><div><div class="setting-title">Show gross variance on every path</div><div class="setting-copy">Keep economic tradeoffs visible beside lender-fit confidence.</div></div><button class="toggle on" data-desk-setting="grossVariance"><div class="toggle-knob"></div></button></div>
+              <div class="setting-row"><div><div class="setting-title">Require provenance for lender criteria</div><div class="setting-copy">Every criteria point must trace to a controlled program record or store note.</div></div><button class="toggle on" data-desk-setting="provenance"><div class="toggle-knob"></div></button></div>
+              <div class="setting-row"><div><div class="setting-title">Allow synthetic confidence percentages</div><div class="setting-copy">Display a demo confidence number alongside the written fit band.</div></div><button class="toggle on" data-desk-setting="confidence"><div class="toggle-knob"></div></button></div>
+            </div></article>
+            <article class="card desk-card"><div class="card-header"><div><div class="card-title">Workspace Profile</div><div class="card-subtitle">Current customer-facing demonstration scope</div></div></div><div class="card-body"><div class="detail-grid" style="margin-top:0"><div class="detail-cell"><div class="detail-label">Workspace</div><div class="detail-value">Desking Intelligence</div></div><div class="detail-cell"><div class="detail-label">Mode</div><div class="detail-value">Synthetic Pathways</div></div><div class="detail-cell"><div class="detail-label">Active Manager</div><div class="detail-value">Alex Morgan</div></div><div class="detail-cell"><div class="detail-label">Programs</div><div class="detail-value">4 synthetic</div></div></div><div class="desk-disclaimer" style="margin-top:14px"><strong>Demonstration boundary:</strong> No consumer report is transmitted, no lender approval is represented, and no protected-class characteristic is used in this synthetic model.</div></div></article>
+          </div>
+        </section>
+
       </div>
     </main>
   </div>
@@ -4254,7 +4663,7 @@
     document.getElementById('workflowResetButton').addEventListener('click', resetWorkflow);
     document.querySelectorAll('[data-workflow-decision]').forEach(button => button.addEventListener('click', () => resolveWorkflowDecision(button.dataset.workflowDecision)));
 
-    document.querySelectorAll('.nav-item').forEach(n => n.addEventListener('click', () => showView(n.dataset.view)));
+    document.querySelectorAll('.nav-item[data-view]').forEach(n => n.addEventListener('click', () => showView(n.dataset.view)));
     document.querySelectorAll('#rangeControl .segment').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('#rangeControl .segment').forEach(x => x.classList.remove('active')); b.classList.add('active'); updateRange(Number(b.dataset.range)); }));
     document.querySelectorAll('[data-finding-filter]').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('[data-finding-filter]').forEach(x => x.classList.remove('active')); b.classList.add('active'); currentFindingFilter=b.dataset.findingFilter; renderFindings(); }));
     document.querySelectorAll('.toggle').forEach(t => t.addEventListener('click', () => t.classList.toggle('on')));
@@ -4285,7 +4694,339 @@
       if (e.key === 'Escape') { closeMorningMeeting(); closeSearch(); closeDrawer(); closeAuditModal(); document.getElementById('notificationPanel').classList.remove('open'); document.getElementById('sidebar').classList.remove('open'); }
     });
 
+
+
+    /* =========================================================
+       ENGENIX DESKING INTELLIGENCE · SYNTHETIC CUSTOMER SANDBOX V1
+       ========================================================= */
+    let currentPortalWorkspace = 'compliance';
+    let lastComplianceView = 'brief';
+    let lastDeskView = 'desk-command';
+
+    const deskVehicles = [
+      { id:'explorer', label:'2026 Ford Explorer ST-Line', price:48540, cost:44490, book:46200, miles:18, age:0 },
+      { id:'bronco', label:'2025 Ford Bronco Sport Badlands', price:40980, cost:37420, book:39750, miles:4200, age:1 },
+      { id:'f150', label:'2026 Ford F-150 XLT', price:54890, cost:50740, book:52600, miles:11, age:0 },
+      { id:'escape', label:'2025 Ford Escape Active', price:33740, cost:30650, book:32600, miles:6800, age:1 }
+    ];
+
+    const deskLenders = [
+      { id:'northline', name:'Northline Demo Finance', program:'Near-prime retail', minScore:640, maxLtv:124, maxPti:18.0, maxDti:55, maxTerm:75, rate:9.75, reserve:950, speed:'8–15 min', source:'Synthetic matrix · Jul 2026', note:'Strong recent store outcomes when advance remains below 120% and income evidence is complete.' },
+      { id:'canyon', name:'Canyon Demo Credit', program:'Prime / near-prime', minScore:675, maxLtv:118, maxPti:16.5, maxDti:50, maxTerm:72, rate:8.25, reserve:700, speed:'15–30 min', source:'Synthetic bulletin · Jul 2026', note:'Payment discipline matters more than term extension. Prefers lower advance and verified stability.' },
+      { id:'apex', name:'Apex Demo Financial', program:'Extended-term retail', minScore:620, maxLtv:128, maxPti:19.0, maxDti:58, maxTerm:84, rate:11.25, reserve:1125, speed:'10–20 min', source:'Synthetic program note · Jul 2026', note:'Wider term flexibility, but conditions increase when negative equity or housing pressure rises.' },
+      { id:'harbor', name:'Harbor Demo Acceptance', program:'Collateral-led retail', minScore:590, maxLtv:115, maxPti:17.5, maxDti:57, maxTerm:72, rate:13.25, reserve:650, speed:'20–45 min', source:'Synthetic store note · Jul 2026', note:'Stronger fit when the desk changes collateral or adds cash rather than stretching payment.' }
+    ];
+
+    const deskProfilePresets = {
+      near:{ bureauScore:682, autoScore:704, income:7800, housing:1650, label:'Near Prime' },
+      prime:{ bureauScore:742, autoScore:761, income:9200, housing:1950, label:'Prime' },
+      challenged:{ bureauScore:598, autoScore:621, income:6100, housing:1425, label:'Challenged' }
+    };
+
+    const deskDeals = [
+      { id:'DX-7314', code:'D4', customer:'Jordan Taylor', vehicle:'2026 Ford Explorer ST-Line', bureau:682, band:'Near Prime', down:3500, payment:814, fit:84, gross:4050, status:'Structuring', owner:'Alex Morgan' },
+      { id:'DX-7311', code:'F2', customer:'Morgan Davis', vehicle:'2025 Ford Bronco Sport', bureau:718, band:'Prime', down:2500, payment:646, fit:91, gross:3580, status:'Decision Required', owner:'Alex Morgan' },
+      { id:'DX-7308', code:'J6', customer:'Cameron Reed', vehicle:'2026 Ford F-150 XLT', bureau:641, band:'Near Prime', down:6000, payment:892, fit:76, gross:4210, status:'Conditional', owner:'Dana Ruiz' },
+      { id:'DX-7305', code:'M3', customer:'Avery Brooks', vehicle:'2025 Ford Escape Active', bureau:592, band:'Challenged', down:4500, payment:601, fit:67, gross:2880, status:'Decision Required', owner:'Alex Morgan' },
+      { id:'DX-7301', code:'P8', customer:'Riley Carter', vehicle:'2026 Ford Explorer Platinum', bureau:756, band:'Prime', down:8000, payment:918, fit:94, gross:4620, status:'Ready for F&I', owner:'Dana Ruiz' },
+      { id:'DX-7297', code:'T5', customer:'Taylor Morgan', vehicle:'2025 Ford F-150 Lariat', bureau:663, band:'Near Prime', down:5000, payment:947, fit:80, gross:4390, status:'Conditional', owner:'Dana Ruiz' }
+    ];
+
+    const deskOutcomeSeed = [
+      { deal:'DX-7288', path:'Approval Strength', fit:88, result:'Funded', variance:-250, conditions:1, note:'Additional cash reduced advance enough to preserve the selected vehicle.' },
+      { deal:'DX-7279', path:'Gross Guard', fit:82, result:'Funded', variance:0, conditions:2, note:'Income evidence resolved the conditional approval without changing collateral.' },
+      { deal:'DX-7264', path:'Collateral Shift', fit:79, result:'Funded', variance:-860, conditions:0, note:'Lower-priced collateral improved PTI and eliminated the down-payment condition.' },
+      { deal:'DX-7251', path:'Payment Relief', fit:71, result:'Restructured', variance:-425, conditions:3, note:'Longer term helped payment, but the store later added cash to reduce advance.' }
+    ];
+
+    const defaultDeskState = {
+      activeDealId:'DX-7314', profile:'near', bureauScore:682, autoScore:704, income:7800, housing:1650,
+      vehicleId:'explorer', sellingPrice:48540, cashDown:3500, tradeEquity:-3200, term:72, apr:10.49, products:2400,
+      selectedPath:null, generatedAt:null, submissionStage:'modeling', conditions:[
+        { id:'DC-01', title:'Verify current income evidence', owner:'Dana Ruiz', due:'Before submission', done:false },
+        { id:'DC-02', title:'Confirm trade payoff amount', owner:'Alex Morgan', due:'Before F&I handoff', done:false }
+      ],
+      timeline:[
+        { time:'10:04', icon:'fa-id-card', title:'Desking record created', copy:'Synthetic credit profile, vehicle, and initial structure attached to DX-7314.' },
+        { time:'10:06', icon:'fa-calculator', title:'Initial structure modeled', copy:'Cash down, negative equity, term, and payment target entered by Alex Morgan.' }
+      ],
+      knowledgeFile:null, creditFile:null
+    };
+
+    function cloneDeskState() { return JSON.parse(JSON.stringify(defaultDeskState)); }
+    function loadDeskState() { try { const saved=JSON.parse(localStorage.getItem('engenix-desking-v1')||'null'); if(saved&&saved.activeDealId) return {...cloneDeskState(),...saved}; } catch(error){} return cloneDeskState(); }
+    let deskState = loadDeskState();
+    let deskPathways = [];
+
+    const deskPageMeta = {
+      'desk-command':['Desk Command','Active structures, lender alignment, and decisions requiring manager attention'],
+      'desk-structure':['Structure Lab','Model credit profile, collateral, cash, term, payment, and gross economics'],
+      'desk-pathways':['Lender Pathways','Explainable synthetic funding pathways with economic tradeoffs'],
+      'desk-deals':['Active Deals','Synthetic desk workload organized around the next structure decision'],
+      'desk-submissions':['Submissions & Conditions','What was submitted, what came back, and who owns the next move'],
+      'desk-outcomes':['Outcome Memory','Preserved synthetic outcomes that can inform future manager judgment'],
+      'desk-knowledge':['Lender Knowledge','Controlled synthetic program criteria and dealership operating notes'],
+      'desk-settings':['Desking Settings','Decision-support guardrails, visibility, and manager controls']
+    };
+
+    function money(value, digits=0) { return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:digits,minimumFractionDigits:digits}).format(Number(value)||0); }
+    function pct(value, digits=1) { return `${Number(value||0).toFixed(digits)}%`; }
+    function deskClamp(value,min,max){ return Math.max(min,Math.min(max,value)); }
+    function deskPayment(principal,apr,months){ const r=(Number(apr)||0)/1200; if(!r) return principal/months; return principal*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1); }
+    function deskVehicleById(id){ return deskVehicles.find(v=>v.id===id)||deskVehicles[0]; }
+    function deskTime(){ return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); }
+    function deskSave(){ try{ localStorage.setItem('engenix-desking-v1',JSON.stringify(deskState)); }catch(error){} }
+    function deskAddEvent(title,copy,icon='fa-bolt'){ deskState.timeline.unshift({time:deskTime(),title,copy,icon}); deskState.timeline=deskState.timeline.slice(0,16); deskSave(); }
+
+    function deskMetrics(overrides={}) {
+      const state={...deskState,...overrides};
+      const vehicle=deskVehicleById(state.vehicleId);
+      const sellingPrice=Number(state.sellingPrice||vehicle.price);
+      const cashDown=Number(state.cashDown||0);
+      const tradeEquity=Number(state.tradeEquity||0);
+      const term=Number(state.term||72);
+      const apr=Number(state.apr||0);
+      const products=Number(state.products||0);
+      const taxesFees=sellingPrice*.0745+895;
+      const amountFinanced=Math.max(5000,sellingPrice+taxesFees+products-cashDown-tradeEquity);
+      const payment=deskPayment(amountFinanced,apr,term);
+      const ltv=amountFinanced/vehicle.book*100;
+      const pti=payment/Math.max(1,Number(state.income||1))*100;
+      const dti=(Number(state.housing||0)+payment)/Math.max(1,Number(state.income||1))*100;
+      const frontGross=sellingPrice-vehicle.cost;
+      return {vehicle,sellingPrice,cashDown,tradeEquity,term,apr,products,taxesFees,amountFinanced,payment,ltv,pti,dti,frontGross,totalGross:frontGross+products};
+    }
+
+    function deskFitForLender(lender,metrics,profile=deskState){
+      let fit=94;
+      if(profile.bureauScore<lender.minScore) fit-=(lender.minScore-profile.bureauScore)*.72;
+      else fit+=Math.min(3,(profile.bureauScore-lender.minScore)*.035);
+      if(metrics.ltv>lender.maxLtv) fit-=(metrics.ltv-lender.maxLtv)*2.15;
+      else fit+=Math.min(3,(lender.maxLtv-metrics.ltv)*.12);
+      if(metrics.pti>lender.maxPti) fit-=(metrics.pti-lender.maxPti)*4.1;
+      if(metrics.dti>lender.maxDti) fit-=(metrics.dti-lender.maxDti)*1.65;
+      if(metrics.term>lender.maxTerm) fit-=22;
+      if(profile.autoScore<profile.bureauScore-25) fit-=4;
+      return Math.round(deskClamp(fit,31,97));
+    }
+
+    function deskFitBand(fit){ return fit>=88?'Very strong alignment':fit>=78?'Strong alignment':fit>=66?'Viable with conditions':fit>=54?'Narrow pathway':'Material restructure needed'; }
+    function deskFitTone(fit){ return fit>=82?'green':fit>=66?'amber':'red'; }
+
+    function generateDeskPathways(navigate=false,silent=false){
+      syncDeskStateFromInputs();
+      const current=deskMetrics();
+      const alternative=deskVehicles.find(v=>v.price<current.sellingPrice-5000)||deskVehicles[1];
+      const strategies=[
+        {id:'gross',name:'Gross Guard',description:'Preserve the selected vehicle and current front gross.',lender:deskLenders[0],overrides:{},color:'#7257e8'},
+        {id:'approval',name:'Approval Strength',description:'Add $1,500 cash and reduce modeled APR through a tighter program.',lender:deskLenders[1],overrides:{cashDown:current.cashDown+1500,term:Math.min(72,current.term),apr:deskLenders[1].rate},color:'#168ed8'},
+        {id:'payment',name:'Payment Relief',description:'Use extended term flexibility to reduce the monthly obligation.',lender:deskLenders[2],overrides:{term:Math.max(75,current.term),apr:deskLenders[2].rate},color:'#d97b31'},
+        {id:'collateral',name:'Collateral Shift',description:'Move to lower-priced collateral to improve advance and payment.',lender:deskLenders[3],overrides:{vehicleId:alternative.id,sellingPrice:alternative.price,term:72,apr:deskLenders[3].rate},color:'#1c9b8c'}
+      ];
+      deskPathways=strategies.map((strategy,index)=>{
+        const metrics=deskMetrics(strategy.overrides);
+        const fit=deskFitForLender(strategy.lender,metrics);
+        const headroom=Math.max(0,strategy.lender.maxLtv/100*metrics.vehicle.book-metrics.amountFinanced);
+        const conditions=[];
+        if(deskState.bureauScore<strategy.lender.minScore) conditions.push('Score exception review');
+        if(metrics.ltv>strategy.lender.maxLtv-3) conditions.push('Advance / trade verification');
+        if(metrics.pti>strategy.lender.maxPti-1.5) conditions.push('Income evidence');
+        if(metrics.dti>strategy.lender.maxDti-3) conditions.push('Housing verification');
+        if(metrics.term>strategy.lender.maxTerm) conditions.push('Term adjustment');
+        if(!conditions.length) conditions.push('Standard identity and income review');
+        const reasons=[
+          metrics.ltv<=strategy.lender.maxLtv?`Modeled LTV ${pct(metrics.ltv)} is within the synthetic ${strategy.lender.maxLtv}% ceiling.`:`Modeled LTV exceeds the synthetic program ceiling by ${pct(metrics.ltv-strategy.lender.maxLtv)}.`,
+          metrics.pti<=strategy.lender.maxPti?`Payment-to-income remains inside the modeled ${strategy.lender.maxPti}% guide.`:`Payment-to-income is the primary pressure point for this path.`,
+          strategy.id==='collateral'?`Lower-priced collateral reduces amount financed by ${money(current.amountFinanced-metrics.amountFinanced)}.`:`Front gross variance is ${money(metrics.frontGross-current.frontGross)} versus the active structure.`
+        ];
+        return {...strategy,index,metrics,fit,band:deskFitBand(fit),headroom,conditions,reasons,grossVariance:metrics.frontGross-current.frontGross};
+      }).sort((a,b)=>b.fit-a.fit);
+      deskState.generatedAt=new Date().toISOString();
+      if(!deskState.selectedPath || !deskPathways.some(p=>p.id===deskState.selectedPath)) deskState.selectedPath=deskPathways[0].id;
+      if(!silent) deskAddEvent('Lender pathways generated',`${deskPathways.length} synthetic pathways compared. ${deskPathways[0].name} currently shows the strongest alignment at ${deskPathways[0].fit}.`,'fa-route');
+      renderAllDesk();
+      if(navigate) showDeskView('desk-pathways');
+      if(!silent) showToast('Pathways generated',`${deskPathways.length} synthetic lender paths are ready for manager review.`,'success');
+    }
+
+    function ensureDeskPathways(){ if(!deskPathways.length) generateDeskPathways(false,true); }
+
+    function getDeskIdentity(dealId){ const deal=deskDeals.find(d=>d.id===dealId); return {code:deal?.code||'D4',shape:'◈',color:'#7257e8'}; }
+    function deskToken(dealId,compact=false){ const i=getDeskIdentity(dealId); return `<span class="desk-record-token ${compact?'compact':''}"><span>${i.shape}</span><b>${i.code}</b><code>${dealId}</code></span>`; }
+
+    function syncDeskInputsFromState(){
+      const map={deskBureauScore:'bureauScore',deskAutoScore:'autoScore',deskIncome:'income',deskHousing:'housing',deskSellingPrice:'sellingPrice',deskCashDown:'cashDown',deskTradeEquity:'tradeEquity',deskTerm:'term',deskApr:'apr',deskProducts:'products',deskDownRange:'cashDown'};
+      Object.entries(map).forEach(([id,key])=>{ const el=document.getElementById(id); if(el) el.value=deskState[key]; });
+      const vehicle=document.getElementById('deskVehicle'); if(vehicle) vehicle.value=deskState.vehicleId;
+      const rangeLabel=document.getElementById('deskDownRangeValue'); if(rangeLabel) rangeLabel.textContent=money(deskState.cashDown);
+      document.querySelectorAll('[data-desk-profile]').forEach(btn=>btn.classList.toggle('active',btn.dataset.deskProfile===deskState.profile));
+    }
+
+    function syncDeskStateFromInputs(){
+      const numberIds={deskBureauScore:'bureauScore',deskAutoScore:'autoScore',deskIncome:'income',deskHousing:'housing',deskSellingPrice:'sellingPrice',deskCashDown:'cashDown',deskTradeEquity:'tradeEquity',deskTerm:'term',deskApr:'apr',deskProducts:'products'};
+      Object.entries(numberIds).forEach(([id,key])=>{ const el=document.getElementById(id); if(el&&el.value!=='') deskState[key]=Number(el.value); });
+      const vehicle=document.getElementById('deskVehicle'); if(vehicle) deskState.vehicleId=vehicle.value;
+      deskSave();
+    }
+
+    function renderDeskActiveBanner(){
+      const deal=deskDeals.find(d=>d.id===deskState.activeDealId)||deskDeals[0];
+      const vehicle=deskVehicleById(deskState.vehicleId);
+      const stage=deskState.submissionStage==='modeling'?'MODELING':deskState.submissionStage==='submitted'?'SUBMITTED':deskState.submissionStage==='conditional'?'CONDITIONAL':'READY FOR F&I';
+      const title=document.getElementById('deskActiveTitle'); if(title) title.textContent=`${deal.customer} · ${vehicle.label}`;
+      const meta=document.getElementById('deskActiveMeta'); if(meta) meta.textContent=`Premier Ford · ${stage.replaceAll('_',' ')} · Owner: ${deal.owner}`;
+      const token=document.getElementById('deskActiveToken'); if(token) token.innerHTML=`<span>◈</span><b>${getDeskIdentity(deal.id).code}</b><code>${deal.id}</code>`;
+      const stageEl=document.getElementById('deskActiveStage'); if(stageEl) stageEl.textContent=stage;
+      const fit=document.getElementById('deskActiveFit'); if(fit) fit.textContent=`${deskPathways.length||4} PATHS`;
+    }
+
+    function renderDeskCommand(){
+      ensureDeskPathways();
+      const metrics=deskMetrics(); const best=deskPathways[0]; const selected=deskPathways.find(p=>p.id===deskState.selectedPath)||best;
+      const focus=document.getElementById('deskFocusGrid'); if(focus) focus.innerHTML=[
+        {label:'Active structure',title:`${deskState.activeDealId} · ${metrics.vehicle.label}`,copy:`${money(metrics.payment)}/mo · ${money(metrics.cashDown)} down`,icon:'fa-calculator',view:'desk-structure',primary:true},
+        {label:'Strongest pathway',title:`${best.name} · ${best.fit}`,copy:`${best.lender.name} · ${best.band}`,icon:'fa-route',view:'desk-pathways'},
+        {label:'Manager decision',title:selected?`${selected.name} selected`:'Path selection required',copy:selected?`Gross variance ${money(selected.grossVariance)}`:'Compare all modeled tradeoffs',icon:'fa-scale-balanced',view:'desk-pathways'},
+        {label:'Submission state',title:deskState.submissionStage.replaceAll('_',' ').toUpperCase(),copy:deskState.conditions.filter(c=>!c.done).length?`${deskState.conditions.filter(c=>!c.done).length} conditions need ownership`:'Ready for F&I handoff',icon:'fa-paper-plane',view:'desk-submissions'}
+      ].map(item=>`<button class="desk-focus-card ${item.primary?'primary':''}" onclick="showDeskView('${item.view}')"><span class="desk-focus-icon"><i class="fa-solid ${item.icon}"></i></span><span><small>${item.label}</small><strong>${item.title}</strong><em>${item.copy}</em></span><i class="fa-solid fa-arrow-right desk-focus-arrow"></i></button>`).join('');
+      const metricsEl=document.getElementById('deskCommandMetrics'); if(metricsEl) metricsEl.innerHTML=[
+        ['Active desk deals','6','2 need manager selection'],['Strong-fit paths',String(deskPathways.filter(p=>p.fit>=78).length),'Across the active structure'],['Modeled payment',money(metrics.payment),'Current synthetic structure'],['Front gross',money(metrics.frontGross),`${money(metrics.totalGross)} including products`],['Conditions open',String(deskState.conditions.filter(c=>!c.done).length),'Before F&I handoff']
+      ].map((m,i)=>`<div class="desk-metric" style="--desk-metric-soft:${i===4?'rgba(217,123,49,.10)':'rgba(114,87,232,.08)'}"><small>${m[0]}</small><strong>${m[1]}</strong><span>${m[2]}</span></div>`).join('');
+      const summary=document.getElementById('deskActiveStructureSummary'); if(summary) summary.innerHTML=`<div class="desk-structure-summary"><div class="desk-structure-head"><div>${deskToken(deskState.activeDealId)}<h3>${metrics.vehicle.label}</h3><div class="section-subtitle">Jordan Taylor · ${deskProfilePresets[deskState.profile]?.label||'Custom'} synthetic profile</div></div><span class="badge ${deskFitTone(best.fit)}">${best.band}</span></div><div class="desk-summary-grid">${[['Payment',money(metrics.payment)],['Amount financed',money(metrics.amountFinanced)],['LTV',pct(metrics.ltv)],['PTI',pct(metrics.pti)],['Cash down',money(metrics.cashDown)],['Trade equity',money(metrics.tradeEquity)],['Front gross',money(metrics.frontGross)],['Products',money(metrics.products)]].map(x=>`<div class="desk-summary-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="desk-fit-strip"><div><strong>${best.name} is currently strongest</strong><div class="desk-fit-track"><div class="desk-fit-fill" style="width:${best.fit}%"></div></div><div class="cell-sub">${best.lender.name} · ${best.reasons[0]}</div></div><div class="desk-fit-number">${best.fit}</div></div></div>`;
+      renderDeskTimeline('deskCommandTimeline',deskState.timeline.slice(0,6));
+      const body=document.getElementById('deskCommandDealBody'); if(body) body.innerHTML=deskDeals.slice(0,5).map(d=>`<tr><td>${deskToken(d.id,true)}</td><td><div class="cell-main">${d.customer}</div><div class="cell-sub">${d.vehicle}</div></td><td><span class="badge desk-badge">${d.band} · ${d.bureau}</span></td><td>${d.id===deskState.activeDealId?money(metrics.amountFinanced):money(d.payment*70)}</td><td><span class="badge ${deskFitTone(d.fit)}">${d.fit} · ${deskFitBand(d.fit)}</span></td><td>${money(d.gross)}</td><td><span class="badge ${d.status==='Ready for F&I'?'green':d.status==='Conditional'?'amber':'blue'}">${d.status}</span></td><td><button class="button small desk-button" onclick="openDeskDeal('${d.id}')">Open <i class="fa-solid fa-arrow-right"></i></button></td></tr>`).join('');
+    }
+
+    function renderDeskTimeline(id,events){ const el=document.getElementById(id); if(!el)return; el.innerHTML=events.map(e=>`<div class="desk-timeline-event"><time>${e.time}</time><div class="desk-timeline-mark"><i class="fa-solid ${e.icon||'fa-bolt'}"></i></div><div><strong>${e.title}</strong><p>${e.copy}</p></div></div>`).join('')||'<div class="empty-state">No desking events recorded.</div>'; }
+
+    function renderDeskStructure(){
+      syncDeskInputsFromState(); ensureDeskPathways(); const metrics=deskMetrics(); const best=deskPathways[0];
+      const vehicleSelect=document.getElementById('deskVehicle'); if(vehicleSelect&&!vehicleSelect.options.length) vehicleSelect.innerHTML=deskVehicles.map(v=>`<option value="${v.id}">${v.label} · ${money(v.price)}</option>`).join(''); if(vehicleSelect) vehicleSelect.value=deskState.vehicleId;
+      const liveVehicle=document.getElementById('deskLiveVehicle'); if(liveVehicle) liveVehicle.textContent=metrics.vehicle.label;
+      const fit=document.getElementById('deskLiveFit'); if(fit) fit.textContent=best.fit;
+      const band=document.getElementById('deskLiveBand'); if(band) band.textContent=best.band;
+      const liveMetrics=document.getElementById('deskLiveMetrics'); if(liveMetrics) liveMetrics.innerHTML=[['Monthly payment',money(metrics.payment),'Modeled at current APR'],['Amount financed',money(metrics.amountFinanced),`${money(metrics.taxesFees)} estimated taxes / fees`],['Loan-to-value',pct(metrics.ltv),`${money(metrics.vehicle.book)} synthetic book`],['Payment-to-income',pct(metrics.pti),`${money(deskState.income)} monthly income`],['Front gross',money(metrics.frontGross),`${money(metrics.totalGross)} with products`],['Back-end headroom',money(best.headroom),'Within strongest synthetic path']].map(x=>`<div class="desk-live-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+      const guard=document.getElementById('deskGuardrails'); if(guard) guard.innerHTML=[
+        {name:'Advance posture',value:`${pct(metrics.ltv)} LTV`,attention:metrics.ltv>best.lender.maxLtv,copy:metrics.ltv<=best.lender.maxLtv?'Inside strongest-path guide':'Above strongest-path guide'},
+        {name:'Payment pressure',value:`${pct(metrics.pti)} PTI`,attention:metrics.pti>best.lender.maxPti,copy:metrics.pti<=best.lender.maxPti?'Inside modeled PTI guide':'Payment pressure requires review'},
+        {name:'Term fit',value:`${metrics.term} months`,attention:metrics.term>best.lender.maxTerm,copy:metrics.term<=best.lender.maxTerm?'Supported by strongest path':'Term exceeds strongest path'},
+        {name:'Manager economics',value:`${money(metrics.frontGross)} front`,attention:false,copy:'Gross remains visible beside fit'}
+      ].map(g=>`<div class="desk-guardrail ${g.attention?'attention':''}"><i class="fa-solid ${g.attention?'fa-triangle-exclamation':'fa-check'}"></i><div><strong>${g.name}</strong><span>${g.copy}</span></div><b>${g.value}</b></div>`).join('');
+      const sensitivity=document.getElementById('deskSensitivity'); if(sensitivity){ const plusDown=deskMetrics({cashDown:metrics.cashDown+1500}); const lowerVehicle=deskMetrics({vehicleId:'bronco',sellingPrice:deskVehicleById('bronco').price}); const shorter=deskMetrics({term:66}); sensitivity.innerHTML=`<div class="desk-sensitivity-list">${[
+        ['Add $1,500 cash',`${money(plusDown.payment)}/mo`,`${pct(plusDown.ltv)} LTV · payment changes ${money(plusDown.payment-metrics.payment)}`],
+        ['Change to Bronco Sport',`${money(lowerVehicle.payment)}/mo`,`${money(metrics.amountFinanced-lowerVehicle.amountFinanced)} less amount financed`],
+        ['Shorten to 66 months',`${money(shorter.payment)}/mo`,`${money(shorter.payment-metrics.payment)} payment increase · faster payoff`]
+      ].map(x=>`<div class="desk-sensitivity-row"><div><strong>${x[0]}</strong><span>${x[2]}</span></div><div class="desk-sensitivity-value">${x[1]}</div></div>`).join('')}</div>`; }
+      const source=document.getElementById('deskProfileSourceBadge'); if(source) source.textContent=deskState.creditFile?'LOCAL FILE NAME + SYNTHETIC DATA':'SYNTHETIC PROFILE';
+      const status=document.getElementById('deskCreditFileStatus'); if(status) status.textContent=deskState.creditFile||'No file selected';
+    }
+
+    function renderDeskPathways(){
+      ensureDeskPathways(); const grid=document.getElementById('deskPathwayGrid'); if(!grid)return;
+      grid.innerHTML=deskPathways.map((p,index)=>`<article class="desk-path-card ${index===0?'recommended':''} ${deskState.selectedPath===p.id?'selected':''}" style="--path-color:${p.color}"><div class="desk-path-top"><div><div class="desk-path-label">${index===0?'Strongest modeled fit':`Path ${index+1}`}</div><div class="desk-path-title">${p.name}</div></div><div class="desk-path-fit"><strong>${p.fit}</strong><span>${p.band}</span></div></div><div class="desk-path-lender"><strong>${p.lender.name}</strong><span>${p.lender.program} · ${p.lender.speed} modeled response</span></div><div class="desk-path-economics">${[['Payment',money(p.metrics.payment)],['Cash down',money(p.metrics.cashDown)],['LTV',pct(p.metrics.ltv)],['PTI',pct(p.metrics.pti)],['Front gross',money(p.metrics.frontGross)],['Gross variance',money(p.grossVariance)]].map(x=>`<div class="desk-path-economic"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="desk-path-reasons">${p.reasons.map(r=>`<div class="desk-path-reason"><i class="fa-solid fa-check"></i><span>${r}</span></div>`).join('')}</div><div class="desk-path-actions"><button class="button small ${deskState.selectedPath===p.id?'desk-primary':'desk-button'}" onclick="selectDeskPath('${p.id}')">${deskState.selectedPath===p.id?'Selected':'Select Path'}</button><button class="button small icon-only" onclick="explainDeskPath('${p.id}')" title="Explain this path"><i class="fa-solid fa-eye"></i></button></div></article>`).join('');
+      const table=document.getElementById('deskPathwayTable'); if(table) table.innerHTML=deskPathways.map(p=>`<tr><td><strong>${p.name}</strong><div class="cell-sub">${p.description}</div></td><td>${p.lender.name}<div class="cell-sub">${p.lender.program}</div></td><td><span class="badge ${deskFitTone(p.fit)}">${p.fit} · ${p.band}</span></td><td>${money(p.metrics.payment)}</td><td>${pct(p.metrics.ltv)}</td><td>${pct(p.metrics.pti)}</td><td>${money(p.metrics.cashDown)}</td><td>${money(p.grossVariance)}</td><td>${p.conditions.join(', ')}</td></tr>`).join('');
+      const copy=document.getElementById('deskPathwayHeroCopy'); if(copy) copy.textContent=`${deskPathways.length} synthetic lender paths generated ${deskState.generatedAt?new Date(deskState.generatedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'from the active structure'}. ${deskPathways[0].name} currently leads at ${deskPathways[0].fit}.`;
+    }
+
+    function renderDeskDeals(){ const q=(document.getElementById('deskDealSearch')?.value||'').toLowerCase(); const status=document.getElementById('deskDealStatus')?.value||'all'; const rows=deskDeals.filter(d=>(status==='all'||d.status===status)&&`${d.id} ${d.customer} ${d.vehicle} ${d.band}`.toLowerCase().includes(q)); const body=document.getElementById('deskDealBody'); if(body) body.innerHTML=rows.map(d=>`<tr class="${d.id===deskState.activeDealId?'completion-row-active':''}" style="--deal-accent:#7257e8"><td>${deskToken(d.id,true)}</td><td>${d.customer}<div class="cell-sub">Owner: ${d.owner}</div></td><td>${d.vehicle}</td><td><span class="badge desk-badge">${d.band} · ${d.bureau}</span></td><td>${money(d.down)}</td><td>${money(d.payment)}</td><td><span class="badge ${deskFitTone(d.fit)}">${d.fit}</span></td><td>${money(d.gross)}</td><td><span class="badge ${d.status==='Ready for F&I'?'green':d.status==='Conditional'?'amber':'blue'}">${d.status}</span></td><td><button class="button small desk-button" onclick="openDeskDeal('${d.id}')">Open</button></td></tr>`).join('')||'<tr><td colspan="10"><div class="empty-state">No desking records match this view.</div></td></tr>'; }
+
+    function renderDeskSubmissions(){
+      ensureDeskPathways(); const selected=deskPathways.find(p=>p.id===deskState.selectedPath)||deskPathways[0]; const open=deskState.conditions.filter(c=>!c.done).length;
+      const summary=document.getElementById('deskSubmissionSummary'); if(summary) summary.innerHTML=[['Selected pathway',selected.name,selected.lender.name],['Submission status',deskState.submissionStage.replaceAll('_',' ').toUpperCase(),deskState.submissionStage==='modeling'?'Not yet submitted':'Synthetic status'],['Conditions open',String(open),open?'Ownership required':'All conditions resolved'],['F&I handoff',deskState.submissionStage==='ready'?'READY':'NOT READY',deskState.submissionStage==='ready'?'Decision record complete':'Complete conditions first']].map(x=>`<div class="desk-submission-card"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+      const board=document.getElementById('deskSubmissionBoard'); if(board){ const stages=[['submitted','Submitted','Path sent for synthetic lender review'],['conditional','Conditional','Terms returned with conditions'],['ready','Ready for F&I','Manager accepted terms and cleared handoff']]; board.innerHTML=stages.map(([key,title,copy])=>`<section class="desk-submission-col"><div class="desk-submission-col-head"><div><strong>${title}</strong><div class="card-subtitle">${copy}</div></div><span class="nav-count">${deskState.submissionStage===key?1:0}</span></div><div class="desk-submission-col-body">${deskState.submissionStage===key?`<article class="desk-submission-item"><div>${deskToken(deskState.activeDealId,true)}</div><strong style="margin-top:8px">${selected.name} · ${selected.lender.name}</strong><p>${money(selected.metrics.payment)}/mo · ${pct(selected.metrics.ltv)} LTV · fit ${selected.fit}. ${open} conditions remain open.</p><footer><span class="badge ${key==='ready'?'green':key==='conditional'?'amber':'desk-badge'}">${title}</span>${key==='submitted'?`<button class="button small desk-button" onclick="advanceDeskSubmission()">Receive terms</button>`:key==='conditional'?`<button class="button small desk-primary" onclick="advanceDeskSubmission()">Review conditions</button>`:'<span class="badge green">Handoff preserved</span>'}</footer></article>`:'<div class="empty-state">No active item in this stage.</div>'}</div></section>`).join(''); }
+      const list=document.getElementById('deskConditionList'); if(list) list.innerHTML=`<div class="desk-condition-list">${deskState.conditions.map(c=>`<div class="desk-condition-item ${c.done?'done':''}"><div class="desk-condition-icon"><i class="fa-solid ${c.done?'fa-check':'fa-triangle-exclamation'}"></i></div><div><strong>${c.title}</strong><span>Owner: ${c.owner} · ${c.due}</span></div>${c.done?'<span class="badge green">Resolved</span>':`<button class="button small desk-button" onclick="resolveDeskCondition('${c.id}')">Resolve</button>`}</div>`).join('')}</div>`;
+      renderDeskTimeline('deskSubmissionTimeline',deskState.timeline.slice(0,9));
+    }
+
+    function renderDeskOutcomes(){ const metrics=document.getElementById('deskOutcomeMetrics'); if(metrics) metrics.innerHTML=[['Funded demo outcomes','18','Last 30 synthetic days'],['First-path funded','72%','Modeled historical pattern'],['Average gross variance',money(-286),'Versus first desk structure'],['Conditions per funded deal','1.4','Synthetic average'],['Median decision time','18 min','From model to submission']].map(x=>`<div class="desk-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join(''); const body=document.getElementById('deskOutcomeBody'); if(body) body.innerHTML=deskOutcomeSeed.map(o=>`<tr><td>${deskToken(o.deal,true)}</td><td>${o.path}</td><td><span class="badge ${deskFitTone(o.fit)}">${o.fit}</span></td><td><span class="badge ${o.result==='Funded'?'green':'amber'}">${o.result}</span></td><td>${money(o.variance)}</td><td>${o.conditions}</td><td>${o.note}</td></tr>`).join(''); const signals=document.getElementById('deskLearningSignals'); if(signals) signals.innerHTML=`<div class="desk-learning-list">${[
+        ['Advance discipline is outperforming term extension','Synthetic funded outcomes show stronger consistency when the desk reduces LTV before stretching the term.'],['Income evidence is the most common preventable condition','Three of the last five conditioned paths required documentation already available elsewhere in the jacket.'],['Collateral changes are protecting more deals than price concessions','Lower-priced vehicles improved payment and advance while preserving a cleaner economic story.'],['Manager reasons improve institutional memory','The outcome record is most useful when the selected path includes a written reason and final funding result.']
+      ].map(x=>`<div class="desk-learning-item"><strong>${x[0]}</strong><p>${x[1]}</p></div>`).join('')}</div>`; }
+
+    function renderDeskKnowledge(){ const grid=document.getElementById('deskLenderGrid'); if(grid) grid.innerHTML=deskLenders.map(l=>`<article class="desk-lender-card"><div class="desk-lender-head"><div><h3>${l.name}</h3><p>${l.program}</p></div><span class="badge desk-badge">SYNTHETIC</span></div><div class="desk-lender-criteria">${[['Min score',l.minScore],['Max LTV',`${l.maxLtv}%`],['Max PTI',`${l.maxPti}%`],['Max term',`${l.maxTerm} mo`],['Modeled APR',`${l.rate}%`],['Reserve',money(l.reserve)]].map(x=>`<div class="desk-lender-criterion"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="desk-lender-note"><strong style="color:var(--text)">Store note:</strong> ${l.note}<br><br><strong style="color:var(--text)">Source:</strong> ${l.source}</div></article>`).join(''); const body=document.getElementById('deskKnowledgeChangeBody'); if(body) body.innerHTML=`<tr><td>08:15</td><td>Northline Demo Finance</td><td>Advance guidance reviewed for current synthetic program.</td><td>Alex Morgan</td><td>Gross Guard</td><td><span class="badge green">Current</span></td></tr><tr><td>Yesterday</td><td>Canyon Demo Credit</td><td>Modeled PTI guide updated from 17.0% to 16.5%.</td><td>Dana Ruiz</td><td>Approval Strength</td><td><span class="badge desk-badge">Reviewed</span></td></tr><tr><td>Jul 16</td><td>Apex Demo Financial</td><td>Extended-term note added for 84-month structures.</td><td>Alex Morgan</td><td>Payment Relief</td><td><span class="badge green">Current</span></td></tr>`; const status=document.getElementById('deskKnowledgeStatus'); if(status&&deskState.knowledgeFile) status.innerHTML=`<strong>Local demo attachment:</strong> ${deskState.knowledgeFile}. The filename is preserved for demonstration only; no file was transmitted or parsed.`; }
+
+    function renderAllDesk(){ renderDeskActiveBanner(); renderDeskCommand(); renderDeskStructure(); renderDeskPathways(); renderDeskDeals(); renderDeskSubmissions(); renderDeskOutcomes(); renderDeskKnowledge(); const cond=document.getElementById('deskConditionCountNav'); if(cond) cond.textContent=deskState.conditions.filter(c=>!c.done).length; }
+
+    function showDeskView(view){
+      if(currentPortalWorkspace!=='desking'){ switchPortalWorkspace('desking',view); return; }
+      lastDeskView=view;
+      document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${view}`));
+      document.querySelectorAll('[data-desk-view]').forEach(n=>n.classList.toggle('active',n.dataset.deskView===view));
+      const meta=deskPageMeta[view]||deskPageMeta['desk-command']; document.getElementById('pageTitle').textContent=meta[0]; document.getElementById('pageSubtitle').textContent=meta[1];
+      document.getElementById('sidebar').classList.remove('open'); window.scrollTo({top:0,behavior:'smooth'}); renderAllDesk();
+    }
+
+    function showView(view){
+      if(currentPortalWorkspace!=='compliance'){ switchPortalWorkspace('compliance',view); return; }
+      lastComplianceView=view;
+      document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${view}`));
+      document.querySelectorAll('.nav-item[data-view]').forEach(n=>n.classList.toggle('active',n.dataset.view===view));
+      const meta=pageMeta[view]||pageMeta.brief; document.getElementById('pageTitle').textContent=meta[0]; document.getElementById('pageSubtitle').textContent=meta[1];
+      document.getElementById('sidebar').classList.remove('open'); window.scrollTo({top:0,behavior:'smooth'});
+      if(view==='brief') renderMorningBrief(); if(view==='journey') renderJourney(); if(view==='audit') renderAudit(); if(view==='actions') renderActions(); if(view==='queue') renderDealQueue(); if(view==='completion') renderCompletionWatch(); if(view==='findings') renderFindings();
+    }
+
+    function switchPortalWorkspace(workspace,targetView=null){
+      currentPortalWorkspace=workspace==='desking'?'desking':'compliance';
+      document.body.dataset.workspace=currentPortalWorkspace;
+      const select=document.getElementById('workspaceSelect'); if(select) select.value=currentPortalWorkspace;
+      const mark=document.getElementById('workspaceSwitchMark'); if(mark) mark.textContent=currentPortalWorkspace==='desking'?'ϟ':'◇';
+      const copy=document.getElementById('workspaceSwitchCopy'); if(copy) copy.textContent=currentPortalWorkspace==='desking'?'Structure modeling, lender pathways, and outcome memory':'Deal control, findings, and accountable resolution';
+      const role=document.getElementById('sessionRole'); if(role) role.textContent=currentPortalWorkspace==='desking'?'Desk Manager · Decision Support':'Senior Compliance Auditor';
+      const pill=document.getElementById('demoPill'); if(pill) pill.textContent=currentPortalWorkspace==='desking'?'DESKING DEMO':'COMPLIANCE DEMO';
+      const search=document.getElementById('searchCopy'); if(search) search.textContent=currentPortalWorkspace==='desking'?'Search desk deals, pathways, programs':'Search deals, findings, actions';
+      const label=document.getElementById('operatingStatusLabel'); if(label) label.textContent=currentPortalWorkspace==='desking'?'Decision Engine':'Operating Status';
+      if(currentPortalWorkspace==='desking'){ renderAllDesk(); showDeskView(targetView||lastDeskView); } else { renderNotifications(); showView(targetView||lastComplianceView); }
+      renderNotifications();
+      showToast(currentPortalWorkspace==='desking'?'Desking Intelligence opened':'Compliance Intelligence opened',currentPortalWorkspace==='desking'?'Same portal navigation, new decision-support cockpit.':'Deal control and audit workspace restored.','success');
+    }
+
+    function selectDeskProfile(profile){ const preset=deskProfilePresets[profile]; if(!preset)return; deskState.profile=profile; Object.assign(deskState,preset); deskState.creditFile=null; deskPathways=[]; syncDeskInputsFromState(); deskAddEvent('Synthetic credit profile changed',`${preset.label} profile loaded with bureau ${preset.bureauScore} and auto score ${preset.autoScore}.`,'fa-id-card'); renderAllDesk(); }
+    function handleDeskInput(){ syncDeskStateFromInputs(); const down=document.getElementById('deskDownRange'); if(down) down.value=deskState.cashDown; const downLabel=document.getElementById('deskDownRangeValue'); if(downLabel) downLabel.textContent=money(deskState.cashDown); deskPathways=[]; generateDeskPathways(false,true); }
+    function saveDeskStructure(){ syncDeskStateFromInputs(); deskPathways=[]; const m=deskMetrics(); deskAddEvent('Structure snapshot saved',`${money(m.amountFinanced)} modeled at ${m.term} months with ${money(m.cashDown)} cash down.`,'fa-floppy-disk'); generateDeskPathways(false); showToast('Structure snapshot saved','The active economics and manager context were preserved.','success'); }
+    function selectDeskPath(id){ ensureDeskPathways(); const path=deskPathways.find(p=>p.id===id); if(!path)return; deskState.selectedPath=id; deskAddEvent('Manager selected a pathway',`${path.name} selected at ${path.fit} fit with ${money(path.grossVariance)} front-gross variance.`,'fa-scale-balanced'); renderAllDesk(); showToast('Path selected',`${path.name} is now the active manager decision.`,'success'); }
+    function explainDeskPath(id){ ensureDeskPathways(); const p=deskPathways.find(x=>x.id===id); if(!p)return; showToast(`${p.name} · ${p.fit}`,`${p.reasons[0]} ${p.reasons[1]}`,'success'); }
+    function submitSelectedDeskPath(){ ensureDeskPathways(); const p=deskPathways.find(x=>x.id===deskState.selectedPath)||deskPathways[0]; deskState.submissionStage='submitted'; deskAddEvent('Synthetic lender submission recorded',`${p.name} was submitted to ${p.lender.name}. No real lender connection was used.`,'fa-paper-plane'); renderAllDesk(); showToast('Synthetic submission recorded',`${p.name} moved into the submitted lane.`,'success'); }
+    function advanceDeskSubmission(){ if(deskState.submissionStage==='modeling'){submitSelectedDeskPath();return;} if(deskState.submissionStage==='submitted'){deskState.submissionStage='conditional';deskAddEvent('Conditional terms received','Synthetic terms returned with income and trade-payoff conditions.','fa-triangle-exclamation');} else if(deskState.submissionStage==='conditional'){ if(deskState.conditions.some(c=>!c.done)){showToast('Conditions remain open','Resolve the owned conditions before the F&I handoff.','warning');return;} deskState.submissionStage='ready';deskAddEvent('Ready for F&I handoff','Manager accepted the synthetic terms and preserved the decision record.','fa-check'); } deskSave(); renderAllDesk(); }
+    function resolveDeskCondition(id){ const c=deskState.conditions.find(x=>x.id===id); if(!c)return; c.done=true; deskAddEvent('Condition resolved',`${c.title} was completed by ${c.owner}.`,'fa-check'); if(deskState.conditions.every(x=>x.done)&&deskState.submissionStage==='conditional') deskState.submissionStage='ready'; deskSave(); renderAllDesk(); showToast('Condition resolved',`${c.title} is complete.`,'success'); }
+    function openDeskDeal(id){ const deal=deskDeals.find(d=>d.id===id); if(!deal)return; if(id!==deskState.activeDealId&&!confirm(`Switch the active desking record from ${deskState.activeDealId} to ${id}?`))return; deskState.activeDealId=id; if(id!=='DX-7314'){ const profile=deal.band==='Prime'?'prime':deal.band==='Challenged'?'challenged':'near'; Object.assign(deskState,deskProfilePresets[profile]); deskState.profile=profile; deskState.cashDown=deal.down; deskState.sellingPrice=deskVehicles[Math.abs(stringHash(id))%deskVehicles.length].price; deskState.vehicleId=deskVehicles[Math.abs(stringHash(id))%deskVehicles.length].id; deskState.selectedPath=null; deskState.submissionStage=deal.status==='Conditional'?'conditional':deal.status==='Ready for F&I'?'ready':'modeling'; }
+      deskPathways=[]; deskAddEvent('Active desking record switched',`${id} · ${deal.customer} is now the protected working context.`,'fa-id-card'); renderAllDesk(); showDeskView('desk-structure'); }
+    function resetDeskingDemo(){ if(!confirm('Reset the synthetic Desking Intelligence demo?'))return; deskState=cloneDeskState(); deskPathways=[]; deskSave(); syncDeskInputsFromState(); renderAllDesk(); showDeskView('desk-command'); showToast('Desking demo reset','DX-7314 is back at the initial structure stage.','success'); }
+    function exportDeskOutcomes(){ exportCsv('ENGENIX_Desking_Outcome_Memory.csv',['Deal','Path','Fit','Result','Gross variance','Conditions','Learning note'],deskOutcomeSeed.map(o=>[o.deal,o.path,o.fit,o.result,o.variance,o.conditions,o.note])); }
+    function saveDeskSettings(){ document.querySelectorAll('[data-desk-setting]').forEach(t=>{}); showToast('Desking settings saved','Decision-support controls were preserved locally for the demonstration.','success'); }
+    function downloadDeskStructureBrief(){ ensureDeskPathways(); const m=deskMetrics(); const selected=deskPathways.find(p=>p.id===deskState.selectedPath)||deskPathways[0]; const html=`<!doctype html><html><head><meta charset="utf-8"><title>ENGENIX Desking Structure Brief</title><style>body{font-family:Arial,sans-serif;color:#132737;margin:40px}header{border-bottom:4px solid #7257e8;padding-bottom:18px;display:flex;justify-content:space-between}h1{margin:6px 0 0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.cell{border:1px solid #d8dce8;border-radius:9px;padding:12px}.cell small{color:#6b778a;text-transform:uppercase;font-size:10px}.cell strong{display:block;margin-top:7px;font-size:16px}table{width:100%;border-collapse:collapse;margin-top:18px}th,td{padding:10px;border-bottom:1px solid #d8dce8;text-align:left;font-size:12px}footer{margin-top:28px;padding-top:12px;border-top:1px solid #d8dce8;color:#6b778a;font-size:10px}</style></head><body><header><div><b>ENGENIX</b><h1>Desking Structure Brief</h1></div><div>${deskState.activeDealId}<br>Generated ${new Date().toLocaleString()}</div></header><div class="grid">${[['Vehicle',m.vehicle.label],['Payment',money(m.payment)],['Amount financed',money(m.amountFinanced)],['Cash down',money(m.cashDown)],['LTV',pct(m.ltv)],['PTI',pct(m.pti)],['Front gross',money(m.frontGross)],['Selected path',selected.name]].map(x=>`<div class="cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><h2>Selected pathway</h2><p><b>${selected.name}</b> · ${selected.lender.name} · ${selected.fit} ${selected.band}</p><table><thead><tr><th>Reason</th><th>Likely conditions</th><th>Gross variance</th></tr></thead><tbody><tr><td>${selected.reasons.join('<br>')}</td><td>${selected.conditions.join('<br>')}</td><td>${money(selected.grossVariance)}</td></tr></tbody></table><footer>Synthetic demonstration only. Estimated lender alignment is decision support, not a lender approval or credit decision. No consumer report was transmitted.</footer></body></html>`; const blob=new Blob([html],{type:'text/html'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`ENGENIX_Desking_Structure_Brief_${deskState.activeDealId}.html`; a.click(); URL.revokeObjectURL(url); deskAddEvent('Structure brief downloaded',`A printable synthetic structure brief was generated for ${deskState.activeDealId}.`,'fa-download'); showToast('Structure brief downloaded','Open the HTML file to print or save it as PDF.','success'); }
+
+    function renderSearchResults(query){
+      if(currentPortalWorkspace==='desking'){ const q=query.toLowerCase().trim(); const items=[...deskDeals.map(d=>({icon:'fa-car',title:d.id,sub:`${d.customer} · ${d.vehicle} · ${d.status}`,type:'Desk deal',action:`openDeskDeal('${d.id}');closeSearch()`})),...deskLenders.map(l=>({icon:'fa-landmark',title:l.name,sub:`${l.program} · ${l.source}`,type:'Program',action:`showDeskView('desk-knowledge');closeSearch()`})),...deskPathways.map(p=>({icon:'fa-route',title:p.name,sub:`${p.lender.name} · fit ${p.fit}`,type:'Pathway',action:`showDeskView('desk-pathways');closeSearch()`}))].filter(x=>!q||`${x.title} ${x.sub} ${x.type}`.toLowerCase().includes(q)).slice(0,10); document.getElementById('searchResults').innerHTML=items.length?items.map(i=>`<button class="search-result" onclick="${i.action}"><div class="search-result-icon"><i class="fa-solid ${i.icon}"></i></div><div><div class="search-result-title">${i.title}</div><div class="search-result-sub">${i.sub}</div></div><div class="search-result-type">${i.type}</div></button>`).join(''):'<div class="empty-state">No desking results found.</div>'; return; }
+      const q=query.toLowerCase().trim(); const items=[...deals.map(d=>({icon:'fa-file-lines',title:d.id,sub:`${d.customer} · ${d.dealer} · ${d.finding}`,type:'Deal',action:`openDeal('${d.id}');closeSearch()`})),...findings.map(f=>({icon:'fa-triangle-exclamation',title:f.name,sub:`${f.id} · ${f.deal} · ${f.dealer}`,type:'Finding',action:`showView('findings');closeSearch()`})),...actions.map(a=>({icon:'fa-list-check',title:a.title,sub:`${a.id} · ${a.dealer} · ${a.owner}`,type:'Action',action:`showView('actions');closeSearch()`}))].filter(x=>!q||`${x.title} ${x.sub} ${x.type}`.toLowerCase().includes(q)).slice(0,10); document.getElementById('searchResults').innerHTML=items.length?items.map(i=>`<button class="search-result" onclick="${i.action}"><div class="search-result-icon"><i class="fa-solid ${i.icon}"></i></div><div><div class="search-result-title">${i.title}</div><div class="search-result-sub">${i.sub}</div></div><div class="search-result-type">${i.type}</div></button>`).join(''):'<div class="empty-state">No workspace results found.</div>';
+    }
+
+    function renderNotifications(){
+      if(currentPortalWorkspace==='desking'){ const n=[{icon:'fa-scale-balanced',text:'DX-7311 requires a manager pathway selection.',time:'4 min ago',unread:true},{icon:'fa-triangle-exclamation',text:'DX-7308 returned with two synthetic lender conditions.',time:'11 min ago',unread:true},{icon:'fa-book-open',text:'Canyon Demo Credit criteria were reviewed this morning.',time:'1 hr ago',unread:false}]; document.getElementById('notificationList').innerHTML=n.map(x=>`<div class="notification-item deal-threaded ${x.unread?'unread':''}" style="--deal-accent:#7257e8"><div class="notification-icon" style="color:#7257e8;background:rgba(114,87,232,.10)"><i class="fa-solid ${x.icon}"></i></div><div><div class="notification-copy">${x.text}</div><div class="notification-time">${x.time}</div></div></div>`).join(''); const count=n.filter(x=>x.unread).length; const dot=document.querySelector('.notification-dot');if(dot)dot.style.display=count?'block':'none'; const subtitle=document.querySelector('#notificationPanel .card-subtitle');if(subtitle)subtitle.textContent=`${count} desking items need attention`; return; }
+      document.getElementById('notificationList').innerHTML=notifications.map(n=>{const dealId=notificationDealId(n);const identity=getDealIdentity(dealId);return `<div class="notification-item deal-threaded ${n.unread?'unread':''}" style="--deal-accent:${identity.color}"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div>${dealId!=='—'?dealIdentityMarkup(dealId,true):''}<div class="notification-copy" style="margin-top:${dealId!=='—'?'6px':'0'}">${n.text}</div><div class="notification-time">${n.time}</div></div></div>`;}).join(''); const count=notifications.filter(item=>item.unread).length; const dot=document.querySelector('.notification-dot');if(dot)dot.style.display=count?'block':'none'; const subtitle=document.querySelector('#notificationPanel .card-subtitle');if(subtitle)subtitle.textContent=`${count} ${count===1?'item needs':'items need'} attention`;
+    }
+
+    function markNotificationsRead(){ if(currentPortalWorkspace==='desking'){ document.querySelectorAll('#notificationList .notification-item').forEach(n=>n.classList.remove('unread')); const dot=document.querySelector('.notification-dot');if(dot)dot.style.display='none'; const subtitle=document.querySelector('#notificationPanel .card-subtitle');if(subtitle)subtitle.textContent='0 desking items need attention'; showToast('Desking notifications cleared','All synthetic desking notifications are marked read.','success'); return;} notifications.forEach(n=>n.unread=false); renderNotifications(); document.querySelector('.notification-dot').style.display='none'; showToast('Notifications cleared','All notifications are marked as read.','success'); }
+
+    function initializeDeskingWorkspace(){
+      const vehicle=document.getElementById('deskVehicle'); if(vehicle) vehicle.innerHTML=deskVehicles.map(v=>`<option value="${v.id}">${v.label} · ${money(v.price)}</option>`).join('');
+      document.getElementById('workspaceSelect')?.addEventListener('change',e=>switchPortalWorkspace(e.target.value));
+      document.querySelectorAll('[data-desk-view]').forEach(n=>n.addEventListener('click',()=>showDeskView(n.dataset.deskView)));
+      document.querySelectorAll('[data-desk-profile]').forEach(n=>n.addEventListener('click',()=>selectDeskProfile(n.dataset.deskProfile)));
+      ['deskBureauScore','deskAutoScore','deskIncome','deskHousing','deskSellingPrice','deskCashDown','deskTradeEquity','deskTerm','deskApr','deskProducts','deskVehicle'].forEach(id=>document.getElementById(id)?.addEventListener('input',handleDeskInput));
+      document.getElementById('deskVehicle')?.addEventListener('change',e=>{ const v=deskVehicleById(e.target.value); deskState.vehicleId=v.id; deskState.sellingPrice=v.price; deskPathways=[]; syncDeskInputsFromState(); renderDeskStructure(); });
+      document.getElementById('deskDownRange')?.addEventListener('input',e=>{ deskState.cashDown=Number(e.target.value); const cash=document.getElementById('deskCashDown');if(cash)cash.value=deskState.cashDown; const label=document.getElementById('deskDownRangeValue');if(label)label.textContent=money(deskState.cashDown); deskPathways=[]; renderDeskStructure(); deskSave(); });
+      document.getElementById('deskCreditFile')?.addEventListener('change',e=>{ const file=e.target.files?.[0]; if(!file)return; deskState.creditFile=file.name; deskAddEvent('Credit report filename attached',`${file.name} was attached locally. Synthetic profile values remain controlling in this demo.`,'fa-file-circle-plus'); renderDeskStructure(); showToast('Local demo attachment recorded','The filename was preserved. No file contents were transmitted or parsed.','success'); });
+      document.getElementById('deskKnowledgeFile')?.addEventListener('change',e=>{ const file=e.target.files?.[0]; if(!file)return; deskState.knowledgeFile=file.name; deskAddEvent('Program bulletin filename attached',`${file.name} was recorded locally for the synthetic knowledge demonstration.`,'fa-book-open'); renderDeskKnowledge(); showToast('Program filename attached','No document contents were transmitted or parsed.','success'); });
+      document.getElementById('deskDealSearch')?.addEventListener('input',renderDeskDeals); document.getElementById('deskDealStatus')?.addEventListener('change',renderDeskDeals);
+      document.querySelectorAll('[data-desk-setting]').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
+      document.getElementById('rooftopSelect')?.addEventListener('change',()=>{if(currentPortalWorkspace==='desking')renderAllDesk();});
+      syncDeskInputsFromState(); ensureDeskPathways(); renderAllDesk();
+    }
+
+
+    initializeDeskingWorkspace();
     initializeEntryExperience();
+    currentPortalWorkspace='compliance'; document.body.dataset.workspace='compliance';
     loadSettings();
     renderNotifications();
     renderMorningBrief();
