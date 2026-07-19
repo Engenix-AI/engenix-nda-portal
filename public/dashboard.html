@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.19-unified-polish-v8">
+  <meta name="dashboard-build" content="2026.07.19-operating-command-v9">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal · Operational Polish V8</title>
+    <title>ENGENIX | Operating Command Unified Portal Demo</title>
   <style>
     :root {
       --bg: #071018;
@@ -3423,14 +3423,256 @@
     }
   </style>
 
+
+  <style id="engenix-operating-command-v9-style">
+    /* ENGENIX V9 · Operating Command, Continuous Reconciliation, and Deal Finalization */
+    .fa-tower-broadcast::before { content:"⌁"; }
+    .fa-diagram-project::before { content:"⌘"; }
+    .fa-link::before { content:"∞"; }
+    .fa-route::before { content:"⇢"; }
+    .fa-sack-dollar::before { content:"$"; }
+    .fa-file-invoice-dollar::before { content:"▧"; }
+    .fa-receipt::before { content:"▥"; }
+    .fa-car-side::before { content:"▰"; }
+    .fa-signature::before { content:"✎"; }
+    .fa-box-archive::before { content:"▣"; }
+    .fa-money-bill-transfer::before { content:"⇄"; }
+    .fa-arrow-up-right-from-square::before { content:"↗"; }
+    .fa-building-circle-check::before { content:"✓"; }
+    .fa-circle-nodes::before { content:"◉"; }
+    .fa-user-clock::before { content:"◷"; }
+    .fa-wave-square::before { content:"⌁"; }
+
+    .command-shell,.finalization-shell { display:none !important; }
+    body[data-workspace="command"] .compliance-shell,
+    body[data-workspace="command"] .desking-shell,
+    body[data-workspace="command"] .finance-shell,
+    body[data-workspace="command"] .finalization-shell { display:none !important; }
+    body[data-workspace="command"] .command-shell { display:block !important; }
+    body[data-workspace="command"] button.command-shell { display:grid !important; }
+    body[data-workspace="command"] nav.command-shell { display:block !important; }
+    body[data-workspace="command"] .command-active-banner.command-shell { display:flex !important; }
+    body[data-workspace="command"] .view:not(.command-view) { display:none !important; }
+    body[data-workspace="command"] .command-view { display:none !important; }
+    body[data-workspace="command"] .command-view.active { display:block !important; }
+
+    body[data-workspace="finalization"] .compliance-shell,
+    body[data-workspace="finalization"] .desking-shell,
+    body[data-workspace="finalization"] .finance-shell,
+    body[data-workspace="finalization"] .command-shell { display:none !important; }
+    body[data-workspace="finalization"] .finalization-shell { display:block !important; }
+    body[data-workspace="finalization"] button.finalization-shell { display:grid !important; }
+    body[data-workspace="finalization"] nav.finalization-shell { display:block !important; }
+    body[data-workspace="finalization"] .final-active-banner.finalization-shell { display:flex !important; }
+    body[data-workspace="finalization"] .view:not(.finalization-view) { display:none !important; }
+    body[data-workspace="finalization"] .finalization-view { display:none !important; }
+    body[data-workspace="finalization"] .finalization-view.active { display:block !important; }
+
+    body[data-workspace="command"] .product-switch-mark { color:#0f7187; background:rgba(15,113,135,.12); }
+    body[data-workspace="command"] .command-nav-item.active { color:var(--text); background:linear-gradient(90deg,rgba(15,113,135,.15),rgba(44,114,214,.05)); border-color:rgba(15,113,135,.22); box-shadow:inset 3px 0 0 #0f7187; }
+    body[data-workspace="command"] .command-primary-action { border-color:rgba(15,113,135,.23); background:linear-gradient(135deg,rgba(15,113,135,.13),rgba(44,114,214,.055)); }
+    body[data-workspace="command"] .command-primary-action .sidebar-primary-icon { color:#0f7187; background:rgba(15,113,135,.12); }
+    body[data-workspace="command"] .demo-pill { color:#0d6579; background:rgba(15,113,135,.09); border-color:rgba(15,113,135,.2); }
+    html[data-theme="light"] body[data-workspace="command"] .sidebar { background:linear-gradient(180deg,#fbfefe,#f2f8f9 66%,#f7f9fb); }
+
+    body[data-workspace="finalization"] .product-switch-mark { color:#9b6318; background:rgba(196,126,31,.12); }
+    body[data-workspace="finalization"] .finalization-nav-item.active { color:var(--text); background:linear-gradient(90deg,rgba(196,126,31,.15),rgba(22,129,103,.05)); border-color:rgba(196,126,31,.23); box-shadow:inset 3px 0 0 #c47e1f; }
+    body[data-workspace="finalization"] .finalization-primary-action { border-color:rgba(196,126,31,.24); background:linear-gradient(135deg,rgba(196,126,31,.13),rgba(22,129,103,.055)); }
+    body[data-workspace="finalization"] .finalization-primary-action .sidebar-primary-icon { color:#a86a17; background:rgba(196,126,31,.12); }
+    body[data-workspace="finalization"] .demo-pill { color:#8b5918; background:rgba(196,126,31,.09); border-color:rgba(196,126,31,.2); }
+    html[data-theme="light"] body[data-workspace="finalization"] .sidebar { background:linear-gradient(180deg,#fffdf9,#faf6ee 64%,#f4f8f6); }
+
+    .command-active-banner,.final-active-banner { position:sticky; top:var(--topbar); z-index:46; min-height:60px; padding:9px clamp(18px,2.3vw,34px); border-bottom:1px solid var(--line); backdrop-filter:blur(18px); align-items:center; gap:14px; }
+    .command-active-banner { background:color-mix(in srgb,var(--bg) 91%,transparent); box-shadow:0 10px 30px rgba(15,113,135,.08); }
+    .command-active-banner::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:linear-gradient(180deg,#0f7187,#2c72d6); }
+    .final-active-banner { background:color-mix(in srgb,var(--bg) 91%,transparent); box-shadow:0 10px 30px rgba(196,126,31,.08); }
+    .final-active-banner::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:linear-gradient(180deg,#c47e1f,#168167); }
+    .command-banner-mark,.final-banner-mark { min-height:31px; padding:4px 9px; border-radius:9px; display:inline-flex; align-items:center; gap:7px; white-space:nowrap; font-size:9px; font-weight:850; letter-spacing:.07em; }
+    .command-banner-mark { color:#0f7187; border:1px solid rgba(15,113,135,.25); background:rgba(15,113,135,.08); }
+    .final-banner-mark { color:#a86a17; border:1px solid rgba(196,126,31,.25); background:rgba(196,126,31,.08); }
+    .command-active-copy,.final-active-copy { min-width:0; flex:1; }
+
+    .oc-shell,.final-shell { display:grid; gap:12px; }
+    .oc-hero,.final-hero { padding:clamp(23px,2.9vw,36px); border-radius:19px; color:#f7fbfd; position:relative; overflow:hidden; }
+    .oc-hero { border:1px solid rgba(15,113,135,.26); background:linear-gradient(116deg,#10242c,#123743 58%,#173c58); }
+    .final-hero { border:1px solid rgba(196,126,31,.27); background:linear-gradient(116deg,#2c2417,#3b2d1d 52%,#193c35); }
+    .oc-hero::before,.final-hero::before { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:30px 30px; mask-image:linear-gradient(90deg,#000,transparent 92%); }
+    .oc-hero::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 86% 18%,rgba(44,114,214,.32),transparent 30%),radial-gradient(circle at 95% 86%,rgba(15,113,135,.34),transparent 25%); }
+    .final-hero::after { content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 84% 20%,rgba(196,126,31,.32),transparent 30%),radial-gradient(circle at 94% 86%,rgba(22,129,103,.30),transparent 25%); }
+    .oc-hero-grid,.final-hero-grid { position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:25px; align-items:center; }
+    .oc-kicker,.final-kicker { font-size:9px; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
+    .oc-kicker { color:#8bd9e6; } .final-kicker { color:#f0c77e; }
+    .oc-hero h1,.final-hero h1 { margin:9px 0 9px; max-width:850px; font-size:clamp(29px,3.45vw,49px); line-height:1.02; letter-spacing:-.047em; }
+    .oc-hero p,.final-hero p { margin:0; max-width:760px; color:#b7cbd2; font-size:12px; line-height:1.65; }
+    .oc-hero-actions,.final-hero-actions { min-width:230px; display:grid; gap:8px; }
+    .oc-hero-actions .button,.final-hero-actions .button { min-height:42px; justify-content:flex-start; }
+    .oc-primary { color:#fff; border-color:rgba(255,255,255,.14); background:linear-gradient(135deg,#0f7187,#2c72d6); box-shadow:0 10px 24px rgba(15,113,135,.22); }
+    .oc-primary:hover { color:#fff; background:linear-gradient(135deg,#128198,#347fdf); }
+    .final-primary { color:#fff; border-color:rgba(255,255,255,.14); background:linear-gradient(135deg,#b8741c,#168167); box-shadow:0 10px 24px rgba(126,91,25,.22); }
+    .final-primary:hover { color:#fff; background:linear-gradient(135deg,#c68022,#1a9073); }
+
+    .oc-metrics,.final-metrics { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+    .oc-metric,.final-metric { min-height:112px; padding:15px; border:1px solid var(--line); border-radius:14px; background:var(--panel); position:relative; overflow:hidden; }
+    .oc-metric small,.final-metric small { color:var(--muted); font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .oc-metric strong,.final-metric strong { display:block; margin-top:10px; font-size:27px; line-height:1; letter-spacing:-.04em; }
+    .oc-metric span,.final-metric span { display:block; margin-top:7px; color:var(--muted); font-size:8.6px; line-height:1.4; }
+    .oc-metric.attention { border-color:rgba(195,69,85,.20); background:var(--red-soft); }
+    .oc-metric.revenue { border-color:rgba(173,116,28,.20); background:var(--amber-soft); }
+    .oc-metric.customer { border-color:rgba(44,114,214,.20); background:var(--blue-soft); }
+    .final-metric.cash { border-color:rgba(196,126,31,.22); background:rgba(196,126,31,.08); }
+    .final-metric.clear { border-color:rgba(22,129,103,.20); background:var(--green-soft); }
+
+    .oc-grid { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(310px,.75fr); gap:12px; align-items:start; }
+    .oc-card,.final-card { border:1px solid var(--line); border-radius:15px; background:var(--panel); overflow:hidden; }
+    .oc-card-head,.final-card-head { min-height:64px; padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .oc-card-title,.final-card-title { font-size:12.5px; font-weight:820; }
+    .oc-card-copy,.final-card-copy { margin-top:3px; color:var(--muted); font-size:9px; line-height:1.4; }
+    .oc-card-body,.final-card-body { padding:15px 16px; }
+
+    .priority-list,.reconcile-list,.escalation-list,.final-queue { display:grid; gap:8px; }
+    .priority-item,.reconcile-item,.escalation-item,.final-queue-item { padding:13px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.016); display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:11px; align-items:start; }
+    html[data-theme="light"] .priority-item,html[data-theme="light"] .reconcile-item,html[data-theme="light"] .escalation-item,html[data-theme="light"] .final-queue-item { background:#fff; }
+    .priority-icon,.reconcile-icon,.escalation-icon,.final-queue-icon { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; font-size:11px; }
+    .priority-icon.urgent,.reconcile-icon.critical,.escalation-icon.urgent,.final-queue-icon.blocked { color:var(--red); background:var(--red-soft); }
+    .priority-icon.revenue,.reconcile-icon.warning,.escalation-icon.revenue,.final-queue-icon.warning { color:var(--amber); background:var(--amber-soft); }
+    .priority-icon.customer,.reconcile-icon.info,.escalation-icon.customer { color:var(--blue); background:var(--blue-soft); }
+    .priority-icon.clear,.reconcile-icon.clear,.final-queue-icon.clear { color:var(--green); background:var(--green-soft); }
+    .priority-eyebrow,.reconcile-eyebrow,.escalation-eyebrow,.final-queue-eyebrow { color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .priority-title,.reconcile-title,.escalation-title,.final-queue-title { margin-top:5px; font-size:10.5px; font-weight:780; line-height:1.42; }
+    .priority-copy,.reconcile-copy,.escalation-copy,.final-queue-copy { margin-top:5px; color:var(--muted); font-size:8.8px; line-height:1.5; }
+    .priority-meta,.reconcile-meta,.escalation-meta,.final-queue-meta { margin-top:8px; display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+    .priority-actions,.reconcile-actions,.escalation-actions,.final-queue-actions { display:grid; gap:6px; min-width:126px; }
+    .priority-actions .button,.reconcile-actions .button,.escalation-actions .button,.final-queue-actions .button { width:100%; }
+
+    .lifecycle-board { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+    .lifecycle-stage { min-height:154px; padding:12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.015); position:relative; }
+    html[data-theme="light"] .lifecycle-stage { background:#fff; }
+    .lifecycle-stage::before { content:""; position:absolute; inset:0 0 auto; height:3px; background:var(--stage-color,var(--blue)); border-radius:12px 12px 0 0; }
+    .lifecycle-stage-label { color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .lifecycle-stage-count { margin-top:8px; font-size:24px; font-weight:850; letter-spacing:-.04em; }
+    .lifecycle-stage strong { display:block; margin-top:10px; font-size:9.5px; line-height:1.4; }
+    .lifecycle-stage span { display:block; margin-top:5px; color:var(--muted); font-size:8px; line-height:1.4; }
+
+    .truth-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .truth-cell { padding:12px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.016); }
+    .truth-cell small { color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .truth-cell strong { display:block; margin-top:7px; font-size:16px; }
+    .truth-cell span { display:block; margin-top:4px; color:var(--muted); font-size:8px; line-height:1.4; }
+
+    .accountability-list { display:grid; gap:0; }
+    .accountability-row { padding:11px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; }
+    .accountability-row:last-child { border-bottom:0; }
+    .accountability-row strong { display:block; font-size:9.7px; }
+    .accountability-row span { display:block; margin-top:4px; color:var(--muted); font-size:8.4px; line-height:1.4; }
+
+    .reconcile-summary { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .reconcile-stat { padding:14px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
+    .reconcile-stat small { color:var(--muted); font-size:8px; font-weight:850; text-transform:uppercase; letter-spacing:.08em; }
+    .reconcile-stat strong { display:block; margin-top:8px; font-size:24px; }
+    .reconcile-stat span { display:block; margin-top:5px; color:var(--muted); font-size:8px; }
+    .source-compare { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+    .source-card { padding:12px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.016); }
+    .source-card small { color:var(--muted-2); font-size:8px; text-transform:uppercase; letter-spacing:.08em; }
+    .source-card strong { display:block; margin-top:7px; font-size:13px; line-height:1.35; }
+    .source-card span { display:block; margin-top:5px; color:var(--muted); font-size:8.3px; line-height:1.4; }
+    .source-card.mismatch { border-color:rgba(195,69,85,.23); background:var(--red-soft); }
+
+    .rooftop-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .rooftop-card { padding:15px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .rooftop-card-head { display:flex; align-items:start; justify-content:space-between; gap:8px; }
+    .rooftop-card h3 { margin:0; font-size:12px; }
+    .rooftop-stats { margin-top:13px; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .rooftop-stat { padding:9px; border-radius:9px; background:var(--panel-2); }
+    .rooftop-stat small { color:var(--muted); font-size:7.5px; text-transform:uppercase; letter-spacing:.07em; }
+    .rooftop-stat strong { display:block; margin-top:5px; font-size:14px; }
+
+    .memory-thread { display:grid; gap:0; }
+    .memory-event { display:grid; grid-template-columns:58px 26px minmax(0,1fr) auto; gap:10px; padding:11px 0; border-bottom:1px solid var(--line); align-items:start; }
+    .memory-event:last-child { border-bottom:0; }
+    .memory-time { color:var(--muted-2); font:8px ui-monospace,SFMono-Regular,Menlo,monospace; padding-top:5px; }
+    .memory-mark { width:25px; height:25px; border-radius:8px; display:grid; place-items:center; color:#0f7187; background:rgba(15,113,135,.1); font-size:8px; }
+    .memory-event strong { display:block; font-size:9.6px; }
+    .memory-event p { margin:4px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; }
+
+    .final-section-grid { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(300px,.75fr); gap:12px; align-items:start; }
+    .final-pipeline { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:7px; }
+    .final-stage { min-height:104px; padding:11px; border:1px solid var(--line); border-radius:11px; background:rgba(255,255,255,.015); }
+    .final-stage small { color:var(--muted-2); font-size:7.5px; text-transform:uppercase; letter-spacing:.08em; }
+    .final-stage strong { display:block; margin-top:9px; font-size:20px; }
+    .final-stage span { display:block; margin-top:5px; color:var(--muted); font-size:8px; line-height:1.35; }
+    .final-stage.blocked { border-color:rgba(195,69,85,.22); background:var(--red-soft); }
+    .final-stage.warning { border-color:rgba(173,116,28,.22); background:var(--amber-soft); }
+    .final-stage.clear { border-color:rgba(22,129,103,.2); background:var(--green-soft); }
+
+    .gross-reconcile { display:grid; gap:8px; }
+    .gross-row { padding:11px; border:1px solid var(--line); border-radius:10px; display:grid; grid-template-columns:minmax(0,1fr) repeat(4,88px); gap:8px; align-items:center; }
+    .gross-row span { color:var(--muted); font-size:8.5px; }
+    .gross-row b { font-size:9px; text-align:right; }
+    .gross-row.variance { border-color:rgba(195,69,85,.22); background:var(--red-soft); }
+
+    .status-filter-row { display:flex; gap:7px; flex-wrap:wrap; }
+    .status-filter-row .segment { min-width:auto; padding:0 10px; }
+
+
+    html[data-theme="light"] .button.oc-primary,
+    html[data-theme="light"] .button.final-primary {
+      color:#fff;
+    }
+    html[data-theme="light"] .button.oc-primary {
+      background:linear-gradient(135deg,#0f7187,#2c72d6);
+      border-color:rgba(15,113,135,.35);
+    }
+    html[data-theme="light"] .button.final-primary {
+      background:linear-gradient(135deg,#b8741c,#168167);
+      border-color:rgba(168,106,23,.35);
+    }
+    html[data-theme="light"] .button.oc-primary:hover,
+    html[data-theme="light"] .button.final-primary:hover { color:#fff; }
+
+    @media (max-width:1320px) {
+      .oc-metrics,.final-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .rooftop-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .final-pipeline { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    }
+    @media (max-width:980px) {
+      .oc-hero-grid,.final-hero-grid { grid-template-columns:1fr; }
+      .oc-hero-actions,.final-hero-actions { min-width:0; grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .oc-grid,.final-section-grid { grid-template-columns:1fr; }
+      .lifecycle-board { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .truth-strip,.reconcile-summary { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:740px) {
+      .command-active-banner,.final-active-banner { padding-left:12px; padding-right:12px; }
+      .command-active-copy,.final-active-copy { display:none; }
+      .command-active-banner .button,.final-active-banner .button { margin-left:auto; }
+      .oc-metrics,.final-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .oc-hero-actions,.final-hero-actions { grid-template-columns:1fr; }
+      .priority-item,.reconcile-item,.escalation-item,.final-queue-item { grid-template-columns:32px minmax(0,1fr); }
+      .priority-actions,.reconcile-actions,.escalation-actions,.final-queue-actions { grid-column:2; grid-template-columns:repeat(2,minmax(0,1fr)); min-width:0; }
+      .source-compare { grid-template-columns:1fr; }
+      .rooftop-grid { grid-template-columns:1fr; }
+      .memory-event { grid-template-columns:48px 24px minmax(0,1fr); }
+      .memory-event > .badge { grid-column:3; justify-self:start; }
+      .gross-row { grid-template-columns:1fr 1fr; }
+      .gross-row span:first-child { grid-column:1/-1; }
+      .gross-row b { text-align:left; }
+    }
+    @media (max-width:470px) {
+      .oc-metrics,.final-metrics,.truth-strip,.reconcile-summary,.lifecycle-board,.final-pipeline { grid-template-columns:1fr; }
+      .oc-hero,.final-hero { padding:19px; }
+      .oc-hero h1,.final-hero h1 { font-size:29px; }
+      .priority-actions,.reconcile-actions,.escalation-actions,.final-queue-actions { grid-template-columns:1fr; }
+    }
+  </style>
+
 </head>
-<body class="auth-locked operator-friendly" data-workspace="compliance">
+<body class="auth-locked operator-friendly" data-workspace="command">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
     <div class="auth-grid">
       <section class="auth-story" aria-label="ENGENIX operating intelligence introduction">
         <div class="auth-story-mark"><span class="dot"></span> Customer demonstration environment</div>
         <h1>Operational judgment, preserved under pressure.</h1>
-        <p>Enter the ENGENIX customer sandbox to explore deal-jacket intelligence, explainable findings, corrective actions, and a durable record of human decisions.</p>
+        <p>Enter the ENGENIX customer sandbox to see what requires action across the dealership, why it matters, who owns the next move, and how each deal remains reconciled from desk through finalization.</p>
         <div class="auth-promise">
           <div class="auth-promise-item"><strong>Detect</strong><span>Surface operational risk while there is still time to act.</span></div>
           <div class="auth-promise-item"><strong>Decide</strong><span>Keep human judgment visible, explainable, and accountable.</span></div>
@@ -3444,8 +3686,8 @@
           <button class="icon-button login-theme-button" id="loginThemeToggle" type="button" aria-label="Switch color theme" title="Switch color theme"><i class="fa-solid fa-moon theme-icon-moon"></i><i class="fa-solid fa-sun theme-icon-sun"></i></button>
         </div>
         <div class="login-kicker">Authorized demonstration access</div>
-        <h2 class="login-title">Enter the operating view.</h2>
-        <p class="login-copy">This login is intentionally simulated for the customer-facing prototype.</p>
+        <h2 class="login-title">Enter Operating Command.</h2>
+        <p class="login-copy">Start at the supervisory operating tower, then move into Desking, F&amp;I, Compliance, or Deal Finalization without relearning the portal.</p>
 
         <div class="demo-credentials" aria-label="Demo login credentials">
           <div class="demo-credentials-label">Use these demonstration credentials</div>
@@ -3493,13 +3735,66 @@
         <div class="product-switch-select">
           <span class="product-switch-mark" id="workspaceSwitchMark">◇</span>
           <select id="workspaceSelect" aria-label="Switch ENGENIX workspace">
-            <option value="compliance">Compliance Intelligence</option>
+            <option value="command" selected>Operating Command</option>
             <option value="desking">Desking Intelligence</option>
             <option value="finance">F&amp;I Intelligence</option>
+            <option value="compliance">Compliance Intelligence</option>
+            <option value="finalization">Deal Finalization Intelligence</option>
           </select>
         </div>
-        <div class="product-switch-copy" id="workspaceSwitchCopy">Deal control, findings, and accountable resolution</div>
+        <div class="product-switch-copy" id="workspaceSwitchCopy">Cross-layer priorities, reconciliation, ownership, and next actions</div>
       </div>
+
+
+      <button class="sidebar-primary-action command-shell command-primary-action" type="button" onclick="showCommandView('command-command')">
+        <span class="sidebar-primary-icon"><i class="fa-solid fa-tower-broadcast"></i></span>
+        <span><strong>Open Priority Tower</strong><small>See what requires action across every layer</small></span>
+      </button>
+
+      <nav class="nav-group command-shell" aria-label="Operating Command navigation">
+        <div class="nav-label">Supervise</div>
+        <div class="nav-list">
+          <button class="nav-item command-nav-item active" data-command-view="command-command"><span class="nav-icon"><i class="fa-solid fa-tower-broadcast"></i></span><span class="nav-text">Operating Command</span><span class="nav-count" id="commandActionCountNav">7</span></button>
+          <button class="nav-item command-nav-item" data-command-view="command-reconciliation"><span class="nav-icon"><i class="fa-solid fa-link"></i></span><span class="nav-text">Deal Reconciliation</span><span class="nav-count" id="commandReconCountNav">6</span></button>
+          <button class="nav-item command-nav-item" data-command-view="command-escalations"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Escalations</span><span class="nav-count" id="commandEscalationCountNav">5</span></button>
+          <button class="nav-item command-nav-item" data-command-view="command-rooftops"><span class="nav-icon"><i class="fa-solid fa-building-shield"></i></span><span class="nav-text">Rooftop Visibility</span><span class="nav-count">4</span></button>
+        </div>
+      </nav>
+      <nav class="nav-group command-shell" aria-label="Operating memory navigation">
+        <div class="nav-label">Remember</div>
+        <div class="nav-list">
+          <button class="nav-item command-nav-item" data-command-view="command-memory"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Deal Memory</span><span class="nav-count">LIVE</span></button>
+          <button class="nav-item command-nav-item" type="button" onclick="switchPortalWorkspace('compliance','brief')"><span class="nav-icon"><i class="fa-solid fa-users"></i></span><span class="nav-text">Leadership Briefing</span></button>
+        </div>
+      </nav>
+
+      <button class="sidebar-primary-action finalization-shell finalization-primary-action" type="button" onclick="runFinalizationSweep()">
+        <span class="sidebar-primary-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+        <span><strong>Run Closeout Sweep</strong><small>Recheck funding, title, refunds, and promises</small></span>
+      </button>
+      <nav class="nav-group finalization-shell" aria-label="Deal Finalization daily work navigation">
+        <div class="nav-label">Daily Work</div>
+        <div class="nav-list">
+          <button class="nav-item finalization-nav-item active" data-final-view="final-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Finalization Command</span><span class="nav-count" id="finalActionCountNav">8</span></button>
+          <button class="nav-item finalization-nav-item" data-final-view="final-cit"><span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span><span class="nav-text">Contracts in Transit</span><span class="nav-count" id="finalCitCountNav">4</span></button>
+          <button class="nav-item finalization-nav-item" data-final-view="final-title"><span class="nav-icon"><i class="fa-solid fa-car-side"></i></span><span class="nav-text">Title &amp; Payoff</span><span class="nav-count" id="finalTitleCountNav">3</span></button>
+        </div>
+      </nav>
+      <nav class="nav-group finalization-shell" aria-label="Deal Finalization obligations navigation">
+        <div class="nav-label">Obligations</div>
+        <div class="nav-list">
+          <button class="nav-item finalization-nav-item" data-final-view="final-cancellations"><span class="nav-icon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="nav-text">Cancellations &amp; Refunds</span><span class="nav-count" id="finalCancelCountNav">4</span></button>
+          <button class="nav-item finalization-nav-item" data-final-view="final-promises"><span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Customer Promises</span><span class="nav-count" id="finalPromiseCountNav">2</span></button>
+          <button class="nav-item finalization-nav-item" data-final-view="final-gross"><span class="nav-icon"><i class="fa-solid fa-scale-balanced"></i></span><span class="nav-text">Final Gross Reconciliation</span><span class="nav-count">2</span></button>
+        </div>
+      </nav>
+      <nav class="nav-group finalization-shell" aria-label="Deal Finalization records navigation">
+        <div class="nav-label">Records</div>
+        <div class="nav-list">
+          <button class="nav-item finalization-nav-item" data-final-view="final-completed"><span class="nav-icon"><i class="fa-solid fa-box-archive"></i></span><span class="nav-text">Completed Archive</span><span class="nav-count">12</span></button>
+          <button class="nav-item finalization-nav-item" data-final-view="final-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span></button>
+        </div>
+      </nav>
 
       <button class="sidebar-primary-action compliance-shell" type="button" onclick="openAuditModal()">
         <span class="sidebar-primary-icon"><i class="fa-solid fa-plus"></i></span>
@@ -3743,6 +4038,29 @@
         </div>
       </header>
 
+
+      <div class="command-active-banner command-shell" id="commandActiveBanner" aria-label="Operating Command supervisory status">
+        <div class="command-banner-mark"><i class="fa-solid fa-tower-broadcast"></i> GROUP COMMAND</div>
+        <div class="command-active-copy">
+          <div class="active-deal-label">Supervisory operating layer · priorities remain connected to their source workspace</div>
+          <div class="active-deal-title" id="commandBannerTitle">7 actions require ownership across 4 rooftops</div>
+          <div class="active-deal-meta" id="commandBannerMeta">2 immediate · $18,420 gross at risk · 3 funding holds · 2 customer recovery opportunities</div>
+        </div>
+        <div class="active-deal-status"><span class="badge red" id="commandImmediateBadge">2 IMMEDIATE</span><span class="badge amber" id="commandReconBadge">6 MISMATCHES</span></div>
+        <button class="button small" type="button" onclick="showCommandView('command-reconciliation')">Review deal truth <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+
+      <div class="final-active-banner finalization-shell" id="finalActiveBanner" aria-label="Deal Finalization status">
+        <div class="final-banner-mark"><i class="fa-solid fa-building-circle-check"></i> CLOSEOUT CONTROL</div>
+        <div class="final-active-copy">
+          <div class="active-deal-label">Post-delivery operating layer · cash, title, refunds, promises, and final economics</div>
+          <div class="active-deal-title" id="finalBannerTitle">8 closeout obligations require action</div>
+          <div class="active-deal-meta" id="finalBannerMeta">$412,840 unsettled · 4 contracts in transit · 3 title/payoff issues · 4 cancellations</div>
+        </div>
+        <div class="active-deal-status"><span class="badge red" id="finalBlockedBadge">3 BLOCKED</span><span class="badge amber" id="finalAgingBadge">4 AGING</span></div>
+        <button class="button small" type="button" onclick="runFinalizationSweep()">Run closeout sweep <i class="fa-solid fa-arrows-rotate"></i></button>
+      </div>
+
       <div class="active-deal-banner compliance-shell" id="activeDealBanner" style="--deal-accent:#3d8bff" aria-label="Active working deal">
         <div id="activeDealIdentity"></div>
         <div class="active-deal-copy">
@@ -3778,6 +4096,130 @@
       </div>
 
       <div class="content">
+
+
+        <section class="view command-view active" id="view-command-command">
+          <div class="oc-shell">
+            <header class="oc-hero">
+              <div class="oc-hero-grid">
+                <div>
+                  <div class="oc-kicker">ENGENIX Operating Command</div>
+                  <h1>What needs action now, why it matters, and who owns the next move.</h1>
+                  <p>The first screen after login supervises every active deal from Desk through Finalization. It does not replace the operating workspaces. It directs the operator to the exact decision, evidence gap, customer concern, cash risk, or obligation requiring attention.</p>
+                </div>
+                <div class="oc-hero-actions">
+                  <button class="button oc-primary" type="button" onclick="showCommandView('command-reconciliation')"><i class="fa-solid fa-link"></i>Review Deal Reconciliation</button>
+                  <button class="button" type="button" onclick="printOperatingBrief()"><i class="fa-solid fa-print"></i>Print Operating Brief</button>
+                  <button class="button" type="button" onclick="switchPortalWorkspace('compliance','brief')"><i class="fa-solid fa-users"></i>Run Leadership Briefing</button>
+                </div>
+              </div>
+            </header>
+            <div class="oc-metrics" id="commandMetrics"></div>
+            <div class="oc-grid">
+              <section class="oc-card">
+                <div class="oc-card-head">
+                  <div><div class="oc-card-title">Manager Attention Queue</div><div class="oc-card-copy">Cross-layer actions ordered by customer, cash, compliance, and timing impact</div></div>
+                  <div class="segmented status-filter-row" id="commandPriorityFilters">
+                    <button class="segment active" type="button" data-command-filter="all">All</button>
+                    <button class="segment" type="button" data-command-filter="immediate">Immediate</button>
+                    <button class="segment" type="button" data-command-filter="revenue">Revenue</button>
+                    <button class="segment" type="button" data-command-filter="customer">Customer</button>
+                  </div>
+                </div>
+                <div class="oc-card-body"><div class="priority-list" id="commandPriorityList"></div></div>
+              </section>
+              <aside class="oc-card">
+                <div class="oc-card-head"><div><div class="oc-card-title">Accountability</div><div class="oc-card-copy">Owners and response windows currently driving execution</div></div><span class="badge blue">LIVE</span></div>
+                <div class="oc-card-body"><div class="accountability-list" id="commandAccountability"></div></div>
+              </aside>
+            </div>
+            <section class="oc-card">
+              <div class="oc-card-head"><div><div class="oc-card-title">Deal Lifecycle Visibility</div><div class="oc-card-copy">Where work is accumulating and which deal is creating the current stage pressure</div></div><button class="button small" type="button" onclick="switchPortalWorkspace('finalization','final-command')">Open Finalization <i class="fa-solid fa-arrow-right"></i></button></div>
+              <div class="oc-card-body"><div class="lifecycle-board" id="commandLifecycle"></div></div>
+            </section>
+            <div class="oc-grid">
+              <section class="oc-card">
+                <div class="oc-card-head"><div><div class="oc-card-title">Continuous Deal Reconciliation</div><div class="oc-card-copy">The same deal compared across customer expectation, desk, lender, F&amp;I, contract, funding, and office records</div></div><button class="button small" type="button" onclick="showCommandView('command-reconciliation')">Open all mismatches</button></div>
+                <div class="oc-card-body"><div class="truth-strip" id="commandTruthStrip"></div><div class="reconcile-list" id="commandReconPreview" style="margin-top:12px"></div></div>
+              </section>
+              <aside class="oc-card">
+                <div class="oc-card-head"><div><div class="oc-card-title">Operating Thesis</div><div class="oc-card-copy">The command layer supervises the work without hiding its source</div></div></div>
+                <div class="oc-card-body">
+                  <div class="brief-callout commitment"><strong>One deal. One decision thread.</strong><p>Every structure, product choice, signature, stipulation, customer promise, refund, and final accounting result remains attached to the same operating record.</p></div>
+                  <div class="brief-callout" style="margin-top:9px"><strong>Escalate with context</strong><p>Operators enter the source workspace with the exact deal, evidence gap, owner, and recommended next move already selected.</p></div>
+                  <div class="brief-callout critical" style="margin-top:9px"><strong>Protect the truth</strong><p>ENGENIX flags drift between what the customer expected, what the lender approved, what F&amp;I sold, what the contract states, and what accounting finally records.</p></div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="view command-view" id="view-command-reconciliation">
+          <div class="oc-shell">
+            <header class="oc-hero">
+              <div class="oc-hero-grid">
+                <div><div class="oc-kicker">Continuous Deal Reconciliation</div><h1>Protect the deal’s truth from first pencil through final accounting.</h1><p>ENGENIX compares the controlling values and customer choices at every handoff, then routes each mismatch to the correct operator before it becomes a funding delay, compliance exposure, gross leak, or customer dispute.</p></div>
+                <div class="oc-hero-actions"><button class="button oc-primary" type="button" onclick="runReconciliationSweep()"><i class="fa-solid fa-arrows-rotate"></i>Run Reconciliation Sweep</button><button class="button" type="button" onclick="showCommandView('command-memory')"><i class="fa-solid fa-clock-rotate-left"></i>Open Deal Memory</button></div>
+              </div>
+            </header>
+            <div class="reconcile-summary" id="reconcileSummary"></div>
+            <section class="oc-card">
+              <div class="oc-card-head"><div><div class="oc-card-title">Open Cross-Layer Mismatches</div><div class="oc-card-copy">Synthetic demonstration records with source, impact, owner, and resolution path</div></div><div class="segmented status-filter-row" id="reconcileFilters"><button class="segment active" type="button" data-recon-filter="open">Open</button><button class="segment" type="button" data-recon-filter="critical">Critical</button><button class="segment" type="button" data-recon-filter="resolved">Resolved</button><button class="segment" type="button" data-recon-filter="all">All</button></div></div>
+              <div class="oc-card-body"><div class="reconcile-list" id="reconcileList"></div></div>
+            </section>
+            <section class="oc-card" id="reconcileInspectorCard">
+              <div class="oc-card-head"><div><div class="oc-card-title">Source Comparison</div><div class="oc-card-copy" id="reconcileInspectorCopy">Select a mismatch to compare the source records</div></div><span class="badge amber" id="reconcileInspectorBadge">SELECT ITEM</span></div>
+              <div class="oc-card-body"><div class="source-compare" id="reconcileSourceCompare"></div></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view command-view" id="view-command-escalations">
+          <div class="oc-shell">
+            <header class="oc-hero"><div class="oc-hero-grid"><div><div class="oc-kicker">Cross-Workspace Escalations</div><h1>Leadership attention arrives with evidence, ownership, and a recommended next move.</h1><p>No mystery alerts. Every escalation explains what changed, why the condition matters, who currently owns it, the response window, and which workspace contains the operating action.</p></div><div class="oc-hero-actions"><button class="button oc-primary" type="button" onclick="acknowledgeAllEscalations()"><i class="fa-solid fa-user-check"></i>Acknowledge Visible Escalations</button></div></div></header>
+            <div class="oc-metrics" id="escalationMetrics"></div>
+            <section class="oc-card"><div class="oc-card-head"><div><div class="oc-card-title">Leadership Decision Queue</div><div class="oc-card-copy">Escalations retain their source workspace and deal identity</div></div></div><div class="oc-card-body"><div class="escalation-list" id="commandEscalationList"></div></div></section>
+          </div>
+        </section>
+
+        <section class="view command-view" id="view-command-rooftops">
+          <div class="oc-shell">
+            <header class="oc-hero"><div class="oc-hero-grid"><div><div class="oc-kicker">Multi-Rooftop Operating Visibility</div><h1>See where execution is breaking before a monthly report explains the damage.</h1><p>Compare rooftop pressure across wait time, gross at risk, compliance exposure, funding holds, customer recovery, and unfinished obligations using the same operating definitions.</p></div></div></header>
+            <div class="rooftop-grid" id="commandRooftopGrid"></div>
+            <section class="oc-card"><div class="oc-card-head"><div><div class="oc-card-title">Cross-Rooftop Pattern Signals</div><div class="oc-card-copy">Synthetic operating observations, not legal or statistical conclusions</div></div><span class="badge blue">90 DAY DEMO</span></div><div class="oc-card-body"><div class="brief-secondary-grid"><div class="brief-callout critical"><strong>Funding packet rework is concentrated at Summit Motors</strong><p>Three of four current funding holds originate from incomplete customer evidence at the F&amp;I handoff.</p></div><div class="brief-callout commitment"><strong>Premier Ford preserves more gross during rehash</strong><p>Collateral rescue is used earlier, reducing average front-gross concession in the synthetic outcome history.</p></div><div class="brief-callout"><strong>Velocity Cars has the longest title aging</strong><p>Two payoff-verification exceptions account for most title delay currently visible in Finalization.</p></div><div class="brief-callout"><strong>Premier Honda resolves customer concerns fastest</strong><p>Ownership Concierge recovery alerts are acknowledged before menu presentation in the current demo records.</p></div></div></div></section>
+          </div>
+        </section>
+
+        <section class="view command-view" id="view-command-memory">
+          <div class="oc-shell">
+            <header class="oc-hero"><div class="oc-hero-grid"><div><div class="oc-kicker">Unified Deal Memory</div><h1>Every decision survives the handoff.</h1><p>The deal thread preserves customer expectations, manager pencils, lender callbacks, product choices, compliance dispositions, funding evidence, refunds, promises, and final economics in one durable record.</p></div><div class="oc-hero-actions"><button class="button oc-primary" type="button" onclick="switchPortalWorkspace('desking','desk-stack')">Open Desking Source</button><button class="button" type="button" onclick="switchPortalWorkspace('finance','fi-concierge')">Open F&amp;I Source</button></div></div></header>
+            <section class="oc-card"><div class="oc-card-head"><div><div class="oc-card-title">Morgan Davis · FI-8421 / DX-7314</div><div class="oc-card-copy">Synthetic unified lifecycle thread across the ENGENIX operating layer</div></div><span class="badge green">ACTIVE RECORD</span></div><div class="oc-card-body"><div class="memory-thread" id="commandMemoryThread"></div></div></section>
+          </div>
+        </section>
+
+        <section class="view finalization-view" id="view-final-command">
+          <div class="final-shell">
+            <header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Deal Finalization Intelligence</div><h1>Protect the store’s cash after the customer leaves.</h1><p>Track contracts in transit, lender shortages, title and payoff, product cancellations, customer refunds, We-Owes, remittance, accounting exceptions, and final gross until every obligation is closed and evidenced.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="runFinalizationSweep()"><i class="fa-solid fa-arrows-rotate"></i>Run Closeout Sweep</button><button class="button" type="button" onclick="showFinalView('final-gross')"><i class="fa-solid fa-scale-balanced"></i>Reconcile Final Gross</button><button class="button" type="button" onclick="switchPortalWorkspace('command','command-command')"><i class="fa-solid fa-tower-broadcast"></i>Operating Command</button></div></div></header>
+            <div class="final-metrics" id="finalMetrics"></div>
+            <section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Closeout Pipeline</div><div class="final-card-copy">Work remaining after delivery, funding release, or office acceptance</div></div></div><div class="final-card-body"><div class="final-pipeline" id="finalPipeline"></div></div></section>
+            <div class="final-section-grid"><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Priority Closeout Queue</div><div class="final-card-copy">Ordered by cash exposure, customer obligation, aging, and funding dependency</div></div><div class="segmented status-filter-row" id="finalPriorityFilters"><button class="segment active" type="button" data-final-filter="open">Open</button><button class="segment" type="button" data-final-filter="blocked">Blocked</button><button class="segment" type="button" data-final-filter="customer">Customer</button><button class="segment" type="button" data-final-filter="all">All</button></div></div><div class="final-card-body"><div class="final-queue" id="finalPriorityList"></div></div></section><aside class="final-card"><div class="final-card-head"><div><div class="final-card-title">Cash Protection</div><div class="final-card-copy">Current post-delivery exposure requiring proof or ownership</div></div></div><div class="final-card-body"><div class="accountability-list" id="finalCashProtection"></div></div></aside></div>
+          </div>
+        </section>
+
+        <section class="view finalization-view" id="view-final-cit"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Contracts in Transit</div><h1>Turn every funding delay into an owned, timed operating action.</h1><p>Funding status, shortages, lender communication, aging, and missing evidence stay attached to the deal until proceeds are received and reconciled.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="runFinalizationSweep()">Refresh Funding Readiness</button></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">CIT Aging &amp; Shortage Queue</div><div class="final-card-copy">Synthetic funding records ordered by age and cash exposure</div></div></div><div class="final-card-body"><div class="final-queue" id="finalCitList"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-title"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Title &amp; Trade Payoff</div><h1>Close ownership transfer without losing the trail.</h1><p>Track payoff verification, title receipt, lien release, state packet, trade identity, and customer follow-up as one accountable closeout process.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Title and Payoff Exceptions</div><div class="final-card-copy">Open source evidence, owner, aging, and next action</div></div></div><div class="final-card-body"><div class="final-queue" id="finalTitleList"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-cancellations"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Cancellations &amp; Customer Refunds</div><h1>Estimated value is not completed value.</h1><p>Separate estimated cancellation amounts, administrator verification, funds received, payoff treatment, customer refund, and final accounting evidence.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Cancellation and Refund Ledger</div><div class="final-card-copy">No value is treated as completed until the administrator and accounting record agree</div></div></div><div class="final-card-body"><div class="final-queue" id="finalCancellationList"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-promises"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Customer Promise Control</div><h1>Every We-Owe and dealership commitment remains visible until fulfilled.</h1><p>Owner, due date, customer communication, evidence, and completion status stay attached to the delivered deal.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Open Customer Commitments</div><div class="final-card-copy">Synthetic We-Owe, second-key, accessory, and refund obligations</div></div></div><div class="final-card-body"><div class="final-queue" id="finalPromiseList"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-gross"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Final Gross Reconciliation</div><h1>Reconcile the economics the desk expected with the cash accounting actually records.</h1><p>Compare desk front, F&amp;I product gross, reserve, chargebacks, lender shortages, cancellations, and final accounting so leakage cannot disappear inside month-end noise.</p></div><div class="final-hero-actions"><button class="button final-primary" type="button" onclick="reconcileFinalGross()"><i class="fa-solid fa-scale-balanced"></i>Run Gross Reconciliation</button></div></div></header><div class="final-metrics" id="finalGrossMetrics"></div><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Deal Economics Comparison</div><div class="final-card-copy">Expected, contracted, funded, and accounting values</div></div></div><div class="final-card-body"><div class="gross-reconcile" id="finalGrossRows"></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-completed"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Completed Deal Archive</div><h1>Closed obligations become searchable operating memory.</h1><p>Final funding, title, cancellation, promises, product remittance, and accounting results remain attached to the deal for audit, pattern learning, and future customer recognition.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Recently Completed Records</div><div class="final-card-copy">Synthetic finalization outcomes</div></div></div><div class="final-card-body"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer</th><th>Funded</th><th>Title</th><th>Refunds</th><th>Promises</th><th>Final Gross</th></tr></thead><tbody id="finalCompletedRows"></tbody></table></div></div></section></div></section>
+
+        <section class="view finalization-view" id="view-final-settings"><div class="final-shell"><header class="final-hero"><div class="final-hero-grid"><div><div class="final-kicker">Finalization Controls</div><h1>Configure the obligations that keep a delivered deal open.</h1><p>These demonstration controls show how each dealership could define aging thresholds, ownership rules, escalation windows, and completion evidence.</p></div></div></header><section class="final-card"><div class="final-card-head"><div><div class="final-card-title">Dealer-Controlled Rules</div><div class="final-card-copy">Synthetic sandbox settings only</div></div></div><div class="final-card-body"><div class="setting-row"><div><div class="setting-title">Escalate contracts in transit after three business days</div><div class="setting-copy">Adds the deal to Operating Command and the Leadership Briefing.</div></div><button class="toggle on" type="button" aria-label="Escalate contracts in transit after three business days" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Require administrator verification before refund completion</div><div class="setting-copy">Estimated cancellation values remain pending until supported.</div></div><button class="toggle on" type="button" aria-label="Require administrator verification before refund completion" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Block completed status while customer promises remain open</div><div class="setting-copy">We-Owes and written commitments cannot disappear at delivery.</div></div><button class="toggle on" type="button" aria-label="Block completed status while customer promises remain open" aria-pressed="true"><span class="toggle-knob"></span></button></div><div class="setting-row"><div><div class="setting-title">Reconcile final gross against desk and F&amp;I expectations</div><div class="setting-copy">Variance thresholds can require controller review.</div></div><button class="toggle on" type="button" aria-label="Reconcile final gross against desk and F&amp;I expectations" aria-pressed="true"><span class="toggle-knob"></span></button></div></div></section></div></section>
+
 
         <section class="view active" id="view-brief">
           <div class="brief-shell">
@@ -6966,7 +7408,7 @@
     renderDealQueue();
     renderCompletionWatch();
     renderFindings();
-    renderComplianceCopilot();
+    if (typeof renderComplianceCopilot === 'function') renderComplianceCopilot();
     renderActions();
     renderActivities();
     initCharts();
@@ -8112,6 +8554,319 @@
       };
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
       else run();
+    })();
+  </script>
+
+
+  <script id="engenix-operating-command-v9-script">
+    (() => {
+      const COMMAND_STORAGE_KEY='engenix-operating-command-v9';
+      const FINAL_STORAGE_KEY='engenix-finalization-v9';
+      let lastCommandView='command-command';
+      let lastFinalView='final-command';
+      let commandPriorityFilter='all';
+      let reconFilter='open';
+      let finalPriorityFilter='open';
+      let selectedReconId='r1';
+
+      const commandSeed={
+        priorities:[
+          {id:'p1',type:'immediate',icon:'fa-stopwatch',deal:'DX-4312',workspace:'desking',view:'desk-attention',customer:'Avery Coleman',title:'Customer has waited 24 minutes for a revised pencil',copy:'The payment target remains $625. The balanced rescue pencil is ready for manager review.',owner:'Alex Morgan',due:'Now',impact:'Customer wait',status:'open'},
+          {id:'p2',type:'revenue',icon:'fa-sack-dollar',deal:'FI-8421',workspace:'finance',view:'fi-funding',customer:'Morgan Davis',title:'Selected products exceed approved back-end capacity by $1,180',copy:'Funding Assurance is blocking release until the F&I structure is corrected or the desk reopens the deal.',owner:'Dana Ruiz',due:'Before delivery',impact:'$1,180 at risk',status:'open'},
+          {id:'p3',type:'customer',icon:'fa-heart-pulse',deal:'FI-8421',workspace:'finance',view:'fi-recovery',customer:'Morgan Davis',title:'Customer reported payment confusion before the menu presentation',copy:'Ownership Concierge created a recovery opportunity. Clarify the base payment before any optional-product discussion.',owner:'Marcus Hale',due:'8 min',impact:'Experience risk',status:'open'},
+          {id:'p4',type:'immediate',icon:'fa-file-circle-check',deal:'PA-44921',workspace:'finance',view:'fi-stips',customer:'Avery Coleman',title:'Funding packet is missing proof of residence',copy:'Preferred lender approval expires in 47 minutes. All other synthetic packet controls are complete.',owner:'Dana Ruiz',due:'47 min',impact:'$58,420 funding',status:'open'},
+          {id:'p5',type:'revenue',icon:'fa-money-bill-transfer',deal:'PF-66218',workspace:'finalization',view:'final-cancellations',customer:'Taylor Brooks',title:'Verified cancellation refund has not been applied or released',copy:'Administrator verified $2,186. Accounting treatment and customer communication remain open.',owner:'Renee Cole',due:'Today',impact:'$2,186 customer value',status:'open'},
+          {id:'p6',type:'customer',icon:'fa-list-check',deal:'ENX-2847',workspace:'finalization',view:'final-promises',customer:'Jordan Taylor',title:'Second-key promise remains open after delivery',copy:'Parts confirmed availability, but customer scheduling and completion evidence are missing.',owner:'Service Liaison',due:'Tomorrow',impact:'Customer promise',status:'open'},
+          {id:'p7',type:'revenue',icon:'fa-scale-balanced',deal:'VC-11987',workspace:'finalization',view:'final-gross',customer:'Cameron Reed',title:'Final accounting gross is $1,420 below the accepted deal record',copy:'Reserve and product remittance explain part of the variance. Controller review is required for the remaining $620.',owner:'Controller',due:'Today',impact:'$1,420 variance',status:'open'}
+        ],
+        reconciliations:[
+          {id:'r1',severity:'critical',deal:'ENX-2847',customer:'Jordan Taylor',title:'Approved term does not match the retail contract',copy:'Desk and lender approval preserve 72 months. The retail contract contains 75 months.',owner:'F&I Manager',impact:'Compliance and customer expectation',status:'open',workspace:'compliance',view:'copilot',sources:[['Desk-approved pencil','72 months','Pencil 5 · accepted by manager'],['Lender callback','72 months','Approval PA-44921'],['Retail contract','75 months','Signed contract · mismatch']]},
+          {id:'r2',severity:'critical',deal:'FI-8421',customer:'Morgan Davis',title:'Customer payment expectation does not match final menu payment',copy:'Customer expectation is $694. The current selected-product menu models $731.',owner:'F&I Director',impact:'Customer presentation',status:'open',workspace:'finance',view:'fi-presentation',sources:[['Desk handoff','$694','Customer expectation'],['F&I base payment','$646','Approved structure'],['Current menu','$731','Selected products · +$37 vs expectation']]},
+          {id:'r3',severity:'warning',deal:'FI-8421',customer:'Morgan Davis',title:'F&I products exceed the lender-approved back-end allowance',copy:'The lender callback allows $2,800. Selected products total $3,980.',owner:'Desk Manager',impact:'Funding and gross',status:'open',workspace:'finance',view:'fi-funding',sources:[['Lender approval','$2,800','Maximum back-end allowance'],['F&I menu','$3,980','Selected product retail'],['Variance','$1,180','Requires restructure']]},
+          {id:'r4',severity:'critical',deal:'FI-8421',customer:'Morgan Davis',title:'Customer declined tire-and-wheel but a product contract is present',copy:'The customer choice record shows declined. A tire-and-wheel contract exists in the packet review.',owner:'Compliance Leader',impact:'Customer choice and contract integrity',status:'open',workspace:'compliance',view:'copilot',sources:[['Customer menu','Declined','Choice record version 3'],['Product contract','Present','$1,095 contract'],['Retail contract','Financed','Included in amount financed']]},
+          {id:'r5',severity:'warning',deal:'PA-44921',customer:'Avery Coleman',title:'Funding packet cash down is not fully supported by receipts',copy:'The lender packet reports $5,000. Customer receipts support $3,500.',owner:'F&I Manager',impact:'Funding evidence',status:'open',workspace:'finance',view:'fi-packet',sources:[['Lender callback','$5,000','Required cash'],['Buyer order','$5,000','Contracted cash'],['Receipt ledger','$3,500','$1,500 unsupported']]},
+          {id:'r6',severity:'warning',deal:'PF-66218',customer:'Taylor Brooks',title:'Verified cancellation proceeds were modeled before receipt',copy:'The refund is administrator-verified but has not been received or released for structure contribution.',owner:'Controller',impact:'Cash treatment and customer value',status:'open',workspace:'finalization',view:'final-cancellations',sources:[['F&I estimate','$2,418','Preliminary calculation'],['Administrator','$2,186','Verified refund'],['Accounting','$0 received','No cash receipt recorded']]}
+        ],
+        escalations:[
+          {id:'e1',type:'urgent',deal:'PA-44921',title:'Approval expires before the missing stipulation response window',copy:'Proof of residence remains open. Lender approval expires in 47 minutes.',owner:'Dana Ruiz',workspace:'finance',view:'fi-stips',status:'open'},
+          {id:'e2',type:'customer',deal:'FI-8421',title:'Customer recovery required before product presentation',copy:'Payment movement remains unclear to the customer.',owner:'Marcus Hale',workspace:'finance',view:'fi-recovery',status:'open'},
+          {id:'e3',type:'revenue',deal:'VC-11987',title:'Final gross variance exceeds controller review threshold',copy:'Accounting is $1,420 below the accepted deal economics.',owner:'Controller',workspace:'finalization',view:'final-gross',status:'open'},
+          {id:'e4',type:'urgent',deal:'ENX-2847',title:'Contract term variance remains unresolved before release',copy:'72-month approval and 75-month contract require correction or authorized disposition.',owner:'Marcus Hale',workspace:'compliance',view:'copilot',status:'open'},
+          {id:'e5',type:'revenue',deal:'PF-66218',title:'Verified customer refund has no completed accounting treatment',copy:'$2,186 remains unresolved after administrator verification.',owner:'Renee Cole',workspace:'finalization',view:'final-cancellations',status:'open'}
+        ]
+      };
+
+      const finalSeed={
+        items:[
+          {id:'f1',category:'cit',state:'blocked',deal:'PA-44921',customer:'Avery Coleman',title:'Preferred lender funding packet held for proof of residence',copy:'Approval expires today. Packet is otherwise complete.',owner:'Dana Ruiz',age:'3 days',amount:58420,status:'open',action:'Resolve stipulation'},
+          {id:'f2',category:'cit',state:'warning',deal:'VC-11987',customer:'Cameron Reed',title:'Lender shortage awaiting signed correction',copy:'Funding received $1,180 short of the contracted proceeds.',owner:'Renee Cole',age:'2 days',amount:1180,status:'open',action:'Record correction'},
+          {id:'f3',category:'cit',state:'warning',deal:'SM-30192',customer:'Taylor Brooks',title:'Customer interview confirmation pending',copy:'Funding release remains conditional on lender callback completion.',owner:'Dana Ruiz',age:'1 day',amount:71890,status:'open',action:'Confirm callback'},
+          {id:'f4',category:'cit',state:'clear',deal:'PH-88214',customer:'Morgan Davis',title:'Funding proceeds received, accounting acceptance pending',copy:'Bank proceeds match the lender approval. Controller acceptance is the final step.',owner:'Controller',age:'Today',amount:39175,status:'open',action:'Accept proceeds'},
+          {id:'f5',category:'title',state:'blocked',deal:'VC-11987',customer:'Cameron Reed',title:'Trade payoff verification is inconsistent with buyer order',copy:'Payoff quote is $620 above the amount used in the final structure.',owner:'Title Clerk',age:'6 days',amount:620,status:'open',action:'Verify payoff'},
+          {id:'f6',category:'title',state:'warning',deal:'ENX-2847',customer:'Jordan Taylor',title:'Lien release not yet received for traded vehicle',copy:'Payoff sent. Lien release remains outstanding.',owner:'Title Clerk',age:'4 days',amount:0,status:'open',action:'Record lien release'},
+          {id:'f7',category:'title',state:'warning',deal:'PF-66218',customer:'Taylor Brooks',title:'State title packet requires corrected odometer statement',copy:'Customer signature is present, but the mileage field differs from the trade appraisal.',owner:'Title Clerk',age:'2 days',amount:0,status:'open',action:'Correct packet'},
+          {id:'f8',category:'cancellation',state:'blocked',deal:'PF-66218',customer:'Taylor Brooks',title:'Verified cancellation refund requires accounting treatment',copy:'Administrator verified $2,186. Customer refund or payoff application remains unrecorded.',owner:'Renee Cole',age:'7 days',amount:2186,status:'open',action:'Apply refund'},
+          {id:'f9',category:'cancellation',state:'warning',deal:'FI-8421',customer:'Morgan Davis',title:'Transfer review remains open for theft-recovery coverage',copy:'Prior contract may transfer. New product recommendation remains paused.',owner:'F&I Product Admin',age:'1 day',amount:640,status:'open',action:'Complete transfer review'},
+          {id:'f10',category:'cancellation',state:'warning',deal:'SM-30192',customer:'Taylor Brooks',title:'GAP cancellation estimate awaiting administrator quote',copy:'Estimated refund is $780. Verified amount is not yet available.',owner:'F&I Product Admin',age:'2 days',amount:780,status:'open',action:'Record quote'},
+          {id:'f11',category:'cancellation',state:'clear',deal:'PH-88214',customer:'Morgan Davis',title:'Service-contract refund received, customer release pending',copy:'$1,420 received and reconciled. Customer communication remains open.',owner:'Renee Cole',age:'Today',amount:1420,status:'open',action:'Release refund'},
+          {id:'f12',category:'promise',state:'warning',deal:'ENX-2847',customer:'Jordan Taylor',title:'Second key promised at delivery',copy:'Key is available. Customer appointment and receipt acknowledgment remain open.',owner:'Service Liaison',age:'3 days',amount:410,status:'open',action:'Complete promise'},
+          {id:'f13',category:'promise',state:'warning',deal:'FI-8421',customer:'Morgan Davis',title:'Cargo organizer installation remains unscheduled',copy:'Accessory is in stock. Customer scheduling is required.',owner:'Delivery Coordinator',age:'2 days',amount:295,status:'open',action:'Schedule installation'}
+        ],
+        gross:[
+          {label:'Front gross',expected:3150,contracted:3150,funded:3150,accounting:3150},
+          {label:'Product gross',expected:2840,contracted:3120,funded:2780,accounting:2780},
+          {label:'Finance reserve',expected:1280,contracted:1280,funded:980,accounting:980},
+          {label:'Cancellation / refund effect',expected:0,contracted:0,funded:-2186,accounting:-2186},
+          {label:'Chargeback reserve',expected:0,contracted:0,funded:0,accounting:-620}
+        ]
+      };
+
+      const clone=value=>JSON.parse(JSON.stringify(value));
+      function loadState(key,seed){ try{const saved=JSON.parse(localStorage.getItem(key)||'null');return saved&&typeof saved==='object'?saved:clone(seed);}catch(e){return clone(seed);} }
+      const commandState=loadState(COMMAND_STORAGE_KEY,commandSeed);
+      const finalState=loadState(FINAL_STORAGE_KEY,finalSeed);
+      const saveCommand=()=>{try{localStorage.setItem(COMMAND_STORAGE_KEY,JSON.stringify(commandState));}catch(e){}};
+      const saveFinal=()=>{try{localStorage.setItem(FINAL_STORAGE_KEY,JSON.stringify(finalState));}catch(e){}};
+      const money=v=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(v)||0);
+      const openCount=list=>list.filter(x=>x.status!=='resolved'&&x.status!=='complete').length;
+      const workspaceLabel=w=>({desking:'Desking',finance:'F&I',compliance:'Compliance',finalization:'Finalization',command:'Operating Command'}[w]||w);
+      const iconClass=t=>t==='immediate'||t==='urgent'?'urgent':t==='revenue'?'revenue':t==='customer'?'customer':'clear';
+
+      window.showCommandView=function(view){
+        lastCommandView=view||lastCommandView;
+        document.querySelectorAll('.command-view').forEach(v=>v.classList.remove('active'));
+        document.querySelectorAll('.command-nav-item').forEach(n=>n.classList.toggle('active',n.dataset.commandView===lastCommandView));
+        const target=document.getElementById('view-'+lastCommandView);if(target)target.classList.add('active');
+        const meta={
+          'command-command':['Operating Command','Cross-layer priorities, ownership, cash protection, and next actions'],
+          'command-reconciliation':['Continuous Deal Reconciliation','Compare the same deal across customer, desk, lender, F&I, contract, funding, and office records'],
+          'command-escalations':['Cross-Workspace Escalations','Leadership decisions with source evidence, owner, timing, and recommended action'],
+          'command-rooftops':['Multi-Rooftop Visibility','Compare execution pressure and operating patterns across the dealer group'],
+          'command-memory':['Unified Deal Memory','One durable decision thread from first pencil through final accounting']
+        }[lastCommandView]||['Operating Command','Supervisory operating intelligence'];
+        const title=document.getElementById('pageTitle');if(title)title.textContent=meta[0];
+        const sub=document.getElementById('pageSubtitle');if(sub)sub.textContent=meta[1];
+        document.getElementById('sidebar')?.classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});renderCommandAll();
+      };
+
+      window.showFinalView=function(view){
+        lastFinalView=view||lastFinalView;
+        document.querySelectorAll('.finalization-view').forEach(v=>v.classList.remove('active'));
+        document.querySelectorAll('.finalization-nav-item').forEach(n=>n.classList.toggle('active',n.dataset.finalView===lastFinalView));
+        const target=document.getElementById('view-'+lastFinalView);if(target)target.classList.add('active');
+        const meta={
+          'final-command':['Deal Finalization Command','Funding, title, refunds, promises, and final economics after delivery'],
+          'final-cit':['Contracts in Transit','Funding aging, shortages, lender response, and proceeds reconciliation'],
+          'final-title':['Title & Payoff','Trade payoff, lien release, state packet, and ownership transfer'],
+          'final-cancellations':['Cancellations & Refunds','Administrator verification, received funds, customer treatment, and evidence'],
+          'final-promises':['Customer Promise Control','We-Owes and written commitments remain open until completed'],
+          'final-gross':['Final Gross Reconciliation','Compare desk, contract, funding, and accounting economics'],
+          'final-completed':['Completed Archive','Closed obligations become searchable operating memory'],
+          'final-settings':['Finalization Settings','Dealer-controlled thresholds, ownership, escalation, and evidence rules']
+        }[lastFinalView]||['Deal Finalization Intelligence','Post-delivery operating control'];
+        const title=document.getElementById('pageTitle');if(title)title.textContent=meta[0];
+        const sub=document.getElementById('pageSubtitle');if(sub)sub.textContent=meta[1];
+        document.getElementById('sidebar')?.classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});renderFinalAll();
+      };
+
+      const previousSwitchPortalWorkspaceV9=window.switchPortalWorkspace||switchPortalWorkspace;
+      window.switchPortalWorkspace=switchPortalWorkspace=function(workspace,targetView=null){
+        if(workspace==='command'){
+          currentPortalWorkspace='command';document.body.dataset.workspace='command';
+          const select=document.getElementById('workspaceSelect');if(select)select.value='command';
+          const mark=document.getElementById('workspaceSwitchMark');if(mark)mark.textContent='⌁';
+          const copy=document.getElementById('workspaceSwitchCopy');if(copy)copy.textContent='Cross-layer priorities, reconciliation, ownership, and next actions';
+          const role=document.getElementById('sessionRole');if(role)role.textContent='Dealer Operator · Group Command';
+          const pill=document.getElementById('demoPill');if(pill)pill.textContent='OPERATING COMMAND';
+          const search=document.getElementById('searchCopy');if(search)search.textContent='Search deals, owners, mismatches, obligations';
+          const label=document.getElementById('operatingStatusLabel');if(label)label.textContent='Group Operating Status';
+          showCommandView(targetView||lastCommandView);renderNotifications();return;
+        }
+        if(workspace==='finalization'){
+          currentPortalWorkspace='finalization';document.body.dataset.workspace='finalization';
+          const select=document.getElementById('workspaceSelect');if(select)select.value='finalization';
+          const mark=document.getElementById('workspaceSwitchMark');if(mark)mark.textContent='✓';
+          const copy=document.getElementById('workspaceSwitchCopy');if(copy)copy.textContent='Funding, title, refunds, promises, and final economics';
+          const role=document.getElementById('sessionRole');if(role)role.textContent='Controller · Deal Finalization';
+          const pill=document.getElementById('demoPill');if(pill)pill.textContent='FINALIZATION DEMO';
+          const search=document.getElementById('searchCopy');if(search)search.textContent='Search CIT, title, refunds, promises, gross';
+          const label=document.getElementById('operatingStatusLabel');if(label)label.textContent='Closeout Control';
+          showFinalView(targetView||lastFinalView);renderNotifications();return;
+        }
+        previousSwitchPortalWorkspaceV9(workspace,targetView);
+      };
+
+      function renderCommandMetrics(){
+        const openP=commandState.priorities.filter(x=>x.status==='open');
+        const grossRisk=18420-commandState.priorities.filter(x=>x.status==='resolved').reduce((sum,x)=>sum+(x.type==='revenue'?1180:0),0);
+        const rows=[
+          ['Actions requiring ownership',openP.length,'Across every operating layer','attention'],
+          ['Immediate decisions',openP.filter(x=>x.type==='immediate').length,'Timing or approval window','attention'],
+          ['Gross at risk',money(Math.max(grossRisk,0)),'Modeled revenue exposure','revenue'],
+          ['Funding holds',finalState.items.filter(x=>x.category==='cit'&&x.status==='open').length,'Contracts not fully closed','revenue'],
+          ['Customer recovery',openP.filter(x=>x.type==='customer').length,'Experience concerns before fallout','customer'],
+          ['Open mismatches',commandState.reconciliations.filter(x=>x.status==='open').length,'Cross-layer deal truth exceptions','attention']
+        ];
+        const el=document.getElementById('commandMetrics');if(el)el.innerHTML=rows.map(([a,b,c,d])=>`<div class="oc-metric ${d}"><small>${a}</small><strong>${b}</strong><span>${c}</span></div>`).join('');
+        const nav=document.getElementById('commandActionCountNav');if(nav)nav.textContent=openP.length;
+        const rn=document.getElementById('commandReconCountNav');if(rn)rn.textContent=commandState.reconciliations.filter(x=>x.status==='open').length;
+        const en=document.getElementById('commandEscalationCountNav');if(en)en.textContent=commandState.escalations.filter(x=>x.status==='open').length;
+        const cb=document.getElementById('commandBannerTitle');if(cb)cb.textContent=`${openP.length} actions require ownership across 4 rooftops`;
+        const meta=document.getElementById('commandBannerMeta');if(meta)meta.textContent=`${openP.filter(x=>x.type==='immediate').length} immediate · ${money(Math.max(grossRisk,0))} gross at risk · ${finalState.items.filter(x=>x.category==='cit'&&x.status==='open').length} funding holds · ${openP.filter(x=>x.type==='customer').length} customer recovery opportunities`;
+        const ib=document.getElementById('commandImmediateBadge');if(ib)ib.textContent=`${openP.filter(x=>x.type==='immediate').length} IMMEDIATE`;
+        const rb=document.getElementById('commandReconBadge');if(rb)rb.textContent=`${commandState.reconciliations.filter(x=>x.status==='open').length} MISMATCHES`;
+      }
+
+      function renderPriorityList(){
+        const list=commandState.priorities.filter(x=>commandPriorityFilter==='all'||x.type===commandPriorityFilter).sort((a,b)=>(a.status==='open'?0:1)-(b.status==='open'?0:1));
+        const el=document.getElementById('commandPriorityList');if(!el)return;
+        el.innerHTML=list.map(x=>`<article class="priority-item" style="opacity:${x.status==='resolved'?'.62':'1'}"><div class="priority-icon ${iconClass(x.type)}"><i class="fa-solid ${x.icon}"></i></div><div><div class="priority-eyebrow">${x.deal} · ${workspaceLabel(x.workspace)} · ${x.customer}</div><div class="priority-title">${x.title}</div><div class="priority-copy">${x.copy}</div><div class="priority-meta"><span class="badge ${x.type==='immediate'?'red':x.type==='revenue'?'amber':x.type==='customer'?'blue':'green'}">${x.impact}</span><span class="badge">Owner: ${x.owner}</span><span class="badge">Due: ${x.due}</span>${x.status==='resolved'?'<span class="badge green">RESOLVED</span>':''}</div></div><div class="priority-actions"><button class="button small" type="button" onclick="openCommandSource('${x.workspace}','${x.view}')">Open source</button><button class="button small ${x.status==='resolved'?'':'oc-primary'}" type="button" onclick="resolveCommandPriority('${x.id}')">${x.status==='resolved'?'Reopen':'Record action'}</button></div></article>`).join('')||'<div class="empty-state">No priorities match this filter.</div>';
+      }
+
+      function renderAccountability(){
+        const owners={};commandState.priorities.filter(x=>x.status==='open').forEach(x=>{owners[x.owner]=(owners[x.owner]||0)+1;});
+        const el=document.getElementById('commandAccountability');if(el)el.innerHTML=Object.entries(owners).sort((a,b)=>b[1]-a[1]).map(([owner,count],i)=>`<div class="accountability-row"><div><strong>${owner}</strong><span>${count} open operating action${count===1?'':'s'} · ${i===0?'highest current load':'within response window'}</span></div><span class="badge ${i===0?'amber':'blue'}">${count}</span></div>`).join('');
+      }
+
+      function renderLifecycle(){
+        const stages=[['Desk',4,'DX-4312 waiting for revised pencil','#7257e8'],['F&I',3,'FI-8421 back-end exceeds approval','#0f8f83'],['Compliance',2,'ENX-2847 term variance','#2c72d6'],['Funding',4,'PA-44921 missing stipulation','#c47e1f'],['Finalization',8,'PF-66218 refund treatment open','#168167']];
+        const el=document.getElementById('commandLifecycle');if(el)el.innerHTML=stages.map(([a,b,c,d])=>`<div class="lifecycle-stage" style="--stage-color:${d}"><div class="lifecycle-stage-label">${a}</div><div class="lifecycle-stage-count">${b}</div><strong>${c}</strong><span>Oldest active condition remains attached to its source deal.</span></div>`).join('');
+      }
+
+      function renderTruth(){
+        const open=commandState.reconciliations.filter(x=>x.status==='open');
+        const cells=[['Customer expectation',2,'Payment and product choice'],['Lender alignment',2,'Advance, term, cash, back-end'],['Contract integrity',2,'Signatures and values'],['Final accounting',1,'Gross and customer value']];
+        const strip=document.getElementById('commandTruthStrip');if(strip)strip.innerHTML=cells.map(([a,b,c])=>`<div class="truth-cell"><small>${a}</small><strong>${b} exception${b===1?'':'s'}</strong><span>${c}</span></div>`).join('');
+        const preview=document.getElementById('commandReconPreview');if(preview)preview.innerHTML=open.slice(0,3).map(x=>reconcileHtml(x,true)).join('');
+      }
+
+      function reconcileHtml(x,preview=false){
+        return `<article class="reconcile-item" style="opacity:${x.status==='resolved'?'.62':'1'}"><div class="reconcile-icon ${x.status==='resolved'?'clear':x.severity}"><i class="fa-solid ${x.status==='resolved'?'fa-circle-check':x.severity==='critical'?'fa-triangle-exclamation':'fa-link'}"></i></div><div><div class="reconcile-eyebrow">${x.deal} · ${x.customer}</div><div class="reconcile-title">${x.title}</div><div class="reconcile-copy">${x.copy}</div><div class="reconcile-meta"><span class="badge ${x.severity==='critical'?'red':'amber'}">${x.impact}</span><span class="badge">Owner: ${x.owner}</span>${x.status==='resolved'?'<span class="badge green">RESOLVED</span>':''}</div></div><div class="reconcile-actions"><button class="button small" type="button" onclick="inspectReconciliation('${x.id}')">Compare sources</button>${preview?`<button class="button small" type="button" onclick="showCommandView('command-reconciliation')">Open queue</button>`:`<button class="button small" type="button" onclick="openCommandSource('${x.workspace}','${x.view}')">Open source</button><button class="button small ${x.status==='resolved'?'':'oc-primary'}" type="button" onclick="resolveReconciliation('${x.id}')">${x.status==='resolved'?'Reopen':'Resolve demo'}</button>`}</div></article>`;
+      }
+
+      function renderReconciliation(){
+        const list=commandState.reconciliations.filter(x=>reconFilter==='all'||(reconFilter==='resolved'?x.status==='resolved':reconFilter==='critical'?x.status==='open'&&x.severity==='critical':x.status==='open'));
+        const el=document.getElementById('reconcileList');if(el)el.innerHTML=list.map(x=>reconcileHtml(x,false)).join('')||'<div class="empty-state">No reconciliation items match this filter.</div>';
+        const open=commandState.reconciliations.filter(x=>x.status==='open');
+        const stats=[['Open mismatches',open.length,'Require owner or disposition'],['Critical',open.filter(x=>x.severity==='critical').length,'Customer, contract, or funding impact'],['Assigned',open.filter(x=>x.owner).length,'Every open item has an owner'],['Resolved today',commandState.reconciliations.filter(x=>x.status==='resolved').length,'Synthetic demonstration actions']];
+        const sum=document.getElementById('reconcileSummary');if(sum)sum.innerHTML=stats.map(([a,b,c])=>`<div class="reconcile-stat"><small>${a}</small><strong>${b}</strong><span>${c}</span></div>`).join('');
+        renderReconcileInspector();
+      }
+
+      function renderReconcileInspector(){
+        const x=commandState.reconciliations.find(r=>r.id===selectedReconId)||commandState.reconciliations[0];if(!x)return;
+        const copy=document.getElementById('reconcileInspectorCopy');if(copy)copy.textContent=`${x.deal} · ${x.title}`;
+        const badge=document.getElementById('reconcileInspectorBadge');if(badge){badge.textContent=x.status==='resolved'?'RESOLVED':x.severity.toUpperCase();badge.className=`badge ${x.status==='resolved'?'green':x.severity==='critical'?'red':'amber'}`;}
+        const el=document.getElementById('reconcileSourceCompare');if(el)el.innerHTML=x.sources.map((s,i)=>`<div class="source-card ${i===x.sources.length-1&&x.status!=='resolved'?'mismatch':''}"><small>${s[0]}</small><strong>${s[1]}</strong><span>${s[2]}</span></div>`).join('');
+      }
+
+      function renderEscalations(){
+        const open=commandState.escalations.filter(x=>x.status==='open');
+        const metrics=[['Open escalations',open.length,'Leadership attention required','attention'],['Expiring today',2,'Approval or response windows','attention'],['Revenue exposure',money(4206),'Synthetic cash and gross impact','revenue'],['Customer impact',1,'Recovery before presentation','customer'],['Acknowledged',commandState.escalations.filter(x=>x.status==='acknowledged').length,'Leadership has reviewed','customer'],['Unassigned',0,'Every escalation has an owner','customer']];
+        const m=document.getElementById('escalationMetrics');if(m)m.innerHTML=metrics.map(([a,b,c,d])=>`<div class="oc-metric ${d}"><small>${a}</small><strong>${b}</strong><span>${c}</span></div>`).join('');
+        const el=document.getElementById('commandEscalationList');if(el)el.innerHTML=commandState.escalations.map(x=>`<article class="escalation-item" style="opacity:${x.status==='acknowledged'?'.65':'1'}"><div class="escalation-icon ${iconClass(x.type)}"><i class="fa-solid ${x.type==='urgent'?'fa-triangle-exclamation':x.type==='customer'?'fa-heart-pulse':'fa-sack-dollar'}"></i></div><div><div class="escalation-eyebrow">${x.deal} · ${workspaceLabel(x.workspace)}</div><div class="escalation-title">${x.title}</div><div class="escalation-copy">${x.copy}</div><div class="escalation-meta"><span class="badge">Owner: ${x.owner}</span>${x.status==='acknowledged'?'<span class="badge green">ACKNOWLEDGED</span>':''}</div></div><div class="escalation-actions"><button class="button small" type="button" onclick="openCommandSource('${x.workspace}','${x.view}')">Open source</button><button class="button small ${x.status==='acknowledged'?'':'oc-primary'}" type="button" onclick="toggleEscalation('${x.id}')">${x.status==='acknowledged'?'Reopen':'Acknowledge'}</button></div></article>`).join('');
+      }
+
+      function renderRooftops(){
+        const data=[
+          ['Premier Ford','Stable',7,6420,1,1,'green'],['Premier Honda','Watch',5,3180,0,1,'amber'],['Summit Motors','Intervene',8,5340,3,0,'red'],['Velocity Cars','Watch',6,3480,0,2,'amber']
+        ];
+        const el=document.getElementById('commandRooftopGrid');if(el)el.innerHTML=data.map(([name,state,actions,gross,holds,finals,color])=>`<article class="rooftop-card"><div class="rooftop-card-head"><h3>${name}</h3><span class="badge ${color}">${state.toUpperCase()}</span></div><div class="rooftop-stats"><div class="rooftop-stat"><small>Open actions</small><strong>${actions}</strong></div><div class="rooftop-stat"><small>Gross at risk</small><strong>${money(gross)}</strong></div><div class="rooftop-stat"><small>Funding holds</small><strong>${holds}</strong></div><div class="rooftop-stat"><small>Finalization aging</small><strong>${finals}</strong></div></div></article>`).join('');
+      }
+
+      function renderMemory(){
+        const events=[
+          ['09:12','fa-clipboard-list','Desking','Customer objective recorded','$694 target payment, 7–8 year ownership horizon, moderate cash flexibility.','green'],
+          ['09:24','fa-copy','Desking','Balanced Close pencil selected','Payment modeled at $694 with preserved front gross and preferred lender sequence.','blue'],
+          ['09:47','fa-landmark','Desking','Preferred lender callback received','72 months, $5,000 cash, $2,800 maximum back-end.','amber'],
+          ['10:03','fa-mobile-screen','F&I','Ownership Concierge completed','Customer prefers predictable expenses and reported payment confusion.','blue'],
+          ['10:18','fa-tags','F&I','Customer menu choices recorded','Service contract and maintenance selected. Tire-and-wheel declined.','green'],
+          ['10:26','fa-link','Reconciliation','Product contract mismatch surfaced','Tire-and-wheel contract present despite customer decline.','red'],
+          ['10:31','fa-shield-halved','Compliance','Delivery gate held','Customer-choice mismatch routed for correction.','red'],
+          ['11:02','fa-file-circle-check','Funding','Packet conditionally ready','Proof of residence remains open. Approval expires today.','amber'],
+          ['14:20','fa-money-bill-transfer','Finalization','Prior product refund verified','$2,186 verified; accounting treatment not yet complete.','amber']
+        ];
+        const el=document.getElementById('commandMemoryThread');if(el)el.innerHTML=events.map(([time,icon,layer,title,copy,color])=>`<div class="memory-event"><time class="memory-time">${time}</time><div class="memory-mark"><i class="fa-solid ${icon}"></i></div><div><strong>${title}</strong><p>${copy}</p></div><span class="badge ${color}">${layer}</span></div>`).join('');
+      }
+
+      function renderCommandAll(){ renderCommandMetrics();renderPriorityList();renderAccountability();renderLifecycle();renderTruth();renderReconciliation();renderEscalations();renderRooftops();renderMemory(); }
+
+      window.openCommandSource=function(workspace,view){switchPortalWorkspace(workspace,view);};
+      window.resolveCommandPriority=function(id){const x=commandState.priorities.find(x=>x.id===id);if(!x)return;x.status=x.status==='resolved'?'open':'resolved';saveCommand();renderCommandAll();showToast(x.status==='resolved'?'Operating action recorded':'Operating action reopened',`${x.deal} remains connected to ${workspaceLabel(x.workspace)}.`,'success');};
+      window.inspectReconciliation=function(id){selectedReconId=id;showCommandView('command-reconciliation');renderReconcileInspector();document.getElementById('reconcileInspectorCard')?.scrollIntoView({behavior:'smooth',block:'center'});};
+      window.resolveReconciliation=function(id){const x=commandState.reconciliations.find(x=>x.id===id);if(!x)return;x.status=x.status==='resolved'?'open':'resolved';saveCommand();renderCommandAll();showToast(x.status==='resolved'?'Mismatch resolved in demo':'Mismatch reopened',`${x.deal} source comparison remains in Deal Memory.`,'success');};
+      window.toggleEscalation=function(id){const x=commandState.escalations.find(x=>x.id===id);if(!x)return;x.status=x.status==='acknowledged'?'open':'acknowledged';saveCommand();renderCommandAll();showToast('Escalation updated',`${x.deal} is ${x.status}.`,'success');};
+      window.acknowledgeAllEscalations=function(){commandState.escalations.forEach(x=>x.status='acknowledged');saveCommand();renderCommandAll();showToast('Escalations acknowledged','Leadership review has been recorded across the visible queue.','success');};
+      window.runReconciliationSweep=function(){showToast('Reconciliation sweep complete',`${commandState.reconciliations.filter(x=>x.status==='open').length} cross-layer mismatches remain open.`,'success');renderCommandAll();};
+
+      function finalCategoryLabel(c){return {cit:'Contracts in Transit',title:'Title & Payoff',cancellation:'Cancellation / Refund',promise:'Customer Promise'}[c]||c;}
+      function finalItemHtml(x){return `<article class="final-queue-item" style="opacity:${x.status==='complete'?'.62':'1'}"><div class="final-queue-icon ${x.status==='complete'?'clear':x.state}"><i class="fa-solid ${x.status==='complete'?'fa-circle-check':x.category==='cit'?'fa-file-invoice-dollar':x.category==='title'?'fa-car-side':x.category==='cancellation'?'fa-money-bill-transfer':'fa-list-check'}"></i></div><div><div class="final-queue-eyebrow">${x.deal} · ${x.customer} · ${finalCategoryLabel(x.category)}</div><div class="final-queue-title">${x.title}</div><div class="final-queue-copy">${x.copy}</div><div class="final-queue-meta"><span class="badge ${x.state==='blocked'?'red':x.state==='warning'?'amber':'green'}">${x.age}</span><span class="badge">Owner: ${x.owner}</span>${x.amount?`<span class="badge blue">${money(x.amount)}</span>`:''}${x.status==='complete'?'<span class="badge green">COMPLETE</span>':''}</div></div><div class="final-queue-actions"><button class="button small ${x.status==='complete'?'':'final-primary'}" type="button" onclick="completeFinalItem('${x.id}')">${x.status==='complete'?'Reopen':x.action}</button><button class="button small" type="button" onclick="switchPortalWorkspace('command','command-memory')">Deal memory</button></div></article>`;}
+
+      function renderFinalMetrics(){
+        const open=finalState.items.filter(x=>x.status==='open');
+        const unsettled=open.filter(x=>x.category==='cit').reduce((s,x)=>s+x.amount,0)+351755;
+        const rows=[['Open closeout actions',open.length,'Across funding, title, refunds, and promises','cash'],['Contracts in transit',open.filter(x=>x.category==='cit').length,money(unsettled)+' unsettled','cash'],['Title / payoff',open.filter(x=>x.category==='title').length,'Ownership transfer exceptions',''],['Cancellations',open.filter(x=>x.category==='cancellation').length,'Customer value not fully closed','cash'],['Customer promises',open.filter(x=>x.category==='promise').length,'We-Owes still visible',''],['Completed today',finalState.items.filter(x=>x.status==='complete').length,'Evidence preserved in archive','clear']];
+        const el=document.getElementById('finalMetrics');if(el)el.innerHTML=rows.map(([a,b,c,d])=>`<div class="final-metric ${d}"><small>${a}</small><strong>${b}</strong><span>${c}</span></div>`).join('');
+        const nav=document.getElementById('finalActionCountNav');if(nav)nav.textContent=open.length;
+        const counts={cit:'finalCitCountNav',title:'finalTitleCountNav',cancellation:'finalCancelCountNav',promise:'finalPromiseCountNav'};Object.entries(counts).forEach(([cat,id])=>{const e=document.getElementById(id);if(e)e.textContent=open.filter(x=>x.category===cat).length;});
+        const title=document.getElementById('finalBannerTitle');if(title)title.textContent=`${open.length} closeout obligations require action`;
+        const meta=document.getElementById('finalBannerMeta');if(meta)meta.textContent=`${money(unsettled)} unsettled · ${open.filter(x=>x.category==='cit').length} contracts in transit · ${open.filter(x=>x.category==='title').length} title/payoff issues · ${open.filter(x=>x.category==='cancellation').length} cancellations`;
+        const blocked=document.getElementById('finalBlockedBadge');if(blocked)blocked.textContent=`${open.filter(x=>x.state==='blocked').length} BLOCKED`;
+        const aging=document.getElementById('finalAgingBadge');if(aging)aging.textContent=`${open.filter(x=>x.state==='warning').length} AGING`;
+      }
+
+      function renderFinalPipeline(){
+        const open=finalState.items.filter(x=>x.status==='open');
+        const stages=[['Funding released',12,'Proceeds received','clear'],['CIT review',open.filter(x=>x.category==='cit').length,'Shortage or evidence','warning'],['Title / payoff',open.filter(x=>x.category==='title').length,'Transfer controls','warning'],['Cancellation',open.filter(x=>x.category==='cancellation').length,'Customer value','blocked'],['Promises',open.filter(x=>x.category==='promise').length,'Written obligations','warning'],['Accounting closed',8,'Final gross accepted','clear']];
+        const el=document.getElementById('finalPipeline');if(el)el.innerHTML=stages.map(([a,b,c,d])=>`<div class="final-stage ${d}"><small>${a}</small><strong>${b}</strong><span>${c}</span></div>`).join('');
+      }
+
+      function renderFinalPriority(){
+        const list=finalState.items.filter(x=>finalPriorityFilter==='all'||(finalPriorityFilter==='open'?x.status==='open':finalPriorityFilter==='blocked'?x.status==='open'&&x.state==='blocked':finalPriorityFilter==='customer'?x.status==='open'&&(x.category==='cancellation'||x.category==='promise'):true));
+        const el=document.getElementById('finalPriorityList');if(el)el.innerHTML=list.slice(0,8).map(finalItemHtml).join('')||'<div class="empty-state">No closeout records match this filter.</div>';
+        const cash=document.getElementById('finalCashProtection');if(cash)cash.innerHTML=[['Unsettled lender proceeds','$412,840','4 deals require funding closure'],['Verified refunds awaiting treatment','$3,606','Customer value cannot disappear into aging'],['Gross variance under review','$1,420','Controller acceptance required'],['Customer promises','$705','Written obligations remain open']].map(([a,b,c])=>`<div class="accountability-row"><div><strong>${a}</strong><span>${c}</span></div><span class="badge amber">${b}</span></div>`).join('');
+      }
+      function renderFinalLists(){
+        const map={finalCitList:'cit',finalTitleList:'title',finalCancellationList:'cancellation',finalPromiseList:'promise'};Object.entries(map).forEach(([id,cat])=>{const el=document.getElementById(id);if(el)el.innerHTML=finalState.items.filter(x=>x.category===cat).map(finalItemHtml).join('');});
+      }
+      function renderFinalGross(){
+        const rows=finalState.gross;const expected=rows.reduce((s,x)=>s+x.expected,0),accounting=rows.reduce((s,x)=>s+x.accounting,0),variance=accounting-expected;
+        const m=document.getElementById('finalGrossMetrics');if(m)m.innerHTML=[['Expected total gross',money(expected),'Desk + F&I accepted economics','cash'],['Accounting gross',money(accounting),'Current final record',''],['Variance',money(variance),'Requires controller review','cash'],['Chargeback exposure',money(620),'Modeled reserve adjustment','cash'],['Reconciled lines',rows.filter(x=>x.expected===x.accounting).length,`of ${rows.length} economic lines`,'clear'],['Decision status','Review','Controller acceptance required','cash']].map(([a,b,c,d])=>`<div class="final-metric ${d}"><small>${a}</small><strong>${b}</strong><span>${c}</span></div>`).join('');
+        const el=document.getElementById('finalGrossRows');if(el)el.innerHTML=rows.map(x=>`<div class="gross-row ${x.expected!==x.accounting?'variance':''}"><span>${x.label}</span><b>Expected<br>${money(x.expected)}</b><b>Contracted<br>${money(x.contracted)}</b><b>Funded<br>${money(x.funded)}</b><b>Accounting<br>${money(x.accounting)}</b></div>`).join('');
+      }
+      function renderCompleted(){
+        const rows=[['PF-77104','Riley Morgan','2 days','Complete','Complete','Complete','$6,420'],['PH-55110','Casey Lee','1 day','Complete','N/A','Complete','$4,980'],['SM-44098','Jamie Reed','3 days','Complete','Complete','Complete','$5,110'],['VC-22814','Avery Stone','2 days','Complete','N/A','Complete','$7,230']];
+        const el=document.getElementById('finalCompletedRows');if(el)el.innerHTML=rows.map(r=>`<tr>${r.map((v,i)=>`<td>${i===0?`<span class="mono">${v}</span>`:i>2&&i<6?`<span class="badge green">${v}</span>`:v}</td>`).join('')}</tr>`).join('');
+      }
+      function renderFinalAll(){renderFinalMetrics();renderFinalPipeline();renderFinalPriority();renderFinalLists();renderFinalGross();renderCompleted();}
+
+      window.completeFinalItem=function(id){const x=finalState.items.find(x=>x.id===id);if(!x)return;x.status=x.status==='complete'?'open':'complete';saveFinal();renderFinalAll();renderCommandAll();showToast(x.status==='complete'?'Closeout action completed':'Closeout action reopened',`${x.deal} remains preserved in Deal Memory.`,'success');};
+      window.runFinalizationSweep=function(){renderFinalAll();showToast('Closeout sweep complete',`${finalState.items.filter(x=>x.status==='open').length} obligations remain open across the finalization pipeline.`,'success');};
+      window.reconcileFinalGross=function(){showToast('Final gross reconciliation complete','Two synthetic economic lines remain outside the configured variance threshold.','warning');renderFinalGross();};
+
+      window.printOperatingBrief=function(){
+        const openP=commandState.priorities.filter(x=>x.status==='open');
+        const win=window.open('','_blank');if(!win){showToast('Print window blocked','Allow pop-ups to open the Operating Brief.','warning');return;}
+        const rows=openP.map(x=>`<tr><td>${x.deal}</td><td>${workspaceLabel(x.workspace)}</td><td>${x.title}</td><td>${x.owner}</td><td>${x.due}</td></tr>`).join('');
+        win.document.write(`<!doctype html><html><head><title>ENGENIX Operating Brief</title><style>body{font-family:Arial;color:#132737;margin:32px}header{border-bottom:4px solid #0f7187;padding-bottom:18px;margin-bottom:20px}h1{margin:0;font-size:28px}p{color:#607789}section{margin-top:24px}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #d6e0e6;text-align:left;font-size:12px}th{font-size:10px;text-transform:uppercase;color:#607789}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{border:1px solid #ccd8df;border-radius:8px;padding:12px}.metric strong{display:block;font-size:22px;margin-top:6px}.foot{margin-top:26px;font-size:10px;color:#718695}</style></head><body><header><div style="font-weight:900;letter-spacing:.15em">ENGENIX</div><h1>Operating Command Brief</h1><p>Premier Auto Group · Synthetic demonstration · ${new Date().toLocaleString()}</p></header><div class="metrics"><div class="metric">Open actions<strong>${openP.length}</strong></div><div class="metric">Immediate<strong>${openP.filter(x=>x.type==='immediate').length}</strong></div><div class="metric">Reconciliation<strong>${commandState.reconciliations.filter(x=>x.status==='open').length}</strong></div><div class="metric">Finalization<strong>${finalState.items.filter(x=>x.status==='open').length}</strong></div></div><section><h2>Manager Attention Queue</h2><table><thead><tr><th>Deal</th><th>Layer</th><th>Required Action</th><th>Owner</th><th>Due</th></tr></thead><tbody>${rows}</tbody></table></section><div class="foot">ENGENIX preserves operator judgment under pressure. Synthetic customer demonstration only.</div><script>setTimeout(()=>window.print(),350)<\/script></body></html>`);win.document.close();
+      };
+
+      document.querySelectorAll('[data-command-view]').forEach(n=>n.addEventListener('click',()=>showCommandView(n.dataset.commandView)));
+      document.querySelectorAll('[data-final-view]').forEach(n=>n.addEventListener('click',()=>showFinalView(n.dataset.finalView)));
+      document.querySelectorAll('[data-command-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-command-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');commandPriorityFilter=b.dataset.commandFilter;renderPriorityList();}));
+      document.querySelectorAll('[data-recon-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-recon-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');reconFilter=b.dataset.reconFilter;renderReconciliation();}));
+      document.querySelectorAll('[data-final-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-final-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');finalPriorityFilter=b.dataset.finalFilter;renderFinalPriority();}));
+
+      const previousSetAuthenticatedV9=window.setAuthenticated||setAuthenticated;
+      window.setAuthenticated=setAuthenticated=function(authenticated){
+        previousSetAuthenticatedV9(authenticated);
+        if(authenticated)setTimeout(()=>switchPortalWorkspace('command','command-command'),30);
+      };
+
+      renderCommandAll();renderFinalAll();
+      const authenticated=!document.body.classList.contains('auth-locked');
+      if(authenticated)setTimeout(()=>switchPortalWorkspace('command','command-command'),40);
+      else { document.body.dataset.workspace='command'; const sel=document.getElementById('workspaceSelect');if(sel)sel.value='command'; }
     })();
   </script>
 
