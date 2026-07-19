@@ -2356,19 +2356,6 @@
                     <div class="workflow-action-title" id="workflowActionTitle">Submit the working structure for manager approval</div>
                     <div class="workflow-action-copy" id="workflowActionCopy">The original structure, author, and timestamp remain attached to this deal before responsibility moves to the next operator.</div>
                   </div>
-
-                  <!-- AI COPILOT GUIDANCE - Deep integration in Deal Journey -->
-                  <div class="ai-copilot-guidance" style="margin-top:16px; padding:16px; border:1px solid var(--line); border-radius:16px; background: linear-gradient(145deg, rgba(201,169,98,0.05), transparent);">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                      <i class="fa-solid fa-robot" style="color:var(--gold); font-size:16px;"></i>
-                      <div style="font-weight:820; font-size:12px;">Copilot Guidance</div>
-                      <span class="ai-badge" style="margin-left:auto;">LIVE</span>
-                    </div>
-                    <div id="aiJourneyGuidance" style="font-size:10.5px; line-height:1.55; color:var(--muted);">
-                      <!-- Populated dynamically by JS based on current stage -->
-                    </div>
-                    <div id="aiJourneyActions" style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;"></div>
-                  </div>
                   <div class="workflow-checklist" id="workflowChecklist"></div>
                   <div class="workflow-decisions" id="workflowDecisionChoices">
                     <button class="decision-button preferred" type="button" data-workflow-decision="correct"><strong>Correct Deal &amp; Document</strong><small>Restore the approved terms, preserve the revised acknowledgment, and clear the gate.</small></button>
@@ -2394,6 +2381,19 @@
                   <div class="identity-legend"><b>Identity</b> uses ◆ A7 and cobalt. <b>Risk</b> uses written Low, Moderate, or High status. The two visual languages never overlap.</div>
                 </div>
               </article>
+            </div>
+
+            <!-- AI COPILOT — Deeply embedded & reactive in Deal Journey -->
+            <div style="margin-top:12px; padding:16px 18px; border:1px solid var(--line); border-radius:16px; background:var(--panel);">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <i class="fa-solid fa-robot" style="color:var(--gold);"></i>
+                <div style="font-weight:820;">Copilot is active on this deal</div>
+                <span style="margin-left:auto; font-size:8.5px; padding:2px 8px; border-radius:999px; background:rgba(201,169,98,0.12); color:var(--gold);">LIVE</span>
+              </div>
+              <div id="aiJourneyGuidance" style="font-size:11px; line-height:1.6; color:#d4dce6; min-height:38px;">
+                <!-- Reactive AI commentary populated by renderJourney() -->
+              </div>
+              <div id="aiJourneyActions" style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;"></div>
             </div>
 
             <article class="card">
@@ -3022,34 +3022,6 @@
       const variance = workflowState.issueActive || workflowState.resolution;
       document.getElementById('currentTermMonths').textContent = variance && !workflowState.resolution ? '75 mo' : '72 mo';
       document.getElementById('currentPayment').textContent = variance && !workflowState.resolution ? '$657' : '$684';
-
-      // === AI COPILOT GUIDANCE IN DEAL JOURNEY (Deep integration) ===
-      const guidanceEl = document.getElementById('aiJourneyGuidance');
-      const actionsEl = document.getElementById('aiJourneyActions');
-      if (guidanceEl && actionsEl) {
-        let guidance = '';
-        let actionsHTML = '';
-
-        if (workflowState.completed) {
-          guidance = 'Deal completed successfully. Full decision history and operating record preserved. Copilot recommends archiving this pattern for future similar deals.';
-          actionsHTML = `<button class="button small" onclick="showView('audit')">View full audit trail</button>`;
-        } else if (workflowState.issueActive && workflowState.stage === 4) {
-          guidance = 'Structure variance detected (F-1051). Historical data shows resolving this now improves close rate by ~34%. Recommend reviewing customer promise terms before proceeding.';
-          actionsHTML = `
-            <button class="button small primary" onclick="resolveWorkflowDecision('correct')">Resolve &amp; Correct</button>
-            <button class="button small" onclick="resolveWorkflowDecision('exception')">Proceed with Exception</button>
-          `;
-        } else if (workflowState.stage === 0) {
-          guidance = 'Early stage. Copilot recommends locking in a clean preliminary structure. Similar deals that front-loaded compliance checks closed 22% faster.';
-          actionsHTML = `<button class="button small" onclick="document.getElementById('workflowPrimaryButton').click()">Submit for Approval</button>`;
-        } else {
-          guidance = `Stage ${workflowState.stage + 1} progressing well. No immediate blockers. Copilot is monitoring for common friction points at this stage.`;
-          actionsHTML = `<button class="button small" onclick="askCopilot('What should I watch for in the current stage?')">Ask Copilot for stage advice</button>`;
-        }
-
-        guidanceEl.innerHTML = guidance;
-        actionsEl.innerHTML = actionsHTML;
-      }
       document.getElementById('currentAcknowledgment').textContent = variance && !workflowState.resolution ? 'Missing' : workflowState.resolution === 'exception' ? 'Exception note' : 'Present';
       ['termMonthsRow','termPaymentRow','termAckRow'].forEach(id => document.getElementById(id).classList.toggle('variance', variance && !workflowState.resolution));
       const contextBadge = document.getElementById('reviewContextBadge');
