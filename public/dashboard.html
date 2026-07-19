@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.19-unified-portal-desking-v1">
+  <meta name="dashboard-build" content="2026.07.19-compliance-copilot-v3">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Dealer Portal Demo</title>
+    <title>ENGENIX | Unified Portal + Compliance Copilot Demo</title>
   <style>
     :root {
       --bg: #071018;
@@ -111,6 +111,13 @@
     .fa-right-from-bracket::before { content: "↪"; }
     .fa-eye-slash::before { content: "◌"; }
     .fa-spinner::before { content: "◌"; }
+    .fa-brain::before { content: "✣"; }
+    .fa-wave-square::before { content: "⌁"; }
+    .fa-lightbulb::before { content: "✦"; }
+    .fa-forward-step::before { content: "↠"; }
+    .fa-copy::before { content: "▣"; }
+    .fa-chart-line::before { content: "↗"; }
+    .fa-circle-nodes::before { content: "◌"; }
     .fa-spin { animation: iconSpin .85s linear infinite; }
     @keyframes iconSpin { to { transform: rotate(360deg); } }
     button { color: inherit; }
@@ -2162,11 +2169,252 @@
     html[data-theme="light"] .desk-focus-card,html[data-theme="light"] .desk-metric,html[data-theme="light"] .desk-path-card,html[data-theme="light"] .desk-submission-card,html[data-theme="light"] .desk-lender-card { background:rgba(255,255,255,.97); box-shadow:0 8px 22px rgba(53,43,102,.045); }
     html[data-theme="light"] .desk-active-banner { background:rgba(255,255,255,.94); }
 
+
+    /* V2 interaction polish */
+    html[data-theme="light"] .button.desk-primary,
+    html[data-theme="light"] button.desk-primary {
+      color:#fff;
+      border-color:rgba(83,73,196,.24);
+      background:linear-gradient(135deg,#7257e8,#506ed8 58%,#168ed8);
+      box-shadow:0 10px 24px rgba(80,86,210,.20);
+    }
+    html[data-theme="light"] .button.desk-primary:hover,
+    html[data-theme="light"] button.desk-primary:hover { color:#fff; background:linear-gradient(135deg,#7d63ec,#5879df 58%,#1a99e5); }
+    .button:disabled,
+    .button[aria-disabled="true"] { cursor:not-allowed; opacity:.62; transform:none !important; box-shadow:none !important; }
+    .desk-snapshot-actions { display:grid; grid-template-columns:minmax(190px,.82fr) minmax(260px,1.18fr); gap:9px; }
+    .desk-snapshot-actions .button { width:100%; min-height:44px; }
+    .desk-pathway-gate i:last-child { margin-left:auto; }
+    .desk-snapshot-status { margin-top:9px; min-height:38px; padding:9px 11px; border:1px solid var(--line); border-radius:10px; display:flex; align-items:center; gap:8px; color:var(--muted); background:var(--panel-2); font-size:8.8px; line-height:1.45; }
+    .desk-snapshot-status i { color:var(--muted-2); }
+    .desk-snapshot-status.saved { color:var(--green); border-color:rgba(22,129,103,.18); background:var(--green-soft); }
+    .desk-snapshot-status.saved i { color:var(--green); }
+    .desk-snapshot-status.dirty { color:var(--amber); border-color:rgba(173,116,28,.19); background:var(--amber-soft); }
+    .desk-snapshot-status.dirty i { color:var(--amber); }
+    .desk-guardrail strong,.desk-guardrail span { display:block; }
+    .desk-guardrail span { margin-top:3px; line-height:1.35; }
+    .desk-guardrail b { padding-left:10px; font-size:10px; text-align:right; white-space:nowrap; }
+    .desk-lab-controls .field { min-width:0; }
+    .desk-lab-controls .field label { min-height:14px; line-height:1.35; }
+    .desk-number-input { font-variant-numeric:tabular-nums; text-align:right; caret-color:#7257e8; }
+    .desk-number-input::-webkit-outer-spin-button,.desk-number-input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+    .desk-number-input[type=number] { appearance:textfield; -moz-appearance:textfield; }
+    .desk-number-input[aria-invalid="true"] { border-color:rgba(195,69,85,.48) !important; box-shadow:0 0 0 3px rgba(195,69,85,.08) !important; }
+    .desk-field-help { display:block; margin-top:-1px; color:var(--muted-2); font-size:7.5px; line-height:1.35; }
+    .desk-lab-controls .field input,.desk-lab-controls .field select { min-height:44px; font-size:11.5px; }
+    .desk-live-card { overflow:hidden; }
+    @media (max-width:1450px) {
+      .topbar-right .select-control { min-width:190px; width:clamp(190px,23vw,300px); }
+      .topbar .avatar { display:none; }
+    }
+    @media (max-width:740px) {
+      .desk-snapshot-actions { grid-template-columns:1fr; }
+      .desk-guardrail { grid-template-columns:20px minmax(0,1fr); }
+      .desk-guardrail b { grid-column:2; padding-left:0; text-align:left; }
+    }
+
     @media (max-width:1300px) { .desk-pathway-grid,.desk-lender-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-metric-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } .desk-focus-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-lab-grid { grid-template-columns:1fr; } }
     @media (max-width:1080px) { .desk-hero-grid,.desk-pathway-hero { grid-template-columns:1fr; } .desk-hero-actions { min-width:0; grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-command-grid { grid-template-columns:1fr; } .desk-submission-summary { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:820px) { .desk-active-copy { display:none; } .desk-active-banner .active-deal-status { flex:1; justify-content:flex-start; } .desk-active-banner .desk-button { margin-left:auto; } .desk-submission-board { grid-template-columns:1fr; } .desk-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:740px) { .desk-focus-grid,.desk-metric-grid { grid-template-columns:1fr 1fr; } .desk-pathway-grid,.desk-lender-grid { grid-template-columns:1fr; } .desk-live-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-hero-actions { grid-template-columns:1fr 1fr; } .desk-pathway-actions { grid-template-columns:1fr 1fr; } .desk-upload-row { grid-template-columns:1fr; } .desk-upload-status { max-width:none; text-align:left; } }
     @media (max-width:470px) { .desk-active-banner { padding-left:12px; padding-right:12px; } .desk-record-token code { display:none; } .desk-active-banner .badge { display:none; } .desk-hero { padding:20px; } .desk-hero h1 { font-size:29px; } .desk-hero-actions,.desk-pathway-actions { grid-template-columns:1fr; } .desk-focus-grid,.desk-metric-grid,.desk-submission-summary { grid-template-columns:1fr; } .desk-live-head { flex-direction:column; } .desk-live-score { width:100%; text-align:left; } .desk-live-metrics,.desk-summary-grid { grid-template-columns:1fr 1fr; } .desk-profile-presets { grid-template-columns:1fr; } }
+  </style>
+
+
+  <style id="engenix-compliance-copilot-v3">
+    /* Compliance Copilot V3: explainable synthetic decision support */
+    .copilot-risk-badge {
+      cursor: pointer;
+      color: var(--amber);
+      border-color: color-mix(in srgb, var(--amber) 28%, var(--line));
+      background: var(--amber-soft);
+    }
+    .copilot-header-actions { display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .copilot-shell { display:grid; gap:12px; }
+    .copilot-hero {
+      min-height:168px;
+      padding:clamp(22px,3vw,32px);
+      border:1px solid rgba(44,114,214,.20);
+      border-radius:18px;
+      background:
+        linear-gradient(105deg, color-mix(in srgb, var(--blue) 8%, var(--panel)), var(--panel) 61%),
+        var(--panel);
+      position:relative;
+      overflow:hidden;
+    }
+    .copilot-hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:linear-gradient(rgba(44,114,214,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(44,114,214,.035) 1px,transparent 1px);
+      background-size:30px 30px;
+      mask-image:linear-gradient(90deg,#000,transparent 88%);
+      pointer-events:none;
+    }
+    .copilot-hero::after {
+      content:"";
+      position:absolute;
+      width:250px;
+      height:250px;
+      right:-90px;
+      top:-115px;
+      border-radius:50%;
+      border:42px solid color-mix(in srgb,var(--blue) 8%,transparent);
+      pointer-events:none;
+    }
+    .copilot-hero-grid { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:center; }
+    .copilot-kicker { color:var(--blue); font-size:9px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; }
+    .copilot-hero h1 { margin:8px 0 8px; max-width:760px; font-size:clamp(28px,3.2vw,44px); line-height:1.04; letter-spacing:-.042em; }
+    .copilot-hero p { margin:0; max-width:760px; color:var(--muted); font-size:11.5px; line-height:1.65; }
+    .copilot-hero-meta { margin-top:15px; display:flex; gap:7px; flex-wrap:wrap; }
+    .copilot-hero-actions { min-width:230px; display:grid; gap:8px; }
+    .copilot-hero-actions .button { justify-content:flex-start; }
+    .copilot-disclaimer { margin-top:12px; color:var(--muted-2); font-size:8.5px; line-height:1.5; }
+
+    .copilot-metrics { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .copilot-metric { min-height:112px; padding:15px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .copilot-metric small { display:block; color:var(--muted-2); font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .copilot-metric strong { display:block; margin-top:9px; font-size:27px; letter-spacing:-.04em; }
+    .copilot-metric span { display:block; margin-top:5px; color:var(--muted); font-size:8.7px; line-height:1.4; }
+    .copilot-metric.attention { border-color:rgba(173,116,28,.23); background:var(--amber-soft); }
+    .copilot-metric.critical { border-color:rgba(195,69,85,.22); background:var(--red-soft); }
+    .copilot-metric.good { border-color:rgba(22,129,103,.20); background:var(--green-soft); }
+
+    .copilot-grid-main { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(330px,.65fr); gap:12px; align-items:start; }
+    .copilot-panel { border:1px solid var(--line); border-radius:15px; background:var(--panel); overflow:hidden; }
+    .copilot-panel-head { min-height:64px; padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .copilot-panel-title { font-size:12.5px; font-weight:850; }
+    .copilot-panel-copy { margin-top:3px; color:var(--muted); font-size:9px; line-height:1.45; }
+    .copilot-panel-body { padding:16px; }
+
+    .risk-layout { display:grid; grid-template-columns:190px minmax(0,1fr); gap:18px; align-items:center; }
+    .risk-ring {
+      --risk-angle:122.4deg;
+      width:168px;
+      height:168px;
+      margin:auto;
+      border-radius:50%;
+      background:conic-gradient(var(--risk-color,var(--amber)) var(--risk-angle),var(--bg-deep) 0);
+      display:grid;
+      place-items:center;
+      position:relative;
+    }
+    .risk-ring::after { content:""; position:absolute; inset:13px; border-radius:50%; background:var(--panel); border:1px solid var(--line); }
+    .risk-ring-copy { position:relative; z-index:1; text-align:center; }
+    .risk-ring-copy strong { display:block; font-size:42px; line-height:1; letter-spacing:-.06em; }
+    .risk-ring-copy span { display:block; margin-top:6px; color:var(--muted); font-size:8px; font-weight:850; letter-spacing:.11em; text-transform:uppercase; }
+    .risk-delta { margin-top:8px; display:inline-flex; min-height:24px; align-items:center; padding:0 8px; border-radius:999px; color:var(--red); background:var(--red-soft); font-size:8.5px; font-weight:850; }
+    .risk-driver-list { display:grid; gap:8px; }
+    .risk-driver { min-height:52px; padding:10px 11px; border:1px solid var(--line); border-radius:10px; display:grid; grid-template-columns:32px minmax(0,1fr) auto; gap:9px; align-items:center; background:var(--panel-2); }
+    .risk-driver-mark { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; color:var(--amber); background:var(--amber-soft); font-size:10px; }
+    .risk-driver.good .risk-driver-mark { color:var(--green); background:var(--green-soft); }
+    .risk-driver strong { display:block; font-size:9.7px; }
+    .risk-driver span { display:block; margin-top:3px; color:var(--muted); font-size:8.3px; line-height:1.35; }
+    .risk-driver b { color:var(--red); font-size:10px; }
+    .risk-driver.good b { color:var(--green); }
+    .risk-actions { margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+
+    .proposal-card { padding:15px; border:1px solid rgba(44,114,214,.23); border-radius:13px; background:var(--blue-soft); }
+    .proposal-top { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+    .proposal-label { color:var(--blue); font-size:8px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+    .proposal-title { margin-top:7px; font-size:15px; font-weight:850; line-height:1.25; }
+    .proposal-copy { margin-top:7px; color:var(--muted); font-size:9.4px; line-height:1.55; }
+    .evidence-list { margin-top:12px; display:grid; gap:7px; }
+    .evidence-row { min-height:40px; padding:8px 10px; border:1px solid var(--line); border-radius:9px; background:var(--panel); display:grid; grid-template-columns:20px minmax(0,1fr) auto; gap:8px; align-items:center; }
+    .evidence-row i { color:var(--blue); }
+    .evidence-row strong { font-size:8.9px; }
+    .evidence-row span { color:var(--muted); font-size:8px; }
+    .proposal-actions { margin-top:13px; display:flex; gap:8px; flex-wrap:wrap; }
+
+    .playbook-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+    .playbook-card { min-height:190px; padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel-2); text-align:left; color:var(--text); cursor:pointer; transition:.16s ease; position:relative; }
+    .playbook-card:hover { transform:translateY(-1px); border-color:var(--line-strong); }
+    .playbook-card.selected { border-color:rgba(44,114,214,.36); background:var(--blue-soft); box-shadow:inset 3px 0 0 var(--blue); }
+    .playbook-rank { color:var(--muted-2); font-size:8px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .playbook-card h3 { margin:9px 0 0; font-size:11px; line-height:1.35; }
+    .playbook-card p { margin:7px 0 0; color:var(--muted); font-size:8.7px; line-height:1.5; }
+    .playbook-fit { margin-top:11px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .playbook-fit span { color:var(--muted); font-size:8px; }
+    .playbook-fit strong { font-size:9px; }
+    .playbook-note { margin-top:9px; padding-top:9px; border-top:1px solid var(--line); color:var(--muted-2); font-size:7.8px; line-height:1.45; }
+
+    .consequence-list { display:grid; gap:8px; }
+    .consequence-row { min-height:48px; padding:9px 10px; border:1px solid var(--line); border-radius:10px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; background:var(--panel-2); }
+    .consequence-row strong { display:block; font-size:9.3px; }
+    .consequence-row span { display:block; margin-top:3px; color:var(--muted); font-size:8.2px; line-height:1.35; }
+    .consequence-result { text-align:right; color:var(--amber); font-size:8.5px; font-weight:850; }
+    .consequence-result.good { color:var(--green); }
+    .consequence-result.bad { color:var(--red); }
+
+    .friction-list { display:grid; gap:8px; }
+    .friction-row { padding:11px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:10px; align-items:center; }
+    .friction-score { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; color:var(--red); background:var(--red-soft); font-size:9px; font-weight:900; }
+    .friction-score.mid { color:var(--amber); background:var(--amber-soft); }
+    .friction-row strong { display:block; font-size:9.5px; }
+    .friction-row span { display:block; margin-top:3px; color:var(--muted); font-size:8.2px; line-height:1.35; }
+
+    .pattern-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+    .pattern-card { min-height:150px; padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel-2); }
+    .pattern-card small { color:var(--muted-2); font-size:7.8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .pattern-card strong { display:block; margin-top:10px; font-size:22px; letter-spacing:-.04em; }
+    .pattern-card h3 { margin:7px 0 0; font-size:10px; line-height:1.4; }
+    .pattern-card p { margin:6px 0 0; color:var(--muted); font-size:8.3px; line-height:1.5; }
+    .pattern-bar { height:7px; margin-top:11px; border-radius:999px; background:var(--bg-deep); overflow:hidden; }
+    .pattern-bar span { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--blue),var(--cyan)); }
+
+    .remediation-grid { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); gap:12px; }
+    .remediation-editor { display:grid; gap:9px; }
+    .remediation-editor textarea { width:100%; min-height:178px; padding:12px; border:1px solid var(--line); border-radius:11px; color:var(--text); background:var(--panel-2); resize:vertical; outline:none; font-size:10px; line-height:1.55; }
+    .remediation-editor textarea:focus { border-color:rgba(44,114,214,.42); box-shadow:0 0 0 3px rgba(44,114,214,.08); }
+    .template-list { display:grid; gap:7px; }
+    .template-button { min-height:46px; padding:9px 10px; border:1px solid var(--line); border-radius:10px; background:var(--panel-2); color:var(--text); display:grid; grid-template-columns:25px minmax(0,1fr); gap:9px; align-items:center; text-align:left; cursor:pointer; }
+    .template-button:hover, .template-button.active { border-color:rgba(44,114,214,.30); background:var(--blue-soft); }
+    .template-button i { color:var(--blue); }
+    .template-button strong { display:block; font-size:9px; }
+    .template-button span { display:block; margin-top:2px; color:var(--muted); font-size:7.8px; }
+
+    .copilot-note { padding:12px; border:1px solid rgba(154,106,18,.18); border-radius:11px; background:rgba(154,106,18,.055); color:var(--muted); font-size:8.5px; line-height:1.55; }
+    .copilot-note strong { color:var(--gold); }
+    html[data-theme="light"] .copilot-panel,
+    html[data-theme="light"] .copilot-metric,
+    html[data-theme="light"] .risk-driver,
+    html[data-theme="light"] .evidence-row,
+    html[data-theme="light"] .playbook-card,
+    html[data-theme="light"] .consequence-row,
+    html[data-theme="light"] .friction-row,
+    html[data-theme="light"] .pattern-card,
+    html[data-theme="light"] .template-button { background:#fff; }
+    html[data-theme="light"] .proposal-card,
+    html[data-theme="light"] .playbook-card.selected,
+    html[data-theme="light"] .template-button.active { background:#edf4ff; }
+    html[data-theme="light"] .risk-ring::after { background:#fff; }
+
+    @media (max-width:1250px) {
+      .copilot-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .copilot-grid-main { grid-template-columns:1fr; }
+      .copilot-hero-grid { grid-template-columns:1fr; }
+      .copilot-hero-actions { grid-template-columns:repeat(3,minmax(0,1fr)); min-width:0; }
+      .copilot-hero-actions .button { justify-content:center; }
+    }
+    @media (max-width:900px) {
+      .risk-layout { grid-template-columns:1fr; }
+      .playbook-grid, .pattern-grid { grid-template-columns:1fr; }
+      .remediation-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:740px) {
+      .copilot-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .copilot-hero { padding:18px; }
+      .copilot-hero-actions { grid-template-columns:1fr; }
+      .copilot-header-actions { width:100%; justify-content:flex-start; }
+      .friction-row { grid-template-columns:34px minmax(0,1fr); }
+      .friction-row .button { grid-column:2; justify-self:start; }
+    }
+    @media (max-width:470px) {
+      .copilot-metrics { grid-template-columns:1fr; }
+      .copilot-hero h1 { font-size:28px; }
+      .proposal-top { flex-direction:column; }
+      .risk-ring { width:150px; height:150px; }
+    }
   </style>
 
 </head>
@@ -2259,6 +2507,9 @@
           </button>
           <button class="nav-item" data-view="overview">
             <span class="nav-icon"><i class="fa-solid fa-grid-2"></i></span><span class="nav-text">Command Center</span>
+          </button>
+          <button class="nav-item" data-view="copilot">
+            <span class="nav-icon"><i class="fa-solid fa-brain"></i></span><span class="nav-text">Compliance Copilot</span><span class="nav-count" id="copilotNavCount">7</span>
           </button>
           <button class="nav-item" data-view="journey">
             <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Deal Journey</span><span class="nav-count" id="journeyStageCount">01</span>
@@ -2400,7 +2651,7 @@
           <div class="active-deal-title" id="activeDealTitle">Jordan Taylor · 2026 Ford Explorer</div>
           <div class="active-deal-meta" id="activeDealMeta">Premier Ford · Desk Started · Owner: Alex Morgan</div>
         </div>
-        <div class="active-deal-status"><span class="badge blue" id="activeDealStage">DESK</span><span class="badge green" id="activeDealGate">GATE OPEN</span></div>
+        <div class="active-deal-status"><span class="badge blue" id="activeDealStage">DESK</span><span class="badge green" id="activeDealGate">GATE OPEN</span><button class="badge copilot-risk-badge" id="copilotRiskBadge" type="button" onclick="showView('copilot')">RISK 34</button></div>
         <button class="button small" type="button" onclick="setActiveDeal('ENX-2847',false);showView('journey')">Open guided journey <i class="fa-solid fa-arrow-right"></i></button>
       </div>
 
@@ -2676,7 +2927,7 @@
         </section>
 
         <section class="view" id="view-findings">
-          <div class="section-row" style="margin-top:0"><div><div class="eyebrow">Explainable intelligence</div><div class="section-title" style="margin-top:5px">Prioritized Findings</div><div class="section-subtitle">Each finding remains reviewable, assignable, and subject to human judgment.</div></div><div class="segmented" id="findingSegments"><button class="segment active" data-finding-filter="all">All</button><button class="segment" data-finding-filter="High">High</button><button class="segment" data-finding-filter="Moderate">Moderate</button><button class="segment" data-finding-filter="Low">Low</button></div></div>
+          <div class="section-row" style="margin-top:0"><div><div class="eyebrow">Explainable intelligence</div><div class="section-title" style="margin-top:5px">Prioritized Findings</div><div class="section-subtitle">Each finding remains reviewable, assignable, and subject to human judgment.</div></div><div class="copilot-header-actions"><button class="button" type="button" onclick="showView('copilot')"><i class="fa-solid fa-brain"></i>Open Copilot</button><div class="segmented" id="findingSegments"><button class="segment active" data-finding-filter="all">All</button><button class="segment" data-finding-filter="High">High</button><button class="segment" data-finding-filter="Moderate">Moderate</button><button class="segment" data-finding-filter="Low">Low</button></div></div></div>
           <div class="kpi-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:12px"><div class="kpi" style="min-height:112px;--accent:var(--red);--accent-soft:var(--red-soft)"><div class="kpi-head"><div class="kpi-label">High Priority</div><div class="kpi-icon"><i class="fa-solid fa-fire"></i></div></div><div class="kpi-value" id="findingHighKpi" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--amber);--accent-soft:var(--amber-soft)"><div class="kpi-head"><div class="kpi-label">Review Required</div><div class="kpi-icon"><i class="fa-solid fa-eye"></i></div></div><div class="kpi-value" id="findingModerateKpi" style="font-size:30px">3</div></div><div class="kpi" style="min-height:112px;--accent:var(--green);--accent-soft:var(--green-soft)"><div class="kpi-head"><div class="kpi-label">Low Exposure</div><div class="kpi-icon"><i class="fa-solid fa-check"></i></div></div><div class="kpi-value" id="findingLowKpi" style="font-size:30px">2</div></div><div class="kpi" style="min-height:112px;--accent:var(--blue);--accent-soft:var(--blue-soft)"><div class="kpi-head"><div class="kpi-label">Median Age</div><div class="kpi-icon"><i class="fa-solid fa-hourglass-half"></i></div></div><div class="kpi-value" style="font-size:30px">42m</div></div></div>
           <article class="card"><div class="table-wrap"><table><thead><tr><th>Finding</th><th>Deal</th><th>Dealership</th><th>Category</th><th>Severity</th><th>Owner</th><th>Status</th><th>Action</th></tr></thead><tbody id="findingsBody"></tbody></table></div></article>
         </section>
@@ -2715,6 +2966,105 @@
               <div class="setting-row"><div><div class="setting-title">Compact operating view</div><div class="setting-copy">Reduce table row and header spacing for denser work queues.</div></div><button class="toggle" data-setting="compact"><div class="toggle-knob"></div></button></div>
             </div></article>
             <article class="card"><div class="card-header"><div><div class="card-title">Workspace profile</div><div class="card-subtitle">Current demonstration identity and scope.</div></div></div><div class="card-body"><div class="detail-grid" style="margin-top:0"><div class="detail-cell"><div class="detail-label">Workspace</div><div class="detail-value">Premier Auto Group</div></div><div class="detail-cell"><div class="detail-label">Rooftops</div><div class="detail-value">4 active</div></div><div class="detail-cell"><div class="detail-label">Role</div><div class="detail-value">Senior Auditor</div></div><div class="detail-cell"><div class="detail-label">Environment</div><div class="detail-value">Customer Sandbox</div></div></div><div style="margin-top:14px;padding:13px;border:1px solid rgba(243,201,107,.2);border-radius:11px;background:rgba(243,201,107,.05);color:var(--muted);font-size:9px;line-height:1.55"><strong style="color:var(--gold)">Demonstration notice:</strong> Data, customers, deal IDs, findings, scores, and operational activity shown here are synthetic and do not represent live dealership records.</div></div></article>
+          </div>
+        </section>
+
+
+
+        <section class="view" id="view-copilot">
+          <div class="copilot-shell">
+            <header class="copilot-hero">
+              <div class="copilot-hero-grid">
+                <div>
+                  <div class="copilot-kicker">Compliance Copilot · explainable operating intelligence</div>
+                  <h1>See the risk move, understand why, and resolve it without losing the human decision.</h1>
+                  <p>ENGENIX converts detected variances into proposed findings, dealer-approved response paths, consequence previews, owned remediation, and preserved operating memory.</p>
+                  <div class="copilot-hero-meta">
+                    <span class="badge blue"><i class="fa-solid fa-wave-square"></i> Live Risk Signal</span>
+                    <span class="badge green"><i class="fa-solid fa-file-circle-check"></i> Human-reviewed findings</span>
+                    <span class="badge amber"><i class="fa-solid fa-lightbulb"></i> Dealer-configured playbooks</span>
+                  </div>
+                  <div class="copilot-disclaimer">Synthetic demonstration. The risk signal is an explainable operating index, not a probability of a legal violation or substitute for dealership counsel.</div>
+                </div>
+                <div class="copilot-hero-actions">
+                  <button class="button primary" type="button" onclick="copilotInjectVariance()"><i class="fa-solid fa-bolt"></i>Inject Deal Change</button>
+                  <button class="button" type="button" onclick="copilotGenerateFinding()"><i class="fa-solid fa-wand-magic-sparkles"></i>Generate Finding</button>
+                  <button class="button" type="button" onclick="copilotResetDemo()"><i class="fa-solid fa-rotate-left"></i>Reset Copilot</button>
+                </div>
+              </div>
+            </header>
+
+            <div class="copilot-metrics">
+              <div class="copilot-metric attention"><small>Live Risk Signal</small><strong id="copilotMetricRisk">34</strong><span id="copilotMetricRiskCopy">Baseline controls intact</span></div>
+              <div class="copilot-metric"><small>Signal Movement</small><strong id="copilotMetricDelta">0</strong><span>Explainable weighted change</span></div>
+              <div class="copilot-metric critical"><small>Friction Watch</small><strong id="copilotMetricFriction">3</strong><span>Deals likely to need intervention</span></div>
+              <div class="copilot-metric good"><small>Evidence Confidence</small><strong id="copilotMetricConfidence">High</strong><span>Fields traced to source records</span></div>
+              <div class="copilot-metric"><small>Recommended Actions</small><strong id="copilotMetricActions">3</strong><span>Manager-controlled pathways</span></div>
+            </div>
+
+            <div class="copilot-grid-main">
+              <article class="copilot-panel">
+                <div class="copilot-panel-head"><div><div class="copilot-panel-title">Predictive Compliance Risk Signal</div><div class="copilot-panel-copy">A deterministic, explainable index that changes as the deal record changes.</div></div><span class="badge amber" id="copilotRiskBand">WATCH</span></div>
+                <div class="copilot-panel-body">
+                  <div class="risk-layout">
+                    <div>
+                      <div class="risk-ring" id="copilotRiskRing"><div class="risk-ring-copy"><strong id="copilotRiskScore">34</strong><span>Operating exposure</span><div class="risk-delta" id="copilotRiskDelta">No change</div></div></div>
+                    </div>
+                    <div>
+                      <div class="risk-driver-list" id="copilotRiskDrivers"></div>
+                      <div class="risk-actions">
+                        <button class="button small" type="button" onclick="copilotInjectVariance()"><i class="fa-solid fa-forward-step"></i>Advance Deal Event</button>
+                        <button class="button small" type="button" onclick="copilotResolveRiskDriver()"><i class="fa-solid fa-check"></i>Resolve Top Driver</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="copilot-panel">
+                <div class="copilot-panel-head"><div><div class="copilot-panel-title">Automated Finding Generation</div><div class="copilot-panel-copy">The system proposes. The operator accepts, edits, or rejects.</div></div><span class="badge blue" id="copilotProposalStatus">READY</span></div>
+                <div class="copilot-panel-body" id="copilotFindingProposal"></div>
+              </article>
+            </div>
+
+            <article class="copilot-panel">
+              <div class="copilot-panel-head"><div><div class="copilot-panel-title">Smart Exception Playbooks</div><div class="copilot-panel-copy">Dealer-approved paths ranked for the visible facts, not autonomous legal decisions.</div></div><span class="badge green">3 RESOLUTION PATHS</span></div>
+              <div class="copilot-panel-body"><div class="playbook-grid" id="copilotPlaybooks"></div></div>
+            </article>
+
+            <div class="copilot-grid-main">
+              <article class="copilot-panel">
+                <div class="copilot-panel-head"><div><div class="copilot-panel-title">Decision Consequence Preview</div><div class="copilot-panel-copy">See what the selected management decision changes before recording it.</div></div><span class="badge amber" id="copilotDecisionBadge">NO PATH SELECTED</span></div>
+                <div class="copilot-panel-body"><div class="consequence-list" id="copilotConsequences"></div><div class="risk-actions"><button class="button primary" type="button" onclick="copilotRecordDecision()"><i class="fa-solid fa-scale-balanced"></i>Record Manager Decision</button><button class="button" type="button" onclick="showView('journey')"><i class="fa-solid fa-route"></i>Open Deal Journey</button></div></div>
+              </article>
+
+              <article class="copilot-panel">
+                <div class="copilot-panel-head"><div><div class="copilot-panel-title">Proactive Stall & Friction Alerts</div><div class="copilot-panel-copy">Early intervention signals from synthetic workflow conditions.</div></div><span class="badge red">3 WATCH ITEMS</span></div>
+                <div class="copilot-panel-body"><div class="friction-list" id="copilotFrictionList"></div></div>
+              </article>
+            </div>
+
+            <article class="copilot-panel">
+              <div class="copilot-panel-head"><div><div class="copilot-panel-title">Compliance Pattern Insights</div><div class="copilot-panel-copy">Synthetic 90-day operating patterns for demonstration. Production insights require sufficient dealership data and validation.</div></div><div class="segmented"><button class="segment" data-copilot-range="30">30D</button><button class="segment active" data-copilot-range="90">90D</button></div></div>
+              <div class="copilot-panel-body"><div class="pattern-grid" id="copilotPatterns"></div></div>
+            </article>
+
+            <article class="copilot-panel">
+              <div class="copilot-panel-head"><div><div class="copilot-panel-title">One-Click Remediation Templates</div><div class="copilot-panel-copy">Prefilled, editable operating language tied to the selected resolution path.</div></div><span class="badge blue">HUMAN REVIEW REQUIRED</span></div>
+              <div class="copilot-panel-body">
+                <div class="remediation-grid">
+                  <div class="template-list" id="copilotTemplateList"></div>
+                  <div class="remediation-editor">
+                    <textarea id="copilotRemediationText" aria-label="Remediation template text"></textarea>
+                    <div class="risk-actions">
+                      <button class="button primary" type="button" onclick="copilotCreateCorrectiveAction()"><i class="fa-solid fa-list-check"></i>Create Corrective Action</button>
+                      <button class="button" type="button" onclick="copilotInsertDecisionNote()"><i class="fa-solid fa-file-signature"></i>Insert Decision Note</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="copilot-note" style="margin-top:12px"><strong>Control boundary:</strong> ENGENIX can propose language from dealership-approved templates. Final wording, legal conclusions, customer communications, and exception authority remain with authorized dealership personnel.</div>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -2778,10 +3128,10 @@
                       <button class="desk-preset" type="button" data-desk-profile="challenged">Challenged</button>
                     </div>
                     <div class="form-grid" style="margin-top:13px">
-                      <div class="field"><label for="deskBureauScore">Bureau score</label><input id="deskBureauScore" type="number" min="400" max="850" /></div>
-                      <div class="field"><label for="deskAutoScore">Auto score</label><input id="deskAutoScore" type="number" min="400" max="900" /></div>
-                      <div class="field"><label for="deskIncome">Verified monthly income</label><input id="deskIncome" type="number" min="0" step="100" /></div>
-                      <div class="field"><label for="deskHousing">Monthly housing</label><input id="deskHousing" type="number" min="0" step="50" /></div>
+                      <div class="field"><label for="deskBureauScore">Bureau score</label><input id="deskBureauScore" class="desk-number-input" type="number" inputmode="numeric" min="400" max="850" step="1" autocomplete="off" aria-describedby="deskBureauHelp" /><small class="desk-field-help" id="deskBureauHelp">400–850 synthetic bureau range</small></div>
+                      <div class="field"><label for="deskAutoScore">Auto score</label><input id="deskAutoScore" class="desk-number-input" type="number" inputmode="numeric" min="400" max="900" step="1" autocomplete="off" aria-describedby="deskAutoHelp" /><small class="desk-field-help" id="deskAutoHelp">400–900 synthetic auto-score range</small></div>
+                      <div class="field"><label for="deskIncome">Verified monthly income</label><input id="deskIncome" class="desk-number-input" type="number" inputmode="decimal" min="0" max="100000" step="100" autocomplete="off" aria-label="Verified monthly income in dollars" /></div>
+                      <div class="field"><label for="deskHousing">Monthly housing</label><input id="deskHousing" class="desk-number-input" type="number" inputmode="decimal" min="0" max="50000" step="50" autocomplete="off" aria-label="Monthly housing obligation in dollars" /></div>
                     </div>
                     <div class="desk-upload-row">
                       <label class="desk-upload-button" for="deskCreditFile"><i class="fa-solid fa-file-circle-plus"></i><span><strong>Attach credit report filename</strong><small>Local demo only. File contents are not transmitted or parsed.</small></span></label>
@@ -2796,12 +3146,12 @@
                   <div class="card-body">
                     <div class="form-grid">
                       <div class="field full"><label for="deskVehicle">Selected vehicle</label><select id="deskVehicle"></select></div>
-                      <div class="field"><label for="deskSellingPrice">Selling price</label><input id="deskSellingPrice" type="number" min="0" step="100" /></div>
-                      <div class="field"><label for="deskCashDown">Cash down</label><input id="deskCashDown" type="number" min="0" step="250" /></div>
-                      <div class="field"><label for="deskTradeEquity">Trade equity (negative = upside down)</label><input id="deskTradeEquity" type="number" step="250" /></div>
+                      <div class="field"><label for="deskSellingPrice">Selling price</label><input id="deskSellingPrice" class="desk-number-input" type="number" inputmode="decimal" min="5000" max="250000" step="100" autocomplete="off" aria-label="Vehicle selling price in dollars" /></div>
+                      <div class="field"><label for="deskCashDown">Cash down</label><input id="deskCashDown" class="desk-number-input" type="number" inputmode="decimal" min="0" max="100000" step="250" autocomplete="off" aria-label="Cash down in dollars" /></div>
+                      <div class="field"><label for="deskTradeEquity">Trade equity (negative = upside down)</label><input id="deskTradeEquity" class="desk-number-input" type="number" inputmode="decimal" min="-100000" max="100000" step="250" autocomplete="off" aria-label="Trade equity in dollars; negative values indicate negative equity" /></div>
                       <div class="field"><label for="deskTerm">Requested term</label><select id="deskTerm"><option>60</option><option>66</option><option selected>72</option><option>75</option><option>84</option></select></div>
-                      <div class="field"><label for="deskApr">Modeled APR</label><input id="deskApr" type="number" min="0" step="0.25" /></div>
-                      <div class="field"><label for="deskProducts">Product allowance</label><input id="deskProducts" type="number" min="0" step="250" /></div>
+                      <div class="field"><label for="deskApr">Modeled APR</label><input id="deskApr" class="desk-number-input" type="number" inputmode="decimal" min="0" max="40" step="0.01" autocomplete="off" aria-label="Modeled annual percentage rate" /></div>
+                      <div class="field"><label for="deskProducts">Product allowance</label><input id="deskProducts" class="desk-number-input" type="number" inputmode="decimal" min="0" max="25000" step="250" autocomplete="off" aria-label="Product allowance in dollars" /></div>
                     </div>
                     <div class="desk-range-block">
                       <div class="desk-range-meta"><span>Cash-down sensitivity</span><strong id="deskDownRangeValue">$3,500</strong></div>
@@ -2816,7 +3166,11 @@
                   <div class="desk-live-head"><div><div class="desk-kicker">Current modeled structure</div><h2 id="deskLiveVehicle">2026 Ford Explorer ST-Line</h2></div><div class="desk-live-score"><span>Strongest fit</span><strong id="deskLiveFit">84</strong><small id="deskLiveBand">Strong alignment</small></div></div>
                   <div class="desk-live-metrics" id="deskLiveMetrics"></div>
                   <div class="desk-guardrails" id="deskGuardrails"></div>
-                  <div class="desk-live-actions"><button class="button desk-primary" type="button" onclick="generateDeskPathways(true)"><i class="fa-solid fa-route"></i>Generate Lender Pathways</button><button class="button desk-button" type="button" onclick="saveDeskStructure()"><i class="fa-solid fa-floppy-disk"></i>Save Structure Snapshot</button></div>
+                  <div class="desk-live-actions desk-snapshot-actions">
+                    <button class="button desk-primary" id="deskSaveSnapshotButton" type="button" onclick="saveDeskStructure()"><i class="fa-solid fa-floppy-disk"></i><span>Save Structure Snapshot</span></button>
+                    <button class="button desk-button desk-pathway-gate" id="deskPathwayGateButton" type="button" onclick="openDeskPathwaysFromSnapshot()" disabled aria-disabled="true"><i class="fa-solid fa-lock"></i><span>Save snapshot to unlock pathways</span></button>
+                  </div>
+                  <div class="desk-snapshot-status" id="deskSnapshotStatus" aria-live="polite"><i class="fa-solid fa-circle-check"></i><span>Snapshot not yet saved. Lender pathways will unlock after the current structure is preserved.</span></div>
                 </article>
                 <article class="card desk-card">
                   <div class="card-header"><div><div class="card-title">Economic Sensitivity</div><div class="card-subtitle">How the next $1,500 changes the structure</div></div></div>
@@ -3925,6 +4279,7 @@
       completion: ['Completion Watch','Funding, title, customer promises, and office handoff after compliance'],
       findings: ['Findings','Review the issue, evidence, owner, and disposition'],
       actions: ['Corrective Actions','Move each issue to an owned and verified resolution'],
+      copilot: ['Compliance Copilot','Explain risk movement, propose findings, preview decisions, and accelerate remediation'],
       reports: ['Reports & Briefings','Leadership-ready summaries from the current workspace'],
       audit: ['Audit History','A chronological record of every action and decision'],
       settings: ['Workspace Settings','Display, alert, and review preferences']
@@ -4463,7 +4818,7 @@
       if (gateCopy) gateCopy.textContent = hold ? 'F-1051 requires a human decision' : workflowState.completed ? 'Decision trace preserved' : 'No active blocker';
     }
 
-    function refreshAll() { renderMorningBrief(); renderOverviewQueue(); renderDealQueue(); renderCompletionWatch(); renderFindings(); renderActions(); renderActivities(); renderNotifications(); renderJourney(); renderActiveDealBanner(); renderOperatorFocus(); refreshCounts(); }
+    function refreshAll() { renderMorningBrief(); renderOverviewQueue(); renderDealQueue(); renderCompletionWatch(); renderFindings(); renderActions(); renderActivities(); renderNotifications(); renderJourney(); renderActiveDealBanner(); renderOperatorFocus(); renderComplianceCopilot(); refreshCounts(); }
 
     let currentTrendDays = 30;
     const trendSets = {
@@ -4697,7 +5052,7 @@
 
 
     /* =========================================================
-       ENGENIX DESKING INTELLIGENCE · SYNTHETIC CUSTOMER SANDBOX V1
+       ENGENIX DESKING INTELLIGENCE · SYNTHETIC CUSTOMER SANDBOX V2
        ========================================================= */
     let currentPortalWorkspace = 'compliance';
     let lastComplianceView = 'brief';
@@ -4750,7 +5105,7 @@
         { time:'10:04', icon:'fa-id-card', title:'Desking record created', copy:'Synthetic credit profile, vehicle, and initial structure attached to DX-7314.' },
         { time:'10:06', icon:'fa-calculator', title:'Initial structure modeled', copy:'Cash down, negative equity, term, and payment target entered by Alex Morgan.' }
       ],
-      knowledgeFile:null, creditFile:null
+      knowledgeFile:null, creditFile:null, snapshotSavedAt:null, snapshotSignature:null
     };
 
     function cloneDeskState() { return JSON.parse(JSON.stringify(defaultDeskState)); }
@@ -4777,6 +5132,87 @@
     function deskTime(){ return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); }
     function deskSave(){ try{ localStorage.setItem('engenix-desking-v1',JSON.stringify(deskState)); }catch(error){} }
     function deskAddEvent(title,copy,icon='fa-bolt'){ deskState.timeline.unshift({time:deskTime(),title,copy,icon}); deskState.timeline=deskState.timeline.slice(0,16); deskSave(); }
+
+
+    function deskStructureSignature(){
+      return JSON.stringify({
+        deal:deskState.activeDealId,
+        profile:deskState.profile,
+        bureau:Number(deskState.bureauScore),
+        auto:Number(deskState.autoScore),
+        income:Number(deskState.income),
+        housing:Number(deskState.housing),
+        vehicle:deskState.vehicleId,
+        price:Number(deskState.sellingPrice),
+        down:Number(deskState.cashDown),
+        trade:Number(deskState.tradeEquity),
+        term:Number(deskState.term),
+        apr:Number(deskState.apr),
+        products:Number(deskState.products)
+      });
+    }
+    function deskSnapshotCurrent(){ return Boolean(deskState.snapshotSavedAt && deskState.snapshotSignature===deskStructureSignature()); }
+    function deskMarkSnapshotDirty(){
+      if(deskState.snapshotSignature && deskState.snapshotSignature!==deskStructureSignature()) deskState.selectedPath=null;
+      updateDeskSnapshotActions();
+    }
+    function updateDeskSnapshotActions(){
+      const current=deskSnapshotCurrent();
+      const save=document.getElementById('deskSaveSnapshotButton');
+      const gate=document.getElementById('deskPathwayGateButton');
+      const status=document.getElementById('deskSnapshotStatus');
+      if(save){
+        save.classList.toggle('desk-primary',!current);
+        save.classList.toggle('desk-button',current);
+        save.innerHTML=current?'<i class="fa-solid fa-check"></i><span>Snapshot Saved</span>':'<i class="fa-solid fa-floppy-disk"></i><span>'+(deskState.snapshotSavedAt?'Save Updated Snapshot':'Save Structure Snapshot')+'</span>';
+      }
+      if(gate){
+        gate.disabled=!current;
+        gate.setAttribute('aria-disabled',String(!current));
+        gate.classList.toggle('desk-primary',current);
+        gate.classList.toggle('desk-button',!current);
+        gate.innerHTML=current?`<i class="fa-solid fa-route"></i><span>Review ${deskPathways.length||4} Lender Pathways</span><i class="fa-solid fa-arrow-right"></i>`:`<i class="fa-solid fa-lock"></i><span>${deskState.snapshotSavedAt?'Save updates to refresh pathways':'Save snapshot to unlock pathways'}</span>`;
+      }
+      if(status){
+        status.classList.toggle('saved',current);
+        status.classList.toggle('dirty',Boolean(deskState.snapshotSavedAt&&!current));
+        const savedTime=deskState.snapshotSavedAt?new Date(deskState.snapshotSavedAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'';
+        status.innerHTML=current?`<i class="fa-solid fa-circle-check"></i><span>Structure preserved at ${savedTime}. ${deskPathways.length||4} explainable pathways are ready for review.</span>`:deskState.snapshotSavedAt?'<i class="fa-solid fa-triangle-exclamation"></i><span>The structure changed after the last snapshot. Save the update before reviewing lender pathways.</span>':'<i class="fa-solid fa-lock"></i><span>Snapshot not yet saved. Lender pathways unlock after the current structure is preserved.</span>';
+      }
+      const activeFit=document.getElementById('deskActiveFit');
+      if(activeFit) activeFit.textContent=current?`${deskPathways.length||4} PATHS`:'SNAPSHOT NEEDED';
+    }
+    function openDeskPathwaysFromSnapshot(){
+      syncDeskStateFromInputs();
+      if(!deskSnapshotCurrent()){
+        updateDeskSnapshotActions();
+        showToast('Save the structure first','Preserve the current deal economics before opening lender pathways.','warning');
+        return;
+      }
+      ensureDeskPathways();
+      showDeskView('desk-pathways');
+    }
+    function normalizeDeskNumberInput(input,silent=false){
+      if(!input) return;
+      const keyMap={deskBureauScore:'bureauScore',deskAutoScore:'autoScore',deskIncome:'income',deskHousing:'housing',deskSellingPrice:'sellingPrice',deskCashDown:'cashDown',deskTradeEquity:'tradeEquity',deskApr:'apr',deskProducts:'products'};
+      const key=keyMap[input.id];
+      if(!key) return;
+      if(input.value==='') input.value=deskState[key];
+      let value=Number(input.value);
+      const min=input.min!==''?Number(input.min):-Infinity;
+      const max=input.max!==''?Number(input.max):Infinity;
+      if(!Number.isFinite(value)) value=Number(deskState[key])||0;
+      value=deskClamp(value,min,max);
+      input.value=value;
+      deskState[key]=value;
+      input.removeAttribute('aria-invalid');
+      deskSave();
+      if(!silent){
+        deskPathways=[];
+        generateDeskPathways(false,true);
+        deskMarkSnapshotDirty();
+      }
+    }
 
     function deskMetrics(overrides={}) {
       const state={...deskState,...overrides};
@@ -4815,6 +5251,12 @@
 
     function generateDeskPathways(navigate=false,silent=false){
       syncDeskStateFromInputs();
+      if(navigate && !deskSnapshotCurrent()){
+        showDeskView('desk-structure');
+        updateDeskSnapshotActions();
+        showToast('Save the structure first','Preserve the current economics before reviewing lender pathways.','warning');
+        return;
+      }
       const current=deskMetrics();
       const alternative=deskVehicles.find(v=>v.price<current.sellingPrice-5000)||deskVehicles[1];
       const strategies=[
@@ -4842,7 +5284,7 @@
         return {...strategy,index,metrics,fit,band:deskFitBand(fit),headroom,conditions,reasons,grossVariance:metrics.frontGross-current.frontGross};
       }).sort((a,b)=>b.fit-a.fit);
       deskState.generatedAt=new Date().toISOString();
-      if(!deskState.selectedPath || !deskPathways.some(p=>p.id===deskState.selectedPath)) deskState.selectedPath=deskPathways[0].id;
+      if(deskState.selectedPath && !deskPathways.some(p=>p.id===deskState.selectedPath)) deskState.selectedPath=null;
       if(!silent) deskAddEvent('Lender pathways generated',`${deskPathways.length} synthetic pathways compared. ${deskPathways[0].name} currently shows the strongest alignment at ${deskPathways[0].fit}.`,'fa-route');
       renderAllDesk();
       if(navigate) showDeskView('desk-pathways');
@@ -4877,7 +5319,7 @@
       const meta=document.getElementById('deskActiveMeta'); if(meta) meta.textContent=`Premier Ford · ${stage.replaceAll('_',' ')} · Owner: ${deal.owner}`;
       const token=document.getElementById('deskActiveToken'); if(token) token.innerHTML=`<span>◈</span><b>${getDeskIdentity(deal.id).code}</b><code>${deal.id}</code>`;
       const stageEl=document.getElementById('deskActiveStage'); if(stageEl) stageEl.textContent=stage;
-      const fit=document.getElementById('deskActiveFit'); if(fit) fit.textContent=`${deskPathways.length||4} PATHS`;
+      const fit=document.getElementById('deskActiveFit'); if(fit) fit.textContent=deskSnapshotCurrent()?`${deskPathways.length||4} PATHS`:'SNAPSHOT NEEDED';
     }
 
     function renderDeskCommand(){
@@ -4900,7 +5342,7 @@
     function renderDeskTimeline(id,events){ const el=document.getElementById(id); if(!el)return; el.innerHTML=events.map(e=>`<div class="desk-timeline-event"><time>${e.time}</time><div class="desk-timeline-mark"><i class="fa-solid ${e.icon||'fa-bolt'}"></i></div><div><strong>${e.title}</strong><p>${e.copy}</p></div></div>`).join('')||'<div class="empty-state">No desking events recorded.</div>'; }
 
     function renderDeskStructure(){
-      syncDeskInputsFromState(); ensureDeskPathways(); const metrics=deskMetrics(); const best=deskPathways[0];
+      ensureDeskPathways(); const metrics=deskMetrics(); const best=deskPathways[0];
       const vehicleSelect=document.getElementById('deskVehicle'); if(vehicleSelect&&!vehicleSelect.options.length) vehicleSelect.innerHTML=deskVehicles.map(v=>`<option value="${v.id}">${v.label} · ${money(v.price)}</option>`).join(''); if(vehicleSelect) vehicleSelect.value=deskState.vehicleId;
       const liveVehicle=document.getElementById('deskLiveVehicle'); if(liveVehicle) liveVehicle.textContent=metrics.vehicle.label;
       const fit=document.getElementById('deskLiveFit'); if(fit) fit.textContent=best.fit;
@@ -4919,6 +5361,7 @@
       ].map(x=>`<div class="desk-sensitivity-row"><div><strong>${x[0]}</strong><span>${x[2]}</span></div><div class="desk-sensitivity-value">${x[1]}</div></div>`).join('')}</div>`; }
       const source=document.getElementById('deskProfileSourceBadge'); if(source) source.textContent=deskState.creditFile?'LOCAL FILE NAME + SYNTHETIC DATA':'SYNTHETIC PROFILE';
       const status=document.getElementById('deskCreditFileStatus'); if(status) status.textContent=deskState.creditFile||'No file selected';
+      updateDeskSnapshotActions();
     }
 
     function renderDeskPathways(){
@@ -4931,9 +5374,9 @@
     function renderDeskDeals(){ const q=(document.getElementById('deskDealSearch')?.value||'').toLowerCase(); const status=document.getElementById('deskDealStatus')?.value||'all'; const rows=deskDeals.filter(d=>(status==='all'||d.status===status)&&`${d.id} ${d.customer} ${d.vehicle} ${d.band}`.toLowerCase().includes(q)); const body=document.getElementById('deskDealBody'); if(body) body.innerHTML=rows.map(d=>`<tr class="${d.id===deskState.activeDealId?'completion-row-active':''}" style="--deal-accent:#7257e8"><td>${deskToken(d.id,true)}</td><td>${d.customer}<div class="cell-sub">Owner: ${d.owner}</div></td><td>${d.vehicle}</td><td><span class="badge desk-badge">${d.band} · ${d.bureau}</span></td><td>${money(d.down)}</td><td>${money(d.payment)}</td><td><span class="badge ${deskFitTone(d.fit)}">${d.fit}</span></td><td>${money(d.gross)}</td><td><span class="badge ${d.status==='Ready for F&I'?'green':d.status==='Conditional'?'amber':'blue'}">${d.status}</span></td><td><button class="button small desk-button" onclick="openDeskDeal('${d.id}')">Open</button></td></tr>`).join('')||'<tr><td colspan="10"><div class="empty-state">No desking records match this view.</div></td></tr>'; }
 
     function renderDeskSubmissions(){
-      ensureDeskPathways(); const selected=deskPathways.find(p=>p.id===deskState.selectedPath)||deskPathways[0]; const open=deskState.conditions.filter(c=>!c.done).length;
-      const summary=document.getElementById('deskSubmissionSummary'); if(summary) summary.innerHTML=[['Selected pathway',selected.name,selected.lender.name],['Submission status',deskState.submissionStage.replaceAll('_',' ').toUpperCase(),deskState.submissionStage==='modeling'?'Not yet submitted':'Synthetic status'],['Conditions open',String(open),open?'Ownership required':'All conditions resolved'],['F&I handoff',deskState.submissionStage==='ready'?'READY':'NOT READY',deskState.submissionStage==='ready'?'Decision record complete':'Complete conditions first']].map(x=>`<div class="desk-submission-card"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
-      const board=document.getElementById('deskSubmissionBoard'); if(board){ const stages=[['submitted','Submitted','Path sent for synthetic lender review'],['conditional','Conditional','Terms returned with conditions'],['ready','Ready for F&I','Manager accepted terms and cleared handoff']]; board.innerHTML=stages.map(([key,title,copy])=>`<section class="desk-submission-col"><div class="desk-submission-col-head"><div><strong>${title}</strong><div class="card-subtitle">${copy}</div></div><span class="nav-count">${deskState.submissionStage===key?1:0}</span></div><div class="desk-submission-col-body">${deskState.submissionStage===key?`<article class="desk-submission-item"><div>${deskToken(deskState.activeDealId,true)}</div><strong style="margin-top:8px">${selected.name} · ${selected.lender.name}</strong><p>${money(selected.metrics.payment)}/mo · ${pct(selected.metrics.ltv)} LTV · fit ${selected.fit}. ${open} conditions remain open.</p><footer><span class="badge ${key==='ready'?'green':key==='conditional'?'amber':'desk-badge'}">${title}</span>${key==='submitted'?`<button class="button small desk-button" onclick="advanceDeskSubmission()">Receive terms</button>`:key==='conditional'?`<button class="button small desk-primary" onclick="advanceDeskSubmission()">Review conditions</button>`:'<span class="badge green">Handoff preserved</span>'}</footer></article>`:'<div class="empty-state">No active item in this stage.</div>'}</div></section>`).join(''); }
+      ensureDeskPathways(); const selected=deskPathways.find(p=>p.id===deskState.selectedPath); const displayPath=selected||deskPathways[0]; const open=deskState.conditions.filter(c=>!c.done).length;
+      const summary=document.getElementById('deskSubmissionSummary'); if(summary) summary.innerHTML=[['Selected pathway',selected?selected.name:'DECISION REQUIRED',selected?selected.lender.name:'Review lender pathways'],['Submission status',deskState.submissionStage.replaceAll('_',' ').toUpperCase(),deskState.submissionStage==='modeling'?'Not yet submitted':'Synthetic status'],['Conditions open',String(open),open?'Ownership required':'All conditions resolved'],['F&I handoff',deskState.submissionStage==='ready'?'READY':'NOT READY',deskState.submissionStage==='ready'?'Decision record complete':'Complete conditions first']].map(x=>`<div class="desk-submission-card"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+      const board=document.getElementById('deskSubmissionBoard'); if(board){ const stages=[['submitted','Submitted','Path sent for synthetic lender review'],['conditional','Conditional','Terms returned with conditions'],['ready','Ready for F&I','Manager accepted terms and cleared handoff']]; board.innerHTML=stages.map(([key,title,copy])=>`<section class="desk-submission-col"><div class="desk-submission-col-head"><div><strong>${title}</strong><div class="card-subtitle">${copy}</div></div><span class="nav-count">${deskState.submissionStage===key?1:0}</span></div><div class="desk-submission-col-body">${deskState.submissionStage===key?`<article class="desk-submission-item"><div>${deskToken(deskState.activeDealId,true)}</div><strong style="margin-top:8px">${displayPath.name} · ${displayPath.lender.name}</strong><p>${money(displayPath.metrics.payment)}/mo · ${pct(displayPath.metrics.ltv)} LTV · fit ${displayPath.fit}. ${open} conditions remain open.</p><footer><span class="badge ${key==='ready'?'green':key==='conditional'?'amber':'desk-badge'}">${title}</span>${key==='submitted'?`<button class="button small desk-button" onclick="advanceDeskSubmission()">Receive terms</button>`:key==='conditional'?`<button class="button small desk-primary" onclick="advanceDeskSubmission()">Review conditions</button>`:'<span class="badge green">Handoff preserved</span>'}</footer></article>`:'<div class="empty-state">No active item in this stage.</div>'}</div></section>`).join(''); }
       const list=document.getElementById('deskConditionList'); if(list) list.innerHTML=`<div class="desk-condition-list">${deskState.conditions.map(c=>`<div class="desk-condition-item ${c.done?'done':''}"><div class="desk-condition-icon"><i class="fa-solid ${c.done?'fa-check':'fa-triangle-exclamation'}"></i></div><div><strong>${c.title}</strong><span>Owner: ${c.owner} · ${c.due}</span></div>${c.done?'<span class="badge green">Resolved</span>':`<button class="button small desk-button" onclick="resolveDeskCondition('${c.id}')">Resolve</button>`}</div>`).join('')}</div>`;
       renderDeskTimeline('deskSubmissionTimeline',deskState.timeline.slice(0,9));
     }
@@ -4962,7 +5405,7 @@
       document.querySelectorAll('.nav-item[data-view]').forEach(n=>n.classList.toggle('active',n.dataset.view===view));
       const meta=pageMeta[view]||pageMeta.brief; document.getElementById('pageTitle').textContent=meta[0]; document.getElementById('pageSubtitle').textContent=meta[1];
       document.getElementById('sidebar').classList.remove('open'); window.scrollTo({top:0,behavior:'smooth'});
-      if(view==='brief') renderMorningBrief(); if(view==='journey') renderJourney(); if(view==='audit') renderAudit(); if(view==='actions') renderActions(); if(view==='queue') renderDealQueue(); if(view==='completion') renderCompletionWatch(); if(view==='findings') renderFindings();
+      if(view==='brief') renderMorningBrief(); if(view==='journey') renderJourney(); if(view==='audit') renderAudit(); if(view==='actions') renderActions(); if(view==='queue') renderDealQueue(); if(view==='completion') renderCompletionWatch(); if(view==='findings') renderFindings(); if(view==='copilot') renderComplianceCopilot();
     }
 
     function switchPortalWorkspace(workspace,targetView=null){
@@ -4980,16 +5423,41 @@
       showToast(currentPortalWorkspace==='desking'?'Desking Intelligence opened':'Compliance Intelligence opened',currentPortalWorkspace==='desking'?'Same portal navigation, new decision-support cockpit.':'Deal control and audit workspace restored.','success');
     }
 
-    function selectDeskProfile(profile){ const preset=deskProfilePresets[profile]; if(!preset)return; deskState.profile=profile; Object.assign(deskState,preset); deskState.creditFile=null; deskPathways=[]; syncDeskInputsFromState(); deskAddEvent('Synthetic credit profile changed',`${preset.label} profile loaded with bureau ${preset.bureauScore} and auto score ${preset.autoScore}.`,'fa-id-card'); renderAllDesk(); }
-    function handleDeskInput(){ syncDeskStateFromInputs(); const down=document.getElementById('deskDownRange'); if(down) down.value=deskState.cashDown; const downLabel=document.getElementById('deskDownRangeValue'); if(downLabel) downLabel.textContent=money(deskState.cashDown); deskPathways=[]; generateDeskPathways(false,true); }
-    function saveDeskStructure(){ syncDeskStateFromInputs(); deskPathways=[]; const m=deskMetrics(); deskAddEvent('Structure snapshot saved',`${money(m.amountFinanced)} modeled at ${m.term} months with ${money(m.cashDown)} cash down.`,'fa-floppy-disk'); generateDeskPathways(false); showToast('Structure snapshot saved','The active economics and manager context were preserved.','success'); }
+    function selectDeskProfile(profile){ const preset=deskProfilePresets[profile]; if(!preset)return; deskState.profile=profile; Object.assign(deskState,preset); deskState.creditFile=null; deskState.snapshotSavedAt=null; deskState.snapshotSignature=null; deskPathways=[]; syncDeskInputsFromState(); deskAddEvent('Synthetic credit profile changed',`${preset.label} profile loaded with bureau ${preset.bureauScore} and auto score ${preset.autoScore}.`,'fa-id-card'); renderAllDesk(); }
+    function handleDeskInput(event){
+      const input=event?.target;
+      if(input&&input.type==='number'&&input.value===''){
+        input.setAttribute('aria-invalid','true');
+        deskMarkSnapshotDirty();
+        return;
+      }
+      syncDeskStateFromInputs();
+      const down=document.getElementById('deskDownRange'); if(down&&input?.id!=='deskDownRange') down.value=deskState.cashDown;
+      const downLabel=document.getElementById('deskDownRangeValue'); if(downLabel) downLabel.textContent=money(deskState.cashDown);
+      deskPathways=[];
+      generateDeskPathways(false,true);
+      deskMarkSnapshotDirty();
+    }
+    function saveDeskStructure(){
+      syncDeskStateFromInputs();
+      document.querySelectorAll('.desk-number-input').forEach(input=>normalizeDeskNumberInput(input,true));
+      deskPathways=[];
+      generateDeskPathways(false,true);
+      deskState.snapshotSignature=deskStructureSignature();
+      deskState.snapshotSavedAt=new Date().toISOString();
+      const m=deskMetrics();
+      deskAddEvent('Structure snapshot saved',`${money(m.amountFinanced)} modeled at ${m.term} months with ${money(m.cashDown)} cash down. ${deskPathways.length} lender pathways unlocked.`,'fa-floppy-disk');
+      deskSave();
+      renderAllDesk();
+      showToast('Structure snapshot saved',`${deskPathways.length} lender pathways are now ready for review.`,'success');
+    }
     function selectDeskPath(id){ ensureDeskPathways(); const path=deskPathways.find(p=>p.id===id); if(!path)return; deskState.selectedPath=id; deskAddEvent('Manager selected a pathway',`${path.name} selected at ${path.fit} fit with ${money(path.grossVariance)} front-gross variance.`,'fa-scale-balanced'); renderAllDesk(); showToast('Path selected',`${path.name} is now the active manager decision.`,'success'); }
     function explainDeskPath(id){ ensureDeskPathways(); const p=deskPathways.find(x=>x.id===id); if(!p)return; showToast(`${p.name} · ${p.fit}`,`${p.reasons[0]} ${p.reasons[1]}`,'success'); }
-    function submitSelectedDeskPath(){ ensureDeskPathways(); const p=deskPathways.find(x=>x.id===deskState.selectedPath)||deskPathways[0]; deskState.submissionStage='submitted'; deskAddEvent('Synthetic lender submission recorded',`${p.name} was submitted to ${p.lender.name}. No real lender connection was used.`,'fa-paper-plane'); renderAllDesk(); showToast('Synthetic submission recorded',`${p.name} moved into the submitted lane.`,'success'); }
+    function submitSelectedDeskPath(){ ensureDeskPathways(); if(!deskSnapshotCurrent()){ showDeskView('desk-structure'); showToast('Snapshot required','Save the current structure before recording a lender submission.','warning'); return; } const p=deskPathways.find(x=>x.id===deskState.selectedPath); if(!p){ showDeskView('desk-pathways'); showToast('Select a pathway first','Choose the manager-preferred pathway before recording a submission.','warning'); return; } deskState.submissionStage='submitted'; deskAddEvent('Synthetic lender submission recorded',`${p.name} was submitted to ${p.lender.name}. No real lender connection was used.`,'fa-paper-plane'); renderAllDesk(); showToast('Synthetic submission recorded',`${p.name} moved into the submitted lane.`,'success'); }
     function advanceDeskSubmission(){ if(deskState.submissionStage==='modeling'){submitSelectedDeskPath();return;} if(deskState.submissionStage==='submitted'){deskState.submissionStage='conditional';deskAddEvent('Conditional terms received','Synthetic terms returned with income and trade-payoff conditions.','fa-triangle-exclamation');} else if(deskState.submissionStage==='conditional'){ if(deskState.conditions.some(c=>!c.done)){showToast('Conditions remain open','Resolve the owned conditions before the F&I handoff.','warning');return;} deskState.submissionStage='ready';deskAddEvent('Ready for F&I handoff','Manager accepted the synthetic terms and preserved the decision record.','fa-check'); } deskSave(); renderAllDesk(); }
     function resolveDeskCondition(id){ const c=deskState.conditions.find(x=>x.id===id); if(!c)return; c.done=true; deskAddEvent('Condition resolved',`${c.title} was completed by ${c.owner}.`,'fa-check'); if(deskState.conditions.every(x=>x.done)&&deskState.submissionStage==='conditional') deskState.submissionStage='ready'; deskSave(); renderAllDesk(); showToast('Condition resolved',`${c.title} is complete.`,'success'); }
-    function openDeskDeal(id){ const deal=deskDeals.find(d=>d.id===id); if(!deal)return; if(id!==deskState.activeDealId&&!confirm(`Switch the active desking record from ${deskState.activeDealId} to ${id}?`))return; deskState.activeDealId=id; if(id!=='DX-7314'){ const profile=deal.band==='Prime'?'prime':deal.band==='Challenged'?'challenged':'near'; Object.assign(deskState,deskProfilePresets[profile]); deskState.profile=profile; deskState.cashDown=deal.down; deskState.sellingPrice=deskVehicles[Math.abs(stringHash(id))%deskVehicles.length].price; deskState.vehicleId=deskVehicles[Math.abs(stringHash(id))%deskVehicles.length].id; deskState.selectedPath=null; deskState.submissionStage=deal.status==='Conditional'?'conditional':deal.status==='Ready for F&I'?'ready':'modeling'; }
-      deskPathways=[]; deskAddEvent('Active desking record switched',`${id} · ${deal.customer} is now the protected working context.`,'fa-id-card'); renderAllDesk(); showDeskView('desk-structure'); }
+    function openDeskDeal(id){ const deal=deskDeals.find(d=>d.id===id); if(!deal)return; if(id!==deskState.activeDealId&&!confirm(`Switch the active desking record from ${deskState.activeDealId} to ${id}?`))return; deskState.activeDealId=id; if(id!=='DX-7314'){ const profile=deal.band==='Prime'?'prime':deal.band==='Challenged'?'challenged':'near'; Object.assign(deskState,deskProfilePresets[profile]); deskState.profile=profile; deskState.cashDown=deal.down; deskState.sellingPrice=deskVehicles[Math.abs(stringHash(id))%deskVehicles.length].price; deskState.vehicleId=deskVehicles[Math.abs(stringHash(id))%deskVehicles.length].id; deskState.selectedPath=null; deskState.snapshotSavedAt=null; deskState.snapshotSignature=null; deskState.submissionStage=deal.status==='Conditional'?'conditional':deal.status==='Ready for F&I'?'ready':'modeling'; }
+      deskPathways=[]; syncDeskInputsFromState(); deskAddEvent('Active desking record switched',`${id} · ${deal.customer} is now the protected working context.`,'fa-id-card'); renderAllDesk(); showDeskView('desk-structure'); }
     function resetDeskingDemo(){ if(!confirm('Reset the synthetic Desking Intelligence demo?'))return; deskState=cloneDeskState(); deskPathways=[]; deskSave(); syncDeskInputsFromState(); renderAllDesk(); showDeskView('desk-command'); showToast('Desking demo reset','DX-7314 is back at the initial structure stage.','success'); }
     function exportDeskOutcomes(){ exportCsv('ENGENIX_Desking_Outcome_Memory.csv',['Deal','Path','Fit','Result','Gross variance','Conditions','Learning note'],deskOutcomeSeed.map(o=>[o.deal,o.path,o.fit,o.result,o.variance,o.conditions,o.note])); }
     function saveDeskSettings(){ document.querySelectorAll('[data-desk-setting]').forEach(t=>{}); showToast('Desking settings saved','Decision-support controls were preserved locally for the demonstration.','success'); }
@@ -5013,8 +5481,14 @@
       document.querySelectorAll('[data-desk-view]').forEach(n=>n.addEventListener('click',()=>showDeskView(n.dataset.deskView)));
       document.querySelectorAll('[data-desk-profile]').forEach(n=>n.addEventListener('click',()=>selectDeskProfile(n.dataset.deskProfile)));
       ['deskBureauScore','deskAutoScore','deskIncome','deskHousing','deskSellingPrice','deskCashDown','deskTradeEquity','deskTerm','deskApr','deskProducts','deskVehicle'].forEach(id=>document.getElementById(id)?.addEventListener('input',handleDeskInput));
-      document.getElementById('deskVehicle')?.addEventListener('change',e=>{ const v=deskVehicleById(e.target.value); deskState.vehicleId=v.id; deskState.sellingPrice=v.price; deskPathways=[]; syncDeskInputsFromState(); renderDeskStructure(); });
-      document.getElementById('deskDownRange')?.addEventListener('input',e=>{ deskState.cashDown=Number(e.target.value); const cash=document.getElementById('deskCashDown');if(cash)cash.value=deskState.cashDown; const label=document.getElementById('deskDownRangeValue');if(label)label.textContent=money(deskState.cashDown); deskPathways=[]; renderDeskStructure(); deskSave(); });
+      document.querySelectorAll('.desk-number-input').forEach(input=>{
+        input.addEventListener('focus',()=>requestAnimationFrame(()=>input.select()));
+        input.addEventListener('blur',()=>normalizeDeskNumberInput(input));
+        input.addEventListener('keydown',event=>{ if(event.key==='Enter'){ event.preventDefault(); input.blur(); } });
+        input.addEventListener('wheel',event=>{ if(document.activeElement===input){ event.preventDefault(); input.blur(); } },{passive:false});
+      });
+      document.getElementById('deskVehicle')?.addEventListener('change',e=>{ const v=deskVehicleById(e.target.value); deskState.vehicleId=v.id; deskState.sellingPrice=v.price; deskPathways=[]; syncDeskInputsFromState(); generateDeskPathways(false,true); deskMarkSnapshotDirty(); });
+      document.getElementById('deskDownRange')?.addEventListener('input',e=>{ deskState.cashDown=Number(e.target.value); const cash=document.getElementById('deskCashDown');if(cash)cash.value=deskState.cashDown; const label=document.getElementById('deskDownRangeValue');if(label)label.textContent=money(deskState.cashDown); deskPathways=[]; generateDeskPathways(false,true); deskSave(); deskMarkSnapshotDirty(); });
       document.getElementById('deskCreditFile')?.addEventListener('change',e=>{ const file=e.target.files?.[0]; if(!file)return; deskState.creditFile=file.name; deskAddEvent('Credit report filename attached',`${file.name} was attached locally. Synthetic profile values remain controlling in this demo.`,'fa-file-circle-plus'); renderDeskStructure(); showToast('Local demo attachment recorded','The filename was preserved. No file contents were transmitted or parsed.','success'); });
       document.getElementById('deskKnowledgeFile')?.addEventListener('change',e=>{ const file=e.target.files?.[0]; if(!file)return; deskState.knowledgeFile=file.name; deskAddEvent('Program bulletin filename attached',`${file.name} was recorded locally for the synthetic knowledge demonstration.`,'fa-book-open'); renderDeskKnowledge(); showToast('Program filename attached','No document contents were transmitted or parsed.','success'); });
       document.getElementById('deskDealSearch')?.addEventListener('input',renderDeskDeals); document.getElementById('deskDealStatus')?.addEventListener('change',renderDeskDeals);
@@ -5037,10 +5511,297 @@
     renderDealQueue();
     renderCompletionWatch();
     renderFindings();
+    renderComplianceCopilot();
     renderActions();
     renderActivities();
     initCharts();
     refreshCounts();
   </script>
+
+  <script id="engenix-compliance-copilot-v3-script">
+    const COPILOT_STORAGE_KEY = 'engenix-compliance-copilot-v3';
+    const copilotBaselineScore = 34;
+    const copilotPlaybookSeed = [
+      {
+        id:'correct', rank:'Recommended path', title:'Correct the source and preserve the revised customer record',
+        copy:'Use when the contracted term or amount does not match the controlling approved structure and the transaction can still be corrected.',
+        fit:'Strong fit', note:'Dealer-approved standard path · preserves a clean control outcome',
+        riskAfter:22, gate:'Clear after evidence', control:'Resolved', owner:'F&I Manager', due:'Before delivery', briefing:'Removed after verification', audit:'Correction and evidence preserved'
+      },
+      {
+        id:'acknowledge', rank:'Conditional path', title:'Obtain a valid acknowledgment and document the reason for change',
+        copy:'Use only when dealership policy and authorized review permit a documented structure change rather than correction.',
+        fit:'Moderate fit', note:'Requires approved form, customer acknowledgment, and manager authority',
+        riskAfter:41, gate:'Hold until signed', control:'Documented variance', owner:'Compliance Leader', due:'Before release', briefing:'Remains until verified', audit:'Exception basis and acknowledgment preserved'
+      },
+      {
+        id:'escalate', rank:'Escalation path', title:'Escalate the unresolved variance for leadership review',
+        copy:'Use when the available record is incomplete, authority is unclear, or the issue cannot be resolved through the standard playbook.',
+        fit:'Safe fallback', note:'Preserves control while the authorized decision-maker reviews the record',
+        riskAfter:58, gate:'Delivery remains held', control:'Unresolved', owner:'General Manager', due:'Immediate review', briefing:'Added as leadership decision', audit:'Escalation and unresolved condition preserved'
+      }
+    ];
+    const copilotTemplates = {
+      correct: {
+        title:'Correction and re-verification note', subtitle:'Correct source record and verify evidence',
+        text:'The final transaction structure was compared with the approved worksheet. The variance was corrected in the controlling transaction documents. The revised documents were reviewed for consistency, required acknowledgments were verified, and the delivery control was released by the authorized manager.'
+      },
+      acknowledge: {
+        title:'Documented structure-change note', subtitle:'Preserve authorized reason and acknowledgment',
+        text:'The final transaction structure differs from the earlier approved worksheet. The authorized manager reviewed the reason for the change, confirmed that the dealership-approved exception process applies, obtained the required customer acknowledgment, and preserved the supporting evidence before vehicle release.'
+      },
+      escalate: {
+        title:'Leadership escalation note', subtitle:'Hold release and preserve unresolved condition',
+        text:'The transaction contains a structure variance that could not be resolved through the standard correction or acknowledgment process. Vehicle release remains subject to leadership review. The available evidence, unresolved control, assigned owner, and required decision have been preserved in the operating record.'
+      }
+    };
+    const copilotFrictionSeed = [
+      {deal:'VC-11987', score:84, reason:'Final structure variance plus supporting-document delay', action:'Open manager review'},
+      {deal:'PA-44921', score:78, reason:'Income stipulation remains unresolved near response window', action:'Open finding'},
+      {deal:'SM-30192', score:69, reason:'Missing disclosure and no accountable owner', action:'Assign owner'}
+    ];
+    const copilotPatternSets = {
+      30:[
+        {metric:'2.1×', title:'Long-term structures produced more document rework', copy:'Synthetic pattern across terms of 75 months or longer.', width:68},
+        {metric:'38%', title:'Unassigned findings exceeded the response window', copy:'Ownership delay was the strongest controllable friction factor.', width:38},
+        {metric:'11', title:'Repeated acknowledgment exceptions', copy:'Three advisors generated most of the synthetic repeat pattern.', width:55}
+      ],
+      90:[
+        {metric:'2.8×', title:'High-advance structures produced more compliance interventions', copy:'Synthetic pattern when high advance and extended term appeared together.', width:82},
+        {metric:'46%', title:'Late-stage document changes caused avoidable rework', copy:'Most surfaced after the deal had already entered F&I.', width:46},
+        {metric:'17', title:'Exceptions repeated across two rooftops', copy:'The same structure-control pattern appeared often enough for a playbook review.', width:64}
+      ]
+    };
+
+    function defaultCopilotState(){
+      return {
+        eventStage:0,
+        previousScore:34,
+        currentScore:34,
+        findingStatus:'ready',
+        findingAccepted:false,
+        selectedPlaybook:null,
+        selectedTemplate:'correct',
+        decisionRecorded:false,
+        correctiveCreated:false,
+        decisionNoteInserted:false,
+        patternRange:90,
+        events:[]
+      };
+    }
+    function loadCopilotState(){
+      try { return Object.assign(defaultCopilotState(), JSON.parse(localStorage.getItem(COPILOT_STORAGE_KEY)||'{}')); }
+      catch(error){ return defaultCopilotState(); }
+    }
+    let complianceCopilotState = loadCopilotState();
+    function saveCopilotState(){ try { localStorage.setItem(COPILOT_STORAGE_KEY,JSON.stringify(complianceCopilotState)); } catch(error){} }
+
+    function copilotActiveDeal(){ return deals.find(d=>d.id===activeDealId) || deals[0]; }
+    function copilotStageDrivers(){
+      const drivers=[
+        {title:'Approved structure captured',copy:'The manager-approved worksheet is preserved as the comparison point.',delta:-4,good:true,icon:'fa-file-circle-check'}
+      ];
+      if(complianceCopilotState.eventStage>=1) drivers.push({title:'Contract term changed',copy:'Approved 72 months now differs from the current 75-month contract.',delta:14,icon:'fa-wave-square'});
+      if(complianceCopilotState.eventStage>=2) drivers.push({title:'Required acknowledgment not located',copy:'The reviewed packet does not contain evidence supporting the change.',delta:13,icon:'fa-file-signature'});
+      if(complianceCopilotState.eventStage>=3) drivers.push({title:'Delivery window approaching',copy:'The unresolved variance is now inside the configured response window.',delta:8,icon:'fa-stopwatch'});
+      if(complianceCopilotState.decisionRecorded && complianceCopilotState.selectedPlaybook==='correct') drivers.push({title:'Corrective evidence verified',copy:'The corrected record and review note reduce the active exposure.',delta:-39,good:true,icon:'fa-check'});
+      if(complianceCopilotState.decisionRecorded && complianceCopilotState.selectedPlaybook==='acknowledge') drivers.push({title:'Authorized acknowledgment preserved',copy:'The exception remains visible but the supporting process is documented.',delta:-20,good:true,icon:'fa-user-check'});
+      return drivers;
+    }
+    function calculateCopilotRisk(){
+      let score=copilotBaselineScore;
+      copilotStageDrivers().forEach(d=>score+=d.delta);
+      if(complianceCopilotState.decisionRecorded && complianceCopilotState.selectedPlaybook==='escalate') score=Math.max(score,58);
+      return Math.max(8,Math.min(96,score));
+    }
+    function copilotRiskBand(score){ if(score>=70)return ['HIGH','var(--red)']; if(score>=50)return ['ELEVATED','var(--amber)']; if(score>=30)return ['WATCH','var(--amber)']; return ['CONTROLLED','var(--green)']; }
+    function copilotSetScore(){
+      const score=calculateCopilotRisk();
+      complianceCopilotState.currentScore=score;
+      const deal=copilotActiveDeal();
+      if(deal && deal.id==='ENX-2847'){
+        deal.score=score;
+        deal.risk=score>=70?'High':score>=40?'Moderate':'Low';
+        if(complianceCopilotState.eventStage>0 && !complianceCopilotState.decisionRecorded){ deal.finding='Structure variance requires review'; deal.status='Compliance Review'; }
+        if(complianceCopilotState.decisionRecorded && complianceCopilotState.selectedPlaybook==='correct'){ deal.finding='Corrective evidence verified'; deal.status='Cleared'; }
+      }
+      return score;
+    }
+
+    function renderComplianceCopilot(){
+      const root=document.getElementById('view-copilot'); if(!root)return;
+      const deal=copilotActiveDeal();
+      const score=copilotSetScore();
+      const delta=score-copilotBaselineScore;
+      const [band,color]=copilotRiskBand(score);
+      const risk=document.getElementById('copilotRiskScore'); if(risk)risk.textContent=score;
+      const ring=document.getElementById('copilotRiskRing'); if(ring){ring.style.setProperty('--risk-angle',`${score*3.6}deg`);ring.style.setProperty('--risk-color',color);}
+      const deltaNode=document.getElementById('copilotRiskDelta'); if(deltaNode){deltaNode.textContent=delta===0?'No change':`${delta>0?'+':''}${delta} from baseline`;deltaNode.style.color=delta>0?'var(--red)':'var(--green)';deltaNode.style.background=delta>0?'var(--red-soft)':'var(--green-soft)';}
+      const bandNode=document.getElementById('copilotRiskBand'); if(bandNode){bandNode.textContent=band;bandNode.className=`badge ${score>=70?'red':score>=40?'amber':'green'}`;}
+      const badge=document.getElementById('copilotRiskBadge'); if(badge){badge.textContent=`RISK ${score}`;badge.className=`badge copilot-risk-badge ${score>=70?'red':score>=40?'amber':'green'}`;}
+      document.getElementById('copilotMetricRisk').textContent=score;
+      document.getElementById('copilotMetricRiskCopy').textContent=score>=70?'Immediate management review':score>=50?'Material variance requires action':score>=30?'Monitor active controls':'Controls documented';
+      document.getElementById('copilotMetricDelta').textContent=delta===0?'0':`${delta>0?'+':''}${delta}`;
+      document.getElementById('copilotMetricActions').textContent=complianceCopilotState.decisionRecorded?'1':'3';
+      document.getElementById('copilotMetricConfidence').textContent=complianceCopilotState.eventStage>=2?'High':'Moderate';
+      document.getElementById('copilotMetricFriction').textContent=copilotFrictionSeed.length;
+      document.getElementById('copilotNavCount').textContent=complianceCopilotState.findingAccepted?'1':'7';
+
+      const drivers=copilotStageDrivers();
+      document.getElementById('copilotRiskDrivers').innerHTML=drivers.map(d=>`<div class="risk-driver ${d.good?'good':''}"><div class="risk-driver-mark"><i class="fa-solid ${d.icon}"></i></div><div><strong>${d.title}</strong><span>${d.copy}</span></div><b>${d.delta>0?'+':''}${d.delta}</b></div>`).join('');
+      renderCopilotFindingProposal(deal);
+      renderCopilotPlaybooks();
+      renderCopilotConsequences();
+      renderCopilotFriction();
+      renderCopilotPatterns();
+      renderCopilotTemplates();
+      saveCopilotState();
+      try { refreshCounts(); renderActiveDealBanner(); renderOperatorFocus(); } catch(error){}
+    }
+
+    function renderCopilotFindingProposal(deal){
+      const host=document.getElementById('copilotFindingProposal'); if(!host)return;
+      const status=complianceCopilotState.findingAccepted?'ACCEPTED':complianceCopilotState.findingStatus==='not-applicable'?'NOT APPLICABLE':complianceCopilotState.eventStage>=1?'PROPOSED':'READY';
+      const statusNode=document.getElementById('copilotProposalStatus'); if(statusNode){statusNode.textContent=status;statusNode.className=`badge ${status==='ACCEPTED'?'green':status==='NOT APPLICABLE'?'amber':'blue'}`;}
+      const hasVariance=complianceCopilotState.eventStage>=1;
+      host.innerHTML=`<div class="proposal-card"><div class="proposal-top"><div><div class="proposal-label">${hasVariance?'Proposed Finding':'Finding engine standing by'}</div><div class="proposal-title">${hasVariance?'Final contract structure differs from manager-approved worksheet':'Advance the synthetic deal to demonstrate automatic finding generation'}</div></div><span class="badge ${hasVariance?'red':'green'}">${hasVariance?'HIGH REVIEW':'CONTROLLED'}</span></div><div class="proposal-copy">${hasVariance?`ENGENIX compared the approved 72-month structure with the current 75-month contract for ${deal.id}. ${complianceCopilotState.eventStage>=2?'No revised customer acknowledgment was located in the reviewed packet.':'Supporting acknowledgment review is still pending.'}`:'No actionable document or structure variance is currently present in the synthetic active record.'}</div><div class="evidence-list"><div class="evidence-row"><i class="fa-solid fa-file-lines"></i><strong>Approved worksheet</strong><span>72 months · manager snapshot</span></div><div class="evidence-row"><i class="fa-solid fa-file-signature"></i><strong>Current retail contract</strong><span>${hasVariance?'75 months · variance detected':'72 months · aligned'}</span></div><div class="evidence-row"><i class="fa-solid fa-magnifying-glass"></i><strong>Acknowledgment search</strong><span>${complianceCopilotState.eventStage>=2?'Not located':'Pending review'}</span></div></div><div class="proposal-actions">${complianceCopilotState.findingAccepted?`<button class="button small" type="button" onclick="showView('findings')"><i class="fa-solid fa-eye"></i>Open Accepted Finding</button>`:`<button class="button small primary" type="button" onclick="copilotAcceptFinding()" ${hasVariance?'':'disabled'}><i class="fa-solid fa-check"></i>Accept Finding</button><button class="button small" type="button" onclick="copilotEditFinding()" ${hasVariance?'':'disabled'}><i class="fa-solid fa-file-signature"></i>Edit Before Accepting</button><button class="button small" type="button" onclick="copilotRejectFinding()" ${hasVariance?'':'disabled'}>Not Applicable</button>`}</div></div>`;
+    }
+
+    function renderCopilotPlaybooks(){
+      const host=document.getElementById('copilotPlaybooks'); if(!host)return;
+      host.innerHTML=copilotPlaybookSeed.map(p=>`<button class="playbook-card ${complianceCopilotState.selectedPlaybook===p.id?'selected':''}" type="button" onclick="copilotSelectPlaybook('${p.id}')"><div class="playbook-rank">${p.rank}</div><h3>${p.title}</h3><p>${p.copy}</p><div class="playbook-fit"><span>Visible-fact alignment</span><strong>${p.fit}</strong></div><div class="playbook-note">${p.note}</div></button>`).join('');
+    }
+
+    function renderCopilotConsequences(){
+      const host=document.getElementById('copilotConsequences'); if(!host)return;
+      const p=copilotPlaybookSeed.find(x=>x.id===complianceCopilotState.selectedPlaybook);
+      const badge=document.getElementById('copilotDecisionBadge');
+      if(!p){
+        if(badge){badge.textContent='NO PATH SELECTED';badge.className='badge amber';}
+        host.innerHTML='<div class="empty-state"><div class="empty-icon"><i class="fa-solid fa-scale-balanced"></i></div>Select a playbook to preview the operational consequences before recording the manager decision.</div>';
+        return;
+      }
+      if(badge){badge.textContent=complianceCopilotState.decisionRecorded?'DECISION RECORDED':p.title.toUpperCase().slice(0,24);badge.className=`badge ${complianceCopilotState.decisionRecorded?'green':'blue'}`;}
+      const rows=[
+        ['Projected signal after completion','Based on visible deterministic controls',`${p.riskAfter} / 100`,p.riskAfter<35?'good':p.riskAfter>55?'bad':''],
+        ['Vehicle release control','What happens to delivery authority',p.gate,p.gate.includes('Clear')?'good':'bad'],
+        ['Underlying control','Whether the variance remains unresolved',p.control,p.control==='Resolved'?'good':p.control==='Unresolved'?'bad':''],
+        ['Accountability','Owner and required timing',`${p.owner} · ${p.due}`,''],
+        ['Leadership Daily Briefing','How the issue remains visible',p.briefing,p.briefing.includes('Removed')?'good':''],
+        ['Audit History','What ENGENIX preserves',p.audit,'good']
+      ];
+      host.innerHTML=rows.map(r=>`<div class="consequence-row"><div><strong>${r[0]}</strong><span>${r[1]}</span></div><div class="consequence-result ${r[3]}">${r[2]}</div></div>`).join('');
+    }
+
+    function renderCopilotFriction(){
+      const host=document.getElementById('copilotFrictionList'); if(!host)return;
+      host.innerHTML=copilotFrictionSeed.map((f,i)=>`<div class="friction-row"><div class="friction-score ${f.score<75?'mid':''}">${f.score}</div><div><strong>${f.deal} · ${deals.find(d=>d.id===f.deal)?.customer||'Synthetic customer'}</strong><span>${f.reason}</span></div><button class="button small" type="button" onclick="copilotOpenFrictionDeal('${f.deal}')">${f.action}</button></div>`).join('');
+    }
+
+    function renderCopilotPatterns(){
+      const host=document.getElementById('copilotPatterns'); if(!host)return;
+      const patterns=copilotPatternSets[complianceCopilotState.patternRange]||copilotPatternSets[90];
+      host.innerHTML=patterns.map(p=>`<div class="pattern-card"><small>Synthetic ${complianceCopilotState.patternRange}-day pattern</small><strong>${p.metric}</strong><h3>${p.title}</h3><p>${p.copy}</p><div class="pattern-bar"><span style="width:${p.width}%"></span></div></div>`).join('');
+      document.querySelectorAll('[data-copilot-range]').forEach(b=>b.classList.toggle('active',Number(b.dataset.copilotRange)===complianceCopilotState.patternRange));
+    }
+
+    function renderCopilotTemplates(){
+      const list=document.getElementById('copilotTemplateList'); const editor=document.getElementById('copilotRemediationText'); if(!list||!editor)return;
+      list.innerHTML=Object.entries(copilotTemplates).map(([id,t])=>`<button class="template-button ${complianceCopilotState.selectedTemplate===id?'active':''}" type="button" onclick="copilotSelectTemplate('${id}')"><i class="fa-solid fa-file-signature"></i><span><strong>${t.title}</strong><span>${t.subtitle}</span></span></button>`).join('');
+      const selected=copilotTemplates[complianceCopilotState.selectedTemplate]||copilotTemplates.correct;
+      if(document.activeElement!==editor || !editor.value.trim()) editor.value=selected.text;
+    }
+
+    function copilotInjectVariance(){
+      if(complianceCopilotState.eventStage>=3){ showToast('All synthetic events applied','Use Resolve Top Driver or reset the Copilot demonstration.','warning'); return; }
+      complianceCopilotState.previousScore=complianceCopilotState.currentScore;
+      complianceCopilotState.eventStage+=1;
+      const labels=['Contract term changed from 72 to 75 months','Revised customer acknowledgment not located','Delivery response window is approaching'];
+      const label=labels[complianceCopilotState.eventStage-1];
+      complianceCopilotState.events.unshift({time:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}),label});
+      addActivity(`<strong>Compliance Copilot</strong> detected: ${label}.`,'Finding',activeDealId,'ENGENIX','Risk signal updated','fa-brain');
+      renderComplianceCopilot();
+      showToast('Risk signal updated',`${label}. The score movement is now explained in the active record.`,'warning');
+    }
+    function copilotResolveRiskDriver(){
+      if(!complianceCopilotState.selectedPlaybook){ showToast('Select a playbook first','Choose a resolution path before resolving the top driver.','warning'); return; }
+      copilotRecordDecision();
+    }
+    function copilotGenerateFinding(){
+      if(complianceCopilotState.eventStage===0) copilotInjectVariance();
+      complianceCopilotState.findingStatus='proposed';
+      renderComplianceCopilot();
+      showToast('Finding proposed','ENGENIX drafted a reviewable finding from the visible structure variance and source fields.','success');
+    }
+    function copilotAcceptFinding(){
+      if(complianceCopilotState.eventStage===0){showToast('No variance detected','Advance the synthetic deal before accepting a finding.','warning');return;}
+      const deal=copilotActiveDeal();
+      const id='F-1058';
+      if(!findings.some(f=>f.id===id)) findings.unshift({id,deal:deal.id,dealer:deal.dealer,name:'Final contract term differs from approved structure',category:'Structure',severity:'High',owner:'Unassigned',status:'Proposed by Copilot'});
+      complianceCopilotState.findingAccepted=true;
+      complianceCopilotState.findingStatus='accepted';
+      deal.finding='Final contract term differs from approved structure'; deal.status='Review Required';
+      addActivity(`Proposed finding <strong>${id}</strong> was accepted by the operator for ${deal.id}.`,'Finding',deal.id,'Marcus Hale','Accepted','fa-check');
+      refreshAll(); renderComplianceCopilot();
+      showToast('Finding accepted',`${id} is now in the Findings queue with its evidence trail preserved.`,'success');
+    }
+    function copilotEditFinding(){
+      const text=document.getElementById('copilotRemediationText'); if(text){text.value='Operator-edited finding: The current retail contract reflects a 75-month term while the approved worksheet reflects 72 months. Confirm the controlling structure, supporting customer acknowledgment, and authorized disposition before vehicle release.';text.focus();}
+      showToast('Finding moved to editor','The proposed language is ready for human revision before acceptance.','success');
+    }
+    function copilotRejectFinding(){
+      complianceCopilotState.findingStatus='not-applicable';
+      addActivity(`The Copilot finding proposal for <strong>${activeDealId}</strong> was marked not applicable.`,'Decision',activeDealId,'Marcus Hale','Not applicable','fa-circle-xmark');
+      renderComplianceCopilot(); showToast('Proposal dismissed','The operator disposition was preserved in Audit History.','success');
+    }
+    function copilotSelectPlaybook(id){
+      complianceCopilotState.selectedPlaybook=id;
+      complianceCopilotState.selectedTemplate=id;
+      complianceCopilotState.decisionRecorded=false;
+      renderComplianceCopilot();
+      const p=copilotPlaybookSeed.find(x=>x.id===id); showToast('Playbook selected',`${p.title}. Review the consequence preview before recording the decision.`,'success');
+    }
+    function copilotRecordDecision(){
+      const p=copilotPlaybookSeed.find(x=>x.id===complianceCopilotState.selectedPlaybook); if(!p){showToast('Select a resolution path','Choose a playbook before recording the manager decision.','warning');return;}
+      complianceCopilotState.decisionRecorded=true;
+      const deal=copilotActiveDeal();
+      if(p.id==='correct'){ deal.status='Cleared'; deal.finding='Corrective evidence verified'; }
+      else if(p.id==='acknowledge'){ deal.status='Awaiting Docs'; deal.finding='Authorized acknowledgment required'; }
+      else { deal.status='Escalated'; deal.finding='Leadership review required'; }
+      addActivity(`<strong>Marcus Hale</strong> selected the ${p.title.toLowerCase()} playbook for ${deal.id}.`,'Decision',deal.id,'Marcus Hale',p.gate,'fa-scale-balanced');
+      renderComplianceCopilot(); refreshAll();
+      showToast('Manager decision recorded',`${p.title}. Consequences, ownership, and audit context were preserved.`,'success');
+    }
+    function copilotOpenFrictionDeal(id){ setActiveDeal(id,false); showView(id==='ENX-2847'?'copilot':'queue'); showToast('Watch item opened',`${id} is now the active deal context.`,'success'); }
+    function copilotSelectTemplate(id){ complianceCopilotState.selectedTemplate=id; renderCopilotTemplates(); saveCopilotState(); }
+    function copilotCreateCorrectiveAction(){
+      const p=copilotPlaybookSeed.find(x=>x.id===complianceCopilotState.selectedPlaybook)||copilotPlaybookSeed[0];
+      const id='CA-209';
+      if(!actions.some(a=>a.id===id)) actions.unshift({id,title:`${p.title} · ${activeDealId}`,dealer:copilotActiveDeal().dealer,owner:p.owner,due:p.due,risk:p.riskAfter>55?'High':p.riskAfter>35?'Moderate':'Low',stage:'open'});
+      complianceCopilotState.correctiveCreated=true;
+      addActivity(`Corrective action <strong>${id}</strong> was created from the approved remediation template.`,'Assignment',activeDealId,p.owner,'Owned','fa-list-check');
+      renderActions(); refreshCounts(); saveCopilotState();
+      showToast('Corrective action created',`${id} is owned by ${p.owner}.`,'success');
+    }
+    function copilotInsertDecisionNote(){
+      const editor=document.getElementById('copilotRemediationText'); if(!editor||!editor.value.trim()){showToast('No note available','Select or enter remediation language first.','warning');return;}
+      complianceCopilotState.decisionNoteInserted=true;
+      addActivity(`A Copilot-assisted remediation note was inserted for <strong>${activeDealId}</strong> and remains subject to human review.`,'Decision',activeDealId,'Marcus Hale','Draft preserved','fa-file-signature');
+      saveCopilotState(); showToast('Decision note inserted','The editable note was attached to the synthetic decision record.','success');
+    }
+    function copilotResetDemo(){
+      if(!confirm('Reset the Compliance Copilot synthetic demonstration?'))return;
+      complianceCopilotState=defaultCopilotState();
+      const generatedIndex=findings.findIndex(f=>f.id==='F-1058'); if(generatedIndex>=0)findings.splice(generatedIndex,1);
+      const actionIndex=actions.findIndex(a=>a.id==='CA-209'); if(actionIndex>=0)actions.splice(actionIndex,1);
+      const deal=deals.find(d=>d.id==='ENX-2847'); if(deal){deal.finding='Guided operating workflow';deal.category='Workflow';deal.risk='Low';deal.score=18;deal.owner='Alex Morgan';deal.status='Active at Desk';}
+      saveCopilotState(); refreshAll(); renderComplianceCopilot(); showToast('Copilot demo reset','The synthetic risk signal and recommendation loop returned to baseline.','success');
+    }
+
+    document.querySelectorAll('[data-copilot-range]').forEach(button=>button.addEventListener('click',()=>{ complianceCopilotState.patternRange=Number(button.dataset.copilotRange); renderCopilotPatterns(); saveCopilotState(); }));
+    document.getElementById('copilotRemediationText')?.addEventListener('input',saveCopilotState);
+    renderComplianceCopilot();
+  </script>
+
 </body>
 </html>
