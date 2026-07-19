@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.19-compliance-copilot-v3">
+  <meta name="dashboard-build" content="2026.07.19-ownership-concierge-v6">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal · F&amp;I Full Send V5</title>
+    <title>ENGENIX | Unified Portal · Ownership Concierge V6</title>
   <style>
     :root {
       --bg: #071018;
@@ -2839,6 +2839,168 @@
       opacity:.72;
     }
   </style>
+
+  <style id="engenix-ownership-concierge-v6">
+    .fa-comments::before { content:"◌"; }
+    .fa-mobile-screen::before { content:"▯"; }
+    .fa-heart-pulse::before { content:"♥"; }
+    .fa-user-headset::before { content:"◎"; }
+    .fa-pause::before { content:"Ⅱ"; }
+    .fa-stop::before { content:"■"; }
+    .fa-circle-play::before { content:"▶"; }
+    .fa-phone-flip::before { content:"⌕"; }
+
+    .fi-action-strip.v5 { grid-template-columns:repeat(6,minmax(0,1fr)); }
+    .concierge-shell { display:grid; gap:12px; }
+    .concierge-hero {
+      padding:clamp(22px,3vw,34px);
+      border:1px solid rgba(12,143,131,.22);
+      border-radius:18px;
+      background:
+        linear-gradient(110deg,color-mix(in srgb,var(--fi-teal) 9%,var(--panel)),var(--panel) 62%,color-mix(in srgb,var(--fi-gold) 7%,var(--panel)));
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:24px;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .concierge-hero::before { content:""; position:absolute; inset:0 auto 0 0; width:5px; background:linear-gradient(180deg,var(--fi-teal),var(--fi-gold)); }
+    .concierge-hero h1 { margin:8px 0; max-width:780px; font-size:clamp(28px,3.2vw,43px); line-height:1.04; letter-spacing:-.045em; }
+    .concierge-hero p { margin:0; max-width:760px; color:var(--muted); font-size:11.5px; line-height:1.65; }
+    .concierge-hero-actions { min-width:220px; display:grid; gap:8px; }
+
+    .concierge-metrics { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .concierge-metric { min-height:102px; padding:14px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .concierge-metric small { display:block; color:var(--muted); font-size:8px; font-weight:820; letter-spacing:.08em; text-transform:uppercase; }
+    .concierge-metric strong { display:block; margin-top:9px; font-size:23px; line-height:1; letter-spacing:-.035em; }
+    .concierge-metric span { display:block; margin-top:6px; color:var(--muted); font-size:8.5px; line-height:1.4; }
+    html[data-theme="light"] .concierge-metric { box-shadow:0 8px 22px rgba(34,57,75,.045); }
+
+    .concierge-workspace { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(340px,.75fr); gap:12px; align-items:start; }
+    .concierge-console-card { min-height:676px; }
+    .concierge-status-panel { padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel-2); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; }
+    .concierge-status-panel h3 { margin:5px 0 0; font-size:14px; }
+    .concierge-status-panel p { margin:5px 0 0; color:var(--muted); font-size:9px; line-height:1.5; }
+    .concierge-status-token { min-width:92px; min-height:34px; padding:0 10px; border:1px solid rgba(12,143,131,.23); border-radius:10px; background:var(--fi-teal-soft); color:var(--fi-teal); display:grid; place-items:center; font-size:8.5px; font-weight:900; text-transform:uppercase; letter-spacing:.08em; text-align:center; }
+    .concierge-status-token.attention { color:var(--amber); border-color:rgba(173,116,28,.24); background:var(--amber-soft); }
+    .concierge-status-token.alert { color:var(--red); border-color:rgba(195,69,85,.22); background:var(--red-soft); }
+
+    .concierge-progress-wrap { margin-top:13px; }
+    .concierge-progress-meta { display:flex; align-items:center; justify-content:space-between; gap:12px; color:var(--muted); font-size:8.5px; }
+    .concierge-progress-meta strong { color:var(--text); }
+    .concierge-progress-track { height:9px; margin-top:7px; border-radius:999px; background:var(--bg-deep); overflow:hidden; }
+    .concierge-progress-fill { width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--fi-teal),var(--fi-gold)); transition:width .32s ease; }
+    .concierge-control-grid { margin-top:13px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+    .concierge-section-title { margin:18px 0 9px; display:flex; align-items:flex-end; justify-content:space-between; gap:12px; }
+    .concierge-section-title span { font-size:11px; font-weight:820; }
+    .concierge-section-title small { color:var(--muted); font-size:8px; }
+
+    .concierge-profile-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+    .concierge-profile-cell { min-height:75px; padding:11px; border:1px solid var(--line); border-radius:10px; background:var(--panel-2); }
+    .concierge-profile-cell small { display:block; color:var(--muted-2); font-size:7.5px; font-weight:820; text-transform:uppercase; letter-spacing:.07em; }
+    .concierge-profile-cell strong { display:block; margin-top:6px; font-size:10px; line-height:1.35; }
+    .concierge-profile-cell span { display:block; margin-top:4px; color:var(--muted); font-size:8px; line-height:1.35; }
+    .concierge-language { margin-top:9px; padding:12px; border:1px solid rgba(189,139,53,.2); border-radius:11px; background:var(--fi-gold-soft); }
+    .concierge-language small { color:var(--fi-gold); font-size:7.5px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .concierge-language blockquote { margin:7px 0 0; color:var(--text); font-size:9px; line-height:1.5; font-style:italic; }
+
+    .concierge-phone-shell { position:sticky; top:calc(var(--topbar) + 74px); display:grid; place-items:center; }
+    .concierge-phone { width:min(388px,100%); min-height:676px; border:8px solid #102d2d; border-radius:35px; background:#f2f5f4; box-shadow:0 24px 55px rgba(12,38,37,.22); overflow:hidden; display:grid; grid-template-rows:auto auto minmax(360px,1fr) auto auto; position:relative; color:#153837; }
+    .concierge-phone-notch { width:116px; height:19px; margin:0 auto; border-radius:0 0 14px 14px; background:#102d2d; }
+    .concierge-phone-head { min-height:65px; padding:10px 13px; border-bottom:1px solid #d6dfdc; background:#fff; display:grid; grid-template-columns:36px minmax(0,1fr) auto; gap:9px; align-items:center; }
+    .concierge-phone-avatar { width:36px; height:36px; border-radius:50%; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,#0c8f83,#bd8b35); font-size:13px; font-weight:900; }
+    .concierge-phone-head strong { display:block; font-size:10px; }
+    .concierge-phone-head span { display:block; margin-top:2px; color:#70817f; font-size:7.5px; }
+    .concierge-phone-secure { margin:0 !important; padding:4px 6px; border:1px solid #c6d8d4; border-radius:99px; color:#08766e !important; background:#edf8f5; font-size:6.5px !important; font-weight:900; letter-spacing:.08em; }
+    .concierge-phone-body { min-height:400px; max-height:470px; padding:15px 12px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; background:linear-gradient(180deg,#f8faf9,#eef3f1); scrollbar-width:thin; }
+    .sms-row { display:flex; }
+    .sms-row.customer { justify-content:flex-end; }
+    .sms-bubble { max-width:83%; padding:9px 11px; border-radius:14px; font-size:9.5px; line-height:1.45; white-space:pre-wrap; box-shadow:0 2px 6px rgba(24,55,52,.05); }
+    .sms-row.bot .sms-bubble { border:1px solid #d8e2df; border-bottom-left-radius:5px; background:#fff; }
+    .sms-row.customer .sms-bubble { border-bottom-right-radius:5px; color:#fff; background:linear-gradient(135deg,#0c8f83,#08756d); }
+    .sms-row.system { justify-content:center; }
+    .sms-row.system .sms-bubble { max-width:92%; padding:6px 9px; border:1px solid #d9e1df; border-radius:999px; color:#6f817e; background:rgba(255,255,255,.74); font-size:7.5px; text-align:center; }
+    .sms-time { display:block; margin-top:4px; color:inherit; opacity:.55; font-size:6.5px; }
+    .sms-empty { margin:auto; padding:22px; color:#748683; text-align:center; font-size:9px; line-height:1.55; }
+    .sms-empty i { display:block; margin-bottom:9px; color:#0c8f83; font-size:25px; }
+    .concierge-quick-replies { min-height:48px; padding:7px 9px; border-top:1px solid #d6dfdc; background:#fff; display:flex; gap:6px; overflow-x:auto; }
+    .concierge-quick-reply { flex:0 0 auto; max-width:225px; min-height:31px; padding:0 10px; border:1px solid #bdd8d2; border-radius:999px; color:#08756d; background:#f5fbf9; font-size:7.8px; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .concierge-quick-reply:hover { background:#e9f7f3; }
+    .concierge-compose { padding:9px; border-top:1px solid #d6dfdc; background:#fff; display:grid; grid-template-columns:minmax(0,1fr) 35px; gap:7px; }
+    .concierge-compose input { width:100%; height:36px; padding:0 11px; border:1px solid #d2dcd9; border-radius:999px; color:#153837; background:#f7f9f8; outline:none; font-size:9px; }
+    .concierge-send-button { width:35px; height:35px; border:0; border-radius:50%; color:#fff; background:#0c8f83; cursor:pointer; }
+    .concierge-send-button:disabled { opacity:.4; cursor:not-allowed; }
+
+    .concierge-secondary-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .concierge-fit-list { display:grid; gap:9px; }
+    .concierge-fit-row { display:grid; grid-template-columns:34px minmax(0,1fr) 62px; gap:9px; align-items:center; }
+    .concierge-fit-rank { width:32px; height:32px; border-radius:9px; display:grid; place-items:center; color:var(--fi-teal); background:var(--fi-teal-soft); font-size:9px; font-weight:900; }
+    .concierge-fit-row strong { display:block; font-size:9.5px; }
+    .concierge-fit-row span { display:block; margin-top:3px; color:var(--muted); font-size:8px; }
+    .concierge-fit-score { text-align:right; font-size:10px; font-weight:850; }
+    .concierge-fit-bar { grid-column:2 / 4; height:7px; margin-top:-4px; border-radius:999px; background:var(--bg-deep); overflow:hidden; }
+    .concierge-fit-bar div { height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--fi-teal),var(--fi-gold)); }
+    .concierge-pulse-grid { display:grid; gap:9px; }
+    .concierge-pulse-card { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); }
+    .concierge-pulse-card.alert { border-color:rgba(195,69,85,.22); background:var(--red-soft); }
+    .concierge-pulse-card.success { border-color:rgba(12,143,131,.22); background:var(--fi-teal-soft); }
+    .concierge-pulse-card small { color:var(--muted-2); font-size:7.5px; font-weight:820; letter-spacing:.08em; text-transform:uppercase; }
+    .concierge-pulse-card strong { display:block; margin-top:5px; font-size:10px; }
+    .concierge-pulse-card p { margin:5px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; }
+
+    .concierge-policy-note { margin-top:12px; padding:13px; border:1px solid rgba(12,143,131,.2); border-radius:12px; background:var(--fi-teal-soft); display:grid; grid-template-columns:30px minmax(0,1fr); gap:10px; }
+    .concierge-policy-note i { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; color:var(--fi-teal); background:var(--panel); }
+    .concierge-policy-note strong { font-size:9.5px; }
+    .concierge-policy-note p { margin:4px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; }
+    .concierge-recovery-hero { padding:18px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .concierge-recovery-grid { margin-top:12px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .recovery-card { padding:15px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .recovery-card.open { border-color:rgba(195,69,85,.24); box-shadow:inset 4px 0 0 var(--red); }
+    .recovery-card.resolved { border-color:rgba(12,143,131,.2); box-shadow:inset 4px 0 0 var(--fi-teal); }
+    .recovery-card h3 { margin:8px 0 0; font-size:13px; }
+    .recovery-card p { margin:6px 0 0; color:var(--muted); font-size:9px; line-height:1.5; }
+    .recovery-meta { margin-top:12px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .recovery-meta div { padding:9px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); }
+    .recovery-meta small { display:block; color:var(--muted-2); font-size:7px; text-transform:uppercase; letter-spacing:.07em; }
+    .recovery-meta strong { display:block; margin-top:4px; font-size:8.7px; }
+    .recovery-actions { margin-top:12px; display:flex; gap:7px; flex-wrap:wrap; }
+
+    .concierge-brief-banner { margin:0 0 15px; padding:13px; border:1px solid rgba(12,143,131,.22); border-radius:12px; background:linear-gradient(110deg,var(--fi-teal-soft),var(--fi-gold-soft)); display:grid; grid-template-columns:38px minmax(0,1fr) auto; gap:11px; align-items:center; }
+    .concierge-brief-banner-icon { width:38px; height:38px; border-radius:11px; display:grid; place-items:center; color:var(--fi-teal); background:var(--panel); }
+    .concierge-brief-banner strong { display:block; font-size:10.5px; }
+    .concierge-brief-banner p { margin:4px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; }
+
+    @media (max-width:1400px) { .fi-action-strip.v5 { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:1250px) {
+      .concierge-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .concierge-workspace { grid-template-columns:1fr; }
+      .concierge-phone-shell { position:static; }
+      .concierge-phone { width:min(430px,100%); }
+    }
+    @media (max-width:880px) {
+      .concierge-hero { grid-template-columns:1fr; }
+      .concierge-hero-actions { min-width:0; grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .concierge-secondary-grid,.concierge-recovery-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:680px) {
+      .concierge-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .concierge-hero-actions { grid-template-columns:1fr; }
+      .concierge-control-grid { grid-template-columns:1fr; }
+      .concierge-profile-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .concierge-console-card { min-height:auto; }
+      .concierge-brief-banner { grid-template-columns:34px minmax(0,1fr); }
+      .concierge-brief-banner > .badge { grid-column:2; justify-self:start; }
+    }
+    @media (max-width:430px) {
+      .concierge-metrics,.concierge-profile-grid { grid-template-columns:1fr; }
+      .concierge-phone { min-height:620px; border-width:6px; border-radius:29px; }
+      .concierge-phone-body { min-height:350px; max-height:420px; }
+      .concierge-status-panel { grid-template-columns:1fr; }
+      .concierge-status-token { justify-self:start; }
+    }
+  </style>
+
 </head>
 <body class="auth-locked operator-friendly" data-workspace="compliance">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
@@ -3030,6 +3192,9 @@
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
           <button class="nav-item finance-nav-item active" data-finance-view="fi-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">F&amp;I Command</span><span class="nav-count" id="fiActiveCountNav">4</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-concierge"><span class="nav-icon"><i class="fa-solid fa-comments"></i></span><span class="nav-text">Ownership Concierge</span><span class="nav-count" id="fiConciergeNavCount">READY</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-interviews"><span class="nav-icon"><i class="fa-solid fa-mobile-screen"></i></span><span class="nav-text">Interview Queue</span><span class="nav-count" id="fiInterviewNavCount">3</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-recovery"><span class="nav-icon"><i class="fa-solid fa-heart-pulse"></i></span><span class="nav-text">Recovery Alerts</span><span class="nav-count" id="fiRecoveryNavCount">0</span></button>
           <button class="nav-item finance-nav-item" data-finance-view="fi-deals"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Active Deals</span><span class="nav-count">6</span></button>
           <button class="nav-item finance-nav-item" data-finance-view="fi-prior"><span class="nav-icon"><i class="fa-solid fa-repeat"></i></span><span class="nav-text">Prior Deal Recognition</span><span class="nav-count" id="fiPriorCountNav">1</span></button>
         </div>
@@ -3736,6 +3901,7 @@
             <header class="fi-hero"><div class="fi-hero-grid"><div><div class="fi-kicker">F&amp;I Intelligence · Synthetic ownership-decision environment</div><h1>Build the right ownership decision without losing the deal behind it.</h1><p>Recognize prior coverage, reconcile cancellation value, recommend products from objective vehicle and customer-declared needs, preserve individual choice, and hand a clean record into Compliance.</p></div><div class="fi-hero-actions"><button class="button fi-button primary" onclick="showFinanceView('fi-prior')"><i class="fa-solid fa-repeat"></i>Recognize Prior Deal</button><button class="button fi-button" onclick="showFinanceView('fi-menu')"><i class="fa-solid fa-tags"></i>Open Menu Studio</button><button class="button fi-button gold" onclick="downloadFinanceMenuBrief()"><i class="fa-solid fa-download"></i>Download Menu Brief</button></div></div></header>
             <div class="fi-metrics" id="fiCommandMetrics"></div>
             <div class="fi-action-strip v5">
+              <button class="fi-action-card attention" id="fiConciergeActionCard" onclick="showFinanceView('fi-concierge')"><small>Ownership concierge</small><strong id="fiActionConciergeTitle">Interview ready</strong><span id="fiActionConciergeCopy">Use the customer wait time to build a transparent ownership profile.</span></button>
               <button class="fi-action-card attention" onclick="showFinanceView('fi-prior')"><small>Prior relationship</small><strong id="fiActionPriorTitle">Recognition available</strong><span id="fiActionPriorCopy">One synthetic prior vehicle and four product contracts may affect this menu.</span></button>
               <button class="fi-action-card" onclick="showFinanceView('fi-cancel')"><small>Cancellation value</small><strong id="fiActionCancelTitle">Verification pending</strong><span id="fiActionCancelCopy">Estimated value is visible but not yet treated as available funds.</span></button>
               <button class="fi-action-card ready" onclick="showFinanceView('fi-menu')"><small>Menu economics</small><strong id="fiActionMenuTitle">Ownership pathway modeled</strong><span id="fiActionMenuCopy">Payment, product gross, and lender headroom update together.</span></button>
@@ -3751,6 +3917,86 @@
               <article class="card fi-card"><div class="card-header"><div><div class="card-title">Decision Timeline</div><div class="card-subtitle">Recent F&amp;I actions preserved in sequence</div></div></div><div class="card-body"><div class="fi-timeline" id="fiCommandTimeline"></div></div></article>
             </div>
           </div>
+        </section>
+
+
+        <section class="view finance-view" id="view-fi-concierge">
+          <div class="concierge-shell">
+            <header class="concierge-hero">
+              <div>
+                <div class="fi-kicker">Ownership Concierge · Simulated customer SMS interview</div>
+                <h1>Turn waiting time into a clearer ownership conversation.</h1>
+                <p>The sandbox identifies itself as an automated dealership concierge, explains how responses will be used, captures customer-declared ownership priorities, and feeds the result into Product Fit and the AI Ownership Brief.</p>
+              </div>
+              <div class="concierge-hero-actions">
+                <button class="button fi-button primary" type="button" onclick="runGuidedConciergeInterview()"><i class="fa-solid fa-circle-play"></i>Run Guided Interview</button>
+                <button class="button fi-button" type="button" onclick="launchOwnershipConcierge()"><i class="fa-solid fa-paper-plane"></i>Send Demo Invitation</button>
+                <button class="button fi-button" type="button" onclick="resetOwnershipConcierge()"><i class="fa-solid fa-rotate"></i>Restart Demo</button>
+              </div>
+            </header>
+
+            <div class="concierge-metrics" id="conciergeMetrics"></div>
+
+            <div class="concierge-workspace">
+              <article class="card fi-card concierge-console-card">
+                <div class="card-header">
+                  <div><div class="card-title">Dealership Console</div><div class="card-subtitle">Live interview state, manager controls, and ownership profile</div></div>
+                  <span class="badge finance-badge" id="conciergeConsoleStatus">READY</span>
+                </div>
+                <div class="card-body">
+                  <div id="conciergeStatusHost"></div>
+                  <div class="concierge-progress-wrap">
+                    <div class="concierge-progress-meta"><span>Interview progress</span><strong id="conciergeProgressLabel">0%</strong></div>
+                    <div class="concierge-progress-track"><div class="concierge-progress-fill" id="conciergeProgressFill"></div></div>
+                  </div>
+                  <div class="concierge-control-grid">
+                    <button class="button fi-button" type="button" onclick="toggleConciergePause()"><i class="fa-solid fa-pause"></i><span id="conciergePauseLabel">Pause</span></button>
+                    <button class="button fi-button" type="button" onclick="handoffConciergeToEmployee()"><i class="fa-solid fa-user-headset"></i>Human Handoff</button>
+                    <button class="button fi-button danger" type="button" onclick="simulateConciergeOptOut()"><i class="fa-solid fa-stop"></i>Simulate STOP</button>
+                  </div>
+                  <div class="concierge-section-title"><span>Live Ownership Profile</span><small>Updates from customer-declared answers</small></div>
+                  <div id="conciergeProfileHost"></div>
+                </div>
+              </article>
+
+              <article class="concierge-phone-shell" aria-label="Simulated customer SMS conversation">
+                <div class="concierge-phone">
+                  <div class="concierge-phone-notch"></div>
+                  <header class="concierge-phone-head">
+                    <div class="concierge-phone-avatar">E</div>
+                    <div><strong>Premier Ford</strong><span>Automated Ownership Concierge</span></div>
+                    <span class="concierge-phone-secure">DEMO</span>
+                  </header>
+                  <div class="concierge-phone-body" id="conciergeTranscript" aria-live="polite"></div>
+                  <div class="concierge-quick-replies" id="conciergeQuickReplies"></div>
+                  <div class="concierge-compose">
+                    <input id="conciergeReplyInput" type="text" placeholder="Type a simulated customer reply…" autocomplete="off" />
+                    <button class="concierge-send-button" id="conciergeSendButton" type="button" onclick="submitConciergeReply()" aria-label="Send simulated reply"><i class="fa-solid fa-paper-plane"></i></button>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="concierge-secondary-grid">
+              <article class="card fi-card"><div class="card-header"><div><div class="card-title">Product-Fit Movement</div><div class="card-subtitle">How the customer’s own answers change presentation relevance</div></div><button class="button small fi-button" onclick="showFinanceView('fi-fit')">Open Product Fit</button></div><div class="card-body" id="conciergeProductFitHost"></div></article>
+              <article class="card fi-card"><div class="card-header"><div><div class="card-title">Experience Pulse</div><div class="card-subtitle">Private recovery and staff-recognition context before F&amp;I</div></div><button class="button small fi-button" onclick="showFinanceView('fi-recovery')">Open alerts</button></div><div class="card-body" id="conciergeExperienceHost"></div></article>
+            </div>
+
+            <article class="card fi-card"><div class="card-header"><div><div class="card-title">Concierge Decision Trail</div><div class="card-subtitle">Invitation, answers, handoffs, recovery events, and profile generation</div></div><button class="button small fi-button" onclick="showFinanceView('fi-audit')">Open full audit</button></div><div class="card-body"><div class="fi-timeline" id="conciergeTimeline"></div></div></article>
+          </div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-interviews">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Customer wait-time orchestration</div><h2>Interview Queue</h2><p>Track invitations, active conversations, completed profiles, opt-outs, and employee handoffs without leaving the F&amp;I workspace.</p></div><button class="button fi-button primary" onclick="showFinanceView('fi-concierge')"><i class="fa-solid fa-comments"></i>Open Guided Interview</button></div>
+          <div class="concierge-metrics" id="conciergeQueueMetrics"></div>
+          <article class="card fi-card" style="margin-top:12px"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer</th><th>Mobile</th><th>Wait time</th><th>Consent</th><th>Interview</th><th>Experience</th><th>Next move</th></tr></thead><tbody id="conciergeQueueBody"></tbody></table></div></article>
+          <div class="concierge-policy-note"><i class="fa-solid fa-shield-halved"></i><div><strong>Sandbox boundary</strong><p>No message is transmitted. Phone numbers, consent states, responses, and outcomes are synthetic and remain inside the browser demonstration.</p></div></div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-recovery">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Private dealership intervention layer</div><h2>Customer Recovery Alerts</h2><p>Surface process confusion or dissatisfaction early enough for a manager to repair the experience before the menu presentation.</p></div><button class="button fi-button" onclick="showFinanceView('fi-concierge')"><i class="fa-solid fa-comments"></i>Return to Concierge</button></div>
+          <div class="concierge-recovery-hero" id="conciergeRecoveryHero"></div>
+          <div class="concierge-recovery-grid" id="conciergeRecoveryHost"></div>
         </section>
 
         <section class="view finance-view" id="view-fi-deals">
@@ -6815,5 +7061,189 @@
     renderAllFinance();
   </script>
 
+
+  <script id="engenix-ownership-concierge-v6-script">
+    const conciergeInterviewQueue = [
+      {deal:'FI-8421',code:'◆ M4',customer:'Morgan Davis',mobile:'(***) ***-4821',wait:'14 min',consent:'Demo verified',status:'guided',experience:'Pending'},
+      {deal:'FI-8418',code:'● K9',customer:'Avery Brooks',mobile:'(***) ***-1366',wait:'9 min',consent:'Demo verified',status:'complete',experience:'Excellent'},
+      {deal:'FI-8415',code:'▲ R2',customer:'Jordan Lee',mobile:'(***) ***-9044',wait:'22 min',consent:'Unavailable',status:'manual',experience:'Not asked'},
+      {deal:'FI-8409',code:'■ C7',customer:'Taylor Reed',mobile:'(***) ***-7118',wait:'6 min',consent:'Demo verified',status:'opted-out',experience:'Good'}
+    ];
+    const conciergeReplies = {
+      0:['START','STOP'],
+      1:["Usually until they're paid off, around 7 or 8 years.",'About 3 years','As long as possible.'],
+      2:['Around 18,000 miles. I drive a lot for work.','About 12,000 miles.','Under 8,000 miles.'],
+      3:['Mostly commuting and weekend trips with the family.','Business use and commuting.','A mixture of everything.'],
+      4:['I can handle a little more monthly. I hate surprise expenses.','Keeping the payment as low as possible.','A balance of both.'],
+      5:['Yes, that would definitely mess up my month.','It would be inconvenient, but manageable.','No, I keep an emergency fund.'],
+      6:['Outside every night, and our roads are terrible.','Mostly garaged and normal roads.','Some rough-road driving.'],
+      7:["Good overall, but I'm still a little confused about how the payment changed.",'Excellent so far.','I need help before we continue.'],
+      8:['Carlos was great. He explained the vehicle really well.','Everyone has been helpful.','No one in particular.']
+    };
+    const conciergeQuestions = {
+      1:'How long do you normally keep your vehicles?',
+      2:'About how many miles do you drive in a typical year?',
+      3:'Will the Bronco Sport mainly be used for commuting, family travel, towing, business use, or a mixture?',
+      4:'Which matters more to you: keeping today’s payment as low as possible, or reducing the chance of larger unexpected expenses later?',
+      5:'Would a sudden $1,500–$3,000 repair create a meaningful disruption to your monthly budget?',
+      6:'Is the vehicle regularly parked outside or driven on rough roads?',
+      7:'While we prepare everything, how has your dealership experience felt so far?',
+      8:'Has anyone on the team been especially helpful?'
+    };
+    let conciergeDemoTimers=[];
+
+    function defaultConciergeState(){return{
+      status:'ready',stage:-1,paused:false,handoff:false,optedOut:false,completedAt:null,inviteSentAt:null,
+      transcript:[],profile:{ownership:'Not captured',miles:'Not captured',use:'Not captured',expense:'Not captured',repair:'Not captured',exposure:'Not captured'},
+      customerLanguage:[],experience:'Not captured',staffRecognition:'Not captured',recovery:null,menuUpdated:false
+    };}
+    function ensureFinanceConciergeState(){
+      if(!financeState.concierge)financeState.concierge=defaultConciergeState();
+      const c=financeState.concierge;
+      Object.entries(defaultConciergeState()).forEach(([k,v])=>{if(c[k]===undefined)c[k]=v;});
+      c.profile=Object.assign(defaultConciergeState().profile,c.profile||{});
+      if(!Array.isArray(c.transcript))c.transcript=[];
+      if(!Array.isArray(c.customerLanguage))c.customerLanguage=[];
+      fiSave();
+    }
+    function conciergeTime(){return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}
+    function conciergeEscape(value){return String(value??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+    function conciergeAddMessage(role,text){ensureFinanceConciergeState();financeState.concierge.transcript.push({role,text,time:conciergeTime()});financeState.concierge.transcript=financeState.concierge.transcript.slice(-30);fiSave();}
+    function conciergeStatusCopy(){
+      const c=financeState.concierge;
+      if(c.optedOut)return['Customer opted out','No further automated conversation will continue.','alert'];
+      if(c.handoff)return['Employee handoff active','The automated conversation is paused for a dealership employee.','attention'];
+      if(c.paused)return['Concierge paused','The transcript and profile remain preserved until the manager resumes.','attention'];
+      if(c.status==='complete')return['Ownership profile generated','Customer-declared priorities are available to Product Fit and Menu Studio.',''];
+      if(c.status==='active')return[`Interview active · Question ${Math.max(1,c.stage)} of 8`,'Answers are updating the ownership profile in real time.',''];
+      if(c.status==='invited')return['Invitation sent','Waiting for the customer to reply START or STOP.','attention'];
+      return['Ready to invite','Synthetic SMS consent is available for the guided customer.',''];
+    }
+    function conciergeProgress(){const c=financeState.concierge;if(c.status==='complete')return 100;if(c.stage<=0)return c.status==='invited'?5:0;return Math.min(96,Math.round((c.stage-1)/8*100));}
+    function launchOwnershipConcierge(){
+      ensureFinanceConciergeState();const c=financeState.concierge;
+      if(c.status!=='ready'&&c.transcript.length){showFinanceView('fi-concierge');showToast('Concierge already started','Continue the current simulated conversation or restart the demo.','warning');return;}
+      c.status='invited';c.stage=0;c.inviteSentAt=new Date().toLocaleString();c.paused=false;c.handoff=false;c.optedOut=false;
+      conciergeAddMessage('bot',`Hi Morgan, I’m the automated Ownership Concierge for Premier Ford. Your finance manager is preparing your documents now. I can ask eight quick questions to help organize your optional ownership-coverage review and keep your visit moving. Your answers will be shared with your finance manager. Reply START to continue or STOP to opt out.`);
+      fiEvent('Ownership Concierge invitation prepared','A transparent synthetic SMS invitation was opened for Morgan Davis. No message was transmitted.','fa-comments');
+      renderAllFinance();showFinanceView('fi-concierge');showToast('Demo invitation sent','Use START or run the guided interview.','success');
+    }
+    function submitConciergeReply(){const input=document.getElementById('conciergeReplyInput');const value=input?.value.trim();if(!value)return;input.value='';sendConciergeReply(value);}
+    function sendConciergeReply(text){
+      ensureFinanceConciergeState();const c=financeState.concierge;
+      if(c.paused){showToast('Concierge is paused','Resume the interview before sending a simulated response.','warning');return;}
+      if(c.handoff){showToast('Human handoff active','Restart or return control to the concierge first.','warning');return;}
+      if(c.optedOut){showToast('Customer opted out','The synthetic record prevents additional automated messages.','error');return;}
+      if(c.status==='ready'){launchOwnershipConcierge();setTimeout(()=>sendConciergeReply(text),80);return;}
+      const upper=String(text).trim().toUpperCase();
+      if(upper==='STOP'){simulateConciergeOptOut(text);return;}
+      if(c.stage===0){
+        conciergeAddMessage('customer',text);
+        if(upper!=='START'){conciergeAddMessage('bot','To continue, please reply START. You can reply STOP at any time.');renderAllFinance();return;}
+        c.status='active';c.stage=1;conciergeAddMessage('bot',`Thanks. I’ll keep this brief. ${conciergeQuestions[1]}`);
+        fiEvent('Customer engaged Ownership Concierge','Morgan replied START and the synthetic interview began.','fa-mobile-screen');
+        fiSave();renderAllFinance();return;
+      }
+      if(c.status!=='active'){showToast('Interview is not active','Launch or restart the Ownership Concierge.','warning');return;}
+      const answeredStage=c.stage;conciergeAddMessage('customer',text);applyConciergeAnswer(answeredStage,text);
+      if(answeredStage>=8){completeOwnershipConcierge();return;}
+      c.stage=answeredStage+1;
+      const acknowledgments={1:'That helps. ',2:'Got it. ',3:'Thank you. ',4:'Understood. ',5:'That makes sense. ',6:'Helpful context. ',7:'Thank you for telling us. '};
+      conciergeAddMessage('bot',(acknowledgments[answeredStage]||'')+conciergeQuestions[c.stage]);
+      fiSave();renderAllFinance();
+    }
+    function applyConciergeAnswer(stage,text){
+      const c=financeState.concierge;const lower=String(text).toLowerCase();
+      if(stage===1){
+        const long=/(paid off|7|8|long|as long)/.test(lower);financeState.needs.ownershipMonths=long?84:36;c.profile.ownership=long?'7–8 years':'Approximately 3 years';
+        if(long)c.customerLanguage.push('“I usually keep them until they’re paid off.”');
+      }
+      if(stage===2){const match=String(text).replace(/,/g,'').match(/\d{4,5}/);const miles=match?Number(match[0]):12000;financeState.needs.annualMiles=miles;c.profile.miles=`${miles.toLocaleString()} miles / year`;if(miles>=15000)c.customerLanguage.push('“I drive a lot for work.”');}
+      if(stage===3){c.profile.use=/business/.test(lower)?'Business + commuting':/family|weekend/.test(lower)?'Commuting + family travel':'Mixed use';financeState.needs.towing=/tow/.test(lower);}
+      if(stage===4){const predictable=/(surprise|unexpected|little more|predict)/.test(lower);financeState.needs.budgetShock=predictable?'High':'Moderate';c.profile.expense=predictable?'Prefers predictable expenses':'Lowest payment priority';if(predictable)c.customerLanguage.push('“I hate surprise expenses.”');}
+      if(stage===5){const high=/(yes|mess up|disruption|definitely)/.test(lower);financeState.needs.repairConcern=high?'High':'Moderate';c.profile.repair=high?'High repair-cost concern':'Moderate repair tolerance';if(high)c.customerLanguage.push('“A large repair would definitely mess up my month.”');}
+      if(stage===6){const exposed=/(outside|rough|terrible|pothole)/.test(lower);financeState.needs.outdoor=exposed;c.profile.exposure=exposed?'Outdoor parking + rough roads':'Limited exposure';}
+      if(stage===7){
+        c.experience=/excellent/.test(lower)?'Excellent':/(confus|help|frustrat)/.test(lower)?'Needs attention':'Good';
+        if(c.experience==='Needs attention')c.recovery={status:'open',severity:'Priority',concern:'Payment explanation remains unclear',owner:'Sales Manager',action:'Clarify the base payment and structure change before presenting optional products',createdAt:new Date().toLocaleString()};
+      }
+      if(stage===8){c.staffRecognition=/carlos/.test(lower)?'Carlos · Sales Consultant':/everyone/.test(lower)?'Entire sales team':'No recognition submitted';}
+      fiSave();
+    }
+    function completeOwnershipConcierge(){
+      const c=financeState.concierge;c.status='complete';c.stage=9;c.completedAt=new Date().toLocaleString();c.menuUpdated=true;
+      conciergeAddMessage('bot','Thank you, Morgan. Your answers have been shared with your finance manager to organize the optional coverage conversation. Nothing has been added to your purchase. Your finance manager will review every option and price with you.');
+      conciergeAddMessage('system','Ownership Profile generated · Product Fit and AI Ownership Brief updated');
+      fiEvent('Ownership Concierge profile generated',`Morgan’s customer-declared ownership priorities were connected to Product Fit. ${c.recovery?'A private recovery alert was created.':'No recovery concern was detected.'}`,'fa-heart-pulse');
+      fiSave();renderAllFinance();showToast('Ownership Profile ready','Product Fit and the AI Ownership Brief now reflect the interview.','success');
+    }
+    function runGuidedConciergeInterview(){
+      resetOwnershipConcierge(false);launchOwnershipConcierge();
+      const sequence=['START',conciergeReplies[1][0],conciergeReplies[2][0],conciergeReplies[3][0],conciergeReplies[4][0],conciergeReplies[5][0],conciergeReplies[6][0],conciergeReplies[7][0],conciergeReplies[8][0]];
+      conciergeDemoTimers.forEach(clearTimeout);conciergeDemoTimers=[];
+      sequence.forEach((reply,index)=>conciergeDemoTimers.push(setTimeout(()=>sendConciergeReply(reply),650+(index*760))));
+      showToast('Guided interview running','The synthetic customer conversation will complete automatically.','success');
+    }
+    function resetOwnershipConcierge(showNotice=true){conciergeDemoTimers.forEach(clearTimeout);conciergeDemoTimers=[];ensureFinanceConciergeState();financeState.concierge=defaultConciergeState();financeState.needs={ownershipMonths:72,annualMiles:18000,repairConcern:'High',outdoor:true,towing:false,budgetShock:'High'};fiEvent('Ownership Concierge demo reset','The synthetic conversation and profile were returned to the ready state.','fa-rotate');fiSave();renderAllFinance();if(showNotice)showToast('Concierge reset','The guided customer is ready for a new invitation.','success');}
+    function toggleConciergePause(){ensureFinanceConciergeState();const c=financeState.concierge;if(c.status==='ready'||c.status==='complete'||c.optedOut)return showToast('No active interview','Start an interview before pausing it.','warning');c.paused=!c.paused;fiEvent(c.paused?'Ownership Concierge paused':'Ownership Concierge resumed',c.paused?'The customer conversation was paused by the operator.':'The automated interview returned to the preserved question.','fa-pause');fiSave();renderAllFinance();}
+    function handoffConciergeToEmployee(){ensureFinanceConciergeState();const c=financeState.concierge;if(c.status==='ready')return showToast('No active conversation','Send the invitation before requesting a handoff.','warning');c.handoff=!c.handoff;c.paused=c.handoff;if(c.handoff)conciergeAddMessage('system','A dealership employee has taken over this conversation.');else conciergeAddMessage('system','The automated concierge has resumed.');fiEvent(c.handoff?'Concierge handed to employee':'Concierge control restored',c.handoff?'Dana Ruiz accepted the customer conversation.':'The automated interview resumed after employee review.','fa-user-headset');fiSave();renderAllFinance();}
+    function simulateConciergeOptOut(original='STOP'){ensureFinanceConciergeState();const c=financeState.concierge;if(c.optedOut)return;c.optedOut=true;c.status='opted-out';c.paused=false;c.handoff=false;conciergeAddMessage('customer',original);conciergeAddMessage('bot','You’re opted out. No additional automated messages will be sent in this demonstration. A dealership employee can still assist you directly.');fiEvent('Customer opted out of Ownership Concierge','The synthetic workflow stopped immediately and preserved the opt-out event.','fa-stop');fiSave();renderAllFinance();showToast('Opt-out preserved','The demonstration prevents additional automated outreach.','warning');}
+    function resolveConciergeRecovery(){ensureFinanceConciergeState();const r=financeState.concierge.recovery;if(!r)return;if(r.status==='resolved')return;r.status='resolved';r.resolvedAt=new Date().toLocaleString();r.resolution='Sales manager clarified the base payment and structure change before F&I presentation.';fiEvent('Customer recovery alert resolved',r.resolution,'fa-circle-check');fiSave();renderAllFinance();showToast('Recovery completed','The resolution is preserved with the F&I record.','success');}
+    function openConciergeQueueDeal(deal){if(deal==='FI-8421'){showFinanceView('fi-concierge');return;}showToast('Synthetic queue record',`${deal} is included to demonstrate workload orchestration. The guided conversation uses FI-8421.`,'success');}
+
+    function renderOwnershipConcierge(){
+      ensureFinanceConciergeState();const c=financeState.concierge;const status=conciergeStatusCopy();const progress=conciergeProgress();
+      const metrics=document.getElementById('conciergeMetrics');if(metrics)metrics.innerHTML=[
+        ['Interview state',status[0],c.status==='complete'?'Profile connected':'Synthetic SMS workflow'],
+        ['Questions complete',c.status==='complete'?'8 / 8':`${Math.max(0,Math.min(8,c.stage-1))} / 8`,'One question at a time'],
+        ['Ownership horizon',c.profile.ownership,'Customer declared'],
+        ['Annual mileage',c.profile.miles,'Customer declared'],
+        ['Experience pulse',c.experience,c.recovery?'Private alert created':'No open recovery alert']
+      ].map(x=>`<div class="concierge-metric"><small>${x[0]}</small><strong style="font-size:${String(x[1]).length>15?'14':'23'}px">${conciergeEscape(x[1])}</strong><span>${conciergeEscape(x[2])}</span></div>`).join('');
+      const consoleStatus=document.getElementById('conciergeConsoleStatus');if(consoleStatus){consoleStatus.textContent=status[0];consoleStatus.className=`badge ${status[2]==='alert'?'red':status[2]==='attention'?'amber':'finance-badge'}`;}
+      const statusHost=document.getElementById('conciergeStatusHost');if(statusHost)statusHost.innerHTML=`<div class="concierge-status-panel"><div><div class="fi-eyebrow">Morgan Davis · (***) ***-4821 · Synthetic consent verified</div><h3>${status[0]}</h3><p>${status[1]}</p></div><div class="concierge-status-token ${status[2]||''}">${c.status.replace('-',' ')}</div></div>`;
+      const fill=document.getElementById('conciergeProgressFill');if(fill)fill.style.width=`${progress}%`;const label=document.getElementById('conciergeProgressLabel');if(label)label.textContent=`${progress}%`;const pause=document.getElementById('conciergePauseLabel');if(pause)pause.textContent=c.paused?'Resume':'Pause';
+      const profile=document.getElementById('conciergeProfileHost');if(profile){const cells=[['Ownership horizon',c.profile.ownership,'Expected retention'],['Annual driving',c.profile.miles,'Mileage exposure'],['Vehicle use',c.profile.use,'Primary use case'],['Expense preference',c.profile.expense,'Presentation priority'],['Repair tolerance',c.profile.repair,'Budget disruption'],['Vehicle exposure',c.profile.exposure,'Road and parking context']];profile.innerHTML=`<div class="concierge-profile-grid">${cells.map(x=>`<div class="concierge-profile-cell"><small>${x[0]}</small><strong>${conciergeEscape(x[1])}</strong><span>${x[2]}</span></div>`).join('')}</div><div class="concierge-language"><small>Customer language</small>${c.customerLanguage.length?c.customerLanguage.slice(-3).map(q=>`<blockquote>${conciergeEscape(q)}</blockquote>`).join(''):'<blockquote>Customer phrases will appear here as the interview progresses.</blockquote>'}</div>`;}
+      const transcript=document.getElementById('conciergeTranscript');if(transcript){transcript.innerHTML=c.transcript.length?c.transcript.map(m=>`<div class="sms-row ${m.role}"><div class="sms-bubble">${conciergeEscape(m.text)}<span class="sms-time">${conciergeEscape(m.time)}</span></div></div>`).join(''):`<div class="sms-empty"><i class="fa-solid fa-comments"></i><strong>Ownership Concierge ready</strong><br>Send the transparent demo invitation or run the guided interview.</div>`;requestAnimationFrame(()=>{transcript.scrollTop=transcript.scrollHeight;});}
+      const quick=document.getElementById('conciergeQuickReplies');if(quick){const replies=conciergeReplies[c.stage]||[];quick.innerHTML=replies.map(r=>`<button class="concierge-quick-reply" type="button" title="${conciergeEscape(r)}" data-concierge-reply="${encodeURIComponent(r)}">${conciergeEscape(r)}</button>`).join('')||'<span style="padding:9px;color:#71817f;font-size:8px">No response required at this stage.</span>';quick.querySelectorAll('[data-concierge-reply]').forEach(button=>button.addEventListener('click',()=>sendConciergeReply(decodeURIComponent(button.dataset.conciergeReply))));}
+      const input=document.getElementById('conciergeReplyInput');const send=document.getElementById('conciergeSendButton');const disabled=c.optedOut||c.status==='complete'||c.handoff||c.paused;if(input)input.disabled=disabled;if(send)send.disabled=disabled;
+      renderConciergeProductFit();renderConciergeExperience();renderConciergeTimeline();
+    }
+    function renderConciergeProductFit(){const host=document.getElementById('conciergeProductFitHost');if(!host)return;const ranked=financeProducts.map(p=>({p,...fiFit(p)})).sort((a,b)=>b.score-a.score).slice(0,5);host.innerHTML=`<div class="concierge-fit-list">${ranked.map((x,i)=>`<div class="concierge-fit-row"><div class="concierge-fit-rank">${i+1}</div><div><strong>${x.p.name}</strong><span>${x.reasons[0]}</span></div><div class="concierge-fit-score">${x.score}</div><div class="concierge-fit-bar"><div style="width:${x.score}%"></div></div></div>`).join('')}</div>`;}
+    function renderConciergeExperience(){const host=document.getElementById('conciergeExperienceHost');if(!host)return;const c=financeState.concierge;host.innerHTML=`<div class="concierge-pulse-grid"><div class="concierge-pulse-card ${c.recovery&&c.recovery.status==='open'?'alert':c.experience==='Excellent'?'success':''}"><small>Current sentiment</small><strong>${conciergeEscape(c.experience)}</strong><p>${c.recovery?'The customer reported a concern that should be addressed before menu presentation.':'The neutral experience pulse has not created an open recovery alert.'}</p></div><div class="concierge-pulse-card"><small>Staff recognition</small><strong>${conciergeEscape(c.staffRecognition)}</strong><p>Recognition remains internal and is not converted into a public-review request.</p></div>${c.recovery?`<div class="concierge-pulse-card ${c.recovery.status==='open'?'alert':'success'}"><small>${c.recovery.status==='open'?'Recovery required':'Recovery resolved'}</small><strong>${conciergeEscape(c.recovery.concern)}</strong><p>${conciergeEscape(c.recovery.status==='open'?c.recovery.action:c.recovery.resolution)}</p>${c.recovery.status==='open'?'<button class="button small fi-button primary" style="margin-top:8px" onclick="resolveConciergeRecovery()">Record Resolution</button>':'<span class="badge green" style="margin-top:8px">Resolved</span>'}</div>`:''}</div>`;}
+    function renderConciergeTimeline(){const items=financeState.timeline.filter(e=>/Concierge|customer recovery|Customer engaged|opted out/i.test(e.title)).slice(0,8);fiTimeline('conciergeTimeline',items);}
+    function renderConciergeQueue(){
+      ensureFinanceConciergeState();const c=financeState.concierge;const queue=conciergeInterviewQueue.map((r,i)=>i? r : {...r,status:c.status,experience:c.experience});
+      const metrics=document.getElementById('conciergeQueueMetrics');if(metrics){const active=queue.filter(x=>['active','invited'].includes(x.status)).length,complete=queue.filter(x=>x.status==='complete').length;metrics.innerHTML=[['Waiting customers','4','Synthetic F&I queue'],['Interview active',active,'Live or invitation sent'],['Profiles ready',complete,'Connected to Product Fit'],['Opted out','1','No further automation'],['Recovery alerts',c.recovery&&c.recovery.status==='open'?1:0,'Private manager intervention']].map(x=>`<div class="concierge-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');}
+      const body=document.getElementById('conciergeQueueBody');if(body)body.innerHTML=queue.map(r=>{const statusLabel=r.status==='guided'?'Ready':r.status.replace('-',' ');const tone=r.status==='complete'?'green':r.status==='opted-out'?'red':r.status==='active'||r.status==='invited'?'finance-badge':'amber';return `<tr><td><span class="finance-record-token" style="min-height:24px;padding:2px 7px"><b>${r.code}</b><code>${r.deal}</code></span></td><td><strong>${r.customer}</strong></td><td>${r.mobile}</td><td>${r.wait}</td><td><span class="badge ${r.consent==='Demo verified'?'green':'amber'}">${r.consent}</span></td><td><span class="badge ${tone}">${statusLabel.toUpperCase()}</span></td><td>${r.experience}</td><td><button class="button small fi-button" onclick="openConciergeQueueDeal('${r.deal}')">${r.deal==='FI-8421'?'Open':'View'}</button></td></tr>`}).join('');
+    }
+    function renderConciergeRecovery(){
+      ensureFinanceConciergeState();const c=financeState.concierge;const open=!!(c.recovery&&c.recovery.status==='open');const hero=document.getElementById('conciergeRecoveryHero');if(hero)hero.innerHTML=`<div class="fi-grid-3"><div><div class="fi-eyebrow">Open recovery opportunities</div><div style="margin-top:8px;font-size:30px;font-weight:850">${open?1:0}</div><p style="margin:5px 0 0;color:var(--muted);font-size:9px">Concerns requiring manager attention before F&amp;I.</p></div><div><div class="fi-eyebrow">Average response target</div><div style="margin-top:8px;font-size:22px;font-weight:850">Under 5 min</div><p style="margin:5px 0 0;color:var(--muted);font-size:9px">Synthetic store-configured intervention standard.</p></div><div><div class="fi-eyebrow">Public review routing</div><div style="margin-top:8px;font-size:16px;font-weight:850">Disabled</div><p style="margin:5px 0 0;color:var(--muted);font-size:9px">Experience responses remain private in this sandbox.</p></div></div>`;
+      const host=document.getElementById('conciergeRecoveryHost');if(host){const cards=[];if(c.recovery)cards.push(`<article class="recovery-card ${c.recovery.status}"><span class="badge ${c.recovery.status==='open'?'red':'green'}">${c.recovery.status.toUpperCase()}</span><h3>${conciergeEscape(c.recovery.concern)}</h3><p>${conciergeEscape(c.recovery.status==='open'?c.recovery.action:c.recovery.resolution)}</p><div class="recovery-meta"><div><small>Customer</small><strong>${financeState.customer}</strong></div><div><small>Owner</small><strong>${c.recovery.owner}</strong></div><div><small>Deal</small><strong>${financeState.activeDealId}</strong></div><div><small>Created</small><strong>${c.recovery.createdAt}</strong></div></div><div class="recovery-actions">${c.recovery.status==='open'?'<button class="button fi-button primary" onclick="resolveConciergeRecovery()">Record Recovery</button>':'<span class="badge green">Resolution preserved</span>'}<button class="button fi-button" onclick="showFinanceView('fi-concierge')">Open Conversation</button></div></article>`);cards.push(`<article class="recovery-card resolved"><span class="badge green">RESOLVED</span><h3>Trade-value explanation clarified</h3><p>A synthetic customer questioned the trade payoff. The sales manager reviewed the figures before the finance presentation.</p><div class="recovery-meta"><div><small>Customer</small><strong>Avery Brooks</strong></div><div><small>Owner</small><strong>Floor Manager</strong></div><div><small>Deal</small><strong>FI-8418</strong></div><div><small>Response</small><strong>3 min</strong></div></div><div class="recovery-actions"><span class="badge green">Closed with customer</span></div></article>`);host.innerHTML=cards.join('')||`<article class="recovery-card resolved"><span class="badge green">NO OPEN ALERT</span><h3>The active customer has not reported a process concern.</h3><p>Run the guided Ownership Concierge interview to demonstrate how payment confusion creates a private recovery opportunity.</p><div class="recovery-actions"><button class="button fi-button primary" onclick="runGuidedConciergeInterview()">Run Guided Interview</button></div></article>`;}
+    }
+    function renderConciergeCommand(){
+      ensureFinanceConciergeState();const c=financeState.concierge;const status=conciergeStatusCopy();const title=document.getElementById('fiActionConciergeTitle');if(title)title.textContent=status[0];const copy=document.getElementById('fiActionConciergeCopy');if(copy)copy.textContent=c.status==='complete'?'Ownership priorities are connected to Product Fit and the AI Ownership Brief.':status[1];const card=document.getElementById('fiConciergeActionCard');if(card){card.classList.toggle('ready',c.status==='complete');card.classList.toggle('attention',c.status!=='complete');}const nav=document.getElementById('fiConciergeNavCount');if(nav)nav.textContent=c.status==='complete'?'READY':c.status==='active'?`${Math.max(1,c.stage)}/8`:c.status==='invited'?'SENT':c.optedOut?'STOP':'NEW';const interviews=document.getElementById('fiInterviewNavCount');if(interviews)interviews.textContent=c.status==='active'||c.status==='invited'?1:3;const recovery=document.getElementById('fiRecoveryNavCount');if(recovery)recovery.textContent=c.recovery&&c.recovery.status==='open'?1:0;
+    }
+    function renderConciergeBriefConnection(){
+      ensureFinanceConciergeState();const c=financeState.concierge;if(c.status!=='complete')return;const body=document.querySelector('#fiOwnershipBriefPreview .ownership-preview-body');if(!body||body.querySelector('.concierge-brief-banner'))return;const banner=document.createElement('div');banner.className='concierge-brief-banner';banner.innerHTML=`<div class="concierge-brief-banner-icon"><i class="fa-solid fa-comments"></i></div><div><strong>Prepared with Morgan’s Ownership Concierge profile</strong><p>${conciergeEscape(c.profile.ownership)} · ${conciergeEscape(c.profile.miles)} · ${conciergeEscape(c.profile.expense)}. Customer language: ${conciergeEscape(c.customerLanguage[0]||'Ownership priorities confirmed.')}</p></div><span class="badge finance-badge">CUSTOMER DECLARED</span>`;body.insertBefore(banner,body.firstChild);
+    }
+
+    const buildFinanceOwnershipBriefDocumentConciergeBase=buildFinanceOwnershipBriefDocument;
+    buildFinanceOwnershipBriefDocument=function(autoPrint=false){
+      let html=buildFinanceOwnershipBriefDocumentConciergeBase(autoPrint);ensureFinanceConciergeState();const c=financeState.concierge;if(c.status!=='complete')return html;
+      const insert=`<div style="margin:.18in 0;padding:.16in;border:1px solid #b9d9d3;border-radius:10px;background:linear-gradient(110deg,#eef9f6,#fff8ea)"><div style="font-size:7pt;font-weight:900;letter-spacing:.12em;color:#08766e;text-transform:uppercase">Prepared with Ownership Concierge</div><div style="margin-top:6px;font-size:11pt;font-weight:800;color:#153837">${conciergeEscape(c.profile.ownership)} · ${conciergeEscape(c.profile.miles)} · ${conciergeEscape(c.profile.expense)}</div><div style="margin-top:5px;font-size:8pt;line-height:1.5;color:#607675">Customer-declared context: ${conciergeEscape(c.customerLanguage.slice(0,2).join(' '))}. The customer retains control of every optional product and price.</div></div>`;
+      return html.replace('<div class="intro">','<div class="intro">'+insert);
+    };
+
+    ensureFinanceConciergeState();
+    financePageMeta['fi-concierge']=['Ownership Concierge','Simulated SMS interview, live ownership profile, product-fit movement, and experience pulse'];
+    financePageMeta['fi-interviews']=['Interview Queue','Invitations, active conversations, completed profiles, opt-outs, and employee handoffs'];
+    financePageMeta['fi-recovery']=['Customer Recovery Alerts','Private process-friction intervention before the F&I presentation'];
+
+    const renderAllFinanceConciergeBase=renderAllFinance;
+    renderAllFinance=function(){renderAllFinanceConciergeBase();ensureFinanceConciergeState();renderOwnershipConcierge();renderConciergeQueue();renderConciergeRecovery();renderConciergeCommand();renderConciergeBriefConnection();};
+    document.getElementById('conciergeReplyInput')?.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();submitConciergeReply();}});
+    renderAllFinance();
+  </script>
+
 </body>
-</html>
