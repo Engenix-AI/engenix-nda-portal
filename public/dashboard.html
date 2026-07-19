@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="dashboard-build" content="2026.07.19-layer-transition-fix-v14">
+  <meta name="dashboard-build" content="2026.07.19-guided-experience-v15">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -17,7 +17,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal Layer Transition Fix V14</title>
+    <title>ENGENIX | Guided Experience V15</title>
   <style>
     :root {
       --bg: #071018;
@@ -3894,8 +3894,8 @@
           <button class="icon-button login-theme-button" id="loginThemeToggle" type="button" aria-label="Switch color theme" title="Switch color theme"><i class="fa-solid fa-moon theme-icon-moon"></i><i class="fa-solid fa-sun theme-icon-sun"></i></button>
         </div>
         <div class="login-kicker">Authorized demonstration access</div>
-        <h2 class="login-title">Enter Operating Command.</h2>
-        <p class="login-copy">Start at the supervisory operating tower, then move into Desking, F&amp;I, Compliance, or Controller Intelligence without relearning the portal.</p>
+        <h2 class="login-title">Enter ENGENIX.</h2>
+        <p class="login-copy">Start with a guided operating day built around your role. ENGENIX will surface what matters, explain why, and route every decision into the correct intelligence workspace.</p>
 
         <div class="demo-credentials" aria-label="Demo login credentials">
           <div class="demo-credentials-label">Use these demonstration credentials</div>
@@ -3944,6 +3944,7 @@
         <div class="product-switch-select">
           <span class="product-switch-mark" id="workspaceSwitchMark">◇</span>
           <select id="workspaceSelect" aria-label="Switch ENGENIX workspace">
+            <option value="guided">Guided Experience</option>
             <option value="command" selected>Operating Command</option>
             <option value="desking">Desking Intelligence</option>
             <option value="finance">F&amp;I Intelligence</option>
@@ -3954,6 +3955,33 @@
         <div class="product-switch-copy" id="workspaceSwitchCopy">Cross-layer priorities, reconciliation, ownership, and next actions</div>
       </div>
 
+
+
+      <button class="sidebar-primary-action guided-shell guided-primary-action" type="button" onclick="openNextGuidedPriority()">
+        <span class="sidebar-primary-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span><strong>Review Next Priority</strong><small>ENGENIX will take you to the next owned decision</small></span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <nav class="nav-group guided-shell" aria-label="Guided experience navigation">
+        <div class="nav-label">Your Operating Day</div>
+        <div class="nav-list">
+          <button type="button" class="nav-item guided-nav-item active" data-guided-view="guided-today"><span class="nav-icon"><i class="fa-solid fa-compass"></i></span><span class="nav-text">Today</span><span class="nav-count" id="guidedTodayCount">5</span></button>
+          <button type="button" class="nav-item guided-nav-item" data-guided-view="guided-work"><span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">My Work</span><span class="nav-count" id="guidedWorkCount">7</span></button>
+          <button type="button" class="nav-item guided-nav-item" data-guided-view="guided-deals"><span class="nav-icon"><i class="fa-solid fa-car"></i></span><span class="nav-text">Deals</span></button>
+          <button type="button" class="nav-item guided-nav-item" data-guided-view="guided-team"><span class="nav-icon"><i class="fa-solid fa-users"></i></span><span class="nav-text">Team</span><span class="nav-count" id="guidedTeamCount">4</span></button>
+          <button type="button" class="nav-item guided-nav-item" data-guided-view="guided-briefings"><span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span><span class="nav-text">Briefings</span></button>
+        </div>
+      </nav>
+
+      <nav class="nav-group guided-shell" aria-label="Guided tools navigation">
+        <div class="nav-label">Explore</div>
+        <div class="nav-list">
+          <button type="button" class="nav-item guided-nav-item" onclick="openGuidedCommand()"><span class="nav-icon"><i class="fa-solid fa-magnifying-glass"></i></span><span class="nav-text">Search &amp; Ask</span><span class="nav-count">⌘K</span></button>
+          <button type="button" class="nav-item guided-nav-item" onclick="openAskEngenix()"><span class="nav-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span><span class="nav-text">Ask ENGENIX</span></button>
+          <button type="button" class="nav-item guided-nav-item" data-guided-view="guided-more"><span class="nav-icon"><i class="fa-solid fa-border-all"></i></span><span class="nav-text">All Intelligence</span></button>
+        </div>
+      </nav>
 
       <button class="sidebar-primary-action command-shell command-primary-action" type="button" onclick="showCommandView('command-command')">
         <span class="sidebar-primary-icon"><i class="fa-solid fa-tower-broadcast"></i></span>
@@ -4251,6 +4279,13 @@
           <span class="demo-pill" id="demoPill">COMPLIANCE DEMO</span>
         </div>
         <div class="topbar-right">
+
+          <button class="guided-role-chip" id="guidedRoleButton" type="button" onclick="openGuidedRoleSelector()" aria-label="Change operating role">
+            <span class="guided-role-avatar" id="guidedRoleInitials">GM</span>
+            <span><small>Operating as</small><strong id="guidedRoleLabel">General Manager</strong></span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <button class="button small guided-mode-toggle" id="guidedModeToggle" type="button" onclick="toggleGuidedMode()"><i class="fa-solid fa-compass"></i><span>Guided Mode</span></button>
           <div class="select-wrap">
             <select class="select-control" id="rooftopSelect" aria-label="Choose dealership scope">
               <option value="all">Premier Auto Group · All rooftops</option>
@@ -4327,6 +4362,99 @@
 
       <div class="content">
 
+
+        <section class="view guided-view active" id="view-guided-today">
+          <div class="guided-page">
+            <header class="guided-hero">
+              <div class="guided-hero-copy">
+                <div class="guided-kicker"><span class="dot"></span><span id="guidedGreetingTime">Your operating day</span></div>
+                <h1 id="guidedGreeting">Good afternoon, Marcus.</h1>
+                <p id="guidedHeroCopy">Five items require your attention. ENGENIX has ordered them by customer impact, financial exposure, and operating urgency.</p>
+                <div class="guided-hero-actions">
+                  <button class="button primary guided-next-button" type="button" onclick="openNextGuidedPriority()"><i class="fa-solid fa-bolt"></i>Review next priority</button>
+                  <button class="button" type="button" onclick="openGuidedRoleSelector()"><i class="fa-solid fa-user-tie"></i>Change role</button>
+                </div>
+              </div>
+              <div class="guided-hero-status">
+                <div class="guided-readiness-ring" id="guidedReadinessRing"><div><strong id="guidedReadinessValue">84%</strong><span>day readiness</span></div></div>
+                <div class="guided-status-copy"><strong id="guidedStatusTitle">4 departments moving</strong><span id="guidedStatusCopy">Two decisions are currently blocking downstream work.</span></div>
+              </div>
+            </header>
+
+            <div class="guided-command-bar" role="search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input id="guidedInlineCommand" type="search" autocomplete="off" placeholder="Search a deal or tell ENGENIX what you need to do" aria-label="Search deals or actions" />
+              <button type="button" onclick="runGuidedInlineCommand()">Ask ENGENIX <span>↵</span></button>
+            </div>
+            <div class="guided-quick-prompts" id="guidedQuickPrompts"></div>
+
+            <div class="guided-metric-grid" id="guidedMetricGrid"></div>
+
+            <section class="guided-continue-card" id="guidedContinueCard">
+              <div class="guided-continue-icon"><i class="fa-solid fa-play"></i></div>
+              <div><div class="guided-section-kicker">Continue where you left off</div><strong id="guidedContinueTitle">Morgan Davis lender callback review</strong><span id="guidedContinueMeta">Step 2 of 4 · last opened 22 minutes ago</span></div>
+              <button class="button small" type="button" id="guidedContinueButton">Continue <i class="fa-solid fa-arrow-right"></i></button>
+            </section>
+
+            <div class="guided-section-head">
+              <div><div class="guided-section-kicker">Prioritized for you</div><h2>What needs attention now</h2><p>Each item shows the decision, the impact, the owner, and one clear next action.</p></div>
+              <button class="button small" type="button" onclick="showGuidedView('guided-work')">View all work</button>
+            </div>
+            <div class="guided-priority-list" id="guidedPriorityList"></div>
+
+            <div class="guided-two-column">
+              <section class="guided-panel">
+                <div class="guided-panel-head"><div><div class="guided-section-kicker">Operating pulse</div><h3>Across the dealership</h3></div><button type="button" class="guided-text-button" onclick="switchPortalWorkspace('command','command-command')">Open Command</button></div>
+                <div class="guided-pulse-list" id="guidedPulseList"></div>
+              </section>
+              <section class="guided-panel">
+                <div class="guided-panel-head"><div><div class="guided-section-kicker">Your team</div><h3>Waiting on ownership</h3></div><button type="button" class="guided-text-button" onclick="showGuidedView('guided-team')">View team</button></div>
+                <div class="guided-team-mini" id="guidedTeamMini"></div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="view guided-view" id="view-guided-work">
+          <div class="guided-page">
+            <header class="guided-simple-hero"><div><div class="guided-kicker">MY WORK</div><h1>Everything assigned to you.</h1><p>Ordered by urgency, customer impact, financial exposure, and dependency.</p></div><button class="button primary" type="button" onclick="openNextGuidedPriority()"><i class="fa-solid fa-bolt"></i>Next priority</button></header>
+            <div class="guided-filter-row" id="guidedWorkFilters">
+              <button type="button" class="active" data-guided-filter="all">All</button><button type="button" data-guided-filter="act-now">Act now</button><button type="button" data-guided-filter="decision">Decision needed</button><button type="button" data-guided-filter="waiting">Waiting</button><button type="button" data-guided-filter="completed">Completed</button>
+            </div>
+            <div class="guided-work-list" id="guidedWorkList"></div>
+          </div>
+        </section>
+
+        <section class="view guided-view" id="view-guided-deals">
+          <div class="guided-page">
+            <header class="guided-simple-hero"><div><div class="guided-kicker">DEAL MEMORY</div><h1>Find any customer, vehicle, or operating record.</h1><p>One deal identity follows every decision from the desk through operating close.</p></div></header>
+            <div class="guided-deal-search"><i class="fa-solid fa-magnifying-glass"></i><input id="guidedDealSearch" type="search" placeholder="Search customer, deal number, vehicle, or owner" aria-label="Search guided deals" /></div>
+            <div class="guided-deal-grid" id="guidedDealGrid"></div>
+          </div>
+        </section>
+
+        <section class="view guided-view" id="view-guided-team">
+          <div class="guided-page">
+            <header class="guided-simple-hero"><div><div class="guided-kicker">ACCOUNTABILITY</div><h1>See where work is waiting.</h1><p>Ownership is visible without forcing you to inspect every departmental queue.</p></div></header>
+            <div class="guided-team-board" id="guidedTeamBoard"></div>
+          </div>
+        </section>
+
+        <section class="view guided-view" id="view-guided-briefings">
+          <div class="guided-page">
+            <header class="guided-simple-hero"><div><div class="guided-kicker">BRIEFINGS</div><h1>Turn operating intelligence into a meeting.</h1><p>Leadership-ready summaries preserve priorities, owners, deadlines, and financial exposure.</p></div></header>
+            <div class="guided-brief-grid" id="guidedBriefGrid"></div>
+          </div>
+        </section>
+
+        <section class="view guided-view" id="view-guided-more">
+          <div class="guided-page">
+            <header class="guided-simple-hero"><div><div class="guided-kicker">FULL PLATFORM</div><h1>Every intelligence workspace remains available.</h1><p>Guided Mode simplifies the path. Workspace Mode preserves the complete operating depth.</p></div><button class="button" type="button" onclick="openGuidedRoleSelector()"><i class="fa-solid fa-user-tie"></i>Change operating role</button></header>
+            <div class="guided-layer-grid" id="guidedLayerGrid"></div>
+            <div class="guided-section-head guided-demo-head"><div><div class="guided-section-kicker">Three-minute walkthroughs</div><h2>Experience ENGENIX by role</h2><p>Each journey follows the same synthetic deals through the decisions that matter to that operator.</p></div></div>
+            <div class="guided-journey-grid" id="guidedJourneyGrid"></div>
+          </div>
+        </section>
 
         <section class="view command-view active" id="view-command-command">
           <div class="oc-shell">
@@ -5434,6 +5562,59 @@
 
   <section class="print-brief-root" id="printBriefRoot" aria-hidden="true"></section>
 
+
+  <div class="guided-role-overlay" id="guidedRoleOverlay" aria-hidden="true">
+    <section class="guided-role-dialog" role="dialog" aria-modal="true" aria-labelledby="guidedRoleTitle">
+      <header><div><div class="guided-kicker">PERSONALIZE THE EXPERIENCE</div><h2 id="guidedRoleTitle">How are you operating today?</h2><p>ENGENIX will prioritize the same platform around the decisions this role owns.</p></div><button class="icon-button" type="button" onclick="closeGuidedRoleSelector()" aria-label="Close role selection"><i class="fa-solid fa-xmark"></i></button></header>
+      <div class="guided-role-grid" id="guidedRoleGrid"></div>
+      <footer><span>Synthetic demonstration roles only. Production access would follow dealership permissions.</span><button class="button" type="button" onclick="selectGuidedRole('general-manager')">Use General Manager</button></footer>
+    </section>
+  </div>
+
+  <div class="guided-task-overlay" id="guidedTaskOverlay" aria-hidden="true" onclick="guidedOverlayClick(event,'guidedTaskOverlay',closeGuidedTask)">
+    <aside class="guided-task-panel" role="dialog" aria-modal="true" aria-labelledby="guidedTaskTitle">
+      <header><div><div class="guided-kicker" id="guidedTaskStatus">DECISION NEEDED</div><h2 id="guidedTaskTitle">Guided task</h2><p id="guidedTaskSubtitle"></p></div><button class="icon-button" type="button" onclick="closeGuidedTask()" aria-label="Close guided task"><i class="fa-solid fa-xmark"></i></button></header>
+      <div class="guided-task-scroll">
+        <div class="guided-task-impact" id="guidedTaskImpact"></div>
+        <section class="guided-task-section"><span>What happened</span><p id="guidedTaskWhat"></p></section>
+        <section class="guided-task-section"><span>Why it matters</span><p id="guidedTaskWhy"></p></section>
+        <section class="guided-task-section recommended"><span>Recommended next move</span><p id="guidedTaskRecommendation"></p></section>
+        <section class="guided-task-section"><span>Complete this decision</span><div class="guided-step-list" id="guidedTaskSteps"></div></section>
+        <details class="guided-evidence"><summary>View supporting evidence</summary><div id="guidedTaskEvidence"></div></details>
+      </div>
+      <footer><button class="button" type="button" onclick="openCurrentTaskWorkspace()"><i class="fa-solid fa-arrow-up-right-from-square"></i>Open full workspace</button><button class="button primary" type="button" id="guidedTaskPrimary" onclick="completeCurrentGuidedTask()">Complete decision</button></footer>
+    </aside>
+  </div>
+
+  <div class="guided-ask-overlay" id="guidedAskOverlay" aria-hidden="true" onclick="guidedOverlayClick(event,'guidedAskOverlay',closeAskEngenix)">
+    <aside class="guided-ask-panel" role="dialog" aria-modal="true" aria-labelledby="guidedAskTitle">
+      <header><div class="guided-ask-mark"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div><div class="guided-kicker">CONTEXTUAL GUIDANCE</div><h2 id="guidedAskTitle">Ask ENGENIX</h2><p>Explain the current work without changing the operating record.</p></div><button class="icon-button" type="button" onclick="closeAskEngenix()" aria-label="Close Ask ENGENIX"><i class="fa-solid fa-xmark"></i></button></header>
+      <div class="guided-ask-context" id="guidedAskContext">General Manager · My Operating Day</div>
+      <div class="guided-ask-messages" id="guidedAskMessages"></div>
+      <div class="guided-ask-suggestions" id="guidedAskSuggestions"></div>
+      <div class="guided-ask-compose"><input id="guidedAskInput" type="text" placeholder="Ask what matters, why, or what to do next" aria-label="Ask ENGENIX a question" /><button class="button primary" type="button" onclick="submitGuidedQuestion()"><i class="fa-solid fa-arrow-up"></i></button></div>
+    </aside>
+  </div>
+
+  <div class="guided-command-overlay" id="guidedCommandOverlay" aria-hidden="true" onclick="guidedOverlayClick(event,'guidedCommandOverlay',closeGuidedCommand)">
+    <section class="guided-command-dialog" role="dialog" aria-modal="true" aria-labelledby="guidedCommandTitle">
+      <header><i class="fa-solid fa-magnifying-glass"></i><input id="guidedCommandInput" type="search" autocomplete="off" placeholder="Search a deal or tell ENGENIX what you need to do" aria-label="Search ENGENIX" /><button class="icon-button" type="button" onclick="closeGuidedCommand()" aria-label="Close search"><i class="fa-solid fa-xmark"></i></button></header>
+      <div class="guided-command-hint" id="guidedCommandTitle">Try “what needs my approval,” “find Morgan Davis,” or “show funding holds.”</div>
+      <div class="guided-command-results" id="guidedCommandResults"></div>
+    </section>
+  </div>
+
+  <nav class="guided-mobile-nav" id="guidedMobileNav" aria-label="Guided mobile navigation">
+    <button type="button" class="active" data-guided-mobile="guided-today"><i class="fa-solid fa-compass"></i><span>Today</span></button>
+    <button type="button" data-guided-mobile="guided-work"><i class="fa-solid fa-list-check"></i><span>My Work</span></button>
+    <button type="button" onclick="openGuidedCommand()"><span class="guided-mobile-search"><i class="fa-solid fa-magnifying-glass"></i></span><span>Search</span></button>
+    <button type="button" data-guided-mobile="guided-briefings"><i class="fa-solid fa-file-lines"></i><span>Brief</span></button>
+    <button type="button" data-guided-mobile="guided-more"><i class="fa-solid fa-border-all"></i><span>More</span></button>
+  </nav>
+
+  <button class="guided-ask-fab" id="guidedAskFab" type="button" onclick="openAskEngenix()" aria-label="Ask ENGENIX"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Ask ENGENIX</span></button>
+
+
   <div class="toast-stack" id="toastStack"></div>
 
   <script>
@@ -5498,9 +5679,9 @@
       }
 
       status.className = 'login-status success';
-      status.textContent = 'Demo access confirmed. Opening operating view…';
+      status.textContent = 'Demo access confirmed. Preparing your operating day…';
       button.disabled = true;
-      button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>Opening Workspace';
+      button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>Preparing Experience';
       try { sessionStorage.setItem('engenix-demo-auth', 'true'); } catch (error) {}
       setTimeout(() => {
         setAuthenticated(true);
@@ -9509,6 +9690,536 @@
     });
 
     window.addEventListener('pageshow', closeMobileNavigation);
+  })();
+  </script>
+
+
+  <style id="engenix-guided-experience-v15-style">
+    :root { --guided:#176f82; --guided-2:#2c72d6; --guided-soft:rgba(23,111,130,.10); --guided-line:rgba(23,111,130,.20); }
+    .guided-shell,.guided-mobile-nav,.guided-ask-fab { display:none !important; }
+    body[data-workspace="guided"] .command-shell,
+    body[data-workspace="guided"] .finalization-shell,
+    body[data-workspace="guided"] .compliance-shell,
+    body[data-workspace="guided"] .desking-shell,
+    body[data-workspace="guided"] .finance-shell { display:none !important; }
+    body[data-workspace="guided"] .guided-shell { display:block !important; }
+    body[data-workspace="guided"] button.guided-shell { display:grid !important; }
+    body[data-workspace="guided"] nav.guided-shell { display:block !important; }
+    body[data-workspace="guided"] .view:not(.guided-view) { display:none !important; }
+    body[data-workspace="guided"] .guided-view { display:none !important; }
+    body[data-workspace="guided"] .guided-view.active { display:block !important; }
+    body[data-workspace="guided"] .product-switch-mark { color:var(--guided); background:var(--guided-soft); }
+    body[data-workspace="guided"] .guided-primary-action { border-color:var(--guided-line); background:linear-gradient(135deg,rgba(23,111,130,.13),rgba(44,114,214,.055)); }
+    body[data-workspace="guided"] .guided-primary-action .sidebar-primary-icon { color:var(--guided); background:var(--guided-soft); }
+    body[data-workspace="guided"] .guided-nav-item.active { color:var(--text); background:linear-gradient(90deg,rgba(23,111,130,.15),rgba(44,114,214,.05)); border-color:var(--guided-line); box-shadow:inset 3px 0 0 var(--guided); }
+    body[data-workspace="guided"] .demo-pill { color:#0d6579; background:rgba(23,111,130,.09); border-color:var(--guided-line); }
+    html[data-theme="light"] body[data-workspace="guided"] .sidebar { background:linear-gradient(180deg,#fbfefe,#f1f8f9 66%,#f7f9fb); }
+    html[data-theme="dark"] body[data-workspace="guided"] .sidebar { background:linear-gradient(180deg,#07191d,#07141a 65%,#0b1118); }
+    body[data-workspace="guided"] { background:radial-gradient(circle at 72% -8%,rgba(23,111,130,.12),transparent 32%),radial-gradient(circle at 12% 105%,rgba(44,114,214,.08),transparent 28%),var(--bg); }
+
+    .guided-page { max-width:1540px; margin:0 auto; }
+    .guided-hero { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:28px; padding:34px; border:1px solid var(--guided-line); border-radius:22px; background:linear-gradient(135deg,rgba(23,111,130,.13),rgba(44,114,214,.055) 58%,rgba(255,255,255,.02)); overflow:hidden; position:relative; }
+    .guided-hero:after { content:""; position:absolute; width:300px; height:300px; border-radius:50%; right:-100px; top:-150px; border:1px solid var(--guided-line); box-shadow:0 0 0 42px rgba(23,111,130,.025),0 0 0 84px rgba(23,111,130,.018); pointer-events:none; }
+    .guided-kicker,.guided-section-kicker { color:var(--guided); font-size:10px; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
+    .guided-kicker { display:flex; align-items:center; gap:8px; }
+    .guided-kicker .dot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 5px rgba(79,209,161,.10); }
+    .guided-hero h1,.guided-simple-hero h1 { margin:11px 0 0; color:var(--text); font-size:clamp(30px,4vw,48px); line-height:1.03; letter-spacing:-.035em; }
+    .guided-hero p,.guided-simple-hero p { max-width:780px; margin:13px 0 0; color:var(--muted); font-size:14px; line-height:1.72; }
+    .guided-hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+    .guided-next-button { min-height:46px; }
+    .guided-hero-status { align-self:stretch; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; position:relative; z-index:1; }
+    .guided-readiness-ring { --progress:84; width:148px; aspect-ratio:1; border-radius:50%; display:grid; place-items:center; background:conic-gradient(var(--guided) calc(var(--progress)*1%),rgba(127,149,167,.18) 0); position:relative; }
+    .guided-readiness-ring:before { content:""; position:absolute; inset:10px; border-radius:50%; background:var(--panel); border:1px solid var(--line); }
+    .guided-readiness-ring div { position:relative; z-index:1; text-align:center; }
+    .guided-readiness-ring strong { display:block; color:var(--text); font-size:29px; letter-spacing:-.04em; }
+    .guided-readiness-ring span { color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.11em; }
+    .guided-status-copy { text-align:center; max-width:220px; }
+    .guided-status-copy strong { display:block; color:var(--text); font-size:13px; }
+    .guided-status-copy span { display:block; color:var(--muted); font-size:11px; line-height:1.5; margin-top:5px; }
+
+    .guided-command-bar { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:12px; margin-top:18px; padding:9px 10px 9px 17px; border:1px solid var(--line-strong); border-radius:15px; background:var(--panel); box-shadow:0 12px 35px rgba(0,0,0,.08); }
+    .guided-command-bar>i { color:var(--guided); }
+    .guided-command-bar input { min-width:0; border:0; outline:0; color:var(--text); background:transparent; font-size:14px; }
+    .guided-command-bar input::placeholder { color:var(--muted-2); }
+    .guided-command-bar button { min-height:38px; border:0; border-radius:10px; padding:0 14px; color:#fff; background:var(--guided); font-weight:750; cursor:pointer; }
+    .guided-command-bar button span { margin-left:8px; opacity:.66; }
+    .guided-quick-prompts { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .guided-quick-prompts button { border:1px solid var(--line); border-radius:999px; padding:7px 10px; color:var(--muted); background:var(--panel); font-size:10px; cursor:pointer; }
+    .guided-quick-prompts button:hover { color:var(--text); border-color:var(--guided-line); }
+
+    .guided-metric-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:20px; }
+    .guided-metric { padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .guided-metric small { display:block; color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.1em; }
+    .guided-metric strong { display:block; margin-top:8px; color:var(--text); font-size:24px; letter-spacing:-.04em; }
+    .guided-metric span { display:block; margin-top:4px; color:var(--muted); font-size:10px; line-height:1.4; }
+
+    .guided-continue-card { display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:14px; align-items:center; margin-top:18px; padding:16px; border:1px solid rgba(44,114,214,.22); border-radius:15px; background:linear-gradient(90deg,rgba(44,114,214,.09),rgba(23,111,130,.04)); }
+    .guided-continue-icon { width:42px; height:42px; display:grid; place-items:center; border-radius:12px; color:var(--guided-2); background:rgba(44,114,214,.10); }
+    .guided-continue-card strong { display:block; color:var(--text); font-size:13px; margin-top:4px; }
+    .guided-continue-card span { display:block; color:var(--muted); font-size:10px; margin-top:4px; }
+
+    .guided-section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:18px; margin:28px 0 13px; }
+    .guided-section-head h2 { margin:5px 0 0; color:var(--text); font-size:22px; }
+    .guided-section-head p { margin:6px 0 0; color:var(--muted); font-size:11px; line-height:1.5; }
+    .guided-priority-list,.guided-work-list { display:grid; gap:11px; }
+    .guided-priority-card { display:grid; grid-template-columns:5px minmax(0,1fr) auto; gap:0; border:1px solid var(--line); border-radius:16px; background:var(--panel); overflow:hidden; transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease; }
+    .guided-priority-card:hover { transform:translateY(-1px); border-color:var(--guided-line); box-shadow:0 14px 35px rgba(0,0,0,.08); }
+    .guided-priority-accent { background:var(--task-color,var(--guided)); }
+    .guided-priority-main { display:grid; grid-template-columns:auto minmax(0,1fr); gap:14px; padding:17px; }
+    .guided-priority-icon { width:42px; height:42px; display:grid; place-items:center; border-radius:12px; color:var(--task-color,var(--guided)); background:color-mix(in srgb,var(--task-color,var(--guided)) 10%,transparent); }
+    .guided-priority-top { display:flex; flex-wrap:wrap; align-items:center; gap:7px; }
+    .guided-task-status { border-radius:999px; padding:4px 8px; font-size:8px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; color:var(--task-color,var(--guided)); background:color-mix(in srgb,var(--task-color,var(--guided)) 10%,transparent); }
+    .guided-priority-layer { color:var(--muted); font-size:9px; }
+    .guided-priority-main h3 { margin:8px 0 0; color:var(--text); font-size:14px; line-height:1.35; }
+    .guided-priority-main p { margin:6px 0 0; color:var(--muted); font-size:11px; line-height:1.5; }
+    .guided-priority-meta { display:flex; flex-wrap:wrap; gap:12px; margin-top:10px; color:var(--muted); font-size:9px; }
+    .guided-priority-meta span { display:flex; align-items:center; gap:5px; }
+    .guided-priority-action { display:flex; align-items:center; padding:16px; border-left:1px solid var(--line); }
+    .guided-priority-action .button { white-space:nowrap; }
+    .guided-priority-card.completed { opacity:.65; }
+    .guided-priority-card.completed .guided-priority-accent { background:var(--green); }
+
+    .guided-two-column { display:grid; grid-template-columns:1.15fr .85fr; gap:14px; margin-top:22px; }
+    .guided-panel { padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--panel); }
+    .guided-panel-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+    .guided-panel h3 { margin:5px 0 0; color:var(--text); font-size:16px; }
+    .guided-text-button { border:0; padding:0; color:var(--guided); background:none; font-weight:750; font-size:10px; cursor:pointer; }
+    .guided-pulse-list,.guided-team-mini { display:grid; gap:9px; margin-top:15px; }
+    .guided-pulse-item,.guided-team-mini-item { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0; border-top:1px solid var(--line); }
+    .guided-pulse-item:first-child,.guided-team-mini-item:first-child { border-top:0; }
+    .guided-pulse-item div,.guided-team-mini-item div { min-width:0; }
+    .guided-pulse-item strong,.guided-team-mini-item strong { display:block; color:var(--text); font-size:11px; }
+    .guided-pulse-item span,.guided-team-mini-item span { display:block; color:var(--muted); font-size:9px; margin-top:4px; }
+    .guided-pulse-value { color:var(--text); font-size:12px; font-weight:850; }
+
+    .guided-simple-hero { display:flex; align-items:flex-end; justify-content:space-between; gap:22px; padding:26px; border:1px solid var(--line); border-radius:18px; background:linear-gradient(135deg,var(--panel),color-mix(in srgb,var(--guided) 5%,var(--panel))); }
+    .guided-simple-hero h1 { font-size:clamp(26px,3vw,38px); }
+    .guided-filter-row { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 14px; }
+    .guided-filter-row button { min-height:34px; padding:0 12px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:var(--panel); font-size:10px; font-weight:750; cursor:pointer; }
+    .guided-filter-row button.active { color:#fff; background:var(--guided); border-color:var(--guided); }
+
+    .guided-deal-search { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:10px; margin:18px 0 14px; padding:0 15px; border:1px solid var(--line-strong); border-radius:13px; background:var(--panel); }
+    .guided-deal-search i { color:var(--guided); }
+    .guided-deal-search input { min-height:48px; border:0; outline:0; color:var(--text); background:transparent; font-size:14px; }
+    .guided-deal-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .guided-deal-card { padding:17px; border:1px solid var(--line); border-radius:15px; background:var(--panel); }
+    .guided-deal-card header { display:flex; justify-content:space-between; gap:10px; }
+    .guided-deal-id { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--guided); font-size:10px; font-weight:850; }
+    .guided-deal-card h3 { margin:10px 0 0; color:var(--text); font-size:14px; }
+    .guided-deal-card p { margin:5px 0 0; color:var(--muted); font-size:10px; line-height:1.45; }
+    .guided-deal-stage { display:flex; align-items:center; gap:5px; margin-top:13px; }
+    .guided-deal-stage span { flex:1; height:5px; border-radius:999px; background:var(--line); }
+    .guided-deal-stage span.done { background:var(--guided); }
+    .guided-deal-footer { display:flex; justify-content:space-between; align-items:center; gap:9px; margin-top:14px; padding-top:12px; border-top:1px solid var(--line); }
+    .guided-deal-footer small { color:var(--muted); }
+
+    .guided-team-board { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:18px; }
+    .guided-team-card { padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--panel); }
+    .guided-team-card header { display:flex; align-items:center; gap:11px; }
+    .guided-team-avatar { width:40px; height:40px; display:grid; place-items:center; border-radius:12px; color:var(--guided); background:var(--guided-soft); font-weight:850; }
+    .guided-team-card h3 { margin:0; color:var(--text); font-size:13px; }
+    .guided-team-card header span { color:var(--muted); font-size:9px; }
+    .guided-team-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:15px; }
+    .guided-team-stats div { padding:9px; border:1px solid var(--line); border-radius:10px; }
+    .guided-team-stats small { display:block; color:var(--muted); font-size:8px; }
+    .guided-team-stats strong { display:block; color:var(--text); font-size:15px; margin-top:4px; }
+    .guided-team-card footer { display:flex; justify-content:space-between; align-items:center; margin-top:14px; color:var(--muted); font-size:9px; }
+
+    .guided-brief-grid,.guided-layer-grid,.guided-journey-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; margin-top:18px; }
+    .guided-brief-card,.guided-layer-card,.guided-journey-card { display:flex; flex-direction:column; min-height:220px; padding:19px; border:1px solid var(--line); border-radius:16px; background:var(--panel); }
+    .guided-brief-icon,.guided-layer-icon { width:43px; height:43px; display:grid; place-items:center; border-radius:12px; color:var(--layer-color,var(--guided)); background:color-mix(in srgb,var(--layer-color,var(--guided)) 10%,transparent); }
+    .guided-brief-card h3,.guided-layer-card h3,.guided-journey-card h3 { margin:15px 0 0; color:var(--text); font-size:15px; }
+    .guided-brief-card p,.guided-layer-card p,.guided-journey-card p { margin:7px 0 0; color:var(--muted); font-size:10px; line-height:1.55; }
+    .guided-brief-card footer,.guided-layer-card footer,.guided-journey-card footer { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:auto; padding-top:17px; }
+    .guided-demo-head { margin-top:30px; }
+    .guided-journey-steps { display:flex; gap:5px; margin-top:15px; }
+    .guided-journey-steps span { flex:1; height:5px; border-radius:99px; background:var(--line); }
+    .guided-journey-steps span.on { background:var(--guided); }
+
+    .guided-role-chip { display:none; align-items:center; gap:9px; min-height:42px; padding:5px 10px 5px 6px; border:1px solid var(--line); border-radius:12px; color:var(--text); background:var(--panel); cursor:pointer; }
+    body[data-workspace="guided"] .guided-role-chip { display:flex; }
+    .guided-role-avatar { width:30px; height:30px; display:grid; place-items:center; border-radius:9px; color:#fff; background:var(--guided); font-size:9px; font-weight:850; }
+    .guided-role-chip small,.guided-role-chip strong { display:block; text-align:left; }
+    .guided-role-chip small { color:var(--muted); font-size:7px; text-transform:uppercase; letter-spacing:.08em; }
+    .guided-role-chip strong { color:var(--text); font-size:9px; margin-top:2px; }
+    .guided-role-chip>i { color:var(--muted); font-size:8px; }
+    .guided-mode-toggle { min-height:42px; }
+    body[data-workspace="guided"] .guided-mode-toggle { color:#fff; background:var(--guided); border-color:var(--guided); }
+
+    .guided-role-overlay,.guided-task-overlay,.guided-ask-overlay,.guided-command-overlay { position:fixed; inset:0; display:none; z-index:550; background:rgba(3,9,14,.64); backdrop-filter:blur(10px); }
+    .guided-role-overlay.open,.guided-task-overlay.open,.guided-ask-overlay.open,.guided-command-overlay.open { display:grid; }
+    .guided-role-overlay { place-items:center; padding:20px; }
+    .guided-role-dialog { width:min(1040px,100%); max-height:min(760px,calc(100dvh - 40px)); overflow:auto; border:1px solid var(--line-strong); border-radius:22px; background:var(--bg); box-shadow:0 38px 100px rgba(0,0,0,.42); }
+    .guided-role-dialog>header { display:flex; align-items:flex-start; justify-content:space-between; gap:18px; padding:26px 26px 18px; }
+    .guided-role-dialog h2 { margin:7px 0 0; color:var(--text); font-size:27px; }
+    .guided-role-dialog header p { margin:7px 0 0; color:var(--muted); font-size:11px; }
+    .guided-role-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; padding:0 26px 24px; }
+    .guided-role-card { padding:18px; border:1px solid var(--line); border-radius:15px; color:var(--text); background:var(--panel); text-align:left; cursor:pointer; }
+    .guided-role-card:hover,.guided-role-card.active { border-color:var(--guided-line); background:linear-gradient(135deg,var(--guided-soft),var(--panel)); }
+    .guided-role-card-icon { width:41px; height:41px; display:grid; place-items:center; border-radius:11px; color:var(--guided); background:var(--guided-soft); }
+    .guided-role-card strong { display:block; margin-top:13px; font-size:13px; }
+    .guided-role-card span { display:block; margin-top:6px; color:var(--muted); font-size:9px; line-height:1.5; }
+    .guided-role-card footer { display:flex; justify-content:space-between; margin-top:13px; color:var(--muted); font-size:8px; }
+    .guided-role-dialog>footer { display:flex; align-items:center; justify-content:space-between; gap:15px; padding:15px 26px; border-top:1px solid var(--line); color:var(--muted); font-size:9px; }
+
+    .guided-task-overlay { justify-items:end; }
+    .guided-task-panel { width:min(540px,100%); height:100%; display:flex; flex-direction:column; border-left:1px solid var(--line-strong); background:var(--bg); box-shadow:-28px 0 80px rgba(0,0,0,.32); }
+    .guided-task-panel>header,.guided-ask-panel>header { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:22px; border-bottom:1px solid var(--line); }
+    .guided-task-panel h2,.guided-ask-panel h2 { margin:7px 0 0; color:var(--text); font-size:22px; line-height:1.2; }
+    .guided-task-panel header p,.guided-ask-panel header p { margin:6px 0 0; color:var(--muted); font-size:10px; line-height:1.5; }
+    .guided-task-scroll { flex:1; overflow:auto; padding:20px; }
+    .guided-task-impact { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .guided-task-impact div { padding:11px; border:1px solid var(--line); border-radius:11px; background:var(--panel); }
+    .guided-task-impact small { display:block; color:var(--muted); font-size:8px; text-transform:uppercase; }
+    .guided-task-impact strong { display:block; margin-top:5px; color:var(--text); font-size:12px; }
+    .guided-task-section { margin-top:17px; padding-top:17px; border-top:1px solid var(--line); }
+    .guided-task-section>span { display:block; color:var(--guided); font-size:9px; font-weight:850; letter-spacing:.1em; text-transform:uppercase; }
+    .guided-task-section p { margin:8px 0 0; color:var(--text); font-size:12px; line-height:1.65; }
+    .guided-task-section.recommended { padding:15px; border:1px solid var(--guided-line); border-radius:13px; background:var(--guided-soft); }
+    .guided-step-list { display:grid; gap:8px; margin-top:10px; }
+    .guided-step { display:grid; grid-template-columns:auto minmax(0,1fr); gap:10px; align-items:start; padding:11px; border:1px solid var(--line); border-radius:11px; background:var(--panel); cursor:pointer; }
+    .guided-step button { width:23px; height:23px; display:grid; place-items:center; border:1px solid var(--line-strong); border-radius:50%; color:transparent; background:transparent; cursor:pointer; }
+    .guided-step.done button { color:#fff; border-color:var(--green); background:var(--green); }
+    .guided-step strong { display:block; color:var(--text); font-size:10px; }
+    .guided-step span { display:block; color:var(--muted); font-size:9px; line-height:1.45; margin-top:4px; }
+    .guided-evidence { margin-top:17px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
+    .guided-evidence summary { padding:12px; color:var(--text); font-size:10px; font-weight:750; cursor:pointer; }
+    .guided-evidence>div { padding:0 12px 12px; color:var(--muted); font-size:9px; line-height:1.6; }
+    .guided-task-panel>footer { display:flex; justify-content:flex-end; gap:9px; padding:16px 20px; border-top:1px solid var(--line); }
+
+    .guided-ask-overlay { justify-items:end; }
+    .guided-ask-panel { width:min(470px,100%); height:100%; display:flex; flex-direction:column; border-left:1px solid var(--line-strong); background:var(--bg); box-shadow:-28px 0 80px rgba(0,0,0,.32); }
+    .guided-ask-panel>header { justify-content:flex-start; }
+    .guided-ask-panel>header .icon-button { margin-left:auto; }
+    .guided-ask-mark { width:41px; height:41px; flex:0 0 auto; display:grid; place-items:center; border-radius:12px; color:var(--guided); background:var(--guided-soft); }
+    .guided-ask-context { margin:14px 18px 0; padding:9px 11px; border:1px solid var(--line); border-radius:10px; color:var(--muted); background:var(--panel); font-size:9px; }
+    .guided-ask-messages { flex:1; overflow:auto; display:flex; flex-direction:column; gap:10px; padding:17px; }
+    .guided-message { max-width:88%; padding:11px 13px; border-radius:13px; color:var(--text); background:var(--panel); font-size:11px; line-height:1.55; }
+    .guided-message.user { align-self:flex-end; color:#fff; background:var(--guided); }
+    .guided-message.assistant { align-self:flex-start; border:1px solid var(--line); }
+    .guided-ask-suggestions { display:flex; gap:7px; flex-wrap:wrap; padding:0 17px 12px; }
+    .guided-ask-suggestions button { padding:7px 9px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:var(--panel); font-size:9px; cursor:pointer; }
+    .guided-ask-compose { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; padding:14px; border-top:1px solid var(--line); }
+    .guided-ask-compose input { min-width:0; min-height:42px; padding:0 12px; border:1px solid var(--line-strong); border-radius:11px; color:var(--text); background:var(--panel); outline:0; font-size:12px; }
+    .guided-ask-compose .button { width:42px; padding:0; }
+
+    .guided-command-overlay { place-items:start center; padding:8vh 18px 18px; }
+    .guided-command-dialog { width:min(760px,100%); max-height:76vh; overflow:hidden; border:1px solid var(--line-strong); border-radius:18px; background:var(--bg); box-shadow:0 38px 100px rgba(0,0,0,.44); }
+    .guided-command-dialog>header { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:12px; padding:13px; border-bottom:1px solid var(--line); }
+    .guided-command-dialog>header>i { color:var(--guided); margin-left:5px; }
+    .guided-command-dialog input { min-width:0; min-height:43px; border:0; outline:0; color:var(--text); background:transparent; font-size:15px; }
+    .guided-command-hint { padding:10px 16px; color:var(--muted); font-size:9px; border-bottom:1px solid var(--line); }
+    .guided-command-results { max-height:58vh; overflow:auto; padding:10px; }
+    .guided-command-result { width:100%; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:12px; align-items:center; padding:12px; border:0; border-radius:12px; color:var(--text); background:transparent; text-align:left; cursor:pointer; }
+    .guided-command-result:hover { background:var(--panel); }
+    .guided-command-result-icon { width:38px; height:38px; display:grid; place-items:center; border-radius:10px; color:var(--guided); background:var(--guided-soft); }
+    .guided-command-result strong { display:block; font-size:11px; }
+    .guided-command-result span { display:block; color:var(--muted); font-size:9px; margin-top:4px; }
+    .guided-command-result small { color:var(--muted); font-size:8px; text-transform:uppercase; }
+
+    .guided-ask-fab { position:fixed; right:22px; bottom:22px; z-index:320; align-items:center; gap:8px; min-height:42px; padding:0 14px; border:1px solid var(--guided-line); border-radius:999px; color:#fff; background:var(--guided); box-shadow:0 16px 38px rgba(0,0,0,.22); font-weight:800; font-size:10px; cursor:pointer; }
+    body[data-workspace="guided"] .guided-ask-fab { display:flex !important; }
+
+    .guided-mobile-nav { position:fixed; left:0; right:0; bottom:0; z-index:310; grid-template-columns:repeat(5,1fr); padding:7px max(8px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left)); border-top:1px solid var(--line-strong); background:color-mix(in srgb,var(--bg) 94%,transparent); backdrop-filter:blur(18px); }
+    .guided-mobile-nav button { min-width:0; min-height:47px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border:0; color:var(--muted); background:transparent; font-size:8px; cursor:pointer; }
+    .guided-mobile-nav button>i { font-size:14px; }
+    .guided-mobile-nav button.active { color:var(--guided); }
+    .guided-mobile-search { width:39px; height:39px; display:grid; place-items:center; margin-top:-24px; border-radius:50%; color:#fff; background:var(--guided); box-shadow:0 8px 22px rgba(0,0,0,.22); }
+
+    @media (max-width:1220px) {
+      .guided-role-chip span:not(.guided-role-avatar),.guided-role-chip>i { display:none; }
+      .guided-role-chip { padding:5px; }
+      .guided-mode-toggle span { display:none; }
+      .guided-deal-grid,.guided-team-board,.guided-brief-grid,.guided-layer-grid,.guided-journey-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:980px) {
+      body[data-workspace="guided"] .guided-mobile-nav { display:grid !important; }
+      body[data-workspace="guided"] .content { padding-bottom:94px; }
+      body[data-workspace="guided"] .guided-ask-fab { bottom:88px; right:14px; }
+      .guided-ask-fab span { display:none; }
+      .guided-ask-fab { width:44px; height:44px; padding:0; justify-content:center; }
+      .guided-role-chip { display:none !important; }
+      .guided-hero { grid-template-columns:1fr; padding:24px; }
+      .guided-hero-status { flex-direction:row; justify-content:flex-start; }
+      .guided-readiness-ring { width:112px; }
+      .guided-two-column { grid-template-columns:1fr; }
+      .guided-metric-grid { grid-template-columns:repeat(2,1fr); }
+      .guided-role-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:660px) {
+      .guided-hero { padding:20px; border-radius:17px; }
+      .guided-hero h1 { font-size:32px; }
+      .guided-hero-status { align-items:center; }
+      .guided-readiness-ring { width:92px; }
+      .guided-command-bar { grid-template-columns:auto minmax(0,1fr); padding:12px 14px; }
+      .guided-command-bar button { grid-column:1/-1; width:100%; }
+      .guided-metric-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+      .guided-metric { padding:13px; }
+      .guided-metric strong { font-size:20px; }
+      .guided-continue-card { grid-template-columns:auto minmax(0,1fr); }
+      .guided-continue-card .button { grid-column:1/-1; width:100%; }
+      .guided-section-head,.guided-simple-hero { align-items:flex-start; flex-direction:column; }
+      .guided-priority-card { grid-template-columns:4px minmax(0,1fr); }
+      .guided-priority-action { grid-column:2; border-left:0; border-top:1px solid var(--line); padding:12px 17px; }
+      .guided-priority-action .button { width:100%; }
+      .guided-priority-main { padding:15px; gap:11px; }
+      .guided-priority-icon { width:36px; height:36px; }
+      .guided-deal-grid,.guided-team-board,.guided-brief-grid,.guided-layer-grid,.guided-journey-grid { grid-template-columns:1fr; }
+      .guided-role-overlay { padding:10px; }
+      .guided-role-dialog { max-height:calc(100dvh - 20px); border-radius:17px; }
+      .guided-role-grid { grid-template-columns:1fr; padding:0 16px 16px; }
+      .guided-role-dialog>header { padding:20px 16px 15px; }
+      .guided-role-dialog>footer { align-items:flex-start; flex-direction:column; padding:14px 16px; }
+      .guided-role-dialog>footer .button { width:100%; }
+      .guided-task-panel,.guided-ask-panel { width:100%; border-left:0; }
+      .guided-task-impact { grid-template-columns:1fr; }
+      .guided-task-panel>footer { display:grid; grid-template-columns:1fr; }
+      .guided-command-overlay { padding:0; place-items:stretch; }
+      .guided-command-dialog { width:100%; max-height:100dvh; height:100dvh; border:0; border-radius:0; }
+      .guided-command-results { max-height:none; flex:1; }
+      .guided-quick-prompts { flex-wrap:nowrap; overflow:auto; padding-bottom:3px; }
+      .guided-quick-prompts button { white-space:nowrap; }
+    }
+  </style>
+
+
+  <script id="engenix-guided-experience-v15-script">
+  (() => {
+    const ROLE_KEY='engenix-guided-role-v15';
+    const STATE_KEY='engenix-guided-state-v15';
+    const roles={
+      'dealer-principal':{label:'Dealer Principal',short:'Ownership',initials:'DP',icon:'fa-building',copy:'Financial exposure, rooftop performance, major decisions, and leadership accountability.',workspace:'command'},
+      'general-manager':{label:'General Manager',short:'General Manager',initials:'GM',icon:'fa-user-tie',copy:'Customer waits, stalled deals, approvals, gross at risk, and department accountability.',workspace:'command'},
+      'sales-manager':{label:'Sales Manager / Desk',short:'Sales Manager',initials:'SM',icon:'fa-scale-balanced',copy:'Customer objectives, strategic pencils, lender callbacks, collateral rescue, and handoffs.',workspace:'desking'},
+      'fi-manager':{label:'F&I Manager',short:'F&I Manager',initials:'FI',icon:'fa-file-contract',copy:'Ownership interviews, product fit, menus, funding conditions, and returned structures.',workspace:'finance'},
+      'compliance-leader':{label:'Compliance Leader',short:'Compliance',initials:'CL',icon:'fa-shield-halved',copy:'Findings, delivery holds, remediation, evidence, and recurring operating patterns.',workspace:'compliance'},
+      'controller':{label:'Controller / Accounting',short:'Controller',initials:'CT',icon:'fa-calculator',copy:'Close readiness, CIT, AR, AP, accruals, payroll exceptions, and statement confidence.',workspace:'finalization'}
+    };
+
+    const tasks=[
+      {id:'structure-rescue',status:'act-now',label:'Act now',color:'#dc5d6d',icon:'fa-car',layer:'Desking Intelligence',workspace:'desking',view:'desk-rescue',title:'Morgan Davis needs a revised structure before the wait becomes a fallout risk.',copy:'The selected vehicle remains $86 above the customer’s stated payment objective.',owner:'Alex Morgan',due:'12 min',impact:'Customer waiting',amount:'$1,850 gross protected',roles:['general-manager','sales-manager','dealer-principal'],what:'The current structure does not fit the customer’s stated payment objective, and the customer has been waiting for a revised option.',why:'Wait time is rising, the selected collateral is creating unnecessary payment pressure, and a cleaner alternative can preserve more gross than another price concession.',recommendation:'Review the Collateral Rescue pathway before reducing selling price. Present one clear alternative with the payment and gross impact visible.',steps:['Confirm the customer’s maximum comfortable payment.','Compare the current vehicle with the recommended collateral alternative.','Approve the revised pencil and preserve the manager reason.'],evidence:['Customer objective: $700 maximum payment','Current modeled payment: $786','Collateral alternative: $694 modeled payment','Modeled front-gross protection: $1,850']},
+      {id:'trade-approval',status:'decision',label:'Decision needed',color:'#d28a27',icon:'fa-scale-balanced',layer:'Desking Intelligence',workspace:'desking',view:'desk-approvals',title:'Trade over-allowance exceeds the configured manager authority by $850.',copy:'The deal cannot move into the locked F&I handoff until the authority gate is cleared.',owner:'General Manager',due:'18 min',impact:'Approval waiting',amount:'$850 authority variance',roles:['general-manager','sales-manager','dealer-principal'],what:'The proposed customer-facing trade allowance exceeds actual cash value and the desk manager’s configured authority.',why:'The over-allowance changes front gross and should remain an explicit leadership decision rather than disappearing inside the final structure.',recommendation:'Review the deal economics and either approve the $850 exception with a reason or return the structure for another path.',steps:['Review actual cash value, customer allowance, payoff, and over-allowance.','Confirm the gross effect and available alternate structures.','Approve or return the exception with a controlling reason.'],evidence:['Actual cash value: $24,500','Customer allowance: $26,000','Configured authority exceeded: $850','Alternative path available: Balanced Close']},
+      {id:'payment-recovery',status:'act-now',label:'Act now',color:'#dc5d6d',icon:'fa-comments',layer:'F&I Intelligence',workspace:'finance',view:'fi-recovery',title:'Customer payment confusion requires recovery before the F&I presentation.',copy:'Ownership Concierge recorded that the base payment remains unclear.',owner:'Sales Manager',due:'Now',impact:'Customer experience',amount:'1 recovery alert',roles:['general-manager','sales-manager','fi-manager','dealer-principal'],what:'Morgan Davis indicated that the base vehicle payment is still unclear before optional products are discussed.',why:'Optional-product presentation should not begin while the customer is uncertain about the underlying transaction. That creates avoidable friction and a weak decision record.',recommendation:'Have the Sales Manager restate the agreed base payment and structure, confirm understanding, then release the record back to F&I.',steps:['Review the customer’s exact statement.','Clarify the base payment and cash expectation without discussing products.','Record the customer’s confirmation and release the recovery hold.'],evidence:['Customer statement: “I am still not sure what the payment is before anything extra.”','Ownership Concierge status: Recovery required','F&I presentation status: Held','Assigned owner: Sales Manager']},
+      {id:'term-mismatch',status:'decision',label:'Decision needed',color:'#d28a27',icon:'fa-triangle-exclamation',layer:'Compliance Intelligence',workspace:'compliance',view:'copilot',title:'Final contract term does not match the manager-approved structure.',copy:'The approved structure shows 72 months. The final contract packet shows 75 months.',owner:'Compliance Leader',due:'Before delivery',impact:'Delivery hold',amount:'3-month variance',roles:['general-manager','fi-manager','compliance-leader','dealer-principal'],what:'The manager-approved pencil and lender decision record show a 72-month term, while the final contract packet shows 75 months.',why:'The customer expectation, approval record, payment, and contract no longer reconcile. The difference must be corrected or explicitly documented before delivery.',recommendation:'Confirm the intended structure with the desk and F&I manager. Correct the contract or document a controlling exception before lifting the hold.',steps:['Compare the approved pencil, lender callback, and final contract.','Confirm the intended term with the decision owners.','Correct the packet or document the approved exception.'],evidence:['Desk-approved term: 72 months','Lender-approved term: 72 months','Final contract term: 75 months','Current gate: Delivery hold']},
+      {id:'funding-hold',status:'act-now',label:'Act now',color:'#dc5d6d',icon:'fa-landmark',layer:'Controller Intelligence',workspace:'finalization',view:'final-cit',title:'Two contracts remain outside the configured funding threshold.',copy:'One lender approval and stipulation window closes today.',owner:'Finance Office',due:'Today',impact:'Cash exposure',amount:'$58,420 outstanding',roles:['dealer-principal','general-manager','fi-manager','controller'],what:'PA-44921 remains unfunded three days after delivery, and required lender proceeds have not reached the accounting record.',why:'The store is carrying the receivable, the approval window is narrowing, and the unresolved conditions can distort close readiness.',recommendation:'Assign the remaining stipulation, confirm lender receipt, and preserve the expected funding date before the approval window closes.',steps:['Verify the exact outstanding lender condition.','Assign the document owner and confirm submission.','Record the lender receipt and expected funding date.'],evidence:['Outstanding proceeds: $58,420','Age: 3 days','Approval window: Today','Current owner: Dana Ruiz']},
+      {id:'close-readiness',status:'decision',label:'Decision needed',color:'#d28a27',icon:'fa-calculator',layer:'Controller Intelligence',workspace:'finalization',view:'final-close-readiness',title:'July operating close is not ready for controller signoff.',copy:'Five financial controls and three deal-level variances remain open.',owner:'Controller',due:'Day 2 of 4',impact:'Statement confidence',amount:'78% close ready',roles:['dealer-principal','general-manager','controller'],what:'The current month-end checklist remains incomplete across funding, payoff, customer liabilities, payroll, and deal-to-ledger reconciliation.',why:'The developing statement includes timing differences and unclassified movement. Leadership should not treat the current estimate as final until the blockers are owned.',recommendation:'Work the close blockers in financial-impact order, beginning with contracts in transit and unclassified deal-level gross movement.',steps:['Review the five open material close controls.','Assign every blocker to a named owner and due time.','Complete the Controller Close Brief after the evidence is accepted.'],evidence:['Close readiness: 78%','Statement confidence: Moderate','Open controller exceptions: 10','Unclassified gross movement: $620']},
+      {id:'gross-leakage',status:'decision',label:'Decision needed',color:'#d28a27',icon:'fa-chart-line',layer:'Controller Intelligence',workspace:'finalization',view:'final-controlled-variable',title:'One deal contains $620 of unclassified realized-gross movement.',copy:'Known timing and chargeback effects explain only part of the total variance.',owner:'Controller',due:'Today',impact:'Gross leakage',amount:'$620 unexplained',roles:['dealer-principal','general-manager','controller'],what:'VC-11987 moved from expected gross to booked and realized gross with $620 that is not yet classified as timing, liability, or true leakage.',why:'Unclassified movement weakens statement confidence and hides whether the store lost value, posted incorrectly, or is simply waiting on another event.',recommendation:'Trace the deal from accepted desk economics through contract, funding, product cost, and accounting posting. Classify the remaining movement with source evidence.',steps:['Compare expected, contracted, funded, booked, and realized gross.','Identify the source event behind the remaining $620.','Accept the classification and attach the evidence record.'],evidence:['Expected gross: $7,410','Booked gross: $6,790','Realized gross: $5,990','Unclassified component: $620']},
+      {id:'finding-remediation',status:'waiting',label:'Waiting',color:'#617b8e',icon:'fa-shield-halved',layer:'Compliance Intelligence',workspace:'compliance',view:'actions',title:'Corrective action CA-208 is waiting on document verification.',copy:'The owner has recorded a correction, but the supporting evidence has not been accepted.',owner:'Compliance Leader',due:'42 min',impact:'Workflow dependency',amount:'1 verification',roles:['compliance-leader','general-manager'],what:'A corrective action was marked resolved by the operating owner, but the required supporting evidence has not been verified.',why:'The finding should remain visible until a second person confirms that the corrective record supports the disposition.',recommendation:'Review the uploaded evidence reference and either verify the action or return it with a specific deficiency.',steps:['Open the corrective action and inspect the evidence reference.','Compare the evidence with the original finding.','Verify or return the action with an explanation.'],evidence:['Corrective action: CA-208','Finding: F-1051','Operating owner status: Complete','Compliance verification: Pending']},
+      {id:'funding-packet',status:'waiting',label:'Waiting',color:'#617b8e',icon:'fa-file-contract',layer:'F&I Intelligence',workspace:'finance',view:'fi-funding',title:'Funding packet is waiting on one stipulation and one signature review.',copy:'Funding Assurance remains in REVIEW REQUIRED status.',owner:'F&I Manager',due:'35 min',impact:'Funding readiness',amount:'2 review items',roles:['fi-manager','general-manager'],what:'The synthetic lender packet is nearly complete, but one stipulation and one signature remain outside verified status.',why:'Sending the packet before both items are resolved increases rework and can extend contracts-in-transit aging.',recommendation:'Resolve the owned stipulation, verify the signature location, then rerun Funding Assurance before release.',steps:['Verify the remaining lender stipulation.','Correct and confirm the signature item.','Rerun Funding Assurance and release only when ready.'],evidence:['Funding status: Review required','Open stipulations: 1','Signature review items: 1','Lender: Summit Auto Credit']}
+    ];
+
+    const dealsGuided=[
+      {id:'DX-7314',customer:'Jordan Taylor',vehicle:'2026 Ford Explorer ST-Line',owner:'Alex Morgan',stage:2,status:'Structure modeling',workspace:'desking',view:'desk-structure',attention:'Payment objective gap'},
+      {id:'FI-8421',customer:'Morgan Davis',vehicle:'2025 Ford Bronco Sport Badlands',owner:'Dana Ruiz',stage:4,status:'F&I recovery',workspace:'finance',view:'fi-recovery',attention:'Payment confusion'},
+      {id:'ENX-2847',customer:'Jordan Taylor',vehicle:'2026 Ford Explorer',owner:'Marcus Hale',stage:5,status:'Compliance hold',workspace:'compliance',view:'journey',attention:'Term mismatch'},
+      {id:'PA-44921',customer:'Avery Coleman',vehicle:'2026 Ford F-150',owner:'Dana Ruiz',stage:7,status:'Contracts in transit',workspace:'finalization',view:'final-cit',attention:'Funding window'},
+      {id:'VC-11987',customer:'Cameron Reed',vehicle:'2026 BMW X5',owner:'Controller',stage:8,status:'Operating close',workspace:'finalization',view:'final-controlled-variable',attention:'Gross variance'},
+      {id:'PH-88214',customer:'Riley Morgan',vehicle:'2026 Honda CR-V',owner:'Marcus Hale',stage:8,status:'Reconciled',workspace:'command',view:'command-memory',attention:'On track'}
+    ];
+
+    const team=[
+      {name:'Alex Morgan',role:'Sales Manager',initials:'AM',open:4,urgent:2,waiting:1,next:'Revised pencil · 12 min'},
+      {name:'Dana Ruiz',role:'F&I Director',initials:'DR',open:5,urgent:1,waiting:2,next:'Funding stipulation · 35 min'},
+      {name:'Marcus Hale',role:'Compliance Leader',initials:'MH',open:3,urgent:1,waiting:1,next:'Term variance · before delivery'},
+      {name:'Renee Cole',role:'Controller',initials:'RC',open:7,urgent:2,waiting:3,next:'CIT exposure · today'},
+      {name:'Taylor Kim',role:'Title Clerk',initials:'TK',open:3,urgent:0,waiting:2,next:'Payoff shortage · today'},
+      {name:'Jordan Price',role:'Payroll Admin',initials:'JP',open:2,urgent:0,waiting:1,next:'Commission exception · today'}
+    ];
+
+    const layers=[
+      {key:'command',name:'Operating Command',icon:'fa-tower-broadcast',color:'#176f82',copy:'Cross-layer priorities, reconciliation, ownership, and leadership visibility.',view:'command-command'},
+      {key:'desking',name:'Desking Intelligence',icon:'fa-scale-balanced',color:'#7257e8',copy:'Deal strategy, pencils, trade intelligence, lender pathways, callbacks, and rescue.',view:'desk-command'},
+      {key:'finance',name:'F&I Intelligence',icon:'fa-file-contract',color:'#0c8f83',copy:'Ownership interviews, product fit, menus, customer decisions, and funding assurance.',view:'fi-command'},
+      {key:'compliance',name:'Compliance Intelligence',icon:'fa-shield-halved',color:'#2c72d6',copy:'Findings, delivery gates, corrective action, evidence, and operating patterns.',view:'brief'},
+      {key:'finalization',name:'Controller Intelligence',icon:'fa-calculator',color:'#b27122',copy:'Controlled Variable, CIT, AR, AP, liabilities, payroll, and operating close.',view:'final-command'}
+    ];
+
+    let state={role:'general-manager',completed:[],steps:{},lastTask:'structure-rescue',lastView:'guided-today',lastWorkspace:'command',filter:'all'};
+    try{state={...state,...JSON.parse(sessionStorage.getItem(STATE_KEY)||'{}')};const savedRole=sessionStorage.getItem(ROLE_KEY);if(savedRole&&roles[savedRole])state.role=savedRole;}catch(e){}
+    let activeTaskId=null;
+
+    function save(){try{sessionStorage.setItem(STATE_KEY,JSON.stringify(state));sessionStorage.setItem(ROLE_KEY,state.role);}catch(e){}}
+    function role(){return roles[state.role]||roles['general-manager'];}
+    function roleTasks(includeCompleted=true){return tasks.filter(t=>t.roles.includes(state.role)&&(includeCompleted||!state.completed.includes(t.id)));}
+    function taskById(id){return tasks.find(t=>t.id===id);}
+    function statusOrder(status){return {"act-now":0,"decision":1,"waiting":2,"completed":3}[status]??4;}
+    function displayStatus(t){return state.completed.includes(t.id)?'completed':t.status;}
+    function statusLabel(t){return state.completed.includes(t.id)?'Completed':t.label;}
+    function taskActionLabel(t){if(state.completed.includes(t.id))return 'Review record';if(t.status==='act-now')return 'Act now';if(t.status==='decision')return 'Review decision';return 'Review item';}
+    function escapeText(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+    function renderRoleUI(){
+      const r=role();
+      document.getElementById('guidedRoleLabel').textContent=r.label;
+      document.getElementById('guidedRoleInitials').textContent=r.initials;
+      const sidebarRole=document.getElementById('sessionRole');if(sidebarRole&&document.body.dataset.workspace==='guided')sidebarRole.textContent=`${r.label} · Guided Operations`;
+      document.getElementById('guidedRoleGrid').innerHTML=Object.entries(roles).map(([id,x])=>`<button type="button" class="guided-role-card ${id===state.role?'active':''}" onclick="selectGuidedRole('${id}')"><div class="guided-role-card-icon"><i class="fa-solid ${x.icon}"></i></div><strong>${x.label}</strong><span>${x.copy}</span><footer><b>${tasks.filter(t=>t.roles.includes(id)).length} guided priorities</b><i class="fa-solid fa-arrow-right"></i></footer></button>`).join('');
+    }
+
+    function renderToday(){
+      const r=role(), open=roleTasks(false).sort((a,b)=>statusOrder(a.status)-statusOrder(b.status));
+      const now=new Date(); const hour=now.getHours(); const greet=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening';
+      document.getElementById('guidedGreetingTime').textContent=`${r.short} operating view`;
+      document.getElementById('guidedGreeting').textContent=`${greet}, Marcus.`;
+      document.getElementById('guidedHeroCopy').textContent=`${open.length} items require your attention. ENGENIX has ordered them around the decisions a ${r.label.toLowerCase()} owns.`;
+      const readiness=Math.max(62,Math.min(96,88-open.filter(t=>t.status==='act-now').length*5-state.completed.length*-2));
+      document.getElementById('guidedReadinessValue').textContent=`${readiness}%`;
+      document.getElementById('guidedReadinessRing').style.setProperty('--progress',readiness);
+      document.getElementById('guidedStatusTitle').textContent=`${new Set(open.map(t=>t.workspace)).size} operating areas moving`;
+      document.getElementById('guidedStatusCopy').textContent=`${open.filter(t=>t.status==='act-now').length} immediate and ${open.filter(t=>t.status==='decision').length} decision items are currently in your queue.`;
+      const metrics=[
+        ['Needs attention',open.length,`${open.filter(t=>t.status==='act-now').length} immediate`],
+        ['Customer waits',open.filter(t=>/Customer|waiting/i.test(t.impact)).length,'Highest wait: 19 min'],
+        ['Financial exposure',state.role==='controller'?'$73.6K':'$18.4K','Owned or visible to your role'],
+        ['Team dependencies',Math.max(2,open.filter(t=>t.owner!==r.label).length),'Across four departments']
+      ];
+      document.getElementById('guidedMetricGrid').innerHTML=metrics.map(x=>`<div class="guided-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+      const last=taskById(state.lastTask)||open[0];
+      if(last){document.getElementById('guidedContinueTitle').textContent=last.title;document.getElementById('guidedContinueMeta').textContent=`${state.completed.includes(last.id)?'Completed record':'Step 2 of '+last.steps.length} · last opened in this demonstration`;document.getElementById('guidedContinueButton').onclick=()=>openGuidedTask(last.id);}
+      document.getElementById('guidedPriorityList').innerHTML=open.slice(0,5).map(taskCard).join('')||`<div class="empty-state">Your role has no open work. ENGENIX will surface the next owned decision here.</div>`;
+      document.getElementById('guidedQuickPrompts').innerHTML=['What needs my approval?','Show funding holds','Find Morgan Davis','Why is July not ready to close?'].map(q=>`<button type="button" onclick="runGuidedPrompt(${JSON.stringify(q)})">${q}</button>`).join('');
+      document.getElementById('guidedPulseList').innerHTML=[['Customers currently waiting','3','Longest wait: 19 min'],['Gross under active decision','$18,420','Across desk, F&I, and controller'],['Deals blocked from moving','4','Two require leadership authority'],['Operating close readiness','78%','Five material controls remain']].map(x=>`<div class="guided-pulse-item"><div><strong>${x[0]}</strong><span>${x[2]}</span></div><div class="guided-pulse-value">${x[1]}</div></div>`).join('');
+      document.getElementById('guidedTeamMini').innerHTML=team.slice(0,4).map(x=>`<div class="guided-team-mini-item"><div><strong>${x.name} · ${x.role}</strong><span>${x.next}</span></div><span class="badge ${x.urgent?'red':'blue'}">${x.open} open</span></div>`).join('');
+      document.getElementById('guidedTodayCount').textContent=Math.min(9,open.length);
+      document.getElementById('guidedWorkCount').textContent=open.length;
+    }
+
+    function taskCard(t){
+      const completed=state.completed.includes(t.id); const status=displayStatus(t);
+      return `<article class="guided-priority-card ${completed?'completed':''}" style="--task-color:${completed?'#4fd1a1':t.color}"><div class="guided-priority-accent"></div><div class="guided-priority-main"><div class="guided-priority-icon"><i class="fa-solid ${completed?'fa-check':t.icon}"></i></div><div><div class="guided-priority-top"><span class="guided-task-status">${statusLabel(t)}</span><span class="guided-priority-layer">${t.layer}</span></div><h3>${t.title}</h3><p>${t.copy}</p><div class="guided-priority-meta"><span><i class="fa-solid fa-user"></i>${t.owner}</span><span><i class="fa-regular fa-clock"></i>${t.due}</span><span><i class="fa-solid fa-chart-line"></i>${t.amount}</span></div></div></div><div class="guided-priority-action"><button class="button small ${t.status==='act-now'&&!completed?'primary':''}" type="button" onclick="openGuidedTask('${t.id}')">${taskActionLabel(t)} <i class="fa-solid fa-arrow-right"></i></button></div></article>`;
+    }
+
+    function renderWork(){
+      let list=roleTasks(true).map(t=>({...t,display:displayStatus(t)}));
+      if(state.filter!=='all')list=list.filter(t=>t.display===state.filter);
+      list.sort((a,b)=>statusOrder(a.display)-statusOrder(b.display));
+      document.getElementById('guidedWorkList').innerHTML=list.map(taskCard).join('')||'<div class="empty-state">No work matches this filter.</div>';
+      document.querySelectorAll('[data-guided-filter]').forEach(b=>b.classList.toggle('active',b.dataset.guidedFilter===state.filter));
+    }
+
+    function renderDeals(){
+      const q=(document.getElementById('guidedDealSearch')?.value||'').toLowerCase();
+      const list=dealsGuided.filter(d=>`${d.id} ${d.customer} ${d.vehicle} ${d.owner} ${d.status}`.toLowerCase().includes(q));
+      document.getElementById('guidedDealGrid').innerHTML=list.map(d=>`<article class="guided-deal-card"><header><span class="guided-deal-id">${d.id}</span><span class="badge ${d.attention==='On track'?'green':'amber'}">${d.status}</span></header><h3>${d.customer}</h3><p>${d.vehicle}<br>Owner: ${d.owner}</p><div class="guided-deal-stage" aria-label="Deal stage ${d.stage} of 8">${Array.from({length:8},(_,i)=>`<span class="${i<d.stage?'done':''}"></span>`).join('')}</div><div class="guided-deal-footer"><small>${d.attention}</small><button class="button small" type="button" onclick="routeGuidedDeal('${d.id}')">Open deal</button></div></article>`).join('')||'<div class="empty-state">No deals match that search.</div>';
+    }
+
+    function renderTeam(){
+      document.getElementById('guidedTeamBoard').innerHTML=team.map(x=>`<article class="guided-team-card"><header><div class="guided-team-avatar">${x.initials}</div><div><h3>${x.name}</h3><span>${x.role}</span></div></header><div class="guided-team-stats"><div><small>Open</small><strong>${x.open}</strong></div><div><small>Urgent</small><strong>${x.urgent}</strong></div><div><small>Waiting</small><strong>${x.waiting}</strong></div></div><footer><span>${x.next}</span><button class="guided-text-button" type="button" onclick="showGuidedView('guided-work')">Review queue</button></footer></article>`).join('');
+    }
+
+    function renderBriefings(){
+      const cards=[
+        ['Leadership Daily Briefing','fa-users','Run the dealership’s morning meeting with priorities, owners, deadlines, and decisions.','Run briefing',()=>switchPortalWorkspace('compliance','brief')],
+        ['Operating Command Brief','fa-tower-broadcast','Cross-layer leadership view of immediate actions, reconciliation, and financial exposure.','Open brief',()=>switchPortalWorkspace('command','command-command')],
+        ['Controller Close Brief','fa-calculator','Close readiness, material exceptions, operating narrative, and leadership decisions.','Open close brief',()=>switchPortalWorkspace('finalization','final-close-brief')]
+      ];
+      document.getElementById('guidedBriefGrid').innerHTML=cards.map((x,i)=>`<article class="guided-brief-card" style="--layer-color:${['#2c72d6','#176f82','#b27122'][i]}"><div class="guided-brief-icon"><i class="fa-solid ${x[1]}"></i></div><h3>${x[0]}</h3><p>${x[2]}</p><footer><span class="badge blue">Ready</span><button class="button small" type="button" data-brief-index="${i}">${x[3]}</button></footer></article>`).join('');
+      document.querySelectorAll('[data-brief-index]').forEach(b=>b.onclick=cards[Number(b.dataset.briefIndex)][4]);
+    }
+
+    function renderMore(){
+      document.getElementById('guidedLayerGrid').innerHTML=layers.map(l=>`<article class="guided-layer-card" style="--layer-color:${l.color}"><div class="guided-layer-icon"><i class="fa-solid ${l.icon}"></i></div><h3>${l.name}</h3><p>${l.copy}</p><footer><span class="badge">Workspace Mode</span><button class="button small" type="button" onclick="switchPortalWorkspace('${l.key}','${l.view}')">Open workspace</button></footer></article>`).join('');
+      document.getElementById('guidedJourneyGrid').innerHTML=Object.entries(roles).map(([id,r])=>`<article class="guided-journey-card"><div class="guided-kicker">${r.initials} ROLE JOURNEY</div><h3>${r.label}</h3><p>${r.copy}</p><div class="guided-journey-steps">${Array.from({length:6},(_,i)=>`<span class="${i<4?'on':''}"></span>`).join('')}</div><footer><span>Approx. 3 minutes</span><button class="button small" type="button" onclick="startRoleJourney('${id}')">Start journey</button></footer></article>`).join('');
+    }
+
+    function renderGuidedAll(){renderRoleUI();renderToday();renderWork();renderDeals();renderTeam();renderBriefings();renderMore();renderAskSuggestions();}
+
+    window.showGuidedView=function(view='guided-today'){
+      state.lastView=view;save();
+      document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${view}`));
+      document.querySelectorAll('[data-guided-view],[data-guided-mobile]').forEach(n=>n.classList.toggle('active',(n.dataset.guidedView||n.dataset.guidedMobile)===view));
+      const meta={
+        'guided-today':['My Operating Day','What matters, why it matters, and the next owned action'],
+        'guided-work':['My Work','Every assignment ordered by urgency and dependency'],
+        'guided-deals':['Deals','One operating record from structure through close'],
+        'guided-team':['Team','Ownership, workload, dependencies, and next actions'],
+        'guided-briefings':['Briefings','Turn operating intelligence into an accountable meeting'],
+        'guided-more':['All Intelligence','The complete ENGENIX platform remains one step away']
+      }[view]||['My Operating Day','Guided operations'];
+      document.getElementById('pageTitle').textContent=meta[0];document.getElementById('pageSubtitle').textContent=meta[1];
+      document.getElementById('sidebar')?.classList.remove('open');document.getElementById('mobileNavBackdrop')?.classList.remove('open');document.body.classList.remove('mobile-nav-open');
+      window.scrollTo({top:0,behavior:'smooth'});renderGuidedAll();
+    };
+
+    window.enterGuidedExperience=function(view='guided-today',announce=true){
+      const before=document.body.dataset.workspace;
+      try{currentPortalWorkspace='guided';}catch(e){}
+      document.body.dataset.workspace='guided';
+      const select=document.getElementById('workspaceSelect');if(select)select.value='guided';
+      const mark=document.getElementById('workspaceSwitchMark');if(mark)mark.textContent='✦';
+      const copy=document.getElementById('workspaceSwitchCopy');if(copy)copy.textContent='Role-based priorities, guided decisions, and direct routing';
+      const pill=document.getElementById('demoPill');if(pill)pill.textContent='GUIDED OPERATIONS';
+      const search=document.getElementById('searchCopy');if(search)search.textContent='Search a deal or ask what you need to do';
+      const label=document.getElementById('operatingStatusLabel');if(label)label.textContent='Guided Experience';
+      updateGuidedModeToggle();showGuidedView(view);
+      if(announce&&before!=='guided'&&typeof showToast==='function')showToast('Switched to Guided Experience','Your role-based operating day is now in view. Every full intelligence workspace remains available.','success');
+    };
+
+    const baseSwitchV15=window.switchPortalWorkspace;
+    window.switchPortalWorkspace=switchPortalWorkspace=function(workspace,targetView=null){
+      if(workspace==='guided')return enterGuidedExperience(targetView||state.lastView,true);
+      state.lastWorkspace=workspace;save();
+      const result=baseSwitchV15(workspace,targetView);updateGuidedModeToggle();return result;
+    };
+
+    window.toggleGuidedMode=function(){
+      if(document.body.dataset.workspace==='guided'){
+        const target=state.lastWorkspace||role().workspace||'command';const layer=layers.find(x=>x.key===target)||layers[0];switchPortalWorkspace(layer.key,layer.view);
+      }else enterGuidedExperience(state.lastView||'guided-today',true);
+    };
+    function updateGuidedModeToggle(){const b=document.getElementById('guidedModeToggle');if(!b)return;const guided=document.body.dataset.workspace==='guided';b.innerHTML=guided?'<i class="fa-solid fa-border-all"></i><span>Workspace Mode</span>':'<i class="fa-solid fa-compass"></i><span>Return to Guided</span>';}
+
+    window.openGuidedRoleSelector=function(){const o=document.getElementById('guidedRoleOverlay');o.classList.add('open');o.setAttribute('aria-hidden','false');document.body.classList.add('guided-overlay-open');renderRoleUI();};
+    window.closeGuidedRoleSelector=function(){const o=document.getElementById('guidedRoleOverlay');o.classList.remove('open');o.setAttribute('aria-hidden','true');document.body.classList.remove('guided-overlay-open');};
+    window.selectGuidedRole=function(id){if(!roles[id])return;state.role=id;save();closeGuidedRoleSelector();enterGuidedExperience('guided-today',false);showToast('Operating view updated',`ENGENIX is now prioritized for ${roles[id].label}.`,'success');};
+
+    window.openNextGuidedPriority=function(){const next=roleTasks(false).sort((a,b)=>statusOrder(a.status)-statusOrder(b.status))[0];if(next)openGuidedTask(next.id);else showToast('Operating day clear','No open guided priorities remain for this role.','success');};
+    window.openGuidedTask=function(id){const t=taskById(id);if(!t)return;activeTaskId=id;state.lastTask=id;save();const o=document.getElementById('guidedTaskOverlay');o.classList.add('open');o.setAttribute('aria-hidden','false');document.body.classList.add('guided-overlay-open');document.getElementById('guidedTaskStatus').textContent=statusLabel(t);document.getElementById('guidedTaskStatus').style.color=state.completed.includes(id)?'#4fd1a1':t.color;document.getElementById('guidedTaskTitle').textContent=t.title;document.getElementById('guidedTaskSubtitle').textContent=`${t.layer} · ${t.owner} · ${t.due}`;document.getElementById('guidedTaskWhat').textContent=t.what;document.getElementById('guidedTaskWhy').textContent=t.why;document.getElementById('guidedTaskRecommendation').textContent=t.recommendation;document.getElementById('guidedTaskImpact').innerHTML=[['Impact',t.impact],['Exposure',t.amount],['Owner',t.owner]].map(x=>`<div><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('');renderTaskSteps(t);document.getElementById('guidedTaskEvidence').innerHTML=t.evidence.map(x=>`<div>• ${x}</div>`).join('');document.getElementById('guidedTaskPrimary').textContent=state.completed.includes(id)?'Reopen decision':'Complete decision';};
+    function renderTaskSteps(t){const done=state.steps[t.id]||[];document.getElementById('guidedTaskSteps').innerHTML=t.steps.map((x,i)=>`<div class="guided-step ${done.includes(i)?'done':''}" onclick="toggleGuidedStep(${i})"><button type="button" aria-label="Toggle step ${i+1}"><i class="fa-solid fa-check"></i></button><div><strong>Step ${i+1}</strong><span>${x}</span></div></div>`).join('');}
+    window.toggleGuidedStep=function(i){if(!activeTaskId)return;const list=state.steps[activeTaskId]||[];state.steps[activeTaskId]=list.includes(i)?list.filter(x=>x!==i):[...list,i];save();renderTaskSteps(taskById(activeTaskId));};
+    window.closeGuidedTask=function(){const o=document.getElementById('guidedTaskOverlay');o.classList.remove('open');o.setAttribute('aria-hidden','true');document.body.classList.remove('guided-overlay-open');activeTaskId=null;};
+    window.completeCurrentGuidedTask=function(){const t=taskById(activeTaskId);if(!t)return;const complete=state.completed.includes(t.id);state.completed=complete?state.completed.filter(x=>x!==t.id):[...state.completed,t.id];if(!complete)state.steps[t.id]=t.steps.map((_,i)=>i);save();closeGuidedTask();renderGuidedAll();showToast(complete?'Decision reopened':'Decision completed',complete?'The task is active again.':'The decision and operating reason were preserved in this demonstration.','success');};
+    window.openCurrentTaskWorkspace=function(){const t=taskById(activeTaskId);if(!t)return;closeGuidedTask();switchPortalWorkspace(t.workspace,t.view);};
+    window.guidedOverlayClick=function(event,id,closer){if(event.target.id===id)closer();};
+
+    window.openAskEngenix=function(){const o=document.getElementById('guidedAskOverlay');o.classList.add('open');o.setAttribute('aria-hidden','false');document.body.classList.add('guided-overlay-open');document.getElementById('guidedAskContext').textContent=`${role().label} · ${document.getElementById('pageTitle').textContent}`;if(!document.getElementById('guidedAskMessages').children.length){addAskMessage('assistant',`I am grounded in your ${role().label} operating view. Ask what requires attention, why something was surfaced, or what should happen next.`);}setTimeout(()=>document.getElementById('guidedAskInput').focus(),70);};
+    window.closeAskEngenix=function(){const o=document.getElementById('guidedAskOverlay');o.classList.remove('open');o.setAttribute('aria-hidden','true');document.body.classList.remove('guided-overlay-open');};
+    function renderAskSuggestions(){const qs=state.role==='controller'?['What blocks the close?','Explain the gross variance','Show cash exposure']:state.role==='sales-manager'?['Which deal should I desk next?','Show approval gates','How do I protect gross?']:state.role==='fi-manager'?['What blocks funding?','Show recovery alerts','Explain product fit']:['What needs my approval?','What is blocking customers?','Where is gross at risk?'];document.getElementById('guidedAskSuggestions').innerHTML=qs.map(q=>`<button type="button" onclick="askSuggested(${JSON.stringify(q)})">${q}</button>`).join('');}
+    function addAskMessage(type,text){const box=document.getElementById('guidedAskMessages');box.insertAdjacentHTML('beforeend',`<div class="guided-message ${type}">${escapeText(text)}</div>`);box.scrollTop=box.scrollHeight;}
+    function answerQuestion(q){const x=q.toLowerCase();if(x.includes('approval'))return 'Two decisions currently require leadership authority: the $850 trade over-allowance and the 72-to-75-month contract-term variance. The trade exception is the next owned decision for the General Manager.';if(x.includes('fund'))return 'PA-44921 carries $58,420 in outstanding lender proceeds. One stipulation and a closing approval window are driving the immediate funding risk.';if(x.includes('close'))return 'July is 78% ready. The material blockers are contracts in transit, payoff exposure, unclassified gross movement, one payroll exception, and final controller signoff.';if(x.includes('gross'))return 'The highest visible gross issue is VC-11987. $800 of the variance is explained, while $620 remains unclassified between booked and realized gross.';if(x.includes('customer')||x.includes('wait'))return 'Morgan Davis is the clearest customer risk. The revised structure is overdue and Ownership Concierge also recorded unresolved payment confusion before F&I.';if(x.includes('next')||x.includes('attention')){const t=roleTasks(false).sort((a,b)=>statusOrder(a.status)-statusOrder(b.status))[0];return t?`Your next priority is: ${t.title} Recommended action: ${t.recommendation}`:'Your guided queue is currently clear.';}return 'I can explain the operating reason, source evidence, owner, financial impact, or next action for any item in your queue. Try asking what needs approval or why a specific deal is blocked.';}
+    window.submitGuidedQuestion=function(){const i=document.getElementById('guidedAskInput');const q=i.value.trim();if(!q)return;addAskMessage('user',q);i.value='';setTimeout(()=>addAskMessage('assistant',answerQuestion(q)),180);};
+    window.askSuggested=function(q){addAskMessage('user',q);setTimeout(()=>addAskMessage('assistant',answerQuestion(q)),150);};
+
+    const commandItems=[
+      ...tasks.map(t=>({type:'Action',title:t.title,copy:`${t.layer} · ${t.owner} · ${t.due}`,icon:t.icon,keywords:`${t.title} ${t.copy} ${t.owner} ${t.layer} ${t.impact}`,run:()=>openGuidedTask(t.id)})),
+      ...dealsGuided.map(d=>({type:'Deal',title:`${d.id} · ${d.customer}`,copy:`${d.vehicle} · ${d.status}`,icon:'fa-car',keywords:`${d.id} ${d.customer} ${d.vehicle} ${d.owner} ${d.status}`,run:()=>routeGuidedDeal(d.id)})),
+      ...layers.map(l=>({type:'Workspace',title:l.name,copy:l.copy,icon:l.icon,keywords:`${l.name} ${l.copy}`,run:()=>switchPortalWorkspace(l.key,l.view)}))
+    ];
+    window.openGuidedCommand=function(query=''){const o=document.getElementById('guidedCommandOverlay');o.classList.add('open');o.setAttribute('aria-hidden','false');document.body.classList.add('guided-overlay-open');const i=document.getElementById('guidedCommandInput');i.value=query;renderCommandResults(query);setTimeout(()=>i.focus(),60);};
+    window.closeGuidedCommand=function(){const o=document.getElementById('guidedCommandOverlay');o.classList.remove('open');o.setAttribute('aria-hidden','true');document.body.classList.remove('guided-overlay-open');};
+    function renderCommandResults(q=''){const query=q.toLowerCase().trim();let list=commandItems.filter(x=>!query||`${x.title} ${x.copy} ${x.keywords}`.toLowerCase().includes(query));if(query.includes('approval'))list=commandItems.filter(x=>x.title.toLowerCase().includes('allowance')||x.title.toLowerCase().includes('term'));if(query.includes('funding hold'))list=commandItems.filter(x=>x.title.toLowerCase().includes('contracts remain'));document.getElementById('guidedCommandResults').innerHTML=list.slice(0,12).map((x,i)=>`<button type="button" class="guided-command-result" data-command-result="${i}"><div class="guided-command-result-icon"><i class="fa-solid ${x.icon}"></i></div><div><strong>${x.title}</strong><span>${x.copy}</span></div><small>${x.type}</small></button>`).join('')||'<div class="empty-state">No exact match. Ask ENGENIX to explain what you need.</div>';document.querySelectorAll('[data-command-result]').forEach(b=>b.onclick=()=>{const x=list[Number(b.dataset.commandResult)];closeGuidedCommand();x?.run();});}
+    window.runGuidedInlineCommand=function(){const q=document.getElementById('guidedInlineCommand').value.trim();openGuidedCommand(q);};
+    window.runGuidedPrompt=function(q){openGuidedCommand(q);};
+    window.routeGuidedDeal=function(id){const d=dealsGuided.find(x=>x.id===id);if(d)switchPortalWorkspace(d.workspace,d.view);};
+    window.startRoleJourney=function(id){selectGuidedRole(id);const first=roleTasks(false).sort((a,b)=>statusOrder(a.status)-statusOrder(b.status))[0];if(first)setTimeout(()=>openGuidedTask(first.id),220);};
+
+    document.querySelectorAll('[data-guided-view]').forEach(b=>b.addEventListener('click',()=>showGuidedView(b.dataset.guidedView)));
+    document.querySelectorAll('[data-guided-mobile]').forEach(b=>b.addEventListener('click',()=>showGuidedView(b.dataset.guidedMobile)));
+    document.querySelectorAll('[data-guided-filter]').forEach(b=>b.addEventListener('click',()=>{state.filter=b.dataset.guidedFilter;save();renderWork();}));
+    document.getElementById('guidedDealSearch')?.addEventListener('input',renderDeals);
+    document.getElementById('guidedCommandInput')?.addEventListener('input',e=>renderCommandResults(e.target.value));
+    document.getElementById('guidedCommandInput')?.addEventListener('keydown',e=>{if(e.key==='Escape')closeGuidedCommand();});
+    document.getElementById('guidedInlineCommand')?.addEventListener('keydown',e=>{if(e.key==='Enter')runGuidedInlineCommand();});
+    document.getElementById('guidedAskInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')submitGuidedQuestion();});
+    document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){if(document.body.dataset.workspace==='guided'){e.preventDefault();openGuidedCommand();}}if(e.key==='Escape'){closeGuidedTask();closeAskEngenix();closeGuidedCommand();}});
+    document.getElementById('searchTrigger')?.addEventListener('click',e=>{if(document.body.dataset.workspace==='guided'){e.preventDefault();e.stopImmediatePropagation();openGuidedCommand();}},true);
+
+    const priorAuthV15=window.setAuthenticated||setAuthenticated;
+    window.setAuthenticated=setAuthenticated=function(authenticated){priorAuthV15(authenticated);if(authenticated)setTimeout(()=>{enterGuidedExperience(state.lastView||'guided-today',false);let hasRole=false;try{hasRole=Boolean(sessionStorage.getItem(ROLE_KEY));}catch(e){}if(!hasRole)setTimeout(openGuidedRoleSelector,180);},110);};
+
+    renderGuidedAll();updateGuidedModeToggle();
+    const authenticated=!document.body.classList.contains('auth-locked');
+    if(authenticated)setTimeout(()=>enterGuidedExperience(state.lastView||'guided-today',false),130);
   })();
   </script>
 
