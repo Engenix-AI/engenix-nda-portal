@@ -2417,6 +2417,247 @@
     }
   </style>
 
+
+  <style id="engenix-finance-intelligence-v4">
+    /* =========================================================
+       ENGENIX F&I INTELLIGENCE · SYNTHETIC CUSTOMER SANDBOX V4
+       Same operating grammar. Distinct financial cockpit.
+       ========================================================= */
+    .fa-wallet::before { content:"▣"; }
+    .fa-tags::before { content:"◇"; }
+    .fa-coins::before { content:"●"; }
+    .fa-receipt::before { content:"▧"; }
+    .fa-handshake::before { content:"⌁"; }
+    .fa-repeat::before { content:"↻"; }
+    .fa-user-shield::before { content:"◈"; }
+    .fa-box-open::before { content:"▱"; }
+    .fa-file-invoice-dollar::before { content:"▤"; }
+    .fa-shield-heart::before { content:"◆"; }
+
+    .finance-shell { display:none !important; }
+    body[data-workspace="finance"] .compliance-shell,
+    body[data-workspace="finance"] .desking-shell { display:none !important; }
+    body[data-workspace="finance"] .finance-shell { display:block !important; }
+    body[data-workspace="finance"] button.finance-shell { display:grid !important; }
+    body[data-workspace="finance"] nav.finance-shell { display:block !important; }
+    body[data-workspace="finance"] .finance-active-banner.finance-shell { display:flex !important; }
+    body[data-workspace="finance"] .view:not(.finance-view) { display:none !important; }
+    body:not([data-workspace="finance"]) .finance-view { display:none !important; }
+
+    body[data-workspace="finance"] {
+      --fi-teal:#0c8f83;
+      --fi-teal-deep:#096b67;
+      --fi-gold:#bd8b35;
+      --fi-gold-soft:rgba(189,139,53,.12);
+      --fi-teal-soft:rgba(12,143,131,.11);
+      --fi-ink:#123b3b;
+    }
+    body[data-workspace="finance"] .product-switch-mark { color:var(--fi-teal); background:var(--fi-teal-soft); }
+    body[data-workspace="finance"] .finance-nav-item.active {
+      color:var(--text);
+      background:linear-gradient(90deg,var(--fi-teal-soft),rgba(189,139,53,.055));
+      border-color:rgba(12,143,131,.23);
+      box-shadow:inset 3px 0 0 var(--fi-teal);
+    }
+    body[data-workspace="finance"] .finance-primary-action {
+      border-color:rgba(12,143,131,.24);
+      background:linear-gradient(135deg,rgba(12,143,131,.13),rgba(189,139,53,.07));
+    }
+    body[data-workspace="finance"] .finance-primary-action .sidebar-primary-icon { color:var(--fi-teal); background:var(--fi-teal-soft); }
+    html[data-theme="light"] body[data-workspace="finance"] .sidebar { background:linear-gradient(180deg,#f8fdfc,#eef8f6 62%,#faf7ef); }
+    html[data-theme="dark"] body[data-workspace="finance"] .sidebar { background:linear-gradient(180deg,#071817,#071313 64%,#15120b); }
+    body[data-workspace="finance"] .demo-pill { color:#08746c; background:rgba(12,143,131,.09); border-color:rgba(12,143,131,.22); }
+
+    .finance-active-banner {
+      position:sticky; top:var(--topbar); z-index:46; min-height:58px;
+      padding:9px clamp(18px,2.3vw,34px); border-bottom:1px solid var(--line);
+      background:color-mix(in srgb,var(--bg) 91%,transparent); backdrop-filter:blur(18px);
+      align-items:center; gap:14px; box-shadow:0 10px 30px rgba(0,0,0,.07);
+    }
+    .finance-active-banner::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:linear-gradient(180deg,var(--fi-teal),var(--fi-gold)); }
+    html[data-theme="light"] .finance-active-banner { background:rgba(255,255,255,.94); }
+    .finance-record-token { min-height:31px; padding:4px 9px 4px 6px; border:1px solid rgba(12,143,131,.27); border-radius:9px; background:var(--fi-teal-soft); display:inline-flex; align-items:center; gap:7px; white-space:nowrap; }
+    .finance-record-token span,.finance-record-token b { color:var(--fi-teal); }
+    .finance-record-token code { color:var(--text); font-size:9px; font-weight:800; }
+    .finance-active-copy { min-width:0; flex:1; }
+    .finance-badge { color:#08766e !important; background:var(--fi-teal-soft) !important; border-color:rgba(12,143,131,.22) !important; }
+
+    .fi-shell { display:grid; gap:12px; }
+    .fi-hero {
+      padding:clamp(22px,3vw,34px); border:1px solid rgba(12,143,131,.19); border-radius:18px;
+      background:
+        linear-gradient(110deg,color-mix(in srgb,var(--fi-teal) 8%,var(--panel)),var(--panel) 64%,color-mix(in srgb,var(--fi-gold) 6%,var(--panel)));
+      position:relative; overflow:hidden;
+    }
+    .fi-hero::before { content:""; position:absolute; inset:0 auto 0 0; width:5px; background:linear-gradient(180deg,var(--fi-teal),var(--fi-gold)); }
+    .fi-hero-grid { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:center; }
+    .fi-kicker,.fi-eyebrow { color:var(--fi-teal); font-size:9px; font-weight:850; letter-spacing:.13em; text-transform:uppercase; }
+    .fi-hero h1 { margin:8px 0; max-width:780px; font-size:clamp(28px,3.3vw,44px); line-height:1.04; letter-spacing:-.045em; }
+    .fi-hero p { margin:0; max-width:740px; color:var(--muted); font-size:12px; line-height:1.65; }
+    .fi-hero-actions { display:grid; gap:8px; min-width:230px; }
+    .fi-button.primary { background:linear-gradient(135deg,#0f9588,#08736d); border-color:rgba(12,143,131,.32); color:#fff; box-shadow:0 12px 28px rgba(12,143,131,.18); }
+    .fi-button.gold { color:#fff5df; background:linear-gradient(135deg,#bd8b35,#9b6c21); border-color:rgba(189,139,53,.3); }
+
+    .fi-metrics { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .fi-metric { min-height:112px; padding:15px; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+    .fi-metric small { display:block; color:var(--muted); font-size:8.5px; font-weight:820; letter-spacing:.08em; text-transform:uppercase; }
+    .fi-metric strong { display:block; margin-top:10px; font-size:28px; line-height:1; letter-spacing:-.04em; }
+    .fi-metric span { display:block; margin-top:6px; color:var(--muted); font-size:8.8px; line-height:1.4; }
+    html[data-theme="light"] .fi-metric { box-shadow:0 8px 22px rgba(34,57,75,.045); }
+
+    .fi-grid-2 { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr); gap:12px; align-items:start; }
+    .fi-grid-even { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .fi-grid-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .fi-card { border-color:rgba(12,143,131,.14); }
+    .fi-section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:12px; }
+    .fi-section-head h2 { margin:5px 0 0; font-size:19px; letter-spacing:-.025em; }
+    .fi-section-head p { margin:5px 0 0; color:var(--muted); font-size:10px; line-height:1.5; }
+
+    .fi-action-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; }
+    .fi-action-card { min-height:86px; padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel); text-align:left; color:var(--text); cursor:pointer; transition:.16s ease; }
+    .fi-action-card:hover { transform:translateY(-1px); border-color:rgba(12,143,131,.3); }
+    .fi-action-card small { color:var(--muted-2); font-size:8px; text-transform:uppercase; letter-spacing:.08em; }
+    .fi-action-card strong { display:block; margin-top:7px; font-size:11px; }
+    .fi-action-card span { display:block; margin-top:4px; color:var(--muted); font-size:8.7px; line-height:1.4; }
+    .fi-action-card.attention { background:var(--fi-gold-soft); border-color:rgba(189,139,53,.22); }
+    .fi-action-card.ready { background:var(--fi-teal-soft); border-color:rgba(12,143,131,.22); }
+
+    .fi-deal-summary { padding:16px; border:1px solid var(--line); border-radius:13px; background:var(--panel-2); }
+    .fi-deal-summary h3 { margin:7px 0 0; font-size:18px; }
+    .fi-summary-grid { margin-top:14px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .fi-summary-cell { padding:10px; border:1px solid var(--line); border-radius:10px; background:var(--panel); }
+    .fi-summary-cell small { display:block; color:var(--muted-2); font-size:7.5px; text-transform:uppercase; letter-spacing:.08em; }
+    .fi-summary-cell strong { display:block; margin-top:5px; font-size:10px; }
+
+    .fi-prior-hero { padding:18px; border:1px solid rgba(12,143,131,.22); border-radius:14px; background:linear-gradient(120deg,var(--fi-teal-soft),var(--panel)); }
+    .fi-match-status { display:inline-flex; align-items:center; gap:7px; min-height:27px; padding:0 9px; border:1px solid rgba(12,143,131,.22); border-radius:999px; color:var(--fi-teal); background:var(--panel); font-size:8.5px; font-weight:850; }
+    .fi-prior-hero h2 { margin:10px 0 5px; font-size:22px; }
+    .fi-prior-hero p { margin:0; color:var(--muted); font-size:10px; line-height:1.55; }
+    .fi-product-ledger { display:grid; gap:8px; }
+    .fi-ledger-row { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel); display:grid; grid-template-columns:minmax(0,1fr) repeat(3,110px) auto; gap:10px; align-items:center; }
+    .fi-ledger-row h3 { margin:0; font-size:10.5px; }
+    .fi-ledger-row p { margin:4px 0 0; color:var(--muted); font-size:8.7px; line-height:1.4; }
+    .fi-ledger-value small { display:block; color:var(--muted-2); font-size:7.5px; text-transform:uppercase; letter-spacing:.07em; }
+    .fi-ledger-value strong { display:block; margin-top:5px; font-size:10px; }
+
+    .fi-callout { padding:13px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); }
+    .fi-callout strong { display:block; font-size:10.5px; }
+    .fi-callout p { margin:5px 0 0; color:var(--muted); font-size:9px; line-height:1.5; }
+    .fi-callout.warning { background:var(--fi-gold-soft); border-color:rgba(189,139,53,.22); }
+    .fi-callout.success { background:var(--fi-teal-soft); border-color:rgba(12,143,131,.22); }
+
+    .fi-needs-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .fi-choice-card { padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel); }
+    .fi-choice-card label { display:block; color:var(--muted); font-size:8.5px; font-weight:760; }
+    .fi-choice-card select,.fi-choice-card input { width:100%; min-height:40px; margin-top:7px; padding:0 10px; border:1px solid var(--line); border-radius:9px; color:var(--text); background:var(--panel-2); outline:none; }
+    .fi-switch-row { min-height:40px; margin-top:7px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+
+    .fi-recommendations { display:grid; gap:9px; }
+    .fi-recommendation { padding:13px; border:1px solid var(--line); border-radius:12px; background:var(--panel); display:grid; grid-template-columns:38px minmax(0,1fr) auto; gap:11px; align-items:start; }
+    .fi-rec-icon { width:38px; height:38px; border-radius:11px; display:grid; place-items:center; color:var(--fi-teal); background:var(--fi-teal-soft); }
+    .fi-recommendation h3 { margin:0; font-size:11px; }
+    .fi-recommendation p { margin:5px 0 0; color:var(--muted); font-size:8.8px; line-height:1.5; }
+    .fi-rec-reasons { margin-top:8px; display:flex; gap:5px; flex-wrap:wrap; }
+
+    .fi-menu-packages { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; }
+    .fi-package { min-height:150px; padding:14px; border:1px solid var(--line); border-radius:13px; background:var(--panel); color:var(--text); text-align:left; cursor:pointer; transition:.16s ease; }
+    .fi-package:hover { transform:translateY(-1px); border-color:rgba(12,143,131,.3); }
+    .fi-package.active { border-color:rgba(12,143,131,.38); box-shadow:inset 0 0 0 1px rgba(12,143,131,.15); background:var(--fi-teal-soft); }
+    .fi-package small { color:var(--muted-2); font-size:8px; text-transform:uppercase; letter-spacing:.08em; }
+    .fi-package h3 { margin:7px 0 0; font-size:14px; }
+    .fi-package strong { display:block; margin-top:13px; font-size:20px; }
+    .fi-package p { margin:6px 0 0; color:var(--muted); font-size:8.7px; line-height:1.4; }
+
+    .fi-product-builder { display:grid; gap:8px; }
+    .fi-product-row { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel); display:grid; grid-template-columns:28px minmax(0,1fr) 120px 110px 96px; gap:10px; align-items:center; }
+    .fi-product-row.selected { border-color:rgba(12,143,131,.25); background:color-mix(in srgb,var(--fi-teal) 6%,var(--panel)); }
+    .fi-product-row input[type="checkbox"] { width:18px; height:18px; accent-color:var(--fi-teal); }
+    .fi-product-row h3 { margin:0; font-size:10.5px; }
+    .fi-product-row p { margin:4px 0 0; color:var(--muted); font-size:8.4px; line-height:1.35; }
+    .fi-price-input { width:100%; height:38px; padding:0 9px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); color:var(--text); outline:none; }
+    .fi-price-input:focus { border-color:rgba(12,143,131,.45); box-shadow:0 0 0 3px rgba(12,143,131,.08); }
+
+    .fi-economics { display:grid; gap:8px; }
+    .fi-econ-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); align-items:center; }
+    .fi-econ-row:last-child { border-bottom:0; }
+    .fi-econ-row span { color:var(--muted); font-size:9px; }
+    .fi-econ-row strong { font-size:11px; }
+    .fi-econ-row.total strong { color:var(--fi-teal); font-size:17px; }
+
+    .fi-presentation-list { display:grid; gap:8px; }
+    .fi-presentation-row { padding:12px; border:1px solid var(--line); border-radius:11px; background:var(--panel); display:grid; grid-template-columns:minmax(0,1fr) 90px auto; gap:10px; align-items:center; }
+    .fi-presentation-row h3 { margin:0; font-size:10.5px; }
+    .fi-presentation-row p { margin:4px 0 0; color:var(--muted); font-size:8.6px; }
+    .fi-choice-actions { display:flex; gap:6px; }
+    .fi-choice-actions .button.selected { background:var(--fi-teal-soft); border-color:rgba(12,143,131,.26); color:var(--fi-teal); }
+    .fi-choice-actions .button.declined { background:var(--red-soft); border-color:rgba(195,69,85,.2); color:var(--red); }
+
+    .fi-checklist { display:grid; gap:8px; }
+    .fi-check { padding:11px; border:1px solid var(--line); border-radius:10px; background:var(--panel); display:grid; grid-template-columns:25px minmax(0,1fr) auto; gap:9px; align-items:center; }
+    .fi-check-mark { width:25px; height:25px; border-radius:8px; display:grid; place-items:center; color:var(--amber); background:var(--amber-soft); }
+    .fi-check.done .fi-check-mark { color:var(--fi-teal); background:var(--fi-teal-soft); }
+    .fi-check strong { display:block; font-size:9.7px; }
+    .fi-check span { display:block; margin-top:3px; color:var(--muted); font-size:8.3px; }
+
+    .fi-timeline { display:grid; }
+    .fi-event { display:grid; grid-template-columns:58px 24px minmax(0,1fr); gap:10px; padding:11px 0; border-bottom:1px solid var(--line); }
+    .fi-event:last-child { border-bottom:0; }
+    .fi-event time { color:var(--muted-2); font-size:8px; font-family:ui-monospace,monospace; padding-top:4px; }
+    .fi-event-mark { width:24px; height:24px; border-radius:8px; display:grid; place-items:center; color:var(--fi-teal); background:var(--fi-teal-soft); font-size:8px; }
+    .fi-event strong { display:block; font-size:9.5px; }
+    .fi-event p { margin:4px 0 0; color:var(--muted); font-size:8.5px; line-height:1.45; }
+
+    .fi-product-knowledge { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .fi-knowledge-card { padding:15px; border:1px solid var(--line); border-radius:13px; background:var(--panel); }
+    .fi-knowledge-card h3 { margin:0; font-size:12px; }
+    .fi-knowledge-card p { margin:6px 0 0; color:var(--muted); font-size:8.8px; line-height:1.5; }
+    .fi-knowledge-grid { margin-top:12px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; }
+    .fi-knowledge-cell { padding:8px; border:1px solid var(--line); border-radius:9px; background:var(--panel-2); }
+    .fi-knowledge-cell small { color:var(--muted-2); font-size:7px; text-transform:uppercase; letter-spacing:.07em; }
+    .fi-knowledge-cell strong { display:block; margin-top:4px; font-size:9px; }
+
+    .fi-disclaimer { padding:11px 13px; border:1px solid rgba(189,139,53,.22); border-radius:11px; color:var(--muted); background:var(--fi-gold-soft); font-size:8.7px; line-height:1.5; }
+    .fi-disclaimer strong { color:var(--text); }
+
+    @media(max-width:1250px){
+      .fi-metrics{grid-template-columns:repeat(3,minmax(0,1fr));}
+      .fi-grid-2{grid-template-columns:1fr;}
+      .fi-menu-packages{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .fi-action-strip{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .fi-product-knowledge{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+    @media(max-width:900px){
+      .fi-hero-grid{grid-template-columns:1fr;}
+      .fi-hero-actions{grid-template-columns:repeat(3,minmax(0,1fr)); min-width:0;}
+      .fi-grid-even{grid-template-columns:1fr;}
+      .fi-needs-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .fi-ledger-row{grid-template-columns:minmax(0,1fr) repeat(2,100px);}
+      .fi-ledger-row .fi-ledger-value:nth-of-type(3){display:none;}
+      .fi-product-row{grid-template-columns:28px minmax(0,1fr) 110px 90px;}
+      .fi-product-row > :last-child{display:none;}
+    }
+    @media(max-width:740px){
+      .finance-active-copy{display:none;}
+      .finance-active-banner{padding-left:13px;padding-right:13px;gap:8px;}
+      .finance-active-banner .active-deal-status{display:none;}
+      .finance-active-banner .button{margin-left:auto;}
+      .fi-metrics{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .fi-action-strip,.fi-menu-packages,.fi-needs-grid,.fi-product-knowledge{grid-template-columns:1fr;}
+      .fi-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .fi-ledger-row{grid-template-columns:1fr;}
+      .fi-ledger-row .fi-ledger-value:nth-of-type(3){display:block;}
+      .fi-product-row{grid-template-columns:26px minmax(0,1fr);}
+      .fi-product-row > :nth-child(n+3){grid-column:2;display:block;}
+      .fi-presentation-row{grid-template-columns:1fr;}
+      .fi-choice-actions{justify-content:flex-start;}
+    }
+    @media(max-width:470px){
+      .fi-hero-actions{grid-template-columns:1fr;}
+      .fi-metrics{grid-template-columns:1fr;}
+      .fi-summary-grid{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+
 </head>
 <body class="auth-locked operator-friendly" data-workspace="compliance">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
@@ -2489,6 +2730,7 @@
           <select id="workspaceSelect" aria-label="Switch ENGENIX workspace">
             <option value="compliance">Compliance Intelligence</option>
             <option value="desking">Desking Intelligence</option>
+            <option value="finance">F&amp;I Intelligence</option>
           </select>
         </div>
         <div class="product-switch-copy" id="workspaceSwitchCopy">Deal control, findings, and accountable resolution</div>
@@ -2597,6 +2839,49 @@
         </div>
       </nav>
 
+
+      <button class="sidebar-primary-action finance-shell finance-primary-action" type="button" onclick="showFinanceView('fi-menu')">
+        <span class="sidebar-primary-icon"><i class="fa-solid fa-wallet"></i></span>
+        <span><strong>Build a Menu</strong><small>Open the active synthetic F&amp;I workspace</small></span>
+      </button>
+
+      <nav class="nav-group finance-shell" aria-label="F&I daily work navigation">
+        <div class="nav-label">Daily Work</div>
+        <div class="nav-list">
+          <button class="nav-item finance-nav-item active" data-finance-view="fi-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">F&amp;I Command</span><span class="nav-count" id="fiActiveCountNav">4</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-deals"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Active Deals</span><span class="nav-count">6</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-prior"><span class="nav-icon"><i class="fa-solid fa-repeat"></i></span><span class="nav-text">Prior Deal Recognition</span><span class="nav-count" id="fiPriorCountNav">1</span></button>
+        </div>
+      </nav>
+
+      <nav class="nav-group finance-shell" aria-label="F&I build navigation">
+        <div class="nav-label">Build</div>
+        <div class="nav-list">
+          <button class="nav-item finance-nav-item" data-finance-view="fi-fit"><span class="nav-icon"><i class="fa-solid fa-shield-heart"></i></span><span class="nav-text">Product Fit</span><span class="nav-count" id="fiFitCountNav">6</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-menu"><span class="nav-icon"><i class="fa-solid fa-tags"></i></span><span class="nav-text">Menu Studio</span><span class="nav-count">LIVE</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-cancel"><span class="nav-icon"><i class="fa-solid fa-coins"></i></span><span class="nav-text">Cancellation &amp; Carryover</span><span class="nav-count" id="fiCancelCountNav">3</span></button>
+        </div>
+      </nav>
+
+      <nav class="nav-group finance-shell" aria-label="F&I decision navigation">
+        <div class="nav-label">Decide</div>
+        <div class="nav-list">
+          <button class="nav-item finance-nav-item" data-finance-view="fi-presentation"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Customer Presentation</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-exceptions"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Exceptions &amp; Overrides</span><span class="nav-count" id="fiExceptionCountNav">2</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-handoff"><span class="nav-icon"><i class="fa-solid fa-file-circle-check"></i></span><span class="nav-text">F&amp;I Handoff</span></button>
+        </div>
+      </nav>
+
+      <nav class="nav-group finance-shell" aria-label="F&I records navigation">
+        <div class="nav-label">Records</div>
+        <div class="nav-list">
+          <button class="nav-item finance-nav-item" data-finance-view="fi-knowledge"><span class="nav-icon"><i class="fa-solid fa-book-open"></i></span><span class="nav-text">Product Knowledge</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-outcomes"><span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Outcome Memory</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-audit"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Audit History</span></button>
+          <button class="nav-item finance-nav-item" data-finance-view="fi-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span></button>
+        </div>
+      </nav>
+
       <div class="sidebar-foot">
         <div class="system-card">
           <div class="system-row">
@@ -2664,6 +2949,18 @@
         </div>
         <div class="active-deal-status"><span class="badge desk-badge" id="deskActiveStage">MODELING</span><span class="badge green" id="deskActiveFit">4 PATHS</span></div>
         <button class="button small desk-button" type="button" onclick="showDeskView('desk-structure')">Open Structure Lab <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+
+
+      <div class="finance-active-banner finance-shell" id="financeActiveBanner" aria-label="Active F&I record">
+        <div class="finance-record-token" id="fiActiveToken"><span>◆</span><b>F7</b><code>FI-8421</code></div>
+        <div class="finance-active-copy">
+          <div class="active-deal-label">Active F&amp;I record · prior coverage, menu decisions, and customer choices stay attached</div>
+          <div class="active-deal-title" id="fiActiveTitle">Morgan Davis · 2025 Ford Bronco Sport Badlands</div>
+          <div class="active-deal-meta" id="fiActiveMeta">Premier Ford · Menu preparation · Owner: Dana Ruiz</div>
+        </div>
+        <div class="active-deal-status"><span class="badge finance-badge" id="fiActiveStage">MENU BUILD</span><span class="badge amber" id="fiActivePrior">PRIOR MATCH</span></div>
+        <button class="button small fi-button" type="button" onclick="showFinanceView('fi-menu')">Open Menu Studio <i class="fa-solid fa-arrow-right"></i></button>
       </div>
 
       <div class="content">
@@ -3237,6 +3534,118 @@
             </div></article>
             <article class="card desk-card"><div class="card-header"><div><div class="card-title">Workspace Profile</div><div class="card-subtitle">Current customer-facing demonstration scope</div></div></div><div class="card-body"><div class="detail-grid" style="margin-top:0"><div class="detail-cell"><div class="detail-label">Workspace</div><div class="detail-value">Desking Intelligence</div></div><div class="detail-cell"><div class="detail-label">Mode</div><div class="detail-value">Synthetic Pathways</div></div><div class="detail-cell"><div class="detail-label">Active Manager</div><div class="detail-value">Alex Morgan</div></div><div class="detail-cell"><div class="detail-label">Programs</div><div class="detail-value">4 synthetic</div></div></div><div class="desk-disclaimer" style="margin-top:14px"><strong>Demonstration boundary:</strong> No consumer report is transmitted, no lender approval is represented, and no protected-class characteristic is used in this synthetic model.</div></div></article>
           </div>
+        </section>
+
+
+        <!-- =====================================================
+             F&I INTELLIGENCE WORKSPACE
+             ===================================================== -->
+        <section class="view finance-view" id="view-fi-command">
+          <div class="fi-shell">
+            <header class="fi-hero"><div class="fi-hero-grid"><div><div class="fi-kicker">F&amp;I Intelligence · Synthetic ownership-decision environment</div><h1>Build the right ownership decision without losing the deal behind it.</h1><p>Recognize prior coverage, reconcile cancellation value, recommend products from objective vehicle and customer-declared needs, preserve individual choice, and hand a clean record into Compliance.</p></div><div class="fi-hero-actions"><button class="button fi-button primary" onclick="showFinanceView('fi-prior')"><i class="fa-solid fa-repeat"></i>Recognize Prior Deal</button><button class="button fi-button" onclick="showFinanceView('fi-menu')"><i class="fa-solid fa-tags"></i>Open Menu Studio</button><button class="button fi-button gold" onclick="downloadFinanceMenuBrief()"><i class="fa-solid fa-download"></i>Download Menu Brief</button></div></div></header>
+            <div class="fi-metrics" id="fiCommandMetrics"></div>
+            <div class="fi-action-strip">
+              <button class="fi-action-card attention" onclick="showFinanceView('fi-prior')"><small>Prior relationship</small><strong id="fiActionPriorTitle">Recognition available</strong><span id="fiActionPriorCopy">One synthetic prior vehicle and four product contracts may affect this menu.</span></button>
+              <button class="fi-action-card" onclick="showFinanceView('fi-cancel')"><small>Cancellation value</small><strong id="fiActionCancelTitle">Verification pending</strong><span id="fiActionCancelCopy">Estimated value is visible but not yet treated as available funds.</span></button>
+              <button class="fi-action-card ready" onclick="showFinanceView('fi-menu')"><small>Menu economics</small><strong id="fiActionMenuTitle">Ownership pathway modeled</strong><span id="fiActionMenuCopy">Payment, product gross, and lender headroom update together.</span></button>
+              <button class="fi-action-card" onclick="showFinanceView('fi-handoff')"><small>Next handoff</small><strong id="fiActionHandoffTitle">Customer presentation required</strong><span id="fiActionHandoffCopy">Complete individual selections and optional-product acknowledgment.</span></button>
+            </div>
+            <div class="fi-grid-2">
+              <article class="card fi-card"><div class="card-header"><div><div class="card-title">Active Ownership Decision</div><div class="card-subtitle">The desk-approved structure and F&amp;I economics in one record</div></div><button class="button small fi-button" onclick="showFinanceView('fi-menu')">Open builder</button></div><div class="card-body" id="fiActiveDecision"></div></article>
+              <article class="card fi-card"><div class="card-header"><div><div class="card-title">Operating Readout</div><div class="card-subtitle">What Dana Ruiz should know before presenting the menu</div></div></div><div class="card-body" id="fiOperatingReadout"></div></article>
+            </div>
+            <div class="fi-grid-even">
+              <article class="card fi-card"><div class="card-header"><div><div class="card-title">Deals Requiring F&amp;I Attention</div><div class="card-subtitle">Synthetic workload ordered by the next decision</div></div><button class="button small" onclick="showFinanceView('fi-deals')">Open all</button></div><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer</th><th>Stage</th><th>Open issue</th><th>Payment</th><th>Next move</th></tr></thead><tbody id="fiCommandDealBody"></tbody></table></div></article>
+              <article class="card fi-card"><div class="card-header"><div><div class="card-title">Decision Timeline</div><div class="card-subtitle">Recent F&amp;I actions preserved in sequence</div></div></div><div class="card-body"><div class="fi-timeline" id="fiCommandTimeline"></div></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-deals">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Synthetic F&amp;I workload</div><h2>Active Deals</h2><p>Every record retains its desk structure, prior-product context, menu version, and customer-choice trail.</p></div><button class="button fi-button primary" onclick="openFinanceDeal('FI-8421')"><i class="fa-solid fa-wallet"></i>Open guided deal</button></div>
+          <div class="filter-bar"><div class="filter-left"><input class="input" id="fiDealSearch" placeholder="Search F&amp;I deals…"><select class="select-control select-small" id="fiDealStatus"><option value="all">All stages</option><option value="Menu Build">Menu Build</option><option value="Presentation">Presentation</option><option value="Review">Review</option><option value="Ready for Compliance">Ready for Compliance</option></select></div><div class="filter-right"><span class="badge finance-badge">Synthetic records</span></div></div>
+          <article class="card fi-card"><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Customer</th><th>Vehicle</th><th>Prior match</th><th>Base payment</th><th>Menu payment</th><th>Product gross</th><th>Stage</th><th></th></tr></thead><tbody id="fiDealBody"></tbody></table></div></article>
+        </section>
+
+        <section class="view finance-view" id="view-fi-prior">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">First-party relationship intelligence</div><h2>Prior Deal Recognition</h2><p>Reconcile the customer’s traded vehicle and existing products before recommending anything new.</p></div><button class="button fi-button primary" id="fiRunRecognitionButton" onclick="runPriorDealRecognition()"><i class="fa-solid fa-repeat"></i>Run Recognition</button></div>
+          <div id="fiPriorRecognitionHost"></div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-cancel">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Cancellation and carryover control</div><h2>Cancellation &amp; Carryover</h2><p>Separate estimated value, administrator-verified refunds, transferable coverage, and any modeled structure contribution.</p></div><button class="button fi-button primary" id="fiVerifyCancellationButton" onclick="verifyFinanceCancellations()"><i class="fa-solid fa-check"></i>Verify Demo Values</button></div>
+          <div class="fi-metrics" id="fiCancellationMetrics"></div>
+          <div class="fi-grid-2">
+            <article class="card fi-card"><div class="card-header"><div><div class="card-title">Prior Product Ledger</div><div class="card-subtitle">Status, remaining value, and permitted next action</div></div></div><div class="card-body"><div class="fi-product-ledger" id="fiCancellationLedger"></div></div></article>
+            <aside class="card fi-card"><div class="card-header"><div><div class="card-title">Structure Treatment</div><div class="card-subtitle">No estimated refund becomes cash automatically</div></div></div><div class="card-body" id="fiCancellationTreatment"></div></aside>
+          </div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-fit">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Objective and customer-declared needs</div><h2>Product Fit</h2><p>Recommendations use authorized vehicle facts, existing coverage, eligibility rules, and answers supplied during the conversation.</p></div><button class="button fi-button primary" onclick="generateFinanceRecommendations()"><i class="fa-solid fa-wand-magic-sparkles"></i>Refresh Fit</button></div>
+          <div class="fi-grid-2">
+            <article class="card fi-card"><div class="card-header"><div><div class="card-title">Customer Needs Conversation</div><div class="card-subtitle">Visible inputs that the F&amp;I manager can confirm with the customer</div></div></div><div class="card-body"><div class="fi-needs-grid" id="fiNeedsGrid"></div><div class="fi-disclaimer" style="margin-top:12px"><strong>Boundary:</strong> The demo does not use property records, ZIP-code profiling, protected characteristics, social-media data, or hidden personal enrichment to target products.</div></div></article>
+            <article class="card fi-card"><div class="card-header"><div><div class="card-title">Vehicle &amp; Coverage Context</div><div class="card-subtitle">What the recommendation engine can explain</div></div></div><div class="card-body" id="fiVehicleContext"></div></article>
+          </div>
+          <article class="card fi-card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">Explainable Product Recommendations</div><div class="card-subtitle">Why recommended, why eligible, and what could change the result</div></div><span class="badge finance-badge" id="fiRecommendationCount">6 evaluated</span></div><div class="card-body"><div class="fi-recommendations" id="fiRecommendationList"></div></div></article>
+        </section>
+
+        <section class="view finance-view" id="view-fi-menu">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Customer-controlled ownership choices</div><h2>Menu Studio</h2><p>Build transparent options while payment, gross, advance, prior coverage, and duplication controls remain visible.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="button fi-button" onclick="saveFinanceMenuSnapshot()"><i class="fa-solid fa-floppy-disk"></i>Save Menu Snapshot</button><button class="button fi-button primary" onclick="showFinanceView('fi-presentation')"><i class="fa-solid fa-handshake"></i>Begin Presentation</button></div></div>
+          <div class="fi-menu-packages" id="fiPackageGrid"></div>
+          <div class="fi-grid-2" style="margin-top:12px">
+            <article class="card fi-card"><div class="card-header"><div><div class="card-title">Individual Product Builder</div><div class="card-subtitle">Every product remains individually priced and individually selectable</div></div><span class="badge finance-badge" id="fiMenuStatusBadge">DRAFT</span></div><div class="card-body"><div class="fi-product-builder" id="fiProductBuilder"></div></div></article>
+            <aside class="card fi-card"><div class="card-header"><div><div class="card-title">Live Menu Economics</div><div class="card-subtitle">Payment, product gross, and lender headroom</div></div></div><div class="card-body" id="fiMenuEconomics"></div></aside>
+          </div>
+          <article class="card fi-card" style="margin-top:12px"><div class="card-header"><div><div class="card-title">Recommendation &amp; Duplication Guard</div><div class="card-subtitle">The menu remains explainable before it reaches the customer</div></div></div><div class="card-body" id="fiMenuGuardrails"></div></article>
+        </section>
+
+        <section class="view finance-view" id="view-fi-presentation">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Transparent customer choice</div><h2>Customer Presentation</h2><p>Record what was offered, each individual price, what the customer selected or declined, and any change after presentation.</p></div><button class="button fi-button gold" onclick="completeFinancePresentation()"><i class="fa-solid fa-check"></i>Complete Presentation</button></div>
+          <div class="fi-grid-2">
+            <article class="card fi-card"><div class="card-header"><div><div class="card-title">Presented Products</div><div class="card-subtitle">Selections remain individually controllable</div></div><span class="badge" id="fiPresentationStatus">NOT STARTED</span></div><div class="card-body"><div class="fi-presentation-list" id="fiPresentationList"></div></div></article>
+            <aside class="card fi-card"><div class="card-header"><div><div class="card-title">Customer Choice Record</div><div class="card-subtitle">Payment and acknowledgment before finalization</div></div></div><div class="card-body" id="fiChoiceRecord"></div></aside>
+          </div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-exceptions">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Operator-controlled review</div><h2>Exceptions &amp; Overrides</h2><p>Keep duplicate coverage, pricing changes, capacity pressure, and cancellation treatment visible before the final contract.</p></div><button class="button fi-button" onclick="renderFinanceExceptions()"><i class="fa-solid fa-arrows-rotate"></i>Refresh Review</button></div>
+          <div class="fi-grid-even"><article class="card fi-card"><div class="card-header"><div><div class="card-title">Open Review Items</div><div class="card-subtitle">Synthetic issues requiring manager disposition</div></div></div><div class="card-body" id="fiExceptionList"></div></article><article class="card fi-card"><div class="card-header"><div><div class="card-title">Manager Decision Record</div><div class="card-subtitle">The reasons behind every override remain attached</div></div></div><div class="card-body"><div class="field"><label for="fiOverrideReason">Decision note</label><textarea id="fiOverrideReason" placeholder="Document why the manager approved, changed, or removed a product…"></textarea></div><button class="button fi-button primary" style="margin-top:10px" onclick="recordFinanceOverride()"><i class="fa-solid fa-scale-balanced"></i>Record Decision</button></div></article></div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-handoff">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Controlled downstream handoff</div><h2>F&amp;I Handoff</h2><p>Verify the menu, customer choices, cancellation treatment, and final economics before the record enters Compliance Intelligence.</p></div><button class="button fi-button primary" id="fiSendComplianceButton" onclick="sendFinanceToCompliance()"><i class="fa-solid fa-file-circle-check"></i>Send to Compliance</button></div>
+          <div class="fi-grid-2">
+            <article class="card fi-card"><div class="card-header"><div><div class="card-title">Handoff Readiness</div><div class="card-subtitle">Required operating evidence before submission</div></div><span class="badge" id="fiHandoffStatus">INCOMPLETE</span></div><div class="card-body"><div class="fi-checklist" id="fiHandoffChecklist"></div></div></article>
+            <aside class="card fi-card"><div class="card-header"><div><div class="card-title">Final F&amp;I Summary</div><div class="card-subtitle">What Compliance receives with the deal</div></div></div><div class="card-body" id="fiHandoffSummary"></div></aside>
+          </div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-knowledge">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Controlled product knowledge</div><h2>Product Knowledge</h2><p>Dealer-approved eligibility, pricing, cost, coverage, and source records supporting every menu recommendation.</p></div><label class="button fi-button" for="fiKnowledgeFile"><i class="fa-solid fa-file-circle-plus"></i>Attach Product Bulletin<input id="fiKnowledgeFile" type="file" accept=".pdf,.csv,.txt" hidden></label></div>
+          <div class="fi-disclaimer" id="fiKnowledgeStatus"><strong>Synthetic knowledge base:</strong> Six product records are available. Local attachments are not parsed or transmitted.</div>
+          <div class="fi-product-knowledge" id="fiKnowledgeGrid" style="margin-top:12px"></div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-outcomes">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Dealership F&amp;I memory</div><h2>Outcome Memory</h2><p>Preserve product selections, cancellations, gross outcomes, chargebacks, and customer-choice patterns for operator review.</p></div><button class="button fi-button" onclick="exportFinanceOutcomes()"><i class="fa-solid fa-download"></i>Export Outcomes</button></div>
+          <div class="fi-metrics" id="fiOutcomeMetrics"></div>
+          <div class="fi-grid-2"><article class="card fi-card"><div class="card-header"><div><div class="card-title">Recent Synthetic Outcomes</div><div class="card-subtitle">What was presented, selected, canceled, and funded</div></div></div><div class="table-wrap"><table><thead><tr><th>Deal</th><th>Vehicle</th><th>Products selected</th><th>Back gross</th><th>Cancellation</th><th>Outcome</th><th>Learning note</th></tr></thead><tbody id="fiOutcomeBody"></tbody></table></div></article><article class="card fi-card"><div class="card-header"><div><div class="card-title">What the Store Is Learning</div><div class="card-subtitle">Synthetic patterns that remain subject to management interpretation</div></div></div><div class="card-body" id="fiLearningSignals"></div></article></div>
+        </section>
+
+        <section class="view finance-view" id="view-fi-audit">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">Durable F&amp;I decision record</div><h2>Audit History</h2><p>Every recognition, recommendation, menu version, choice, override, and handoff is preserved in order.</p></div><button class="button fi-button" onclick="resetFinanceDemo()"><i class="fa-solid fa-rotate-left"></i>Reset F&amp;I Demo</button></div>
+          <article class="card fi-card"><div class="card-body"><div class="fi-timeline" id="fiAuditTimeline"></div></div></article>
+        </section>
+
+        <section class="view finance-view" id="view-fi-settings">
+          <div class="fi-section-head"><div><div class="fi-eyebrow">F&amp;I workspace controls</div><h2>Settings</h2><p>Dealer-controlled guardrails for product fit, pricing, customer choice, and downstream review.</p></div><button class="button fi-button primary" onclick="saveFinanceSettings()"><i class="fa-solid fa-floppy-disk"></i>Save Changes</button></div>
+          <div class="settings-grid"><article class="card fi-card"><div class="card-header"><div><div class="card-title">Decision-Support Guardrails</div><div class="card-subtitle">Keep F&amp;I recommendations explainable and voluntary</div></div></div><div class="card-body">
+            <div class="setting-row"><div><div class="setting-title">Require individual product pricing</div><div class="setting-copy">Every product remains visible and individually selectable during presentation.</div></div><button class="toggle on" data-fi-setting="individualPricing"><div class="toggle-knob"></div></button></div>
+            <div class="setting-row"><div><div class="setting-title">Block duplicate active coverage</div><div class="setting-copy">Require manager review when a new product overlaps transferable or active coverage.</div></div><button class="toggle on" data-fi-setting="duplicateGuard"><div class="toggle-knob"></div></button></div>
+            <div class="setting-row"><div><div class="setting-title">Require optional-product acknowledgment</div><div class="setting-copy">Preserve that optional products were presented as voluntary and individually priced.</div></div><button class="toggle on" data-fi-setting="optionalAcknowledgment"><div class="toggle-knob"></div></button></div>
+            <div class="setting-row"><div><div class="setting-title">Separate estimated and verified cancellations</div><div class="setting-copy">Never treat a preliminary refund estimate as immediately available customer funds.</div></div><button class="toggle on" data-fi-setting="verifiedCancellation"><div class="toggle-knob"></div></button></div>
+          </div></article><article class="card fi-card"><div class="card-header"><div><div class="card-title">Workspace Profile</div><div class="card-subtitle">Current customer-facing demonstration scope</div></div></div><div class="card-body"><div class="detail-grid" style="margin-top:0"><div class="detail-cell"><div class="detail-label">Workspace</div><div class="detail-value">F&amp;I Intelligence</div></div><div class="detail-cell"><div class="detail-label">Mode</div><div class="detail-value">Synthetic Menu Intelligence</div></div><div class="detail-cell"><div class="detail-label">Active Manager</div><div class="detail-value">Dana Ruiz</div></div><div class="detail-cell"><div class="detail-label">Products</div><div class="detail-value">6 synthetic</div></div></div><div class="fi-disclaimer" style="margin-top:14px"><strong>Demonstration boundary:</strong> No real customer report, product contract, administrator quote, or public-record profile is used in this sandbox.</div></div></article></div>
         </section>
 
       </div>
@@ -5801,6 +6210,235 @@
     document.querySelectorAll('[data-copilot-range]').forEach(button=>button.addEventListener('click',()=>{ complianceCopilotState.patternRange=Number(button.dataset.copilotRange); renderCopilotPatterns(); saveCopilotState(); }));
     document.getElementById('copilotRemediationText')?.addEventListener('input',saveCopilotState);
     renderComplianceCopilot();
+  </script>
+
+
+
+  <script id="engenix-finance-intelligence-v4-script">
+    const FI_STORAGE_KEY='engenix-finance-intelligence-v4';
+    let lastFinanceView='fi-command';
+
+    const financeProducts=[
+      {id:'vsc',name:'Vehicle Service Contract',short:'Service Contract',price:2795,cost:1210,term:'84 mo / 100,000 mi',eligibility:'Eligible',category:'Mechanical protection',icon:'fa-shield-heart'},
+      {id:'gap',name:'Guaranteed Asset Protection',short:'GAP',price:995,cost:375,term:'Loan term',eligibility:'Eligible',category:'Loan protection',icon:'fa-scale-balanced'},
+      {id:'maintenance',name:'Prepaid Maintenance',short:'Maintenance',price:1295,cost:620,term:'60 mo / 60,000 mi',eligibility:'Eligible',category:'Ownership planning',icon:'fa-list-check'},
+      {id:'tire',name:'Tire & Wheel Protection',short:'Tire & Wheel',price:1495,cost:650,term:'60 months',eligibility:'Eligible',category:'Road-hazard protection',icon:'fa-circle-check'},
+      {id:'key',name:'Key Replacement',short:'Key',price:695,cost:210,term:'60 months',eligibility:'Eligible',category:'Convenience protection',icon:'fa-key'},
+      {id:'appearance',name:'Appearance Protection',short:'Appearance',price:1195,cost:390,term:'60 months',eligibility:'Eligible',category:'Vehicle-condition protection',icon:'fa-wand-magic-sparkles'}
+    ];
+    const financePackages={
+      essential:{name:'Essential Protection',products:['vsc','gap'],copy:'Mechanical and loan-balance protection.'},
+      ownership:{name:'Ownership Protection',products:['vsc','gap','maintenance'],copy:'Adds planned maintenance to the core protection path.'},
+      complete:{name:'Complete Ownership',products:['vsc','gap','maintenance','tire','key','appearance'],copy:'All eligible products remain individually visible and removable.'},
+      custom:{name:'Custom Menu',products:[],copy:'Manager-controlled product selection based on the live needs conversation.'}
+    };
+    const financePriorProducts=[
+      {id:'pvsc',name:'Prior Vehicle Service Contract',provider:'Summit Demo Administrators',original:2495,status:'Cancelable',estimate:1442,verified:1375,action:'Cancel',note:'Vehicle-specific coverage. No claims assumed in this synthetic calculation.'},
+      {id:'pgap',name:'Prior GAP Contract',provider:'Harbor Demo Benefits',original:895,status:'Cancelable',estimate:486,verified:462,action:'Cancel',note:'Loan-specific product. Refund remains subject to administrator verification.'},
+      {id:'pmaint',name:'Prior Maintenance Plan',provider:'Premier Care Demo',original:1195,status:'Transfer Review',estimate:620,verified:0,action:'Transfer',note:'Synthetic remaining service value may transfer with administrator approval.'},
+      {id:'ptire',name:'Prior Tire & Wheel',provider:'RoadGuard Demo',original:1295,status:'Expired',estimate:0,verified:0,action:'None',note:'Coverage expired before the trade date.'}
+    ];
+    const financeDeals=[
+      {id:'FI-8421',code:'F7',customer:'Morgan Davis',vehicle:'2025 Ford Bronco Sport Badlands',prior:'Matched',base:646,menu:712,gross:3730,stage:'Menu Build',issue:'Prior products require reconciliation'},
+      {id:'FI-8418',code:'H2',customer:'Jordan Taylor',vehicle:'2026 Ford Explorer ST-Line',prior:'None',base:814,menu:887,gross:4210,stage:'Presentation',issue:'Customer selections incomplete'},
+      {id:'FI-8414',code:'K5',customer:'Cameron Reed',vehicle:'2026 Ford F-150 XLT',prior:'Matched',base:892,menu:957,gross:3985,stage:'Review',issue:'GAP capacity review'},
+      {id:'FI-8411',code:'N4',customer:'Avery Brooks',vehicle:'2025 Ford Escape Active',prior:'None',base:601,menu:649,gross:2840,stage:'Menu Build',issue:'Needs assessment incomplete'},
+      {id:'FI-8407',code:'R3',customer:'Riley Carter',vehicle:'2026 Ford Explorer Platinum',prior:'Matched',base:918,menu:1005,gross:4625,stage:'Ready for Compliance',issue:'Handoff ready'},
+      {id:'FI-8402',code:'T8',customer:'Taylor Morgan',vehicle:'2025 Ford F-150 Lariat',prior:'None',base:947,menu:1012,gross:4170,stage:'Presentation',issue:'One product declined'}
+    ];
+    const financeOutcomeSeed=[
+      {deal:'FI-8388',vehicle:'2025 Explorer',products:'VSC · GAP · Maintenance',gross:3520,cancel:1640,outcome:'Funded',note:'Verified prior refunds were preserved separately from menu pricing.'},
+      {deal:'FI-8379',vehicle:'2026 F-150',products:'VSC · Tire & Wheel',gross:2890,cancel:0,outcome:'Funded',note:'Customer declined GAP after individual presentation.'},
+      {deal:'FI-8364',vehicle:'2025 Escape',products:'Maintenance · Key',gross:1160,cancel:420,outcome:'Funded',note:'Existing transferable coverage prevented duplicate service-contract sale.'},
+      {deal:'FI-8351',vehicle:'2026 Bronco',products:'Complete Ownership',gross:4780,cancel:1895,outcome:'Review',note:'Cancellation timing required controller follow-up after delivery.'}
+    ];
+    function defaultFinanceState(){return{
+      activeDealId:'FI-8421', customer:'Morgan Davis', vehicle:'2025 Ford Bronco Sport Badlands', owner:'Dana Ruiz', dealer:'Premier Ford',
+      sellingPrice:40980, bookValue:39750, cashDown:2500, tradeEquity:-1800, term:72, apr:8.25,
+      priorRecognitionRun:false, priorDealVerified:false, cancellationVerified:false, verifiedCancellation:0, appliedCancellation:0,
+      needs:{ownershipMonths:72,annualMiles:18000,repairConcern:'High',outdoor:true,towing:false,budgetShock:'High'},
+      selectedPackage:'ownership', selectedProducts:['vsc','gap','maintenance'], prices:Object.fromEntries(financeProducts.map(p=>[p.id,p.price])),
+      menuGenerated:true, menuSavedAt:null, presentationStatus:'not-started', choices:{}, optionalAcknowledged:false,
+      overrideRecorded:false, sentToCompliance:false, knowledgeFile:null,
+      timeline:[
+        {time:'10:31',icon:'fa-arrow-right',title:'Desk structure handed to F&I',copy:'DX-7311 delivered a 72-month structure with a modeled base payment of $646.'},
+        {time:'10:33',icon:'fa-id-card',title:'F&I record created',copy:'Morgan Davis and the 2025 Bronco Sport are now the protected working context.'}
+      ]
+    }}
+    function cloneFinanceState(){return JSON.parse(JSON.stringify(defaultFinanceState()));}
+    function loadFinanceState(){try{const saved=JSON.parse(localStorage.getItem(FI_STORAGE_KEY)||'null');return saved&&saved.activeDealId?Object.assign(cloneFinanceState(),saved):cloneFinanceState();}catch(e){return cloneFinanceState();}}
+    let financeState=loadFinanceState();
+    const financePageMeta={
+      'fi-command':['F&I Command','Prior coverage, menu economics, customer choices, and handoff readiness'],
+      'fi-deals':['Active F&I Deals','Synthetic workload organized around the next ownership decision'],
+      'fi-prior':['Prior Deal Recognition','Reconnect the trade vehicle to prior products, remaining value, and customer history'],
+      'fi-fit':['Product Fit','Explainable recommendations from objective facts and customer-declared needs'],
+      'fi-menu':['Menu Studio','Transparent product options with payment, gross, and duplication controls'],
+      'fi-cancel':['Cancellation & Carryover','Separate estimated refunds, verified value, transfers, and structure treatment'],
+      'fi-presentation':['Customer Presentation','Preserve individual prices, selections, declines, and optional-product acknowledgment'],
+      'fi-exceptions':['Exceptions & Overrides','Review duplicate coverage, pricing changes, capacity pressure, and manager decisions'],
+      'fi-handoff':['F&I Handoff','Package the final menu, customer choices, and cancellation treatment for Compliance'],
+      'fi-knowledge':['Product Knowledge','Controlled eligibility, coverage, cost, pricing, and source records'],
+      'fi-outcomes':['F&I Outcome Memory','Preserved product, cancellation, gross, and customer-choice outcomes'],
+      'fi-audit':['F&I Audit History','Durable chronology of every recommendation, choice, override, and handoff'],
+      'fi-settings':['F&I Settings','Dealer-controlled guardrails for voluntary, explainable product presentation']
+    };
+
+    function fiSave(){try{localStorage.setItem(FI_STORAGE_KEY,JSON.stringify(financeState));}catch(e){}}
+    function fiTime(){return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}
+    function fiEvent(title,copy,icon='fa-wallet'){financeState.timeline.unshift({time:fiTime(),title,copy,icon});financeState.timeline=financeState.timeline.slice(0,24);fiSave();}
+    function fiPayment(principal,apr,months){const r=(Number(apr)||0)/1200;if(!r)return principal/months;return principal*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1);}
+    function fiSelectedProducts(){return financeProducts.filter(p=>financeState.selectedProducts.includes(p.id));}
+    function fiCustomerSelectedProducts(){return financeProducts.filter(p=>financeState.selectedProducts.includes(p.id)&&financeState.choices[p.id]==='selected');}
+    function fiFinalProductTotal(){return fiCustomerSelectedProducts().reduce((sum,p)=>sum+Number(financeState.prices[p.id]||0),0);}
+    function fiFinalProductCost(){return fiCustomerSelectedProducts().reduce((sum,p)=>sum+p.cost,0);}
+    function fiFinalProductGross(){return fiFinalProductTotal()-fiFinalProductCost();}
+    function fiFinalPrincipal(){return fiBasePrincipal()+fiFinalProductTotal()-financeState.appliedCancellation;}
+    function fiFinalPayment(){return fiPayment(fiFinalPrincipal(),financeState.apr,financeState.term);}
+    function fiProductTotal(){return fiSelectedProducts().reduce((s,p)=>s+Number(financeState.prices[p.id]||0),0);}
+    function fiProductCost(){return fiSelectedProducts().reduce((s,p)=>s+p.cost,0);}
+    function fiProductGross(){return fiProductTotal()-fiProductCost();}
+    function fiBasePrincipal(){return financeState.sellingPrice+Math.max(0,-financeState.tradeEquity)-financeState.cashDown;}
+    function fiMenuPrincipal(){return fiBasePrincipal()+fiProductTotal()-financeState.appliedCancellation;}
+    function fiBasePayment(){return fiPayment(fiBasePrincipal(),financeState.apr,financeState.term);}
+    function fiMenuPayment(){return fiPayment(fiMenuPrincipal(),financeState.apr,financeState.term);}
+    function fiAdvance(){return fiMenuPrincipal()/financeState.bookValue*100;}
+    function fiVerifiedTotal(){return financePriorProducts.reduce((s,p)=>s+(p.verified||0),0);}
+    function fiEstimateTotal(){return financePriorProducts.reduce((s,p)=>s+(p.estimate||0),0);}
+    function fiHandoffReady(){return financeState.priorRecognitionRun&&financeState.priorDealVerified&&financeState.cancellationVerified&&financeState.menuSavedAt&&financeState.presentationStatus==='complete'&&financeState.optionalAcknowledged;}
+    function fiFit(product){
+      const n=financeState.needs; let score=50, reasons=[];
+      if(product.id==='vsc'){if(n.ownershipMonths>=60){score+=25;reasons.push('ownership period extends beyond remaining factory coverage');}if(n.annualMiles>=15000){score+=12;reasons.push('higher annual mileage');}if(n.repairConcern==='High'){score+=10;reasons.push('customer identified repair-cost concern');}}
+      if(product.id==='gap'){if(fiAdvance()>100){score+=28;reasons.push('modeled amount financed exceeds book value');}if(financeState.term>=72){score+=12;reasons.push('longer finance term');}}
+      if(product.id==='maintenance'){if(n.annualMiles>=15000){score+=22;reasons.push('high annual mileage');}if(n.budgetShock==='High'){score+=10;reasons.push('customer prefers planned ownership costs');}}
+      if(product.id==='tire'){if(n.annualMiles>=15000){score+=18;reasons.push('frequent road exposure');}if(n.outdoor){score+=8;reasons.push('vehicle regularly parked outdoors');}}
+      if(product.id==='key'){if(n.ownershipMonths>=60){score+=10;reasons.push('long ownership period');}}
+      if(product.id==='appearance'){if(n.outdoor){score+=18;reasons.push('outdoor parking');}if(n.ownershipMonths>=60){score+=8;reasons.push('long ownership period');}}
+      score=Math.max(35,Math.min(96,score)); return {score,band:score>=80?'Strong':score>=65?'Relevant':'Optional',reasons:reasons.length?reasons:['eligible product with no high-priority need signal']};
+    }
+    function fiToken(deal,compact=false){const d=financeDeals.find(x=>x.id===deal)||financeDeals[0];return `<span class="finance-record-token" style="min-height:${compact?'24':'31'}px;padding:${compact?'2px 7px 2px 5px':'4px 9px 4px 6px'}"><span>◆</span><b>${d.code}</b><code>${d.id}</code></span>`;}
+    function fiTimeline(hostId,items=financeState.timeline){const el=document.getElementById(hostId);if(!el)return;el.innerHTML=items.map(e=>`<div class="fi-event"><time>${e.time}</time><div class="fi-event-mark"><i class="fa-solid ${e.icon||'fa-wallet'}"></i></div><div><strong>${e.title}</strong><p>${e.copy}</p></div></div>`).join('')||'<div class="empty-state">No F&I events recorded.</div>';}
+
+    function showFinanceView(view){
+      if(currentPortalWorkspace!=='finance'){switchPortalWorkspace('finance',view);return;}
+      lastFinanceView=view;
+      document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${view}`));
+      document.querySelectorAll('[data-finance-view]').forEach(n=>n.classList.toggle('active',n.dataset.financeView===view));
+      const meta=financePageMeta[view]||financePageMeta['fi-command'];document.getElementById('pageTitle').textContent=meta[0];document.getElementById('pageSubtitle').textContent=meta[1];
+      document.getElementById('sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'});renderAllFinance();
+    }
+
+    const previousSwitchPortalWorkspace=switchPortalWorkspace;
+    switchPortalWorkspace=function(workspace,targetView=null){
+      if(workspace!=='finance'){previousSwitchPortalWorkspace(workspace,targetView);return;}
+      currentPortalWorkspace='finance';document.body.dataset.workspace='finance';
+      const select=document.getElementById('workspaceSelect');if(select)select.value='finance';
+      const mark=document.getElementById('workspaceSwitchMark');if(mark)mark.textContent='◆';
+      const copy=document.getElementById('workspaceSwitchCopy');if(copy)copy.textContent='Prior coverage, menu intelligence, customer choice, and handoff evidence';
+      const role=document.getElementById('sessionRole');if(role)role.textContent='F&I Director · Ownership Decisions';
+      const pill=document.getElementById('demoPill');if(pill)pill.textContent='F&I DEMO';
+      const search=document.getElementById('searchCopy');if(search)search.textContent='Search F&I deals, products, prior contracts';
+      const label=document.getElementById('operatingStatusLabel');if(label)label.textContent='Menu Intelligence';
+      renderAllFinance();showFinanceView(targetView||lastFinanceView);renderNotifications();showToast('F&I Intelligence opened','Same portal navigation, refined ownership-decision cockpit.','success');
+    };
+
+    function renderFinanceActiveBanner(){
+      const stage=financeState.sentToCompliance?'SENT TO COMPLIANCE':financeState.presentationStatus==='complete'?'HANDOFF REVIEW':financeState.menuSavedAt?'PRESENTATION':'MENU BUILD';
+      document.getElementById('fiActiveStage').textContent=stage;
+      document.getElementById('fiActivePrior').textContent=financeState.priorRecognitionRun?'PRIOR MATCH':'RECOGNITION OPEN';
+      document.getElementById('fiActiveMeta').textContent=`${financeState.dealer} · ${stage.toLowerCase()} · Owner: ${financeState.owner}`;
+    }
+    function renderFinanceCommand(){
+      const metrics=document.getElementById('fiCommandMetrics');if(metrics)metrics.innerHTML=[
+        ['Base payment',money(fiBasePayment()),'Desk-approved modeled payment'],['Current menu',money(fiMenuPayment()),`${money(fiMenuPayment()-fiBasePayment())} payment movement`],['Product gross',money(fiProductGross()),`${fiSelectedProducts().length} products selected`],['Cancellation value',financeState.cancellationVerified?money(fiVerifiedTotal()):money(fiEstimateTotal()),financeState.cancellationVerified?'Administrator-verified demo':'Estimated only'],['Handoff readiness',fiHandoffReady()?'100%':`${Math.round([financeState.priorRecognitionRun,financeState.priorDealVerified,financeState.cancellationVerified,!!financeState.menuSavedAt,financeState.presentationStatus==='complete',financeState.optionalAcknowledged].filter(Boolean).length/6*100)}%`,'Evidence completed']
+      ].map(x=>`<div class="fi-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+      document.getElementById('fiActionPriorTitle').textContent=financeState.priorRecognitionRun?'Prior relationship matched':'Recognition available';
+      document.getElementById('fiActionPriorCopy').textContent=financeState.priorRecognitionRun?'2022 Ford Explorer and four synthetic product contracts located.':'One synthetic prior vehicle and four product contracts may affect this menu.';
+      document.getElementById('fiActionCancelTitle').textContent=financeState.cancellationVerified?`${money(fiVerifiedTotal())} verified`:'Verification pending';
+      document.getElementById('fiActionCancelCopy').textContent=financeState.appliedCancellation?`${money(financeState.appliedCancellation)} is modeled as a structure contribution.`:'Estimated value is visible but not treated as available funds.';
+      document.getElementById('fiActionMenuTitle').textContent=`${financePackages[financeState.selectedPackage].name} modeled`;
+      document.getElementById('fiActionMenuCopy').textContent=`${fiSelectedProducts().length} products · ${money(fiMenuPayment())} payment · ${money(fiProductGross())} gross.`;
+      document.getElementById('fiActionHandoffTitle').textContent=fiHandoffReady()?'Ready for Compliance':financeState.presentationStatus==='complete'?'Final acknowledgment required':'Customer presentation required';
+      document.getElementById('fiActionHandoffCopy').textContent=fiHandoffReady()?'The controlled F&I record can move downstream.':'Complete individual selections and optional-product acknowledgment.';
+      const active=document.getElementById('fiActiveDecision');if(active)active.innerHTML=`<div class="fi-deal-summary"><div class="fi-eyebrow">${fiToken(financeState.activeDealId,true)} · Desk handoff DX-7311</div><h3>${financeState.customer} · ${financeState.vehicle}</h3><div class="fi-summary-grid">${[['Selling price',money(financeState.sellingPrice)],['Cash down',money(financeState.cashDown)],['Trade equity',money(financeState.tradeEquity)],['Term / APR',`${financeState.term} mo · ${financeState.apr}%`],['Base payment',money(fiBasePayment())],['Menu payment',money(fiMenuPayment())],['Product gross',money(fiProductGross())],['Modeled advance',pct(fiAdvance())]].map(x=>`<div class="fi-summary-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div></div>`;
+      const readout=document.getElementById('fiOperatingReadout');if(readout)readout.innerHTML=`<div class="fi-callout ${financeState.priorRecognitionRun?'success':'warning'}"><strong>${financeState.priorRecognitionRun?'Prior relationship recognized':'Run prior-deal recognition first'}</strong><p>${financeState.priorRecognitionRun?'Existing coverage is now visible before new recommendations are finalized.':'The trade may contain cancelable or transferable products that affect this menu.'}</p></div><div class="fi-callout ${fiAdvance()>120?'warning':'success'}" style="margin-top:8px"><strong>Modeled advance ${pct(fiAdvance())}</strong><p>${fiAdvance()>120?'Current product selection is creating capacity pressure. Review product scope or verified funds.':'The current synthetic menu remains within the configured demonstration capacity.'}</p></div><div class="fi-callout" style="margin-top:8px"><strong>Customer-choice evidence</strong><p>${financeState.presentationStatus==='complete'?'Presentation decisions are preserved.':'Individual selections and declines still need to be recorded.'}</p></div>`;
+      const body=document.getElementById('fiCommandDealBody');if(body)body.innerHTML=financeDeals.slice(0,4).map(d=>`<tr><td>${fiToken(d.id,true)}</td><td>${d.customer}</td><td><span class="badge ${d.stage==='Ready for Compliance'?'green':d.stage==='Review'?'amber':'finance-badge'}">${d.stage}</span></td><td>${d.issue}</td><td>${money(d.menu)}</td><td><button class="button small" onclick="openFinanceDeal('${d.id}')">Open</button></td></tr>`).join('');
+      fiTimeline('fiCommandTimeline',financeState.timeline.slice(0,7));
+    }
+    function renderFinanceDeals(){const q=(document.getElementById('fiDealSearch')?.value||'').toLowerCase();const status=document.getElementById('fiDealStatus')?.value||'all';const rows=financeDeals.filter(d=>(status==='all'||d.stage===status)&&`${d.id} ${d.customer} ${d.vehicle}`.toLowerCase().includes(q));const body=document.getElementById('fiDealBody');if(body)body.innerHTML=rows.map(d=>`<tr class="${d.id===financeState.activeDealId?'completion-row-active':''}" style="--deal-accent:#0c8f83"><td>${fiToken(d.id,true)}</td><td>${d.customer}</td><td>${d.vehicle}</td><td><span class="badge ${d.prior==='Matched'?'finance-badge':'blue'}">${d.prior}</span></td><td>${money(d.base)}</td><td>${money(d.menu)}</td><td>${money(d.gross)}</td><td><span class="badge ${d.stage==='Ready for Compliance'?'green':d.stage==='Review'?'amber':'finance-badge'}">${d.stage}</span></td><td><button class="button small" onclick="openFinanceDeal('${d.id}')">Open</button></td></tr>`).join('')||'<tr><td colspan="9"><div class="empty-state">No F&I deals match this view.</div></td></tr>';}
+
+    function renderFinancePrior(){const host=document.getElementById('fiPriorRecognitionHost');if(!host)return;if(!financeState.priorRecognitionRun){host.innerHTML=`<div class="fi-prior-hero"><span class="fi-match-status"><i class="fa-solid fa-magnifying-glass"></i> Recognition ready</span><h2>Reconnect the trade before building the menu.</h2><p>The synthetic customer previously purchased a 2022 Ford Explorer from Premier Ford. Run recognition to retrieve the prior-deal ledger and product status.</p><button class="button fi-button primary" style="margin-top:15px" onclick="runPriorDealRecognition()"><i class="fa-solid fa-repeat"></i>Run Prior Deal Recognition</button></div>`;return;}
+      host.innerHTML=`<div class="fi-prior-hero"><span class="fi-match-status"><i class="fa-solid fa-check"></i> High-confidence first-party match</span><h2>Prior relationship located.</h2><p>Morgan Davis purchased the traded 2022 Ford Explorer XLT from Premier Ford on August 18, 2023. Four synthetic product records require review before the new menu is finalized.</p><div class="fi-summary-grid">${[['Prior vehicle','2022 Ford Explorer XLT'],['Original deal','PF-39281'],['Contract date','Aug 18, 2023'],['Trade VIN','…KGA48219']].map(x=>`<div class="fi-summary-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div></div><div class="fi-grid-2" style="margin-top:12px"><article class="card fi-card"><div class="card-header"><div><div class="card-title">Prior Product Ledger</div><div class="card-subtitle">Existing coverage before new recommendations</div></div></div><div class="card-body"><div class="fi-product-ledger">${financePriorProducts.map(p=>`<div class="fi-ledger-row"><div><h3>${p.name}</h3><p>${p.provider} · ${p.note}</p></div><div class="fi-ledger-value"><small>Status</small><strong>${p.status}</strong></div><div class="fi-ledger-value"><small>Estimated value</small><strong>${money(p.estimate)}</strong></div><div class="fi-ledger-value"><small>Next action</small><strong>${p.action}</strong></div><span class="badge ${p.status==='Cancelable'?'finance-badge':p.status==='Expired'?'amber':'blue'}">${p.status}</span></div>`).join('')}</div></div></article><aside class="card fi-card"><div class="card-header"><div><div class="card-title">Recognition Controls</div><div class="card-subtitle">Operator verification before downstream use</div></div></div><div class="card-body"><div class="fi-callout success"><strong>Customer and trade identity aligned</strong><p>Name, prior VIN, dealership, and trade record align in this synthetic demonstration.</p></div><div class="fi-callout warning" style="margin-top:8px"><strong>Product values remain unverified</strong><p>Estimated refunds cannot be treated as current cash or a lender contribution.</p></div><button class="button fi-button primary" style="width:100%;margin-top:12px" onclick="verifyPriorDealRecord()"><i class="fa-solid fa-user-check"></i>${financeState.priorDealVerified?'Prior Deal Verified':'Verify Prior Deal Record'}</button></div></aside></div>`;
+    }
+    function renderFinanceCancellation(){const metrics=document.getElementById('fiCancellationMetrics');if(metrics)metrics.innerHTML=[['Estimated refunds',money(fiEstimateTotal()),'Preliminary synthetic calculation'],['Verified refunds',financeState.cancellationVerified?money(fiVerifiedTotal()):money(0),financeState.cancellationVerified?'Administrator-verified demo':'Pending'],['Transfer review',money(620),'Maintenance value under review'],['Applied to structure',money(financeState.appliedCancellation),'Modeled only'],['Open actions',financeState.cancellationVerified?'1':'3','Controller and administrator follow-up']].map(x=>`<div class="fi-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');
+      const ledger=document.getElementById('fiCancellationLedger');if(ledger)ledger.innerHTML=financePriorProducts.map(p=>`<div class="fi-ledger-row"><div><h3>${p.name}</h3><p>${p.note}</p></div><div class="fi-ledger-value"><small>Estimated</small><strong>${money(p.estimate)}</strong></div><div class="fi-ledger-value"><small>Verified</small><strong>${financeState.cancellationVerified?money(p.verified):'Pending'}</strong></div><div class="fi-ledger-value"><small>Treatment</small><strong>${p.action}</strong></div><span class="badge ${p.status==='Cancelable'?'finance-badge':p.status==='Expired'?'amber':'blue'}">${p.status}</span></div>`).join('');
+      const treatment=document.getElementById('fiCancellationTreatment');if(treatment)treatment.innerHTML=`<div class="fi-callout warning"><strong>Estimated value is not available cash.</strong><p>ENGENIX keeps preliminary calculations separate until an administrator verifies the amount and the dealership determines the permitted treatment.</p></div><div class="fi-economics" style="margin-top:12px"><div class="fi-econ-row"><span>Estimated cancelable value</span><strong>${money(fiEstimateTotal())}</strong></div><div class="fi-econ-row"><span>Administrator-verified value</span><strong>${financeState.cancellationVerified?money(fiVerifiedTotal()):'Pending'}</strong></div><div class="fi-econ-row"><span>Modeled structure contribution</span><strong>${money(financeState.appliedCancellation)}</strong></div><div class="fi-econ-row total"><span>Revised modeled payment</span><strong>${money(fiMenuPayment())}</strong></div></div><button class="button fi-button primary" style="width:100%;margin-top:12px" ${financeState.cancellationVerified?'':'disabled'} onclick="toggleFinanceCancellationContribution()">${financeState.appliedCancellation?'Remove Modeled Contribution':'Model Verified Value in Structure'}</button><div class="fi-disclaimer" style="margin-top:10px"><strong>Demo only:</strong> This action changes the modeled structure, not a lender submission or actual customer funds.</div>`;
+    }
+    function renderFinanceFit(){const grid=document.getElementById('fiNeedsGrid');if(grid)grid.innerHTML=`<div class="fi-choice-card"><label for="fiOwnershipMonths">Expected ownership period</label><select id="fiOwnershipMonths"><option value="36">36 months</option><option value="60">60 months</option><option value="72">72 months</option><option value="84">84 months</option></select></div><div class="fi-choice-card"><label for="fiAnnualMiles">Annual mileage</label><input id="fiAnnualMiles" class="fi-needs-number" type="number" min="5000" max="50000" step="1000" value="${financeState.needs.annualMiles}"></div><div class="fi-choice-card"><label for="fiRepairConcern">Unexpected repair concern</label><select id="fiRepairConcern"><option>Low</option><option>Moderate</option><option>High</option></select></div><div class="fi-choice-card"><label for="fiBudgetShock">Preference for planned costs</label><select id="fiBudgetShock"><option>Low</option><option>Moderate</option><option>High</option></select></div><div class="fi-choice-card"><label>Vehicle parked outdoors</label><div class="fi-switch-row"><span class="badge ${financeState.needs.outdoor?'finance-badge':'blue'}">${financeState.needs.outdoor?'YES':'NO'}</span><button class="toggle ${financeState.needs.outdoor?'on':''}" id="fiOutdoorToggle"><div class="toggle-knob"></div></button></div></div><div class="fi-choice-card"><label>Regular towing / commercial use</label><div class="fi-switch-row"><span class="badge ${financeState.needs.towing?'amber':'blue'}">${financeState.needs.towing?'YES':'NO'}</span><button class="toggle ${financeState.needs.towing?'on':''}" id="fiTowingToggle"><div class="toggle-knob"></div></button></div></div>`;
+      const om=document.getElementById('fiOwnershipMonths');if(om)om.value=String(financeState.needs.ownershipMonths);const rc=document.getElementById('fiRepairConcern');if(rc)rc.value=financeState.needs.repairConcern;const bs=document.getElementById('fiBudgetShock');if(bs)bs.value=financeState.needs.budgetShock;
+      [om,document.getElementById('fiAnnualMiles'),rc,bs].forEach(el=>el?.addEventListener('change',handleFinanceNeeds));document.getElementById('fiOutdoorToggle')?.addEventListener('click',()=>{financeState.needs.outdoor=!financeState.needs.outdoor;fiEvent('Needs response updated',`Outdoor parking changed to ${financeState.needs.outdoor?'yes':'no'}.`,'fa-car');renderFinanceFit();renderFinanceMenu();});document.getElementById('fiTowingToggle')?.addEventListener('click',()=>{financeState.needs.towing=!financeState.needs.towing;fiEvent('Needs response updated',`Towing or commercial use changed to ${financeState.needs.towing?'yes':'no'}.`,'fa-car');renderFinanceFit();});
+      const context=document.getElementById('fiVehicleContext');if(context)context.innerHTML=`<div class="fi-summary-grid" style="margin-top:0">${[['Vehicle','2025 Bronco Sport'],['Mileage','4,200 miles'],['Factory coverage','Approx. 18 mo remaining'],['Finance term',`${financeState.term} months`],['Modeled advance',pct(fiAdvance())],['Existing VSC','Cancelable'],['Maintenance','Transfer review'],['Prior GAP','Loan-specific']].map(x=>`<div class="fi-summary-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="fi-callout warning" style="margin-top:10px"><strong>Coverage overlap review</strong><p>The proposed service contract begins while factory coverage remains. The recommendation explains the longer ownership horizon and does not describe factory coverage as absent.</p></div>`;
+      const rec=document.getElementById('fiRecommendationList');if(rec)rec.innerHTML=financeProducts.sort((a,b)=>fiFit(b).score-fiFit(a).score).map(p=>{const f=fiFit(p);return `<div class="fi-recommendation"><div class="fi-rec-icon"><i class="fa-solid ${p.icon}"></i></div><div><h3>${p.name}</h3><p><strong>Why recommended:</strong> ${f.reasons.join('; ')}. <strong>Why eligible:</strong> synthetic vehicle age, mileage, term, and program rules align. <strong>What could change it:</strong> ownership period, annual mileage, existing coverage, or administrator eligibility.</p><div class="fi-rec-reasons">${f.reasons.map(r=>`<span class="badge finance-badge">${r}</span>`).join('')}</div></div><span class="badge ${f.score>=80?'green':f.score>=65?'finance-badge':'blue'}">${f.band} · ${f.score}</span></div>`}).join('');
+    }
+    function renderFinanceMenu(){const packages=document.getElementById('fiPackageGrid');if(packages)packages.innerHTML=Object.entries(financePackages).map(([id,p])=>{const ids=id==='custom'?financeState.selectedProducts:p.products;const total=ids.reduce((s,pid)=>s+Number(financeState.prices[pid]||0),0);return `<button class="fi-package ${financeState.selectedPackage===id?'active':''}" onclick="selectFinancePackage('${id}')"><small>${id==='custom'?'Manager-controlled':'Dealer-configured pathway'}</small><h3>${p.name}</h3><strong>${money(total)}</strong><p>${p.copy}<br>${ids.length} individually priced products.</p></button>`}).join('');
+      const builder=document.getElementById('fiProductBuilder');if(builder)builder.innerHTML=financeProducts.map(p=>{const selected=financeState.selectedProducts.includes(p.id),fit=fiFit(p);return `<div class="fi-product-row ${selected?'selected':''}"><input type="checkbox" aria-label="Select ${p.name}" ${selected?'checked':''} onchange="toggleFinanceProduct('${p.id}',this.checked)"><div><h3>${p.name}</h3><p>${p.term} · ${p.category} · Fit ${fit.score}</p></div><input class="fi-price-input" type="number" inputmode="decimal" min="0" max="9999" step="25" value="${financeState.prices[p.id]}" aria-label="Retail price for ${p.name}" onfocus="this.select()" onchange="updateFinanceProductPrice('${p.id}',this.value)"><div class="fi-ledger-value"><small>Product gross</small><strong>${money(Number(financeState.prices[p.id]||0)-p.cost)}</strong></div><span class="badge ${fit.score>=80?'green':fit.score>=65?'finance-badge':'blue'}">${fit.band}</span></div>`}).join('');
+      const econ=document.getElementById('fiMenuEconomics');if(econ)econ.innerHTML=`<div class="fi-economics"><div class="fi-econ-row"><span>Base amount financed</span><strong>${money(fiBasePrincipal())}</strong></div><div class="fi-econ-row"><span>Selected product retail</span><strong>${money(fiProductTotal())}</strong></div><div class="fi-econ-row"><span>Modeled cancellation contribution</span><strong>-${money(financeState.appliedCancellation)}</strong></div><div class="fi-econ-row"><span>Menu amount financed</span><strong>${money(fiMenuPrincipal())}</strong></div><div class="fi-econ-row"><span>Base payment</span><strong>${money(fiBasePayment())}</strong></div><div class="fi-econ-row"><span>Menu payment</span><strong>${money(fiMenuPayment())}</strong></div><div class="fi-econ-row"><span>Payment movement</span><strong>${money(fiMenuPayment()-fiBasePayment())}</strong></div><div class="fi-econ-row"><span>Product cost</span><strong>${money(fiProductCost())}</strong></div><div class="fi-econ-row total"><span>Product gross</span><strong>${money(fiProductGross())}</strong></div><div class="fi-econ-row"><span>Modeled advance</span><strong>${pct(fiAdvance())}</strong></div></div>`;
+      const guard=document.getElementById('fiMenuGuardrails');if(guard)guard.innerHTML=`<div class="fi-grid-3"><div class="fi-callout ${financeState.priorRecognitionRun?'success':'warning'}"><strong>${financeState.priorRecognitionRun?'Prior coverage reconciled':'Prior coverage not reconciled'}</strong><p>${financeState.priorRecognitionRun?'New recommendations are compared against the prior product ledger.':'Run prior-deal recognition before finalizing the menu.'}</p></div><div class="fi-callout ${financeState.selectedProducts.includes('vsc')?'warning':'success'}"><strong>${financeState.selectedProducts.includes('vsc')?'Factory-overlap explanation required':'No service-contract overlap selected'}</strong><p>${financeState.selectedProducts.includes('vsc')?'The presentation must explain remaining factory coverage and the longer ownership horizon.':'The current menu does not include a new service contract.'}</p></div><div class="fi-callout ${fiAdvance()>120?'warning':'success'}"><strong>Modeled advance ${pct(fiAdvance())}</strong><p>${fiAdvance()>120?'Product scope is approaching the configured synthetic lender capacity.':'Current product scope remains inside the configured demonstration guardrail.'}</p></div></div>`;
+      const badge=document.getElementById('fiMenuStatusBadge');if(badge){badge.textContent=financeState.menuSavedAt?'SNAPSHOT SAVED':'DRAFT';badge.className=`badge ${financeState.menuSavedAt?'green':'finance-badge'}`;}
+    }
+    function renderFinancePresentation(){const list=document.getElementById('fiPresentationList');if(list)list.innerHTML=fiSelectedProducts().map(p=>{const choice=financeState.choices[p.id]||'pending';return `<div class="fi-presentation-row"><div><h3>${p.name}</h3><p>${money(financeState.prices[p.id])} · ${p.term} · Individually optional</p></div><strong>${money(fiPayment(financeState.prices[p.id],financeState.apr,financeState.term))}/mo</strong><div class="fi-choice-actions"><button class="button small ${choice==='selected'?'selected':''}" onclick="recordFinanceChoice('${p.id}','selected')">Select</button><button class="button small ${choice==='declined'?'declined':''}" onclick="recordFinanceChoice('${p.id}','declined')">Decline</button></div></div>`}).join('')||'<div class="empty-state">No products are selected for presentation.</div>';
+      const selected=Object.values(financeState.choices).filter(x=>x==='selected').length,declined=Object.values(financeState.choices).filter(x=>x==='declined').length,pending=fiSelectedProducts().length-selected-declined;
+      const record=document.getElementById('fiChoiceRecord');if(record)record.innerHTML=`<div class="fi-economics"><div class="fi-econ-row"><span>Products presented</span><strong>${fiSelectedProducts().length}</strong></div><div class="fi-econ-row"><span>Selected</span><strong>${selected}</strong></div><div class="fi-econ-row"><span>Declined</span><strong>${declined}</strong></div><div class="fi-econ-row"><span>Pending decision</span><strong>${pending}</strong></div><div class="fi-econ-row total"><span>Customer-selected payment</span><strong>${money(fiFinalPayment())}</strong></div></div><label class="form-check" style="margin-top:12px"><input class="form-check-input" type="checkbox" id="fiOptionalAcknowledgment" ${financeState.optionalAcknowledged?'checked':''}><span class="form-check-label">Customer acknowledged that each presented product is optional and individually priced.</span></label><div class="fi-disclaimer" style="margin-top:10px"><strong>Presentation record:</strong> The sandbox preserves menu version, individual prices, product decisions, and any later changes.</div>`;
+      document.getElementById('fiOptionalAcknowledgment')?.addEventListener('change',e=>{financeState.optionalAcknowledged=e.target.checked;fiEvent('Optional-product acknowledgment updated',e.target.checked?'Customer acknowledgment recorded in the synthetic presentation.':'Customer acknowledgment removed for further review.','fa-file-signature');renderFinancePresentation();renderFinanceHandoff();});
+      const status=document.getElementById('fiPresentationStatus');if(status){status.textContent=financeState.presentationStatus==='complete'?'COMPLETE':financeState.presentationStatus==='in-progress'?'IN PROGRESS':'NOT STARTED';status.className=`badge ${financeState.presentationStatus==='complete'?'green':financeState.presentationStatus==='in-progress'?'finance-badge':'amber'}`;}
+    }
+    function renderFinanceExceptions(){const duplicate=financeState.selectedProducts.includes('vsc')&&financeState.priorRecognitionRun;const capacity=fiAdvance()>120;const list=document.getElementById('fiExceptionList');if(list)list.innerHTML=`<div class="fi-checklist"><div class="fi-check ${duplicate&&financeState.overrideRecorded?'done':''}"><div class="fi-check-mark"><i class="fa-solid ${duplicate&&financeState.overrideRecorded?'fa-check':'fa-triangle-exclamation'}"></i></div><div><strong>Remaining factory coverage explanation</strong><span>${duplicate?'A new VSC is selected while factory coverage remains. Explain timing and ownership horizon.':'No active overlap condition in the current menu.'}</span></div><span class="badge ${duplicate?'amber':'green'}">${duplicate?'REVIEW':'CLEAR'}</span></div><div class="fi-check ${!capacity?'done':''}"><div class="fi-check-mark"><i class="fa-solid ${!capacity?'fa-check':'fa-triangle-exclamation'}"></i></div><div><strong>Product capacity</strong><span>Modeled advance is ${pct(fiAdvance())}; configured review threshold is 120%.</span></div><span class="badge ${capacity?'red':'green'}">${capacity?'PRESSURE':'CLEAR'}</span></div><div class="fi-check ${financeState.cancellationVerified?'done':''}"><div class="fi-check-mark"><i class="fa-solid ${financeState.cancellationVerified?'fa-check':'fa-hourglass-half'}"></i></div><div><strong>Cancellation treatment</strong><span>${financeState.cancellationVerified?'Verified value remains separated from customer cash and menu price.':'Administrator verification is still pending.'}</span></div><span class="badge ${financeState.cancellationVerified?'green':'amber'}">${financeState.cancellationVerified?'CONTROLLED':'OPEN'}</span></div></div>`;
+      const count=[duplicate&&!financeState.overrideRecorded,capacity,!financeState.cancellationVerified].filter(Boolean).length;const nav=document.getElementById('fiExceptionCountNav');if(nav)nav.textContent=count;
+    }
+    function renderFinanceHandoff(){const checks=[['Prior deal reviewed',financeState.priorRecognitionRun&&financeState.priorDealVerified,'Trade and prior products reconciled'],['Cancellation treatment recorded',financeState.cancellationVerified,'Verified values remain separated from estimates'],['Menu snapshot saved',!!financeState.menuSavedAt,'Final offered products and prices preserved'],['Customer choices complete',financeState.presentationStatus==='complete','Selections and declines recorded'],['Optional-product acknowledgment',financeState.optionalAcknowledged,'Voluntary nature preserved']];const host=document.getElementById('fiHandoffChecklist');if(host)host.innerHTML=checks.map(c=>`<div class="fi-check ${c[1]?'done':''}"><div class="fi-check-mark"><i class="fa-solid ${c[1]?'fa-check':'fa-hourglass-half'}"></i></div><div><strong>${c[0]}</strong><span>${c[2]}</span></div><span class="badge ${c[1]?'green':'amber'}">${c[1]?'READY':'OPEN'}</span></div>`).join('');
+      const ready=fiHandoffReady();const status=document.getElementById('fiHandoffStatus');if(status){status.textContent=ready?'READY':'INCOMPLETE';status.className=`badge ${ready?'green':'amber'}`;}const btn=document.getElementById('fiSendComplianceButton');if(btn)btn.disabled=!ready||financeState.sentToCompliance;
+      const selected=fiSelectedProducts().filter(p=>financeState.choices[p.id]==='selected');const summary=document.getElementById('fiHandoffSummary');if(summary)summary.innerHTML=`<div class="fi-economics"><div class="fi-econ-row"><span>Customer / vehicle</span><strong>${financeState.customer}<br>${financeState.vehicle}</strong></div><div class="fi-econ-row"><span>Products selected</span><strong>${selected.length?selected.map(p=>p.short).join(' · '):'None recorded'}</strong></div><div class="fi-econ-row"><span>Final modeled payment</span><strong>${money(fiFinalPayment())}</strong></div><div class="fi-econ-row"><span>Final product gross</span><strong>${money(fiFinalProductGross())}</strong></div><div class="fi-econ-row"><span>Verified cancellation value</span><strong>${money(financeState.verifiedCancellation)}</strong></div><div class="fi-econ-row"><span>Manager override</span><strong>${financeState.overrideRecorded?'Recorded':'None'}</strong></div><div class="fi-econ-row total"><span>Downstream status</span><strong>${financeState.sentToCompliance?'Sent to Compliance':ready?'Ready':'Open items remain'}</strong></div></div><div class="fi-disclaimer" style="margin-top:10px"><strong>Compliance receives:</strong> menu snapshot, individual prices, choices, optional acknowledgment, prior-coverage record, cancellation treatment, and manager decisions.</div>`;
+    }
+    function renderFinanceKnowledge(){const host=document.getElementById('fiKnowledgeGrid');if(host)host.innerHTML=financeProducts.map(p=>`<article class="fi-knowledge-card"><h3>${p.name}</h3><p>${p.category}. Synthetic eligibility and coverage record supporting the demo recommendation.</p><div class="fi-knowledge-grid">${[['Retail',money(financeState.prices[p.id])],['Cost',money(p.cost)],['Term',p.term],['Status',p.eligibility]].map(x=>`<div class="fi-knowledge-cell"><small>${x[0]}</small><strong>${x[1]}</strong></div>`).join('')}</div><div class="fi-callout" style="margin-top:10px"><strong>Source provenance</strong><p>Synthetic dealer-approved product bulletin · July 2026 demo set.</p></div></article>`).join('');const status=document.getElementById('fiKnowledgeStatus');if(status&&financeState.knowledgeFile)status.innerHTML=`<strong>Local demo attachment:</strong> ${financeState.knowledgeFile}. The filename is preserved locally; contents were not parsed or transmitted.`;}
+    function renderFinanceOutcomes(){const metrics=document.getElementById('fiOutcomeMetrics');if(metrics)metrics.innerHTML=[['Menus presented','42','Synthetic last 30 days'],['Individual select rate','61%','Across all product offers'],['Average back gross',money(3148),'Synthetic funded deals'],['Prior matches','29%','Deals with earlier store history'],['Cancellation follow-up','94%','Closed inside configured window']].map(x=>`<div class="fi-metric"><small>${x[0]}</small><strong>${x[1]}</strong><span>${x[2]}</span></div>`).join('');const body=document.getElementById('fiOutcomeBody');if(body)body.innerHTML=financeOutcomeSeed.map(o=>`<tr><td>${fiToken(o.deal,true)}</td><td>${o.vehicle}</td><td>${o.products}</td><td>${money(o.gross)}</td><td>${money(o.cancel)}</td><td><span class="badge ${o.outcome==='Funded'?'green':'amber'}">${o.outcome}</span></td><td>${o.note}</td></tr>`).join('');const learn=document.getElementById('fiLearningSignals');if(learn)learn.innerHTML=`<div class="fi-callout success"><strong>Prior-product reconciliation is preventing duplicate coverage.</strong><p>Three synthetic deals removed or changed a product after transferable or active coverage was identified.</p></div><div class="fi-callout" style="margin-top:8px"><strong>High-mileage customers are selecting maintenance more often.</strong><p>This pattern is descriptive only and remains subject to operator interpretation.</p></div><div class="fi-callout warning" style="margin-top:8px"><strong>Cancellation timing needs stronger ownership.</strong><p>Two synthetic refunds crossed the configured follow-up window after delivery.</p></div><div class="fi-callout" style="margin-top:8px"><strong>Individual pricing improves the decision record.</strong><p>Menus with preserved individual prices produce cleaner final-contract comparisons.</p></div>`;}
+    function renderAllFinance(){renderFinanceActiveBanner();renderFinanceCommand();renderFinanceDeals();renderFinancePrior();renderFinanceCancellation();renderFinanceFit();renderFinanceMenu();renderFinancePresentation();renderFinanceExceptions();renderFinanceHandoff();renderFinanceKnowledge();renderFinanceOutcomes();fiTimeline('fiAuditTimeline');const prior=document.getElementById('fiPriorCountNav');if(prior)prior.textContent=financeState.priorRecognitionRun?'1':'!';const cancel=document.getElementById('fiCancelCountNav');if(cancel)cancel.textContent=financeState.cancellationVerified?'1':'3';}
+
+    function runPriorDealRecognition(){if(financeState.priorRecognitionRun){showToast('Prior relationship already located','The synthetic 2022 Explorer and four product records are open.','success');return;}financeState.priorRecognitionRun=true;financeState.menuSavedAt=null;financeState.sentToCompliance=false;fiEvent('Prior deal relationship recognized','PF-39281 and four synthetic product contracts were matched to the traded 2022 Explorer.','fa-repeat');renderAllFinance();showToast('Prior relationship located','Existing coverage and estimated cancellation value are now visible.','success');}
+    function verifyPriorDealRecord(){financeState.priorDealVerified=true;fiEvent('Prior deal record verified','Dana Ruiz confirmed the synthetic customer, trade VIN, dealership, and prior contract relationship.','fa-user-check');renderAllFinance();showToast('Prior deal verified','The first-party relationship is approved for menu review.','success');}
+    function verifyFinanceCancellations(){if(!financeState.priorRecognitionRun){showToast('Run prior recognition first','Locate the prior contracts before verifying cancellation values.','warning');return;}financeState.cancellationVerified=true;financeState.verifiedCancellation=fiVerifiedTotal();financeState.sentToCompliance=false;fiEvent('Cancellation values verified',`${money(fiVerifiedTotal())} in synthetic administrator-verified refunds was preserved separately from estimated value.`,'fa-coins');renderAllFinance();showToast('Demo values verified','Verified refunds remain separate from current cash until management chooses a treatment.','success');}
+    function toggleFinanceCancellationContribution(){if(!financeState.cancellationVerified){showToast('Verification required','Verify the synthetic administrator amounts first.','warning');return;}financeState.appliedCancellation=financeState.appliedCancellation?0:fiVerifiedTotal();financeState.menuSavedAt=null;financeState.sentToCompliance=false;fiEvent(financeState.appliedCancellation?'Verified value modeled in structure':'Modeled cancellation contribution removed',financeState.appliedCancellation?`${money(financeState.appliedCancellation)} was modeled as a structure contribution for comparison only.`:'The structure returned to the original cash and product assumptions.','fa-calculator');renderAllFinance();}
+    function handleFinanceNeeds(){financeState.menuSavedAt=null;financeState.sentToCompliance=false;financeState.needs.ownershipMonths=Number(document.getElementById('fiOwnershipMonths')?.value||72);financeState.needs.annualMiles=Number(document.getElementById('fiAnnualMiles')?.value||18000);financeState.needs.repairConcern=document.getElementById('fiRepairConcern')?.value||'High';financeState.needs.budgetShock=document.getElementById('fiBudgetShock')?.value||'High';fiEvent('Customer needs conversation updated','Ownership period, mileage, and ownership-cost preferences changed the explainable product fit.','fa-user-check');renderFinanceFit();renderFinanceMenu();fiSave();}
+    function generateFinanceRecommendations(){fiEvent('Product fit refreshed','Six synthetic products were re-evaluated against vehicle context, existing coverage, and customer-declared needs.','fa-wand-magic-sparkles');renderFinanceFit();showToast('Product fit refreshed','Recommendation reasons and fit bands were recalculated.','success');}
+    function selectFinancePackage(id){const p=financePackages[id];if(!p)return;financeState.selectedPackage=id;if(id!=='custom')financeState.selectedProducts=[...p.products];financeState.menuSavedAt=null;financeState.presentationStatus='not-started';financeState.choices={};fiEvent('Menu pathway selected',`${p.name} loaded with ${financeState.selectedProducts.length} individually priced products.`,'fa-tags');renderAllFinance();}
+    function toggleFinanceProduct(id,checked){financeState.selectedPackage='custom';financeState.selectedProducts=checked?[...new Set([...financeState.selectedProducts,id])]:financeState.selectedProducts.filter(x=>x!==id);financeState.menuSavedAt=null;delete financeState.choices[id];fiEvent('Menu product changed',`${financeProducts.find(p=>p.id===id)?.name} was ${checked?'added to':'removed from'} the custom menu.`,'fa-tags');renderAllFinance();}
+    function updateFinanceProductPrice(id,value){const n=Math.max(0,Math.min(9999,Number(value)||0));financeState.prices[id]=n;financeState.selectedPackage='custom';financeState.menuSavedAt=null;fiEvent('Product price updated',`${financeProducts.find(p=>p.id===id)?.name} retail changed to ${money(n)} in the synthetic menu.`,'fa-receipt');renderAllFinance();}
+    function saveFinanceMenuSnapshot(){financeState.menuSavedAt=new Date().toLocaleString();financeState.menuGenerated=true;fiEvent('Menu snapshot saved',`${financePackages[financeState.selectedPackage].name} was preserved with ${fiSelectedProducts().length} products at ${money(fiMenuPayment())} modeled payment.`,'fa-floppy-disk');renderAllFinance();showToast('Menu snapshot saved','Product prices, payment, gross, and guardrail context are preserved.','success');}
+    function recordFinanceChoice(id,choice){financeState.presentationStatus='in-progress';financeState.choices[id]=choice;fiEvent(`Product ${choice}`,`${financeProducts.find(p=>p.id===id)?.name} was ${choice} during the synthetic customer presentation.`,'fa-handshake');renderFinancePresentation();renderFinanceHandoff();fiSave();}
+    function completeFinancePresentation(){const pending=fiSelectedProducts().filter(p=>!financeState.choices[p.id]).length;if(pending){showToast('Customer decisions incomplete',`${pending} presented product${pending===1?'':'s'} still need a select or decline decision.`,'warning');return;}if(!financeState.optionalAcknowledged){showToast('Acknowledgment required','Record that optional products were presented as voluntary and individually priced.','warning');return;}financeState.presentationStatus='complete';fiEvent('Customer presentation completed','Individual prices, selections, declines, and optional-product acknowledgment were preserved.','fa-handshake');renderAllFinance();showToast('Presentation complete','The customer-choice record is ready for F&I handoff review.','success');}
+    function recordFinanceOverride(){const note=document.getElementById('fiOverrideReason')?.value.trim();if(!note){showToast('Decision note required','Document the manager reason before recording an override.','warning');return;}financeState.overrideRecorded=true;financeState.sentToCompliance=false;fiEvent('Manager override recorded',note,'fa-scale-balanced');renderAllFinance();showToast('Manager decision preserved','The override reason is attached to the F&I decision trail.','success');}
+    function sendFinanceToCompliance(){if(!fiHandoffReady()){showToast('Handoff incomplete','Complete every readiness item before sending the record to Compliance.','warning');return;}financeState.sentToCompliance=true;fiEvent('F&I record sent to Compliance',`${financeState.activeDealId} now carries the menu snapshot, customer choices, prior coverage, cancellation treatment, and final economics.`,'fa-file-circle-check');try{addActivity(`<strong>${financeState.activeDealId}</strong> entered Compliance Intelligence with its F&I menu and customer-choice record.`,'Handoff','ENX-2847','Dana Ruiz','Compliance review','fa-file-circle-check');}catch(e){}renderAllFinance();showToast('Sent to Compliance','The synthetic F&I record is now ready for downstream review.','success');}
+    function openFinanceDeal(id){const d=financeDeals.find(x=>x.id===id);if(!d)return;if(id!=='FI-8421'){showToast('Synthetic record opened',`${id} · ${d.customer} is displayed in the Active Deals table. The guided workspace remains attached to FI-8421.`,'success');showFinanceView('fi-deals');return;}financeState.activeDealId=id;renderAllFinance();showFinanceView('fi-menu');}
+    function saveFinanceSettings(){fiEvent('F&I settings saved','Dealer-controlled product-fit, pricing, and customer-choice guardrails were preserved.','fa-sliders');showToast('F&I settings saved','Synthetic workspace guardrails were updated.','success');}
+    function exportFinanceOutcomes(){const rows=['Deal,Vehicle,Products,Back Gross,Cancellation,Outcome',...financeOutcomeSeed.map(o=>`"${o.deal}","${o.vehicle}","${o.products}",${o.gross},${o.cancel},"${o.outcome}"`)];const blob=new Blob([rows.join('\n')],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='ENGENIX_FI_Outcome_Memory_Demo.csv';a.click();URL.revokeObjectURL(url);showToast('Outcome export created','Synthetic F&I outcome memory was exported as CSV.','success');}
+    function downloadFinanceMenuBrief(){const selected=fiSelectedProducts();const html=`<!doctype html><html><head><meta charset="utf-8"><title>ENGENIX F&I Menu Brief</title><style>body{font-family:Arial,sans-serif;color:#183637;margin:42px}header{border-bottom:4px solid #0c8f83;padding-bottom:18px}h1{margin:5px 0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}.cell{border:1px solid #cbd8d7;border-radius:8px;padding:10px}.cell small{display:block;color:#657b7c;text-transform:uppercase;font-size:8px}.cell strong{display:block;margin-top:5px}.row{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:8px;padding:10px 0;border-bottom:1px solid #dfe8e7;font-size:11px}footer{margin-top:24px;color:#6e8080;font-size:9px;line-height:1.5}</style></head><body><header><strong>ENGENIX · F&I INTELLIGENCE</strong><h1>Ownership Decision Brief</h1><div>${financeState.activeDealId} · ${financeState.customer} · ${financeState.vehicle}</div></header><div class="grid"><div class="cell"><small>Base payment</small><strong>${money(fiBasePayment())}</strong></div><div class="cell"><small>Menu payment</small><strong>${money(fiMenuPayment())}</strong></div><div class="cell"><small>Product gross</small><strong>${money(fiProductGross())}</strong></div><div class="cell"><small>Verified cancellation</small><strong>${money(financeState.verifiedCancellation)}</strong></div></div><h2>Presented products</h2>${selected.map(p=>`<div class="row"><strong>${p.name}</strong><span>${money(financeState.prices[p.id])}</span><span>${p.term}</span><span>${financeState.choices[p.id]||'Pending'}</span></div>`).join('')}<footer>Synthetic demonstration only. Products remain optional and individually priced. Estimated or verified cancellation values are not actual customer funds or lender approvals.</footer></body></html>`;const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`ENGENIX_FI_Menu_Brief_${financeState.activeDealId}.html`;a.click();URL.revokeObjectURL(url);fiEvent('F&I menu brief downloaded','A printable synthetic ownership-decision brief was generated.','fa-download');showToast('Menu brief downloaded','Open the HTML file to print or save it as PDF.','success');}
+    function resetFinanceDemo(){if(!confirm('Reset the synthetic F&I Intelligence demonstration?'))return;financeState=cloneFinanceState();fiSave();renderAllFinance();showFinanceView('fi-command');showToast('F&I demo reset','FI-8421 returned to the initial menu-preparation stage.','success');}
+
+    const priorSearchRenderer=renderSearchResults;
+    renderSearchResults=function(query){if(currentPortalWorkspace!=='finance'){priorSearchRenderer(query);return;}const q=(query||'').toLowerCase().trim();const items=[...financeDeals.map(d=>({icon:'fa-wallet',title:d.id,sub:`${d.customer} · ${d.vehicle} · ${d.stage}`,type:'F&I deal',action:`openFinanceDeal('${d.id}');closeSearch()`})),...financeProducts.map(p=>({icon:p.icon,title:p.name,sub:`${p.term} · ${p.category}`,type:'Product',action:`showFinanceView('fi-knowledge');closeSearch()`})),...financePriorProducts.map(p=>({icon:'fa-repeat',title:p.name,sub:`${p.status} · ${p.provider}`,type:'Prior product',action:`showFinanceView('fi-prior');closeSearch()`}))].filter(x=>!q||`${x.title} ${x.sub} ${x.type}`.toLowerCase().includes(q)).slice(0,10);document.getElementById('searchResults').innerHTML=items.length?items.map(i=>`<button class="search-result" onclick="${i.action}"><div class="search-result-icon" style="color:#0c8f83;background:rgba(12,143,131,.10)"><i class="fa-solid ${i.icon}"></i></div><div><div class="search-result-title">${i.title}</div><div class="search-result-sub">${i.sub}</div></div><div class="search-result-type">${i.type}</div></button>`).join(''):'<div class="empty-state">No F&I results found.</div>';};
+    const priorNotificationRenderer=renderNotifications;
+    renderNotifications=function(){if(currentPortalWorkspace!=='finance'){priorNotificationRenderer();return;}const n=[{icon:'fa-repeat',text:'FI-8421 has prior products requiring reconciliation.',time:'3 min ago',unread:true},{icon:'fa-handshake',text:'FI-8418 has two customer product decisions still pending.',time:'9 min ago',unread:true},{icon:'fa-coins',text:'One synthetic cancellation verification was completed.',time:'42 min ago',unread:false}];document.getElementById('notificationList').innerHTML=n.map(x=>`<div class="notification-item deal-threaded ${x.unread?'unread':''}" style="--deal-accent:#0c8f83"><div class="notification-icon" style="color:#0c8f83;background:rgba(12,143,131,.10)"><i class="fa-solid ${x.icon}"></i></div><div><div class="notification-copy">${x.text}</div><div class="notification-time">${x.time}</div></div></div>`).join('');const count=n.filter(x=>x.unread).length;const dot=document.querySelector('.notification-dot');if(dot)dot.style.display=count?'block':'none';const subtitle=document.querySelector('#notificationPanel .card-subtitle');if(subtitle)subtitle.textContent=`${count} F&I items need attention`;};
+    const priorMarkRead=markNotificationsRead;
+    markNotificationsRead=function(){if(currentPortalWorkspace!=='finance'){priorMarkRead();return;}document.querySelectorAll('#notificationList .notification-item').forEach(n=>n.classList.remove('unread'));const dot=document.querySelector('.notification-dot');if(dot)dot.style.display='none';const subtitle=document.querySelector('#notificationPanel .card-subtitle');if(subtitle)subtitle.textContent='0 F&I items need attention';showToast('F&I notifications cleared','All synthetic F&I notifications are marked read.','success');};
+
+    function initializeFinanceWorkspace(){
+      document.querySelectorAll('[data-finance-view]').forEach(n=>n.addEventListener('click',()=>showFinanceView(n.dataset.financeView)));
+      document.querySelectorAll('[data-fi-setting]').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
+      document.getElementById('fiDealSearch')?.addEventListener('input',renderFinanceDeals);document.getElementById('fiDealStatus')?.addEventListener('change',renderFinanceDeals);
+      document.getElementById('fiKnowledgeFile')?.addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;financeState.knowledgeFile=file.name;fiEvent('Product bulletin filename attached',`${file.name} was recorded locally for the synthetic knowledge demonstration.`,'fa-book-open');renderFinanceKnowledge();showToast('Product filename attached','No document contents were transmitted or parsed.','success');});
+      document.getElementById('rooftopSelect')?.addEventListener('change',()=>{if(currentPortalWorkspace==='finance')renderAllFinance();});
+      renderAllFinance();
+    }
+    initializeFinanceWorkspace();
   </script>
 
 </body>
