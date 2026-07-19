@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
-  <meta name="dashboard-build" content="2026.07.19-ownership-concierge-v6">
+  <meta name="dashboard-build" content="2026.07.19-unified-polish-v8">
   <script>
     try {
       const savedTheme = localStorage.getItem('engenix-demo-theme-v3');
@@ -14,7 +14,7 @@
       document.documentElement.style.colorScheme = initialTheme;
     } catch (error) {}
   </script>
-    <title>ENGENIX | Unified Portal · Desking Strategy & Rescue V7</title>
+    <title>ENGENIX | Unified Portal · Operational Polish V8</title>
   <style>
     :root {
       --bg: #071018;
@@ -3155,6 +3155,272 @@
     @media (max-width:1100px) { .desk-v7-hero-grid,.desk-brief-grid,.desk-handoff-readiness { grid-template-columns:1fr; } .desk-v7-actions { min-width:0; grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-goal-bar { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-objective-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .desk-collateral-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:740px) { .desk-v7-metrics,.desk-attention-grid,.desk-pencil-grid,.desk-rescue-grid,.desk-collateral-grid { grid-template-columns:1fr; } .desk-objective-grid,.desk-goal-bar { grid-template-columns:1fr; } .desk-equity-bridge { grid-template-columns:1fr 1fr; } .desk-equity-node::after { display:none; } .desk-v7-actions { grid-template-columns:1fr; } .desk-approval-card,.desk-attention-card { grid-template-columns:34px minmax(0,1fr); } .desk-approval-card > :last-child,.desk-attention-card > :last-child { grid-column:2; justify-self:start; } }
     @media (max-width:470px) { .desk-equity-bridge { grid-template-columns:1fr; } .desk-v7-hero { padding:19px; } .desk-v7-hero h1 { font-size:29px; } }
+  </style>
+
+
+  <style id="engenix-unified-operational-polish-v8">
+    /* Unified portal V8 · alignment, controls, accessibility, and responsive polish */
+    :root {
+      --control-height: 44px;
+      --control-height-small: 34px;
+      --control-radius: 10px;
+      --focus-ring: 0 0 0 3px color-mix(in srgb, var(--blue) 18%, transparent);
+    }
+
+    .fa-key::before { content: "⌑"; }
+    .fa-rotate::before { content: "↻"; }
+
+    button, [role="button"] { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    .nav-item:focus-visible,
+    .operator-focus-card:focus-visible,
+    .desk-focus-card:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--blue) 72%, white);
+      outline-offset: 2px;
+    }
+
+    .button {
+      min-height: var(--control-height);
+      padding: 0 14px;
+      border-radius: var(--control-radius);
+      line-height: 1.2;
+      text-align: center;
+    }
+    .button.small { min-height: var(--control-height-small); padding: 0 11px; }
+    .button.icon-only { min-height: 38px; }
+    .button > i { flex: 0 0 auto; }
+    .button > span { min-width: 0; }
+    .button:disabled,
+    .button[aria-disabled="true"],
+    button:disabled {
+      cursor: not-allowed !important;
+      opacity: .52;
+      transform: none !important;
+      box-shadow: none !important;
+      filter: saturate(.55);
+    }
+
+    .icon-button { flex: 0 0 auto; }
+    .select-wrap::after {
+      content: "⌄";
+      font-family: inherit;
+      font-weight: 900;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-52%);
+      line-height: 1;
+    }
+
+    .control,
+    .select-control,
+    .input,
+    .field input,
+    .field select,
+    .field textarea,
+    .desk-v7-field input,
+    .desk-v7-field select,
+    .desk-v7-field textarea,
+    .login-input {
+      min-height: var(--control-height);
+      border-radius: var(--control-radius);
+      font-size: 11.5px;
+      line-height: 1.3;
+    }
+    .field label,
+    .desk-v7-field label,
+    .login-field label {
+      min-height: 0;
+      color: var(--muted);
+      font-size: 9.5px;
+      font-weight: 780;
+      line-height: 1.35;
+    }
+    .desk-field-help,
+    .field-help {
+      color: var(--muted-2);
+      font-size: 8.4px;
+      line-height: 1.4;
+    }
+    input[type="number"] {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type="range"] { accent-color: var(--blue); }
+    textarea { line-height: 1.5; }
+
+    .card-header,
+    .section-row,
+    .fi-section-head,
+    .funding-control-bar,
+    .completion-identity-head,
+    .desk-callback-banner {
+      flex-wrap: wrap;
+    }
+    .card-header > :first-child,
+    .section-row > :first-child,
+    .fi-section-head > :first-child {
+      min-width: 0;
+      flex: 1 1 240px;
+    }
+    .card-header > .button,
+    .section-row > .button,
+    .fi-section-head > .button { flex: 0 0 auto; }
+
+    .topbar-left { flex: 1 1 auto; }
+    .topbar-right { flex: 0 1 auto; justify-content: flex-end; }
+    .topbar-right .select-control { max-width: min(320px, 28vw); }
+    .page-heading { flex: 1 1 auto; }
+
+    .sidebar-primary-action { min-height: 56px; }
+    .nav-item { min-height: 42px; }
+    .nav-text { line-height: 1.25; }
+    .nav-count { flex: 0 0 auto; }
+
+    .table-wrap {
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-strong) transparent;
+    }
+    .table-wrap::-webkit-scrollbar { height: 8px; }
+    .table-wrap::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
+    th, td { vertical-align: middle; }
+
+    .desk-v7-actions .button,
+    .fi-hero-actions .button,
+    .brief-actions .button,
+    .funding-hero-actions .button,
+    .handoff-actions .button,
+    .desk-pencil-card footer .button,
+    .desk-collateral-card footer .button,
+    .desk-rescue-card footer .button,
+    .desk-snapshot-actions .button { width: 100%; }
+
+    .desk-v7-number { caret-color: #7257e8; }
+    .desk-objective-grid,
+    .form-grid,
+    .desk-goal-bar,
+    .desk-summary-grid,
+    .fi-grid-2,
+    .fi-grid-even { align-items: start; }
+    .desk-objective-grid > *,
+    .form-grid > *,
+    .desk-goal-bar > *,
+    .desk-summary-grid > *,
+    .fi-grid-2 > *,
+    .fi-grid-even > * { min-width: 0; }
+
+    .desk-v7-metric,
+    .fi-metric,
+    .brief-metric,
+    .completion-kpi { display: flex; flex-direction: column; }
+    .desk-v7-metric span,
+    .fi-metric span,
+    .brief-metric em,
+    .completion-kpi-copy { margin-top: auto; padding-top: 7px; }
+
+    .desk-attention-card > .button,
+    .desk-approval-card > .button { min-width: 112px; }
+    .desk-sequence-item > :last-child { min-width: 96px; }
+    .desk-intake-row b { max-width: 180px; overflow-wrap: anywhere; }
+    .desk-condition-item .button,
+    .desk-handoff-check .button { justify-self: end; }
+
+    .desk-active-banner,
+    .active-deal-banner,
+    .fi-active-banner { overflow: hidden; }
+    .desk-active-copy,
+    .active-deal-copy,
+    .fi-active-copy { min-width: 0; }
+
+    .toggle { position: relative; }
+    .toggle:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    .toggle[aria-pressed="true"] { box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 10%, transparent); }
+
+    .drawer-actions,
+    .modal-foot,
+    .recovery-actions,
+    .completion-item-actions,
+    .meeting-footer,
+    .meeting-footer-group { flex-wrap: wrap; }
+
+    html[data-theme="light"] .desk-v7-field input,
+    html[data-theme="light"] .desk-v7-field select,
+    html[data-theme="light"] .desk-v7-field textarea {
+      background: #fff;
+      border-color: rgba(28,57,78,.15);
+    }
+    html[data-theme="light"] .desk-v7-field input:hover,
+    html[data-theme="light"] .desk-v7-field select:hover,
+    html[data-theme="light"] .desk-v7-field textarea:hover { border-color: rgba(114,87,232,.30); }
+
+    @media (max-width: 1100px) {
+      .topbar-right .select-control { max-width: 230px; }
+      .desk-v7-actions,
+      .fi-hero-actions,
+      .funding-hero-actions { min-width: 0; }
+      .desk-sequence-item { grid-template-columns: 32px minmax(0,1fr); }
+      .desk-sequence-item > :last-child { grid-column: 2; min-width: 0; text-align: left !important; }
+    }
+
+    @media (max-width: 740px) {
+      .button { white-space: normal; }
+      .card-header,
+      .section-row,
+      .fi-section-head { align-items: flex-start; }
+      .card-header > .button,
+      .section-row > .button,
+      .fi-section-head > .button { width: 100%; }
+      .filter-left,
+      .filter-right,
+      .drawer-actions,
+      .modal-foot { align-items: stretch; }
+      .filter-left > *,
+      .filter-right > *,
+      .drawer-actions > *,
+      .modal-foot > * { flex: 1 1 150px; }
+      .desk-attention-card,
+      .desk-approval-card,
+      .desk-condition-item,
+      .desk-handoff-check { align-items: start; }
+      .desk-attention-card > .button,
+      .desk-approval-card > .button,
+      .desk-condition-item > .button,
+      .desk-handoff-check > .button {
+        grid-column: 2;
+        justify-self: stretch;
+        width: 100%;
+        min-width: 0;
+      }
+      .desk-callback-banner { align-items: stretch; }
+      .desk-callback-banner > .button,
+      .desk-callback-banner > .badge { width: 100%; justify-content: center; }
+      .desk-intake-row { grid-template-columns: 1fr; }
+      .desk-intake-row b { max-width: none; text-align: left; }
+      .desk-snapshot-actions { grid-template-columns: 1fr; }
+      .topbar-right .select-control { max-width: none; }
+    }
+
+    @media (max-width: 470px) {
+      :root { --control-height: 46px; }
+      .content { padding-left: 11px; padding-right: 11px; }
+      .button.small { min-height: 38px; }
+      .card-header { padding: 13px; }
+      .card-body { padding: 13px; }
+      .desk-v7-hero,
+      .fi-hero,
+      .concierge-hero,
+      .brief-hero { border-radius: 15px; }
+      .desk-pencil-metrics,
+      .desk-collateral-stats,
+      .recovery-meta { grid-template-columns: 1fr; }
+      .toast { max-width: calc(100vw - 24px); }
+    }
   </style>
 
 </head>
@@ -7734,6 +8000,119 @@
     document.querySelectorAll('.desk-v7-number').forEach(input=>{input.addEventListener('focus',()=>requestAnimationFrame(()=>input.select()));input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();input.blur();}});input.addEventListener('wheel',e=>{if(document.activeElement===input){e.preventDefault();input.blur();}},{passive:false});});
     renderAllDesk();
 
+  </script>
+
+
+  <script id="engenix-unified-operational-polish-v8-script">
+    (() => {
+      const numericRules = {
+        deskTargetPayment: { min: 0, max: 5000, step: 25, placeholder: '700' },
+        deskMaxCash: { min: 0, max: 100000, step: 250, placeholder: '5000' },
+        deskStackTargetPayment: { min: 0, max: 5000, step: 25, placeholder: '700' },
+        deskMaxGrossGive: { min: 0, max: 25000, step: 100, placeholder: '1250' },
+        deskTradeAcv: { min: 0, max: 250000, step: 100, placeholder: '28000' },
+        deskTradeAllowance: { min: 0, max: 250000, step: 100, placeholder: '28500' },
+        deskTradePayoff: { min: 0, max: 250000, step: 100, placeholder: '36000' },
+        deskTradeRecon: { min: 0, max: 50000, step: 50, placeholder: '1200' },
+        deskTradeWholesale: { min: 0, max: 250000, step: 100, placeholder: '27000' }
+      };
+
+      const controlLabels = {
+        queueRisk: 'Filter deal queue by risk',
+        queueStatus: 'Filter deal queue by status',
+        auditType: 'Filter audit history by event type',
+        deskDownRange: 'Adjust modeled cash down',
+        deskDealStatus: 'Filter active desk deals by status',
+        fiDealStatus: 'Filter active F&I deals by status',
+        newDealId: 'New deal identifier',
+        newDealer: 'New deal dealership',
+        newCustomer: 'New deal customer name',
+        newCategory: 'New finding category'
+      };
+
+      function setButtonTypes(root = document) {
+        root.querySelectorAll('button:not([type])').forEach(button => button.type = 'button');
+      }
+
+      function improveControls(root = document) {
+        setButtonTypes(root);
+
+        Object.entries(controlLabels).forEach(([id, label]) => {
+          const control = document.getElementById(id);
+          if (control && !control.getAttribute('aria-label')) control.setAttribute('aria-label', label);
+        });
+
+        Object.entries(numericRules).forEach(([id, rule]) => {
+          const input = document.getElementById(id);
+          if (!input) return;
+          Object.entries(rule).forEach(([key, value]) => input.setAttribute(key, value));
+          input.setAttribute('autocomplete', 'off');
+          input.setAttribute('inputmode', 'decimal');
+        });
+
+        root.querySelectorAll('input[type="number"]').forEach(input => {
+          if (!input.dataset.v8NumericReady) {
+            input.dataset.v8NumericReady = 'true';
+            if (input.value !== '') input.dataset.lastValidValue = input.value;
+            input.addEventListener('focus', () => {
+              if (input.value !== '') requestAnimationFrame(() => input.select());
+            });
+            input.addEventListener('input', () => {
+              if (input.value !== '' && Number.isFinite(Number(input.value))) input.dataset.lastValidValue = input.value;
+            });
+            input.addEventListener('keydown', event => {
+              if (event.key === 'Enter') {
+                event.preventDefault();
+                input.blur();
+              }
+            });
+            input.addEventListener('wheel', event => {
+              if (document.activeElement === input) event.preventDefault();
+            }, { passive: false });
+            input.addEventListener('blur', () => {
+              if (input.value !== '') return;
+              const fallback = input.dataset.lastValidValue ?? input.getAttribute('min') ?? '0';
+              input.value = fallback;
+            });
+          }
+        });
+
+        root.querySelectorAll('.toggle').forEach(toggle => {
+          const settingRow = toggle.closest('.setting-row');
+          const title = settingRow?.querySelector('.setting-title')?.textContent?.trim();
+          if (!toggle.getAttribute('aria-label')) toggle.setAttribute('aria-label', title ? `Toggle ${title}` : 'Toggle setting');
+          const sync = () => toggle.setAttribute('aria-pressed', toggle.classList.contains('on') ? 'true' : 'false');
+          sync();
+          if (!toggle.dataset.v8ToggleReady) {
+            toggle.dataset.v8ToggleReady = 'true';
+            toggle.addEventListener('click', () => requestAnimationFrame(sync));
+          }
+        });
+
+        root.querySelectorAll('.drawer .icon-button, .modal .icon-button').forEach(button => {
+          if (!button.getAttribute('aria-label')) button.setAttribute('aria-label', 'Close panel');
+          if (!button.title) button.title = 'Close';
+        });
+      }
+
+      function observeDynamicControls() {
+        const observer = new MutationObserver(records => {
+          for (const record of records) {
+            for (const node of record.addedNodes) {
+              if (node.nodeType === 1) improveControls(node);
+            }
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+
+      const run = () => {
+        improveControls();
+        observeDynamicControls();
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
+      else run();
+    })();
   </script>
 
 </body>
