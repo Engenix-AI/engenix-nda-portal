@@ -2,9 +2,12 @@
 <html lang="en" data-theme="light" style="color-scheme: light;">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#f4f7fa" id="themeColorMeta" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="format-detection" content="telephone=no" />
   <meta name="dashboard-build" content="2026.07.19-operating-command-v9">
   <script>
     try {
@@ -3665,6 +3668,58 @@
     }
   </style>
 
+
+  <style id="engenix-mobile-compatibility-v10-style">
+    /* V10 mobile/browser hardening: iOS Safari/Chrome, Android Chrome, Samsung Internet, Firefox Mobile */
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body { min-height: 100vh; min-height: 100dvh; }
+    button, input, select, textarea { -webkit-appearance: none; appearance: none; }
+    select { -webkit-appearance: menulist; appearance: menulist; }
+    .sidebar {
+      height: 100vh;
+      height: 100dvh;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
+      padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    }
+    .topbar {
+      padding-top: env(safe-area-inset-top, 0px);
+      min-height: calc(var(--topbar) + env(safe-area-inset-top, 0px));
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .command-active-banner, .final-active-banner, .active-deal-banner { -webkit-backdrop-filter: blur(18px); }
+    .nav-list, .nav-group, .finalization-shell, .command-shell { position: relative; }
+    .nav-item, .sidebar-primary-action {
+      position: relative;
+      z-index: 2;
+      pointer-events: auto !important;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      touch-action: manipulation;
+    }
+    .nav-item > *, .sidebar-primary-action > * { pointer-events: none; }
+    .nav-item[aria-current="page"] { isolation: isolate; }
+    @supports (-webkit-touch-callout: none) {
+      .sidebar { transform: translateZ(0); }
+      .nav-item, .sidebar-primary-action { transform: translateZ(0); }
+    }
+    @media (max-width: 980px) {
+      .sidebar {
+        width: min(286px, calc(100vw - 42px));
+        max-width: calc(100vw - 42px);
+        padding-left: max(12px, env(safe-area-inset-left, 0px));
+      }
+      .nav-item { min-height: 48px; padding-top: 10px; padding-bottom: 10px; }
+      .nav-text { line-height: 1.25; }
+      .sidebar.open { will-change: transform; }
+    }
+    @media (max-width: 470px) {
+      .nav-item { min-height: 50px; }
+      .sidebar { width: min(292px, calc(100vw - 28px)); max-width: calc(100vw - 28px); }
+    }
+  </style>
 </head>
 <body class="auth-locked operator-friendly" data-workspace="command">
   <div class="auth-gate" id="authGate" aria-label="ENGENIX demonstration login">
@@ -3754,16 +3809,16 @@
       <nav class="nav-group command-shell" aria-label="Operating Command navigation">
         <div class="nav-label">Supervise</div>
         <div class="nav-list">
-          <button class="nav-item command-nav-item active" data-command-view="command-command"><span class="nav-icon"><i class="fa-solid fa-tower-broadcast"></i></span><span class="nav-text">Operating Command</span><span class="nav-count" id="commandActionCountNav">7</span></button>
-          <button class="nav-item command-nav-item" data-command-view="command-reconciliation"><span class="nav-icon"><i class="fa-solid fa-link"></i></span><span class="nav-text">Deal Reconciliation</span><span class="nav-count" id="commandReconCountNav">6</span></button>
-          <button class="nav-item command-nav-item" data-command-view="command-escalations"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Escalations</span><span class="nav-count" id="commandEscalationCountNav">5</span></button>
-          <button class="nav-item command-nav-item" data-command-view="command-rooftops"><span class="nav-icon"><i class="fa-solid fa-building-shield"></i></span><span class="nav-text">Rooftop Visibility</span><span class="nav-count">4</span></button>
+          <button type="button" class="nav-item command-nav-item active" data-command-view="command-command"><span class="nav-icon"><i class="fa-solid fa-tower-broadcast"></i></span><span class="nav-text">Operating Command</span><span class="nav-count" id="commandActionCountNav">7</span></button>
+          <button type="button" class="nav-item command-nav-item" data-command-view="command-reconciliation"><span class="nav-icon"><i class="fa-solid fa-link"></i></span><span class="nav-text">Deal Reconciliation</span><span class="nav-count" id="commandReconCountNav">6</span></button>
+          <button type="button" class="nav-item command-nav-item" data-command-view="command-escalations"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Escalations</span><span class="nav-count" id="commandEscalationCountNav">5</span></button>
+          <button type="button" class="nav-item command-nav-item" data-command-view="command-rooftops"><span class="nav-icon"><i class="fa-solid fa-building-shield"></i></span><span class="nav-text">Rooftop Visibility</span><span class="nav-count">4</span></button>
         </div>
       </nav>
       <nav class="nav-group command-shell" aria-label="Operating memory navigation">
         <div class="nav-label">Remember</div>
         <div class="nav-list">
-          <button class="nav-item command-nav-item" data-command-view="command-memory"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Deal Memory</span><span class="nav-count">LIVE</span></button>
+          <button type="button" class="nav-item command-nav-item" data-command-view="command-memory"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Deal Memory</span><span class="nav-count">LIVE</span></button>
           <button class="nav-item command-nav-item" type="button" onclick="switchPortalWorkspace('compliance','brief')"><span class="nav-icon"><i class="fa-solid fa-users"></i></span><span class="nav-text">Leadership Briefing</span></button>
         </div>
       </nav>
@@ -3775,24 +3830,24 @@
       <nav class="nav-group finalization-shell" aria-label="Deal Finalization daily work navigation">
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
-          <button class="nav-item finalization-nav-item active" data-final-view="final-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Finalization Command</span><span class="nav-count" id="finalActionCountNav">8</span></button>
-          <button class="nav-item finalization-nav-item" data-final-view="final-cit"><span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span><span class="nav-text">Contracts in Transit</span><span class="nav-count" id="finalCitCountNav">4</span></button>
-          <button class="nav-item finalization-nav-item" data-final-view="final-title"><span class="nav-icon"><i class="fa-solid fa-car-side"></i></span><span class="nav-text">Title &amp; Payoff</span><span class="nav-count" id="finalTitleCountNav">3</span></button>
+          <button type="button" class="nav-item finalization-nav-item active" data-final-view="final-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Finalization Command</span><span class="nav-count" id="finalActionCountNav">8</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-cit"><span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span><span class="nav-text">Contracts in Transit</span><span class="nav-count" id="finalCitCountNav">4</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-title"><span class="nav-icon"><i class="fa-solid fa-car-side"></i></span><span class="nav-text">Title &amp; Payoff</span><span class="nav-count" id="finalTitleCountNav">3</span></button>
         </div>
       </nav>
       <nav class="nav-group finalization-shell" aria-label="Deal Finalization obligations navigation">
         <div class="nav-label">Obligations</div>
         <div class="nav-list">
-          <button class="nav-item finalization-nav-item" data-final-view="final-cancellations"><span class="nav-icon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="nav-text">Cancellations &amp; Refunds</span><span class="nav-count" id="finalCancelCountNav">4</span></button>
-          <button class="nav-item finalization-nav-item" data-final-view="final-promises"><span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Customer Promises</span><span class="nav-count" id="finalPromiseCountNav">2</span></button>
-          <button class="nav-item finalization-nav-item" data-final-view="final-gross"><span class="nav-icon"><i class="fa-solid fa-scale-balanced"></i></span><span class="nav-text">Final Gross Reconciliation</span><span class="nav-count">2</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-cancellations"><span class="nav-icon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="nav-text">Cancellations &amp; Refunds</span><span class="nav-count" id="finalCancelCountNav">4</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-promises"><span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Customer Promises</span><span class="nav-count" id="finalPromiseCountNav">2</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-gross"><span class="nav-icon"><i class="fa-solid fa-scale-balanced"></i></span><span class="nav-text">Final Gross Reconciliation</span><span class="nav-count">2</span></button>
         </div>
       </nav>
       <nav class="nav-group finalization-shell" aria-label="Deal Finalization records navigation">
         <div class="nav-label">Records</div>
         <div class="nav-list">
-          <button class="nav-item finalization-nav-item" data-final-view="final-completed"><span class="nav-icon"><i class="fa-solid fa-box-archive"></i></span><span class="nav-text">Completed Archive</span><span class="nav-count">12</span></button>
-          <button class="nav-item finalization-nav-item" data-final-view="final-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-completed"><span class="nav-icon"><i class="fa-solid fa-box-archive"></i></span><span class="nav-text">Completed Archive</span><span class="nav-count">12</span></button>
+          <button type="button" class="nav-item finalization-nav-item" data-final-view="final-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span></button>
         </div>
       </nav>
 
@@ -3804,22 +3859,22 @@
       <nav class="nav-group compliance-shell" aria-label="Compliance daily work navigation">
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
-          <button class="nav-item active" data-view="brief">
+          <button type="button" class="nav-item active" data-view="brief">
             <span class="nav-icon"><i class="fa-solid fa-building-shield"></i></span><span class="nav-text">Daily Briefing</span><span class="nav-count" id="briefOpenCount">5</span>
           </button>
-          <button class="nav-item" data-view="overview">
+          <button type="button" class="nav-item" data-view="overview">
             <span class="nav-icon"><i class="fa-solid fa-grid-2"></i></span><span class="nav-text">Command Center</span>
           </button>
-          <button class="nav-item" data-view="copilot">
+          <button type="button" class="nav-item" data-view="copilot">
             <span class="nav-icon"><i class="fa-solid fa-brain"></i></span><span class="nav-text">Compliance Copilot</span><span class="nav-count" id="copilotNavCount">7</span>
           </button>
-          <button class="nav-item" data-view="journey">
+          <button type="button" class="nav-item" data-view="journey">
             <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Deal Journey</span><span class="nav-count" id="journeyStageCount">01</span>
           </button>
-          <button class="nav-item" data-view="queue">
+          <button type="button" class="nav-item" data-view="queue">
             <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Deal Queue</span><span class="nav-count" id="queueCount">8</span>
           </button>
-          <button class="nav-item" data-view="completion">
+          <button type="button" class="nav-item" data-view="completion">
             <span class="nav-icon"><i class="fa-solid fa-file-circle-check"></i></span><span class="nav-text">Completion Watch</span><span class="nav-count" id="completionCountNav">5</span>
           </button>
         </div>
@@ -3828,10 +3883,10 @@
       <nav class="nav-group compliance-shell" aria-label="Compliance resolution navigation">
         <div class="nav-label">Resolve</div>
         <div class="nav-list">
-          <button class="nav-item" data-view="findings">
+          <button type="button" class="nav-item" data-view="findings">
             <span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Findings</span><span class="nav-count" id="findingCountNav">7</span>
           </button>
-          <button class="nav-item" data-view="actions">
+          <button type="button" class="nav-item" data-view="actions">
             <span class="nav-icon"><i class="fa-solid fa-list-check"></i></span><span class="nav-text">Corrective Actions</span><span class="nav-count" id="actionCountNav">6</span>
           </button>
         </div>
@@ -3840,13 +3895,13 @@
       <nav class="nav-group compliance-shell" aria-label="Compliance records navigation">
         <div class="nav-label">Records</div>
         <div class="nav-list">
-          <button class="nav-item" data-view="reports">
+          <button type="button" class="nav-item" data-view="reports">
             <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Reports</span>
           </button>
-          <button class="nav-item" data-view="audit">
+          <button type="button" class="nav-item" data-view="audit">
             <span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Audit History</span>
           </button>
-          <button class="nav-item" data-view="settings">
+          <button type="button" class="nav-item" data-view="settings">
             <span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span>
           </button>
         </div>
@@ -3860,19 +3915,19 @@
       <nav class="nav-group desking-shell" aria-label="Desking daily work navigation">
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
-          <button class="nav-item desk-nav-item active" data-desk-view="desk-command">
+          <button type="button" class="nav-item desk-nav-item active" data-desk-view="desk-command">
             <span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">Desk Command</span><span class="nav-count" id="deskActiveCountNav">6</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-intake">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-intake">
             <span class="nav-icon"><i class="fa-solid fa-clipboard-list"></i></span><span class="nav-text">Deal Intake</span><span class="nav-count">LIVE</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-structure">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-structure">
             <span class="nav-icon"><i class="fa-solid fa-calculator"></i></span><span class="nav-text">Structure Lab</span><span class="nav-count">MODEL</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-deals">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-deals">
             <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Active Deals</span><span class="nav-count">6</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-attention">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-attention">
             <span class="nav-icon"><i class="fa-solid fa-bell"></i></span><span class="nav-text">Manager Attention</span><span class="nav-count" id="deskAttentionCountNav">4</span>
           </button>
         </div>
@@ -3881,16 +3936,16 @@
       <nav class="nav-group desking-shell" aria-label="Desking structure navigation">
         <div class="nav-label">Structure</div>
         <div class="nav-list">
-          <button class="nav-item desk-nav-item" data-desk-view="desk-stack">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-stack">
             <span class="nav-icon"><i class="fa-solid fa-copy"></i></span><span class="nav-text">Deal Stack</span><span class="nav-count" id="deskPencilCountNav">4</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-trade">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-trade">
             <span class="nav-icon"><i class="fa-solid fa-arrow-right-arrow-left"></i></span><span class="nav-text">Trade &amp; Equity</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-collateral">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-collateral">
             <span class="nav-icon"><i class="fa-solid fa-car"></i></span><span class="nav-text">Collateral Rescue</span><span class="nav-count">5</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-pathways">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-pathways">
             <span class="nav-icon"><i class="fa-solid fa-route"></i></span><span class="nav-text">Lender Pathways</span><span class="nav-count" id="deskPathCountNav">4</span>
           </button>
         </div>
@@ -3899,19 +3954,19 @@
       <nav class="nav-group desking-shell" aria-label="Desking decision navigation">
         <div class="nav-label">Decide</div>
         <div class="nav-list">
-          <button class="nav-item desk-nav-item" data-desk-view="desk-strategy">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-strategy">
             <span class="nav-icon"><i class="fa-solid fa-chess"></i></span><span class="nav-text">Submission Strategy</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-callbacks">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-callbacks">
             <span class="nav-icon"><i class="fa-solid fa-phone"></i></span><span class="nav-text">Callbacks &amp; Conditions</span><span class="nav-count" id="deskConditionCountNav">2</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-rescue">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-rescue">
             <span class="nav-icon"><i class="fa-solid fa-life-ring"></i></span><span class="nav-text">Deal Rescue</span><span class="nav-count" id="deskRescueCountNav">NEW</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-approvals">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-approvals">
             <span class="nav-icon"><i class="fa-solid fa-user-shield"></i></span><span class="nav-text">Manager Approvals</span><span class="nav-count" id="deskApprovalCountNav">2</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-handoff">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-handoff">
             <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">F&amp;I Handoff</span><span class="nav-count" id="deskHandoffCountNav">HOLD</span>
           </button>
         </div>
@@ -3920,16 +3975,16 @@
       <nav class="nav-group desking-shell" aria-label="Desking records navigation">
         <div class="nav-label">Records</div>
         <div class="nav-list">
-          <button class="nav-item desk-nav-item" data-desk-view="desk-knowledge">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-knowledge">
             <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span><span class="nav-text">Lender Knowledge</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-outcomes">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-outcomes">
             <span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Outcome Memory</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-history">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-history">
             <span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Decision History</span>
           </button>
-          <button class="nav-item desk-nav-item" data-desk-view="desk-settings">
+          <button type="button" class="nav-item desk-nav-item" data-desk-view="desk-settings">
             <span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span>
           </button>
         </div>
@@ -3944,50 +3999,50 @@
       <nav class="nav-group finance-shell" aria-label="F&I daily work navigation">
         <div class="nav-label">Daily Work</div>
         <div class="nav-list">
-          <button class="nav-item finance-nav-item active" data-finance-view="fi-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">F&amp;I Command</span><span class="nav-count" id="fiActiveCountNav">4</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-concierge"><span class="nav-icon"><i class="fa-solid fa-comments"></i></span><span class="nav-text">Ownership Concierge</span><span class="nav-count" id="fiConciergeNavCount">READY</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-interviews"><span class="nav-icon"><i class="fa-solid fa-mobile-screen"></i></span><span class="nav-text">Interview Queue</span><span class="nav-count" id="fiInterviewNavCount">3</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-recovery"><span class="nav-icon"><i class="fa-solid fa-heart-pulse"></i></span><span class="nav-text">Recovery Alerts</span><span class="nav-count" id="fiRecoveryNavCount">0</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-deals"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Active Deals</span><span class="nav-count">6</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-prior"><span class="nav-icon"><i class="fa-solid fa-repeat"></i></span><span class="nav-text">Prior Deal Recognition</span><span class="nav-count" id="fiPriorCountNav">1</span></button>
+          <button type="button" class="nav-item finance-nav-item active" data-finance-view="fi-command"><span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="nav-text">F&amp;I Command</span><span class="nav-count" id="fiActiveCountNav">4</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-concierge"><span class="nav-icon"><i class="fa-solid fa-comments"></i></span><span class="nav-text">Ownership Concierge</span><span class="nav-count" id="fiConciergeNavCount">READY</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-interviews"><span class="nav-icon"><i class="fa-solid fa-mobile-screen"></i></span><span class="nav-text">Interview Queue</span><span class="nav-count" id="fiInterviewNavCount">3</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-recovery"><span class="nav-icon"><i class="fa-solid fa-heart-pulse"></i></span><span class="nav-text">Recovery Alerts</span><span class="nav-count" id="fiRecoveryNavCount">0</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-deals"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">Active Deals</span><span class="nav-count">6</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-prior"><span class="nav-icon"><i class="fa-solid fa-repeat"></i></span><span class="nav-text">Prior Deal Recognition</span><span class="nav-count" id="fiPriorCountNav">1</span></button>
         </div>
       </nav>
 
       <nav class="nav-group finance-shell" aria-label="F&I build navigation">
         <div class="nav-label">Build</div>
         <div class="nav-list">
-          <button class="nav-item finance-nav-item" data-finance-view="fi-fit"><span class="nav-icon"><i class="fa-solid fa-shield-heart"></i></span><span class="nav-text">Product Fit</span><span class="nav-count" id="fiFitCountNav">6</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-menu"><span class="nav-icon"><i class="fa-solid fa-tags"></i></span><span class="nav-text">Menu Studio</span><span class="nav-count">LIVE</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-brief"><span class="nav-icon"><i class="fa-solid fa-sparkles"></i></span><span class="nav-text">AI Ownership Brief</span><span class="nav-count">NEW</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-cancel"><span class="nav-icon"><i class="fa-solid fa-coins"></i></span><span class="nav-text">Cancellation &amp; Carryover</span><span class="nav-count" id="fiCancelCountNav">3</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-fit"><span class="nav-icon"><i class="fa-solid fa-shield-heart"></i></span><span class="nav-text">Product Fit</span><span class="nav-count" id="fiFitCountNav">6</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-menu"><span class="nav-icon"><i class="fa-solid fa-tags"></i></span><span class="nav-text">Menu Studio</span><span class="nav-count">LIVE</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-brief"><span class="nav-icon"><i class="fa-solid fa-sparkles"></i></span><span class="nav-text">AI Ownership Brief</span><span class="nav-count">NEW</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-cancel"><span class="nav-icon"><i class="fa-solid fa-coins"></i></span><span class="nav-text">Cancellation &amp; Carryover</span><span class="nav-count" id="fiCancelCountNav">3</span></button>
         </div>
       </nav>
 
       <nav class="nav-group finance-shell" aria-label="F&I decision navigation">
         <div class="nav-label">Decide</div>
         <div class="nav-list">
-          <button class="nav-item finance-nav-item" data-finance-view="fi-presentation"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Customer Presentation</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-exceptions"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Exceptions &amp; Overrides</span><span class="nav-count" id="fiExceptionCountNav">2</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-handoff"><span class="nav-icon"><i class="fa-solid fa-file-circle-check"></i></span><span class="nav-text">F&amp;I Handoff</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-presentation"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Customer Presentation</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-exceptions"><span class="nav-icon"><i class="fa-solid fa-triangle-exclamation"></i></span><span class="nav-text">Exceptions &amp; Overrides</span><span class="nav-count" id="fiExceptionCountNav">2</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-handoff"><span class="nav-icon"><i class="fa-solid fa-file-circle-check"></i></span><span class="nav-text">F&amp;I Handoff</span></button>
         </div>
       </nav>
 
       <nav class="nav-group finance-shell" aria-label="F&I funding navigation">
         <div class="nav-label">Fund</div>
         <div class="nav-list">
-          <button class="nav-item finance-nav-item" data-finance-view="fi-funding"><span class="nav-icon"><i class="fa-solid fa-user-shield"></i></span><span class="nav-text">Funding Assurance</span><span class="nav-count" id="fiFundingNavCount">4</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-packet"><span class="nav-icon"><i class="fa-solid fa-file-contract"></i></span><span class="nav-text">Lender Packet Review</span><span class="nav-count" id="fiPacketNavCount">15</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-stips"><span class="nav-icon"><i class="fa-solid fa-clipboard-list"></i></span><span class="nav-text">Stipulation Tracker</span><span class="nav-count" id="fiStipNavCount">3</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-funding"><span class="nav-icon"><i class="fa-solid fa-user-shield"></i></span><span class="nav-text">Funding Assurance</span><span class="nav-count" id="fiFundingNavCount">4</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-packet"><span class="nav-icon"><i class="fa-solid fa-file-contract"></i></span><span class="nav-text">Lender Packet Review</span><span class="nav-count" id="fiPacketNavCount">15</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-stips"><span class="nav-icon"><i class="fa-solid fa-clipboard-list"></i></span><span class="nav-text">Stipulation Tracker</span><span class="nav-count" id="fiStipNavCount">3</span></button>
         </div>
       </nav>
 
       <nav class="nav-group finance-shell" aria-label="F&I records navigation">
         <div class="nav-label">Records</div>
         <div class="nav-list">
-          <button class="nav-item finance-nav-item" data-finance-view="fi-knowledge"><span class="nav-icon"><i class="fa-solid fa-book-open"></i></span><span class="nav-text">Product Knowledge</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-outcomes"><span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Outcome Memory</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-audit"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Audit History</span></button>
-          <button class="nav-item finance-nav-item" data-finance-view="fi-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-knowledge"><span class="nav-icon"><i class="fa-solid fa-book-open"></i></span><span class="nav-text">Product Knowledge</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-outcomes"><span class="nav-icon"><i class="fa-solid fa-chart-column"></i></span><span class="nav-text">Outcome Memory</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-audit"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span><span class="nav-text">Audit History</span></button>
+          <button type="button" class="nav-item finance-nav-item" data-finance-view="fi-settings"><span class="nav-icon"><i class="fa-solid fa-sliders"></i></span><span class="nav-text">Settings</span></button>
         </div>
       </nav>
 
@@ -8870,4 +8925,107 @@
     })();
   </script>
 
+
+  <script id="engenix-mobile-compatibility-v10-script">
+  (() => {
+    const navSelector = [
+      '.finalization-nav-item[data-final-view]',
+      '.command-nav-item[data-command-view]',
+      '.desk-nav-item[data-desk-view]',
+      '.finance-nav-item[data-finance-view]',
+      '.nav-item[data-view]'
+    ].join(',');
+
+    let touchCandidate = null;
+    let lastTouchActivation = 0;
+
+    function safeTop() {
+      try { window.scrollTo(0, 0); } catch (error) {
+        try { document.documentElement.scrollTop = 0; document.body.scrollTop = 0; } catch (ignored) {}
+      }
+    }
+
+    function setCurrent(control) {
+      const group = control.classList.contains('finalization-nav-item') ? '.finalization-nav-item'
+        : control.classList.contains('command-nav-item') ? '.command-nav-item'
+        : control.classList.contains('desk-nav-item') ? '.desk-nav-item'
+        : control.classList.contains('finance-nav-item') ? '.finance-nav-item'
+        : '.nav-item[data-view]';
+      document.querySelectorAll(group).forEach(item => {
+        item.setAttribute('aria-current', item === control ? 'page' : 'false');
+      });
+    }
+
+    function activate(control) {
+      if (!control || control.disabled || control.getAttribute('aria-disabled') === 'true') return false;
+      try {
+        if (control.dataset.finalView && typeof window.showFinalView === 'function') window.showFinalView(control.dataset.finalView);
+        else if (control.dataset.commandView && typeof window.showCommandView === 'function') window.showCommandView(control.dataset.commandView);
+        else if (control.dataset.deskView && typeof window.showDeskView === 'function') window.showDeskView(control.dataset.deskView);
+        else if (control.dataset.financeView && typeof window.showFinanceView === 'function') window.showFinanceView(control.dataset.financeView);
+        else if (control.dataset.view && typeof window.showView === 'function') window.showView(control.dataset.view);
+        else return false;
+        setCurrent(control);
+        document.getElementById('sidebar')?.classList.remove('open');
+        safeTop();
+        return true;
+      } catch (error) {
+        console.error('ENGENIX mobile navigation activation failed', error);
+        return false;
+      }
+    }
+
+    document.querySelectorAll(navSelector).forEach(control => {
+      control.type = 'button';
+      if (!control.hasAttribute('aria-current')) control.setAttribute('aria-current', control.classList.contains('active') ? 'page' : 'false');
+    });
+
+    document.addEventListener('touchstart', event => {
+      const control = event.target.closest?.(navSelector);
+      if (!control || event.touches.length !== 1) { touchCandidate = null; return; }
+      const touch = event.touches[0];
+      touchCandidate = { control, x: touch.clientX, y: touch.clientY, time: Date.now() };
+    }, { capture: true, passive: true });
+
+    document.addEventListener('touchend', event => {
+      if (!touchCandidate) return;
+      const touch = event.changedTouches && event.changedTouches[0];
+      const candidate = touchCandidate;
+      touchCandidate = null;
+      if (!touch) return;
+      const moved = Math.hypot(touch.clientX - candidate.x, touch.clientY - candidate.y);
+      const elapsed = Date.now() - candidate.time;
+      const endedOn = event.target.closest?.(navSelector);
+      if (moved <= 14 && elapsed < 900 && (!endedOn || endedOn === candidate.control)) {
+        event.preventDefault();
+        event.stopPropagation();
+        lastTouchActivation = Date.now();
+        activate(candidate.control);
+      }
+    }, { capture: true, passive: false });
+
+    document.addEventListener('touchcancel', () => { touchCandidate = null; }, { capture: true, passive: true });
+
+    document.addEventListener('click', event => {
+      const control = event.target.closest?.(navSelector);
+      if (!control) return;
+      if (Date.now() - lastTouchActivation < 700) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+      if (activate(control)) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, true);
+
+    window.addEventListener('pageshow', () => {
+      document.querySelectorAll(navSelector).forEach(control => {
+        control.type = 'button';
+        control.style.pointerEvents = 'auto';
+      });
+    });
+  })();
+  </script>
 </body>
