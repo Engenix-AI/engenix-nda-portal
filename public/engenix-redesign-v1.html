@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ENGENIX — The Operating Intelligence Layer for Automotive Retail. Command every deal with precision. No noise. No false hope. Just the signal that moves the close." name="description"/>
+<title>ENGENIX | Operating Intelligence for Automotive Retail</title>
+<style>
+  :root {
+    --bg: #05070b;
+    --surface: #0a0d14;
+    --line: rgba(255,255,255,.08);
+    --gold: #d4a73a;
+    --gold-light: #f1cf74;
+    --text: #e8e9ed;
+    --muted: #8b94a3;
+    --success: #3a9a70;
+    --danger: #c44d4d;
+    --radius: 16px;
+    --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+  html[data-theme="light"] {
+    --bg: #f8f9fc;
+    --surface: #ffffff;
+    --line: rgba(31,48,73,.12);
+    --text: #20262e;
+    --muted: #5a6578;
+    --gold: #b98528;
+    --gold-light: #d4a73a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,7,11,.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+  html[data-theme="light"] .site-header {
+    background: rgba(248,249,252,.95);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .brand span { color: var(--gold); }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all .2s ease;
+  }
+  .theme-toggle:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  @media (max-width: 820px) {
+    .hamburger { display: block; }
+    .nav-actions .theme-toggle { margin-right: 8px; }
+  }
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(212,167,58,.08), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-content {
+    max-width: 720px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-kicker {
+    font-size: .85rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5.2vw, 3.6rem);
+    line-height: 1.05;
+    margin: 0 0 24px;
+    font-weight: 700;
+  }
+  .hero h1 strong { color: var(--gold-light); }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 32px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .95rem;
+    text-decoration: none;
+    transition: all .2s ease;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: #05070b;
+    box-shadow: 0 4px 20px rgba(212,167,58,.3);
+  }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+  .section-kicker {
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .section h2 {
+    font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+    line-height: 1.1;
+    margin: 0 0 20px;
+  }
+
+  /* Operating Code */
+  .operating-code {
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .code-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+    margin-top: 40px;
+  }
+  .code-card {
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 26px;
+    transition: all .2s ease;
+  }
+  html[data-theme="light"] .code-card {
+    background: #fff;
+    border-color: rgba(31,48,73,.12);
+  }
+  .code-card:hover {
+    border-color: rgba(212,167,58,.4);
+    transform: translateY(-4px);
+  }
+  .code-num {
+    display: inline-block;
+    background: rgba(212,167,58,.12);
+    color: var(--gold);
+    font-size: .72rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+  .code-card h4 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+  }
+  .code-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: .97rem;
+    line-height: 1.55;
+  }
+
+  .visual {
+    margin-top: 60px;
+    text-align: center;
+  }
+  .visual img {
+    max-width: 100%;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 90px rgba(0,0,0,.5);
+  }
+  .visual small {
+    display: block;
+    margin-top: 14px;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    opacity: .6;
+  }
+
+  /* Risk Simulator */
+  .sim {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 32px;
+    border: 1px solid var(--line);
+  }
+  .sim-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .sim-control label {
+    display: block;
+    font-size: .85rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .sim-control input[type="range"] {
+    width: 100%;
+    accent-color: var(--gold);
+  }
+  .sim-output {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .risk-dial {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(var(--success) 0% 22%, var(--gold) 22% 48%, var(--danger) 48% 100%);
+    box-shadow: inset 0 0 0 18px var(--surface);
+  }
+  .risk-dial::before {
+    content: attr(data-risk);
+    position: absolute;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .sim-metrics {
+    display: grid;
+    gap: 12px;
+  }
+  .metric {
+    display: flex;
+    justify-content: space-between;
+    font-size: .95rem;
+  }
+  .metric span { color: var(--muted); }
+
+  .btn-generate {
+    margin-top: 24px;
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: #05070b;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--muted);
+    font-size: .9rem;
+  }
+
+  @media (max-width: 820px) {
+    .hero { padding-top: 100px; min-height: auto; }
+    .sim-output { grid-template-columns: 1fr; text-align: center; }
+    .risk-dial { margin-bottom: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell">
+    <nav class="nav">
+      <a href="#" class="brand">ENGENIX <span>OS</span></a>
+      
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">◐</button>
+        <button class="hamburger" aria-label="Menu">☰</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="shell">
+    <div class="hero-content">
+      <div class="hero-kicker">THE OPERATING INTELLIGENCE LAYER</div>
+      <h1>Your systems record what happened.<br><strong>ENGENIX commands what happens next.</strong></h1>
+      <p>The noise stops here. Precision over chaos. No false hope. No blind spots. Just the signal that moves every deal from structure to close with clarity and control.</p>
+      
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="document.getElementById('founding-briefing').scrollIntoView({behavior:'smooth'})">Request Founding Briefing</button>
+        <a href="#operating-code" class="btn btn-secondary">Explore the Operating Code</a>
+      </div>
+      
+      <div style="margin-top: 28px; font-size: .85rem; color: var(--muted);">
+        All intelligence layers operational in the demo dashboard
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATING CODE -->
+<section id="operating-code" class="section operating-code">
+  <div class="shell">
+    <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+      <span class="section-kicker">THE ENGENIX OPERATING CODE</span>
+      <h2>Precision is the only luxury that scales.<br><strong>Calculated Silence, applied.</strong></h2>
+      <p style="color: var(--muted); max-width: 620px; margin: 0 auto;">The same doctrine that forged the music now forges the operating system. No theater. No noise. Just the signal that commands the deal.</p>
+    </div>
+
+    <div class="code-grid">
+      <div class="code-card">
+        <span class="code-num">01</span>
+        <h4>Precision over Volume</h4>
+        <p>Every signal must earn its place. Noise is expensive. Command starts with ruthless subtraction.</p>
+      </div>
+      <div class="code-card">
+        <span class="code-num">02</span>
+        <h4>Signal &gt; Story</h4>
+        <p>The deal tells the truth. We surface it without narrative padding or political theater.</p>
+      </div>
+      <div class="code-card">
+        <span class="code-num">03</span>
+        <h4>Command without Theater</h4>
+        <p>No dashboards for the sake of dashboards. Only what moves the needle and protects the close.</p>
+      </div>
+      <div class="code-card">
+        <span class="code-num">04</span>
+        <h4>Controlled Intensity</h4>
+        <p>High-stakes moments get calm, surgical attention. Panic is the most expensive emotion in the building.</p>
+      </div>
+      <div class="code-card">
+        <span class="code-num">05</span>
+        <h4>Silence as Power</h4>
+        <p>The operator who sees the full picture doesn’t need to raise their voice. Clarity is the loudest signal.</p>
+      </div>
+      <div class="code-card">
+        <span class="code-num">06</span>
+        <h4>Truth at Close</h4>
+        <p>No false hope. The numbers that matter are the ones that survive reconciliation. Everything else is noise.</p>
+      </div>
+    </div>
+
+    <div class="visual">
+      <!-- Visual: Upload Crlwo.jpg from artifacts/imagine_images to your images folder and update src -->
+      <img src="https://picsum.photos/id/1015/1200/630" alt="ENGENIX Command Layer — precision data streams" style="max-width: 100%; border-radius: 20px; border: 1px solid var(--line);" />
+      <small>ILLUSTRATIVE · THE SIGNAL LAYER IN MOTION</small>
+    </div>
+  </div>
+</section>
+
+<!-- ONE DEAL SNAPSHOT + RISK SIM -->
+<section class="section" id="impact">
+  <div class="shell">
+    <div style="text-align: center; max-width: 620px; margin: 0 auto 48px;">
+      <span class="section-kicker">ONE DEAL. ONE OPERATING TRUTH.</span>
+      <h2>The deal is already happening.<br>ENGENIX makes sure it happens right.</h2>
+    </div>
+
+    <!-- Compact Risk Simulator -->
+    <div class="sim">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <strong style="font-size: 1.15rem;">Risk Simulator</strong>
+          <div style="color: var(--muted); font-size: .9rem;">See how data quality moves exposure in real time</div>
+        </div>
+        <div id="risk-label" style="font-weight: 700; font-size: 1.1rem; padding: 6px 18px; border-radius: 999px; background: rgba(212,167,58,.1); color: var(--gold);">LOW</div>
+      </div>
+
+      <div class="sim-controls">
+        <div class="sim-control">
+          <label>Documents Quality <span id="sim-docs-value">82%</span></label>
+          <input type="range" id="sim-docs" min="40" max="98" value="82">
+        </div>
+        <div class="sim-control">
+          <label>Signatures Complete <span id="sim-signatures-value">91%</span></label>
+          <input type="range" id="sim-signatures" min="30" max="100" value="91">
+        </div>
+        <div class="sim-control">
+          <label>Manager Review Depth <span id="sim-review-value">76%</span></label>
+          <input type="range" id="sim-review" min="20" max="100" value="76">
+        </div>
+      </div>
+
+      <div class="sim-output">
+        <div>
+          <div class="risk-dial" id="risk-dial" data-risk="18"></div>
+        </div>
+        <div class="sim-metrics">
+          <div class="metric"><span>Risk Score</span> <strong id="risk-score">18</strong></div>
+          <div class="metric"><span>Deal Ready</span> <strong id="sim-ready">78%</strong></div>
+          <div class="metric"><span>Critical Findings</span> <strong id="sim-critical">1</strong></div>
+          <div class="metric"><span>Moderate Items</span> <strong id="sim-moderate">3</strong></div>
+        </div>
+      </div>
+
+      <button class="btn-generate" onclick="generateBrief()">Generate Operating Brief →</button>
+      <div id="brief-output" style="margin-top: 20px; display: none; background: rgba(0,0,0,.3); padding: 20px; border-radius: 12px; font-family: var(--font-mono); font-size: .9rem; white-space: pre-wrap;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="founding-briefing" class="section" style="background: var(--surface); border-top: 1px solid var(--line);">
+  <div class="shell" style="text-align: center; max-width: 620px;">
+    <h2 style="margin-bottom: 16px;">Ready to command the deal?</h2>
+    <p style="color: var(--muted); margin-bottom: 32px;">Book a private founding briefing. See the full demo dashboard. No pitch. Just the operating truth.</p>
+    
+    <button onclick="alert('Thank you. A founding team member will reach out within 24 hours.')" class="btn btn-primary" style="padding: 18px 42px; font-size: 1.05rem;">Request Private Briefing</button>
+    
+    <div style="margin-top: 40px; font-size: .8rem; color: var(--muted);">
+      Built by dealership operators. For dealership operators.<br>
+      All layers operational today.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    © 2026 ENGENIX. Precision is the only luxury that scales.
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+const toggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
+
+function setTheme(theme) {
+  html.dataset.theme = theme;
+  localStorage.setItem('engenix-theme', theme);
+  toggle.textContent = theme === 'light' ? '☾' : '◐';
+}
+
+toggle.addEventListener('click', () => {
+  const current = html.dataset.theme || 'dark';
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+// Load saved theme
+const saved = localStorage.getItem('engenix-theme');
+if (saved) setTheme(saved);
+else setTheme('dark');
+
+// Risk Simulator
+const docs = document.getElementById('sim-docs');
+const signatures = document.getElementById('sim-signatures');
+const review = document.getElementById('sim-review');
+
+function updateSim() {
+  const d = parseInt(docs.value);
+  const s = parseInt(signatures.value);
+  const r = parseInt(review.value);
+
+  document.getElementById('sim-docs-value').textContent = d + '%';
+  document.getElementById('sim-signatures-value').textContent = s + '%';
+  document.getElementById('sim-review-value').textContent = r + '%';
+
+  const quality = (d * 0.42) + (s * 0.31) + (r * 0.27);
+  const risk = Math.max(4, Math.round(100 - quality));
+
+  document.getElementById('risk-score').textContent = risk;
+  document.getElementById('sim-ready').textContent = Math.max(30, Math.round(quality - 4)) + '%';
+  document.getElementById('sim-critical').textContent = Math.max(0, Math.round((risk - 18) / 11));
+  document.getElementById('sim-moderate').textContent = Math.max(1, Math.round(risk / 7));
+
+  let label = 'LOW';
+  let color = 'var(--success)';
+  if (risk >= 25) { label = 'MODERATE'; color = 'var(--gold)'; }
+  if (risk >= 48) { label = 'HIGH'; color = 'var(--danger)'; }
+
+  const labelEl = document.getElementById('risk-label');
+  labelEl.textContent = label;
+  labelEl.style.background = color === 'var(--success)' ? 'rgba(58,154,112,.15)' : color === 'var(--gold)' ? 'rgba(212,167,58,.15)' : 'rgba(196,77,77,.15)';
+  labelEl.style.color = color;
+
+  const dial = document.getElementById('risk-dial');
+  dial.style.background = `conic-gradient(${color} 0% ${risk}%, var(--surface) ${risk}% 100%)`;
+  dial.setAttribute('data-risk', risk);
+}
+
+[docs, signatures, review].forEach(el => el.addEventListener('input', updateSim));
+updateSim();
+
+// Generate Operating Brief
+function generateBrief() {
+  const risk = document.getElementById('risk-score').textContent;
+  const ready = document.getElementById('sim-ready').textContent;
+  const critical = document.getElementById('sim-critical').textContent;
+  const moderate = document.getElementById('sim-moderate').textContent;
+
+  const brief = `ENGENIX OPERATING BRIEF — Deal #2847
+Generated: ${new Date().toLocaleString()}
+
+RISK SCORE: ${risk}
+DEAL READINESS: ${ready}
+CRITICAL FINDINGS: ${critical}
+MODERATE ITEMS: ${moderate}
+
+RECOMMENDED ACTIONS:
+• Prioritize manager review on disclosure variance
+• Confirm collateral rescue pathway before customer leaves
+• Document corrective action owner before close
+
+NEXT DECISION OWNER: General Manager / Desk Manager
+TIMING: Before vehicle release
+
+— ENGENIX OS | Precision over noise`;
+
+  const output = document.getElementById('brief-output');
+  output.style.display = 'block';
+  output.textContent = brief;
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(brief).then(() => {
+    const origText = output.textContent;
+    output.textContent = brief + '\n\n[Copied to clipboard]';
+    setTimeout(() => {
+      if (output.textContent.includes('[Copied')) output.textContent = origText;
+    }, 2200);
+  }).catch(() => {});
+}
+
+// Simple mobile menu (placeholder)
+document.querySelector('.hamburger').addEventListener('click', () => {
+  alert('Mobile menu would open here — clean nav with links to Code, Impact, Briefing.');
+});
+</script>
+</body>
+</html>
