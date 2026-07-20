@@ -93,7 +93,7 @@ body.menu-locked,
 body.drawer-locked,
 body.loader-active {
   overflow: hidden;
-  touch-action: none;
+  touch-action:  none;
 }
 
 .site-loader {
