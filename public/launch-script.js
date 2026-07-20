@@ -26,7 +26,7 @@
     ["company", "Company"],
   ];
 
-  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=7" alt="ENGENIX" width="577" height="433"></span>`;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=8" alt="ENGENIX" width="577" height="433"></span>`;
   const arrow = '<span class="arrow" aria-hidden="true"></span>';
   const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
     (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
@@ -78,8 +78,10 @@
           </div>
           <div class="nav-actions">
             <button class="theme-toggle" type="button" aria-label="Switch website theme" aria-pressed="false" data-theme-current="obsidian">
-              <span class="theme-toggle-orb" aria-hidden="true"></span>
-              <span class="theme-toggle-label" data-theme-toggle-label>OBSIDIAN</span>
+              <span class="theme-toggle-icons" aria-hidden="true">
+                <svg class="theme-toggle-icon theme-toggle-icon--moon" viewBox="0 0 24 24"><path d="M20 15.2A8.35 8.35 0 0 1 8.8 4a8.4 8.4 0 1 0 11.2 11.2Z"></path></svg>
+                <svg class="theme-toggle-icon theme-toggle-icon--sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.6"></circle><path d="M12 2.3v2.1M12 19.6v2.1M2.3 12h2.1M19.6 12h2.1M5.15 5.15l1.5 1.5M17.35 17.35l1.5 1.5M18.85 5.15l-1.5 1.5M6.65 17.35l-1.5 1.5"></path></svg>
+              </span>
             </button>
             <a class="button button--gold nav-founding" href="${route("founding-dealerships")}">Founding Dealerships</a>
             <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
@@ -133,9 +135,12 @@
   briefingDock.setAttribute("aria-controls", "briefing-drawer");
   briefingDock.setAttribute("aria-expanded", "false");
   briefingDock.innerHTML = `
-    <span>Founding Dealerships</span>
-    <strong>Request a briefing</strong>
-    <b aria-hidden="true">&#8599;</b>`;
+    <span class="briefing-dock__signal" aria-hidden="true"></span>
+    <span class="briefing-dock__copy">
+      <small>Founding Dealerships</small>
+      <strong>Request a briefing</strong>
+    </span>
+    <span class="briefing-dock__arrow" aria-hidden="true"></span>`;
   document.body.append(briefingDock);
 
   const themeButton = document.querySelector(".theme-toggle");
@@ -143,13 +148,10 @@
     if (!themeButton) return;
     const current = normalizeTheme(document.documentElement.dataset.theme);
     const nextLabel = current === "obsidian" ? "Signal White" : "Obsidian";
-    const currentLabel = current === "signal" ? "SIGNAL WHITE" : "OBSIDIAN";
     themeButton.setAttribute("aria-label", `Switch to ${nextLabel} website theme`);
     themeButton.setAttribute("aria-pressed", current === "signal" ? "true" : "false");
     themeButton.setAttribute("data-theme-current", current);
     themeButton.setAttribute("title", `Switch to ${nextLabel}`);
-    const visibleLabel = themeButton.querySelector("[data-theme-toggle-label]");
-    if (visibleLabel) visibleLabel.textContent = currentLabel;
   };
   updateThemeLabel();
   themeButton?.addEventListener("click", () => {
