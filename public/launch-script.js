@@ -4,6 +4,20 @@
   const scriptUrl = document.currentScript && document.currentScript.src;
   const root = scriptUrl ? new URL(".", scriptUrl).pathname : "/";
   const route = (slug) => slug ? `${root}${slug}/` : `${root}launch.html`;
+  const themeStorageKey = "engenix-theme";
+  const normalizeTheme = (value) => value === "signal" || value === "light" ? "signal" : "obsidian";
+  const applyTheme = (value, persist) => {
+    const theme = normalizeTheme(value);
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme === "signal" ? "light" : "dark";
+    const themeColor = document.querySelector("#theme-color-meta");
+    if (themeColor) themeColor.content = theme === "signal" ? "#f1f2ee" : "#090b0c";
+    if (persist) {
+      try { localStorage.setItem(themeStorageKey, theme === "signal" ? "light" : "dark"); } catch {}
+    }
+    return theme;
+  };
+  applyTheme(document.documentElement.dataset.theme, false);
   const navItems = [
     ["platform", "Platform"],
     ["intelligence-layers", "Intelligence Layers"],
@@ -12,7 +26,7 @@
     ["company", "Company"],
   ];
 
-  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png" alt="ENGENIX" width="577" height="433"></span>`;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=5" alt="ENGENIX" width="577" height="433"></span>`;
   const arrow = '<span class="arrow" aria-hidden="true"></span>';
   const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
     (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
@@ -20,6 +34,37 @@
   const headerTarget = document.querySelector("[data-site-header]");
   const footerTarget = document.querySelector("[data-site-footer]");
   const drawerTarget = document.querySelector("[data-site-drawer]");
+
+  const loader = document.querySelector("#site-loader");
+  const loaderStatus = document.querySelector("#loader-status");
+  const loaderThemeButtons = Array.from(document.querySelectorAll("[data-loader-theme]"));
+  const syncLoaderTheme = () => {
+    const current = normalizeTheme(document.documentElement.dataset.theme);
+    loaderThemeButtons.forEach((button) => {
+      const selected = button.dataset.loaderTheme === current;
+      button.classList.toggle("is-active", selected);
+      button.setAttribute("aria-pressed", selected ? "true" : "false");
+    });
+  };
+  syncLoaderTheme();
+  loaderThemeButtons.forEach((button) => button.addEventListener("click", () => {
+    applyTheme(button.dataset.loaderTheme, true);
+    syncLoaderTheme();
+  }));
+
+  if (loader) {
+    document.body.classList.add("loader-active");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reducedMotion && loaderStatus) {
+      window.setTimeout(() => { loaderStatus.textContent = "Calibrating operating view"; }, 850);
+      window.setTimeout(() => { loaderStatus.textContent = "Entry authorized"; }, 1650);
+    }
+    window.setTimeout(() => {
+      loader.classList.add("is-hidden");
+      loader.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("loader-active");
+    }, reducedMotion ? 450 : 2350);
+  }
 
   if (headerTarget) {
     headerTarget.innerHTML = `
@@ -80,15 +125,23 @@
   const themeButton = document.querySelector(".theme-toggle");
   const updateThemeLabel = () => {
     if (!themeButton) return;
-    const current = document.documentElement.dataset.theme === "signal" ? "signal" : "obsidian";
+    const current = normalizeTheme(document.documentElement.dataset.theme);
     themeButton.setAttribute("aria-label", `Switch to ${current === "obsidian" ? "Signal White" : "Obsidian"} theme`);
+    themeButton.setAttribute("aria-pressed", current === "signal" ? "true" : "false");
   };
   updateThemeLabel();
   themeButton?.addEventListener("click", () => {
-    const current = document.documentElement.dataset.theme === "signal" ? "signal" : "obsidian";
+    const current = normalizeTheme(document.documentElement.dataset.theme);
     const next = current === "obsidian" ? "signal" : "obsidian";
-    document.documentElement.dataset.theme = next;
-    try { localStorage.setItem("engenix-theme", next); } catch {}
+    applyTheme(next, true);
+    syncLoaderTheme();
+    updateThemeLabel();
+  });
+
+  window.addEventListener("storage", (event) => {
+    if (event.key !== themeStorageKey || !event.newValue) return;
+    applyTheme(event.newValue, false);
+    syncLoaderTheme();
     updateThemeLabel();
   });
 

@@ -4,15 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0a0b0c">
+  <meta id="theme-color-meta" name="theme-color" content="#0a0b0c">
   <title>ENGENIX | Operating Intelligence for Automotive Retail</title>
   <meta name="description" content="ENGENIX is the Operating Intelligence Layer for Automotive Retail, helping dealership leaders identify operational risk, workflow failures, financial exposure, and missed opportunities early enough to act.">
   <link rel="icon" href="assets/engenix-icon.jpeg" type="image/jpeg">
   <link rel="apple-touch-icon" href="assets/engenix-icon.jpeg">
-  <link rel="stylesheet" href="launch-styles.css">
-  <script>try{document.documentElement.dataset.theme=localStorage.getItem('engenix-theme')==='signal'?'signal':'obsidian'}catch(_){document.documentElement.dataset.theme='obsidian'}</script>
+  <link rel="stylesheet" href="launch-styles.css?v=5">
+  <script>
+    (() => {
+      let saved = null;
+      try { saved = localStorage.getItem("engenix-theme"); } catch (_) {}
+      const systemLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+      const signal = saved === "light" || saved === "signal" || (!saved && systemLight);
+      document.documentElement.dataset.theme = signal ? "signal" : "obsidian";
+      document.documentElement.style.colorScheme = signal ? "light" : "dark";
+    })();
+  </script>
 </head>
 <body>
+  <div class="site-loader" id="site-loader" role="status" aria-live="polite" aria-label="Initializing ENGENIX">
+    <div class="loader-grid" aria-hidden="true"></div>
+    <div class="loader-aura" aria-hidden="true"></div>
+    <div class="loader-stage">
+      <div class="loader-mark-wrap">
+        <img class="loader-mark" src="assets/engenix-icon.jpeg?v=5" alt="" aria-hidden="true">
+        <div class="loader-orbit" aria-hidden="true"></div>
+        <div class="loader-scan" aria-hidden="true"></div>
+      </div>
+      <span class="loader-wordmark"><img src="assets/engenix-logo.png?v=5" alt="ENGENIX"></span>
+      <div class="loader-label">Operating Intelligence for Automotive Retail</div>
+      <div class="loader-theme-picker" role="group" aria-label="Choose display mode">
+        <button type="button" data-loader-theme="obsidian"><i aria-hidden="true"></i><span>OBSIDIAN</span></button>
+        <button type="button" data-loader-theme="signal"><i aria-hidden="true"></i><span>SIGNAL WHITE</span></button>
+      </div>
+      <div class="loader-theme-note">Device preference detected · choose anytime</div>
+      <div class="loader-status" id="loader-status">Establishing secure session</div>
+      <div class="loader-progress" aria-hidden="true"><span></span></div>
+      <div class="loader-readout" aria-hidden="true"><span>SECURE SESSION</span><span>OPERATING LAYER</span><span>ENTRY AUTHORIZED</span></div>
+    </div>
+  </div>
   <div data-site-header></div>
   <main id="main-content">
     <section class="home-hero" aria-labelledby="home-hero-heading">
@@ -85,6 +115,6 @@
   </main>
   <div data-site-footer></div>
   <div data-site-drawer></div>
-  <script src="launch-script.js"></script>
+  <script src="launch-script.js?v=5"></script>
 </body>
 </html>
