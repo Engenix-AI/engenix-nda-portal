@@ -1,3 +1,4 @@
+
 :root,
 :root[data-theme="obsidian"] {
   --page: #090b0c;
@@ -3015,6 +3016,8 @@ select:focus-visible {
   }
 
   .synthetic-review > div:not(.synthetic-review__head):not(.synthetic-review__title) span {
+
+    
     max-width: 60%;
   }
 
@@ -3092,5 +3095,8 @@ select:focus-visible {
     transition-duration: 0.001ms !important;
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    
   }
+  
 }
+<!-- Updated floating button + sun/moon toggle - July 20 -->
