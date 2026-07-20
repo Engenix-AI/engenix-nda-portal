@@ -26,7 +26,7 @@
     ["company", "Company"],
   ];
 
-  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=6" alt="ENGENIX" width="577" height="433"></span>`;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=7" alt="ENGENIX" width="577" height="433"></span>`;
   const arrow = '<span class="arrow" aria-hidden="true"></span>';
   const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
     (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
@@ -50,6 +50,7 @@
   loaderThemeButtons.forEach((button) => button.addEventListener("click", () => {
     applyTheme(button.dataset.loaderTheme, true);
     syncLoaderTheme();
+    updateThemeLabel();
   }));
 
   if (loader) {
@@ -76,7 +77,10 @@
             ${navItems.map(([slug, label]) => `<a href="${route(slug)}"${currentSlug === slug ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
           </div>
           <div class="nav-actions">
-            <button class="theme-toggle" type="button" aria-label="Switch website theme"><span class="theme-toggle__track" aria-hidden="true"><span class="theme-toggle__dot"></span></span></button>
+            <button class="theme-toggle" type="button" aria-label="Switch website theme" aria-pressed="false" data-theme-current="obsidian">
+              <span class="theme-toggle-orb" aria-hidden="true"></span>
+              <span class="theme-toggle-label" data-theme-toggle-label>OBSIDIAN</span>
+            </button>
             <a class="button button--gold nav-founding" href="${route("founding-dealerships")}">Founding Dealerships</a>
             <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
           </div>
@@ -105,7 +109,7 @@
   if (drawerTarget) {
     drawerTarget.innerHTML = `
       <div class="drawer-backdrop" aria-hidden="true">
-        <aside class="briefing-drawer" role="dialog" aria-modal="true" aria-labelledby="briefing-title">
+        <aside class="briefing-drawer" id="briefing-drawer" role="dialog" aria-modal="true" aria-labelledby="briefing-title">
           <button class="drawer-close" type="button" aria-label="Close briefing request"><span></span><span></span></button>
           <div class="briefing-drawer__intro"><p class="eyebrow">Founding Dealership Network</p><h2 id="briefing-title">Request a private operating briefing.</h2><p>For dealership principals, ownership groups, and operating leaders evaluating the first ENGENIX layer and the system entering controlled deployment.</p></div>
           <form class="briefing-form">
@@ -122,12 +126,30 @@
       </div>`;
   }
 
+  const briefingDock = document.createElement("button");
+  briefingDock.className = "briefing-dock";
+  briefingDock.type = "button";
+  briefingDock.setAttribute("data-open-briefing", "");
+  briefingDock.setAttribute("aria-controls", "briefing-drawer");
+  briefingDock.setAttribute("aria-expanded", "false");
+  briefingDock.innerHTML = `
+    <span>Founding Dealerships</span>
+    <strong>Request a briefing</strong>
+    <b aria-hidden="true">&#8599;</b>`;
+  document.body.append(briefingDock);
+
   const themeButton = document.querySelector(".theme-toggle");
   const updateThemeLabel = () => {
     if (!themeButton) return;
     const current = normalizeTheme(document.documentElement.dataset.theme);
-    themeButton.setAttribute("aria-label", `Switch to ${current === "obsidian" ? "Signal White" : "Obsidian"} theme`);
+    const nextLabel = current === "obsidian" ? "Signal White" : "Obsidian";
+    const currentLabel = current === "signal" ? "SIGNAL WHITE" : "OBSIDIAN";
+    themeButton.setAttribute("aria-label", `Switch to ${nextLabel} website theme`);
     themeButton.setAttribute("aria-pressed", current === "signal" ? "true" : "false");
+    themeButton.setAttribute("data-theme-current", current);
+    themeButton.setAttribute("title", `Switch to ${nextLabel}`);
+    const visibleLabel = themeButton.querySelector("[data-theme-toggle-label]");
+    if (visibleLabel) visibleLabel.textContent = currentLabel;
   };
   updateThemeLabel();
   themeButton?.addEventListener("click", () => {
@@ -171,22 +193,30 @@
   const backdrop = document.querySelector(".drawer-backdrop");
   const drawer = document.querySelector(".briefing-drawer");
   const closeDrawerButton = document.querySelector(".drawer-close");
+  const briefingTriggers = Array.from(document.querySelectorAll("[data-open-briefing]"));
   let lastTrigger = null;
+  const setBriefingExpanded = (expanded) => {
+    briefingTriggers.forEach((trigger) => {
+      if (trigger.hasAttribute("aria-controls")) trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+  };
   const openDrawer = (trigger) => {
     lastTrigger = trigger || document.activeElement;
     closeMenu(false);
     backdrop?.classList.add("is-open");
     backdrop?.setAttribute("aria-hidden", "false");
     document.body.classList.add("drawer-locked");
+    setBriefingExpanded(true);
     closeDrawerButton?.focus();
   };
   const closeDrawer = () => {
     backdrop?.classList.remove("is-open");
     backdrop?.setAttribute("aria-hidden", "true");
     document.body.classList.remove("drawer-locked");
+    setBriefingExpanded(false);
     if (lastTrigger && typeof lastTrigger.focus === "function") lastTrigger.focus();
   };
-  document.querySelectorAll("[data-open-briefing]").forEach((button) => button.addEventListener("click", () => openDrawer(button)));
+  briefingTriggers.forEach((button) => button.addEventListener("click", () => openDrawer(button)));
   closeDrawerButton?.addEventListener("click", closeDrawer);
   backdrop?.addEventListener("mousedown", (event) => { if (event.target === backdrop) closeDrawer(); });
   document.addEventListener("keydown", (event) => {
