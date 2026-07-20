@@ -1,3 +1,11 @@
+/* 
+  ENGENIX Launch Styles — Nuclear Cinematic Version
+  Updated: July 20, 2026
+  - Richer gold + glow effects
+  - Scroll reveal system (fade + side entry + stagger)
+  - Premium card hovers with lift + shadow
+  - Alive, breathing, Rivian-style cinematic flow
+*/
 :root,
 :root[data-theme="obsidian"] {
   --page: #090b0c;
@@ -15,8 +23,10 @@
   --nav-shadow: 0 16px 48px rgba(0, 0, 0, 0.38);
   --nav-subtle: #9ba29f;
   --logo-filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.38));
-  --gold: #eeb229;
+  --gold: #f0c25a;
+  --gold-dark: #d4a73a;
   --gold-ink: #171207;
+  --gold-glow: rgba(240, 194, 90, 0.38);
   --green: #6db88a;
   --red: #cb675b;
   --blue: #6597a9;
@@ -93,7 +103,7 @@ body.menu-locked,
 body.drawer-locked,
 body.loader-active {
   overflow: hidden;
-  touch-action:  none;
+  touch-action: none;
 }
 
 .site-loader {
@@ -3424,6 +3434,32 @@ body.loader-active .briefing-dock {
 
 .site-footer {
   padding-bottom: max(132px, calc(104px + env(safe-area-inset-bottom)));
+}
+
+/* =========================================================
+   BEAUTIFULLY SEXY PREMIUM CARDS - Nuclear level
+   ========================================================= */
+.code-grid .code-card {
+  border: 1px solid rgba(240, 194, 90, 0.14);
+  background: rgba(8, 11, 16, 0.78);
+  box-shadow: 0 14px 50px rgba(0, 0, 0, 0.4);
+  transition: all 420ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.code-grid .code-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.6),
+              0 0 0 1px var(--gold-glow);
+  transform: translateY(-8px) scale(1.015);
+}
+
+.code-card h4 {
+  color: var(--gold);
+  transition: color 300ms ease;
+}
+
+.code-grid .code-card:hover h4 {
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
