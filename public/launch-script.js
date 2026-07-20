@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+   "use strict";
 
   const scriptUrl = document.currentScript && document.currentScript.src;
   const root = scriptUrl ? new URL(".", scriptUrl).pathname : "/";
