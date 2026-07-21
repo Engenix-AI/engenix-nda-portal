@@ -285,4 +285,70 @@
       window.setInterval(() => renderStage((active + 1) % stages.length), 3400);
     }
   }
+
+  // =========================================================
+  // CINEMATIC SCROLL REVEALS + ALERT SIMULATOR
+  // =========================================================
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!prefersReduced) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          if (el.classList.contains("code-grid")) {
+            const cards = el.querySelectorAll(".code-card");
+            cards.forEach((card, i) => {
+              setTimeout(() => card.classList.add("is-visible"), i * 95);
+            });
+            observer.unobserve(el);
+            return;
+          }
+          el.classList.add("is-visible");
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -80px 0px" });
+
+    document.querySelectorAll(".reveal-on-scroll, .operating-code-section, .code-grid, .status-panel, .editorial-link, .home-deal, .home-guided, .live-alert-section").forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  // Interactive Alert Simulator
+  const alertCard = document.getElementById("flying-alert");
+  const resolveBtn = document.getElementById("resolve-btn");
+  const resultPanel = document.getElementById("alert-result");
+
+  if (alertCard) {
+    const alertObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => alertCard.classList.add("is-visible"), 180);
+          alertObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const alertSection = document.getElementById("live-alert");
+    if (alertSection) alertObserver.observe(alertSection);
+  }
+
+  if (resolveBtn && resultPanel && alertCard) {
+    resolveBtn.addEventListener("click", () => {
+      alertCard.style.transition = "all 380ms ease";
+      alertCard.style.opacity = "0";
+      alertCard.style.transform = "translateX(-40px)";
+
+      setTimeout(() => {
+        alertCard.style.display = "none";
+        resultPanel.style.display = "block";
+        resultPanel.classList.add("show");
+
+        setTimeout(() => {
+          resultPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 420);
+      }, 420);
+    });
+  }
 })();
