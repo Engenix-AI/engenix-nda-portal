@@ -18,6 +18,8 @@
     return theme;
   };
   applyTheme(document.documentElement.dataset.theme, false);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reducedMotion) document.documentElement.classList.add("motion-ready");
   const navItems = [
     ["platform", "Platform"],
     ["intelligence-layers", "Intelligence Layers"],
@@ -26,7 +28,7 @@
     ["company", "Company"],
   ];
 
-  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=8" alt="ENGENIX" width="577" height="433"></span>`;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=9" alt="ENGENIX" width="577" height="433"></span>`;
   const arrow = '<span class="arrow" aria-hidden="true"></span>';
   const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
     (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
@@ -55,7 +57,6 @@
 
   if (loader) {
     document.body.classList.add("loader-active");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reducedMotion && loaderStatus) {
       window.setTimeout(() => { loaderStatus.textContent = "Calibrating operating view"; }, 850);
       window.setTimeout(() => { loaderStatus.textContent = "Entry authorized"; }, 1650);
@@ -281,8 +282,48 @@
     rail.innerHTML = stages.map((stage, index) => `<button type="button" role="tab" data-stage-button aria-selected="${index === 0}"><span>${String(index + 1).padStart(2, "0")}</span>${stage[0]}</button>`).join("");
     rail.querySelectorAll("[data-stage-button]").forEach((button, index) => button.addEventListener("click", () => renderStage(index)));
     renderStage(0);
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!reducedMotion) {
       window.setInterval(() => renderStage((active + 1) % stages.length), 3400);
     }
+  }
+
+  const revealItems = Array.from(document.querySelectorAll(".reveal-on-scroll"));
+  if (!reducedMotion && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    revealItems.forEach((item) => revealObserver.observe(item));
+  } else {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  }
+
+  const alertSimulator = document.querySelector("[data-alert-simulator]");
+  if (alertSimulator) {
+    const alertCard = alertSimulator.querySelector("[data-simulator-alert]");
+    const resolvedPanel = alertSimulator.querySelector("[data-simulator-resolved]");
+    const resolveButton = alertSimulator.querySelector("[data-resolve-alert]");
+    const replayButton = alertSimulator.querySelector("[data-replay-alert]");
+    let focusTimer = null;
+
+    const setSimulatorState = (resolved, moveFocus) => {
+      window.clearTimeout(focusTimer);
+      alertSimulator.classList.toggle("is-resolved", resolved);
+      alertCard?.setAttribute("aria-hidden", resolved ? "true" : "false");
+      resolvedPanel?.setAttribute("aria-hidden", resolved ? "false" : "true");
+      if (alertCard) alertCard.inert = resolved;
+      if (resolvedPanel) resolvedPanel.inert = !resolved;
+      if (!moveFocus) return;
+      focusTimer = window.setTimeout(() => {
+        if (resolved) replayButton?.focus();
+        else resolveButton?.focus();
+      }, reducedMotion ? 0 : 520);
+    };
+
+    resolveButton?.addEventListener("click", () => setSimulatorState(true, true));
+    replayButton?.addEventListener("click", () => setSimulatorState(false, true));
   }
 })();
