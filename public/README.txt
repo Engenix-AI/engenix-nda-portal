@@ -1,15 +1,17 @@
-ENGENIX Website Package - Mon Jul 20 06:20:36 UTC 2026
+ENGENIX Launch - Clean Upload Package
 
-Files included:
-- launch.html + launch-styles.css + launch-script.js  → Your current base with my updates (Operating Code section, fixed bottom CTA bar, mobile hero fixes, enhanced theme toggle)
-- enegenix-rivian-foundation.html → Clean Rivian-inspired foundation (recommended starting point)
-- enegenix-redesign-v2-rivian.html → Previous Rivian-style redesign
-- enegenix-redesign-v1.html → Earlier redesign version
-- Crlwo.jpg → Generated cinematic visual for hero/background
+INSTRUCTIONS:
+1. Delete your current launch.html, launch-styles.css, launch-script.js on the server.
+2. Upload the three files from this folder.
+3. Upload the 'assets' folder (or just Crlwo.jpg into your existing assets folder).
+4. In launch-styles.css, the hero background is set to 'assets/Crlwo.jpg' — update if your assets folder is in a different location.
+5. Hard refresh the site (Ctrl/Cmd + Shift + R) after uploading.
+6. Purge Cloudflare cache if changes don't appear.
 
-How to use:
-1. Use enegenix-rivian-foundation.html as the clean new base
-2. Or continue with your launch.html and merge in the Operating Code + fixed CTA from the updates I made
-3. Upload Crlwo.jpg to your assets/images folder and update any image paths
+This package includes:
+- Full cinematic movie-opening hero with breathing + drifting grid
+- Interactive Alert Simulator (flies in + resolve + handoff)
+- Operating Code section
+- Scroll animations and premium styling
 
-Theme toggle and mobile fixes are already in the CSS.
+Updated: July 20, 2026
