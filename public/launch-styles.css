@@ -6395,3 +6395,199 @@ body.loader-active .briefing-dock {
     animation: none !important;
   }
 }
+
+/* V13 Transaction Gate — a section-scoped illustration, never a page takeover. */
+.v13-exception-demo {
+  isolation: isolate;
+  overflow: clip;
+}
+
+.v13-exception-status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.v13-exception-demo .simulator-stage {
+  position: relative;
+  display: grid;
+  min-height: 650px;
+  overflow: clip;
+}
+
+.v13-exception-demo .v13-exception-panel,
+.v13-exception-demo .v13-demo-closed {
+  grid-area: 1 / 1;
+  align-self: center;
+  justify-self: end;
+  width: min(560px, 48%);
+  min-height: 0;
+  transition: opacity 280ms ease, transform 430ms cubic-bezier(.2,.85,.2,1), visibility 0s linear 430ms;
+}
+
+.v13-exception-demo .v13-exception-panel[aria-hidden="true"],
+.v13-exception-demo .v13-demo-closed[aria-hidden="true"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(42px) scale(.985);
+}
+
+.motion-ready .v13-exception-demo:not(.is-entered) [data-exception-panel="alert"] {
+  opacity: 0;
+  transform: translateX(96px);
+}
+
+.v13-exception-demo.is-entered [data-exception-panel="alert"][aria-hidden="false"] {
+  animation: exception-arrive 760ms cubic-bezier(.17,.9,.23,1) both;
+}
+
+.v13-exception-demo .sim-alert__meta > span:first-child i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #e6a24c;
+  box-shadow: 0 0 0 6px rgba(230,162,76,.13);
+}
+
+.v13-panel-label {
+  margin: 0 0 17px !important;
+  color: var(--gold, #f0c25a) !important;
+  font: 700 10px/1.4 var(--font-mono);
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.v13-exception-demo .sim-alert h3,
+.v13-exception-demo .sim-resolved h3 {
+  max-width: 11ch;
+  font-size: clamp(37px, 3.55vw, 56px);
+  letter-spacing: -.065em;
+}
+
+.v13-human-note,
+.v13-resolved-copy {
+  max-width: 52ch;
+  margin: 24px 0 0;
+  color: var(--muted, rgba(255,255,255,.65));
+  font-size: 13px;
+  line-height: 1.58;
+}
+
+.v13-human-note strong { color: var(--ink, #fff); }
+
+.v13-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+.v13-panel-actions .button { min-height: 50px; }
+
+.v13-text-button {
+  min-height: 44px;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink, #fff);
+  font: 700 11px/1.2 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.v13-text-button:hover,
+.v13-text-button:focus-visible { color: var(--gold, #f0c25a); }
+
+.v13-exception-demo[data-state="recording"] [data-exception-record] {
+  opacity: .68;
+  pointer-events: none;
+}
+
+.v13-exception-demo[data-state="recording"] .v13-review-panel::after {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background: rgba(3,5,7,.48);
+  color: #fff;
+  content: "Recording decision history…";
+  font: 700 10px/1.3 var(--font-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.v13-exception-demo .sim-resolved { align-content: center; }
+.v13-exception-demo .v13-demo-closed {
+  padding: clamp(34px, 5vw, 58px);
+  border: 1px solid var(--line, rgba(255,255,255,.16));
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--surface, #111516) 92%, transparent);
+}
+.v13-demo-closed h3 { margin: 12px 0 26px; font-size: clamp(30px, 3vw, 46px); letter-spacing: -.05em; }
+
+[data-theme="signal"] .v13-exception-demo .sim-alert,
+[data-theme="signal"] .v13-exception-demo .sim-resolved,
+[data-theme="signal"] .v13-exception-demo .v13-demo-closed {
+  border-color: rgba(9,14,18,.18);
+  background: rgba(248,249,246,.94);
+  box-shadow: 0 20px 48px rgba(11,18,22,.14);
+}
+
+[data-theme="signal"] .v13-exception-demo .sim-alert h3,
+[data-theme="signal"] .v13-exception-demo .sim-resolved h3,
+[data-theme="signal"] .v13-exception-demo .v13-demo-closed h3,
+[data-theme="signal"] .v13-human-note strong { color: #111619; }
+
+[data-theme="signal"] .v13-exception-demo .sim-alert__body > p,
+[data-theme="signal"] .v13-human-note,
+[data-theme="signal"] .v13-resolved-copy { color: #566067; }
+
+@keyframes exception-arrive {
+  0% { opacity: 0; transform: translateX(96px) scale(.985); }
+  72% { opacity: 1; transform: translateX(-5px) scale(1.005); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .v13-exception-demo .simulator-stage {
+    min-height: 0;
+    padding: 92px 10px 12px;
+  }
+
+  .v13-exception-demo .v13-exception-panel,
+  .v13-exception-demo .v13-demo-closed {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .v13-exception-demo .sim-alert__body,
+  .v13-exception-demo .sim-resolved { padding: 28px 20px 30px; }
+
+  .v13-exception-demo .sim-alert h3,
+  .v13-exception-demo .sim-resolved h3 { max-width: 12ch; font-size: clamp(36px, 10.6vw, 48px); }
+
+  .v13-exception-demo .sim-alert dl > div { grid-template-columns: 1fr; gap: 8px; }
+  .v13-exception-demo .sim-alert dd { margin: 0; }
+  .v13-panel-actions { display: grid; grid-template-columns: 1fr; }
+  .v13-panel-actions .button,
+  .v13-panel-actions .simulator-replay { width: 100%; }
+  .v13-text-button { text-align: left; }
+  .v13-exception-demo .sim-alert,
+  .v13-exception-demo .sim-resolved,
+  .v13-exception-demo .v13-demo-closed { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v13-exception-demo .v13-exception-panel,
+  .v13-exception-demo .v13-demo-closed { transition: none !important; }
+  .v13-exception-demo.is-entered [data-exception-panel="alert"][aria-hidden="false"] { animation: none; }
+}
