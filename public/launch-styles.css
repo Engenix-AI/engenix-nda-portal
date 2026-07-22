@@ -915,7 +915,7 @@ select:focus-visible {
 .movie-hero-bg {
   z-index: 0;
   inset: -4%;
-  background: url("assets/Crlwo.jpg?v=10") center 52% / cover no-repeat;
+  background: url("assets/Crlwo.jpg?v=11") center 52% / cover no-repeat;
   filter: saturate(0.92) contrast(1.08);
   transform: scale(1.045);
   transform-origin: 50% 52%;
@@ -2070,7 +2070,7 @@ select:focus-visible {
   background:
     linear-gradient(110deg, rgba(3, 5, 6, 0.98), rgba(5, 9, 10, 0.78) 58%, rgba(21, 34, 39, 0.72)),
     radial-gradient(circle at 78% 50%, rgba(101, 151, 169, 0.42), transparent 32%),
-    url("assets/launch-texture.jpg?v=10") center 58% / cover no-repeat,
+    url("assets/launch-texture.jpg?v=11") center 58% / cover no-repeat,
     #0b0f11;
   color: #fff;
 }
@@ -2120,7 +2120,7 @@ select:focus-visible {
   background:
     linear-gradient(115deg, rgba(4, 6, 7, 0.95), rgba(4, 8, 9, 0.73)),
     radial-gradient(circle at 75% 45%, rgba(240, 194, 90, 0.2), transparent 30%),
-    url("assets/launch-texture.jpg?v=10") center 58% / cover no-repeat,
+    url("assets/launch-texture.jpg?v=11") center 58% / cover no-repeat,
     #0b0f11;
 }
 
@@ -2133,7 +2133,7 @@ select:focus-visible {
   background:
     linear-gradient(110deg, rgba(245, 247, 243, 0.98), rgba(229, 235, 232, 0.86) 62%, rgba(206, 221, 224, 0.72)),
     radial-gradient(circle at 78% 50%, rgba(101, 151, 169, 0.25), transparent 32%),
-    url("assets/launch-texture.jpg?v=10") center 58% / cover no-repeat,
+    url("assets/launch-texture.jpg?v=11") center 58% / cover no-repeat,
     #eef1ee;
   color: #151718;
 }
@@ -3906,7 +3906,7 @@ body.loader-active .briefing-dock {
     inset: 0;
     background:
       linear-gradient(180deg, transparent 0 52%, #090b0c 81%),
-      url("assets/Crlwo.jpg?v=10") center 76px / auto 620px no-repeat,
+      url("assets/Crlwo.jpg?v=11") center 76px / auto 620px no-repeat,
       #090b0c;
     filter: saturate(0.96) contrast(1.08);
     transform: scale(1.02);
@@ -3916,7 +3916,7 @@ body.loader-active .briefing-dock {
   :root[data-theme="signal"] .movie-hero-bg {
     background:
       linear-gradient(180deg, transparent 0 48%, #f1f2ee 81%),
-      url("assets/Crlwo.jpg?v=10") center 76px / auto 620px no-repeat,
+      url("assets/Crlwo.jpg?v=11") center 76px / auto 620px no-repeat,
       #f1f2ee;
     filter: saturate(0.7) contrast(0.91) brightness(1.1);
   }
@@ -4041,6 +4041,314 @@ body.loader-active .briefing-dock {
 }
 
 /* =========================================================
+   LAUNCH EDITION V11 — CINEMATIC VISUAL CUT
+   Original ENGENIX image plates generated for this release.
+   ========================================================= */
+
+.launch-v10 .v10-hero__image {
+  background-image: url("assets/engenix-horizon-v11.webp?v=11");
+  background-position: center center;
+  filter: saturate(.88) contrast(1.08) brightness(.68);
+}
+
+.v10-hero__image i {
+  position: absolute;
+  inset: -10%;
+  background: linear-gradient(112deg, transparent 0 42%, rgba(240,194,90,.09) 49%, rgba(180,220,255,.07) 52%, transparent 59%);
+  mix-blend-mode: screen;
+  transform: translateX(-70%);
+  animation: v11-light-pass 12s cubic-bezier(.4,0,.2,1) infinite;
+}
+
+@keyframes v11-light-pass {
+  0%, 18% { transform: translateX(-70%); opacity: 0; }
+  28% { opacity: 1; }
+  62% { opacity: .72; }
+  74%, 100% { transform: translateX(70%); opacity: 0; }
+}
+
+.v10-hero__shade {
+  background:
+    radial-gradient(circle at 76% 56%, transparent 0 9%, rgba(2,4,6,.12) 43%, rgba(2,4,6,.82) 94%),
+    linear-gradient(90deg, rgba(3,5,7,.95) 0%, rgba(3,5,7,.7) 38%, rgba(3,5,7,.16) 71%, rgba(3,5,7,.48) 100%),
+    linear-gradient(180deg, rgba(3,5,7,.7), transparent 32%, rgba(3,5,7,.65) 100%);
+}
+
+.v10-pulse {
+  box-shadow: 0 42px 120px rgba(0,0,0,.58), 0 0 0 1px rgba(240,194,90,.04), inset 0 1px rgba(255,255,255,.07);
+}
+
+.v11-deal-plate {
+  position: relative;
+  max-width: 1400px;
+  min-height: clamp(390px, 42vw, 610px);
+  margin: clamp(70px, 9vw, 125px) auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: clamp(24px, 3vw, 42px);
+  background: #090b0d url("assets/engenix-six-gates-v11.webp?v=11") center center / cover no-repeat;
+  box-shadow: 0 45px 130px rgba(0,0,0,.55), inset 0 1px rgba(255,255,255,.08);
+}
+
+.v11-deal-plate::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(4,6,8,.12), transparent 46%, rgba(4,6,8,.72) 100%),
+    radial-gradient(circle at 47% 57%, rgba(240,194,90,.12), transparent 19%);
+  content: "";
+}
+
+.v11-deal-plate__shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -35%;
+  width: 24%;
+  background: linear-gradient(90deg, transparent, rgba(255,244,198,.26), transparent);
+  filter: blur(8px);
+  mix-blend-mode: screen;
+  transform: skewX(-14deg);
+  animation: v11-gate-scan 9s ease-in-out infinite;
+}
+
+@keyframes v11-gate-scan {
+  0%, 15% { left: -35%; opacity: 0; }
+  25% { opacity: .78; }
+  72% { opacity: .46; }
+  85%, 100% { left: 115%; opacity: 0; }
+}
+
+.v11-deal-plate figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 25px 30px;
+  color: rgba(255,255,255,.6);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.v11-deal-plate figcaption span:first-child {
+  color: rgba(255,255,255,.86);
+}
+
+.v10-deal .v11-chain {
+  position: relative;
+  z-index: 3;
+  margin-top: -40px;
+  border-color: rgba(255,255,255,.27);
+  background: rgba(7,9,10,.88);
+  box-shadow: 0 25px 70px rgba(0,0,0,.48);
+  backdrop-filter: blur(20px) saturate(1.12);
+}
+
+.v10-deal .v11-chain > div {
+  min-height: 174px;
+  background: rgba(255,255,255,.025);
+}
+
+.v10-proof {
+  background:
+    radial-gradient(circle at 8% 60%, rgba(32,89,128,.12), transparent 24%),
+    var(--page);
+}
+
+.v10-simulator {
+  border-color: rgba(240,194,90,.22);
+  background: #080b0d url("assets/engenix-evidence-vault-v11.webp?v=11") center center / cover no-repeat;
+  box-shadow: 0 50px 130px rgba(0,0,0,.44), 0 0 0 1px rgba(240,194,90,.035);
+}
+
+.v10-simulator .simulator-topline {
+  background: rgba(6,9,11,.7);
+  backdrop-filter: blur(18px);
+}
+
+.v10-simulator .simulator-stage {
+  min-height: 650px;
+  padding: 30px;
+}
+
+.v10-simulator .sim-alert,
+.v10-simulator .sim-resolved {
+  justify-self: end;
+  width: min(520px, 45%);
+  min-height: 590px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 24px;
+  background: rgba(8,11,13,.9);
+  box-shadow: 0 30px 80px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.055);
+  backdrop-filter: blur(20px) saturate(1.1);
+}
+
+.v10-simulator .sim-alert__body {
+  padding: 30px;
+}
+
+.v10-simulator .sim-alert h3,
+.v10-simulator .sim-resolved h3 {
+  margin-top: 26px;
+  font-size: clamp(36px, 3.3vw, 51px);
+}
+
+.v10-simulator .sim-alert__body > p {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.v10-simulator .sim-alert dl {
+  grid-template-columns: 1fr;
+  margin-top: 24px;
+}
+
+.v10-simulator .sim-alert dl > div {
+  display: grid;
+  grid-template-columns: 95px 1fr;
+  align-items: center;
+  min-height: 55px;
+  padding: 13px 15px;
+}
+
+.v10-simulator .sim-alert dd {
+  margin: 0;
+}
+
+.v10-simulator .sim-alert .button {
+  width: 100%;
+  margin-top: 22px;
+  padding-right: 18px;
+  padding-left: 18px;
+}
+
+.v10-simulator .sim-resolved {
+  align-content: center;
+  padding: 38px;
+}
+
+.v10-simulator .handoff-chain {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.v10-simulator .handoff-chain li {
+  min-height: 60px;
+}
+
+.v10-simulator .handoff-chain li::after {
+  display: none;
+}
+
+:root[data-theme="signal"] .launch-v10 .v10-hero__image {
+  filter: saturate(.67) contrast(.93) brightness(1.18);
+  opacity: .5;
+}
+
+:root[data-theme="signal"] .v10-hero__shade {
+  background:
+    radial-gradient(circle at 75% 56%, rgba(255,255,255,.02), rgba(245,248,245,.35) 40%, rgba(239,242,239,.91) 92%),
+    linear-gradient(90deg, rgba(244,247,244,.99), rgba(244,247,244,.8) 44%, rgba(244,247,244,.25) 73%, rgba(244,247,244,.73)),
+    linear-gradient(180deg, rgba(244,247,244,.78), transparent 34%, rgba(244,247,244,.76));
+}
+
+@media (max-width: 760px), (max-width: 900px) and (hover: none) and (pointer: coarse) {
+  .launch-v10 .v10-hero__image {
+    inset: 0;
+    background-image: url("assets/engenix-horizon-mobile-v11.webp?v=11");
+    background-position: center center;
+    background-size: cover;
+    filter: saturate(.82) contrast(1.08) brightness(.58);
+  }
+
+  .v10-hero__shade {
+    background:
+      linear-gradient(180deg, rgba(3,5,7,.82), rgba(3,5,7,.33) 22%, rgba(3,5,7,.84) 58%, #050708 95%),
+      linear-gradient(90deg, rgba(3,5,7,.8), rgba(3,5,7,.18));
+  }
+
+  .v11-deal-plate {
+    min-height: 430px;
+    margin-top: 58px;
+    border-radius: 22px;
+    background-size: auto 100%;
+    background-position: 46% center;
+  }
+
+  .v11-deal-plate figcaption {
+    display: grid;
+    gap: 8px;
+    padding: 20px;
+    font-size: 6.5px;
+  }
+
+  .v10-deal .v11-chain {
+    margin-top: -24px;
+  }
+
+  .v10-simulator {
+    background-image: url("assets/engenix-evidence-mobile-v11.webp?v=11");
+    background-position: center 54px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+  .v10-simulator .simulator-stage {
+    min-height: 0;
+    padding: 330px 10px 10px;
+  }
+
+  .v10-simulator .sim-alert,
+  .v10-simulator .sim-resolved {
+    justify-self: stretch;
+    width: 100%;
+    min-height: 0;
+    border-radius: 18px;
+    background: rgba(8,11,13,.95);
+  }
+
+  .v10-simulator .sim-alert__body,
+  .v10-simulator .sim-resolved {
+    padding: 28px 20px 32px;
+  }
+
+  .v10-simulator .sim-alert dl > div {
+    grid-template-columns: 82px 1fr;
+  }
+
+  .v10-simulator .sim-resolved {
+    min-height: 560px;
+  }
+
+  :root[data-theme="signal"] .launch-v10 .v10-hero__image {
+    filter: saturate(.58) contrast(.88) brightness(1.2);
+    opacity: .42;
+  }
+
+  :root[data-theme="signal"] .v10-hero__shade {
+    background:
+      linear-gradient(180deg, rgba(245,248,245,.92), rgba(245,248,245,.5) 22%, rgba(245,248,245,.88) 62%, #eef1ef 96%),
+      linear-gradient(90deg, rgba(245,248,245,.92), rgba(245,248,245,.25));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v10-hero__image i,
+  .v11-deal-plate__shade {
+    animation: none !important;
+    display: none;
+  }
+}
+
+/* =========================================================
    LAUNCH EDITION V10 — DIRECTOR'S CUT
    Homepage-only art direction. Shared controllers remain intact.
    ========================================================= */
@@ -4136,7 +4444,7 @@ body.loader-active .briefing-dock {
 
 .v10-hero__image {
   inset: -4%;
-  background: url("assets/Crlwo.jpg?v=10") center 58% / cover no-repeat;
+  background: url("assets/Crlwo.jpg?v=11") center 58% / cover no-repeat;
   filter: saturate(0.84) contrast(1.07) brightness(0.56);
   animation: v10-hero-breathe 20s ease-in-out infinite alternate;
 }
