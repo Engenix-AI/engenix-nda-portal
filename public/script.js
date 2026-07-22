@@ -1,1097 +1,407 @@
-(() => {
-  'use strict';
+(function () {
+  "use strict";
 
-  const qs = (selector, root = document) => root.querySelector(selector);
-  const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-
-  // ---------------------------------------------------------------------------
-  // Display theme: saved choice > device preference > dark fallback
-  // ---------------------------------------------------------------------------
-  (() => {
-    const STORAGE_KEY = 'engenix-theme';
-    const root = document.documentElement;
-    const systemQuery = window.matchMedia('(prefers-color-scheme: light)');
-    const themeColor = qs('#theme-color-meta');
-
-    const readSaved = () => {
-      try {
-        const value = window.localStorage.getItem(STORAGE_KEY);
-        return value === 'light' || value === 'dark' ? value : null;
-      } catch (_) {
-        return null;
-      }
-    };
-
-    const save = theme => {
-      try {
-        window.localStorage.setItem(STORAGE_KEY, theme);
-      } catch (_) {
-        // Private browsing or storage restrictions should never block the theme.
-      }
-    };
-
-    const updateControls = theme => {
-      qsa('[data-theme-toggle]').forEach(button => {
-        const nextTheme = theme === 'light' ? 'dark' : 'light';
-        const label = qs('[data-theme-toggle-label]', button);
-        button.dataset.themeCurrent = theme;
-        button.setAttribute('aria-pressed', String(theme === 'light'));
-        button.setAttribute('aria-label', `Switch to ${nextTheme} website theme`);
-        button.title = `Switch to ${nextTheme === 'light' ? 'Signal White' : 'Obsidian'}`;
-        if (label) label.textContent = theme === 'light' ? 'SIGNAL WHITE' : 'OBSIDIAN';
-      });
-
-      qsa('[data-loader-theme]').forEach(button => {
-        const active = button.dataset.loaderTheme === theme;
-        button.classList.toggle('is-active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-    };
-
-    const apply = (theme, { persist = false } = {}) => {
-      const resolved = theme === 'light' ? 'light' : 'dark';
-      root.dataset.theme = resolved;
-      root.style.colorScheme = resolved;
-      if (themeColor) themeColor.content = resolved === 'light' ? '#f3f6fc' : '#05070b';
-      if (persist) save(resolved);
-      updateControls(resolved);
-      window.dispatchEvent(new CustomEvent('engenix:themechange', {
-        detail: { theme: resolved }
-      }));
-    };
-
-    const initial = readSaved() || (systemQuery.matches ? 'light' : 'dark');
-    apply(initial);
-
-    qsa('[data-theme-toggle]').forEach(button => {
-      button.addEventListener('click', () => {
-        apply(root.dataset.theme === 'light' ? 'dark' : 'light', { persist: true });
-      });
-    });
-
-    qsa('[data-loader-theme]').forEach(button => {
-      button.addEventListener('click', () => {
-        apply(button.dataset.loaderTheme, { persist: true });
-      });
-    });
-
-    const followSystem = event => {
-      if (readSaved()) return;
-      apply(event.matches ? 'light' : 'dark');
-    };
-
-    if (typeof systemQuery.addEventListener === 'function') {
-      systemQuery.addEventListener('change', followSystem);
-    } else if (typeof systemQuery.addListener === 'function') {
-      systemQuery.addListener(followSystem);
+  const scriptUrl = document.currentScript && document.currentScript.src;
+  const root = scriptUrl ? new URL(".", scriptUrl).pathname : "/";
+  const route = (slug) => slug ? `${root}${slug}/` : root;
+  const themeStorageKey = "engenix-theme";
+  const normalizeTheme = (value) => value === "signal" || value === "light" ? "signal" : "obsidian";
+  const applyTheme = (value, persist) => {
+    const theme = normalizeTheme(value);
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme === "signal" ? "light" : "dark";
+    const themeColor = document.querySelector("#theme-color-meta");
+    if (themeColor) themeColor.content = theme === "signal" ? "#f1f2ee" : "#090b0c";
+    if (persist) {
+      try { localStorage.setItem(themeStorageKey, theme === "signal" ? "light" : "dark"); } catch {}
     }
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Loader
-  // ---------------------------------------------------------------------------
-  (() => {
-    const loader = qs('#site-loader');
-    if (!loader) {
-      document.body.classList.remove('loader-active');
-      return;
-    }
-
-    const status = qs('#loader-status');
-    const messages = [
-      'Establishing secure session',
-      'Authenticating operator access',
-      'Risk engine online',
-      'Entry authorized'
-    ];
-    const compactViewport = window.matchMedia('(max-width: 620px)').matches;
-    const duration = reducedMotion ? 250 : (compactViewport ? 1250 : 2300);
-    const messageStep = reducedMotion ? 50 : (compactViewport ? 280 : 520);
-    let closed = false;
-
-    messages.forEach((message, index) => {
-      window.setTimeout(() => {
-        if (!status || closed) return;
-        status.classList.remove('status-in');
-        window.requestAnimationFrame(() => {
-          status.textContent = message;
-          status.classList.add('status-in');
-        });
-      }, index * messageStep);
-    });
-
-    const closeLoader = () => {
-      if (closed) return;
-      closed = true;
-      loader.classList.add('is-ready');
-      window.setTimeout(() => {
-        loader.classList.add('is-hidden');
-        document.body.classList.remove('loader-active');
-      }, reducedMotion ? 0 : 360);
-      window.setTimeout(() => loader.remove(), reducedMotion ? 25 : 1380);
-    };
-
-    window.setTimeout(closeLoader, duration);
-    window.setTimeout(closeLoader, 7000);
-    window.addEventListener('pageshow', event => {
-      if (event.persisted) closeLoader();
-    });
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Header and navigation: exactly one controller
-  // ---------------------------------------------------------------------------
-  (() => {
-    const header = qs('.site-header');
-    const toggle = qs('.nav-toggle');
-    const links = qsa('.nav-links a');
-    if (!header) return;
-
-    const closeMenu = () => {
-      header.classList.remove('menu-open');
-      document.body.classList.remove('menu-open');
-      toggle?.setAttribute('aria-expanded', 'false');
-    };
-
-    const updateHeader = () => {
-      header.classList.toggle('scrolled', window.scrollY > 24);
-    };
-
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, { passive: true });
-
-    toggle?.addEventListener('click', event => {
-      event.preventDefault();
-      const open = !header.classList.contains('menu-open');
-      header.classList.toggle('menu-open', open);
-      document.body.classList.toggle('menu-open', open);
-      toggle.setAttribute('aria-expanded', String(open));
-    });
-
-    links.forEach(link => link.addEventListener('click', closeMenu));
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeMenu();
-    });
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 1180) closeMenu();
-    }, { passive: true });
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Copyright year and delayed reveal timing
-  // ---------------------------------------------------------------------------
-  const year = qs('#year');
-  if (year) year.textContent = String(new Date().getFullYear());
-
-  qsa('[data-delay]').forEach(element => {
-    element.style.setProperty('--delay', `${element.dataset.delay}ms`);
-  });
-
-  if ('IntersectionObserver' in window && !reducedMotion) {
-    const revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-
-    qsa('.reveal').forEach(element => revealObserver.observe(element));
-  } else {
-    qsa('.reveal').forEach(element => element.classList.add('visible'));
-  }
-
-  // ---------------------------------------------------------------------------
-  // Private access drawer
-  // ---------------------------------------------------------------------------
-  (() => {
-    const trigger = qs('#private-access-trigger');
-    const panel = qs('#private-access-panel');
-    const backdrop = qs('#private-access-backdrop');
-    const close = qs('#private-access-close');
-    if (!trigger || !panel || !backdrop || !close) return;
-
-    const openPanel = () => {
-      backdrop.hidden = false;
-      window.requestAnimationFrame(() => {
-        backdrop.classList.add('is-open');
-        panel.classList.add('is-open');
-      });
-      panel.setAttribute('aria-hidden', 'false');
-      trigger.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('private-access-open');
-      window.setTimeout(() => qs('input, select, textarea', panel)?.focus(), 350);
-    };
-
-    const closePanel = () => {
-      backdrop.classList.remove('is-open');
-      panel.classList.remove('is-open');
-      panel.setAttribute('aria-hidden', 'true');
-      trigger.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('private-access-open');
-      window.setTimeout(() => { backdrop.hidden = true; }, 380);
-    };
-
-    trigger.addEventListener('click', openPanel);
-    close.addEventListener('click', closePanel);
-    backdrop.addEventListener('click', closePanel);
-    qsa('[data-open-private-access]').forEach(button => button.addEventListener('click', openPanel));
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
-    });
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Forms
-  // ---------------------------------------------------------------------------
-  (() => {
-    const forms = [qs('#quick-demo-form'), qs('#demo-request-form')].filter(Boolean);
-    if (!forms.length) return;
-
-    forms.forEach(form => {
-      form.action = '/api/demo';
-      form.method = 'POST';
-      form.removeAttribute('target');
-
-      const status = qs('.quick-form-status, .form-status', form);
-      const button = qs('button[type="submit"]', form);
-      const label = qs('span', button || form);
-      const defaultLabel = label?.textContent || 'Become a Founding Dealership';
-
-      const setStatus = (message, type = '') => {
-        if (!status) return;
-        const base = status.classList.contains('quick-form-status') ? 'quick-form-status' : 'form-status';
-        status.className = `${base}${type ? ` ${type}` : ''}`;
-        status.textContent = message;
-      };
-
-      form.addEventListener('submit', async event => {
-        event.preventDefault();
-        setStatus('');
-        if (!form.reportValidity()) return;
-
-        if (button) button.disabled = true;
-        if (label) label.textContent = 'Sending securely…';
-        setStatus('Securely submitting your founding dealership request…');
-
-        try {
-          const payload = Object.fromEntries(new FormData(form).entries());
-          payload.page = window.location.href;
-          payload.userAgent = navigator.userAgent;
-          payload.submittedAtClient = new Date().toISOString();
-
-          const response = await fetch('/api/demo', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          });
-
-          const result = await response.json().catch(() => ({}));
-          if (!response.ok || !result.ok) {
-            throw new Error(result.error || 'We could not deliver your request.');
-          }
-
-          form.reset();
-          setStatus(
-            'Founding status received. A member of the ENGENIX leadership team will contact you shortly.',
-            'success'
-          );
-          if (label) label.textContent = 'Founding Request Received';
-          window.setTimeout(() => {
-            if (label) label.textContent = defaultLabel;
-          }, 6500);
-        } catch (error) {
-          setStatus(
-            `${error.message || 'Unable to send request.'} Email demo@engenix.co if the issue continues.`,
-            'error'
-          );
-          if (label) label.textContent = defaultLabel;
-        } finally {
-          if (button) button.disabled = false;
-        }
-      });
-    });
-  })();
-
-
-  // ---------------------------------------------------------------------------
-  // Hero deal-jacket review sequence
-  // A product-led opening scene that remains readable and useful without motion.
-  // ---------------------------------------------------------------------------
-  (() => {
-    const consoleBox = qs('#hero-audit-console');
-    if (!consoleBox) return;
-
-    const clock = qs('#hero-audit-clock');
-    const documentState = qs('#hero-document-state');
-    const jacketStatus = qs('#hero-jacket-status');
-    const title = qs('#hero-review-title');
-    const pill = qs('#hero-review-pill');
-    const eventTime = qs('#hero-review-time');
-    const copy = qs('#hero-review-copy');
-    const action = qs('#hero-next-action');
-    const owner = qs('#hero-action-owner');
-    const findings = qsa('[data-hero-finding]', consoleBox);
-    const phases = qsa('[data-hero-phase]', consoleBox);
-    const hero = qs('#hero-entry');
-    const dock = qs('.global-founding-dock');
-
-    const states = [
-      {
-        time: '17:42:08', documentState: '46 DOCUMENTS', jacket: 'Structuring review context',
-        title: 'Deal jacket received', pill: 'STRUCTURING', tone: 'neutral', phase: 0,
-        copy: 'Documents are entering a structured review while the transaction is still active.',
-        action: 'Building review context', owner: 'ENGENIX review sequence active',
-        findings: [
-          ['checking', 'Indexing file contents', 'CHECKING'],
-          ['queued', 'Waiting for review', 'QUEUED'],
-          ['queued', 'Waiting for review', 'QUEUED']
-        ]
-      },
-      {
-        time: '17:42:10', documentState: 'STRUCTURED', jacket: 'Required documents organized',
-        title: 'Review context established', pill: 'REVIEWING', tone: 'active', phase: 0,
-        copy: 'The jacket is organized into a reviewable operating record without losing transaction context.',
-        action: 'Comparing documents and terms', owner: 'Review continues before delivery',
-        findings: [
-          ['clear', 'Required items identified', 'CLEAR'],
-          ['checking', 'Comparing transaction terms', 'CHECKING'],
-          ['checking', 'Comparing signature fields', 'CHECKING']
-        ]
-      },
-      {
-        time: '17:42:12', documentState: 'REVIEW REQUIRED', jacket: 'Attention surfaced before release',
-        title: 'Disclosure variance detected', pill: 'ATTENTION', tone: 'risk', phase: 1,
-        copy: 'A disclosure appears inconsistent with the active deal structure. Management review is recommended before delivery.',
-        action: 'Review disclosure variance', owner: 'Management attention recommended',
-        findings: [
-          ['clear', 'Required items present', 'CLEAR'],
-          ['risk', 'Terms require management review', 'REVIEW'],
-          ['clear', 'Signature fields consistent', 'CLEAR']
-        ]
-      },
-      {
-        time: '17:42:16', documentState: 'ACTION ASSIGNED', jacket: 'Finding converted into ownership',
-        title: 'Corrective action assigned', pill: 'OWNER ASSIGNED', tone: 'action', phase: 2,
-        copy: 'The finding now has an owner, a required response, and a visible place in the active deal workflow.',
-        action: 'Resolve before vehicle release', owner: 'Owner: General Manager · Status: Open',
-        findings: [
-          ['clear', 'Required items present', 'CLEAR'],
-          ['action', 'Corrective action in progress', 'OWNED'],
-          ['clear', 'Signature fields consistent', 'CLEAR']
-        ]
-      },
-      {
-        time: '17:42:21', documentState: 'DOCUMENTED', jacket: 'Decision history preserved',
-        title: 'Decision trace preserved', pill: 'DOCUMENTED', tone: 'resolved', phase: 3,
-        copy: 'The review, management response, and completed action remain attached to the operating record.',
-        action: 'Deal cleared with documented review', owner: 'Decision trace available for leadership',
-        findings: [
-          ['clear', 'Required items present', 'CLEAR'],
-          ['resolved', 'Variance reviewed and resolved', 'RESOLVED'],
-          ['clear', 'Signature fields consistent', 'CLEAR']
-        ]
-      }
-    ];
-
-    let index = 0;
-    let timer = null;
-    let inView = true;
-
-    const render = nextIndex => {
-      index = nextIndex;
-      const state = states[index];
-      consoleBox.dataset.heroTone = state.tone;
-      if (clock) clock.textContent = state.time;
-      if (documentState) documentState.textContent = state.documentState;
-      if (jacketStatus) jacketStatus.textContent = state.jacket;
-      if (title) title.textContent = state.title;
-      if (pill) pill.textContent = state.pill;
-      if (eventTime) eventTime.textContent = state.time;
-      if (copy) copy.textContent = state.copy;
-      if (action) action.textContent = state.action;
-      if (owner) owner.textContent = state.owner;
-
-      findings.forEach((finding, findingIndex) => {
-        const [tone, detail, status] = state.findings[findingIndex];
-        finding.dataset.state = tone;
-        const detailNode = qs('small', finding);
-        const statusNode = qs('b', finding);
-        if (detailNode) detailNode.textContent = detail;
-        if (statusNode) statusNode.textContent = status;
-      });
-
-      phases.forEach((phase, phaseIndex) => {
-        phase.classList.toggle('is-active', phaseIndex === state.phase);
-        phase.classList.toggle('is-complete', phaseIndex < state.phase);
-      });
-    };
-
-    const stop = () => {
-      window.clearInterval(timer);
-      timer = null;
-    };
-
-    const start = () => {
-      stop();
-      if (reducedMotion || !inView) return;
-      timer = window.setInterval(() => render((index + 1) % states.length), 2300);
-    };
-
-    consoleBox.addEventListener('mouseenter', stop);
-    consoleBox.addEventListener('mouseleave', start);
-    consoleBox.addEventListener('focusin', stop);
-    consoleBox.addEventListener('focusout', start);
-
-    if ('IntersectionObserver' in window && hero) {
-      const observer = new IntersectionObserver(([entry]) => {
-        inView = entry.isIntersecting && entry.intersectionRatio > 0.22;
-        if (inView) start(); else stop();
-      }, { threshold: [0, .22, .6] });
-      observer.observe(hero);
-    }
-
-    render(reducedMotion ? 2 : 0);
-    start();
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Risk simulator
-  // ---------------------------------------------------------------------------
-  (() => {
-    const docs = qs('#sim-docs');
-    const signatures = qs('#sim-signatures');
-    const review = qs('#sim-review');
-    if (!docs || !signatures || !review) return;
-
-    const update = () => {
-      const docsValue = Number(docs.value);
-      const signaturesValue = Number(signatures.value);
-      const reviewValue = Number(review.value);
-      const quality = docsValue * 0.42 + signaturesValue * 0.31 + reviewValue * 0.27;
-      const risk = Math.max(4, Math.round(100 - quality));
-
-      const setText = (selector, value) => {
-        const element = qs(selector);
-        if (element) element.textContent = value;
-      };
-
-      setText('#sim-docs-value', `${docsValue}%`);
-      setText('#sim-signatures-value', `${signaturesValue}%`);
-      setText('#sim-review-value', `${reviewValue}%`);
-      setText('#risk-score', String(risk));
-      setText('#sim-ready', `${Math.max(30, Math.round(quality - 4))}%`);
-      setText('#sim-critical', String(Math.max(0, Math.round((risk - 18) / 11))));
-      setText('#sim-moderate', String(Math.max(1, Math.round(risk / 7))));
-
-      let riskLabel = 'Low';
-      let dialColor = 'var(--success)';
-      if (risk >= 25) { riskLabel = 'Moderate'; dialColor = 'var(--gold)'; }
-      if (risk >= 48) { riskLabel = 'High'; dialColor = 'var(--danger)'; }
-      setText('#risk-label', riskLabel);
-
-      const dial = qs('#risk-dial');
-      if (dial) {
-        dial.style.setProperty('--risk', String(risk));
-        const lightTheme = document.documentElement.dataset.theme === 'light';
-        const dialCenter = lightTheme ? '#ffffff' : '#090c12';
-        const dialTrack = lightTheme ? 'rgba(31,48,73,.12)' : 'rgba(255,255,255,.07)';
-        dial.style.background = `radial-gradient(circle at center, ${dialCenter} 57%, transparent 58%), conic-gradient(${dialColor} ${risk}%, ${dialTrack} 0)`;
-      }
-    };
-
-    [docs, signatures, review].forEach(control => control.addEventListener('input', update));
-    window.addEventListener('engenix:themechange', update);
-    update();
-  })();
-
-  // ---------------------------------------------------------------------------
-  // One Deal sequence
-  // The active department automatically follows the story on mobile so the
-  // viewer never has to swipe the rail just to see the current phase.
-  // ---------------------------------------------------------------------------
-  (() => {
-    const nodes = qsa('.deal-node');
-    const eventBox = qs('#deal-event');
-    const track = qs('#deal-track');
-    const consoleBox = eventBox?.closest('.deal-console');
-    if (!nodes.length || !eventBox || !track || !consoleBox) return;
-
-    const mobileWorkflow = window.matchMedia('(max-width: 820px)');
-    const events = [
-      ['09:14:02', 'Customer identity verified', 'Required customer information is present and the review can continue.', 'CLEAR', '✓', false],
-      ['09:16:18', 'Deal structure created', 'Vehicle, trade, cash, and payment structure enter the active workflow.', 'MOVING', '→', false],
-      ['09:20:44', 'Lender path selected', 'Approval context and deal structure are ready for finance review.', 'READY', '✓', false],
-      ['09:23:09', 'Disclosure variance detected', 'A required disclosure appears inconsistent. Manager review is recommended before delivery.', 'PRIORITY', '!', true],
-      ['09:27:31', 'Corrective action documented', 'The manager records the response, owner, and resolution inside the audit history.', 'RESOLVED', '✓', false],
-      ['09:31:06', 'Deal cleared for delivery', 'The reviewed transaction continues with a documented operational record.', 'CLEAR', '✓', false]
-    ];
-
-    let current = 0;
-    let timer = null;
-    let resumeTimer = null;
-    let inView = false;
-    let hasEntered = false;
-    let userHoldUntil = 0;
-
-    const stop = () => {
-      window.clearInterval(timer);
-      timer = null;
-    };
-
-    const centerActiveNode = (index, behavior = 'smooth', force = false) => {
-      if (!mobileWorkflow.matches) return;
-      if (!force && Date.now() < userHoldUntil) return;
-
-      const node = nodes[index];
-      if (!node) return;
-
-      window.requestAnimationFrame(() => {
-        const target = node.offsetLeft - Math.max(0, (track.clientWidth - node.offsetWidth) / 2);
-        track.scrollTo({
-          left: Math.max(0, target),
-          behavior: reducedMotion ? 'auto' : behavior
-        });
-      });
-    };
-
-    const render = (index, options = {}) => {
-      current = index;
-      nodes.forEach((node, nodeIndex) => {
-        node.classList.toggle('active', nodeIndex === index);
-        node.classList.toggle('complete', nodeIndex < index);
-        node.setAttribute('aria-current', nodeIndex === index ? 'step' : 'false');
-      });
-
-      const [time, heading, text, state, symbol, risk] = events[index];
-      const assignments = [
-        ['#deal-event-time', time],
-        ['#deal-event-title', heading],
-        ['#deal-event-copy', text],
-        ['#deal-event-status', state],
-        ['#deal-clock', time]
-      ];
-      assignments.forEach(([selector, value]) => {
-        const element = qs(selector);
-        if (element) element.textContent = value;
-      });
-
-      const icon = qs('.deal-event-icon', eventBox);
-      if (icon) icon.textContent = symbol;
-      eventBox.classList.toggle('is-risk', risk);
-
-      const progress = qs('#deal-progress-bar');
-      if (progress) progress.style.width = `${((index + 1) / events.length) * 100}%`;
-
-      centerActiveNode(index, options.behavior || 'smooth', Boolean(options.forceFollow));
-    };
-
-    const start = () => {
-      stop();
-      if (reducedMotion || !inView || Date.now() < userHoldUntil) return;
-      timer = window.setInterval(() => render((current + 1) % events.length), 2800);
-    };
-
-    const holdForManualInteraction = () => {
-      stop();
-      window.clearTimeout(resumeTimer);
-      userHoldUntil = Date.now() + 4800;
-      resumeTimer = window.setTimeout(start, 4900);
-    };
-
-    nodes.forEach((node, index) => node.addEventListener('click', () => {
-      userHoldUntil = 0;
-      render(index, { forceFollow: true });
-      start();
-    }));
-
-    track.addEventListener('pointerdown', holdForManualInteraction, { passive: true });
-    track.addEventListener('touchstart', holdForManualInteraction, { passive: true });
-    consoleBox.addEventListener('mouseenter', stop);
-    consoleBox.addEventListener('mouseleave', start);
-
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          inView = entry.isIntersecting && entry.intersectionRatio >= 0.32;
-          if (inView) {
-            if (!hasEntered) {
-              hasEntered = true;
-              current = 0;
-              render(0, { behavior: 'auto', forceFollow: true });
-            } else {
-              centerActiveNode(current, 'smooth');
-            }
-            start();
-          } else {
-            stop();
-          }
-        });
-      }, { threshold: [0, 0.32, 0.6] });
-      observer.observe(consoleBox);
-    } else {
-      inView = true;
-      hasEntered = true;
-      render(0, { behavior: 'auto', forceFollow: true });
-      start();
-    }
-
-    render(0, { behavior: 'auto' });
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Count-up metrics
-  // ---------------------------------------------------------------------------
-  (() => {
-    const counters = qsa('[data-count]');
-    if (!counters.length) return;
-    if (!('IntersectionObserver' in window) || reducedMotion) {
-      counters.forEach(element => { element.textContent = element.dataset.count; });
-      return;
-    }
-
-    const counterObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const element = entry.target;
-        const target = Number(element.dataset.count);
-        const start = performance.now();
-        const animate = now => {
-          const progress = Math.min(1, (now - start) / 1100);
-          element.textContent = String(Math.round(target * (1 - Math.pow(1 - progress, 3))));
-          if (progress < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-        counterObserver.unobserve(element);
-      });
-    }, { threshold: 0.4 });
-
-    counters.forEach(element => counterObserver.observe(element));
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Scene direction and dock suppression
-  // ---------------------------------------------------------------------------
-  (() => {
-    const scenes = qsa('.cinematic-scene');
-    if (!scenes.length || !('IntersectionObserver' in window)) return;
-
-    const number = qs('#scene-number');
-    const name = qs('#scene-name');
-    const names = ['ENTRY', 'THRESHOLD', 'BLIND SPOTS', 'THE DEAL', 'SYSTEM', 'PRINCIPLE', 'OPERATORS', 'HORIZON', 'TRUST', 'FOUNDING', 'SESSION'];
-
-    const sceneObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        scenes.forEach(scene => scene.classList.remove('scene-active'));
-        entry.target.classList.add('scene-active');
-        const index = scenes.indexOf(entry.target);
-        document.documentElement.style.setProperty('--scene-progress', String((index + 1) / scenes.length));
-        if (number) number.textContent = String(index + 1).padStart(2, '0');
-        if (name) name.textContent = names[index] || 'ENGENIX';
-      });
-    }, { threshold: 0.42 });
-
-    scenes.forEach(scene => sceneObserver.observe(scene));
-
-    const dock = qs('.global-founding-dock');
-    const ending = qs('.scene-ending');
-    if (dock && ending) {
-      const dockObserver = new IntersectionObserver(([entry]) => {
-        dock.classList.toggle('is-suppressed', entry.isIntersecting);
-      }, { threshold: 0.28 });
-      dockObserver.observe(ending);
-    }
-  })();
-
-  // ---------------------------------------------------------------------------
-  // Hero parallax and quiet scene breathing
-  // ---------------------------------------------------------------------------
-  if (!reducedMotion) {
-    (() => {
-      const hero = qs('.cinematic-hero');
-      const visual = qs('.hero-visual', hero || document);
-      const copy = qs('.hero-copy', hero || document);
-      const quietElements = [qs('.threshold-content'), qs('.silent-interlude .shell')].filter(Boolean);
-      if (!hero && !quietElements.length) return;
-
-      let ticking = false;
-      const render = () => {
-        if (hero && visual && copy) {
-          if (window.innerWidth <= 820) {
-            visual.style.transform = 'none';
-            copy.style.transform = 'none';
-            copy.style.opacity = '1';
-          } else {
-            const rect = hero.getBoundingClientRect();
-            const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
-            visual.style.transform = `translate3d(0, ${progress * 30}px, 0) scale(${1 - progress * 0.03})`;
-            copy.style.transform = `translate3d(0, ${progress * 15}px, 0)`;
-            copy.style.opacity = String(1 - progress * 0.28);
-          }
-        }
-
-        quietElements.forEach(element => {
-          const section = element.parentElement;
-          if (!section) return;
-          const rect = section.getBoundingClientRect();
-          const center = rect.top + rect.height / 2;
-          const distance = Math.abs(window.innerHeight / 2 - center);
-          const intensity = Math.max(0, 1 - distance / window.innerHeight);
-          element.style.transform = `scale(${0.965 + intensity * 0.035})`;
-          element.style.opacity = String(0.55 + intensity * 0.45);
-        });
-        ticking = false;
-      };
-
-      window.addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(render);
-      }, { passive: true });
-      render();
-    })();
-  }
-
-  // ---------------------------------------------------------------------------
-  // Cinematic chapter navigation
-  // ---------------------------------------------------------------------------
-  (() => {
-    const supportedHashes = new Set(['#system', '#intelligence', '#why']);
-
-    const getOffset = () => {
-      const header = qs('.site-header');
-      return (header?.getBoundingClientRect().height || 84) + (window.innerWidth <= 620 ? 14 : 24);
-    };
-
-    const moveToChapter = (hash, behavior = 'smooth') => {
-      if (!supportedHashes.has(hash)) return false;
-      const target = qs(hash);
-      if (!target) return false;
-      const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - getOffset());
-      window.scrollTo({ top, behavior });
-      return true;
-    };
-
-    document.addEventListener('click', event => {
-      const link = event.target.closest('a[href]');
-      if (!link) return;
-      const url = new URL(link.href, window.location.href);
-      const sameDocument = url.origin === window.location.origin && url.pathname === window.location.pathname;
-      if (!sameDocument || !supportedHashes.has(url.hash)) return;
-      event.preventDefault();
-      history.pushState(null, '', url.hash);
-      moveToChapter(url.hash);
-    });
-
-    const placeInitialHash = () => {
-      if (!supportedHashes.has(window.location.hash)) return;
-      const waitForLoader = () => {
-        const loader = qs('#site-loader');
-        if (loader && !loader.classList.contains('is-hidden')) {
-          window.setTimeout(waitForLoader, 120);
-          return;
-        }
-        requestAnimationFrame(() => moveToChapter(window.location.hash, reducedMotion ? 'auto' : 'smooth'));
-      };
-      waitForLoader();
-    };
-
-    window.addEventListener('load', placeInitialHash);
-    window.addEventListener('hashchange', () => moveToChapter(window.location.hash));
-  })();
-})();
-
-// =============================================================================
-// ENGENIX MOBILE UNBOXING V2
-// Scroll-driven optical framing and premium mobile chapter controls.
-// =============================================================================
-(() => {
-  const mobile = window.matchMedia('(max-width: 820px)');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const root = document.documentElement;
-
-  const frameSelectors = [
-    '.signal-card',
-    '.blind-line',
-    '.deal-console',
-    '.intel-panel',
-    '.activity-stream',
-    '.leader-card',
-    '.expansion-rail article',
-    '.trust-item',
-    '.early-access-grid'
+    return theme;
+  };
+  applyTheme(document.documentElement.dataset.theme, false);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const allowBodyScrollLock = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!reducedMotion) document.documentElement.classList.add("motion-ready");
+  const navItems = [
+    ["platform", "Platform"],
+    ["intelligence-layers", "Intelligence Layers"],
+    ["guided-experience", "Guided Experience"],
+    ["security", "Security"],
+    ["company", "Company"],
   ];
 
-  let frames = [];
-  let ticking = false;
-  let expansionCleanup = null;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=12.3" alt="ENGENIX" width="577" height="433"></span>`;
+  const arrow = '<span class="arrow" aria-hidden="true"></span>';
+  const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
+    (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
 
-  const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+  const headerTarget = document.querySelector("[data-site-header]");
+  const footerTarget = document.querySelector("[data-site-footer]");
+  const drawerTarget = document.querySelector("[data-site-drawer]");
 
-  const resetFrame = element => {
-    element.style.removeProperty('--m-scale');
-    element.style.removeProperty('--m-lift');
-    element.style.removeProperty('--m-opacity');
-    element.style.removeProperty('--m-radius');
-  };
-
-  const update = () => {
-    ticking = false;
-
-    const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    root.style.setProperty('--mobile-page-progress', String(clamp(window.scrollY / scrollable)));
-
-    if (!mobile.matches || reduced) {
-      frames.forEach(resetFrame);
-      return;
-    }
-
-    const viewport = window.innerHeight;
-    const focusLine = viewport * 0.53;
-
-    frames.forEach(element => {
-      const rect = element.getBoundingClientRect();
-      const center = rect.top + rect.height / 2;
-      const distance = Math.abs(center - focusLine);
-      const focus = clamp(1 - distance / (viewport * 0.82));
-      const scale = 0.975 + focus * 0.025;
-      const lift = (1 - focus) * 16;
-      const opacity = 0.90 + focus * 0.10;
-      const radius = 36 - focus * 4;
-
-      element.style.setProperty('--m-scale', scale.toFixed(4));
-      element.style.setProperty('--m-lift', `${lift.toFixed(1)}px`);
-      element.style.setProperty('--m-opacity', opacity.toFixed(3));
-      element.style.setProperty('--m-radius', `${radius.toFixed(1)}px`);
+  const loader = document.querySelector("#site-loader");
+  const loaderStatus = document.querySelector("#loader-status");
+  const loaderThemeButtons = Array.from(document.querySelectorAll("[data-loader-theme]"));
+  const syncLoaderTheme = () => {
+    const current = normalizeTheme(document.documentElement.dataset.theme);
+    loaderThemeButtons.forEach((button) => {
+      const selected = button.dataset.loaderTheme === current;
+      button.classList.toggle("is-active", selected);
+      button.setAttribute("aria-pressed", selected ? "true" : "false");
     });
   };
+  syncLoaderTheme();
+  loaderThemeButtons.forEach((button) => button.addEventListener("click", () => {
+    applyTheme(button.dataset.loaderTheme, true);
+    syncLoaderTheme();
+    updateThemeLabel();
+  }));
 
-  const schedule = () => {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(update);
-  };
-
-  const buildExpansionTabs = () => {
-    expansionCleanup?.();
-    expansionCleanup = null;
-
-    const rail = document.querySelector('.expansion-rail');
-    if (!rail || !mobile.matches) return;
-
-    const cards = Array.from(rail.querySelectorAll(':scope > article'));
-    if (!cards.length) return;
-
-    let tabs = rail.previousElementSibling;
-    if (!tabs || !tabs.classList.contains('mobile-expansion-tabs')) {
-      tabs = document.createElement('div');
-      tabs.className = 'mobile-expansion-tabs';
-      tabs.setAttribute('aria-label', 'ENGENIX expansion stages');
-      rail.parentNode.insertBefore(tabs, rail);
+  if (loader) {
+    document.body.classList.add("loader-active");
+    const releaseLoader = () => {
+      loader.classList.add("is-hidden");
+      loader.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("loader-active");
+      loader.remove();
+    };
+    if (!reducedMotion && loaderStatus) {
+      window.setTimeout(() => { loaderStatus.textContent = "Calibrating operating view"; }, 480);
+      window.setTimeout(() => { loaderStatus.textContent = "Entry authorized"; }, 950);
     }
-
-    tabs.replaceChildren();
-
-    const buttons = cards.map((card, index) => {
-      const button = document.createElement('button');
-      const heading = card.querySelector('h3');
-      button.type = 'button';
-      button.textContent = heading?.textContent?.trim() || `Stage ${index + 1}`;
-      button.setAttribute('aria-label', `Show ${button.textContent}`);
-      button.classList.toggle('is-active', index === 0);
-      button.addEventListener('click', () => {
-        card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
-        rail.scrollTo({ left: card.offsetLeft - 20, behavior: reduced ? 'auto' : 'smooth' });
-      });
-      tabs.appendChild(button);
-      return button;
-    });
-
-    let railTicking = false;
-    const updateActive = () => {
-      railTicking = false;
-      const railCenter = rail.getBoundingClientRect().left + rail.clientWidth / 2;
-      let activeIndex = 0;
-      let bestDistance = Infinity;
-
-      cards.forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
-        const distance = Math.abs(rect.left + rect.width / 2 - railCenter);
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          activeIndex = index;
-        }
-      });
-
-      buttons.forEach((button, index) => {
-        const active = index === activeIndex;
-        button.classList.toggle('is-active', active);
-        button.setAttribute('aria-pressed', String(active));
-      });
-    };
-
-    const onRailScroll = () => {
-      if (railTicking) return;
-      railTicking = true;
-      requestAnimationFrame(updateActive);
-    };
-
-    rail.addEventListener('scroll', onRailScroll, { passive: true });
-    updateActive();
-
-    expansionCleanup = () => rail.removeEventListener('scroll', onRailScroll);
-  };
-
-  const buildSignalReveal = () => {
-    const rail = document.querySelector('.signal-reveal-rail');
-    const sequence = document.querySelector('.signal-sequence');
-    if (!rail || !sequence || !mobile.matches) return () => {};
-
-    const cards = Array.from(rail.querySelectorAll(':scope > .signal-card'));
-    const labels = Array.from(sequence.querySelectorAll('[data-signal-label]'));
-    if (!cards.length) return () => {};
-
-    let frame = 0;
-    const updateSignal = () => {
-      frame = 0;
-      const railRect = rail.getBoundingClientRect();
-      const focusX = railRect.left + rail.clientWidth * 0.5;
-      let activeIndex = 0;
-      let distance = Infinity;
-
-      cards.forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
-        const nextDistance = Math.abs(rect.left + rect.width / 2 - focusX);
-        if (nextDistance < distance) {
-          distance = nextDistance;
-          activeIndex = index;
-        }
-      });
-
-      cards.forEach((card, index) => card.classList.toggle('is-active', index === activeIndex));
-      labels.forEach((label, index) => label.classList.toggle('is-active', index === activeIndex));
-    };
-
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(updateSignal);
-    };
-
-    rail.addEventListener('scroll', onScroll, { passive: true });
-    updateSignal();
-    return () => rail.removeEventListener('scroll', onScroll);
-  };
-
-  let signalCleanup = null;
-
-  const prepare = () => {
-    signalCleanup?.();
-    signalCleanup = buildSignalReveal();
-    frames = frameSelectors.flatMap(selector => Array.from(document.querySelectorAll(selector)));
-    frames.forEach(element => element.classList.add('mobile-cinematic-frame'));
-    buildExpansionTabs();
-    schedule();
-  };
-
-  // Preserve the briefing invitation without covering the story. The full rail
-  // returns when the viewer scrolls upward; downward reading collapses it into
-  // a Rivian-style action puck.
-  const dock = document.querySelector('.global-founding-dock');
-  let lastScrollY = window.scrollY;
-  let dockTicking = false;
-
-  const updateDock = () => {
-    dockTicking = false;
-    if (!dock || !mobile.matches) {
-      dock?.classList.remove('is-compact');
-      lastScrollY = window.scrollY;
-      return;
-    }
-
-    const delta = window.scrollY - lastScrollY;
-    if (window.scrollY < 300 || delta < -10) {
-      dock.classList.remove('is-compact');
-    } else if (delta > 8) {
-      dock.classList.add('is-compact');
-    }
-    lastScrollY = window.scrollY;
-  };
-
-  const scheduleDock = () => {
-    if (dockTicking) return;
-    dockTicking = true;
-    requestAnimationFrame(updateDock);
-  };
-
-  window.addEventListener('scroll', () => {
-    schedule();
-    scheduleDock();
-  }, { passive: true });
-  window.addEventListener('resize', () => {
-    buildExpansionTabs();
-    signalCleanup?.();
-    signalCleanup = buildSignalReveal();
-    schedule();
-  }, { passive: true });
-
-  if (typeof mobile.addEventListener === 'function') {
-    mobile.addEventListener('change', () => {
-      buildExpansionTabs();
-      signalCleanup?.();
-      signalCleanup = buildSignalReveal();
-      schedule();
-    });
+    window.setTimeout(releaseLoader, reducedMotion ? 280 : 1300);
+    loader.addEventListener("animationend", (event) => {
+      if (event.animationName === "loader-failsafe") releaseLoader();
+    }, { once: true });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', prepare, { once: true });
+  if (headerTarget) {
+    headerTarget.innerHTML = `
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <header class="site-header">
+        <nav class="nav-shell" aria-label="Primary navigation">
+          <a class="brand-link" href="${route("")}" aria-label="ENGENIX home">${brandLogo}<span>Launch Edition</span></a>
+          <div class="desktop-nav">
+            ${navItems.map(([slug, label]) => `<a href="${route(slug)}"${currentSlug === slug ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
+          </div>
+          <div class="nav-actions">
+            <button class="theme-toggle" type="button" aria-label="Switch website theme" aria-pressed="false" data-theme-current="obsidian">
+              <span class="theme-toggle-icons" aria-hidden="true">
+                <svg class="theme-toggle-icon theme-toggle-icon--moon" viewBox="0 0 24 24"><path d="M20 15.2A8.35 8.35 0 0 1 8.8 4a8.4 8.4 0 1 0 11.2 11.2Z"></path></svg>
+                <svg class="theme-toggle-icon theme-toggle-icon--sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.6"></circle><path d="M12 2.3v2.1M12 19.6v2.1M2.3 12h2.1M19.6 12h2.1M5.15 5.15l1.5 1.5M17.35 17.35l1.5 1.5M18.85 5.15l-1.5 1.5M6.65 17.35l-1.5 1.5"></path></svg>
+              </span>
+            </button>
+            <a class="button button--gold nav-founding" href="${route("founding-dealerships")}">Founding Dealerships</a>
+            <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+          </div>
+        </nav>
+      </header>
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true" hidden>
+        <div class="mobile-menu__inner">
+          <p class="eyebrow">Operating Intelligence</p>
+          ${navItems.map(([slug, label], index) => `<a ${index === 0 ? 'data-first-menu-link ' : ""}href="${route(slug)}"${currentSlug === slug ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
+          <a href="${route("founding-dealerships")}"${currentSlug === "founding-dealerships" ? ' aria-current="page"' : ""}>Founding Dealerships</a>
+          <button class="button button--gold" type="button" data-open-briefing>Request a Founding Briefing</button>
+        </div>
+      </div>`;
+  }
+
+  if (footerTarget) {
+    footerTarget.innerHTML = `
+      <footer class="site-footer">
+        <div>${brandLogo}<p>Operating Intelligence for Automotive Retail</p></div>
+        <div class="footer-statement"><p>Dealership software records what happened.</p><p>ENGENIX helps change what happens next.</p></div>
+        <div class="footer-links">${navItems.map(([slug, label]) => `<a href="${route(slug)}">${label}</a>`).join("")}<a href="${route("founding-dealerships")}">Founding Dealerships</a></div>
+        <div class="footer-meta"><span>ENGEN LLC d/b/a ENGENIX</span><a href="mailto:nicholas@engenix.co">nicholas@engenix.co</a><span>© ${new Date().getFullYear()} ENGENIX</span></div>
+      </footer>`;
+  }
+
+  if (drawerTarget) {
+    drawerTarget.innerHTML = `
+      <div class="drawer-backdrop" aria-hidden="true" hidden>
+        <aside class="briefing-drawer" id="briefing-drawer" role="dialog" aria-modal="true" aria-labelledby="briefing-title">
+          <button class="drawer-close" type="button" aria-label="Close briefing request"><span></span><span></span></button>
+          <div class="briefing-drawer__intro"><p class="eyebrow">Founding Dealership Network</p><h2 id="briefing-title">Request a private operating briefing.</h2><p>For dealership principals, ownership groups, and operating leaders evaluating the first ENGENIX layer and the system entering controlled deployment.</p></div>
+          <form class="briefing-form" action="https://script.google.com/macros/s/AKfycbyYggK-MIIaSpGqwAdh4YXuZ5DCKCQMGw6T7V-TeAME5vJKQf51qSiVA8ugah3QdsWl/exec" method="post" target="engenix-briefing-response">
+            <label>Name<input name="name" type="text" autocomplete="name" required></label>
+            <label>Role<input name="role" type="text" autocomplete="organization-title" placeholder="Dealer principal, GM, controller…" required></label>
+            <label>Dealership or group<input name="company" type="text" autocomplete="organization" required></label>
+            <label>Work email<input name="email" type="email" autocomplete="email" required></label>
+            <label>Phone <span class="field-optional">Optional</span><input name="phone" type="tel" autocomplete="tel"></label>
+            <label>Rooftops <span class="field-optional">Optional</span><select name="rooftops"><option value="">Select</option><option value="1">1 rooftop</option><option value="2–4">2–4 rooftops</option><option value="5–9">5–9 rooftops</option><option value="10–24">10–24 rooftops</option><option value="25+">25+ rooftops</option></select></label>
+            <label>Monthly retail volume <span class="field-optional">Optional</span><select name="monthlyVolume"><option value="">Select</option><option value="Under 75">Under 75</option><option value="75–149">75–149</option><option value="150–299">150–299</option><option value="300–599">300–599</option><option value="600+">600+</option></select></label>
+            <label>DMS <span class="field-optional">Optional</span><input name="dms" type="text" autocomplete="off"></label>
+            <label class="briefing-form__wide">What would you like to address?<textarea name="challenge" rows="4" required placeholder="For example: deal-jacket review, funding readiness, controller reconciliation, or multi-rooftop visibility."></textarea></label>
+            <input class="form-honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input name="source" type="hidden" value="ENGENIX website">
+            <input name="page" type="hidden" value="">
+            <input name="userAgent" type="hidden" value="">
+            <button class="button button--gold button--full" type="submit"><span data-form-submit-label>Request a Founding Briefing</span> ${arrow}</button>
+            <p class="form-note">Your request is sent securely to ENGENIX leadership. We use it only to follow up on your briefing request.</p>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <iframe class="form-response-frame" name="engenix-briefing-response" title="Briefing request response" tabindex="-1"></iframe>
+        </aside>
+      </div>`;
+  }
+
+  const briefingDock = document.createElement("button");
+  briefingDock.className = "briefing-dock";
+  briefingDock.type = "button";
+  briefingDock.setAttribute("data-open-briefing", "");
+  briefingDock.setAttribute("aria-controls", "briefing-drawer");
+  briefingDock.setAttribute("aria-expanded", "false");
+  briefingDock.innerHTML = `
+    <span class="briefing-dock__signal" aria-hidden="true"></span>
+    <span class="briefing-dock__copy">
+      <small>Founding Dealerships</small>
+      <strong>Request a briefing</strong>
+    </span>
+    <span class="briefing-dock__arrow" aria-hidden="true"></span>`;
+  document.body.append(briefingDock);
+
+  const themeButton = document.querySelector(".theme-toggle");
+  const updateThemeLabel = () => {
+    if (!themeButton) return;
+    const current = normalizeTheme(document.documentElement.dataset.theme);
+    const nextLabel = current === "obsidian" ? "Signal White" : "Obsidian";
+    themeButton.setAttribute("aria-label", `Switch to ${nextLabel} website theme`);
+    themeButton.setAttribute("aria-pressed", current === "signal" ? "true" : "false");
+    themeButton.setAttribute("data-theme-current", current);
+    themeButton.setAttribute("title", `Switch to ${nextLabel}`);
+  };
+  updateThemeLabel();
+  themeButton?.addEventListener("click", () => {
+    const current = normalizeTheme(document.documentElement.dataset.theme);
+    const next = current === "obsidian" ? "signal" : "obsidian";
+    applyTheme(next, true);
+    syncLoaderTheme();
+    updateThemeLabel();
+  });
+
+  window.addEventListener("storage", (event) => {
+    if (event.key !== themeStorageKey || !event.newValue) return;
+    applyTheme(event.newValue, false);
+    syncLoaderTheme();
+    updateThemeLabel();
+  });
+
+  const menu = document.querySelector(".mobile-menu");
+  const menuButton = document.querySelector(".menu-button");
+  const firstMenuLink = document.querySelector("[data-first-menu-link]");
+  const closeMenu = (returnFocus) => {
+    menu?.classList.remove("is-open");
+    menu?.setAttribute("aria-hidden", "true");
+    if (menu) {
+      menu.hidden = true;
+      menu.inert = true;
+    }
+    menuButton?.setAttribute("aria-expanded", "false");
+    menuButton?.setAttribute("aria-label", "Open navigation menu");
+    document.body.classList.remove("menu-locked");
+    if (returnFocus) menuButton?.focus();
+  };
+  menuButton?.addEventListener("click", () => {
+    const willOpen = !menu?.classList.contains("is-open");
+    if (!willOpen) return closeMenu(false);
+    if (menu) {
+      menu.hidden = false;
+      menu.inert = false;
+    }
+    menu?.classList.add("is-open");
+    menu?.setAttribute("aria-hidden", "false");
+    menuButton.setAttribute("aria-expanded", "true");
+    menuButton.setAttribute("aria-label", "Close navigation menu");
+    if (allowBodyScrollLock) document.body.classList.add("menu-locked");
+    firstMenuLink?.focus();
+  });
+  menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => closeMenu(false)));
+
+  const backdrop = document.querySelector(".drawer-backdrop");
+  const drawer = document.querySelector(".briefing-drawer");
+  const closeDrawerButton = document.querySelector(".drawer-close");
+  const briefingTriggers = Array.from(document.querySelectorAll("[data-open-briefing]"));
+  let lastTrigger = null;
+  const setBriefingExpanded = (expanded) => {
+    briefingTriggers.forEach((trigger) => {
+      if (trigger.hasAttribute("aria-controls")) trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+    });
+  };
+  const openDrawer = (trigger) => {
+    lastTrigger = trigger || document.activeElement;
+    closeMenu(false);
+    if (backdrop) {
+      backdrop.hidden = false;
+      backdrop.inert = false;
+    }
+    backdrop?.classList.add("is-open");
+    backdrop?.setAttribute("aria-hidden", "false");
+    if (allowBodyScrollLock) document.body.classList.add("drawer-locked");
+    setBriefingExpanded(true);
+    closeDrawerButton?.focus();
+  };
+  const closeDrawer = () => {
+    backdrop?.classList.remove("is-open");
+    backdrop?.setAttribute("aria-hidden", "true");
+    if (backdrop) {
+      backdrop.hidden = true;
+      backdrop.inert = true;
+    }
+    document.body.classList.remove("drawer-locked");
+    setBriefingExpanded(false);
+    if (lastTrigger && typeof lastTrigger.focus === "function") lastTrigger.focus();
+  };
+
+  /* Prevent Safari back-forward cache from restoring an invisible scroll lock. */
+  window.addEventListener("pagehide", () => {
+    if (menu) {
+      menu.hidden = true;
+      menu.inert = true;
+    }
+    if (backdrop) {
+      backdrop.hidden = true;
+      backdrop.inert = true;
+    }
+    document.body.classList.remove("menu-locked", "drawer-locked", "loader-active");
+  });
+  window.addEventListener("pageshow", (event) => {
+    closeMenu(false);
+    backdrop?.classList.remove("is-open");
+    backdrop?.setAttribute("aria-hidden", "true");
+    if (backdrop) {
+      backdrop.hidden = true;
+      backdrop.inert = true;
+    }
+    document.body.classList.remove("menu-locked", "drawer-locked", "loader-active");
+    if (event.persisted) loader?.remove();
+    setBriefingExpanded(false);
+  });
+
+  briefingTriggers.forEach((button) => button.addEventListener("click", () => openDrawer(button)));
+  closeDrawerButton?.addEventListener("click", closeDrawer);
+  backdrop?.addEventListener("mousedown", (event) => { if (event.target === backdrop) closeDrawer(); });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      if (backdrop?.classList.contains("is-open")) closeDrawer();
+      else if (menu?.classList.contains("is-open")) closeMenu(true);
+    }
+    if (event.key === "Tab" && backdrop?.classList.contains("is-open") && drawer) {
+      const focusable = Array.from(drawer.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    }
+  });
+
+  const form = document.querySelector(".briefing-form");
+  const formStatus = form?.querySelector(".form-status");
+  const formSubmitLabel = form?.querySelector("[data-form-submit-label]");
+  const formSubmitButton = form?.querySelector('button[type="submit"]');
+  let briefingResponseTimer = null;
+  const setFormStatus = (state, message) => {
+    if (!form) return;
+    form.dataset.state = state;
+    if (formStatus) formStatus.textContent = message;
+    if (formSubmitButton) formSubmitButton.disabled = state === "submitting" || state === "submitted";
+    if (formSubmitLabel) formSubmitLabel.textContent = state === "submitting" ? "Sending request" : state === "submitted" ? "Briefing request received" : "Request a Founding Briefing";
+  };
+  form?.addEventListener("submit", () => {
+    window.clearTimeout(briefingResponseTimer);
+    const pageField = form.elements.namedItem("page");
+    const userAgentField = form.elements.namedItem("userAgent");
+    if (pageField) pageField.value = window.location.href;
+    if (userAgentField) userAgentField.value = navigator.userAgent;
+    setFormStatus("submitting", "Sending your private briefing request…");
+    briefingResponseTimer = window.setTimeout(() => {
+      if (form?.dataset.state === "submitting") setFormStatus("error", "We could not confirm the request. Please try again, or email nicholas@engenix.co.");
+    }, 18000);
+  });
+  window.addEventListener("message", (event) => {
+    if (!/^https:\/\/[a-z0-9-]+\.googleusercontent\.com$/i.test(event.origin)) return;
+    const payload = event.data;
+    if (!payload || payload.source !== "engenix-google-form" || !form || form.dataset.state !== "submitting") return;
+    window.clearTimeout(briefingResponseTimer);
+    if (payload.ok) {
+      setFormStatus("submitted", "Request received. ENGENIX leadership will follow up shortly.");
+      form.reset();
+    } else {
+      setFormStatus("error", payload.error || "We could not send the request. Please review the form and try again.");
+      formSubmitButton?.focus();
+    }
+  });
+
+  const sequence = document.querySelector("[data-hero-sequence]");
+  if (sequence) {
+    const stages = [
+      ["Structure", "Desking Intelligence", "Strongest pathway identified", "Customer objective, trade position, lender pathway, and approved economics remain connected.", "Sales leadership", "Preparing for controlled deployment"],
+      ["Sell", "F&I Intelligence", "Ownership strategy prepared", "The approved structure remains visible as the transaction moves into F&I.", "F&I leadership", "Preparing for controlled deployment"],
+      ["Verify", "Compliance Intelligence", "Disclosure review required", "A material difference between the approval record and final transaction is surfaced for dealership review.", "Compliance leadership", "Operational today"],
+      ["Fund", "Funding Assurance", "Funding condition visible", "Packet consistency, required items, and the accountable next move stay in view.", "Funding owner", "In active development"],
+      ["Reconcile", "Controller Intelligence", "Gross variance surfaced", "Expected, booked, and realized transaction values remain connected.", "Controller", "In active development"],
+      ["Close", "Operating Command", "Next action assigned", "Leadership sees the unresolved blocker, accountable owner, and preserved decision history.", "Executive leadership", "In active development"],
+    ];
+    let active = 0;
+    const renderStage = (index) => {
+      active = index;
+      const [label, layer, outcome, detail, owner, status] = stages[index];
+      sequence.querySelector("[data-stage-layer]").textContent = layer;
+      sequence.querySelector("[data-stage-status]").textContent = status;
+      sequence.querySelector("[data-stage-outcome]").textContent = outcome;
+      sequence.querySelector("[data-stage-detail]").textContent = detail;
+      sequence.querySelector("[data-stage-owner]").textContent = owner;
+      sequence.querySelectorAll("[data-stage-button]").forEach((button, buttonIndex) => {
+        const selected = buttonIndex === index;
+        button.classList.toggle("is-active", selected);
+        button.setAttribute("aria-selected", selected ? "true" : "false");
+      });
+      sequence.setAttribute("data-active-stage", label.toLowerCase());
+    };
+    const rail = sequence.querySelector(".operating-film__rail");
+    rail.innerHTML = stages.map((stage, index) => `<button type="button" role="tab" data-stage-button aria-selected="${index === 0}"><span>${String(index + 1).padStart(2, "0")}</span>${stage[0]}</button>`).join("");
+    rail.querySelectorAll("[data-stage-button]").forEach((button, index) => button.addEventListener("click", () => renderStage(index)));
+    renderStage(0);
+    if (!reducedMotion) {
+      window.setInterval(() => renderStage((active + 1) % stages.length), 3400);
+    }
+  }
+
+  const revealItems = Array.from(document.querySelectorAll(".reveal-on-scroll"));
+  if (!reducedMotion && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    revealItems.forEach((item) => revealObserver.observe(item));
   } else {
-    prepare();
-  }
-})();
-
-
-// =============================================================================
-// ENGENIX MOBILE CONTROL ORCHESTRATION V3
-// Keeps the briefing entry available without covering an on-screen CTA.
-// =============================================================================
-(() => {
-  const dock = document.querySelector('.global-founding-dock');
-  if (!dock) return;
-
-  const contextualButtons = Array.from(document.querySelectorAll('[data-open-private-access]'))
-    .filter(button => button !== dock && !button.closest('#private-access-panel'));
-
-  let visibleButtons = new Set();
-
-  const updateDock = () => {
-    const hiddenByContext = visibleButtons.size > 0;
-    dock.classList.toggle('is-context-hidden', hiddenByContext);
-    dock.setAttribute('aria-hidden', String(hiddenByContext));
-  };
-
-  if ('IntersectionObserver' in window && contextualButtons.length) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const rect = entry.boundingClientRect;
-        const actuallyVisible = entry.isIntersecting && entry.intersectionRatio >= 0.42 && rect.height > 0 && rect.width > 0;
-        if (actuallyVisible) visibleButtons.add(entry.target);
-        else visibleButtons.delete(entry.target);
-      });
-      updateDock();
-    }, {
-      threshold: [0, .42, .75],
-      rootMargin: '-8% 0px -8% 0px'
-    });
-
-    contextualButtons.forEach(button => observer.observe(button));
+    revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
-  updateDock();
+  const alertSimulator = document.querySelector("[data-alert-simulator]");
+  if (alertSimulator) {
+    const alertCard = alertSimulator.querySelector("[data-simulator-alert]");
+    const resolvedPanel = alertSimulator.querySelector("[data-simulator-resolved]");
+    const resolveButton = alertSimulator.querySelector("[data-resolve-alert]");
+    const replayButton = alertSimulator.querySelector("[data-replay-alert]");
+    let focusTimer = null;
+
+    const setSimulatorState = (resolved, moveFocus) => {
+      window.clearTimeout(focusTimer);
+      alertSimulator.classList.toggle("is-resolved", resolved);
+      alertCard?.setAttribute("aria-hidden", resolved ? "true" : "false");
+      resolvedPanel?.setAttribute("aria-hidden", resolved ? "false" : "true");
+      if (alertCard) alertCard.inert = resolved;
+      if (resolvedPanel) resolvedPanel.inert = !resolved;
+      if (!moveFocus) return;
+      focusTimer = window.setTimeout(() => {
+        if (resolved) replayButton?.focus();
+        else resolveButton?.focus();
+      }, reducedMotion ? 0 : 520);
+    };
+
+    resolveButton?.addEventListener("click", () => setSimulatorState(true, true));
+    replayButton?.addEventListener("click", () => setSimulatorState(false, true));
+  }
 })();
