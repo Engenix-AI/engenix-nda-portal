@@ -28,7 +28,7 @@
     ["company", "Company"],
   ];
 
-  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=11" alt="ENGENIX" width="577" height="433"></span>`;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=12" alt="ENGENIX" width="577" height="433"></span>`;
   const arrow = '<span class="arrow" aria-hidden="true"></span>';
   const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
     (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
@@ -57,15 +57,19 @@
 
   if (loader) {
     document.body.classList.add("loader-active");
-    if (!reducedMotion && loaderStatus) {
-      window.setTimeout(() => { loaderStatus.textContent = "Calibrating operating view"; }, 850);
-      window.setTimeout(() => { loaderStatus.textContent = "Entry authorized"; }, 1650);
-    }
-    window.setTimeout(() => {
+    const releaseLoader = () => {
       loader.classList.add("is-hidden");
       loader.setAttribute("aria-hidden", "true");
       document.body.classList.remove("loader-active");
-    }, reducedMotion ? 450 : 2350);
+    };
+    if (!reducedMotion && loaderStatus) {
+      window.setTimeout(() => { loaderStatus.textContent = "Calibrating operating view"; }, 480);
+      window.setTimeout(() => { loaderStatus.textContent = "Entry authorized"; }, 950);
+    }
+    window.setTimeout(releaseLoader, reducedMotion ? 280 : 1300);
+    loader.addEventListener("animationend", (event) => {
+      if (event.animationName === "loader-failsafe") releaseLoader();
+    }, { once: true });
   }
 
   if (headerTarget) {
@@ -219,6 +223,29 @@
     setBriefingExpanded(false);
     if (lastTrigger && typeof lastTrigger.focus === "function") lastTrigger.focus();
   };
+
+  /* Prevent Safari back-forward cache from restoring an invisible scroll lock. */
+  window.addEventListener("pagehide", () => {
+    document.body.classList.remove("menu-locked", "drawer-locked", "loader-active");
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
+    closeMenu(false);
+    backdrop?.classList.remove("is-open");
+    backdrop?.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("menu-locked", "drawer-locked", "loader-active");
+    loader?.classList.add("is-hidden");
+    loader?.setAttribute("aria-hidden", "true");
+    setBriefingExpanded(false);
+  });
+
+  document.addEventListener("touchstart", () => {
+    if (!menu?.classList.contains("is-open")) document.body.classList.remove("menu-locked");
+    if (!backdrop?.classList.contains("is-open")) document.body.classList.remove("drawer-locked");
+    if (!loader || loader.classList.contains("is-hidden") || loader.getAttribute("aria-hidden") === "true") {
+      document.body.classList.remove("loader-active");
+    }
+  }, { passive: true, capture: true });
   briefingTriggers.forEach((button) => button.addEventListener("click", () => openDrawer(button)));
   closeDrawerButton?.addEventListener("click", closeDrawer);
   backdrop?.addEventListener("mousedown", (event) => { if (event.target === backdrop) closeDrawer(); });
