@@ -29,7 +29,7 @@
     ["company", "Company"],
   ];
 
-  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=12.2" alt="ENGENIX" width="577" height="433"></span>`;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=12.3" alt="ENGENIX" width="577" height="433"></span>`;
   const arrow = '<span class="arrow" aria-hidden="true"></span>';
   const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
     (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
@@ -62,6 +62,7 @@
       loader.classList.add("is-hidden");
       loader.setAttribute("aria-hidden", "true");
       document.body.classList.remove("loader-active");
+      loader.remove();
     };
     if (!reducedMotion && loaderStatus) {
       window.setTimeout(() => { loaderStatus.textContent = "Calibrating operating view"; }, 480);
@@ -94,7 +95,7 @@
           </div>
         </nav>
       </header>
-      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true" hidden>
         <div class="mobile-menu__inner">
           <p class="eyebrow">Operating Intelligence</p>
           ${navItems.map(([slug, label], index) => `<a ${index === 0 ? 'data-first-menu-link ' : ""}href="${route(slug)}"${currentSlug === slug ? ' aria-current="page"' : ""}>${label}</a>`).join("")}
@@ -116,7 +117,7 @@
 
   if (drawerTarget) {
     drawerTarget.innerHTML = `
-      <div class="drawer-backdrop" aria-hidden="true">
+      <div class="drawer-backdrop" aria-hidden="true" hidden>
         <aside class="briefing-drawer" id="briefing-drawer" role="dialog" aria-modal="true" aria-labelledby="briefing-title">
           <button class="drawer-close" type="button" aria-label="Close briefing request"><span></span><span></span></button>
           <div class="briefing-drawer__intro"><p class="eyebrow">Founding Dealership Network</p><h2 id="briefing-title">Request a private operating briefing.</h2><p>For dealership principals, ownership groups, and operating leaders evaluating the first ENGENIX layer and the system entering controlled deployment.</p></div>
@@ -181,6 +182,10 @@
   const closeMenu = (returnFocus) => {
     menu?.classList.remove("is-open");
     menu?.setAttribute("aria-hidden", "true");
+    if (menu) {
+      menu.hidden = true;
+      menu.inert = true;
+    }
     menuButton?.setAttribute("aria-expanded", "false");
     menuButton?.setAttribute("aria-label", "Open navigation menu");
     document.body.classList.remove("menu-locked");
@@ -189,6 +194,10 @@
   menuButton?.addEventListener("click", () => {
     const willOpen = !menu?.classList.contains("is-open");
     if (!willOpen) return closeMenu(false);
+    if (menu) {
+      menu.hidden = false;
+      menu.inert = false;
+    }
     menu?.classList.add("is-open");
     menu?.setAttribute("aria-hidden", "false");
     menuButton.setAttribute("aria-expanded", "true");
@@ -211,6 +220,10 @@
   const openDrawer = (trigger) => {
     lastTrigger = trigger || document.activeElement;
     closeMenu(false);
+    if (backdrop) {
+      backdrop.hidden = false;
+      backdrop.inert = false;
+    }
     backdrop?.classList.add("is-open");
     backdrop?.setAttribute("aria-hidden", "false");
     if (allowBodyScrollLock) document.body.classList.add("drawer-locked");
@@ -220,6 +233,10 @@
   const closeDrawer = () => {
     backdrop?.classList.remove("is-open");
     backdrop?.setAttribute("aria-hidden", "true");
+    if (backdrop) {
+      backdrop.hidden = true;
+      backdrop.inert = true;
+    }
     document.body.classList.remove("drawer-locked");
     setBriefingExpanded(false);
     if (lastTrigger && typeof lastTrigger.focus === "function") lastTrigger.focus();
@@ -227,16 +244,26 @@
 
   /* Prevent Safari back-forward cache from restoring an invisible scroll lock. */
   window.addEventListener("pagehide", () => {
+    if (menu) {
+      menu.hidden = true;
+      menu.inert = true;
+    }
+    if (backdrop) {
+      backdrop.hidden = true;
+      backdrop.inert = true;
+    }
     document.body.classList.remove("menu-locked", "drawer-locked", "loader-active");
   });
   window.addEventListener("pageshow", (event) => {
-    if (!event.persisted) return;
     closeMenu(false);
     backdrop?.classList.remove("is-open");
     backdrop?.setAttribute("aria-hidden", "true");
+    if (backdrop) {
+      backdrop.hidden = true;
+      backdrop.inert = true;
+    }
     document.body.classList.remove("menu-locked", "drawer-locked", "loader-active");
-    loader?.classList.add("is-hidden");
-    loader?.setAttribute("aria-hidden", "true");
+    if (event.persisted) loader?.remove();
     setBriefingExpanded(false);
   });
 

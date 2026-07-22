@@ -52,7 +52,7 @@
 html {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 92px;
   background: var(--page);
@@ -63,7 +63,7 @@ body {
   min-width: 320px;
   max-width: 100%;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--page);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -130,6 +130,11 @@ body.loader-active {
 .mobile-menu:not(.is-open),
 .drawer-backdrop:not(.is-open) {
   pointer-events: none;
+}
+
+.mobile-menu[hidden],
+.drawer-backdrop[hidden] {
+  display: none !important;
 }
 
 .mobile-menu.is-open,
@@ -931,7 +936,7 @@ select:focus-visible {
 .movie-hero-bg {
   z-index: 0;
   inset: -4%;
-  background: url("assets/Crlwo.jpg?v=12.2") center 52% / cover no-repeat;
+  background: url("assets/Crlwo.jpg?v=12.3") center 52% / cover no-repeat;
   filter: saturate(0.92) contrast(1.08);
   transform: scale(1.045);
   transform-origin: 50% 52%;
@@ -2086,7 +2091,7 @@ select:focus-visible {
   background:
     linear-gradient(110deg, rgba(3, 5, 6, 0.98), rgba(5, 9, 10, 0.78) 58%, rgba(21, 34, 39, 0.72)),
     radial-gradient(circle at 78% 50%, rgba(101, 151, 169, 0.42), transparent 32%),
-    url("assets/launch-texture.jpg?v=12.2") center 58% / cover no-repeat,
+    url("assets/launch-texture.jpg?v=12.3") center 58% / cover no-repeat,
     #0b0f11;
   color: #fff;
 }
@@ -2136,7 +2141,7 @@ select:focus-visible {
   background:
     linear-gradient(115deg, rgba(4, 6, 7, 0.95), rgba(4, 8, 9, 0.73)),
     radial-gradient(circle at 75% 45%, rgba(240, 194, 90, 0.2), transparent 30%),
-    url("assets/launch-texture.jpg?v=12.2") center 58% / cover no-repeat,
+    url("assets/launch-texture.jpg?v=12.3") center 58% / cover no-repeat,
     #0b0f11;
 }
 
@@ -2149,7 +2154,7 @@ select:focus-visible {
   background:
     linear-gradient(110deg, rgba(245, 247, 243, 0.98), rgba(229, 235, 232, 0.86) 62%, rgba(206, 221, 224, 0.72)),
     radial-gradient(circle at 78% 50%, rgba(101, 151, 169, 0.25), transparent 32%),
-    url("assets/launch-texture.jpg?v=12.2") center 58% / cover no-repeat,
+    url("assets/launch-texture.jpg?v=12.3") center 58% / cover no-repeat,
     #eef1ee;
   color: #151718;
 }
@@ -3235,7 +3240,7 @@ body.loader-active .briefing-dock {
   main {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   html {
@@ -3922,7 +3927,7 @@ body.loader-active .briefing-dock {
     inset: 0;
     background:
       linear-gradient(180deg, transparent 0 52%, #090b0c 81%),
-      url("assets/Crlwo.jpg?v=12.2") center 76px / auto 620px no-repeat,
+      url("assets/Crlwo.jpg?v=12.3") center 76px / auto 620px no-repeat,
       #090b0c;
     filter: saturate(0.96) contrast(1.08);
     transform: scale(1.02);
@@ -3932,7 +3937,7 @@ body.loader-active .briefing-dock {
   :root[data-theme="signal"] .movie-hero-bg {
     background:
       linear-gradient(180deg, transparent 0 48%, #f1f2ee 81%),
-      url("assets/Crlwo.jpg?v=12.2") center 76px / auto 620px no-repeat,
+      url("assets/Crlwo.jpg?v=12.3") center 76px / auto 620px no-repeat,
       #f1f2ee;
     filter: saturate(0.7) contrast(0.91) brightness(1.1);
   }
@@ -4062,7 +4067,7 @@ body.loader-active .briefing-dock {
    ========================================================= */
 
 .launch-v10 .v10-hero__image {
-  background-image: url("assets/engenix-horizon-v11.webp?v=12.2");
+  background-image: url("assets/engenix-horizon-v11.webp?v=12.3");
   background-position: center center;
   filter: saturate(.88) contrast(1.08) brightness(.68);
 }
@@ -4102,7 +4107,7 @@ body.loader-active .briefing-dock {
   overflow: hidden;
   border: 1px solid rgba(255,255,255,.18);
   border-radius: clamp(24px, 3vw, 42px);
-  background: #090b0d url("assets/engenix-six-gates-v11.webp?v=12.2") center center / cover no-repeat;
+  background: #090b0d url("assets/engenix-six-gates-v11.webp?v=12.3") center center / cover no-repeat;
   box-shadow: 0 45px 130px rgba(0,0,0,.55), inset 0 1px rgba(255,255,255,.08);
 }
 
@@ -4179,7 +4184,7 @@ body.loader-active .briefing-dock {
 
 .v10-simulator {
   border-color: rgba(240,194,90,.22);
-  background: #080b0d url("assets/engenix-evidence-vault-v11.webp?v=12.2") center center / cover no-repeat;
+  background: #080b0d url("assets/engenix-evidence-vault-v11.webp?v=12.3") center center / cover no-repeat;
   box-shadow: 0 50px 130px rgba(0,0,0,.44), 0 0 0 1px rgba(240,194,90,.035);
 }
 
@@ -4279,7 +4284,7 @@ body.loader-active .briefing-dock {
 @media (max-width: 760px), (max-width: 900px) and (hover: none) and (pointer: coarse) {
   .launch-v10 .v10-hero__image {
     inset: 0;
-    background-image: url("assets/engenix-horizon-mobile-v11.webp?v=12.2");
+    background-image: url("assets/engenix-horizon-mobile-v11.webp?v=12.3");
     background-position: center center;
     background-size: cover;
     filter: saturate(.82) contrast(1.08) brightness(.58);
@@ -4311,7 +4316,7 @@ body.loader-active .briefing-dock {
   }
 
   .v10-simulator {
-    background-image: url("assets/engenix-evidence-mobile-v11.webp?v=12.2");
+    background-image: url("assets/engenix-evidence-mobile-v11.webp?v=12.3");
     background-position: center 54px;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -4460,7 +4465,7 @@ body.loader-active .briefing-dock {
 
 .v10-hero__image {
   inset: -4%;
-  background: url("assets/Crlwo.jpg?v=12.2") center 58% / cover no-repeat;
+  background: url("assets/Crlwo.jpg?v=12.3") center 58% / cover no-repeat;
   filter: saturate(0.84) contrast(1.07) brightness(0.56);
   animation: v10-hero-breathe 20s ease-in-out infinite alternate;
 }
@@ -5818,7 +5823,7 @@ body.loader-active .briefing-dock {
 
 /* V11 final cascade: keep cinematic plates authoritative after V10 foundations. */
 .launch-v10 .v10-hero__image {
-  background-image: url("assets/engenix-horizon-v11.webp?v=12.2");
+  background-image: url("assets/engenix-horizon-v11.webp?v=12.3");
   background-position: center center;
   filter: saturate(.88) contrast(1.08) brightness(.68);
 }
@@ -5832,7 +5837,7 @@ body.loader-active .briefing-dock {
 
 .launch-v10 .v10-simulator {
   border-color: rgba(240,194,90,.22);
-  background: #080b0d url("assets/engenix-evidence-vault-v11.webp?v=12.2") center center / cover no-repeat;
+  background: #080b0d url("assets/engenix-evidence-vault-v11.webp?v=12.3") center center / cover no-repeat;
   box-shadow: 0 50px 130px rgba(0,0,0,.44), 0 0 0 1px rgba(240,194,90,.035);
 }
 
@@ -5909,7 +5914,7 @@ body.loader-active .briefing-dock {
 @media (max-width: 760px), (max-width: 900px) and (hover: none) and (pointer: coarse) {
   .launch-v10 .v10-hero__image {
     inset: 0;
-    background-image: url("assets/engenix-horizon-mobile-v11.webp?v=12.2");
+    background-image: url("assets/engenix-horizon-mobile-v11.webp?v=12.3");
     background-position: center center;
     background-size: cover;
     filter: saturate(.82) contrast(1.08) brightness(.58);
@@ -5922,7 +5927,7 @@ body.loader-active .briefing-dock {
   }
 
   .launch-v10 .v10-simulator {
-    background-image: url("assets/engenix-evidence-mobile-v11.webp?v=12.2");
+    background-image: url("assets/engenix-evidence-mobile-v11.webp?v=12.3");
     background-position: center 54px;
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -6261,19 +6266,30 @@ body.loader-active .briefing-dock {
   }
 }
 
-/* V12.2 native mobile scroll: touch browsers own the page gesture. */
+/* V12.3 native mobile scroll: one root scroller, no retained overlays. */
 @media (max-width: 900px), (hover: none) and (pointer: coarse) {
   html,
-  body {
+  body,
+  main {
+    overflow-x: clip !important;
     overscroll-behavior: auto !important;
     touch-action: auto !important;
+  }
+
+  html {
+    overflow-y: auto !important;
+    scroll-behavior: auto;
+  }
+
+  body {
+    overflow-y: visible !important;
   }
 
   body.menu-locked,
   body.drawer-locked,
   body.loader-active {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
     touch-action: auto !important;
   }
 
@@ -6303,6 +6319,15 @@ body.loader-active .briefing-dock {
     scroll-snap-type: none !important;
     overscroll-behavior: auto;
     touch-action: auto !important;
+  }
+
+  .nav-shell {
+    pointer-events: none;
+  }
+
+  .brand-link,
+  .nav-actions {
+    pointer-events: auto;
   }
 
   /* Keep every homepage gesture vertical on Safari. The former swipe rails
