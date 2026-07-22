@@ -349,103 +349,29 @@
     revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
-  // Section-scoped Transaction Gate: it pauses the illustrative deal, never page scroll.
-  // This controller intentionally does not alter body classes, touch handlers, or global overlays.
-  const exceptionDemo = document.querySelector("[data-exception-demo]");
-  if (exceptionDemo) {
-    const panels = Array.from(exceptionDemo.querySelectorAll("[data-exception-panel]"));
-    const status = exceptionDemo.querySelector("[data-exception-status]");
-    const controls = {
-      review: exceptionDemo.querySelector("[data-exception-review]"),
-      record: exceptionDemo.querySelector("[data-exception-record]"),
-      back: exceptionDemo.querySelector("[data-exception-back]"),
-      close: exceptionDemo.querySelector("[data-exception-close]"),
-      replay: exceptionDemo.querySelector("[data-exception-replay]"),
-      reopen: exceptionDemo.querySelector("[data-exception-reopen]"),
-    };
-    const statusCopy = {
-      alert: "High-risk exception surfaced. The synthetic deal requires qualified operator review.",
-      review: "Qualified operator review is ready. Confirm the next move for the synthetic deal.",
-      recording: "Decision is being recorded on the synthetic deal.",
-      resolved: "Decision recorded. Corrective action assigned. The synthetic deal may proceed.",
-      closed: "Illustrative demonstration paused. Reopen the alert to review it again.",
-    };
-    let timer = null;
-    let lastControl = null;
+  const alertSimulator = document.querySelector("[data-alert-simulator]");
+  if (alertSimulator) {
+    const alertCard = alertSimulator.querySelector("[data-simulator-alert]");
+    const resolvedPanel = alertSimulator.querySelector("[data-simulator-resolved]");
+    const resolveButton = alertSimulator.querySelector("[data-resolve-alert]");
+    const replayButton = alertSimulator.querySelector("[data-replay-alert]");
+    let focusTimer = null;
 
-    const setExceptionState = (state, options = {}) => {
-      const { moveFocus = false, returnFocus = false } = options;
-      window.clearTimeout(timer);
-      exceptionDemo.dataset.state = state;
-      exceptionDemo.classList.toggle("is-entered", state !== "closed");
-      const visiblePanel = state === "recording" ? "review" : state;
-      panels.forEach((panel) => {
-        const active = panel.dataset.exceptionPanel === visiblePanel;
-        panel.setAttribute("aria-hidden", active ? "false" : "true");
-        panel.inert = !active;
-      });
-      if (status) status.textContent = statusCopy[state] || statusCopy.alert;
-      if (returnFocus && lastControl?.focus) {
-        lastControl.focus();
-        return;
-      }
+    const setSimulatorState = (resolved, moveFocus) => {
+      window.clearTimeout(focusTimer);
+      alertSimulator.classList.toggle("is-resolved", resolved);
+      alertCard?.setAttribute("aria-hidden", resolved ? "true" : "false");
+      resolvedPanel?.setAttribute("aria-hidden", resolved ? "false" : "true");
+      if (alertCard) alertCard.inert = resolved;
+      if (resolvedPanel) resolvedPanel.inert = !resolved;
       if (!moveFocus) return;
-      const target = state === "review" ? controls.record
-        : state === "resolved" ? controls.replay
-        : state === "closed" ? controls.reopen
-        : controls.review;
-      timer = window.setTimeout(() => target?.focus(), reducedMotion ? 0 : 320);
+      focusTimer = window.setTimeout(() => {
+        if (resolved) replayButton?.focus();
+        else resolveButton?.focus();
+      }, reducedMotion ? 0 : 520);
     };
 
-    const enterDemo = () => exceptionDemo.classList.add("is-entered");
-    if (!reducedMotion && "IntersectionObserver" in window) {
-      const exceptionObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          enterDemo();
-          observer.unobserve(entry.target);
-        });
-      }, { rootMargin: "0px 0px -12% 0px", threshold: 0.22 });
-      exceptionObserver.observe(exceptionDemo);
-    } else {
-      enterDemo();
-    }
-
-    controls.review?.addEventListener("click", () => {
-      lastControl = controls.review;
-      setExceptionState("review", { moveFocus: true });
-    });
-    controls.back?.addEventListener("click", () => {
-      lastControl = controls.back;
-      setExceptionState("alert", { moveFocus: true });
-    });
-    controls.record?.addEventListener("click", () => {
-      lastControl = controls.record;
-      setExceptionState("recording");
-      timer = window.setTimeout(() => setExceptionState("resolved", { moveFocus: true }), reducedMotion ? 0 : 620);
-    });
-    controls.close?.addEventListener("click", () => {
-      lastControl = controls.close;
-      setExceptionState("closed", { moveFocus: true });
-    });
-    controls.replay?.addEventListener("click", () => {
-      lastControl = controls.replay;
-      setExceptionState("alert", { moveFocus: true });
-    });
-    controls.reopen?.addEventListener("click", () => {
-      lastControl = controls.reopen;
-      setExceptionState("alert", { moveFocus: true });
-    });
-    exceptionDemo.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      const state = exceptionDemo.dataset.state;
-      if (state === "review") {
-        event.preventDefault();
-        setExceptionState("alert", { moveFocus: true });
-      } else if (state !== "alert" && state !== "closed") {
-        event.preventDefault();
-        setExceptionState("alert", { moveFocus: true });
-      }
-    });
+    resolveButton?.addEventListener("click", () => setSimulatorState(true, true));
+    replayButton?.addEventListener("click", () => setSimulatorState(false, true));
   }
 })();

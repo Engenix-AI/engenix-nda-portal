@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="assets/engenix-icon.jpeg">
   <link rel="preload" as="image" href="assets/engenix-horizon-v11.webp?v=12.3" fetchpriority="high" media="(min-width: 761px)">
   <link rel="preload" as="image" href="assets/engenix-horizon-mobile-v11.webp?v=12.3" fetchpriority="high" media="(max-width: 760px)">
-  <link rel="stylesheet" href="launch-styles.css?v=13.1">
+  <link rel="stylesheet" href="launch-styles.css?v=12.3">
   <script>
     (() => {
       let saved = null;
@@ -113,52 +113,29 @@
       <div class="v10-kicker"><span>03</span><p class="eyebrow">Operational proof</p></div>
       <div class="v10-proof__intro"><div><span class="status-badge status-badge--live"><i></i> Operational today</span><h2 id="alert-simulator-heading">The audit should begin when the deal begins.</h2></div><div><p>Compliance Intelligence helps qualified dealership personnel surface potential exposure, connect findings to source evidence, assign corrective action, and preserve the decision history.</p><a class="v10-text-link" href="compliance-intelligence/">Explore Compliance Intelligence <span class="arrow" aria-hidden="true"></span></a></div></div>
 
-      <div class="v10-simulator v13-exception-demo reveal-on-scroll" data-exception-demo data-state="alert" aria-label="Illustrative high-risk exception demonstration">
-        <div class="simulator-topline"><span class="live-mark"><i></i> Illustrative operating alert</span><span>Synthetic deal DX-2147</span></div>
-        <p class="v13-exception-status" data-exception-status role="status" aria-live="polite">High-risk exception surfaced. The synthetic deal requires qualified operator review.</p>
-        <div class="simulator-stage">
-          <article class="sim-alert v13-exception-panel" data-exception-panel="alert" aria-hidden="false">
-            <div class="sim-alert__meta"><span><i aria-hidden="true"></i> High-risk exception</span><span>Deal movement paused</span></div>
+      <div class="v10-simulator reveal-on-scroll" data-alert-simulator>
+        <div class="simulator-topline"><span class="live-mark"><i></i> Illustrative operating alert</span><span>Deal DX-2147 · Synthetic</span></div>
+        <div class="simulator-stage" aria-live="polite">
+          <article class="sim-alert" data-simulator-alert aria-hidden="false">
+            <div class="sim-alert__meta"><span>Management attention</span><span>Compliance Intelligence</span></div>
             <div class="sim-alert__body">
-              <p class="v13-panel-label">Management attention required</p>
-              <h3>Operator decision required before this deal can move forward.</h3>
-              <p>The approval record shows 72 months. The final contract shows 75 months. ENGENIX has paused this illustrative deal for qualified dealership review.</p>
+              <span class="sim-alert__risk">Material difference</span>
+              <h3>Approved term and final contract differ.</h3>
+              <p>The illustrative approval record shows 72 months. The illustrative final contract shows 75 months. Qualified dealership review is required.</p>
               <dl>
-                <div><dt>Source evidence</dt><dd>Approval record · Final contract</dd></div>
-                <div><dt>Accountable owner</dt><dd>Compliance leadership</dd></div>
-                <div><dt>Operating state</dt><dd>Deal movement paused</dd></div>
+                <div><dt>Evidence</dt><dd>Approval record + final contract</dd></div>
+                <div><dt>Owner</dt><dd>Compliance leadership</dd></div>
+                <div><dt>Next move</dt><dd>Confirm and assign corrective action</dd></div>
               </dl>
-              <p class="v13-human-note"><strong>Human authority remains with the dealership.</strong> ENGENIX surfaces the potential exposure and the next decision; qualified personnel make the final call.</p>
-              <div class="v13-panel-actions"><button class="button button--gold" type="button" data-exception-review>Review required decision <span class="arrow" aria-hidden="true"></span></button><button class="v13-text-button" type="button" data-exception-close>Close demonstration</button></div>
+              <button class="button button--gold" type="button" data-resolve-alert>Resolve &amp; hand off to F&amp;I <span class="arrow" aria-hidden="true"></span></button>
             </div>
           </article>
-
-          <article class="sim-alert v13-exception-panel v13-review-panel" data-exception-panel="review" aria-hidden="true" inert>
-            <div class="sim-alert__meta"><span>Qualified operator review</span><span>Synthetic deal DX-2147</span></div>
-            <div class="sim-alert__body">
-              <p class="v13-panel-label">Confirm the next move</p>
-              <h3>Return the deal to F&amp;I for correction.</h3>
-              <p>The approved term and final contract do not align. The qualified operator acknowledges the exception and assigns the next action before the synthetic deal proceeds.</p>
-              <dl>
-                <div><dt>Decision</dt><dd>Return to F&amp;I for correction</dd></div>
-                <div><dt>Owner</dt><dd>F&amp;I leadership</dd></div>
-                <div><dt>Record</dt><dd>Decision history preserved</dd></div>
-              </dl>
-              <div class="v13-panel-actions"><button class="button button--gold" type="button" data-exception-record>Record decision &amp; assign corrective action <span class="arrow" aria-hidden="true"></span></button><button class="v13-text-button" type="button" data-exception-back>Back to alert</button></div>
-            </div>
-          </article>
-
-          <article class="sim-resolved v13-exception-panel" data-exception-panel="resolved" aria-hidden="true" inert>
+          <div class="sim-resolved" data-simulator-resolved aria-hidden="true" inert>
             <div class="sim-resolved__mark" aria-hidden="true"><span></span></div>
-            <p class="eyebrow">Decision recorded</p>
-            <h3>The decision is clear.<br> The deal can move forward.</h3>
-            <p class="v13-resolved-copy">The exception was reviewed by a qualified operator. Corrective action has been assigned to F&amp;I, and the decision is preserved with the synthetic deal record.</p>
-            <ol class="handoff-chain" aria-label="Illustrative decision history"><li><span>01</span><strong>Exception reviewed</strong></li><li><span>02</span><strong>Corrective action assigned</strong></li><li><span>03</span><strong>Decision recorded</strong></li></ol>
-            <div class="v13-panel-actions"><a class="button button--gold" href="#proof-dashboard">Continue to Operational Proof <span class="arrow" aria-hidden="true"></span></a><button class="simulator-replay" type="button" data-exception-replay>Replay illustrative alert</button></div>
-          </article>
-
-          <div class="v13-demo-closed" data-exception-panel="closed" aria-hidden="true" inert>
-            <p class="eyebrow">Illustrative operating alert</p><h3>Demonstration paused.</h3><button class="simulator-replay" type="button" data-exception-reopen>Reopen high-risk exception</button>
+            <p class="eyebrow">Corrective action assigned</p>
+            <h3>Next action clear.<br>Decision history preserved.</h3>
+            <ol class="handoff-chain" aria-label="Illustrative handoff chain"><li><span>01</span><strong>Compliance review</strong></li><li><span>02</span><strong>F&amp;I leadership</strong></li><li><span>03</span><strong>Decision history</strong></li></ol>
+            <button class="simulator-replay" type="button" data-replay-alert>Replay illustrative alert</button>
           </div>
         </div>
       </div>
@@ -206,6 +183,6 @@
   </main>
   <div data-site-footer></div>
   <div data-site-drawer></div>
-  <script src="launch-script.js?v=13"></script>
+  <script src="launch-script.js?v=12.3"></script>
 </body>
 </html>

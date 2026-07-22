@@ -4061,6 +4061,97 @@ body.loader-active .briefing-dock {
   }
 }
 
+/* V14 interior briefing system — shared across Launch Edition menu pages. */
+.briefing-page .page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.briefing-page .page-hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: auto 5% 8% auto;
+  width: min(39vw, 540px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(240,194,90,.28);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 52px rgba(240,194,90,.025), 0 0 110px rgba(65,128,151,.18);
+  content: "";
+}
+
+.briefing-page .page-hero .status-badge { margin-bottom: 24px; }
+.briefing-page .page-hero__actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:32px; }
+.briefing-page .page-hero__actions .button { margin:0; }
+.briefing-page .page-hero__actions .text-link { align-self:center; color:inherit; }
+
+.briefing-intro {
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(300px,.55fr);
+  gap:clamp(44px,8vw,135px);
+  align-items:end;
+}
+.briefing-intro h2 { max-width:850px; margin:0; font-size:clamp(46px,6vw,88px); font-weight:590; letter-spacing:-.068em; line-height:.92; }
+.briefing-intro > div:last-child > p { margin:0; color:var(--muted); font-size:16px; line-height:1.68; }
+
+.truth-rail {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  overflow:hidden;
+  margin-top:64px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:var(--surface);
+}
+.truth-rail > div { min-height:175px; padding:25px; border-right:1px solid var(--line); }
+.truth-rail > div:last-child { border-right:0; }
+.truth-rail span { color:var(--muted-2); font:700 8px/1.2 var(--font-mono); letter-spacing:.12em; text-transform:uppercase; }
+.truth-rail strong { display:block; max-width:13ch; margin-top:54px; font-size:20px; font-weight:640; letter-spacing:-.04em; line-height:1.05; }
+
+.operating-steps { display:grid; gap:0; margin-top:68px; border-top:1px solid var(--line); }
+.operating-steps article { display:grid; grid-template-columns:70px minmax(150px,.6fr) minmax(0,1.2fr); gap:28px; align-items:start; padding:28px 0; border-bottom:1px solid var(--line); }
+.operating-steps span { color:var(--gold); font:700 9px/1.2 var(--font-mono); letter-spacing:.1em; }
+.operating-steps h3 { margin:0; font-size:23px; letter-spacing:-.04em; }
+.operating-steps p { max-width:670px; margin:0; color:var(--muted); font-size:15px; line-height:1.62; }
+
+.decision-anatomy { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:60px; }
+.decision-anatomy article { min-height:190px; padding:26px; border:1px solid var(--line); border-radius:20px; background:var(--surface); }
+.decision-anatomy span { color:var(--gold); font:700 8px/1.2 var(--font-mono); letter-spacing:.11em; text-transform:uppercase; }
+.decision-anatomy h3 { margin:48px 0 10px; font-size:24px; letter-spacing:-.04em; }
+.decision-anatomy p { margin:0; color:var(--muted); font-size:14px; line-height:1.58; }
+
+.briefing-slab { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(300px,.65fr); gap:clamp(42px,8vw,120px); align-items:center; padding:clamp(48px,7vw,92px); border:1px solid rgba(240,194,90,.32); border-radius:30px; background:linear-gradient(125deg,rgba(240,194,90,.1),rgba(31,65,76,.09)); }
+.briefing-slab h2 { max-width:740px; margin:0; font-size:clamp(40px,5vw,70px); font-weight:590; letter-spacing:-.065em; line-height:.94; }
+.briefing-slab p { margin:0 0 25px; color:var(--muted); font-size:16px; line-height:1.65; }
+
+.status-matrix { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-top:58px; }
+.status-matrix > div { min-height:125px; padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
+.status-matrix span { display:block; color:var(--muted-2); font:700 8px/1.3 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; }
+.status-matrix strong { display:block; margin-top:30px; font-size:15px; letter-spacing:-.025em; }
+.status-matrix .is-live { border-color:rgba(109,184,138,.5); }
+.status-matrix .is-live span { color:#69b88a; }
+
+.role-lines { display:grid; gap:0; margin-top:64px; border-top:1px solid var(--line); }
+.role-lines article { display:grid; grid-template-columns:minmax(155px,.46fr) minmax(0,1fr); gap:30px; padding:27px 0; border-bottom:1px solid var(--line); }
+.role-lines h3 { margin:0; font-size:21px; letter-spacing:-.04em; }.role-lines p { max-width:720px; margin:0; color:var(--muted); font-size:15px; line-height:1.62; }
+
+.founding-phases { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:64px; }
+.founding-phases article { min-height:280px; padding:26px; border:1px solid var(--line); border-radius:20px; background:var(--surface); }.founding-phases span { color:var(--gold); font:700 9px/1.2 var(--font-mono); letter-spacing:.1em; }.founding-phases h3 { margin:72px 0 12px; font-size:25px; letter-spacing:-.045em; }.founding-phases p { margin:0; color:var(--muted); font-size:14px; line-height:1.58; }
+
+.implementation-list { display:grid; gap:12px; margin-top:56px; }.implementation-list article { display:grid; grid-template-columns:44px minmax(0,1fr); gap:18px; padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }.implementation-list span { color:var(--gold); font:700 9px/1.3 var(--font-mono); }.implementation-list h3 { margin:0 0 8px; font-size:19px; letter-spacing:-.03em; }.implementation-list p { margin:0; color:var(--muted); font-size:14px; line-height:1.58; }
+
+.briefing-page .closing-cta { margin-bottom:clamp(120px,14vw,180px); }
+
+@media (max-width:900px), (hover:none) and (pointer:coarse) {
+  .briefing-page .page-hero { min-height:auto; padding-top:150px; padding-bottom:72px; }.briefing-page .page-hero::after { width:260px; right:-74px; bottom:20px; }.briefing-page .page-hero__actions { display:grid; grid-template-columns:1fr; }.briefing-page .page-hero__actions .button { width:100%; }
+  .briefing-intro,.briefing-slab { grid-template-columns:1fr; gap:28px; }.briefing-intro h2 { font-size:clamp(42px,11vw,62px); }
+  .truth-rail { grid-template-columns:1fr; margin-top:42px; }.truth-rail > div { min-height:120px; border-right:0; border-bottom:1px solid var(--line); }.truth-rail > div:last-child { border-bottom:0; }.truth-rail strong { margin-top:28px; }
+  .operating-steps { margin-top:44px; }.operating-steps article { grid-template-columns:42px 1fr; gap:10px 16px; }.operating-steps p { grid-column:2; }
+  .decision-anatomy,.status-matrix { grid-template-columns:1fr; margin-top:42px; }.decision-anatomy article { min-height:150px; }.decision-anatomy h3 { margin-top:30px; }
+  .role-lines article { grid-template-columns:1fr; gap:10px; }.founding-phases { grid-template-columns:1fr; margin-top:42px; }.founding-phases article { min-height:190px; }.founding-phases h3 { margin-top:42px; }
+  .briefing-slab { padding:32px 22px; border-radius:24px; }.briefing-slab h2 { font-size:clamp(38px,10vw,56px); }
+}
+
 /* =========================================================
    LAUNCH EDITION V11 — CINEMATIC VISUAL CUT
    Original ENGENIX image plates generated for this release.
@@ -6394,268 +6485,4 @@ body.loader-active .briefing-dock {
   .v11-chain::after {
     animation: none !important;
   }
-}
-
-/* V13 Transaction Gate — a section-scoped illustration, never a page takeover. */
-.v13-exception-demo {
-  isolation: isolate;
-  overflow: clip;
-}
-
-.v13-exception-status {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.v13-exception-demo .simulator-stage {
-  position: relative;
-  display: grid;
-  min-height: 650px;
-  overflow: clip;
-}
-
-.v13-exception-demo .v13-exception-panel,
-.v13-exception-demo .v13-demo-closed {
-  grid-area: 1 / 1;
-  align-self: center;
-  justify-self: end;
-  width: min(560px, 48%);
-  min-height: 0;
-  transition: opacity 280ms ease, transform 430ms cubic-bezier(.2,.85,.2,1), visibility 0s linear 430ms;
-}
-
-.v13-exception-demo .v13-exception-panel[aria-hidden="true"],
-.v13-exception-demo .v13-demo-closed[aria-hidden="true"] {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateX(42px) scale(.985);
-}
-
-/* The legacy simulator hides .sim-resolved until .is-resolved is added.
-   V13 uses data-state instead, so explicitly restore every active panel. */
-.v13-exception-demo .v13-exception-panel[aria-hidden="false"],
-.v13-exception-demo .v13-demo-closed[aria-hidden="false"] {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateX(0) scale(1);
-  transition-delay: 0s;
-}
-
-.v13-exception-demo[data-state="resolved"] .handoff-chain li {
-  animation: handoff-enter 520ms cubic-bezier(.2,.85,.2,1) both;
-}
-
-.v13-exception-demo[data-state="resolved"] .handoff-chain li:nth-child(1) { animation-delay: 120ms; }
-.v13-exception-demo[data-state="resolved"] .handoff-chain li:nth-child(2) { animation-delay: 250ms; }
-.v13-exception-demo[data-state="resolved"] .handoff-chain li:nth-child(3) { animation-delay: 380ms; }
-
-.motion-ready .v13-exception-demo:not(.is-entered) [data-exception-panel="alert"] {
-  opacity: 0;
-  transform: translateX(96px);
-}
-
-.v13-exception-demo.is-entered [data-exception-panel="alert"][aria-hidden="false"] {
-  animation: exception-arrive 760ms cubic-bezier(.17,.9,.23,1) both;
-}
-
-.v13-exception-demo.is-entered .simulator-topline .live-mark i {
-  animation: exception-signal 1.45s ease-in-out 2;
-}
-
-.v13-exception-demo::after {
-  position: absolute;
-  top: 108px;
-  left: clamp(24px, 4vw, 56px);
-  z-index: 1;
-  display: grid;
-  gap: 9px;
-  width: min(250px, 36%);
-  padding: 18px 0 18px 18px;
-  border-left: 2px solid rgba(240,194,90,.88);
-  color: rgba(255,255,255,.78);
-  content: "HIGH-RISK EXCEPTION\\AOPERATOR REVIEW REQUIRED";
-  font: 700 9px/1.65 var(--font-mono);
-  letter-spacing: .16em;
-  white-space: pre-line;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(16px);
-}
-
-.v13-exception-demo.is-entered::after {
-  animation: exception-beacon 560ms cubic-bezier(.17,.9,.23,1) 100ms both;
-}
-
-.v13-exception-demo .sim-alert__meta > span:first-child i {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 8px;
-  border-radius: 50%;
-  background: #e6a24c;
-  box-shadow: 0 0 0 6px rgba(230,162,76,.13);
-}
-
-.v13-panel-label {
-  margin: 0 0 17px !important;
-  color: var(--gold, #f0c25a) !important;
-  font: 700 10px/1.4 var(--font-mono);
-  letter-spacing: .17em;
-  text-transform: uppercase;
-}
-
-.v13-exception-demo .sim-alert h3,
-.v13-exception-demo .sim-resolved h3 {
-  max-width: 11ch;
-  font-size: clamp(37px, 3.55vw, 56px);
-  letter-spacing: -.065em;
-}
-
-.v13-human-note,
-.v13-resolved-copy {
-  max-width: 52ch;
-  margin: 24px 0 0;
-  color: var(--muted, rgba(255,255,255,.65));
-  font-size: 13px;
-  line-height: 1.58;
-}
-
-.v13-human-note strong { color: var(--ink, #fff); }
-
-.v13-panel-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  margin-top: 28px;
-}
-
-.v13-panel-actions .button { min-height: 50px; }
-
-.v13-text-button {
-  min-height: 44px;
-  padding: 10px 0;
-  border: 0;
-  background: transparent;
-  color: var(--ink, #fff);
-  font: 700 11px/1.2 var(--font-mono);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.v13-text-button:hover,
-.v13-text-button:focus-visible { color: var(--gold, #f0c25a); }
-
-.v13-exception-demo[data-state="recording"] [data-exception-record] {
-  opacity: .68;
-  pointer-events: none;
-}
-
-.v13-exception-demo[data-state="recording"] .v13-review-panel::after {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  border-radius: inherit;
-  background: rgba(3,5,7,.48);
-  color: #fff;
-  content: "Recording decision history…";
-  font: 700 10px/1.3 var(--font-mono);
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-
-.v13-exception-demo .sim-resolved { align-content: center; }
-.v13-exception-demo .v13-demo-closed {
-  padding: clamp(34px, 5vw, 58px);
-  border: 1px solid var(--line, rgba(255,255,255,.16));
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--surface, #111516) 92%, transparent);
-}
-.v13-demo-closed h3 { margin: 12px 0 26px; font-size: clamp(30px, 3vw, 46px); letter-spacing: -.05em; }
-
-[data-theme="signal"] .v13-exception-demo .sim-alert,
-[data-theme="signal"] .v13-exception-demo .sim-resolved,
-[data-theme="signal"] .v13-exception-demo .v13-demo-closed {
-  border-color: rgba(9,14,18,.18);
-  background: rgba(248,249,246,.94);
-  box-shadow: 0 20px 48px rgba(11,18,22,.14);
-}
-
-[data-theme="signal"] .v13-exception-demo .sim-alert h3,
-[data-theme="signal"] .v13-exception-demo .sim-resolved h3,
-[data-theme="signal"] .v13-exception-demo .v13-demo-closed h3,
-[data-theme="signal"] .v13-human-note strong { color: #111619; }
-
-[data-theme="signal"] .v13-exception-demo .sim-alert__body > p,
-[data-theme="signal"] .v13-human-note,
-[data-theme="signal"] .v13-resolved-copy { color: #566067; }
-
-[data-theme="signal"] .v13-exception-demo::after { color: #3c454a; }
-
-@keyframes exception-arrive {
-  0% { opacity: 0; transform: translateX(96px) scale(.985); }
-  72% { opacity: 1; transform: translateX(-5px) scale(1.005); }
-  100% { opacity: 1; transform: translateX(0) scale(1); }
-}
-
-@keyframes exception-beacon {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes exception-signal {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(240,194,90,0); }
-  45% { box-shadow: 0 0 0 8px rgba(240,194,90,.18); }
-}
-
-@media (max-width: 900px), (hover: none) and (pointer: coarse) {
-  .v13-exception-demo .simulator-stage {
-    min-height: 0;
-    padding: 92px 10px 12px;
-  }
-
-  .v13-exception-demo::after {
-    top: 72px;
-    left: 20px;
-    width: auto;
-    padding: 12px 0 12px 13px;
-    font-size: 8px;
-  }
-
-  .v13-exception-demo .v13-exception-panel,
-  .v13-exception-demo .v13-demo-closed {
-    width: 100%;
-    justify-self: stretch;
-  }
-
-  .v13-exception-demo .sim-alert__body,
-  .v13-exception-demo .sim-resolved { padding: 28px 20px 30px; }
-
-  .v13-exception-demo .sim-alert h3,
-  .v13-exception-demo .sim-resolved h3 { max-width: 12ch; font-size: clamp(36px, 10.6vw, 48px); }
-
-  .v13-exception-demo .sim-alert dl > div { grid-template-columns: 1fr; gap: 8px; }
-  .v13-exception-demo .sim-alert dd { margin: 0; }
-  .v13-panel-actions { display: grid; grid-template-columns: 1fr; }
-  .v13-panel-actions .button,
-  .v13-panel-actions .simulator-replay { width: 100%; }
-  .v13-text-button { text-align: left; }
-  .v13-exception-demo .sim-alert,
-  .v13-exception-demo .sim-resolved,
-  .v13-exception-demo .v13-demo-closed { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .v13-exception-demo .v13-exception-panel,
-  .v13-exception-demo .v13-demo-closed { transition: none !important; }
-  .v13-exception-demo.is-entered [data-exception-panel="alert"][aria-hidden="false"] { animation: none; }
-  .v13-exception-demo.is-entered::after,
-  .v13-exception-demo.is-entered .simulator-topline .live-mark i { animation: none; opacity: 1; transform: none; }
 }
