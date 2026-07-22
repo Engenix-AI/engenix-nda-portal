@@ -19,6 +19,7 @@
   };
   applyTheme(document.documentElement.dataset.theme, false);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const allowBodyScrollLock = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (!reducedMotion) document.documentElement.classList.add("motion-ready");
   const navItems = [
     ["platform", "Platform"],
@@ -28,7 +29,7 @@
     ["company", "Company"],
   ];
 
-  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=12" alt="ENGENIX" width="577" height="433"></span>`;
+  const brandLogo = `<span class="brand-logo"><img class="brand-logo__image" src="${root}assets/engenix-logo.png?v=12.2" alt="ENGENIX" width="577" height="433"></span>`;
   const arrow = '<span class="arrow" aria-hidden="true"></span>';
   const currentSlug = navItems.find(([slug]) => location.pathname.includes(`/${slug}/`))?.[0] ||
     (location.pathname.includes("/founding-dealerships/") ? "founding-dealerships" : "");
@@ -192,7 +193,7 @@
     menu?.setAttribute("aria-hidden", "false");
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", "Close navigation menu");
-    document.body.classList.add("menu-locked");
+    if (allowBodyScrollLock) document.body.classList.add("menu-locked");
     firstMenuLink?.focus();
   });
   menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => closeMenu(false)));
@@ -212,7 +213,7 @@
     closeMenu(false);
     backdrop?.classList.add("is-open");
     backdrop?.setAttribute("aria-hidden", "false");
-    document.body.classList.add("drawer-locked");
+    if (allowBodyScrollLock) document.body.classList.add("drawer-locked");
     setBriefingExpanded(true);
     closeDrawerButton?.focus();
   };
@@ -239,13 +240,6 @@
     setBriefingExpanded(false);
   });
 
-  document.addEventListener("touchstart", () => {
-    if (!menu?.classList.contains("is-open")) document.body.classList.remove("menu-locked");
-    if (!backdrop?.classList.contains("is-open")) document.body.classList.remove("drawer-locked");
-    if (!loader || loader.classList.contains("is-hidden") || loader.getAttribute("aria-hidden") === "true") {
-      document.body.classList.remove("loader-active");
-    }
-  }, { passive: true, capture: true });
   briefingTriggers.forEach((button) => button.addEventListener("click", () => openDrawer(button)));
   closeDrawerButton?.addEventListener("click", closeDrawer);
   backdrop?.addEventListener("mousedown", (event) => { if (event.target === backdrop) closeDrawer(); });
