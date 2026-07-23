@@ -313,13 +313,16 @@
     if (userAgentField) userAgentField.value = navigator.userAgent;
     setFormStatus("submitting", "Sending your private briefing request…");
     briefingResponseTimer = window.setTimeout(() => {
-      if (form?.dataset.state === "submitting") setFormStatus("error", "We could not confirm the request. Please try again, or email nicholas@engenix.co.");
-    }, 18000);
+      if (form?.dataset.state === "submitting") {
+        setFormStatus("processing", "Your request is still being processed. Please check your inbox shortly for ENGENIX confirmation.");
+        if (formSubmitButton) formSubmitButton.disabled = false;
+      }
+    }, 12000);
   });
   window.addEventListener("message", (event) => {
-    if (!/^https:\/\/[a-z0-9-]+\.googleusercontent\.com$/i.test(event.origin)) return;
+    if (!/^https:\/\/(?:[a-z0-9-]+\.)?googleusercontent\.com$/i.test(event.origin)) return;
     const payload = event.data;
-    if (!payload || payload.source !== "engenix-google-form" || !form || form.dataset.state !== "submitting") return;
+    if (!payload || payload.source !== "engenix-google-form" || !form || !["submitting", "processing"].includes(form.dataset.state)) return;
     window.clearTimeout(briefingResponseTimer);
     if (payload.ok) {
       setFormStatus("submitted", "Request received. ENGENIX leadership will follow up shortly.");

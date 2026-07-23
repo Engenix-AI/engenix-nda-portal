@@ -2152,8 +2152,8 @@ select:focus-visible {
 
 :root[data-theme="signal"] .page-hero:not(.page-hero--gold) {
   background:
-    linear-gradient(110deg, rgba(245, 247, 243, 0.98), rgba(229, 235, 232, 0.86) 62%, rgba(206, 221, 224, 0.72)),
-    radial-gradient(circle at 78% 50%, rgba(101, 151, 169, 0.25), transparent 32%),
+    linear-gradient(110deg, rgba(246, 248, 244, 0.9), rgba(230, 237, 234, 0.72) 52%, rgba(199, 219, 224, 0.38)),
+    radial-gradient(circle at 78% 50%, rgba(69, 136, 166, 0.2), transparent 32%),
     url("assets/launch-texture.jpg?v=12.3") center 58% / cover no-repeat,
     #eef1ee;
   color: #151718;
@@ -3119,6 +3119,10 @@ body.loader-active .briefing-dock {
 
 .briefing-form[data-state="submitting"] .form-status {
   color: #9a6c13;
+}
+
+.briefing-form[data-state="processing"] .form-status {
+  color: #5c625f;
 }
 
 .briefing-form[data-state="submitted"] .form-status {
