@@ -4,7 +4,9 @@
   const scriptUrl = document.currentScript && document.currentScript.src;
   const root = scriptUrl ? new URL(".", scriptUrl).pathname : "/";
   const route = (slug) => slug ? `${root}${slug}/` : root;
-  const themeStorageKey = "engenix-theme";
+  // V15.3 deliberately starts a new preference key. Earlier previews could
+  // persist Signal White automatically, before a visitor intentionally chose it.
+  const themeStorageKey = "engenix-theme-v2";
   const normalizeTheme = (value) => value === "signal" || value === "light" ? "signal" : "obsidian";
   const applyTheme = (value, persist) => {
     const theme = normalizeTheme(value);

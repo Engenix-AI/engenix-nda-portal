@@ -21,11 +21,11 @@
   <link rel="apple-touch-icon" href="assets/engenix-icon.jpeg">
   <link rel="preload" as="image" href="assets/engenix-horizon-v11.webp?v=15" fetchpriority="high" media="(min-width: 761px)">
   <link rel="preload" as="image" href="assets/engenix-horizon-mobile-v11.webp?v=15" fetchpriority="high" media="(max-width: 760px)">
-  <link rel="stylesheet" href="styles.css?v=15.2">
+  <link rel="stylesheet" href="styles.css?v=15.3">
   <script>
     (() => {
       let saved = null;
-      try { saved = localStorage.getItem("engenix-theme"); } catch (_) {}
+      try { saved = localStorage.getItem("engenix-theme-v2"); } catch (_) {}
       const systemLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
       const signal = saved === "light" || saved === "signal" || (!saved && systemLight);
       document.documentElement.dataset.theme = signal ? "signal" : "obsidian";
@@ -193,6 +193,6 @@
   </main>
   <div data-site-footer></div>
   <div data-site-drawer></div>
-  <script src="script.js?v=15.2"></script>
+  <script src="script.js?v=15.3"></script>
 </body>
 </html>
