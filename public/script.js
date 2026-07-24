@@ -1,4 +1,4 @@
- (function () {
+(function () {
   "use strict";
 
   const scriptUrl = document.currentScript && document.currentScript.src;
@@ -356,6 +356,14 @@
         button.setAttribute("aria-selected", selected ? "true" : "false");
       });
       sequence.setAttribute("data-active-stage", label.toLowerCase());
+      // Drive the track indicator to the active stage position
+      const track = sequence.querySelector(".v10-pulse__track span");
+      if (track) {
+        const pct = (index / (stages.length - 1)) * 100;
+        track.style.left = `calc(${pct}% - 41px)`;
+        track.style.opacity = "1";
+        track.style.animation = "none";
+      }
     };
     const renderStage = (index) => {
       if (isTransitioning || index === active) return;
@@ -369,14 +377,14 @@
         applyStage(index);
         sequence.classList.remove("is-stage-changing");
         isTransitioning = false;
-      }, 180);
+      }, 280);
     };
     const rail = sequence.querySelector(".operating-film__rail");
     rail.innerHTML = stages.map((stage, index) => `<button type="button" role="tab" data-stage-button aria-selected="${index === 0}"><span>${String(index + 1).padStart(2, "0")}</span>${stage[0]}</button>`).join("");
     rail.querySelectorAll("[data-stage-button]").forEach((button, index) => button.addEventListener("click", () => renderStage(index)));
     renderStage(0);
     if (!reducedMotion) {
-      window.setInterval(() => renderStage((active + 1) % stages.length), 3800);
+      window.setInterval(() => renderStage((active + 1) % stages.length), 4600);
     }
   }
 
