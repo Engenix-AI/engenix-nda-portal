@@ -4,9 +4,7 @@
   const scriptUrl = document.currentScript && document.currentScript.src;
   const root = scriptUrl ? new URL(".", scriptUrl).pathname : "/";
   const route = (slug) => slug ? `${root}${slug}/` : root;
-  // V15.3 deliberately starts a new preference key. Earlier previews could
-  // persist Signal White automatically, before a visitor intentionally chose it.
-  const themeStorageKey = "engenix-theme-v2";
+  const themeStorageKey = "engenix-theme";
   const normalizeTheme = (value) => value === "signal" || value === "light" ? "signal" : "obsidian";
   const applyTheme = (value, persist) => {
     const theme = normalizeTheme(value);
@@ -315,16 +313,13 @@
     if (userAgentField) userAgentField.value = navigator.userAgent;
     setFormStatus("submitting", "Sending your private briefing request…");
     briefingResponseTimer = window.setTimeout(() => {
-      if (form?.dataset.state === "submitting") {
-        setFormStatus("processing", "Your request is still being processed. Please check your inbox shortly for ENGENIX confirmation.");
-        if (formSubmitButton) formSubmitButton.disabled = false;
-      }
-    }, 12000);
+      if (form?.dataset.state === "submitting") setFormStatus("error", "We could not confirm the request. Please try again, or email nicholas@engenix.co.");
+    }, 18000);
   });
   window.addEventListener("message", (event) => {
-    if (!/^https:\/\/(?:[a-z0-9-]+\.)?googleusercontent\.com$/i.test(event.origin)) return;
+    if (!/^https:\/\/[a-z0-9-]+\.googleusercontent\.com$/i.test(event.origin)) return;
     const payload = event.data;
-    if (!payload || payload.source !== "engenix-google-form" || !form || !["submitting", "processing"].includes(form.dataset.state)) return;
+    if (!payload || payload.source !== "engenix-google-form" || !form || form.dataset.state !== "submitting") return;
     window.clearTimeout(briefingResponseTimer);
     if (payload.ok) {
       setFormStatus("submitted", "Request received. ENGENIX leadership will follow up shortly.");
@@ -345,8 +340,9 @@
       ["Reconcile", "Controller Intelligence", "Gross variance surfaced", "Expected, booked, and realized transaction values remain connected.", "Controller", "In active development"],
       ["Close", "Operating Command", "Next action assigned", "Leadership sees the unresolved blocker, accountable owner, and preserved decision history.", "Executive leadership", "In active development"],
     ];
-    let active = 0;
-    const renderStage = (index) => {
+    let active = -1;
+    let isTransitioning = false;
+    const applyStage = (index) => {
       active = index;
       const [label, layer, outcome, detail, owner, status] = stages[index];
       sequence.querySelector("[data-stage-layer]").textContent = layer;
@@ -361,12 +357,26 @@
       });
       sequence.setAttribute("data-active-stage", label.toLowerCase());
     };
+    const renderStage = (index) => {
+      if (isTransitioning || index === active) return;
+      if (active === -1 || reducedMotion) {
+        applyStage(index);
+        return;
+      }
+      isTransitioning = true;
+      sequence.classList.add("is-stage-changing");
+      window.setTimeout(() => {
+        applyStage(index);
+        sequence.classList.remove("is-stage-changing");
+        isTransitioning = false;
+      }, 180);
+    };
     const rail = sequence.querySelector(".operating-film__rail");
     rail.innerHTML = stages.map((stage, index) => `<button type="button" role="tab" data-stage-button aria-selected="${index === 0}"><span>${String(index + 1).padStart(2, "0")}</span>${stage[0]}</button>`).join("");
     rail.querySelectorAll("[data-stage-button]").forEach((button, index) => button.addEventListener("click", () => renderStage(index)));
     renderStage(0);
     if (!reducedMotion) {
-      window.setInterval(() => renderStage((active + 1) % stages.length), 3400);
+      window.setInterval(() => renderStage((active + 1) % stages.length), 3800);
     }
   }
 
